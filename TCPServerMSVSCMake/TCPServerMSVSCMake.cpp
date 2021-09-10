@@ -1,7 +1,7 @@
 ﻿// TCPServerMSVSCMake.cpp: определяет точку входа для приложения.
 //
 
-#include "TCPServerMSVSCMake.hpp"
+#include "TCPServerMSVSCMake.h"
 
 
 using namespace std;
