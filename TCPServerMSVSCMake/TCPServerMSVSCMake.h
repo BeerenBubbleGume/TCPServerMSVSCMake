@@ -5,7 +5,6 @@
 #include <cassert>
 #include "libs/includes/uv.h"
 
-
 class Server {
 public:
 
@@ -15,8 +14,7 @@ public:
 	uv_tcp_t serv;
 	void handlingLoop();
 	
-	void on_accept(uv_tcp_t* handler);
-	
+	void on_accept(uv_tcp_t* handler);	
 	
 private:
 
