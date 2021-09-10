@@ -23,13 +23,11 @@ private:
 
 	uv_thread_t thread_handler;
 	uint16_t port;
-	
 	struct sockaddr_in addr;
 	char* buffer;
 	int socket;
 	int ret;
 	
-
 protected:
 	uv_alloc_cb alloc_buffer_cb;
 	uv_read_cb socket_read_cb;
