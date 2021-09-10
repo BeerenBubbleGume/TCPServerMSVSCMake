@@ -73,7 +73,7 @@ build cmake_object_order_depends_target_TCPServerMSVSCMake: phony || TCPServerMS
 
 build TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\TCPServerMSVSCMake.cpp.obj: CXX_COMPILER__TCPServerMSVSCMake_Debug ..\..\..\TCPServerMSVSCMake\TCPServerMSVSCMake.cpp || cmake_object_order_depends_target_TCPServerMSVSCMake
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++17
-  INCLUDES = -I..\..\..\TCPServerMSVSCMake\libs\includes -I..\..\..\TCPServerMSVSCMake\libs\includes\uv.lib
+  INCLUDES = -I..\..\..\TCPServerMSVSCMake\libs\includes -I..\..\..\TCPServerMSVSCMake\libs\lib\uv.lib
   OBJECT_DIR = TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir
   OBJECT_FILE_DIR = TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir
   TARGET_COMPILE_PDB = TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\

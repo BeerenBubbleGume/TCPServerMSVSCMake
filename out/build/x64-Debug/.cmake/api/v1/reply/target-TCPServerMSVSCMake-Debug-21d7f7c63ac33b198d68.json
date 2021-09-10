@@ -66,7 +66,7 @@
 				},
 				{
 					"backtrace" : 3,
-					"path" : "C:/Users/Operator/source/repos/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/uv.lib"
+					"path" : "C:/Users/Operator/source/repos/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/lib/uv.lib"
 				}
 			],
 			"language" : "CXX",
