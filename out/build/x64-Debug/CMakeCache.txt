@@ -193,10 +193,10 @@ CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
 //Value Computed by CMake
-TCPServerMSVSCMake_BINARY_DIR:STATIC=C:/Users/Operator/source/repos/TCPServerMSVSCMake/out/build/x64-Debug/TCPServerMSVSCMake/libs
+TCPServerMSVSCMake_BINARY_DIR:STATIC=C:/Users/Operator/source/repos/TCPServerMSVSCMake/out/build/x64-Debug
 
 //Value Computed by CMake
-TCPServerMSVSCMake_SOURCE_DIR:STATIC=C:/Users/Operator/source/repos/TCPServerMSVSCMake/TCPServerMSVSCMake/libs
+TCPServerMSVSCMake_SOURCE_DIR:STATIC=C:/Users/Operator/source/repos/TCPServerMSVSCMake
 
 //Path to a library.
 libuv:FILEPATH=libuv-NOTFOUND

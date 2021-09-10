@@ -1,5 +1,4 @@
-﻿#pragma once
-#ifndef TCPSERVERMVSCMAKE_H
+﻿#ifndef TCPSERVERMVSCMAKE_H
 #define TCPSEVERMSVSCMAKE_H
 
 #include <iostream>
