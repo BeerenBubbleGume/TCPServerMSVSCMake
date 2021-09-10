@@ -42,11 +42,11 @@ void Server::on_accept(uv_tcp_t* handler) {
 }
 
 int main(uint16_t host, uv_loop_t* loop) {
-	
+
 	uv_loop_init(loop);
 	Server(8000);
-	
+
 	uv_run(loop, UV_RUN_DEFAULT);
 
-    return 0;
+	return 0;
 }
