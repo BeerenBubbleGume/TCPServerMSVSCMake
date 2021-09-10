@@ -1,24 +1,26 @@
 ﻿// TCPServerMSVSCMake.cpp: определяет точку входа для приложения.
 //
 
-#include "TCPServerMSVSCMake.hpp"
+#include "TCPServerMSVSCMake.h"
 
 
 using namespace std;
 
-Server::Server(uint16_t port) : port(port){
-	
-	uv_tcp_init(loop, &serv);
 
-	uv_ip4_addr("127.0.0.1", port, &addr);
-	uv_tcp_bind(&serv, (const struct sockaddr*)&addr, 0);
-	ret = uv_listen((uv_stream_t*)&serv, NULL, NULL);
+
+Server::Server(uint16_t port, uv_loop_t* loop) : port(port), loop(loop){
+	loop = uv_default_loop();
+	uv_tcp_init(loop, &serv);
+	
+	int address = uv_ip4_addr("0.0.0.0", port, addr);
+	uv_tcp_bind(&serv, (const struct sockaddr*)&address, 0);
+	ret = uv_listen((uv_stream_t*)&serv, 128, NULL);
     
 }
 
 Server::~Server()
 {
-
+	
 }
 
 void Server::handlingLoop()
@@ -41,10 +43,26 @@ void Server::on_accept(uv_tcp_t* handler) {
 	}
 }
 
-int main(uint16_t host, uv_loop_t* loop) {
+void Server::on_open(uv_tcp_t* handle, uv_os_sock_t* socket)
+{
+}
+
+void Server::on_close(uv_tcp_t* handle)
+{
+	uv_tcp_close_reset(handle, NULL);
+}
+
+void Server::on_connection(uv_stream_t* server, int status)
+{
+
+}
+
+
+int main(uint16_t hostm, uv_loop_t* loop){
 	
 	uv_loop_init(loop);
-	Server(8000);
+
+	loop = uv_default_loop();
 	
 	uv_run(loop, UV_RUN_DEFAULT);
 
