@@ -9,6 +9,7 @@ add_executable (TCPServerMSVSCMake WIN32 "TCPServerMSVSCMake.cpp" "TCPServerMSVS
 # TODO: Добавьте тесты и целевые объекты, если это необходимо.
 
 add_subdirectory("libs")
-include_directories(${CMAKE_SOURCE_DIR}/libs/includes)
-link_directories(${CMAKE_SOURCE_DIR}/libs/lib)
+include_directories(${CMAKE_SOURCE_DIR}/libs/includes/)
+link_directories(${CMAKE_SOURCE_DIR}/libs/lib/)
 
+target_link_libraries(TCPServerMSVSCMake uv)
