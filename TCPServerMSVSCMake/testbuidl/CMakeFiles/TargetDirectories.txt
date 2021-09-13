@@ -1,0 +1,3 @@
+C:/Users/Operator/source/repos/TCPServerMSVSCMake/TCPServerMSVSCMake/testbuidl/CMakeFiles/TCPServerMSVSCMake.dir
+C:/Users/Operator/source/repos/TCPServerMSVSCMake/TCPServerMSVSCMake/testbuidl/CMakeFiles/ALL_BUILD.dir
+C:/Users/Operator/source/repos/TCPServerMSVSCMake/TCPServerMSVSCMake/testbuidl/CMakeFiles/ZERO_CHECK.dir

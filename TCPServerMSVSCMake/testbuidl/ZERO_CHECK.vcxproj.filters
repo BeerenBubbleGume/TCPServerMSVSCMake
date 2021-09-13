@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\testbuidl\CMakeFiles\7ea607cce752fabaa0b8d0cc60cf0c99\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{568A8667-D0ED-3E42-A431-279FE7858B9D}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

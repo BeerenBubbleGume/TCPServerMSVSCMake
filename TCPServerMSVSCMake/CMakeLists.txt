@@ -4,12 +4,11 @@
 cmake_minimum_required (VERSION 3.8)
 
 # Добавьте источник в исполняемый файл этого проекта.
-add_executable (TCPServerMSVSCMake WIN32 "TCPServerMSVSCMake.cpp" "TCPServerMSVSCMake.h")
+add_executable (TCPServerMSVSCMake "TCPServerMSVSCMake.cpp" "TCPServerMSVSCMake.h")
 
 # TODO: Добавьте тесты и целевые объекты, если это необходимо.
 
 add_subdirectory("libs")
-include_directories(${CMAKE_SOURCE_DIR}/libs/includes/)
-link_directories(${CMAKE_SOURCE_DIR}/libs/lib/)
 
-target_link_libraries(TCPServerMSVSCMake uv)
+target_include_directories(TCPServerMSVSCMake PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/uv.h)
+target_link_libraries(TCPServerMSVSCMake ${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/uv.lib)
