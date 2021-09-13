@@ -9,6 +9,10 @@ add_executable (TCPServerMSVSCMake "TCPServerMSVSCMake.cpp" "TCPServerMSVSCMake.
 # TODO: Добавьте тесты и целевые объекты, если это необходимо.
 
 add_subdirectory("libs")
-
-target_include_directories(TCPServerMSVSCMake PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/uv.h)
-target_link_libraries(TCPServerMSVSCMake ${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/uv.lib)
+IF(WIN32)
+	target_include_directories(TCPServerMSVSCMake PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/uv.h)
+	target_link_libraries(TCPServerMSVSCMake ${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/uv.lib)
+ELSE()
+	target_include_directories(TCPServerMSVSCMake PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/)
+	target_link_libraries(TCPServerMSVSCMake ${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libuv.so)
+ENDIF()

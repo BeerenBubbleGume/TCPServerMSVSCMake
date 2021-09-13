@@ -24,12 +24,21 @@ int main() {
 
 void handlingLoop()
 {
-
+	
 }
 
-void on_accept(uv_tcp_t* handler)
+void on_accept(uv_stream_t* handler, int status)
 {
+	if (status < 0) {
+		fprintf(stderr, "New connection fail: \n", uv_strerror(status));
+		return;
+	}
 
+	uv_tcp_t* client = (uv_tcp_t*)malloc(sizeof(uv_tcp_t));
+	uv_tcp_init(loop, client);
+	if (uv_accept(handler, (uv_stream_t*)client) == 0) {
+		uv_read_start((uv_stream_t*)client, alloc_buffer, read_buffer);
+	}
 }
 
 void on_close(uv_tcp_t* handler)
