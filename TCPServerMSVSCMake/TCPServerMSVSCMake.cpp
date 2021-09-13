@@ -11,15 +11,25 @@ uv_tcp_t serv;
 
 int main() {
 
-
+	errno = 0;
+	status = errno;
 	uv_tcp_init(loop, &serv);
-	struct sockaddr_in addr;
-	uv_ip4_addr("0.0.0.0", 8000, &addr);
-	uv_tcp_bind(&serv, (const struct sockaddr*)&addr, 0);
+
+	struct sockaddr_in recive_addr;
+
+	
+
+	uv_ip4_addr("0.0.0.0", 8000, &recive_addr);
+
+	uv_tcp_bind(&serv, (const struct sockaddr*)&recive_addr, 0);
 
 	int ret = uv_listen((uv_stream_t*)&serv, 128, NULL);
-
-	uv_run(loop, UV_RUN_DEFAULT);
+	if (ret) {
+		fprintf(stderr, "Listean fail: \n", uv_strerror(status));
+		return 1;
+	}
+	
+	return uv_run(loop, UV_RUN_DEFAULT);
 }
 
 void handlingLoop()
@@ -27,7 +37,7 @@ void handlingLoop()
 	
 }
 
-void on_accept(uv_stream_t* handler, int status)
+void on_accept(uv_stream_t* handler, errno_t status)
 {
 	if (status < 0) {
 		fprintf(stderr, "New connection fail: \n", uv_strerror(status));
@@ -39,9 +49,12 @@ void on_accept(uv_stream_t* handler, int status)
 	if (uv_accept(handler, (uv_stream_t*)client) == 0) {
 		uv_read_start((uv_stream_t*)client, alloc_buffer, read_buffer);
 	}
+	on_accept((uv_stream_t*)&serv, 0);
+	uv_close((uv_handle_t*)&handler, on_close_cb);
 }
 
-void on_close(uv_tcp_t* handler)
+void on_close(uv_tcp_t* handle, int status)
 {
-	
+	free(handle);
+	printf("disconected.\n");
 }
