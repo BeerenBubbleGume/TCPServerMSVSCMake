@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.o -o TCPServerMSVSCMake   -L/home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/lib  -Wl,-rpath,/home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/lib -luv 
