@@ -1,30 +1,32 @@
 #include "ServerUV.h"
 
+uv_loop_t* loop;
+
 Server::Server()
 {
-	loop = uv_default_loop();
-	tcp_socket = (uv_tcp_t*)malloc(sizeof(uv_tcp_t));
-	uv_loop_init(loop);
-	uv_tcp_init(loop, tcp_socket);
-	uv_run(loop, UV_RUN_DEFAULT);
+	servloop = uv_default_loop();
+	serv = (uv_tcp_t*)malloc(sizeof(uv_tcp_t));
+	uv_loop_init(servloop);
+	uv_tcp_init(servloop, serv);
+	uv_run(servloop, UV_RUN_DEFAULT);
 }
 
 Server::~Server()
 {
-	//free(loop);
+	free(servloop);
 	
 }
 
 int Server::connect(sockaddr* addr)
 {
 	uv_ip4_addr("0.0.0.0", 544, (sockaddr_in*)addr);
-	uv_listen((uv_stream_t*)tcp_socket, 1024, OnAccept);
+	uv_listen((uv_stream_t*)serv, 1024, OnAccept);
 	return uv_tcp_connect(req, handle, addr, OnConnection);
 }
 
 void Server::setup()
 {
-	uv_tcp_nodelay(tcp_socket, true);
+	uv_tcp_nodelay(serv, true);
 }
 
 void OnConnection(uv_connect_t* req, int status)
@@ -45,13 +47,13 @@ void OnAccept(uv_stream_t* server, int status)
 		return;
 	}
 	// Сервер создает новый сокет, чтобы через него установить соединение с клиентом
-	uv_tcp_t* tcp_socket = (uv_tcp_t*)malloc(sizeof(uv_tcp_t));
-	//memset(tcp_socket, 0, sizeof(uv_tcp_t));
-	uv_tcp_init(loop, tcp_socket);
-	if (uv_accept(server, (uv_stream_t*)tcp_socket) == 0) // делается попытка установить соединение
+	uv_tcp_t* client = (uv_tcp_t*)malloc(sizeof(uv_tcp_t));
+	
+	uv_tcp_init(loop, client);
+	if (uv_accept(server, (uv_stream_t*)client) == 0) // делается попытка установить соединение
 	{
 		// Соединение установлено
-		uv_read_start((uv_stream_t*)tcp_socket, OnAllocBuffer, OnReadTCP); // Переводим сокет в режим чтения
+		uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadTCP); // Переводим сокет в режим чтения
 	}
 	else
 	{
@@ -59,12 +61,17 @@ void OnAccept(uv_stream_t* server, int status)
 		//uv_close((uv_handle_t*)tcp_socket, OnCloseSocket); // Удаляем сокет, который был создан для соединения
 	}
 }
-void OnAllocBuffer(uv_handle_t* handle, size_t suggested_size, uv_buf_t* buf) { *buf = uv_buf_init((char*)malloc(suggested_size), suggested_size); }
+
+void OnAllocBuffer(uv_handle_t* handle, size_t suggested_size, uv_buf_t* buf) {
+	*buf = uv_buf_init((char*)malloc(suggested_size), suggested_size);
+	buf->base = (char*)suggested_size;
+}
+
 void OnReadTCP(uv_stream_t* stream, ssize_t nread, const uv_buf_t* buf) {
 	if (nread < 0) {
 		if (nread == UV_EOF) {
 			// end of file
-
+			uv_close((uv_handle_t*)stream, OnCloseSocket);
 		}
 	}
 	else if (nread > 0) {

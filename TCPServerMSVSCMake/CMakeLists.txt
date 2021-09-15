@@ -1,6 +1,8 @@
 # CMakeList.txt: проект CMake дл€ TCPServerMSVSCMake; включите исходный код и определени€,
 # укажите здесь логику дл€ конкретного проекта.
-#
+cmake_minimum_required (VERSION 3.8)
+
+add_subdirectory("src")
 
 
 # ƒобавьте источник в исполн€емый файл этого проекта.
