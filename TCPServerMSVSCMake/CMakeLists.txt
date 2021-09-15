@@ -4,7 +4,7 @@
 
 
 # Добавьте источник в исполняемый файл этого проекта.
-add_executable (TCPServerMSVSCMake "TCPServerMSVSCMake.cpp" "TCPServerMSVSCMake.h")
+add_executable (TCPServerMSVSCMake "TCPServerMSVSCMake.cpp" "TCPServerMSVSCMake.h" "src/serv/ServerUV.h" "src/serv/ServerUV.cpp")
 
 # TODO: Добавьте тесты и целевые объекты, если это необходимо.
 IF(WIN32)

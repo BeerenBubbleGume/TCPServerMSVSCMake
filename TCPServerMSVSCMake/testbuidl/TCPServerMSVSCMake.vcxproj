@@ -315,6 +315,8 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   <ItemGroup>
     <ClCompile Include="C:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\TCPServerMSVSCMake.cpp" />
     <ClInclude Include="C:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\TCPServerMSVSCMake.h" />
+    <ClInclude Include="C:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\ServerUV.h" />
+    <ClCompile Include="C:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\ServerUV.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="C:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\testbuidl\ZERO_CHECK.vcxproj">

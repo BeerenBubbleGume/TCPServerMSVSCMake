@@ -3,10 +3,11 @@
 
 #include <iostream>
 #include <cassert>
-#include "libs/includes/uv.h"
-
+#include "src/serv/ServerUV.h"
+/*
 uv_thread_t thread_handler;
-uint16_t port;;
+uint16_t port;
+uv_close_cb on_close_cb;
 errno_t status;
 char* buffer;
 void handlingLoop();
@@ -31,9 +32,6 @@ void read_buffer(uv_stream_t* stream, ssize_t nread, const uv_buf_t* buf) {
     if (buf->base)
         free(buf->base);
 }
-
-void on_close_cb(uv_handle_t* handle) {
-    free(handle);
-}
+*/
 #endif // !TCPSERVERMVSCMAKE_H
 
