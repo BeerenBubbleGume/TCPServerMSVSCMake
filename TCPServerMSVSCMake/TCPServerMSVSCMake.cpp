@@ -8,6 +8,7 @@ using namespace std;
 
 uv_loop_t* loop = uv_default_loop();
 uv_tcp_t serv;
+uv_tcp_t* client = (uv_tcp_t*)malloc(sizeof(uv_tcp_t));
 
 int main() {
 
@@ -28,7 +29,7 @@ int main() {
 		fprintf(stderr, "Listean fail: \n", uv_strerror(status));
 		return 1;
 	}
-	
+	on_accept((uv_stream_t*)&serv, status);
 	return uv_run(loop, UV_RUN_DEFAULT);
 }
 
@@ -44,12 +45,11 @@ void on_accept(uv_stream_t* handler, errno_t status)
 		return;
 	}
 
-	uv_tcp_t* client = (uv_tcp_t*)malloc(sizeof(uv_tcp_t));
 	uv_tcp_init(loop, client);
 	if (uv_accept(handler, (uv_stream_t*)client) == 0) {
 		uv_read_start((uv_stream_t*)client, alloc_buffer, read_buffer);
 	}
-	on_accept((uv_stream_t*)&serv, 0);
+	
 	uv_close((uv_handle_t*)&handler, on_close_cb);
 }
 

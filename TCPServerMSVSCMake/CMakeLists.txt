@@ -1,14 +1,12 @@
-п»ї# CMakeList.txt: РїСЂРѕРµРєС‚ CMake РґР»СЏ TCPServerMSVSCMake; РІРєР»СЋС‡РёС‚Рµ РёСЃС…РѕРґРЅС‹Р№ РєРѕРґ Рё РѕРїСЂРµРґРµР»РµРЅРёСЏ,
-# СѓРєР°Р¶РёС‚Рµ Р·РґРµСЃСЊ Р»РѕРіРёРєСѓ РґР»СЏ РєРѕРЅРєСЂРµС‚РЅРѕРіРѕ РїСЂРѕРµРєС‚Р°.
+# CMakeList.txt: проект CMake для TCPServerMSVSCMake; включите исходный код и определения,
+# укажите здесь логику для конкретного проекта.
 #
-cmake_minimum_required (VERSION 3.8)
 
-# Р”РѕР±Р°РІСЊС‚Рµ РёСЃС‚РѕС‡РЅРёРє РІ РёСЃРїРѕР»РЅСЏРµРјС‹Р№ С„Р°Р№Р» СЌС‚РѕРіРѕ РїСЂРѕРµРєС‚Р°.
+
+# Добавьте источник в исполняемый файл этого проекта.
 add_executable (TCPServerMSVSCMake "TCPServerMSVSCMake.cpp" "TCPServerMSVSCMake.h")
 
-# TODO: Р”РѕР±Р°РІСЊС‚Рµ С‚РµСЃС‚С‹ Рё С†РµР»РµРІС‹Рµ РѕР±СЉРµРєС‚С‹, РµСЃР»Рё СЌС‚Рѕ РЅРµРѕР±С…РѕРґРёРјРѕ.
-
-add_subdirectory("libs")
+# TODO: Добавьте тесты и целевые объекты, если это необходимо.
 IF(WIN32)
 	target_include_directories(TCPServerMSVSCMake PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/uv.h)
 	target_link_libraries(TCPServerMSVSCMake ${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/uv.lib)
