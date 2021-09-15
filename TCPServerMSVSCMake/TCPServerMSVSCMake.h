@@ -4,7 +4,7 @@
 #include <iostream>
 #include <cassert>
 #include "src/serv/ServerUV.h"
-/*
+
 uv_thread_t thread_handler;
 uint16_t port;
 uv_close_cb on_close_cb;
@@ -13,7 +13,7 @@ char* buffer;
 void handlingLoop();
 void on_accept(uv_stream_t* handler, errno_t status);
 void on_close(uv_tcp_t* handle, int status);
-
+/*
 void alloc_buffer(uv_handle_t* handle, size_t suggested_size, uv_buf_t* buf) {
     *buf = uv_buf_init((char*)malloc(suggested_size), suggested_size);
 }

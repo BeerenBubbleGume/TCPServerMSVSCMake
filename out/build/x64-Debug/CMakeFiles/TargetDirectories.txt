@@ -1,5 +1,0 @@
-C:/Users/Operator/source/repos/TCPServerMSVSCMake/out/build/x64-Debug/CMakeFiles/edit_cache.dir
-C:/Users/Operator/source/repos/TCPServerMSVSCMake/out/build/x64-Debug/CMakeFiles/rebuild_cache.dir
-C:/Users/Operator/source/repos/TCPServerMSVSCMake/out/build/x64-Debug/TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir
-C:/Users/Operator/source/repos/TCPServerMSVSCMake/out/build/x64-Debug/TCPServerMSVSCMake/CMakeFiles/edit_cache.dir
-C:/Users/Operator/source/repos/TCPServerMSVSCMake/out/build/x64-Debug/TCPServerMSVSCMake/CMakeFiles/rebuild_cache.dir

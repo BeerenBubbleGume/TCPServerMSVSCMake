@@ -12,9 +12,9 @@ uv_loop_t* loop;
 
 void OnConnection(uv_connect_t* req, int status);
 void OnAccept(uv_stream_t* server, int status);
-void OnAllocBuffer(uv_handle_t* handle, size_t suggested_size, uv_buf_t* buf) { *buf = uv_buf_init((char*)malloc(suggested_size), suggested_size); }
+void OnAllocBuffer(uv_handle_t* handle, size_t suggested_size, uv_buf_t* buf); 
 void OnReadTCP(uv_stream_t* stream, ssize_t nread, const uv_buf_t* buf);
-void OnCloseSocket(uv_handle_t* handle, int status) { }
+void OnCloseSocket(uv_handle_t* handle, int status);
 
 class Server {
 public:
