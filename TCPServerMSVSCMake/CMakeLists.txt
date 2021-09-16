@@ -6,7 +6,7 @@ add_subdirectory("src")
 
 
 # Добавьте источник в исполняемый файл этого проекта.
-add_executable (TCPServerMSVSCMake "TCPServerMSVSCMake.cpp" "TCPServerMSVSCMake.h" "src/serv/ServerUV.h" "src/serv/ServerUV.cpp")
+add_executable (TCPServerMSVSCMake "TCPServerMSVSCMake.cpp" "TCPServerMSVSCMake.h" "src/serv/ServerUV.h" "src/serv/ServerUV.cpp" "src/serv/NetSock.h" "src/serv/NetSock.cpp" "src/serv/NetSocketUV.h" "src/serv/NetSocketUV.cpp" "src/serv/Net.h" "src/serv/Net.cpp")
 
 # TODO: Добавьте тесты и целевые объекты, если это необходимо.
 IF(WIN32)

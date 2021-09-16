@@ -1,0 +1,10 @@
+# ninja log v5
+8	844	6534938304712175	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.obj	1588641344430d6e
+5	856	6534928433425824	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/ServerUV.cpp.obj	8f0b4baf257509ef
+3	428	6534819874018356	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.obj	cb578ef9a5d026dd
+990	1102	6534819880570192	TCPServerMSVSCMake/TCPServerMSVSCMake.exe	9968304ed57e3302
+9	507	6534943308226468	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/Net.cpp.obj	453f6564c6a424f6
+3	887	6534943312046263	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.obj	1588641344430d6e
+1	907	6534943312245719	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/ServerUV.cpp.obj	8f0b4baf257509ef
+7	843	6534951136013878	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/ServerUV.cpp.obj	8f0b4baf257509ef
+3	857	6534951136143523	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.obj	1588641344430d6e
