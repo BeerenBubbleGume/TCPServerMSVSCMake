@@ -6,13 +6,28 @@ add_subdirectory("src")
 
 
 # Добавьте источник в исполняемый файл этого проекта.
-add_executable (TCPServerMSVSCMake "TCPServerMSVSCMake.cpp" "TCPServerMSVSCMake.h" "src/serv/ServerUV.h" "src/serv/ServerUV.cpp" "src/serv/NetSock.h" "src/serv/NetSock.cpp" "src/serv/NetSocketUV.h" "src/serv/NetSocketUV.cpp" "src/serv/Net.h" "src/serv/Net.cpp")
+add_executable (TCPServerMSVSCMake	"src/serv/Net.h"
+									"src/serv/Net.cpp"
+									"src/serv/NETBUFFER.cpp"
+									"src/serv/NETBUFFER.h"
+									"src/serv/NetSock.h"
+									"src/serv/NetSock.cpp"
+									"src/serv/NetSocketUV.h"
+									"src/serv/NetSocketUV.cpp"
+									"src/serv/ServerUV.h"
+									"src/serv/ServerUV.cpp"
+									"TCPServerMSVSCMake.cpp"
+									"TCPServerMSVSCMake.h")
 
 # TODO: Добавьте тесты и целевые объекты, если это необходимо.
 IF(WIN32)
-	target_include_directories(TCPServerMSVSCMake PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/uv.h)
-	target_link_libraries(TCPServerMSVSCMake ${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/uv.lib)
+	target_include_directories(TCPServerMSVSCMake PUBLIC
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/uv.h)
+	target_link_libraries(TCPServerMSVSCMake 
+							${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/uv.lib)
 ELSE()
-	target_include_directories(TCPServerMSVSCMake PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/)
-	target_link_libraries(TCPServerMSVSCMake ${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libuv.so)
+	target_include_directories(TCPServerMSVSCMake PUBLIC
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/)
+	target_link_libraries(TCPServerMSVSCMake
+							${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libuv.so)
 ENDIF()

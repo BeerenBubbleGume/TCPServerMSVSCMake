@@ -10,9 +10,13 @@ public:
 	NetSocket();
 	~NetSocket();
 
+	Net* net;
 	char* ClientID;
 	char* DataBuff;
 	int SocketCT;
+
+	void ReciveTCP();
+	void Destroy();
 };
 struct NET_SOCKET_PRT {
 	NetSocket* net_socket;

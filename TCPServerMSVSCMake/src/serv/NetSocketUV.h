@@ -3,6 +3,7 @@
 #define NETSOCKETUV_H
 
 #include "NetSock.h"
+#include "NetBuffer.h"
 #include "../../libs/includes/uv.h"
 
 void OnConnection(uv_connect_t* req, int status);
@@ -21,7 +22,7 @@ public:
 
 	void* sock;
 
-	Net* net;
+	NetBuffer* net;
 	bool udp_tcp;
 
 	virtual bool Create(bool udp_tcp, int port, bool listen);
@@ -34,13 +35,11 @@ public:
 	virtual void SendUDP(char* buf);
 	virtual void RecciveTCP();
 	virtual void ReciveUDP();
-
-
-	uv_tcp_t* GetPtrTCP(void* ptr);
-	
+	void Destroy();
 
 };
-
+uv_tcp_t* GetPtrTCP(void* ptr);
+uv_udp_t* GetPtrUDP(void* ptr);
 
 
 #endif // !NETSOCKETUV_H

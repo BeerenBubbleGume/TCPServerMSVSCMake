@@ -4,9 +4,6 @@
 
 #include "NetSock.h"
 #include "NetSocketUV.h"
-#include <iostream>
-#include <cstring>
-#include <cstdlib>
 
 class Server {
 public:

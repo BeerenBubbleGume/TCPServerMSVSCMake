@@ -1,5 +1,6 @@
 #include "NetSocketUV.h"
 #include "../../TCPServerMSVSCMake.h"
+#include <cassert>
 
 extern uv_loop_t* servloop;
 extern uv_tcp_t* server;
@@ -69,14 +70,36 @@ void NetSocketUV::ReciveUDP()
 {
 }
 
-uv_tcp_t* NetSocketUV::GetPtrTCP(void* ptr) //����������� ����� ip 
+void NetSocketUV::Destroy()
 {
-	return nullptr;
+	if (sock)
+	{
+		if (udp_tcp)
+		{
+			uv_tcp_t* tcp = GetPtrTCP(sock);
+			uv_close((uv_handle_t*)tcp, OnCloseSocket);
+			((TCP_SOCKET*)sock)->net_socket = NULL;
+		}
+		else {
+			uv_udp_t* udp = GetPtrUDP(sock);
+			int r = uv_read_stop((uv_stream_t*)udp);
+			assert(r == 0);
+			uv_close((uv_handle_t*)sock, OnCloseSocket);
+			((UDP_SOCKET*)sock)->net_socket = NULL;
+		}
+		sock = NULL;
+	}
+	NetSocket::Destroy();
 }
 
 uv_tcp_t* GetPtrTCP(void* ptr)
 {
 	return (uv_tcp_t*)(((char*)ptr) + sizeof(void*));
+}
+
+uv_udp_t* GetPtrUDP(void* ptr)
+{
+	return (uv_udp_t*)(((char*)ptr) + sizeof(void*));
 }
 
 uv_loop_t* GetLoop(void* prt)
@@ -94,7 +117,10 @@ void OnReadTCP(uv_stream_t* stream, ssize_t nread, const uv_buf_t* buf) {
 		}
 	}
 	else if (nread > 0) {
-		char* recv_buff;
+		NetBuffer* recv_buff = socket->net->GetReciveData();
+		assert(buf->base == (char*)recv_buff->GetData());
+		recv_buff->SetLength(nread);
+		socket->ReciveTCP();
 	}
 
 	if (buf->base)

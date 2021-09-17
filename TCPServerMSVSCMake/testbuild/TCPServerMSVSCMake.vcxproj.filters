@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="C:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\TCPServerMSVSCMake.cpp">
+    <ClCompile Include="C:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\Net.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\ServerUV.cpp">
+    <ClCompile Include="C:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\NetBuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="C:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\NetSock.cpp">
@@ -13,15 +13,18 @@
     <ClCompile Include="C:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\NetSocketUV.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\Net.cpp">
+    <ClCompile Include="C:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\ServerUV.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\TCPServerMSVSCMake.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="C:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\TCPServerMSVSCMake.h">
+    <ClInclude Include="C:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\Net.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\ServerUV.h">
+    <ClInclude Include="C:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\NetBuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="C:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\NetSock.h">
@@ -30,7 +33,10 @@
     <ClInclude Include="C:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\NetSocketUV.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\Net.h">
+    <ClInclude Include="C:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\ServerUV.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\TCPServerMSVSCMake.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

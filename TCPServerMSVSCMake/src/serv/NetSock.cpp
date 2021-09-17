@@ -22,3 +22,10 @@ NetSocket* GetNetSocketPtr(void* uv_socket)
 {
 	return GetPtrSocket((char*)uv_socket - sizeof(void*));
 }
+
+void NetSocket::ReciveTCP();
+{
+
+}
+
+void NetSocket::Destroy();
