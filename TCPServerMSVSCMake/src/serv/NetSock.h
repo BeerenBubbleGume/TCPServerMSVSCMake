@@ -16,8 +16,7 @@ public:
 
 	char* ClientID;
 	char* DataBuff;
-	unsigned SocketCT;
-
+	int SocketCT;
 };
 struct NET_SOCKET_PRT {
 	NetSocket* net_socket;
@@ -31,6 +30,8 @@ struct UDP_SOCKET : public NET_SOCKET_PRT, uv_udp_t
 
 };
 
+NetSocket* GetPtrSocket(void* ptr);
+NetSocket* GetNetSocketPtr(void* uv_socket);
 
 
 #endif // !NETSOCK_H

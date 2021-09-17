@@ -38,8 +38,7 @@ public:
 
 
 	uv_tcp_t* GetPtrTCP(void* ptr);
-	NetSocketUV* GetPtrSocket(void* ptr);
-	NetSocketUV* GetNetSocketPtr(void* uv_socket);
+	
 
 };
 

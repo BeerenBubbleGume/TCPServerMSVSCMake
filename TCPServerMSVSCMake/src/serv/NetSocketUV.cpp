@@ -69,21 +69,10 @@ void NetSocketUV::ReciveUDP()
 {
 }
 
-uv_tcp_t* NetSocketUV::GetPtrTCP(void* ptr)
+uv_tcp_t* NetSocketUV::GetPtrTCP(void* ptr) //реализовать прием ip 
 {
 	return nullptr;
 }
-
-NetSocketUV* NetSocketUV::GetPtrSocket(void* ptr)
-{
-	return nullptr;
-}
-
-NetSocketUV* NetSocketUV::GetNetSocketPtr(void* uv_socket)
-{
-	return nullptr;
-}
-
 
 uv_tcp_t* GetPtrTCP(void* ptr)
 {
@@ -93,14 +82,6 @@ uv_tcp_t* GetPtrTCP(void* ptr)
 uv_loop_t* GetLoop(void* prt)
 {
 	return (uv_loop_t*)(((char*)prt) + sizeof(void*));
-}
-
-NetSocketUV* GetPtrSocket(void* ptr) {
-	return *((NetSocketUV**)ptr);
-}
-
-NetSocketUV* GetNetSocketPtr(void* uv_socket) {
-	return GetPtrSocket(((char*)uv_socket) - sizeof(void*));
 }
 
 void OnReadTCP(uv_stream_t* stream, ssize_t nread, const uv_buf_t* buf) {
