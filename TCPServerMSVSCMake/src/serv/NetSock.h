@@ -1,12 +1,8 @@
 #pragma once
 #ifndef NETSOCK_H
 #define NETSOCKET_H
-#include "ServerUV.h"
-#include <sys/types.h>
-#include <WinSock2.h>
-#include <list>
-#include <iostream>
-#include "../uv.h"
+#include "Net.h"
+#include "../../libs/includes/uv.h"
 
 class NetSocket {
 

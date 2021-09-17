@@ -64,32 +64,65 @@ CMAKE_BINARY_DIR = /home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCP
 
 # The main recursive "all" target.
 all: CMakeFiles/TCPServerMSVSCMake.dir/all
-all: libs/all
+all: src/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
-preinstall: libs/preinstall
+preinstall: src/preinstall
 .PHONY : preinstall
 
 # The main recursive "clean" target.
 clean: CMakeFiles/TCPServerMSVSCMake.dir/clean
-clean: libs/clean
+clean: src/clean
 .PHONY : clean
 
 #=============================================================================
-# Directory level rules for directory libs
+# Directory level rules for directory src
 
 # Recursive "all" directory target.
-libs/all:
-.PHONY : libs/all
+src/all: src/serv/all
+src/all: src/client/all
+.PHONY : src/all
 
 # Recursive "preinstall" directory target.
-libs/preinstall:
-.PHONY : libs/preinstall
+src/preinstall: src/serv/preinstall
+src/preinstall: src/client/preinstall
+.PHONY : src/preinstall
 
 # Recursive "clean" directory target.
-libs/clean:
-.PHONY : libs/clean
+src/clean: src/serv/clean
+src/clean: src/client/clean
+.PHONY : src/clean
+
+#=============================================================================
+# Directory level rules for directory src/client
+
+# Recursive "all" directory target.
+src/client/all:
+.PHONY : src/client/all
+
+# Recursive "preinstall" directory target.
+src/client/preinstall:
+.PHONY : src/client/preinstall
+
+# Recursive "clean" directory target.
+src/client/clean:
+.PHONY : src/client/clean
+
+#=============================================================================
+# Directory level rules for directory src/serv
+
+# Recursive "all" directory target.
+src/serv/all:
+.PHONY : src/serv/all
+
+# Recursive "preinstall" directory target.
+src/serv/preinstall:
+.PHONY : src/serv/preinstall
+
+# Recursive "clean" directory target.
+src/serv/clean:
+.PHONY : src/serv/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/TCPServerMSVSCMake.dir
@@ -98,12 +131,12 @@ libs/clean:
 CMakeFiles/TCPServerMSVSCMake.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TCPServerMSVSCMake.dir/build.make CMakeFiles/TCPServerMSVSCMake.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TCPServerMSVSCMake.dir/build.make CMakeFiles/TCPServerMSVSCMake.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/TESTbuildUNIX/CMakeFiles --progress-num=1,2 "Built target TCPServerMSVSCMake"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/TESTbuildUNIX/CMakeFiles --progress-num=1,2,3,4,5,6 "Built target TCPServerMSVSCMake"
 .PHONY : CMakeFiles/TCPServerMSVSCMake.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/TCPServerMSVSCMake.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/TESTbuildUNIX/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/TESTbuildUNIX/CMakeFiles 6
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/TCPServerMSVSCMake.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/TESTbuildUNIX/CMakeFiles 0
 .PHONY : CMakeFiles/TCPServerMSVSCMake.dir/rule

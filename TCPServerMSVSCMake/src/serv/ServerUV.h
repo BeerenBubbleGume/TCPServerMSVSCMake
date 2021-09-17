@@ -13,7 +13,7 @@ public:
 
 	Server();
 	~Server();
-	//конфликт из-за отсутсвия определения в классе Net
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ-пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ Net
 	NetSocket* NewSocket(Net* net);
 	void connect(sockaddr* addr, uv_tcp_t* serv);
 	void setup(uv_tcp_t* serv, sockaddr_in* addr);

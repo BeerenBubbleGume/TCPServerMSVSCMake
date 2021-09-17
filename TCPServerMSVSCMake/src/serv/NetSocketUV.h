@@ -2,9 +2,8 @@
 #ifndef NETSOCKETUV_H
 #define NETSOCKETUV_H
 
-#include "../../libs/includes/uv.h"
 #include "NetSock.h"
-#include "Net.h"
+#include "../../libs/includes/uv.h"
 
 void OnConnection(uv_connect_t* req, int status);
 void OnAccept(uv_stream_t* stream, int status);

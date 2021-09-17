@@ -153,6 +153,102 @@ TCPServerMSVSCMake.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TCPServerMSVSCMake.dir/build.make CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.s
 .PHONY : TCPServerMSVSCMake.cpp.s
 
+src/serv/Net.o: src/serv/Net.cpp.o
+.PHONY : src/serv/Net.o
+
+# target to build an object file
+src/serv/Net.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TCPServerMSVSCMake.dir/build.make CMakeFiles/TCPServerMSVSCMake.dir/src/serv/Net.cpp.o
+.PHONY : src/serv/Net.cpp.o
+
+src/serv/Net.i: src/serv/Net.cpp.i
+.PHONY : src/serv/Net.i
+
+# target to preprocess a source file
+src/serv/Net.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TCPServerMSVSCMake.dir/build.make CMakeFiles/TCPServerMSVSCMake.dir/src/serv/Net.cpp.i
+.PHONY : src/serv/Net.cpp.i
+
+src/serv/Net.s: src/serv/Net.cpp.s
+.PHONY : src/serv/Net.s
+
+# target to generate assembly for a file
+src/serv/Net.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TCPServerMSVSCMake.dir/build.make CMakeFiles/TCPServerMSVSCMake.dir/src/serv/Net.cpp.s
+.PHONY : src/serv/Net.cpp.s
+
+src/serv/NetSock.o: src/serv/NetSock.cpp.o
+.PHONY : src/serv/NetSock.o
+
+# target to build an object file
+src/serv/NetSock.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TCPServerMSVSCMake.dir/build.make CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.o
+.PHONY : src/serv/NetSock.cpp.o
+
+src/serv/NetSock.i: src/serv/NetSock.cpp.i
+.PHONY : src/serv/NetSock.i
+
+# target to preprocess a source file
+src/serv/NetSock.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TCPServerMSVSCMake.dir/build.make CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.i
+.PHONY : src/serv/NetSock.cpp.i
+
+src/serv/NetSock.s: src/serv/NetSock.cpp.s
+.PHONY : src/serv/NetSock.s
+
+# target to generate assembly for a file
+src/serv/NetSock.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TCPServerMSVSCMake.dir/build.make CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.s
+.PHONY : src/serv/NetSock.cpp.s
+
+src/serv/NetSocketUV.o: src/serv/NetSocketUV.cpp.o
+.PHONY : src/serv/NetSocketUV.o
+
+# target to build an object file
+src/serv/NetSocketUV.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TCPServerMSVSCMake.dir/build.make CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.o
+.PHONY : src/serv/NetSocketUV.cpp.o
+
+src/serv/NetSocketUV.i: src/serv/NetSocketUV.cpp.i
+.PHONY : src/serv/NetSocketUV.i
+
+# target to preprocess a source file
+src/serv/NetSocketUV.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TCPServerMSVSCMake.dir/build.make CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.i
+.PHONY : src/serv/NetSocketUV.cpp.i
+
+src/serv/NetSocketUV.s: src/serv/NetSocketUV.cpp.s
+.PHONY : src/serv/NetSocketUV.s
+
+# target to generate assembly for a file
+src/serv/NetSocketUV.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TCPServerMSVSCMake.dir/build.make CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.s
+.PHONY : src/serv/NetSocketUV.cpp.s
+
+src/serv/ServerUV.o: src/serv/ServerUV.cpp.o
+.PHONY : src/serv/ServerUV.o
+
+# target to build an object file
+src/serv/ServerUV.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TCPServerMSVSCMake.dir/build.make CMakeFiles/TCPServerMSVSCMake.dir/src/serv/ServerUV.cpp.o
+.PHONY : src/serv/ServerUV.cpp.o
+
+src/serv/ServerUV.i: src/serv/ServerUV.cpp.i
+.PHONY : src/serv/ServerUV.i
+
+# target to preprocess a source file
+src/serv/ServerUV.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TCPServerMSVSCMake.dir/build.make CMakeFiles/TCPServerMSVSCMake.dir/src/serv/ServerUV.cpp.i
+.PHONY : src/serv/ServerUV.cpp.i
+
+src/serv/ServerUV.s: src/serv/ServerUV.cpp.s
+.PHONY : src/serv/ServerUV.s
+
+# target to generate assembly for a file
+src/serv/ServerUV.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TCPServerMSVSCMake.dir/build.make CMakeFiles/TCPServerMSVSCMake.dir/src/serv/ServerUV.cpp.s
+.PHONY : src/serv/ServerUV.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -165,6 +261,18 @@ help:
 	@echo "... TCPServerMSVSCMake.o"
 	@echo "... TCPServerMSVSCMake.i"
 	@echo "... TCPServerMSVSCMake.s"
+	@echo "... src/serv/Net.o"
+	@echo "... src/serv/Net.i"
+	@echo "... src/serv/Net.s"
+	@echo "... src/serv/NetSock.o"
+	@echo "... src/serv/NetSock.i"
+	@echo "... src/serv/NetSock.s"
+	@echo "... src/serv/NetSocketUV.o"
+	@echo "... src/serv/NetSocketUV.i"
+	@echo "... src/serv/NetSocketUV.s"
+	@echo "... src/serv/ServerUV.o"
+	@echo "... src/serv/ServerUV.i"
+	@echo "... src/serv/ServerUV.s"
 .PHONY : help
 
 

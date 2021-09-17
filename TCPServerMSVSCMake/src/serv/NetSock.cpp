@@ -9,6 +9,8 @@ NetSocket::NetSocket()
 
 NetSocket::~NetSocket()
 {
+	free(ClientID);
+	free(DataBuff);
 }
 
 NetSocket* GetPtrSocket(void* ptr)
