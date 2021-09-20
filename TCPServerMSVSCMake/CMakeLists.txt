@@ -1,15 +1,15 @@
-# CMakeList.txt: проект CMake для TCPServerMSVSCMake; включите исходный код и определения,
-# укажите здесь логику для конкретного проекта.
+# CMakeList.txt: пїЅпїЅпїЅпїЅпїЅпїЅ CMake пїЅпїЅпїЅ TCPServerMSVSCMake; пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ,
+# пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 cmake_minimum_required (VERSION 3.8)
 
 add_subdirectory("src")
 
 
-# Добавьте источник в исполняемый файл этого проекта.
+# пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 add_executable (TCPServerMSVSCMake	"src/serv/Net.h"
 									"src/serv/Net.cpp"
-									"src/serv/NETBUFFER.cpp"
-									"src/serv/NETBUFFER.h"
+									"src/serv/NetBuffer.cpp"
+									"src/serv/NetBuffer.h"
 									"src/serv/NetSock.h"
 									"src/serv/NetSock.cpp"
 									"src/serv/NetSocketUV.h"
@@ -19,7 +19,7 @@ add_executable (TCPServerMSVSCMake	"src/serv/Net.h"
 									"TCPServerMSVSCMake.cpp"
 									"TCPServerMSVSCMake.h")
 
-# TODO: Добавьте тесты и целевые объекты, если это необходимо.
+# TODO: пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 IF(WIN32)
 	target_include_directories(TCPServerMSVSCMake PUBLIC
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/uv.h)

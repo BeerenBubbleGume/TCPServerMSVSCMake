@@ -3,6 +3,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.o.d"
   "CMakeFiles/TCPServerMSVSCMake.dir/src/serv/Net.cpp.o"
   "CMakeFiles/TCPServerMSVSCMake.dir/src/serv/Net.cpp.o.d"
+  "CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetBuffer.cpp.o"
+  "CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetBuffer.cpp.o.d"
   "CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.o"
   "CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.o.d"
   "CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.o"

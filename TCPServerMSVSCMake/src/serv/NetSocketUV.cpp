@@ -1,6 +1,7 @@
 #include "NetSocketUV.h"
 #include <cassert>
 #include <fstream>
+#include <cstring>
 
 uv_loop_t* servloop;
 uv_tcp_t* server;
@@ -209,14 +210,14 @@ void OnWrite(uv_write_t* req, int status)
 {
 	if (status == 0)
 	{
-		fprintf(file, "Sending TCP/UDP is fail!\n", strerror(status));
+		fprintf(file, "Sending TCP/UDP is fail!\n", uv_strerror(status));
 	}
 }
 
 void OnConnection(uv_stream_t* req, int status)
 {
 	if (status == 0) {
-		fprintf(file, "Connection fail!\n", strerror(status));
+		fprintf(file, "Connection fail!\n", uv_strerror(status));
 		return;
 	}
 	
@@ -230,7 +231,7 @@ void OnConnect(uv_connect_t* req, int status)
 	if (status <= 0)
 	{
 		udp_tcp = false;
-		fprintf(file, "Connection fali!\n", strerror(status));
+		fprintf(file, "Connection fali!\n", uv_strerror(status));
 		return;
 	}
 	else

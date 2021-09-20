@@ -12,7 +12,7 @@ Net::Net()
 
 	addr.sin_family = AF_INET;
 	addr.sin_port = htons(544);
-	addr.sin_addr.S_un.S_addr = htonl(INADDR_ANY);
+	addr.sin_addr.s_addr = htonl(INADDR_ANY);
 
 	if (bind(tcp_socket, (struct sockaddr*)&addr, sizeof(addr)) < 0) {
 		perror("bind");
@@ -25,19 +25,20 @@ Net::~Net()
 {
 
 }
-#ifdef UNIX
-void Net::closesock(int socket)
-{
-	free(buffer);
-	close(socket);
-}
-#endif // UNIX
-
+#ifdef WIN32
 void Net::closesock(SOCKET sock)
 {
 	//closesocket(sock);
 	//WSACleanup();
 }
+#else 
+void Net::closesock(int socket)
+{
+	free(buffer);
+	close(socket);
+}
+#endif // WIN32
+
 
 Net* Net::Recive()
 {

@@ -1,4 +1,6 @@
 #include "NetSock.h"
+#include <unistd.h>
+#include <cstring>
 
 NetSocket::NetSocket()
 {
