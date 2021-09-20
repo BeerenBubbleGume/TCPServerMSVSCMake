@@ -2,15 +2,14 @@
 
 NetSocket::NetSocket()
 {
-	ClientID = nullptr;
-	DataBuff = nullptr;
+	memset(ClientID, 0, sizeof(char*));
+	memset(DataBuff, 0, sizeof(char*));
 	SocketCT = 0;
 }
 
 NetSocket::~NetSocket()
 {
-	free(ClientID);
-	free(DataBuff);
+
 }
 
 NetSocket* GetPtrSocket(void* ptr)
@@ -23,9 +22,12 @@ NetSocket* GetNetSocketPtr(void* uv_socket)
 	return GetPtrSocket((char*)uv_socket - sizeof(void*));
 }
 
-void NetSocket::ReciveTCP();
+void NetSocket::ReciveTCP()
 {
-
+	//net->Recive();
 }
 
-void NetSocket::Destroy();
+void NetSocket::Destroy()
+{
+	//net->closesock(Socket);
+}

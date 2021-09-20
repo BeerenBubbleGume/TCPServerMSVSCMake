@@ -10,10 +10,52 @@ Net::Net()
 	raw_socket = socket(AF_INET, SOCK_RAW, 0);
 #endif // UNIX
 
-	
+	addr.sin_family = AF_INET;
+	addr.sin_port = htons(544);
+	addr.sin_addr.S_un.S_addr = htonl(INADDR_ANY);
+
+	if (bind(tcp_socket, (struct sockaddr*)&addr, sizeof(addr)) < 0) {
+		perror("bind");
+		//exit(1);
+	}
 
 }
 
 Net::~Net()
 {
+
 }
+#ifdef UNIX
+void Net::closesock(int socket)
+{
+	free(buffer);
+	close(socket);
+}
+#endif // UNIX
+
+void Net::closesock(SOCKET sock)
+{
+	//closesocket(sock);
+	//WSACleanup();
+}
+
+Net* Net::Recive()
+{
+	/*
+	while (true)
+	{
+		tcp_socket = accept(listner, nullptr, nullptr);
+		if (tcp_socket < 0)
+		{
+			perror("Reciving fail!\n");
+			//exit(1);
+		}
+		while (true)
+		{
+			bytes_read = recv(tcp_socket, *buffer, 4096, 0);
+		}
+	}
+	*/
+	return nullptr;
+}
+

@@ -14,6 +14,7 @@ public:
 	char* ClientID;
 	char* DataBuff;
 	int SocketCT;
+	int Socket;
 
 	void ReciveTCP();
 	void Destroy();

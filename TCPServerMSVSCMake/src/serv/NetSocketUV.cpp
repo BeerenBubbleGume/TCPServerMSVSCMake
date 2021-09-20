@@ -1,9 +1,11 @@
 #include "NetSocketUV.h"
-#include "../../TCPServerMSVSCMake.h"
 #include <cassert>
+#include <fstream>
 
-extern uv_loop_t* servloop;
-extern uv_tcp_t* server;
+uv_loop_t* servloop;
+uv_tcp_t* server;
+bool udp_tcp;
+FILE* file = fopen("ErrorLog.txt", "w");
 
 NetSocketUV::NetSocketUV(Net* net)
 {
@@ -41,21 +43,53 @@ bool NetSocketUV::SetConnectedSocketToReadMode()
 
 bool NetSocketUV::GetIP(sockaddr_in* addr, bool own_or_peer)
 {
+	if (own_or_peer) {
+		uv_tcp_init(servloop, server);
+		uv_ip4_addr("0.0.0.0", 544, addr);
+		int gip = uv_tcp_bind(server, (sockaddr*)addr, 0);
+		return NetSocketUV::Connect((sockaddr*)addr);
+	}
 	return false;
 }
 
 bool NetSocketUV::Connect(sockaddr* addr)
 {
+	if (addr)
+	{
+		uv_connect_t* req;
+		memset(req, 0, sizeof(TCP_SOCKET));
+		uv_tcp_connect(req, server, addr, OnConnect);
+	}
 	return false;
 }
 
 bool NetSocketUV::Accept()
 {
+	if (udp_tcp)
+	{
+		uv_stream_t* client = (uv_stream_t*)malloc(sizeof(sock));
+		int s = uv_accept((uv_stream_t*)server, client);
+		if(s)
+			NetSocketUV::ReciveTCP();
+		return (s == 0);
+	}
 	return false;
 }
 
 void NetSocketUV::SendTCP(char* buf)
 {
+	if (udp_tcp)
+	{
+		const uv_buf_t* uv_buf = (uv_buf_t*)buf;
+		uv_write_t* wr;
+		memset(wr, 0, sizeof(uv_write_t*));
+		uv_stream_t* client = (uv_stream_t*)malloc(sizeof(uv_stream_t*));
+		uv_write(wr, client, uv_buf, 4096, OnWrite);
+	}
+	else {
+		
+	}
+
 }
 
 void NetSocketUV::SendUDP(char* buf)
@@ -64,6 +98,18 @@ void NetSocketUV::SendUDP(char* buf)
 
 void NetSocketUV::RecciveTCP()
 {
+	int list = uv_listen((uv_stream_t*)server, 1024, OnConnection);
+	uv_stream_t* client = (uv_stream_t*)malloc(sizeof(TCP_SOCKET));
+	if (list)
+	{
+		udp_tcp = true;
+		uv_read_start(client, OnAllocBuffer, OnReadTCP);
+	}
+	else
+	{
+		udp_tcp = false;
+		uv_close((uv_handle_t*)client, OnCloseSocket);
+	}
 }
 
 void NetSocketUV::ReciveUDP()
@@ -108,7 +154,7 @@ uv_loop_t* GetLoop(void* prt)
 }
 
 void OnReadTCP(uv_stream_t* stream, ssize_t nread, const uv_buf_t* buf) {
-	NetSocket* socket = GetNetSocketPtr(stream);
+	NetSocketUV* socket = (NetSocketUV*)GetNetSocketPtr(stream);
 
 	if (nread < 0) {
 		if (nread == UV_EOF) {
@@ -131,7 +177,7 @@ void OnAccept(uv_stream_t* stream, int status)
 {
 	if (status < 0)
 	{
-		fprintf(stderr, "New connection error %s\n", uv_strerror(status));
+		fprintf(file, "New connection error %s\n", uv_strerror(status));
 		return;
 	}
 	// ������ ������� ����� �����, ����� ����� ���� ���������� ���������� � ��������
@@ -159,14 +205,38 @@ void OnCloseSocket(uv_handle_t* handle) {
 	free(handle);
 }
 
-void OnConnection(uv_connect_t* req, int status)
+void OnWrite(uv_write_t* req, int status)
+{
+	if (status == 0)
+	{
+		fprintf(file, "Sending TCP/UDP is fail!\n", strerror(status));
+	}
+}
+
+void OnConnection(uv_stream_t* req, int status)
 {
 	if (status == 0) {
-		fprintf(stderr, "Connection fail!\n", strerror(status));
+		fprintf(file, "Connection fail!\n", strerror(status));
 		return;
 	}
-	/*
+	
 	else {
+		
+	}
+}
 
-	}*/
+void OnConnect(uv_connect_t* req, int status)
+{
+	if (status <= 0)
+	{
+		udp_tcp = false;
+		fprintf(file, "Connection fali!\n", strerror(status));
+		return;
+	}
+	else
+	{
+		udp_tcp = true;
+
+	}
+
 }
