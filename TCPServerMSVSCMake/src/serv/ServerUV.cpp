@@ -1,5 +1,6 @@
+#include <stdint.h>
 #include "ServerUV.h"
-
+#include <string.h>
 Server::Server()
 {
 	//NetBuffer* netbuff = new NetBuffer;
@@ -44,7 +45,7 @@ void Server::SetID(void* NewClient)
 {
 	int counter = 0;
 	if (NewClient != nullptr)
-		for (int i = 0; i <= MAXINT16; i++)
+		for (int i = 0; i <= INT16_MAX; i++)
 		{
 			counter = i;
 			ClientID = counter;
