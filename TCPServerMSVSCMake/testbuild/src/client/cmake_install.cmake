@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/Operator/source/repos/TCPServerMSVSCMake/TCPServerMSVSCMake/src/client
+# Install script for directory: C:/Users/drhaz/source/repos/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/src/client
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

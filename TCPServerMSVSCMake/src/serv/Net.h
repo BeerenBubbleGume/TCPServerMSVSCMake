@@ -33,12 +33,12 @@ public:
 #endif // UNIX
 	
 	int listner;
-	char* buffer[4096];
+	char* buffer;
+	size_t buff_ltngth;
 	int bytes_read;
-	sockaddr_in addr;
+	sockaddr_in addr; //не указано sin_family sin_port sin_addr
 
 	Net* Recive();
-
 	
 };
 

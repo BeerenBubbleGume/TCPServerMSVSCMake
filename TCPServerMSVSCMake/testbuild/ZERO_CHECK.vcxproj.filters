@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <CustomBuild Include="C:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\testbuild\CMakeFiles\5b5b60219fcf536c3e529ee62ba4c2d4\generate.stamp.rule">
+    <CustomBuild Include="C:\Users\drhaz\source\repos\BeerenBubbleGume\TCPServerMSVSCMake\TCPServerMSVSCMake\testbuild\CMakeFiles\cc19e878043f720247480c4377feddd6\generate.stamp.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="CMake Rules">
-      <UniqueIdentifier>{6BC2B6A9-5D66-31E1-9916-E2A9AA47A666}</UniqueIdentifier>
+      <UniqueIdentifier>{08DE52BE-87C8-337B-89D6-2070E4D412A7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

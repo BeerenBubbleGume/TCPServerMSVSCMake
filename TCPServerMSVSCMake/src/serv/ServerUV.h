@@ -5,7 +5,7 @@
 #include "NetSock.h"
 #include "NetSocketUV.h"
 
-class Server {
+class Server : public NetSocketUV, public NetSocket, public Net, public NetBuffer {
 public:
 
 	Server();
@@ -13,11 +13,6 @@ public:
 	//�������� ��-�� ��������� ����������� � ������ Net
 	NetSocket* NewSocket(Net* net);
 	void connect(sockaddr* addr, uv_tcp_t* serv);
-	void setup(uv_tcp_t* serv, sockaddr_in* addr);
-
-protected:
-	
-	uv_connect_t* connect_data;
 
 };
 

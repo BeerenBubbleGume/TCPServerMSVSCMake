@@ -2,11 +2,15 @@
 //
 
 #include "TCPServerMSVSCMake.h"
+#include <thread>
 
 int main() {
 
-	servloop = uv_default_loop();
-	server = (uv_tcp_t*)malloc(sizeof(uv_tcp_t));
+	memset(addr, 0, sizeof(sockaddr));
+	
+	Server* serv = (Server*)malloc(sizeof(Server*));
+	serv->connect(addr, server);
+	std::cout << "Main:" << std::endl;
 	std::system("pause");
 	return 0;
 }

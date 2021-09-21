@@ -17,9 +17,10 @@ void OnWrite(uv_write_t* req, int status);
 
 uv_loop_t* GetLoop(void* prt);
 
-class NetSocketUV : public NetSocket
+class NetSocketUV : public NetSocket, Net
 {
 public:
+	NetSocketUV();
 	NetSocketUV(Net* net);
 	~NetSocketUV();
 

@@ -3,18 +3,25 @@
 #define NETSOCKET_H
 #include "Net.h"
 #include "../../libs/includes/uv.h"
+#include "NetBuffer.h"
 
-class NetSocket {
+class NetSocket : public NetBuffer, public Net {
 
 public:
 	NetSocket();
 	~NetSocket();
 
-	Net* net;
-	char* ClientID;
-	char* DataBuff;
+	Net* net; //не выделена память \/
+	int ClientID; //требуется инициализация 
+	char* DataBuff; //требуется выдиление памяти
 	int SocketCT;
-	int Socket;
+	int Socket; //не существует, требутеся инициализация
+	sockaddr_in net_addr;
+
+	char GetClientID();
+
+	int SetID(void* NewClient);
+	char* IDArray;
 
 	void ReciveTCP();
 	void Destroy();

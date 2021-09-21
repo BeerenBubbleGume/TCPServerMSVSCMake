@@ -1,5 +1,5 @@
 #include "NetBuffer.h"
-Net* net;
+Net* net; //выделить место
 
 NetBuffer::NetBuffer()
 {
@@ -11,18 +11,23 @@ NetBuffer::~NetBuffer()
 
 Net* NetBuffer::GetData()
 {
-	return nullptr; //net->Recive();
+	return Recive();
 }
 
 void NetBuffer::GetLength()
 {
+	buffer[buff_ltngth];
 }
 
 void NetBuffer::SetLength(ssize_t length)
 {
+	if (length)
+	{
+		net->buff_ltngth = length;
+	}
 }
 
-NetBuffer* NetBuffer::GetReciveData()
+NetBuffer* NetBuffer::GetReciveBuffer()
 {
-	return nullptr;
+	return (NetBuffer*)(buffer + sizeof(buffer[buff_ltngth]));
 }

@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/Operator/source/repos/TCPServerMSVSCMake/TCPServerMSVSCMake/src
+# Install script for directory: C:/Users/drhaz/source/repos/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -34,8 +34,8 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("C:/Users/Operator/source/repos/TCPServerMSVSCMake/TCPServerMSVSCMake/testbuild/src/serv/cmake_install.cmake")
-  include("C:/Users/Operator/source/repos/TCPServerMSVSCMake/TCPServerMSVSCMake/testbuild/src/client/cmake_install.cmake")
+  include("C:/Users/drhaz/source/repos/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/testbuild/src/serv/cmake_install.cmake")
+  include("C:/Users/drhaz/source/repos/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/testbuild/src/client/cmake_install.cmake")
 
 endif()
 
