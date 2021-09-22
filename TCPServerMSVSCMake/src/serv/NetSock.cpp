@@ -1,5 +1,5 @@
 #include "NetSock.h"
-//#include <unistd.h>
+#include <unistd.h>
 #include <cstring>
 
 NetSocket::NetSocket()
@@ -26,12 +26,10 @@ NetSocket* GetNetSocketPtr(void* uv_socket)
 
 void NetSocket::ReciveTCP()
 {
-	printf("netsock recivetcp");
-	net->Recive();
+	//net->Recive();
 }
 
 void NetSocket::Destroy()
 {
-	printf("netsock destroy");
-	net->closesock(Socket);
+	//net->closesock(Socket);
 }
