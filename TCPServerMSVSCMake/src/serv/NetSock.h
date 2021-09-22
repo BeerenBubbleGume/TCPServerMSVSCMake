@@ -5,7 +5,7 @@
 #include "../../libs/includes/uv.h"
 #include "NetBuffer.h"
 
-class NetSocket : public NetBuffer, public Net {
+class NetSocket : public NetBuffer {
 
 public:
 	NetSocket();
@@ -17,10 +17,21 @@ public:
 	int SocketCT;
 	int Socket; //не существует, требутеся инициализация
 	sockaddr_in net_addr;
+	size_t buff_length;
+#ifdef WIN32
+	SOCKET tcp_socket;
+	SOCKET udp_socket;
+	SOCKET raw_socket;
+#else 
+	int tcp_socket;
+	int udp_socket;
+	int raw_socket;
+#endif // UNIX
+
 
 	char GetClientID();
 
-	int SetID(void* NewClient);
+	void SetID(void* NewClient);
 	char* IDArray;
 
 	void ReciveTCP();

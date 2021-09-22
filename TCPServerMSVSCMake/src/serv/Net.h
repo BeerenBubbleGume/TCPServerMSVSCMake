@@ -12,34 +12,30 @@
 #include <netinet/in.h>
 #include <netinet/ip.h>
 #include <unistd.h>
-
 #endif // UNIX
+#include "NetSock.h"
 
-class Net {
+class Net : public NetSocket {
 public:
 	Net();
 	~Net();
-#ifdef WIN32
-	SOCKET tcp_socket;
-	SOCKET udp_socket;
-	SOCKET raw_socket;
-	void closesock(SOCKET sock);
-	
-#else 
-	int tcp_socket;
-	int udp_socket;
-	int raw_socket;
-	void closesock(int socket);
-#endif // UNIX
+
 	
 	int listner;
 	char* buffer;
-	size_t buff_ltngth;
+	size_t buff_length;
 	int bytes_read;
 	sockaddr_in addr; //не указано sin_family sin_port sin_addr
-
-	Net* Recive();
 	
+	Net* Recive();
+#ifdef WIN32
+	void closesock(SOCKET sock);
+#else
+	void closesock(int sock);
+#endif // WIN32
+
+	
+
 };
 
 #endif // !NET_H

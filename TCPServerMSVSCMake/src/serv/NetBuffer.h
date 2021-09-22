@@ -4,17 +4,17 @@
 #include <iostream>
 #include <cstdlib>
 #include "../../libs/includes/uv.h"
-#include "Net.h"
+#include "NetSock.h"
 
-class NetBuffer : public Net{
+class NetBuffer : public NetSocket{
 public:
 	NetBuffer();
 	~NetBuffer();
-	char* buffer;
-	ssize_t buflength;
+
+	NetSocket* netsock;
 	
-	Net* GetData();
-	void GetLength();
+	NetSocket* GetData();
+	size_t GetLength();
 	void SetLength(ssize_t length);
 	NetBuffer* GetReciveBuffer();
 

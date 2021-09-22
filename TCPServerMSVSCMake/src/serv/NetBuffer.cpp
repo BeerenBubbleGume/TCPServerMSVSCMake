@@ -1,28 +1,33 @@
 #include "NetBuffer.h"
-Net* net;
 
 NetBuffer::NetBuffer()
 {
+	
 }
 
 NetBuffer::~NetBuffer()
 {
 }
 
-Net* NetBuffer::GetData()
+NetSocket* NetBuffer::GetData()
 {
-	return nullptr; //net->Recive();
+	return (NetSocket*)netsock->ReciveTCP();
 }
 
-void NetBuffer::GetLength()
+size_t NetBuffer::GetLength()
 {
+	return DataBuff[buff_length];
 }
 
 void NetBuffer::SetLength(ssize_t length)
 {
+	if (length)
+	{
+		buff_length = length;
+	}
 }
 
-NetBuffer* NetBuffer::GetReciveData()
+NetBuffer* NetBuffer::GetReciveBuffer()
 {
-	return nullptr;
+	return (NetBuffer*)(DataBuff + sizeof(DataBuff[buff_length]));
 }

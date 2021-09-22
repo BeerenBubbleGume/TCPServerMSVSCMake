@@ -2,11 +2,17 @@
 #include <cassert>
 #include <fstream>
 #include <cstring>
+#pragma comment(lib, "uv.lib")
 
-uv_loop_t* servloop;
-uv_tcp_t* server;
+uv_loop_t* servloop = uv_default_loop();
+uv_tcp_t* server = new uv_tcp_t;
 bool udp_tcp;
-FILE* file = fopen("ErrorLog.txt", "w");
+
+NetSocketUV::NetSocketUV()
+{
+	sock = new void*;
+	net = new NetBuffer;
+}
 
 NetSocketUV::NetSocketUV(Net* net)
 {
@@ -46,9 +52,9 @@ bool NetSocketUV::GetIP(sockaddr_in* addr, bool own_or_peer)
 {
 	if (own_or_peer) {
 		uv_tcp_init(servloop, server);
-		uv_ip4_addr("0.0.0.0", 544, addr);
+		uv_ip4_addr("0.0.0.0", 8000, addr);
 		int gip = uv_tcp_bind(server, (sockaddr*)addr, 0);
-		return NetSocketUV::Connect((sockaddr*)addr);
+		NetSocketUV::Connect((sockaddr*)addr);
 	}
 	return false;
 }
@@ -70,9 +76,11 @@ bool NetSocketUV::Accept()
 	{
 		uv_stream_t* client = (uv_stream_t*)malloc(sizeof(sock));
 		int s = uv_accept((uv_stream_t*)server, client);
-		if(s)
-			NetSocketUV::ReciveTCP();
+		if (s)
+			NetSocketUV::SetConnectedSocketToReadMode();
+		SetID(client);
 		return (s == 0);
+		std::cout << "Accepted!" << std::endl;
 	}
 	return false;
 }
@@ -164,7 +172,7 @@ void OnReadTCP(uv_stream_t* stream, ssize_t nread, const uv_buf_t* buf) {
 		}
 	}
 	else if (nread > 0) {
-		NetBuffer* recv_buff = socket->net->GetReciveData();
+		NetBuffer* recv_buff = socket->net->GetReciveBuffer();
 		assert(buf->base == (char*)recv_buff->GetData());
 		recv_buff->SetLength(nread);
 		socket->ReciveTCP();
@@ -178,7 +186,7 @@ void OnAccept(uv_stream_t* stream, int status)
 {
 	if (status < 0)
 	{
-		fprintf(file, "New connection error %s\n", uv_strerror(status));
+		fprintf(stderr, "New connection error %s\n", uv_strerror(status));
 		return;
 	}
 	// ������ ������� ����� �����, ����� ����� ���� ���������� ���������� � ��������
@@ -210,14 +218,14 @@ void OnWrite(uv_write_t* req, int status)
 {
 	if (status == 0)
 	{
-		fprintf(file, "Sending TCP/UDP is fail!\n", uv_strerror(status));
+		fprintf(stderr, "Sending TCP/UDP is fail!\n", uv_strerror(status));
 	}
 }
 
 void OnConnection(uv_stream_t* req, int status)
 {
 	if (status == 0) {
-		fprintf(file, "Connection fail!\n", uv_strerror(status));
+		fprintf(stderr, "Connection fail!\n", uv_strerror(status));
 		return;
 	}
 	
@@ -231,7 +239,7 @@ void OnConnect(uv_connect_t* req, int status)
 	if (status <= 0)
 	{
 		udp_tcp = false;
-		fprintf(file, "Connection fali!\n", uv_strerror(status));
+		fprintf(stderr, "Connection fali!\n", uv_strerror(status));
 		return;
 	}
 	else
