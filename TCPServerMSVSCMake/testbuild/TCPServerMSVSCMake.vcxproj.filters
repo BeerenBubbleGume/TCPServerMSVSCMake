@@ -1,54 +1,54 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="C:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\Net.cpp">
+    <ClCompile Include="C:\Users\drhaz\source\repos\BeerenBubbleGume\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\Net.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\NetBuffer.cpp">
+    <ClCompile Include="C:\Users\drhaz\source\repos\BeerenBubbleGume\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\NetBuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\NetSock.cpp">
+    <ClCompile Include="C:\Users\drhaz\source\repos\BeerenBubbleGume\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\NetSock.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\NetSocketUV.cpp">
+    <ClCompile Include="C:\Users\drhaz\source\repos\BeerenBubbleGume\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\NetSocketUV.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\ServerUV.cpp">
+    <ClCompile Include="C:\Users\drhaz\source\repos\BeerenBubbleGume\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\ServerUV.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\TCPServerMSVSCMake.cpp">
+    <ClCompile Include="C:\Users\drhaz\source\repos\BeerenBubbleGume\TCPServerMSVSCMake\TCPServerMSVSCMake\TCPServerMSVSCMake.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="C:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\Net.h">
+    <ClInclude Include="C:\Users\drhaz\source\repos\BeerenBubbleGume\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\Net.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\NetBuffer.h">
+    <ClInclude Include="C:\Users\drhaz\source\repos\BeerenBubbleGume\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\NetBuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\NetSock.h">
+    <ClInclude Include="C:\Users\drhaz\source\repos\BeerenBubbleGume\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\NetSock.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\NetSocketUV.h">
+    <ClInclude Include="C:\Users\drhaz\source\repos\BeerenBubbleGume\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\NetSocketUV.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\ServerUV.h">
+    <ClInclude Include="C:\Users\drhaz\source\repos\BeerenBubbleGume\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\ServerUV.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\TCPServerMSVSCMake.h">
+    <ClInclude Include="C:\Users\drhaz\source\repos\BeerenBubbleGume\TCPServerMSVSCMake\TCPServerMSVSCMake\TCPServerMSVSCMake.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\CMakeLists.txt" />
+    <CustomBuild Include="C:\Users\drhaz\source\repos\BeerenBubbleGume\TCPServerMSVSCMake\TCPServerMSVSCMake\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
-      <UniqueIdentifier>{BF14F5CD-DE1D-359E-ABA4-391276658C64}</UniqueIdentifier>
+      <UniqueIdentifier>{9572D1F9-CAE9-38FA-9D9F-22807F464547}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{789DFD3C-D1D7-368B-883B-B6D8544400F7}</UniqueIdentifier>
+      <UniqueIdentifier>{5F017DB5-40DE-3AE6-A492-779BB0A98A45}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

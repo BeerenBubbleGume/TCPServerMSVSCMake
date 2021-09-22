@@ -7,5 +7,7 @@
 extern uv_loop_t* servloop;
 extern uv_tcp_t* server;
 
+sockaddr* addr;
+
 #endif // !TCPSERVERMVSCMAKE_H
 

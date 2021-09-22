@@ -1,0 +1,11 @@
+C:/Users/drhaz/source/repos/BeerenBubbleGume/TCPServerMSVSCMake/out/build/x64-Debug (по умолчанию)/CMakeFiles/edit_cache.dir
+C:/Users/drhaz/source/repos/BeerenBubbleGume/TCPServerMSVSCMake/out/build/x64-Debug (по умолчанию)/CMakeFiles/rebuild_cache.dir
+C:/Users/drhaz/source/repos/BeerenBubbleGume/TCPServerMSVSCMake/out/build/x64-Debug (по умолчанию)/TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir
+C:/Users/drhaz/source/repos/BeerenBubbleGume/TCPServerMSVSCMake/out/build/x64-Debug (по умолчанию)/TCPServerMSVSCMake/CMakeFiles/edit_cache.dir
+C:/Users/drhaz/source/repos/BeerenBubbleGume/TCPServerMSVSCMake/out/build/x64-Debug (по умолчанию)/TCPServerMSVSCMake/CMakeFiles/rebuild_cache.dir
+C:/Users/drhaz/source/repos/BeerenBubbleGume/TCPServerMSVSCMake/out/build/x64-Debug (по умолчанию)/TCPServerMSVSCMake/src/CMakeFiles/edit_cache.dir
+C:/Users/drhaz/source/repos/BeerenBubbleGume/TCPServerMSVSCMake/out/build/x64-Debug (по умолчанию)/TCPServerMSVSCMake/src/CMakeFiles/rebuild_cache.dir
+C:/Users/drhaz/source/repos/BeerenBubbleGume/TCPServerMSVSCMake/out/build/x64-Debug (по умолчанию)/TCPServerMSVSCMake/src/serv/CMakeFiles/edit_cache.dir
+C:/Users/drhaz/source/repos/BeerenBubbleGume/TCPServerMSVSCMake/out/build/x64-Debug (по умолчанию)/TCPServerMSVSCMake/src/serv/CMakeFiles/rebuild_cache.dir
+C:/Users/drhaz/source/repos/BeerenBubbleGume/TCPServerMSVSCMake/out/build/x64-Debug (по умолчанию)/TCPServerMSVSCMake/src/client/CMakeFiles/edit_cache.dir
+C:/Users/drhaz/source/repos/BeerenBubbleGume/TCPServerMSVSCMake/out/build/x64-Debug (по умолчанию)/TCPServerMSVSCMake/src/client/CMakeFiles/rebuild_cache.dir
