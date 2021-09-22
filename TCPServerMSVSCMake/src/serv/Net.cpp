@@ -9,14 +9,14 @@ Net::~Net()
 
 }
 #ifdef WIN32
-void Net::closesock(SOCKET sock)
+void Net::closesock(void* sock)
 {
-	closesocket(sock);
+	closesocket((SOCKET)sock);
 	free(DataBuff);
 	WSACleanup();
 }
 #else 
-void Net::closesock(int socket)
+void Net::closesock(void* socket)
 {
 	free(DataBuff);
 	close(socket);
@@ -26,6 +26,7 @@ void Net::closesock(int socket)
 
 Net* Net::Recive()
 {
+	/*
 	if (bind(tcp_socket, (struct sockaddr*)&net_addr, sizeof(net_addr)) < 0) {
 		perror("bind");
 		exit(1);
@@ -33,7 +34,7 @@ Net* Net::Recive()
 
 	while (true)
 	{
-		tcp_socket = accept(listner, nullptr, nullptr);
+		tcp_socket = accept(tcp_socket, nullptr, nullptr);
 		if (tcp_socket < 0)
 		{
 			perror("Reciving fail!\n");
@@ -44,5 +45,7 @@ Net* Net::Recive()
 			bytes_read = recv(tcp_socket, DataBuff, 4096, 0);
 		}
 	}
+	*/
+	return nullptr;
 }
 

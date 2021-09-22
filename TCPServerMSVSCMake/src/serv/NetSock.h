@@ -9,17 +9,14 @@ public:
 	NetSocket();
 	~NetSocket();
 
-	//не выделена память \/
-	int ClientID; //требуется инициализация 
-	char* DataBuff; //требуется выдиление памяти
-	int SocketCT;
-	int Socket; //не существует, требутеся инициализация
+	int ClientID = 0; //требуется инициализация  \/
+	char* DataBuff; //требуется выдиление памяти   \/
+	int SocketCT = 0;
 	sockaddr_in net_addr;
 	size_t buff_length;
-
-	int listner;
+	void* sock;
 	int bytes_read;
-
+/*
 #ifdef WIN32
 	SOCKET tcp_socket;
 	SOCKET udp_socket;
@@ -29,7 +26,7 @@ public:
 	int udp_socket;
 	int raw_socket;
 #endif // UNIX
-
+*/
 
 	char GetClientID();
 

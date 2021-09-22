@@ -4,9 +4,7 @@
 
 #include "src/serv/ServerUV.h"
 
-extern uv_loop_t* servloop;
-extern uv_tcp_t* server;
-
+const char* ip;
 sockaddr* addr;
 
 #endif // !TCPSERVERMVSCMAKE_H
