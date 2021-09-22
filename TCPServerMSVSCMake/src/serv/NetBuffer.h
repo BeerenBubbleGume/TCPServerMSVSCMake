@@ -13,7 +13,7 @@ public:
 
 	NetSocket* netsock;
 	
-	NetSocket* GetData();
+	char GetData();
 	size_t GetLength();
 	void SetLength(ssize_t length);
 	NetBuffer* GetReciveBuffer();

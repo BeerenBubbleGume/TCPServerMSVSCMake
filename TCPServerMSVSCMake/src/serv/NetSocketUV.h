@@ -5,6 +5,7 @@
 #include <iostream>
 #include "NetSock.h"
 #include "NetBuffer.h"
+#include "Net.h"
 #include "../../libs/includes/uv.h"
 
 void OnConnection(uv_stream_t* req, int status);

@@ -1,6 +1,10 @@
 #include "NetSock.h"
 //#include <unistd.h>
 #include <cstring>
+#include <iostream>
+#include "Net.h"
+
+Net* net;
 
 NetSocket::NetSocket()
 {
@@ -61,7 +65,7 @@ void NetSocket::SetID(void* NewClient)
 }
 void NetSocket::ReciveTCP()
 {
-	net->Recive();
+	DataBuff = (char*)net->Recive();
 }
 
 void NetSocket::Destroy()

@@ -1,23 +1,25 @@
 #pragma once
 #ifndef NETSOCK_H
 #define NETSOCKET_H
-#include "Net.h"
 #include "../../libs/includes/uv.h"
-#include "NetBuffer.h"
 
-class NetSocket : public NetBuffer {
+class NetSocket {
 
 public:
 	NetSocket();
 	~NetSocket();
 
-	Net* net; //не выделена пам€ть \/
+	//не выделена пам€ть \/
 	int ClientID; //требуетс€ инициализаци€ 
 	char* DataBuff; //требуетс€ выдиление пам€ти
 	int SocketCT;
 	int Socket; //не существует, требутес€ инициализаци€
 	sockaddr_in net_addr;
 	size_t buff_length;
+
+	int listner;
+	int bytes_read;
+
 #ifdef WIN32
 	SOCKET tcp_socket;
 	SOCKET udp_socket;
@@ -51,6 +53,8 @@ struct UDP_SOCKET : public NET_SOCKET_PRT, uv_udp_t
 
 NetSocket* GetPtrSocket(void* ptr);
 NetSocket* GetNetSocketPtr(void* uv_socket);
+
+
 
 
 #endif // !NETSOCK_H

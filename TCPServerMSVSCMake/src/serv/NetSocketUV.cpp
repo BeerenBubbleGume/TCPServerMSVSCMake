@@ -63,7 +63,7 @@ bool NetSocketUV::Connect(sockaddr* addr)
 {
 	if (addr)
 	{
-		uv_connect_t* req;
+		uv_connect_t* req = new uv_connect_t;
 		memset(req, 0, sizeof(TCP_SOCKET));
 		uv_tcp_connect(req, server, addr, OnConnect);
 	}
@@ -90,7 +90,7 @@ void NetSocketUV::SendTCP(char* buf)
 	if (udp_tcp)
 	{
 		const uv_buf_t* uv_buf = (uv_buf_t*)buf;
-		uv_write_t* wr;
+		uv_write_t* wr = new uv_write_t;
 		memset(wr, 0, sizeof(uv_write_t*));
 		uv_stream_t* client = (uv_stream_t*)malloc(sizeof(uv_stream_t*));
 		uv_write(wr, client, uv_buf, 4096, OnWrite);

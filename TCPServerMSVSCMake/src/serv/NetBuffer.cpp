@@ -9,9 +9,9 @@ NetBuffer::~NetBuffer()
 {
 }
 
-NetSocket* NetBuffer::GetData()
+char NetBuffer::GetData()
 {
-	return (NetSocket*)netsock->ReciveTCP();
+	return (char)DataBuff + buff_length;	
 }
 
 size_t NetBuffer::GetLength()

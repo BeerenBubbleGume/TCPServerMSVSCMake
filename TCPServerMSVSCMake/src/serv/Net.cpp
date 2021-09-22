@@ -12,13 +12,13 @@ Net::~Net()
 void Net::closesock(SOCKET sock)
 {
 	closesocket(sock);
-	free(buffer);
+	free(DataBuff);
 	WSACleanup();
 }
 #else 
 void Net::closesock(int socket)
 {
-	free(buffer);
+	free(DataBuff);
 	close(socket);
 }
 #endif // WIN32
@@ -41,7 +41,7 @@ Net* Net::Recive()
 		}
 		while (true)
 		{
-			bytes_read = recv(tcp_socket, buffer, 4096, 0);
+			bytes_read = recv(tcp_socket, DataBuff, 4096, 0);
 		}
 	}
 }

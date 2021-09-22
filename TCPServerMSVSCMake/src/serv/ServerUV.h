@@ -4,6 +4,7 @@
 
 #include "NetSock.h"
 #include "NetSocketUV.h"
+#include "Net.h"
 
 class Server : public NetSocketUV, public NetSocket, public Net, public NetBuffer {
 public:

@@ -26,3 +26,17 @@
 866	974	6539905031596462	TCPServerMSVSCMake/TCPServerMSVSCMake.exe	e3c067cca7c685b2
 0	752	6539907152544637	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/Net.cpp.obj	453f6564c6a424f6
 752	855	6539907153392204	TCPServerMSVSCMake/TCPServerMSVSCMake.exe	e3c067cca7c685b2
+1	1073	6539959880629999	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetBuffer.cpp.obj	709b855fd21862cf
+5	1106	6539959880929191	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.obj	cb578ef9a5d026dd
+3	1119	6539959881068811	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/Net.cpp.obj	453f6564c6a424f6
+0	830	6539961091970698	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/ServerUV.cpp.obj	8f0b4baf257509ef
+4	833	6539961092000626	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.obj	1588641344430d6e
+3	835	6539961092010589	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.obj	d82bc07ea5a7257b
+835	980	6539961093247285	TCPServerMSVSCMake/TCPServerMSVSCMake.exe	e3c067cca7c685b2
+12	983	6539963283220219	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.obj	1588641344430d6e
+3	985	6539963283230183	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.obj	cb578ef9a5d026dd
+1	986	6539963283240166	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetBuffer.cpp.obj	709b855fd21862cf
+9	1023	6539963283649058	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/ServerUV.cpp.obj	8f0b4baf257509ef
+7	1080	6539963284227525	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.obj	d82bc07ea5a7257b
+0	826	6539963721282666	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/Net.cpp.obj	453f6564c6a424f6
+827	944	6539963722280028	TCPServerMSVSCMake/TCPServerMSVSCMake.exe	e3c067cca7c685b2
