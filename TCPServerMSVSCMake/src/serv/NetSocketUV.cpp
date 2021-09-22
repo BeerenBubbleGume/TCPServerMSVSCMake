@@ -29,6 +29,7 @@ bool NetSocketUV::Create(bool udp_tcp, int port, bool listen)
 	//NetSocketUV::Create(udp_tcp, port, listen);
 
 	uv_loop_t* loop = GetLoop(sock);
+	uv_tcp_t* server = GetPtrTCP(sock);
 
 	if (udp_tcp)
 	{
@@ -36,7 +37,7 @@ bool NetSocketUV::Create(bool udp_tcp, int port, bool listen)
 		memset(sock, 0, sizeof(TCP_SOCKET));
 		((TCP_SOCKET*)sock)->net_socket = this;
 	}
-
+	uv_tcp_init(loop, server);
 
 	return false;
 }
@@ -55,16 +56,17 @@ bool NetSocketUV::SetConnectedSocketToReadMode()
 //получаем IP адресс 
 bool NetSocketUV::GetIP(const char* ip, sockaddr_in* addr, bool own_or_peer)
 {
-	uv_loop_t* servloop = GetLoop(sock);
 	uv_tcp_t* server = GetPtrTCP(sock);
 	sockaddr_in* saddr = addr;
 
 	if (own_or_peer) {
-		uv_tcp_init(servloop, server);
 		uv_ip4_addr(ip, 8000, saddr);
 		int gip = uv_tcp_bind(server, (sockaddr*)saddr, 0);
-		NetSocketUV::Create(true, 8000, true);
-		NetSocketUV::Connect((sockaddr*)saddr);
+		if (gip)
+		{
+			NetSocketUV::Create(true, 8000, true);
+			NetSocketUV::Connect((sockaddr*)saddr);
+		}
 		return true;
 	}
 	return false;
