@@ -4,8 +4,8 @@
 
 #include "src/serv/ServerUV.h"
 
-const char* ip;
-sockaddr* addr;
+char* ip;
+sockaddr_in* addr;
 
 #endif // !TCPSERVERMVSCMAKE_H
 

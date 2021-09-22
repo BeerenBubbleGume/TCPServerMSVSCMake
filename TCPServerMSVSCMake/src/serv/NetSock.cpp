@@ -34,7 +34,7 @@ NetSocket::NetSocket()
 	net_addr.sin_addr.S_un.S_addr = htonl(INADDR_ANY);
 	*/
 	DataBuff = new char[buff_length];
-	IDArray = new char[1000000];
+	IDArray = new char[1024];
 	bytes_read = 0;
 	
 }
@@ -63,11 +63,12 @@ void NetSocket::SetID(void* NewClient)
 		exit(1);
 	}
 }
+/*
 void NetSocket::ReciveTCP()
 {
-	DataBuff;
+	recv((SOCKET)sock, DataBuff, buff_length, 0);
 }
-
+*/
 void NetSocket::Destroy()
 {
 	net->closesock(sock);

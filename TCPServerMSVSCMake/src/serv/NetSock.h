@@ -12,7 +12,7 @@ public:
 	int ClientID = 0; //требуется инициализация  \/
 	char* DataBuff; //требуется выдиление памяти   \/
 	int SocketCT = 0;
-	sockaddr_in net_addr;
+	sockaddr_in* net_addr;
 	size_t buff_length;
 	void* sock;
 	int bytes_read;
@@ -33,7 +33,7 @@ public:
 	void SetID(void* NewClient);
 	char* IDArray;
 
-	void ReciveTCP();
+	//void ReciveTCP();
 	void Destroy();
 };
 struct NET_SOCKET_PRT {

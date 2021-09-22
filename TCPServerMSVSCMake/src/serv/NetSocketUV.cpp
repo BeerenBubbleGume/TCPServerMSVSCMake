@@ -89,6 +89,7 @@ bool NetSocketUV::Connect(sockaddr* addr)
 bool NetSocketUV::Accept()
 {
 	uv_tcp_t* server = GetPtrTCP(sock);
+	uv_loop_t* loop = GetLoop(sock);
 
 	if (udp_tcp)
 	{
@@ -98,8 +99,8 @@ bool NetSocketUV::Accept()
 		return (s == 0);
 		std::cout << "Accepted!" << std::endl;
 	}
-
-	return false;
+	
+	return uv_run(loop, UV_RUN_DEFAULT);
 }
 
 //высылаем данные по TCP протаколу
@@ -126,7 +127,7 @@ void NetSocketUV::SendUDP(char* buf)
 }
 
 //принимаем данные по TCP протоколу
-void NetSocketUV::RecciveTCP()
+void NetSocketUV::ReciveTCP()
 {
 	uv_stream_t* server = (uv_stream_t*)GetPtrTCP(sock);
 	int list = uv_listen(server, 1024, OnAccept);

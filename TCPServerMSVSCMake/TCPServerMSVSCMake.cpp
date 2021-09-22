@@ -6,9 +6,8 @@
 int main() {
 
 	ip = {"127.0.0.1"};
-	memset(addr, 0, sizeof(sockaddr));
-	Server* serv;
-	if ((serv->connect(addr, ip)) == 0)
+	Server* serv = (Server*)malloc(sizeof(Server*));
+	if ((serv->connect((sockaddr*)addr, ip)) == 0)
 	{
 		std::cout << "Main:" << std::endl;
 	}

@@ -33,7 +33,7 @@ public:
 
 	virtual void SendTCP(char* buf);
 	virtual void SendUDP(char* buf);
-	virtual void RecciveTCP();
+	virtual void ReciveTCP();
 	virtual void ReciveUDP();
 	void Destroy();
 
