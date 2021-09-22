@@ -15,10 +15,12 @@ NetSocket* Server::NewSocket(Net* net)
 
 void Server::connect(sockaddr* addr, uv_tcp_t* serv)
 {
+	netsockuv->NetSocketUV::GetIP((sockaddr_in*)addr, true);
 }
 
 void Server::setup(uv_tcp_t* serv, sockaddr_in* addr)
 {
+
 }
 
 

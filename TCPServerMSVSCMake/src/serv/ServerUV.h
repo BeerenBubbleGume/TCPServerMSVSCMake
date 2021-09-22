@@ -10,6 +10,9 @@ public:
 
 	Server();
 	~Server();
+
+	NetSocketUV* netsockuv;
+
 	//�������� ��-�� ��������� ����������� � ������ Net
 	NetSocket* NewSocket(Net* net);
 	void connect(sockaddr* addr, uv_tcp_t* serv);

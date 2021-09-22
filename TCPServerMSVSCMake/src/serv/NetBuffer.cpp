@@ -11,7 +11,7 @@ NetBuffer::~NetBuffer()
 
 Net* NetBuffer::GetData()
 {
-	return nullptr; //net->Recive();
+	return net->Recive();
 }
 
 void NetBuffer::GetLength()
