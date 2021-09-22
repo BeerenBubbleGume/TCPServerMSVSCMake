@@ -3,13 +3,14 @@
 #include <cstring>
 #include <iostream>
 #include "Net.h"
+#include "NetSocketUV.h"
 
 Net* net;
 
 NetSocket::NetSocket()
 {
 	net = new Net;
-
+   /*
 #ifdef WIN32
 	WSADATA wsdata;
 	WORD DLLVersion = MAKEWORD(2, 1);
@@ -31,16 +32,15 @@ NetSocket::NetSocket()
 	net_addr.sin_family = AF_INET;
 	net_addr.sin_port = htons(8000);
 	net_addr.sin_addr.S_un.S_addr = htonl(INADDR_ANY);
-
+	*/
 	DataBuff = new char[buff_length];
-	SocketCT = 0;
-	ClientID = 0;
-	IDArray = new char[MAXINT16];
+	IDArray = new char[1000000];
+	bytes_read = 0;
+	
 }
 
 NetSocket::~NetSocket()
 {
-
 }
 char NetSocket::GetClientID()
 {
@@ -70,7 +70,7 @@ void NetSocket::ReciveTCP()
 
 void NetSocket::Destroy()
 {
-	net->closesock(Socket);
+	net->closesock(sock);
 }
 
 NetSocket* GetPtrSocket(void* ptr)

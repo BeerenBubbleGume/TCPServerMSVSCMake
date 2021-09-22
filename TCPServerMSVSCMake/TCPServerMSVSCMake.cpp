@@ -5,11 +5,13 @@
 
 int main() {
 
+	ip = {"127.0.0.1"};
 	memset(addr, 0, sizeof(sockaddr));
-
-	Server* serv = (Server*)malloc(sizeof(Server*));
-	serv->connect(addr, server);
-	std::cout << "Main:" << std::endl;
+	Server* serv;
+	if ((serv->connect(addr, ip)) == 0)
+	{
+		std::cout << "Main:" << std::endl;
+	}
 
 	return 0;
 }

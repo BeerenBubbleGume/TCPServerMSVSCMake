@@ -13,9 +13,10 @@ NetSocket* Server::NewSocket(Net* net)
 	return new NetSocketUV(net);
 }
 
-void Server::connect(sockaddr* addr, uv_tcp_t* serv)
+int Server::connect(sockaddr* addr, const char* ip)
 {
-	GetIP((sockaddr_in*)addr, true);
+	Create(true, 8000, true);
+	return GetIP(ip, (sockaddr_in*)addr, true);
 }
 
 

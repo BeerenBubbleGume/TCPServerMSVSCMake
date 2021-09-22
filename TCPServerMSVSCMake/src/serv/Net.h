@@ -22,9 +22,9 @@ public:
 	
 	Net* Recive();
 #ifdef WIN32
-	void closesock(SOCKET sock);
+	void closesock(void* sock);
 #else
-	void closesock(int sock);
+	void closesock(void* sock);
 #endif // WIN32
 
 	

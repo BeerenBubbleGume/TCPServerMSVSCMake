@@ -31,3 +31,4 @@ NetBuffer* NetBuffer::GetReciveBuffer()
 {
 	return (NetBuffer*)(DataBuff + sizeof(DataBuff[buff_length]));
 }
+
