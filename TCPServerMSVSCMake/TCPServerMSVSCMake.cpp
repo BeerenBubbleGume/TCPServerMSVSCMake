@@ -6,8 +6,7 @@
 int main() {
 
 	ip = {"127.0.0.1"};
-	memset(addr, 0, sizeof(sockaddr));
-	Server* serv;
+	Server* serv = new Server;
 	if ((serv->connect(addr, ip)) == 0)
 	{
 		std::cout << "Main:" << std::endl;
