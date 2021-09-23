@@ -25,9 +25,9 @@ public:
 	~NetSocketUV();
 
 	NetBuffer* net;
-	virtual bool Create(bool udp_tcp, int port, bool listen);
+	virtual bool Create(const char* ip, bool udp_tcp, int port, bool listen);
 	virtual bool SetConnectedSocketToReadMode();
-	virtual bool GetIP(const char* ip, sockaddr_in* addr, bool own_or_peer);
+	virtual bool GetIP(sockaddr_in* addr, bool own_or_peer);
 	virtual bool Connect(sockaddr* addr);
 	virtual bool Accept();
 

@@ -13,7 +13,7 @@ public:
 	~Server();
 	//�������� ��-�� ��������� ����������� � ������ Net
 	NetSocket* NewSocket(Net* net);
-	int connect(sockaddr* addr, const char* ip);
+	int connect(const char* ip);
 
 };
 
