@@ -3,20 +3,25 @@
 #define NETBUFFER_H
 #include <iostream>
 #include <cstdlib>
-#include "../../libs/includes/uv.h"
-#include "NetSock.h"
 
-class NetBuffer : public NetSocket{
+
+class NetBuffer
+{
 public:
 	NetBuffer();
 	~NetBuffer();
-
-	NetSocket* netsock;
 	
 	char GetData();
 	size_t GetLength();
-	void SetLength(ssize_t length);
+	void SetLength(unsigned int length);
 	NetBuffer* GetReciveBuffer();
+
+	int ClientID = 0;
+	char* DataBuff;
+	int SocketCT = 0;
+	size_t buff_length;
+	void* sock;
+	int bytes_read;
 
 };
 

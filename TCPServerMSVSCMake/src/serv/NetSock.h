@@ -1,39 +1,16 @@
 #pragma once
 #ifndef NETSOCK_H
 #define NETSOCKET_H
-#include "../../libs/includes/uv.h"
+#include "NetBuffer.h"
+#include "Net.h"
+#include "../uv.h"
 
-class NetSocket {
+class NetSocket : public Net {
 
 public:
 	NetSocket();
 	~NetSocket();
 
-	int ClientID = 0; //требуется инициализация  \/
-	char* DataBuff; //требуется выдиление памяти   \/
-	int SocketCT = 0;
-	sockaddr_in* net_addr;
-	size_t buff_length;
-	void* sock;
-	int bytes_read;
-/*
-#ifdef WIN32
-	SOCKET tcp_socket;
-	SOCKET udp_socket;
-	SOCKET raw_socket;
-#else 
-	int tcp_socket;
-	int udp_socket;
-	int raw_socket;
-#endif // UNIX
-*/
-
-	char GetClientID();
-
-	void SetID(void* NewClient);
-	char* IDArray;
-
-	//void ReciveTCP();
 	void Destroy();
 };
 struct NET_SOCKET_PRT {

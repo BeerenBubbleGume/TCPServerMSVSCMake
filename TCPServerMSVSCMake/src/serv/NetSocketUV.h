@@ -23,18 +23,19 @@ public:
 	NetSocketUV();
 	NetSocketUV(Net* net);
 	~NetSocketUV();
-
 	NetBuffer* net;
-	virtual bool Create(const char* ip, bool udp_tcp, int port, bool listen);
-	virtual bool SetConnectedSocketToReadMode();
-	virtual bool GetIP(sockaddr_in* addr, bool own_or_peer);
-	virtual bool Connect(sockaddr* addr);
-	virtual bool Accept();
 
-	virtual void SendTCP(char* buf);
-	virtual void SendUDP(char* buf);
-	virtual void ReciveTCP();
-	virtual void ReciveUDP();
+	bool Create(const char* ip, sockaddr_in* addr, bool udp_tcp, int port, bool listen);
+	
+	bool SetConnectedSocketToReadMode();
+	bool GetIP(sockaddr_in* addr, const char* ip, bool own_or_peer);
+	bool Connect(sockaddr* addr);
+	bool Accept();
+
+	void SendTCP(char* buf);
+	void SendUDP(char* buf);
+	void ReciveTCP();
+	void ReciveUDP();
 	void Destroy();
 
 };

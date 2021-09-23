@@ -2,7 +2,8 @@
 
 NetBuffer::NetBuffer()
 {
-	
+	DataBuff = new char[buff_length];
+	bytes_read = 0;
 }
 
 NetBuffer::~NetBuffer()
@@ -19,7 +20,7 @@ size_t NetBuffer::GetLength()
 	return DataBuff[buff_length];
 }
 
-void NetBuffer::SetLength(ssize_t length)
+void NetBuffer::SetLength(unsigned int length)
 {
 	if (length)
 	{

@@ -7,7 +7,8 @@
 #include <cassert>
 #include <fstream>
 #include <cstring>
-#pragma comment(lib, "uv.lib")
+#include "Net.h"
+
 
 bool udp_tcp;
 
@@ -24,22 +25,29 @@ NetSocketUV::~NetSocketUV()
 {
 }
 
-bool NetSocketUV::Create(const char* ip, bool udp_tcp, int port, bool listen)
+bool NetSocketUV::Create(const char* ip, sockaddr_in* addr, bool udp_tcp, int port, bool listen)
 {
-	//NetSocketUV::Create(udp_tcp, port, listen);
-
-	uv_loop_t* loop = GetLoop(sock);
-	uv_tcp_t* server = GetPtrTCP(sock);
-	uv_ip4_addr(ip, 8000, net_addr);
+	//NetSocketUV::Create(ip, addr, udp_tcp, port, listen);
+	uv_loop_t* loop = GetLoop(net);
+	uv_tcp_t* serv = GetPtrTCP(net);
 	if (udp_tcp)
 	{
 		sock = malloc(sizeof(TCP_SOCKET));
 		memset(sock, 0, sizeof(TCP_SOCKET));
 		((TCP_SOCKET*)sock)->net_socket = this;
-		GetIP(net_addr, true);
-	}
-	uv_tcp_init(loop, server);
 
+	}
+	if ((loop && serv) != NULL)
+	{
+		int init = uv_tcp_init(loop, serv);
+		if (init)
+			GetIP(addr, ip, true);
+		else
+		{
+			fprintf(stderr, "Cannot initialize socket!\n");
+			exit(1);
+		}
+	}
 	return false;
 }
 
@@ -55,17 +63,17 @@ bool NetSocketUV::SetConnectedSocketToReadMode()
 }
 
 //получаем IP адресс 
-bool NetSocketUV::GetIP(sockaddr_in* addr, bool own_or_peer)
+bool NetSocketUV::GetIP(sockaddr_in* addr, const char* ip, bool own_or_peer)
 {
-	uv_tcp_t* server = GetPtrTCP(sock);
-	net_addr = addr;
+	uv_tcp_t* server = GetPtrTCP(net);
 
 	if (own_or_peer) 
 	{
-		int gip = uv_tcp_bind(server, (sockaddr*)net_addr, 0);
+		int i = uv_ip4_addr(ip, 8000, addr);
+		int gip = uv_tcp_bind(server, (sockaddr*)addr, 0);
 		if (gip)
 		{
-			NetSocketUV::Connect((sockaddr*)net_addr);
+			NetSocketUV::Connect((sockaddr*)addr);
 		}
 		return true;
 	}
@@ -75,7 +83,7 @@ bool NetSocketUV::GetIP(sockaddr_in* addr, bool own_or_peer)
 //настраиваем соединение
 bool NetSocketUV::Connect(sockaddr* addr)
 {
-	uv_tcp_t* server = GetPtrTCP(sock);
+	uv_tcp_t* server = GetPtrTCP(net);
 
 	if (addr)
 	{
@@ -90,19 +98,18 @@ bool NetSocketUV::Connect(sockaddr* addr)
 
 bool NetSocketUV::Accept()
 {
-	uv_tcp_t* server = GetPtrTCP(sock);
-	uv_loop_t* loop = GetLoop(sock);
+	uv_tcp_t* server = GetPtrTCP(net);
+	uv_loop_t* loop = GetLoop(net);
 
 	if (udp_tcp)
 	{
-		uv_stream_t* client = (uv_stream_t*)malloc(sizeof(sock));
+		uv_stream_t* client = (uv_stream_t*)malloc(sizeof(net));
 		int s = uv_accept((uv_stream_t*)server, client);
-		SetID(client);
 		return (s == 0);
 		std::cout << "Accepted!" << std::endl;
 	}
-	
-	return uv_run(loop, UV_RUN_DEFAULT);
+	uv_run(loop, UV_RUN_DEFAULT);
+	return false;
 }
 
 //высылаем данные по TCP протаколу
@@ -142,7 +149,7 @@ void NetSocketUV::ReciveTCP()
 	else
 	{
 		udp_tcp = false;
-		uv_close((uv_handle_t*)client, OnCloseSocket);
+		Destroy();
 	}
 }
 

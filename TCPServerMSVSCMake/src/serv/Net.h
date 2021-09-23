@@ -13,14 +13,14 @@
 #include <netinet/ip.h>
 #include <unistd.h>
 #endif // UNIX
-#include "NetSock.h"
+#include "NetBuffer.h"
 
-class Net : public NetSocket {
+class Net : public NetBuffer 
+{
 public:
 	Net();
 	~Net();
-	
-	Net* Recive();
+
 #ifdef WIN32
 	void closesock(void* sock);
 #else
