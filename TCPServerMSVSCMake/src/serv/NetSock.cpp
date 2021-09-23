@@ -5,11 +5,9 @@
 #include "Net.h"
 #include "NetSocketUV.h"
 
-Net* net;
 
 NetSocket::NetSocket()
 {
-	net = new Net;
    /*
 #ifdef WIN32
 	WSADATA wsdata;
@@ -32,46 +30,17 @@ NetSocket::NetSocket()
 	net_addr.sin_family = AF_INET;
 	net_addr.sin_port = htons(8000);
 	net_addr.sin_addr.S_un.S_addr = htonl(INADDR_ANY);
-	*/
-	DataBuff = new char[buff_length];
-	IDArray = new char[1024];
-	bytes_read = 0;
-	
+	*/	
 }
 
 NetSocket::~NetSocket()
 {
 }
-char NetSocket::GetClientID()
-{
-	return ClientID;
-}
 
-void NetSocket::SetID(void* NewClient)
-{
-	int counter = 0;
-	if (NewClient != nullptr)
-		for (int i = 0; i <= MAXINT16; i++)
-		{
-			counter = i;
-			ClientID = counter;
-			*IDArray = counter;
-		}
-	else
-	{
-		fprintf(stderr, "New client is null!");
-		exit(1);
-	}
-}
-/*
-void NetSocket::ReciveTCP()
-{
-	recv((SOCKET)sock, DataBuff, buff_length, 0);
-}
-*/
 void NetSocket::Destroy()
 {
-	net->closesock(sock);
+	//Net* net = new Net;
+	//net->closesock(sock);
 }
 
 NetSocket* GetPtrSocket(void* ptr)
