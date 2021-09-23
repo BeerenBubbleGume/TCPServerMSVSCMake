@@ -8,6 +8,10 @@
 #include <fstream>
 #include <cstring>
 #include "Net.h"
+#include "ServerUV.h"
+
+extern uv_loop_t* loop;
+extern uv_tcp_t* server;
 
 
 bool udp_tcp;
@@ -29,8 +33,6 @@ NetSocketUV::~NetSocketUV()
 bool NetSocketUV::Create(const char* ip, sockaddr_in* addr, bool udp_tcp, int port, bool listen)
 {
 	//NetSocketUV::Create(ip, addr, udp_tcp, port, listen);
-	uv_loop_t* loop = GetLoop(net);
-	uv_tcp_t* serv = GetPtrTCP(net);
 	if (udp_tcp)
 	{
 		sock = malloc(sizeof(TCP_SOCKET));
@@ -38,9 +40,9 @@ bool NetSocketUV::Create(const char* ip, sockaddr_in* addr, bool udp_tcp, int po
 		((TCP_SOCKET*)sock)->net_socket = this;
 
 	}
-	if ((loop && serv) != NULL)
+	if ((loop && server) != NULL)
 	{
-		int init = uv_tcp_init(loop, serv);
+		int init = uv_tcp_init(loop, server);
 		if (init)
 			GetIP(addr, ip, true);
 		else
@@ -100,7 +102,6 @@ bool NetSocketUV::Connect(sockaddr* addr)
 bool NetSocketUV::Accept()
 {
 	uv_tcp_t* server = GetPtrTCP(net);
-	uv_loop_t* loop = GetLoop(net);
 
 	if (udp_tcp)
 	{
