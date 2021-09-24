@@ -163,9 +163,4 @@ CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetBuffer.cpp.o: \
  /usr/include/bits/param.h /usr/include/linux/param.h \
  /usr/include/asm/param.h /usr/include/asm-generic/param.h \
  /home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/../../libs/includes/uv/threadpool.h \
- /home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/uv/linux.h \
- /home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/Net.h \
- /usr/include/netinet/ip.h /usr/include/unistd.h \
- /usr/include/bits/posix_opt.h /usr/include/bits/environments.h \
- /usr/include/bits/confname.h /usr/include/bits/getopt_posix.h \
- /usr/include/bits/getopt_core.h
+ /home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/uv/linux.h

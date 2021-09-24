@@ -15,7 +15,7 @@ NetBuffer::~NetBuffer()
 
 char NetBuffer::GetData()
 {
-	return (char)DataBuff + buff_length;	
+	return *(char*)(DataBuff + buff_length);	
 }
 
 size_t NetBuffer::GetLength()

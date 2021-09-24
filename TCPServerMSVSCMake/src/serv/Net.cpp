@@ -22,8 +22,10 @@ void Net::closesock(void* sock)
 #else 
 void Net::closesock(void* socket)
 {
+	/*
 	free(DataBuff);
-	close(socket);
+	close((int*)socket);
+	*/
 }
 #endif // WIN32
 

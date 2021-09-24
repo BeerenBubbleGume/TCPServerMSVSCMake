@@ -3,7 +3,7 @@
 #define NETBUFFER_H
 #include <iostream>
 #include <cstdlib>
-#include "../uv.h"
+#include "../../libs/includes/uv.h"
 
 class NetBuffer
 {

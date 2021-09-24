@@ -3,7 +3,7 @@
 #define NETSOCKET_H
 #include "NetBuffer.h"
 #include "Net.h"
-#include "../uv.h"
+#include "../../libs/includes/uv.h"
 
 class NetSocket : public NetBuffer, public Net {
 
