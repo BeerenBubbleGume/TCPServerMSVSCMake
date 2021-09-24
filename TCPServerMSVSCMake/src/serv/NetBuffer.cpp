@@ -4,16 +4,13 @@ NetBuffer::NetBuffer()
 {
 	loop = uv_default_loop();
 	server = new uv_tcp_t;
-
+	buff_length = 0;
 	DataBuff = new char[buff_length];
 	bytes_read = 0;
 }
 
 NetBuffer::~NetBuffer()
 {
-	free(loop);
-	free(server);
-	free(DataBuff);
 }
 
 char NetBuffer::GetData()

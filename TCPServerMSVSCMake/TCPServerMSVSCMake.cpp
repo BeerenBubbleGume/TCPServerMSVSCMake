@@ -6,12 +6,16 @@
 int main() {
 
 	ip = {"127.0.0.1"};
-	Server* serv = (Server*)malloc(sizeof(Server*));
+	std::cout << "Main:" << std::endl;
+	Net* net = new Net;
+	NetSocket* netsock = new NetSocket;
+	NetSocketUV* netsockuv = new NetSocketUV;
+	NetBuffer* netbuf = new NetBuffer;
+	Server* server = new Server;
+
+	server->connect(ip);
 	
-	if ((serv->connect(ip)) == 0)
-	{
-		std::cout << "Main:" << std::endl;
-	}
+	
 
 	return 0;
 }

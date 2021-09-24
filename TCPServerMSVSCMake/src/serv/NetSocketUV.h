@@ -8,8 +8,7 @@
 #include "Net.h"
 #include "../../libs/includes/uv.h"
 
-void OnConnect(uv_connect_t* req, int status);
-void OnAccept(uv_stream_t* stream, int status);
+void OnConnect(uv_stream_t* stream, int status);
 void OnAllocBuffer(uv_handle_t* handle, size_t suggested_size, uv_buf_t* buf);
 void OnReadTCP(uv_stream_t* stream, ssize_t nread, const uv_buf_t* buf);
 void OnCloseSocket(uv_handle_t* handle);
@@ -25,12 +24,12 @@ public:
 	~NetSocketUV();
 	NetBuffer* net;
 
-	bool Create(const char* ip, sockaddr_in* addr, bool udp_tcp, int port, bool listen);
+	bool Create(const char* ip, bool udp_tcp, int port, bool listen);
 	
 	bool SetConnectedSocketToReadMode();
-	bool GetIP(sockaddr_in* addr, const char* ip, bool own_or_peer);
-	bool Connect(sockaddr* addr);
-	bool Accept();
+	bool GetIP(const char* ip, bool own_or_peer, uv_loop_t* loop, uv_tcp_t* serv);
+	bool Connect(int port, const char* ip, sockaddr_in* addr, uv_loop_t* Mloop, uv_tcp_t* server);
+	bool Accept(uv_stream_t* srver);
 
 	void SendTCP(char* buf);
 	void SendUDP(char* buf);
@@ -38,9 +37,12 @@ public:
 	void ReciveUDP();
 	void Destroy();
 
+
+	int status;
 };
 uv_tcp_t* GetPtrTCP(void* ptr);
 uv_udp_t* GetPtrUDP(void* ptr);
+NetBuffer* GetPtrBuffer(void* ptr);
 
 
 #endif // !NETSOCKETUV_H
