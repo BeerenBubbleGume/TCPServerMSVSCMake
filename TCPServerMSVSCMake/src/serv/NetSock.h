@@ -11,6 +11,7 @@ public:
 	NetSocket();
 	~NetSocket();
 
+	NetBuffer* net;
 	void Destroy();
 };
 struct NET_SOCKET_PRT {

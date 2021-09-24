@@ -21,9 +21,9 @@ public:
 	bool Create(const char* ip, bool udp_tcp, int port, bool listen);
 	
 	bool SetConnectedSocketToReadMode();
-	bool GetIP(const char* ip, bool own_or_peer, uv_loop_t* loop, uv_tcp_t* serv);
-	bool Connect(int port, const char* ip, sockaddr_in* addr, uv_loop_t* Mloop, uv_tcp_t* server);
-	bool Accept(uv_stream_t* srver);
+	bool GetIP(const char* ip, bool own_or_peer);
+	bool Connect(int port, const char* ip, sockaddr_in* addr);
+	bool Accept();
 
 	void SendTCP(char* buf);
 	void SendUDP(char* buf);
@@ -41,6 +41,7 @@ public:
 };
 uv_tcp_t* GetPtrTCP(void* ptr);
 uv_udp_t* GetPtrUDP(void* ptr);
+uv_stream_t* GetPtrStream(void* ptr);
 NetBuffer* GetPtrBuffer(void* ptr);
 
 

@@ -8,7 +8,8 @@
 
 NetSocket::NetSocket()
 {
-   /*
+	net = new NetBuffer;
+	/*
 #ifdef WIN32
 	WSADATA wsdata;
 	WORD DLLVersion = MAKEWORD(2, 1);
