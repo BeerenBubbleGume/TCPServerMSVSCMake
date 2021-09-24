@@ -16,9 +16,7 @@ public:
 	
 	sockaddr_in* net_addr;
 	char* IDArray;
-	uv_loop_t* loop;
-	uv_tcp_t* server;
-
+	
 	NetSocket* NewSocket(Net* net);
 	int connect(const char* ip);
 	char GetClientID();

@@ -7,9 +7,6 @@ Server::Server()
 	memset(net_addr, 0, sizeof(sockaddr_in*));
 	IDArray = new char[1024];
 
-	loop = uv_default_loop();
-	server = new uv_tcp_t;
-
 }
 
 Server::~Server()
