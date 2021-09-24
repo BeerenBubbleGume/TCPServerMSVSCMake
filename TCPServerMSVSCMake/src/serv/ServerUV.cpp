@@ -2,7 +2,7 @@
 
 Server::Server()
 {
-	NetBuffer* netbuff = new NetBuffer;
+	//NetBuffer* netbuff = new NetBuffer;
 	net_addr = new sockaddr_in;
 	memset(net_addr, 0, sizeof(sockaddr_in*));
 	IDArray = new char[1024];
@@ -25,7 +25,7 @@ int Server::connect(const char* ip)
 		udp_tcp = true;
 		if (net_addr)
 		{
-			return Create(ip, net_addr, true, 8000, true);
+			return Create(ip, true, 8000, true);
 		}
 	}
 	else

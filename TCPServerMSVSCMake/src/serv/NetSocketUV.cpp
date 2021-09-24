@@ -10,107 +10,94 @@
 #include "Net.h"
 #include "ServerUV.h"
 
+
 bool udp_tcp;
 
 NetSocketUV::NetSocketUV()
 {
+	status = errno;
 	net = new NetBuffer;
 }
 
 NetSocketUV::NetSocketUV(Net* _Net)
 {
-	_Net = new Net;
 }
 
 NetSocketUV::~NetSocketUV()
 {
 }
 
-bool NetSocketUV::Create(const char* ip, sockaddr_in* addr, bool udp_tcp, int port, bool listen)
+bool NetSocketUV::Create(const char* ip, bool udp_tcp, int port, bool listen)
 {
 	//NetSocketUV::Create(ip, addr, udp_tcp, port, listen);
 	uv_loop_t* servloop = GetLoop(net);
-	uv_tcp_t* serv = GetPtrTCP(net);
+	uv_tcp_t* server = GetPtrTCP(net);
 	if (udp_tcp)
 	{
 		sock = malloc(sizeof(TCP_SOCKET));
 		memset(sock, 0, sizeof(TCP_SOCKET));
 		((TCP_SOCKET*)sock)->net_socket = this;
 
+		loop = uv_default_loop();
+		uv_loop_init(loop);
+		std::cout << "Create socket!" << std::endl;
+		GetIP(ip, true, servloop, server);
 	}
-	if ((loop && server) != NULL)
-	{
-		int init = uv_tcp_init(servloop, serv);
-		if (init)
-			GetIP(addr, ip, true);
-		else
-		{
-			fprintf(stderr, "Cannot initialize socket!\n");
-			exit(1);
-		}
-	}
+	
 	return false;
 }
 
-bool NetSocketUV::SetConnectedSocketToReadMode()
+bool NetSocketUV::GetIP(const char* ip, bool own_or_peer, uv_loop_t* loop, uv_tcp_t* serv)
 {
-	if (udp_tcp)
-	{
-		uv_tcp_t* tcp = GetPtrTCP(sock);
-		int r = uv_read_start((uv_stream_t*)tcp, OnAllocBuffer, OnReadTCP);
-		return (r == 0);
-	}
-	return false;
-}
-
-//получаем IP адресс 
-bool NetSocketUV::GetIP(sockaddr_in* addr, const char* ip, bool own_or_peer)
-{
-	uv_tcp_t* server = GetPtrTCP(net);
-
+	sockaddr_in* addr = new sockaddr_in;
 	if (own_or_peer) 
 	{
-		int i = uv_ip4_addr(ip, 8000, addr);
-		int gip = uv_tcp_bind(server, (sockaddr*)addr, 0);
-		if (gip)
-		{
-			NetSocketUV::Connect((sockaddr*)addr);
-		}
+		std::cout << "Set IP to socket!" << std::endl;
+		assert(0 == uv_ip4_addr(ip, 8000, addr));
+		Connect(8000, ip, addr,loop, serv);
 		return true;
 	}
 	return false;
 }
 
-//настраиваем соединение
-bool NetSocketUV::Connect(sockaddr* addr)
+bool NetSocketUV::Connect(int port, const char* ip, sockaddr_in* addr, uv_loop_t* Mloop, uv_tcp_t* server)
 {
-	uv_tcp_t* server = GetPtrTCP(net);
-
-	if (addr)
+	if ((loop && server) != NULL)
 	{
 		uv_connect_t* req = new uv_connect_t;
-		memset(req, 0, sizeof(TCP_SOCKET));
-		uv_tcp_connect(req, server, addr, OnConnect);
+		//uv_tcp_connect(req, server, (sockaddr*)addr, OnConnect);
+		
+		int init = uv_tcp_init(loop, server);
+		if (init)
+		{
+			fprintf(stderr, "Cannot initialize socket!\n", uv_strerror(init));
+			exit(1);
+		}	
+		int gip = uv_tcp_bind(server, (sockaddr*)addr, 0);
+		std::cout << "Binding socket!" << std::endl;
+		udp_tcp = true;
+		Accept((uv_stream_t*)server);
 	}
 
 	return false;
 }
 
-
-bool NetSocketUV::Accept()
+bool NetSocketUV::Accept(uv_stream_t* server)
 {
-	uv_tcp_t* server = GetPtrTCP(net);
-
 	if (udp_tcp)
 	{
-		uv_stream_t* client = (uv_stream_t*)malloc(sizeof(net));
-		int s = uv_accept((uv_stream_t*)server, client);
-		return (s == 0);
-		std::cout << "Accepted!" << std::endl;
+		std::cout << "Start listening socket!" << std::endl;
+		int list = uv_listen(server, 1024, OnConnect);
+		if (list != 0)
+		{
+			fprintf(stderr, "Cannot listen socket!\n");
+			exit(2);
+		}
 	}
-	uv_run(loop, UV_RUN_DEFAULT);
-	return false;
+	
+	return uv_run(GetLoop(net), UV_RUN_DEFAULT);
 }
+
 
 //высылаем данные по TCP протаколу
 void NetSocketUV::SendTCP(char* buf)
@@ -138,23 +125,24 @@ void NetSocketUV::SendUDP(char* buf)
 //принимаем данные по TCP протоколу
 void NetSocketUV::ReciveTCP()
 {
-	uv_stream_t* server = (uv_stream_t*)GetPtrTCP(sock);
-	int list = uv_listen(server, 1024, OnAccept);
-	uv_stream_t* client = (uv_stream_t*)GetPtrTCP(sock);
-
-	if (list)
-	{
-		udp_tcp = true;
-	}
-	else
-	{
-		udp_tcp = false;
-		Destroy();
-	}
+	uv_stream_t* server = (uv_stream_t*)GetPtrTCP(net);
+	
 }
 
 void NetSocketUV::ReciveUDP()
 {
+}
+
+bool NetSocketUV::SetConnectedSocketToReadMode()
+{
+	if (udp_tcp)
+	{
+		std::cout << "Setting connected socket to reading mode!" << std::endl;
+		uv_tcp_t* tcp = GetPtrTCP(sock);
+		int r = uv_read_start((uv_stream_t*)tcp, OnAllocBuffer, OnReadTCP);
+		return (r == 0);
+	}
+	return false;
 }
 
 //удаляем сокет libuv и приметив сокета
@@ -166,7 +154,7 @@ void NetSocketUV::Destroy()
 		{
 			uv_tcp_t* tcp = GetPtrTCP(sock);
 			uv_close((uv_handle_t*)tcp, OnCloseSocket);
-			((TCP_SOCKET*)sock)->net_socket = NULL;
+			((TCP_SOCKET*)sock)->net_socket = nullptr;
 		}
 		else {
 			uv_udp_t* udp = GetPtrUDP(sock);
@@ -188,6 +176,11 @@ uv_tcp_t* GetPtrTCP(void* ptr)
 uv_udp_t* GetPtrUDP(void* ptr)
 {
 	return (uv_udp_t*)(((char*)ptr) + sizeof(void*));
+}
+
+NetBuffer* GetPtrBuffer(void* ptr)
+{
+	return (NetBuffer*)(((char*)ptr) + sizeof(void*));
 }
 
 uv_loop_t* GetLoop(void* prt)
@@ -216,32 +209,6 @@ void OnReadTCP(uv_stream_t* stream, ssize_t nread, const uv_buf_t* buf) {
 		free(buf->base);
 }
 
-void OnAccept(uv_stream_t* stream, int status)
-{
-	if (status < 0)
-	{
-		fprintf(stderr, "New connection error %s\n", uv_strerror(status));
-		return;
-	}
-
-
-	NetSocketUV* netsock = (NetSocketUV*)GetNetSocketPtr(stream);
-	uv_loop_t* servloop = GetLoop(netsock);
-
-	uv_tcp_t* client = (uv_tcp_t*)malloc(sizeof(uv_tcp_t));
-	uv_tcp_init(servloop, client);
-	if (uv_accept(stream, (uv_stream_t*)client) == 0) // �������� ������� ���������� ����������
-	{
-		netsock->SetConnectedSocketToReadMode();
-	}
-	else
-	{
-		// ���������� ���������� �� �������
-		uv_close((uv_handle_t*)client, OnCloseSocket); // ������� �����, ������� ��� ������ ��� ����������
-	}
-}
-
-
 //callback функция которая выделяет место под буффер данных
 void OnAllocBuffer(uv_handle_t* handle, size_t suggested_size, uv_buf_t* buf) {
 	*buf = uv_buf_init((char*)malloc(suggested_size), suggested_size);
@@ -261,20 +228,31 @@ void OnWrite(uv_write_t* req, int status)
 	}
 }
 
-//callback функция вызываемая из Connect 
-void OnConnect(uv_connect_t* req, int status)
+//callback функция вызываемая из Accept 
+void OnConnect(uv_stream_t* stream, int status)
 {
-	if (status <= 0)
+	if (status < 0)
 	{
-		udp_tcp = false;
-		fprintf(stderr, "Connection fali!\n", uv_strerror(status));
+		fprintf(stderr, "New connection error %s\n", uv_strerror(status));
 		return;
+	}
+
+
+	NetSocketUV* netsock = new NetSocketUV;
+	NetBuffer* net = new NetBuffer;
+	uv_loop_t* servloop = GetLoop(net);
+
+	uv_tcp_t* client = (uv_tcp_t*)malloc(sizeof(uv_tcp_t));
+	uv_tcp_init(servloop, client);
+	if (uv_accept(stream, (uv_stream_t*)client) == 0) // �������� ������� ���������� ����������
+	{
+		std::cout << "Socket have set to read mode!" << std::endl;
+		netsock->SetConnectedSocketToReadMode();
 	}
 	else
 	{
-		udp_tcp = true;
-		NetSocketUV* netsock = (NetSocketUV*)GetNetSocketPtr(req);
-		netsock->Accept();
+		// ���������� ���������� �� �������
+		uv_close((uv_handle_t*)client, OnCloseSocket); // ������� �����, ������� ��� ������ ��� ����������
 	}
 
 }
