@@ -8,12 +8,6 @@
 #include "Net.h"
 #include "../../libs/includes/uv.h"
 
-void OnConnect(uv_stream_t* stream, int status);
-void OnAllocBuffer(uv_handle_t* handle, size_t suggested_size, uv_buf_t* buf);
-void OnReadTCP(uv_stream_t* stream, ssize_t nread, const uv_buf_t* buf);
-void OnCloseSocket(uv_handle_t* handle);
-void OnWrite(uv_write_t* req, int status);
-
 uv_loop_t* GetLoop(void* prt);
 
 class NetSocketUV : public NetSocket
@@ -37,6 +31,11 @@ public:
 	void ReciveUDP();
 	void Destroy();
 
+	static void OnConnect(uv_stream_t* stream, int status);
+	static void OnAllocBuffer(uv_handle_t* handle, size_t suggested_size, uv_buf_t* buf);
+	static void OnReadTCP(uv_stream_t* stream, ssize_t nread, const uv_buf_t* buf);
+	static void OnCloseSocket(uv_handle_t* handle);
+	static void OnWrite(uv_write_t* req, int status);
 
 	int status;
 };

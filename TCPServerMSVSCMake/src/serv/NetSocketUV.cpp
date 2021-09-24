@@ -189,7 +189,7 @@ uv_loop_t* GetLoop(void* prt)
 }
 
 //callback функция которая вызываемая uv_read_start - записывает полученные данные в массив данных
-void OnReadTCP(uv_stream_t* stream, ssize_t nread, const uv_buf_t* buf) {
+void NetSocketUV::OnReadTCP(uv_stream_t* stream, ssize_t nread, const uv_buf_t* buf) {
 	NetSocketUV* socket = (NetSocketUV*)GetNetSocketPtr(stream);
 
 	if (nread < 0) {
@@ -210,17 +210,17 @@ void OnReadTCP(uv_stream_t* stream, ssize_t nread, const uv_buf_t* buf) {
 }
 
 //callback функция которая выделяет место под буффер данных
-void OnAllocBuffer(uv_handle_t* handle, size_t suggested_size, uv_buf_t* buf) {
+void NetSocketUV::OnAllocBuffer(uv_handle_t* handle, size_t suggested_size, uv_buf_t* buf) {
 	*buf = uv_buf_init((char*)malloc(suggested_size), suggested_size);
 	buf->base = (char*)suggested_size;
 }
 
 //функция закрывающая libuv сокет
-void OnCloseSocket(uv_handle_t* handle) {
+void NetSocketUV::OnCloseSocket(uv_handle_t* handle) {
 	free(handle);
 }
 
-void OnWrite(uv_write_t* req, int status)
+void NetSocketUV::OnWrite(uv_write_t* req, int status)
 {
 	if (status != 0)
 	{
@@ -229,7 +229,7 @@ void OnWrite(uv_write_t* req, int status)
 }
 
 //callback функция вызываемая из Accept 
-void OnConnect(uv_stream_t* stream, int status)
+void NetSocketUV::OnConnect(uv_stream_t* stream, int status)
 {
 	if (status < 0)
 	{
