@@ -10,17 +10,20 @@
 
 uv_loop_t* GetLoop(void* prt);
 
+
+
 class NetSocketUV : public NetSocket
 {
 public:
+	
 	NetSocketUV();
 	NetSocketUV(Net* _Net);
 	~NetSocketUV();
-	NetBuffer* net;
+	Net* net;
 
 	bool Create(const char* ip, bool udp_tcp, int port, bool listen);
 	
-	bool SetConnectedSocketToReadMode();
+	bool SetConnectedSocketToReadMode(uv_stream_t* stream);
 	bool GetIP(const char* ip, bool own_or_peer);
 	bool Connect(int port, const char* ip, sockaddr_in* addr);
 	bool Accept();
@@ -36,6 +39,8 @@ public:
 	static void OnReadTCP(uv_stream_t* stream, ssize_t nread, const uv_buf_t* buf);
 	static void OnCloseSocket(uv_handle_t* handle);
 	static void OnWrite(uv_write_t* req, int status);
+
+	static void RunLoop(uv_loop_t* loop);
 
 	int status;
 };

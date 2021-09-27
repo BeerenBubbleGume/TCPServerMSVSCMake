@@ -4,26 +4,25 @@
 #include <iostream>
 #include <cstdlib>
 #include "../../libs/includes/uv.h"
+#include "Net.h"
 
-class NetBuffer
+
+class NetBuffer : public Net
 {
 public:
 	NetBuffer();
 	~NetBuffer();
 	
-	char* GetData();
+	NetBuffer* GetData();
 	size_t GetLength();
 	void SetLength(unsigned int length);
-	NetBuffer* GetReciveBuffer();
-	uv_loop_t* loop;
-	uv_tcp_t* server;
 
 	int ClientID = 0;
-	char* DataBuff;
 	int SocketCT = 0;
-	size_t buff_length;
+	
 	void* sock;
 	int bytes_read;
+	Net* net;
 
 };
 

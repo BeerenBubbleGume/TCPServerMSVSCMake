@@ -22,6 +22,9 @@ public:
 	char GetClientID();
 	void SetID(void* NewClient);
 	
+protected:
+	void Accept();
+	bool IsConnected();
 	
 };
 

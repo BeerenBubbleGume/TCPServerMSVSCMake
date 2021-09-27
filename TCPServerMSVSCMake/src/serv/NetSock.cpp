@@ -8,30 +8,6 @@
 
 NetSocket::NetSocket()
 {
-	net = new NetBuffer;
-	/*
-#ifdef WIN32
-	WSADATA wsdata;
-	WORD DLLVersion = MAKEWORD(2, 1);
-	if (WSAStartup(DLLVersion, &wsdata))
-	{
-		std::cout << "WSAStartup crush!" << std::endl;
-		exit(0);
-	}
-#endif // WIN32
-
-	tcp_socket = socket(AF_INET, SOCK_STREAM, 0);
-	udp_socket = socket(AF_INET, SOCK_DGRAM, 0);
-#ifdef UNIX
-	raw_socket = socket(AF_INET, SOCK_RAW, SO_PROTOCOL);
-#else
-	raw_socket = socket(AF_INET, SOCK_RAW, 0);
-#endif // UNIX
-
-	net_addr.sin_family = AF_INET;
-	net_addr.sin_port = htons(8000);
-	net_addr.sin_addr.S_un.S_addr = htonl(INADDR_ANY);
-	*/	
 }
 
 NetSocket::~NetSocket()
@@ -40,13 +16,18 @@ NetSocket::~NetSocket()
 
 void NetSocket::Destroy()
 {
-	//Net* net = new Net;
-	//net->closesock(sock);
+	Net* net = new Net;
+#ifdef WIN32
+	net->closesock((SOCKET)sock);
+#else
+	net->closesock((int)sock);
+#endif // WIN32
+	
 }
 
 NetSocket* GetPtrSocket(void* ptr)
 {
-	return *((NetSocket**)ptr);
+	return (NetSocket*)ptr;
 }
 
 NetSocket* GetNetSocketPtr(void* uv_socket)

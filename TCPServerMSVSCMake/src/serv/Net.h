@@ -20,14 +20,28 @@ public:
 	Net();
 	~Net();
 
+	sockaddr_in* net_addr;
+	char* DataBuff;
+	size_t buff_length;
 #ifdef WIN32
-	void closesock(void* sock);
 	SOCKET tcp_socket;
+	void Connect(sockaddr_in* addr, SOCKET socket);
+	int Recive(SOCKET socket, void* buf, size_t len);
+	void Send(SOCKET socket, void* data, size_t len);
+	void closesock(SOCKET sock);
+
 #else
 	int tcp_socket;
+	void Connetct(sockaddr_in* addr, int socket);
+	int Recive(int socket, void* buf, unsigned int len);
+	void Send(int socket, void* data, unsigned int len);
 	void closesock(void* sock);
+
+	
 #endif // WIN32
 
+	void OnLostConnection(void* socket);
+	char* GetReciveBuffer();
 	
 
 };

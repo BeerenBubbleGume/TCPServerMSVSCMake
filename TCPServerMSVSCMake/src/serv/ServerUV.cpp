@@ -26,12 +26,13 @@ int Server::connect(const char* ip)
 		udp_tcp = true;
 		if (net_addr)
 		{
+			
 			return Create(ip, true, 8000, true);
 		}
 	}
 	else
 	{
-		fprintf(stderr, "IP is not correct!\n");
+		fprintf(stderr, "Server is not connetcted!\n");
 		return 1;
 	}
 }

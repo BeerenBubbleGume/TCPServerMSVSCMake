@@ -5,13 +5,12 @@
 #include "Net.h"
 #include "../../libs/includes/uv.h"
 
-class NetSocket : public NetBuffer, public Net {
+class NetSocket : public NetBuffer {
 
 public:
 	NetSocket();
 	~NetSocket();
 
-	NetBuffer* net;
 	void Destroy();
 };
 struct NET_SOCKET_PRT {
