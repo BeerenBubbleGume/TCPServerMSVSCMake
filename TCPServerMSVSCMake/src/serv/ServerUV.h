@@ -19,12 +19,9 @@ public:
 	
 	NetSocket* NewSocket(Net* net);
 	int connect(const char* ip);
-	char GetClientID();
+	char* GetClientID();
 	void SetID(void* NewClient);
 	
-protected:
-	void Accept();
-	bool IsConnected();
 	
 };
 

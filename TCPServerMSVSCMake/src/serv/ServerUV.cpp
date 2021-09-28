@@ -37,9 +37,10 @@ int Server::connect(const char* ip)
 	}
 }
 
-char Server::GetClientID()
+char* Server::GetClientID()
 {
-	return ClientID;
+	char ServerPath[] = { "rtsp://192.168.0.109:554/" };
+	return ServerPath + ClientID;
 }
 
 void Server::SetID(void* NewClient)
