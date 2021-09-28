@@ -14,11 +14,12 @@ NetBuffer::~NetBuffer()
 	buff_length = NULL;
 }
 
-char* NetBuffer::GetData() const
+bool NetBuffer::GetData()
 {
 	if (DataBuff)
 	{
-		return GetReciveBuffer();
+		char* rbuf = DataBuff;
+		return true;
 	}
 	else
 	{
@@ -29,7 +30,6 @@ char* NetBuffer::GetData() const
 
 size_t NetBuffer::GetLength()
 {
-	buff_length = 65536;
 	return buff_length;
 }
 

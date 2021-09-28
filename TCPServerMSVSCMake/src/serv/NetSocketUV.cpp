@@ -110,8 +110,8 @@ void NetSocketUV::SendTCP(char* buf)
 {
 	Net* net = new Net;
 #ifdef WIN32
-	tcp_socket = (SOCKET)GetPtrSocket(net);
-	Send(tcp_socket, buf, sizeof(buf));
+	
+	Send(buf, sizeof(buf));
 #else
 	Send(tcp_socket, buf, sizeof(buf));
 #endif // WIN32
@@ -125,10 +125,8 @@ void NetSocketUV::SendUDP(char* buf)
 //принимаем данные по TCP протоколу
 void NetSocketUV::ReciveTCP(void* stream)
 {
-
-	
 	size_t len = GetLength();
-	char* buf = (char*)GetReciveBuffer();
+	char* buf = GetReciveBuffer();
 #ifdef WIN32
 	if (buf != nullptr)
 		Recive((SOCKET)sock, buf, len);

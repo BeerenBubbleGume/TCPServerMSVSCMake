@@ -133,9 +133,6 @@
 		},
 		{
 			"path" : "TCPServerMSVSCMake/src/serv/CMakeLists.txt"
-		},
-		{
-			"path" : "TCPServerMSVSCMake/src/client/CMakeLists.txt"
 		}
 	],
 	"kind" : "cmakeFiles",

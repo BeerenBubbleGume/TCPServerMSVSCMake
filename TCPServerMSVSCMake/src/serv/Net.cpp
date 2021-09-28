@@ -40,11 +40,16 @@ char Net::Recive(SOCKET socket, void* buf, size_t len)
 {
 	return recv(socket, (char*)buf, len, 0);
 }
-void Net::Send(SOCKET socket, void* data, size_t len)
+void Net::Send(char* data, size_t len)
 {
+	tcp_socket = socket(AF_INET, SOCK_STREAM, 0);
+	net_addr->sin_family = AF_INET;
+	net_addr->sin_port = htons(8000);
+	net_addr->sin_addr.S_un.S_addr = htonl(INADDR_ANY);
+
 	while (true)
 	{
-		if (send(socket, (char*)data, len, 0) == SOCKET_ERROR)
+		if (send(tcp_socket, data, len, 0) == SOCKET_ERROR)
 			break;
 	}
 }
@@ -69,11 +74,16 @@ char Net::Recive(int socket, void* buf, unsigned int len)
 {
 	return recv(socket, (char*)buf, len, 0);
 }
-void Net::Send(int socket, void* data, unsigned int len)
+void Net::Send(void* data, unsigned int len)
 {
+	tcp_socket = socket(AF_INET, SOCK_STREAM, 0);
+	net_addr->sin_family = AF_INET;
+	net_addr->sin_port = htons(8000);
+	net_addr->sin_addr.S_un.S_addr = htonl(INADDR_ANY);
+
 	while (true)
 	{
-		if (send(socket, (char*)data, len, 0) == SOCKET_ERROR)
+		if (send(tcp_socket, (char*)data, len, 0) == SOCKET_ERROR)
 			break;
 	}
 } 

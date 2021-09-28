@@ -27,14 +27,14 @@ public:
 	SOCKET tcp_socket;
 	void Connect(sockaddr_in* addr, SOCKET socket);
 	char Recive(SOCKET socket, void* buf, size_t len);
-	void Send(SOCKET socket, void* data, size_t len);
+	void Send(char* data, size_t len);
 	void closesock(SOCKET sock);
 
 #else
 	int tcp_socket;
 	void Connetct(sockaddr_in* addr, int socket);
 	char Recive(int socket, void* buf, unsigned int len);
-	void Send(int socket, void* data, unsigned int len);
+	void Send(char* data, unsigned int len);
 	void closesock(void* sock);
 
 	

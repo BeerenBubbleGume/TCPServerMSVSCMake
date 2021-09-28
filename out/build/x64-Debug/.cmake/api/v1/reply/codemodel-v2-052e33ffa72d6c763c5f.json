@@ -39,8 +39,7 @@
 					"build" : "TCPServerMSVSCMake/src",
 					"childIndexes" : 
 					[
-						3,
-						4
+						3
 					],
 					"minimumCMakeVersion" : 
 					{
@@ -59,16 +58,6 @@
 					"parentIndex" : 2,
 					"projectIndex" : 0,
 					"source" : "TCPServerMSVSCMake/src/serv"
-				},
-				{
-					"build" : "TCPServerMSVSCMake/src/client",
-					"minimumCMakeVersion" : 
-					{
-						"string" : "3.8"
-					},
-					"parentIndex" : 2,
-					"projectIndex" : 0,
-					"source" : "TCPServerMSVSCMake/src/client"
 				}
 			],
 			"name" : "Debug",
@@ -80,8 +69,7 @@
 						0,
 						1,
 						2,
-						3,
-						4
+						3
 					],
 					"name" : "TCPServerMSVSCMake",
 					"targetIndexes" : 

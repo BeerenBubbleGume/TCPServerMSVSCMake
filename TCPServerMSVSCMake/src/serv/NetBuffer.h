@@ -14,7 +14,7 @@ public:
 	NetBuffer();
 	~NetBuffer();
 	
-	char* GetData() const;
+	bool GetData();
 	size_t GetLength();
 	unsigned int SetLength(unsigned int length);
 	static char* GetReciveBuffer();
