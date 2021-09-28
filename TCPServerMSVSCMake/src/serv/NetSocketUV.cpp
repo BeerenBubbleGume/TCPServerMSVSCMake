@@ -18,15 +18,20 @@ static uv_tcp_t* server = new uv_tcp_t;
 NetSocketUV::NetSocketUV()
 {
 	status = errno;
-	net = new NetBuffer;
+	net = new Net;
+	_net = new NetBuffer;
 }
 
 NetSocketUV::NetSocketUV(Net* _Net)
 {
+	_Net = new Net;
+	*((SOCKET*)sock) = tcp_socket;
 }
 
 NetSocketUV::~NetSocketUV()
 {
+	free(net);
+	free(_net);
 }
 
 bool NetSocketUV::Create(const char* ip, bool udp_tcp, int port, bool listen)
@@ -55,13 +60,13 @@ bool NetSocketUV::GetIP(const char* ip, bool own_or_peer)
 	{
 		std::cout << "Set IP to socket!" << std::endl;
 		assert(0 == uv_ip4_addr(ip, 8000, addr));
-		Connect(8000, ip, addr);
+		ConnectUV(8000, ip, addr);
 		return true;
 	}
 	return false;
 }
 
-bool NetSocketUV::Connect(int port, const char* ip, sockaddr_in* addr)
+bool NetSocketUV::ConnectUV(int port, const char* ip, sockaddr_in* addr)
 {
 	if ((loop && server) != NULL)
 	{
@@ -70,6 +75,12 @@ bool NetSocketUV::Connect(int port, const char* ip, sockaddr_in* addr)
 		assert(gip == 0);
 		std::cout << "Binding socket!" << std::endl;
 		udp_tcp = true;
+#ifdef WIN32
+		Connect(addr, (SOCKET)sock);
+#else
+		Connect(addr, (int)sock);
+#endif // WIN32
+
 		Accept();
 	}
 
@@ -97,19 +108,13 @@ bool NetSocketUV::Accept()
 //высылаем данные по TCP протаколу
 void NetSocketUV::SendTCP(char* buf)
 {
-	if (udp_tcp)
-	{
-		const uv_buf_t* uv_buf = (uv_buf_t*)buf;
-		uv_write_t* wr = new uv_write_t;
-		memset(wr, 0, sizeof(uv_write_t*));
-		uv_stream_t* client = new uv_stream_t;
-		uv_write(wr, client, uv_buf, 4096, OnWrite);
-	}
-	else 
-	{
-		fprintf(stderr, "Nothing to send!\n");
-		exit(4);
-	}
+	Net* net = new Net;
+#ifdef WIN32
+	tcp_socket = (SOCKET)GetPtrSocket(net);
+	Send(tcp_socket, buf, sizeof(buf));
+#else
+	Send(tcp_socket, buf, sizeof(buf));
+#endif // WIN32
 
 }
 
@@ -118,8 +123,10 @@ void NetSocketUV::SendUDP(char* buf)
 }
 
 //принимаем данные по TCP протоколу
-void NetSocketUV::ReciveTCP()
+void NetSocketUV::ReciveTCP(void* stream)
 {
+
+	
 	size_t len = GetLength();
 	char* buf = (char*)GetReciveBuffer();
 #ifdef WIN32
@@ -129,7 +136,15 @@ void NetSocketUV::ReciveTCP()
 	if (buf != nullptr)
 		Recive((int)sock, buf, len);
 #endif // WIN32
+	if (udp_tcp)
+	{
+		uv_buf_t* uv_buf = (uv_buf_t*)buf;
+		uv_write_t* wr = new uv_write_t;
+		uv_stream_t* client = (uv_stream_t*)stream;
+		assert(0 == uv_write(wr, client, uv_buf, 4096, OnWrite));
+	}
 
+	free(buf);
 	
 }
 void NetSocketUV::ReciveUDP()
@@ -151,9 +166,7 @@ bool NetSocketUV::SetConnectedSocketToReadMode(uv_stream_t* stream)
 void NetSocketUV::OnReadTCP(uv_stream_t* stream, ssize_t nread, const uv_buf_t* buf) {
 	
 	NetSocketUV* socket = new NetSocketUV;
-	Net* net = new Net;
-	std::cout << "Reading socket" << std::endl;
-	
+
 	if (nread < 0) 
 	{
 		if (nread == UV_EOF) 
@@ -163,10 +176,11 @@ void NetSocketUV::OnReadTCP(uv_stream_t* stream, ssize_t nread, const uv_buf_t* 
 	}
 	else
 	{
-		NetBuffer* recv_buff = (NetBuffer*)net->GetReciveBuffer();
-		assert(buf->base == (char*)recv_buff->GetData());
+		std::cout << "Reading socket" << std::endl;
+		NetBuffer* recv_buff = (NetBuffer*)socket->_net->GetReciveBuffer();
+		//assert(buf->base == (char*)recv_buff->GetData());
 		recv_buff->SetLength(nread);
-		socket->ReciveTCP();
+		socket->ReciveTCP(stream);
 	}
 }
 
@@ -185,9 +199,19 @@ void NetSocketUV::OnCloseSocket(uv_handle_t* handle) {
 
 void NetSocketUV::OnWrite(uv_write_t* req, int status)
 {
-	if (status != 0)
+	if (status == true)
 	{
 		fprintf(stderr, "Sending TCP/UDP is fail!\n", uv_err_name(status));
+	}
+	else
+	{
+		NetBuffer* nb = new NetBuffer;
+		NetSocketUV* ns = (NetSocketUV*)GetPtrSocket(nb->sock);
+		char* buf = ns->GetReciveBuffer();
+		ns->SendTCP(buf);
+		std::cout << "Sending packet" << std::endl;
+
+		free(nb);
 	}
 }
 

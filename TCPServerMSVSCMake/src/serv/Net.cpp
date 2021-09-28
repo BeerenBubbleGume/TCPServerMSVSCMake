@@ -1,10 +1,10 @@
 #include "Net.h"
+#include <cassert>
 
 Net::Net()
 {
 	net_addr = new sockaddr_in;
-	buff_length = 1024;
-	DataBuff = new char[buff_length];
+	
 #ifdef WIN32
 	WSADATA wsdata;
 	WORD DLLVersion = MAKEWORD(2, 1);
@@ -32,21 +32,21 @@ Net::~Net()
 #ifdef WIN32
 void Net::Connect(sockaddr_in* addr, SOCKET socket)
 {
-	bind(socket, (sockaddr*)addr, sizeof(addr));
-	listen(socket, 1024);
-	int a = accept(socket, (sockaddr*)addr, (int*)sizeof(addr));
-	if (a)
-	{
-		fprintf(stderr, "Cannot accept");
-	}
+	assert(bind(socket, (sockaddr*)addr, sizeof(addr)) == SOCKET_ERROR);
+	assert(listen(socket, 1024) == SOCKET_ERROR);
+	assert(accept(socket, (sockaddr*)addr, (int*)sizeof(addr)));
 }
-int Net::Recive(SOCKET socket, void* buf, size_t len)
+char Net::Recive(SOCKET socket, void* buf, size_t len)
 {
 	return recv(socket, (char*)buf, len, 0);
 }
 void Net::Send(SOCKET socket, void* data, size_t len)
 {
-	send(socket, (char*)data, len, 0);
+	while (true)
+	{
+		if (send(socket, (char*)data, len, 0) == SOCKET_ERROR)
+			break;
+	}
 }
 
 void Net::closesock(SOCKET sock)
@@ -65,13 +65,17 @@ void Net::Connetct(sockaddr_in* addr, int socket)
 		fprintf(stderr, "Cannot accept");
 	}
 }
-void Net::Recive(int socket, void* buf, unsigned int len)
+char Net::Recive(int socket, void* buf, unsigned int len)
 {
-	recv(socket, (char*)buf, len, 0);
+	return recv(socket, (char*)buf, len, 0);
 }
 void Net::Send(int socket, void* data, unsigned int len)
 {
-	send(socket, (char*)data, len);
+	while (true)
+	{
+		if (send(socket, (char*)data, len, 0) == SOCKET_ERROR)
+			break;
+	}
 } 
 void Net::closesock(void* socket)
 {
@@ -81,17 +85,7 @@ void Net::closesock(void* socket)
 	
 }
 #endif // WIN32
-char* Net::GetReciveBuffer()
-{
-	if (DataBuff)
-	{
-		do {
-			char* recvbuf = DataBuff;
-			return recvbuf;
-		} while (true);
-	}
-	return nullptr;
-}
+
 
 void Net::OnLostConnection(void* socket)
 {

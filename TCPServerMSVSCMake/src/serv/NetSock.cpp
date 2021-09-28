@@ -23,6 +23,8 @@ void NetSocket::Destroy()
 	net->closesock((int)sock);
 #endif // WIN32
 	
+
+	free(net);
 }
 
 NetSocket* GetPtrSocket(void* ptr)

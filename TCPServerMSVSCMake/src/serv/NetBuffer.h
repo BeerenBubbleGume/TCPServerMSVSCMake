@@ -5,6 +5,7 @@
 #include <cstdlib>
 #include "../../libs/includes/uv.h"
 #include "Net.h"
+#include <string>
 
 
 class NetBuffer : public Net
@@ -13,17 +14,20 @@ public:
 	NetBuffer();
 	~NetBuffer();
 	
-	NetBuffer* GetData();
+	char* GetData() const;
 	size_t GetLength();
-	void SetLength(unsigned int length);
+	unsigned int SetLength(unsigned int length);
+	static char* GetReciveBuffer();
 
+
+	Net* net;
 	int ClientID = 0;
 	int SocketCT = 0;
 	
 	void* sock;
 	int bytes_read;
-	Net* net;
-
+	char* DataBuff;
+	size_t buff_length;
 };
 
 #endif // NETBUFFER_H

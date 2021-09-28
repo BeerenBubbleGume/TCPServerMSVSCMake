@@ -8,10 +8,6 @@
 #include "Net.h"
 #include "../../libs/includes/uv.h"
 
-uv_loop_t* GetLoop(void* prt);
-
-
-
 class NetSocketUV : public NetSocket
 {
 public:
@@ -20,17 +16,18 @@ public:
 	NetSocketUV(Net* _Net);
 	~NetSocketUV();
 	Net* net;
+	NetBuffer* _net;
 
 	bool Create(const char* ip, bool udp_tcp, int port, bool listen);
 	
 	bool SetConnectedSocketToReadMode(uv_stream_t* stream);
 	bool GetIP(const char* ip, bool own_or_peer);
-	bool Connect(int port, const char* ip, sockaddr_in* addr);
+	bool ConnectUV(int port, const char* ip, sockaddr_in* addr);
 	bool Accept();
 
 	void SendTCP(char* buf);
 	void SendUDP(char* buf);
-	void ReciveTCP();
+	void ReciveTCP(void* stream);
 	void ReciveUDP();
 	void Destroy();
 
@@ -44,8 +41,11 @@ public:
 
 	int status;
 };
+
+
 uv_tcp_t* GetPtrTCP(void* ptr);
 uv_udp_t* GetPtrUDP(void* ptr);
+uv_loop_t* GetLoop(void* prt);
 uv_stream_t* GetPtrStream(void* ptr);
 NetBuffer* GetPtrBuffer(void* ptr);
 
