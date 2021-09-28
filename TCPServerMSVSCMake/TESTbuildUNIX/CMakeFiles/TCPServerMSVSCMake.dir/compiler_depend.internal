@@ -456,6 +456,8 @@ CMakeFiles/TCPServerMSVSCMake.dir/src/serv/Net.cpp.o
  /usr/include/bits/confname.h
  /usr/include/bits/getopt_posix.h
  /usr/include/bits/getopt_core.h
+ /usr/include/c++/8/cassert
+ /usr/include/assert.h
 
 CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetBuffer.cpp.o
  /home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/NetBuffer.cpp
@@ -712,6 +714,14 @@ CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetBuffer.cpp.o
  /usr/include/asm-generic/param.h
  /home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/uv/threadpool.h
  /home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/uv/linux.h
+ /home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/Net.h
+ /usr/include/netinet/ip.h
+ /usr/include/unistd.h
+ /usr/include/bits/posix_opt.h
+ /usr/include/bits/environments.h
+ /usr/include/bits/confname.h
+ /usr/include/bits/getopt_posix.h
+ /usr/include/bits/getopt_core.h
 
 CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.o
  /home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/NetSock.cpp
@@ -1257,6 +1267,7 @@ CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.o
  /usr/include/c++/8/cstring
  /usr/include/string.h
  /usr/include/strings.h
+ /usr/include/inttypes.h
  /home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/ServerUV.h
 
 CMakeFiles/TCPServerMSVSCMake.dir/src/serv/ServerUV.cpp.o

@@ -121,4 +121,5 @@ CMakeFiles/TCPServerMSVSCMake.dir/src/serv/Net.cpp.o: \
  /usr/include/bits/in.h /usr/include/netinet/ip.h /usr/include/unistd.h \
  /usr/include/bits/posix_opt.h /usr/include/bits/environments.h \
  /usr/include/bits/confname.h /usr/include/bits/getopt_posix.h \
- /usr/include/bits/getopt_core.h
+ /usr/include/bits/getopt_core.h /usr/include/c++/8/cassert \
+ /usr/include/assert.h

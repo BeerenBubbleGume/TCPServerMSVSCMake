@@ -33,9 +33,9 @@ public:
 #else
 	int tcp_socket;
 	void Connetct(sockaddr_in* addr, int socket);
-	char Recive(int socket, void* buf, unsigned int len);
+	char Recive(void* buf, unsigned int len);
 	void Send(char* data, unsigned int len);
-	void closesock(void* sock);
+	void closesock(int sock);
 
 	
 #endif // WIN32

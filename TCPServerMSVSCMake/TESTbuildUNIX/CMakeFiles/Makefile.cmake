@@ -12,7 +12,6 @@ set(CMAKE_MAKEFILE_DEPENDS
   "CMakeFiles/3.21.2/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.21.2/CMakeSystem.cmake"
   "../src/CMakeLists.txt"
-  "../src/client/CMakeLists.txt"
   "../src/serv/CMakeLists.txt"
   "/usr/local/share/cmake-3.21/Modules/CMakeCInformation.cmake"
   "/usr/local/share/cmake-3.21/Modules/CMakeCXXInformation.cmake"
@@ -44,7 +43,6 @@ set(CMAKE_MAKEFILE_PRODUCTS
   "CMakeFiles/CMakeDirectoryInformation.cmake"
   "src/CMakeFiles/CMakeDirectoryInformation.cmake"
   "src/serv/CMakeFiles/CMakeDirectoryInformation.cmake"
-  "src/client/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:

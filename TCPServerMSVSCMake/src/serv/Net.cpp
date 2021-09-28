@@ -62,37 +62,39 @@ void Net::closesock(SOCKET sock)
 #else
 void Net::Connetct(sockaddr_in* addr, int socket)
 {
-	bind(socket, (sockaddr*)addr, sizeof(addr));
-	listen(socket, 1024);
-	int a = accept(socket, (sockaddr*)addr, (int*)sizeof(addr));
+	assert(bind(socket, (sockaddr*)addr, sizeof(addr)) == 0);
+	assert(listen(socket, 1024) == 0);
+	int a = accept(socket, (sockaddr*)addr, (socklen_t*)sizeof(addr));
 	if (a)
 	{
-		fprintf(stderr, "Cannot accept");
+		fprintf(stderr, "Cannot accept!\n");
 	}
 }
-char Net::Recive(int socket, void* buf, unsigned int len)
-{
-	return recv(socket, (char*)buf, len, 0);
-}
-void Net::Send(void* data, unsigned int len)
+char Net::Recive(void* buf, unsigned int len)
 {
 	tcp_socket = socket(AF_INET, SOCK_STREAM, 0);
 	net_addr->sin_family = AF_INET;
 	net_addr->sin_port = htons(8000);
-	net_addr->sin_addr.S_un.S_addr = htonl(INADDR_ANY);
+	net_addr->sin_addr.s_addr = htonl(INADDR_ANY);
+
+	return recv(tcp_socket, (char*)buf, len, 0);
+}
+void Net::Send(char* data, unsigned int len)
+{
+	tcp_socket = socket(AF_INET, SOCK_STREAM, 0);
+	net_addr->sin_family = AF_INET;
+	net_addr->sin_port = htons(8000);
+	net_addr->sin_addr.s_addr = htonl(INADDR_ANY);
 
 	while (true)
 	{
-		if (send(tcp_socket, (char*)data, len, 0) == SOCKET_ERROR)
+		if (send(tcp_socket, (char*)data, len, 0) == 0)
 			break;
 	}
 } 
-void Net::closesock(void* socket)
+void Net::closesock(int socket)
 {
-	
-	free(DataBuff);
-	close((int*)socket);
-	
+	close(socket);
 }
 #endif // WIN32
 
@@ -102,10 +104,11 @@ void Net::OnLostConnection(void* socket)
 	if (socket)
 	{
 		std::cout << "Lost connection with socket!" << std::endl;
-#ifdef UNIX
-		closesock((int)socket);
-#else
+#ifdef WIN32
 		closesock((SOCKET)socket);
+		
+#else
+		//closesock((int)socket);
 #endif // !WIN32
 
 	}

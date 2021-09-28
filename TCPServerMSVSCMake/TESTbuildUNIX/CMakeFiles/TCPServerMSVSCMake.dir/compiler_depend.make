@@ -453,7 +453,9 @@ CMakeFiles/TCPServerMSVSCMake.dir/src/serv/Net.cpp.o: ../src/serv/Net.cpp \
   /usr/include/bits/environments.h \
   /usr/include/bits/confname.h \
   /usr/include/bits/getopt_posix.h \
-  /usr/include/bits/getopt_core.h
+  /usr/include/bits/getopt_core.h \
+  /usr/include/c++/8/cassert \
+  /usr/include/assert.h
 
 CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetBuffer.cpp.o: ../src/serv/NetBuffer.cpp \
   /usr/include/stdc-predef.h \
@@ -708,7 +710,15 @@ CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetBuffer.cpp.o: ../src/serv/NetBuffe
   /usr/include/asm/param.h \
   /usr/include/asm-generic/param.h \
   ../libs/includes/uv/threadpool.h \
-  ../libs/includes/uv/linux.h
+  ../libs/includes/uv/linux.h \
+  ../src/serv/Net.h \
+  /usr/include/netinet/ip.h \
+  /usr/include/unistd.h \
+  /usr/include/bits/posix_opt.h \
+  /usr/include/bits/environments.h \
+  /usr/include/bits/confname.h \
+  /usr/include/bits/getopt_posix.h \
+  /usr/include/bits/getopt_core.h
 
 CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.o: ../src/serv/NetSock.cpp \
   /usr/include/stdc-predef.h \
@@ -1252,6 +1262,7 @@ CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.o: ../src/serv/NetSoc
   /usr/include/c++/8/cstring \
   /usr/include/string.h \
   /usr/include/strings.h \
+  /usr/include/inttypes.h \
   ../src/serv/ServerUV.h
 
 CMakeFiles/TCPServerMSVSCMake.dir/src/serv/ServerUV.cpp.o: ../src/serv/ServerUV.cpp \
@@ -1604,6 +1615,8 @@ CMakeFiles/TCPServerMSVSCMake.dir/src/serv/ServerUV.cpp.o: ../src/serv/ServerUV.
 /usr/include/sys/socket.h:
 
 /usr/include/linux/limits.h:
+
+/usr/include/inttypes.h:
 
 /usr/include/bits/local_lim.h:
 

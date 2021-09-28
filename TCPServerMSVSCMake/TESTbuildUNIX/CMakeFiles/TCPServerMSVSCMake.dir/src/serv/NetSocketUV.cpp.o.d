@@ -176,5 +176,5 @@ CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.o: \
  /usr/include/c++/8/x86_64-redhat-linux/bits/basic_file.h \
  /usr/include/c++/8/x86_64-redhat-linux/bits/c++io.h \
  /usr/include/c++/8/bits/fstream.tcc /usr/include/c++/8/cstring \
- /usr/include/string.h /usr/include/strings.h \
+ /usr/include/string.h /usr/include/strings.h /usr/include/inttypes.h \
  /home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/ServerUV.h

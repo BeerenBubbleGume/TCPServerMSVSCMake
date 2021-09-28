@@ -24,7 +24,7 @@ bool NetBuffer::GetData()
 	else
 	{
 		fprintf(stderr, "Buffer is NULL\n");
-		return nullptr;
+		return false;
 	}
 }
 

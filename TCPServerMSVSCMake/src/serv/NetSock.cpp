@@ -20,7 +20,7 @@ void NetSocket::Destroy()
 #ifdef WIN32
 	net->closesock((SOCKET)sock);
 #else
-	net->closesock((int)sock);
+	//net->closesock((int)sock);
 #endif // WIN32
 	
 
