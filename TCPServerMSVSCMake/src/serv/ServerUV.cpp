@@ -4,8 +4,7 @@
 Server::Server()
 {
 	//NetBuffer* netbuff = new NetBuffer;
-	net_addr = new sockaddr_in;
-	memset(net_addr, 0, sizeof(sockaddr_in*));
+	Net* net = new Net;
 	IDArray = new char[1024];
 
 }

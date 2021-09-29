@@ -8,26 +8,21 @@
 #include <string>
 
 
-class NetBuffer : public Net
+struct NetBuffer : Net
 {
 public:
 	NetBuffer();
 	~NetBuffer();
 	
-	bool GetData();
+	unsigned char* GetData() { return DataBuff; }
 	size_t GetLength();
-	unsigned int SetLength(unsigned int length);
-	static char* GetReciveBuffer();
+	int SetLength(unsigned int length);
 
-
-	Net* net;
 	int ClientID = 0;
 	int SocketCT = 0;
 	
 	void* sock;
-	int bytes_read;
-	char* DataBuff;
-	size_t buff_length;
+	
 };
 
 #endif // NETBUFFER_H
