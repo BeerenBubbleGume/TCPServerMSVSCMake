@@ -29,6 +29,7 @@ public:
 	char Recive(SOCKET socket, void *buf, size_t len);
 	void Send(char *data, size_t len);
 	void closesock(SOCKET sock);
+	bool CreateSocket(void* sockptr, sockaddr_in* addr);
 
 #else
 	int tcp_socket;
