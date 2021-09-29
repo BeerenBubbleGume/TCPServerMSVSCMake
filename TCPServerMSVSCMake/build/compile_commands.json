@@ -1,0 +1,32 @@
+[
+{
+  "directory": "/home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/build",
+  "command": "/usr/bin/c++  -I/home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes -g -o CMakeFiles/TCPServerMSVSCMake.dir/src/serv/Net.cpp.o -c /home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/Net.cpp",
+  "file": "/home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/Net.cpp"
+},
+{
+  "directory": "/home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/build",
+  "command": "/usr/bin/c++  -I/home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes -g -o CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetBuffer.cpp.o -c /home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/NetBuffer.cpp",
+  "file": "/home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/NetBuffer.cpp"
+},
+{
+  "directory": "/home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/build",
+  "command": "/usr/bin/c++  -I/home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes -g -o CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.o -c /home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/NetSock.cpp",
+  "file": "/home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/NetSock.cpp"
+},
+{
+  "directory": "/home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/build",
+  "command": "/usr/bin/c++  -I/home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes -g -o CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.o -c /home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/NetSocketUV.cpp",
+  "file": "/home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/NetSocketUV.cpp"
+},
+{
+  "directory": "/home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/build",
+  "command": "/usr/bin/c++  -I/home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes -g -o CMakeFiles/TCPServerMSVSCMake.dir/src/serv/ServerUV.cpp.o -c /home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/ServerUV.cpp",
+  "file": "/home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/ServerUV.cpp"
+},
+{
+  "directory": "/home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/build",
+  "command": "/usr/bin/c++  -I/home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes -g -o CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.o -c /home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/TCPServerMSVSCMake.cpp",
+  "file": "/home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/TCPServerMSVSCMake.cpp"
+}
+]

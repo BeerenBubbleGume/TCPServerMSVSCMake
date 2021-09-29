@@ -60,11 +60,41 @@ void Net::closesock(SOCKET sock)
 	WSACleanup();
 }
 #else
-void Net::Connetct(sockaddr_in* addr, int socket)
+bool Net::CreateSocket(void* sockptr, sockaddr_in* addr)
 {
-	assert(bind(socket, (sockaddr*)addr, sizeof(addr)) == 0);
-	assert(listen(socket, 1024) == 0);
-	int a = accept(socket, (sockaddr*)addr, (socklen_t*)sizeof(addr));
+	if(sockptr)
+	{
+		int nsock = static_cast<int>(reinterpret_cast<intptr_t>(sockptr));
+		nsock = socket(AF_INET, SOCK_STREAM, 0);
+		if(nsock > 0)
+		{
+			printf("Socket created success!\n");
+			Connetct(addr, nsock);
+			return true;
+		}
+	}
+	else
+	{
+		fprintf(stderr, "Cannot create tcp_socket");
+		return false;
+	}
+	return false;
+}
+
+void Net::Connetct(sockaddr_in* addr, int sock)
+{
+	socklen_t socklen = ('localhost', 8000);
+	if(bind(sock, (sockaddr*)addr, socklen) != 0)
+	{
+		fprintf(stderr, "Bind error!\n");
+		exit(1);
+	}
+	if(listen(sock, 1024) != 0)
+	{
+		fprintf(stderr, "Listen error\n");
+		exit(2);
+	}
+	int a = accept(sock, (sockaddr*)addr, (socklen_t*)sizeof(addr));
 	if (a)
 	{
 		fprintf(stderr, "Cannot accept!\n");

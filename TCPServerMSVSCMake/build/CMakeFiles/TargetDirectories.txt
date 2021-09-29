@@ -1,0 +1,7 @@
+/home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/build/CMakeFiles/rebuild_cache.dir
+/home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/build/CMakeFiles/TCPServerMSVSCMake.dir
+/home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/build/CMakeFiles/edit_cache.dir
+/home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/build/src/CMakeFiles/rebuild_cache.dir
+/home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/build/src/CMakeFiles/edit_cache.dir
+/home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/build/src/serv/CMakeFiles/rebuild_cache.dir
+/home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/build/src/serv/CMakeFiles/edit_cache.dir

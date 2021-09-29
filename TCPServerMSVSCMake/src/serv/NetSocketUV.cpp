@@ -48,7 +48,10 @@ bool NetSocketUV::Create(const char *ip, bool udp_tcp, int port, bool listen)
 		loop = uv_default_loop();
 		uv_loop_init(loop);
 		std::cout << "Create socket!" << std::endl;
-		GetIP(ip, true);
+		if(CreateSocket(sock, net_addr) == true)
+		{
+			GetIP(ip, true);
+		}
 	}
 	RunLoop(loop);
 	return false;
@@ -78,8 +81,9 @@ bool NetSocketUV::ConnectUV(int port, const char *ip, sockaddr_in *addr)
 		udp_tcp = true;
 #ifdef WIN32
 		Connect(addr, (SOCKET)sock);
-#else		
-		Connetct(addr, (intptr_t)sock);
+#else	
+		//tcp_socket = socket(AF_INET, SOCK_STREAM, 0);	
+		//Connetct(addr, static_cast<int>(reinterpret_cast<intptr_t>(sock)));
 #endif // WIN32
 
 		assert(Accept() == true);
