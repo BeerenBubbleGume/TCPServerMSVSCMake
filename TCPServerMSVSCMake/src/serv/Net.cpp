@@ -5,7 +5,7 @@ Net::Net()
 {
 	net_addr = new sockaddr_in;
 	DataBuff = new unsigned char;
-	buff_length = 65536;
+	buff_length = 0;
 	bytes_read = 0;
 	
 #ifdef WIN32
@@ -51,6 +51,11 @@ bool Net::CreateSocket(void* sockptr, sockaddr_in* addr)
 		fprintf(stderr, "Cannot create tcp_socket");
 		return false;
 	}
+	return false;
+}
+
+bool Net::IsServer()
+{
 	return false;
 }
 

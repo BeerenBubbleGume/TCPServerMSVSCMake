@@ -6,7 +6,6 @@ Server::Server()
 	//NetBuffer* netbuff = new NetBuffer;
 	Net* net = new Net;
 	IDArray = new char[1024];
-
 }
 
 Server::~Server()
@@ -25,7 +24,6 @@ int Server::connect(const char* ip)
 		udp_tcp = true;
 		if (net_addr)
 		{
-			
 			return Create(ip, true, 8000, true);
 		}
 	}

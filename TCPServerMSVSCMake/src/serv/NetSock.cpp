@@ -8,7 +8,6 @@
 
 NetSocket::NetSocket()
 {
-	
 }
 
 NetSocket::~NetSocket()
@@ -17,15 +16,7 @@ NetSocket::~NetSocket()
 
 void NetSocket::Destroy()
 {
-	Net* net = new Net;
-#ifdef WIN32
-	net->closesock((SOCKET)sock);
-#else
-	net->closesock((int)sock);
-#endif // WIN32
-	
 
-	free(net);
 }
 
 NetSocket* GetPtrSocket(void* ptr)

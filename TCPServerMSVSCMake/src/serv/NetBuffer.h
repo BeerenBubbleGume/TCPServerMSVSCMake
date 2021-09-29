@@ -8,7 +8,7 @@
 #include <string>
 
 
-class NetBuffer : Net
+struct NetBuffer : NET_BUFFER_INDEX
 {
 public:
 	NetBuffer();

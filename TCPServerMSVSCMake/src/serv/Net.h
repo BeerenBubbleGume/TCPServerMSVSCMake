@@ -26,7 +26,7 @@ public:
 	unsigned char* DataBuff;
 	size_t buff_length;
 	sockaddr_in *net_addr;
-
+	bool IsServer();
 #ifdef WIN32
 	SOCKET tcp_socket;
 	void Connect(sockaddr_in *addr, SOCKET socket);
@@ -37,7 +37,7 @@ public:
 
 #else
 	int tcp_socket;
-	void Connetct(sockaddr_in *addr, int socket);
+	void Connect(sockaddr_in *addr, int socket);
 	char Recive(void *buf, unsigned int len);
 	void Send(char *data, unsigned int len);
 	void closesock(int sock);
@@ -46,6 +46,11 @@ public:
 #endif // WIN32
 
 	void OnLostConnection(void *socket);
+};
+
+struct NET_BUFFER_INDEX : Net
+{
+
 };
 
 #endif // !NET_H
