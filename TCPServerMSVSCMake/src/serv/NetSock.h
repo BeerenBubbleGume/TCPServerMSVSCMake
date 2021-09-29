@@ -8,10 +8,12 @@
 class NetSocket : public NetBuffer {
 
 public:
+
 	NetSocket();
 	~NetSocket();
-
+	NetBuffer rbuffer;
 	void Destroy();
+	NetBuffer* GetReciveBuffer() { return &rbuffer; }
 };
 struct NET_SOCKET_PRT {
 	NetSocket* net_socket;

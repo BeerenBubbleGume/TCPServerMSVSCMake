@@ -15,19 +15,23 @@
 #include <cstdint>
 #endif // UNIX
 
+
 class Net
 {
 public:
 	Net();
 	~Net();
 
+	int bytes_read;
+	unsigned char* DataBuff;
+	size_t buff_length;
 	sockaddr_in *net_addr;
 
 #ifdef WIN32
 	SOCKET tcp_socket;
 	void Connect(sockaddr_in *addr, SOCKET socket);
-	char Recive(SOCKET socket, void *buf, size_t len);
-	void Send(char *data, size_t len);
+	virtual char Recive(SOCKET socket, void *buf, size_t len);
+	virtual void Send(char *data, size_t len);
 	void closesock(SOCKET sock);
 	bool CreateSocket(void* sockptr, sockaddr_in* addr);
 

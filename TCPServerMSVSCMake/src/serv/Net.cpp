@@ -4,6 +4,9 @@
 Net::Net()
 {
 	net_addr = new sockaddr_in;
+	DataBuff = new unsigned char;
+	buff_length = 65536;
+	bytes_read = 0;
 	
 #ifdef WIN32
 	WSADATA wsdata;
@@ -63,15 +66,15 @@ char Net::Recive(SOCKET socket, void* buf, size_t len)
 }
 void Net::Send(char* data, size_t len)
 {
-	tcp_socket = socket(AF_INET, SOCK_STREAM, 0);
-	net_addr->sin_family = AF_INET;
-	net_addr->sin_port = htons(8000);
-	net_addr->sin_addr.S_un.S_addr = htonl(INADDR_ANY);
 
 	while (true)
 	{
-		if (send(tcp_socket, data, len, 0) == SOCKET_ERROR)
+		bytes_read = send(tcp_socket, data, len, 0);
+		if (bytes_read <= 0)
+		{
+			fprintf(stderr, "sending error!\n");
 			break;
+		}
 	}
 }
 
@@ -130,9 +133,10 @@ char Net::Recive(void* buf, unsigned int len)
 
 	return recv(tcp_socket, (char*)buf, len, 0);
 }
-void Net::Send(char* data, unsigned int len)
+void Net::Send(char* data, unsigned int len, void* sock, sockaddr_in* addr)
 {
-	tcp_socket = socket(AF_INET, SOCK_STREAM, 0);
+	tcp_socket = static_cast<int>(reinterpret_cast<intptr_t>(sockptr));
+	net_addr = addr;
 	net_addr->sin_family = AF_INET;
 	net_addr->sin_port = htons(8000);
 	net_addr->sin_addr.s_addr = htonl(INADDR_ANY);

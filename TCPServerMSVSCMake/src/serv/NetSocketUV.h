@@ -16,7 +16,7 @@ public:
 	NetSocketUV(Net* _Net);
 	~NetSocketUV();
 	Net* net;
-	NetBuffer* _net;
+	
 
 	bool Create(const char* ip, bool udp_tcp, int port, bool listen);
 	
@@ -27,7 +27,7 @@ public:
 
 	void SendTCP(char* buf);
 	void SendUDP(char* buf);
-	void ReciveTCP(void* stream);
+	void ReciveTCP();
 	void ReciveUDP();
 	void Destroy();
 
