@@ -1,4 +1,4 @@
-# Install script for directory: /home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/src
+# Install script for directory: /home/dkhaziev/Документы/GitHub/BeerenBubbleGume/BeerenBubbleGume/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -44,7 +44,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/TESTbuildUNIX/src/serv/cmake_install.cmake")
+  include("/home/dkhaziev/Документы/GitHub/BeerenBubbleGume/BeerenBubbleGume/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/TESTbuildUNIX/src/serv/cmake_install.cmake")
 
 endif()
 

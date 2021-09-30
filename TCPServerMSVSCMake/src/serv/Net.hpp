@@ -40,8 +40,8 @@ public:
 #else
 	int tcp_socket;
 	void Connect(sockaddr_in *addr, int socket);
-	char Recive(void *buf, unsigned int len);
-	void Send(char *data, unsigned int len);
+	char Recive();
+	void Send(char* data, unsigned int len, void* sockptr, sockaddr_in* addr);
 	void closesock(int sock);
 	bool CreateSocket(void *sockptr, sockaddr_in* addr);
 

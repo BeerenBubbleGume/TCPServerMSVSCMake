@@ -56,7 +56,7 @@ void NetSocket::OnLostConnection(void* socket)
 		net.Net::closesock((SOCKET)socket);
 
 #else
-		net.Net::closesock((int)socket);
+		net.Net::closesock(static_cast<int>(reinterpret_cast<intptr_t>(socket)));
 #endif // !WIN32
 
 	}

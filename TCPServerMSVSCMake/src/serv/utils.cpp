@@ -323,7 +323,7 @@ void CString::IntToString(int value)
 	itoa(value, s, 10);
 	*this = s;
 #else
-	Format("%d", v);
+	Format("%d", value);
 #endif // WIN32
 
 }

@@ -57,10 +57,10 @@ RM = /usr/local/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake
+CMAKE_SOURCE_DIR = /home/dkhaziev/Документы/GitHub/BeerenBubbleGume/BeerenBubbleGume/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/TESTbuildUNIX
+CMAKE_BINARY_DIR = /home/dkhaziev/Документы/GitHub/BeerenBubbleGume/BeerenBubbleGume/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/TESTbuildUNIX
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/TESTbuildUNIX/CMakeFiles /home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/TESTbuildUNIX//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/dkhaziev/Документы/GitHub/BeerenBubbleGume/BeerenBubbleGume/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/TESTbuildUNIX/CMakeFiles /home/dkhaziev/Документы/GitHub/BeerenBubbleGume/BeerenBubbleGume/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/TESTbuildUNIX//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/dkhaziev/Документы/GitHub/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/TESTbuildUNIX/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/dkhaziev/Документы/GitHub/BeerenBubbleGume/BeerenBubbleGume/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/TESTbuildUNIX/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -177,30 +177,6 @@ src/serv/Net.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TCPServerMSVSCMake.dir/build.make CMakeFiles/TCPServerMSVSCMake.dir/src/serv/Net.cpp.s
 .PHONY : src/serv/Net.cpp.s
 
-src/serv/NetBuffer.o: src/serv/NetBuffer.cpp.o
-.PHONY : src/serv/NetBuffer.o
-
-# target to build an object file
-src/serv/NetBuffer.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TCPServerMSVSCMake.dir/build.make CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetBuffer.cpp.o
-.PHONY : src/serv/NetBuffer.cpp.o
-
-src/serv/NetBuffer.i: src/serv/NetBuffer.cpp.i
-.PHONY : src/serv/NetBuffer.i
-
-# target to preprocess a source file
-src/serv/NetBuffer.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TCPServerMSVSCMake.dir/build.make CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetBuffer.cpp.i
-.PHONY : src/serv/NetBuffer.cpp.i
-
-src/serv/NetBuffer.s: src/serv/NetBuffer.cpp.s
-.PHONY : src/serv/NetBuffer.s
-
-# target to generate assembly for a file
-src/serv/NetBuffer.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TCPServerMSVSCMake.dir/build.make CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetBuffer.cpp.s
-.PHONY : src/serv/NetBuffer.cpp.s
-
 src/serv/NetSock.o: src/serv/NetSock.cpp.o
 .PHONY : src/serv/NetSock.o
 
@@ -273,6 +249,30 @@ src/serv/ServerUV.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TCPServerMSVSCMake.dir/build.make CMakeFiles/TCPServerMSVSCMake.dir/src/serv/ServerUV.cpp.s
 .PHONY : src/serv/ServerUV.cpp.s
 
+src/serv/utils.o: src/serv/utils.cpp.o
+.PHONY : src/serv/utils.o
+
+# target to build an object file
+src/serv/utils.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TCPServerMSVSCMake.dir/build.make CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o
+.PHONY : src/serv/utils.cpp.o
+
+src/serv/utils.i: src/serv/utils.cpp.i
+.PHONY : src/serv/utils.i
+
+# target to preprocess a source file
+src/serv/utils.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TCPServerMSVSCMake.dir/build.make CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.i
+.PHONY : src/serv/utils.cpp.i
+
+src/serv/utils.s: src/serv/utils.cpp.s
+.PHONY : src/serv/utils.s
+
+# target to generate assembly for a file
+src/serv/utils.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TCPServerMSVSCMake.dir/build.make CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.s
+.PHONY : src/serv/utils.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -288,9 +288,6 @@ help:
 	@echo "... src/serv/Net.o"
 	@echo "... src/serv/Net.i"
 	@echo "... src/serv/Net.s"
-	@echo "... src/serv/NetBuffer.o"
-	@echo "... src/serv/NetBuffer.i"
-	@echo "... src/serv/NetBuffer.s"
 	@echo "... src/serv/NetSock.o"
 	@echo "... src/serv/NetSock.i"
 	@echo "... src/serv/NetSock.s"
@@ -300,6 +297,9 @@ help:
 	@echo "... src/serv/ServerUV.o"
 	@echo "... src/serv/ServerUV.i"
 	@echo "... src/serv/ServerUV.s"
+	@echo "... src/serv/utils.o"
+	@echo "... src/serv/utils.i"
+	@echo "... src/serv/utils.s"
 .PHONY : help
 
 

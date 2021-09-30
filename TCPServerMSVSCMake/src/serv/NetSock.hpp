@@ -12,14 +12,10 @@ bool udp_tcp;
 
 #define SENDER_SIZE_UV sizeof(uv_write_t)
 
-class NetSocket	: public Net_Address
+class NetSocket
 {
 
 public:
-
-	Net_Address* addr;
-	Net* net;
-	NetSocket* receiving_socket;
 
 	NetSocket();
 	~NetSocket();
@@ -37,6 +33,11 @@ public:
 	void OnLostConnection(void* socket);
 
 	bool IsServer();
+
+	Net_Address* addr;
+	Net* net;
+	NetSocket* receiving_socket;
+	
 };
 struct NET_SOCKET_PRT 
 {
@@ -102,6 +103,8 @@ protected:
 struct Net_Address
 {
 public:
+	Net_Address();
+	~Net_Address();
 	CString address;
 	int port;
 	void FromStringIP(const char* ip);
@@ -114,6 +117,7 @@ public:
 	char sender_object[SENDER_SIZE_UV];
 
 	NetBufferUV(int index) : NET_BUFFER_INDEX(index) {}
+	virtual ~NetBufferUV();
 
 	uv_write_t* GetPtrWrite();
 	uv_udp_send_t* GetPtrSend();

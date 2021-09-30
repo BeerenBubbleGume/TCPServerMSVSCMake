@@ -124,16 +124,16 @@ void Net::Connect(sockaddr_in* addr, int sock)
 		fprintf(stderr, "Cannot accept!\n");
 	}
 }
-char Net::Recive(void* buf, unsigned int len)
+char Net::Recive()
 {
 	tcp_socket = socket(AF_INET, SOCK_STREAM, 0);
 	net_addr->sin_family = AF_INET;
 	net_addr->sin_port = htons(8000);
 	net_addr->sin_addr.s_addr = htonl(INADDR_ANY);
 
-	return recv(tcp_socket, (char*)buf, len, 0);
+	return recv(tcp_socket, DataBuff, buff_length, 0);
 }
-void Net::Send(char* data, unsigned int len, void* sock, sockaddr_in* addr)
+void Net::Send(char* data, unsigned int len, void* sockptr, sockaddr_in* addr)
 {
 	tcp_socket = static_cast<int>(reinterpret_cast<intptr_t>(sockptr));
 	net_addr = addr;
