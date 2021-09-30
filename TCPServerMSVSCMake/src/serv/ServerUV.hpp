@@ -5,7 +5,7 @@
 #include "NetSocketUV.hpp"
 #include "Net.hpp"
 
-extern bool udp_tcp;
+//extern bool udp_tcp;
 
 class Server : public NetSocketUV 
 {

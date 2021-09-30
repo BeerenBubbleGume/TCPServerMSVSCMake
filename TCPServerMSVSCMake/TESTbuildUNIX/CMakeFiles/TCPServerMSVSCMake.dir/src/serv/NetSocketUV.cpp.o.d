@@ -1,21 +1,29 @@
-CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.o: \
- /home/dkhaziev/Документы/GitHub/BeerenBubbleGume/BeerenBubbleGume/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/NetSock.cpp \
+CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.o: \
+ /home/dkhaziev/Документы/GitHub/BeerenBubbleGume/BeerenBubbleGume/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/NetSocketUV.cpp \
  /usr/include/stdc-predef.h \
- /home/dkhaziev/Документы/GitHub/BeerenBubbleGume/BeerenBubbleGume/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/NetSock.hpp \
- /usr/include/unistd.h /usr/include/features.h /usr/include/sys/cdefs.h \
- /usr/include/bits/wordsize.h /usr/include/bits/long-double.h \
- /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h \
- /usr/include/bits/posix_opt.h /usr/include/bits/environments.h \
- /usr/include/bits/types.h /usr/include/bits/typesizes.h \
- /usr/lib/gcc/x86_64-redhat-linux/8/include/stddef.h \
- /usr/include/bits/confname.h /usr/include/bits/getopt_posix.h \
- /usr/include/bits/getopt_core.h /usr/include/c++/8/cstring \
+ /home/dkhaziev/Документы/GitHub/BeerenBubbleGume/BeerenBubbleGume/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/NetSocketUV.hpp \
+ /usr/include/c++/8/cassert \
  /usr/include/c++/8/x86_64-redhat-linux/bits/c++config.h \
+ /usr/include/bits/wordsize.h \
  /usr/include/c++/8/x86_64-redhat-linux/bits/os_defines.h \
+ /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/long-double.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h \
  /usr/include/c++/8/x86_64-redhat-linux/bits/cpu_defines.h \
- /usr/include/string.h /usr/include/bits/libc-header-start.h \
+ /usr/include/assert.h /usr/include/c++/8/cstring /usr/include/string.h \
+ /usr/include/bits/libc-header-start.h \
+ /usr/lib/gcc/x86_64-redhat-linux/8/include/stddef.h \
  /usr/include/bits/types/locale_t.h /usr/include/bits/types/__locale_t.h \
- /usr/include/strings.h /usr/include/c++/8/cstdio /usr/include/stdio.h \
+ /usr/include/strings.h /usr/include/inttypes.h \
+ /usr/lib/gcc/x86_64-redhat-linux/8/include/stdint.h \
+ /usr/include/stdint.h /usr/include/bits/types.h \
+ /usr/include/bits/typesizes.h /usr/include/bits/wchar.h \
+ /usr/include/bits/stdint-intn.h /usr/include/bits/stdint-uintn.h \
+ /home/dkhaziev/Документы/GitHub/BeerenBubbleGume/BeerenBubbleGume/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/NetSock.hpp \
+ /usr/include/unistd.h /usr/include/bits/posix_opt.h \
+ /usr/include/bits/environments.h /usr/include/bits/confname.h \
+ /usr/include/bits/getopt_posix.h /usr/include/bits/getopt_core.h \
+ /usr/include/c++/8/cstdio /usr/include/stdio.h \
  /usr/lib/gcc/x86_64-redhat-linux/8/include/stdarg.h \
  /usr/include/bits/types/__fpos_t.h /usr/include/bits/types/__mbstate_t.h \
  /usr/include/bits/types/__fpos64_t.h /usr/include/bits/types/__FILE.h \
@@ -27,9 +35,9 @@ CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.o: \
  /usr/include/c++/8/bits/stringfwd.h /usr/include/c++/8/bits/memoryfwd.h \
  /usr/include/c++/8/bits/postypes.h /usr/include/c++/8/cwchar \
  /usr/include/wchar.h /usr/include/bits/floatn.h \
- /usr/include/bits/floatn-common.h /usr/include/bits/wchar.h \
- /usr/include/bits/types/wint_t.h /usr/include/bits/types/mbstate_t.h \
- /usr/include/c++/8/exception /usr/include/c++/8/bits/exception.h \
+ /usr/include/bits/floatn-common.h /usr/include/bits/types/wint_t.h \
+ /usr/include/bits/types/mbstate_t.h /usr/include/c++/8/exception \
+ /usr/include/c++/8/bits/exception.h \
  /usr/include/c++/8/bits/exception_ptr.h \
  /usr/include/c++/8/bits/exception_defines.h \
  /usr/include/c++/8/bits/cxxabi_init_exception.h \
@@ -49,9 +57,7 @@ CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.o: \
  /usr/include/c++/8/bits/stl_iterator.h \
  /usr/include/c++/8/bits/ptr_traits.h /usr/include/c++/8/debug/debug.h \
  /usr/include/c++/8/bits/predefined_ops.h /usr/include/c++/8/cstdint \
- /usr/lib/gcc/x86_64-redhat-linux/8/include/stdint.h \
- /usr/include/stdint.h /usr/include/bits/stdint-intn.h \
- /usr/include/bits/stdint-uintn.h /usr/include/c++/8/bits/localefwd.h \
+ /usr/include/c++/8/bits/localefwd.h \
  /usr/include/c++/8/x86_64-redhat-linux/bits/c++locale.h \
  /usr/include/c++/8/clocale /usr/include/locale.h \
  /usr/include/bits/locale.h /usr/include/c++/8/cctype \
@@ -166,5 +172,4 @@ CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.o: \
  /home/dkhaziev/Документы/GitHub/BeerenBubbleGume/BeerenBubbleGume/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/../../libs/includes/uv/threadpool.h \
  /home/dkhaziev/Документы/GitHub/BeerenBubbleGume/BeerenBubbleGume/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/uv/linux.h \
  /home/dkhaziev/Документы/GitHub/BeerenBubbleGume/BeerenBubbleGume/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/utils.hpp \
- /home/dkhaziev/Документы/GitHub/BeerenBubbleGume/BeerenBubbleGume/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/Net.cpp \
- /usr/include/c++/8/cassert /usr/include/assert.h
+ /home/dkhaziev/Документы/GitHub/BeerenBubbleGume/BeerenBubbleGume/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/Net.cpp

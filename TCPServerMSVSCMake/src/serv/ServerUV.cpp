@@ -15,7 +15,7 @@ int Server::connect(const char* ip)
 {
 	if (ip)
 	{
-		udp_tcp = true;
+		//udp_tcp = true;
 		if (net_addr)
 		{
 			return Create(ip, true, 8000, true);

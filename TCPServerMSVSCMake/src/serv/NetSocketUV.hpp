@@ -22,20 +22,21 @@ public:
 
 	bool Create(const char* ip, bool udp_tcp, int port, bool listen);
 	
-	bool SetConnectedSocketToReadMode(uv_stream_t* stream);
-	bool GetIP(const char* ip, bool own_or_peer);
-	bool ConnectUV(int port, const char* ip, sockaddr_in* addr);
-	bool Accept();
+	virtual bool SetConnectedSocketToReadMode(uv_stream_t* stream);
+	virtual bool GetIP(const char* ip, bool own_or_peer);
+	virtual bool ConnectUV(int port, const char* ip, sockaddr_in* addr);
+	virtual bool Accept();
 
 	virtual void SendTCP(NET_BUFFER_INDEX* buf) override;
 	virtual void SendUDP(NET_BUFFER_INDEX* buf) override;
 	virtual void ReceiveTCP() override;
 	virtual void ReceiveUPD() override;
-	void Destroy();
+	virtual void Destroy();
 
 	static void OnConnect(uv_stream_t* stream, int status);
 	static void OnAllocBuffer(uv_handle_t* handle, size_t suggested_size, uv_buf_t* buf);
 	static void OnReadTCP(uv_stream_t* stream, ssize_t nread, const uv_buf_t* buf);
+	static void OnReadUDP(uv_udp_t* handle, ssize_t nread, const uv_buf_t* buf, const struct sockaddr* addr, unsigned flags);
 	static void OnCloseSocket(uv_handle_t* handle);
 	static void OnWrite(uv_write_t* req, int status);
 

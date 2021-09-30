@@ -1,8 +1,9 @@
 #pragma once
 #ifndef NETSOCK_H
 #define NETSOCKET_H
-//#include <unistd.h>
+#include <unistd.h>
 #include <cstring>
+#include <cstdio>
 #include <iostream>
 #include "Net.hpp"
 #include "../../libs/includes/uv.h"
@@ -11,23 +12,28 @@
 bool udp_tcp;
 
 #define SENDER_SIZE_UV sizeof(uv_write_t)
+struct NetBuffer;
+struct Net_Address;
+struct NET_BUFFER_INDEX;
+struct NET_BUFFER_INDEX;
+struct MEM_DATA;
 
 class NetSocket
 {
-
 public:
 
 	NetSocket();
 	~NetSocket();
-	NetBuffer rbuffer;
+	NetBuffer* rbuffer;
 	void Destroy();
-	NetBuffer* GetReciveBuffer() { return &rbuffer; }	
+	NetBuffer* GetReciveBuffer() { return rbuffer; }	
 
 	virtual void SendTCP(NET_BUFFER_INDEX* buf) = 0;
 	virtual void SendUDP(NET_BUFFER_INDEX* buf) = 0;
 
 	virtual void ReceiveTCP() = 0;
 	virtual void ReceiveUPD() = 0; 
+
 	void SendMessenge(NET_BUFFER_INDEX* buf, Net_Address* addr);
 	bool IsTCP() { return udp_tcp; }
 	void OnLostConnection(void* socket);
@@ -37,7 +43,7 @@ public:
 	Net_Address* addr;
 	Net* net;
 	NetSocket* receiving_socket;
-	
+
 };
 struct NET_SOCKET_PRT 
 {
@@ -67,8 +73,8 @@ public:
 	NetBuffer();
 	virtual ~NetBuffer();
 
-	NET_BUFFER_LIST* owner;
-	unsigned char* GetData() { return DataBuff; }
+	NET_BUFFER_INDEX* owner;
+	unsigned char* GetData() { return data; }
 	size_t GetLength();
 	int SetLength(unsigned int length);
 	void Add(int length, void* data);

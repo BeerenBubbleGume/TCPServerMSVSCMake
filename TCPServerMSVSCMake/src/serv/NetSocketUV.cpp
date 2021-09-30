@@ -7,7 +7,7 @@
 #include "Net.cpp"
 
 
-bool udp_tcp;
+//bool udp_tcp;
 static uv_loop_t *loop = uv_default_loop();
 static uv_tcp_t *server = new uv_tcp_t;
 
@@ -142,7 +142,7 @@ void NetSocketUV::ReceiveTCP()
 {
 	NetBuffer* recv_buffer = GetReciveBuffer();
 	int received_bytes = recv_buffer->GetLength();
-	rbuffer.Add(received_bytes, recv_buffer->GetData());
+	rbuffer->Add(received_bytes, recv_buffer->GetData());
 
 	if (net->IsServer())
 		Recive();
@@ -204,13 +204,13 @@ void NetSocketUV::OnWrite(uv_write_t *req, int status)
 {
 	int offset = offsetof(NetBufferUV, sender_object);
 	NetBufferUV* buf = (NetBufferUV*)(((char*)req) - offset);
-	NET_BUFFER_LIST* list = buf->owner;
+	NET_BUFFER_LIST* list = (NET_BUFFER_LIST*)buf->owner;
 	int index = buf->GetIndex();
 	
 	list->DeleteBuffer(index);
 }
 char address_converter[30];
-void OnReadUDP(uv_udp_t* handle, ssize_t nread, const uv_buf_t* buf, const struct sockaddr* addr, unsigned flags)
+void NetSocketUV::OnReadUDP(uv_udp_t* handle, ssize_t nread, const uv_buf_t* buf, const struct sockaddr* addr, unsigned flags)
 {
 	NetSocket* socket = GetNetSocketPtr(handle);
 	NetBuffer* recv_buffer = socket->GetReciveBuffer();

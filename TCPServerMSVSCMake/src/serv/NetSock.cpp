@@ -5,7 +5,7 @@
 
 NetSocket::NetSocket()
 {
-	addr = NULL;
+	addr = nullptr;
 }
 
 NetSocket::~NetSocket()
@@ -156,10 +156,10 @@ uv_udp_send_t* NetBufferUV::GetPtrSend()
 
 NET_BUFFER_LIST::NET_BUFFER_LIST() : CArrayBase()
 {
-	net = NULL;
+	net = nullptr;
 
 	k_buffer = 0;
-	m_buffer = NULL;
+	m_buffer = nullptr;
 
 	k_buffer = 10;
 	m_buffer = (NET_BUFFER_INDEX**)malloc(k_buffer * sizeof(NET_BUFFER_INDEX*));
