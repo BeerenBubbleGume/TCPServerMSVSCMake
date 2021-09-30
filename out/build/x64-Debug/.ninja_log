@@ -15,3 +15,5 @@
 1	1469	6546883858490127	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.obj	cb578ef9a5d026dd
 1	512	6546884167149894	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.obj	28e91594c55b864b
 513	692	6546884168646185	TCPServerMSVSCMake/TCPServerMSVSCMake.exe	17bd3736b2dfd946
+12	1133	6546967337198140	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.obj	28e91594c55b864b
+5	1450	6546967340419547	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/Net.cpp.obj	453f6564c6a424f6

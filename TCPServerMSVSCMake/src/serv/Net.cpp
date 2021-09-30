@@ -65,9 +65,9 @@ void Net::Connect(sockaddr_in* addr, SOCKET socket)
 	assert(listen(socket, 1024) == SOCKET_ERROR);
 	assert(accept(socket, (sockaddr*)addr, (int*)sizeof(addr)));
 }
-char Net::Recive(SOCKET socket, void* buf, size_t len)
+char Net::Recive()
 {
-	return recv(socket, (char*)buf, len, 0);
+	return recv(tcp_socket, (char*)DataBuff, buff_length, 0);
 }
 void Net::Send(char* data, size_t len)
 {

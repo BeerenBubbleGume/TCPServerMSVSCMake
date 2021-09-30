@@ -1,4 +1,5 @@
 ﻿#include "utils.hpp"
+#include <cassert>
 
 CString::CString()
 {
@@ -711,4 +712,87 @@ bool CString::IsVariableName()
 		return true;
 	}
 	return false;
+}
+
+
+CArrayBase::CArrayBase()
+{
+	max_existing = 0;
+	k_existing = 0;
+	m_existing = nullptr;
+
+	max_deleted = 0;
+	k_deleted = 0;
+	m_deleted = nullptr;
+
+	max_indexed = 0;
+	m_indexed = nullptr;
+}
+
+CArrayBase::~CArrayBase()
+{
+	max_existing = k_existing = 0;
+	if (m_existing)
+	{
+		delete[]m_existing;
+		m_existing = NULL;
+	}
+
+	max_deleted = k_deleted = 0;
+	if (m_deleted)
+	{
+		delete[]m_deleted;
+		m_deleted = NULL;
+	}
+
+	max_indexed = 0;
+	if (m_indexed)
+	{
+		delete[]m_indexed;
+		m_indexed = 0;
+	}
+}
+
+void CArrayBase::FromExistingToDeleted(int index)
+{
+	assert(max_indexed > index);
+	int from = m_indexed[index];
+	assert(from >= 0);
+
+	m_indexed[index] = -1;
+	if (from != k_existing)
+	{
+		m_existing[from] = m_existing[k_existing];
+		m_indexed[k_existing] = from;
+	}
+	AddToDeleted(index);
+}
+
+void CArrayBase::AddToDeleted(int index)
+{
+	if (max_indexed > index)
+	{
+		m_indexed[index] = -1;
+	}
+	if (max_deleted == k_deleted)
+	{
+		int step = max_deleted / 4;
+		if (step < 4)
+		{
+			step = 4;
+		}
+		int vmax_deleted = max_deleted + step;
+		int* vm_deleted = new int[vmax_deleted];
+		int i;
+		for (i = 0; i < max_deleted; ++i)
+		{
+			vm_deleted[i] = m_deleted[i];
+		}
+		if (m_deleted)
+			delete[] m_deleted;
+		m_deleted = vm_deleted;
+		max_deleted = vmax_deleted;
+	}
+	m_deleted[k_deleted] = index;
+	k_deleted++;
 }

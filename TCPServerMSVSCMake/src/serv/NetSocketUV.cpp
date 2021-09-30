@@ -24,6 +24,7 @@ NetSocketUV::NetSocketUV()
 
 NetSocketUV::NetSocketUV(Net *_Net)
 {
+	
 }
 
 NetSocketUV::~NetSocketUV()
@@ -74,12 +75,6 @@ bool NetSocketUV::ConnectUV(int port, const char *ip, sockaddr_in *addr)
 		assert(gip == 0);
 		std::cout << "Binding socket!" << std::endl;
 		udp_tcp = true;
-#ifdef WIN32
-		Connect(addr, (SOCKET)sock);
-#else	
-		tcp_socket = socket(AF_INET, SOCK_STREAM, 0);	
-		Connetct(addr, static_cast<int>(reinterpret_cast<intptr_t>(sock)));
-#endif // WIN32
 
 		assert(Accept() == true);
 	}
@@ -108,15 +103,16 @@ bool NetSocketUV::Accept()
 }
 
 //высылаем данные по TCP протаколу
-void NetSocketUV::SendTCP(char *buf)
+void NetSocketUV::SendTCP(NET_BUFFER_INDEX *buf)
 {
-	Net __net;
-#ifdef WIN32
-	
-	__net.Send(buf, sizeof(buf));
-#else
-	Send(buf, sizeof(buf), sock, net_addr);
-#endif // WIN32
+	if (buf->length > 0)
+	{
+		uv_buf_t buffer;
+		buffer.len = buf->length;
+		buffer.base = (char*)buf->data;
+		int r = uv_write(((NetBufferUV*)buf)->GetPtrWrite(), (uv_stream_t*)GetPtrTCP(sock), &buffer, 1, OnWrite);
+		assert(r == 0);
+	}
 }
 
 void NetSocketUV::SendUDP(char *buf)
@@ -126,7 +122,12 @@ void NetSocketUV::SendUDP(char *buf)
 //принимаем данные по TCP протоколу
 void NetSocketUV::ReciveTCP()
 {
-	
+	NetBuffer* recv_buffer = GetReciveBuffer();
+	int received_bytes = recv_buffer->GetLength();
+	rbuffer.Add(received_bytes, recv_buffer->GetData());
+
+	if (net->IsServer())
+		Recive();	
 }
 void NetSocketUV::ReciveUDP()
 {
@@ -182,14 +183,12 @@ void NetSocketUV::OnCloseSocket(uv_handle_t *handle)
 
 void NetSocketUV::OnWrite(uv_write_t *req, int status)
 {
-	if (status == true)
-	{
-		fprintf(stderr, "Sending TCP/UDP is fail!\n", uv_err_name(status));
-	}
-	else
-	{
-		
-	}
+	int offset = offsetof(NetBufferUV, sender_object);
+	NetBufferUV* buf = (NetBufferUV*)(((char*)req) - offset);
+	NET_BUFFER_LIST* list = buf->owner;
+	int index = buf->GetIndex();
+	
+	list->DeleteBuffer(index);
 }
 
 void NetSocketUV::RunLoop(uv_loop_t *loop)
@@ -214,7 +213,7 @@ void NetSocketUV::OnConnect(uv_stream_t *stream, int status)
 		return;
 	}
 
-	NetSocketUV *netsock = new NetSocketUV;
+	NetSocketUV* netsock = (NetSocketUV*)GetNetSocketPtr(stream);
 
 	uv_tcp_t *client = new uv_tcp_t;
 	memset(client, 0, sizeof(uv_tcp_t *));

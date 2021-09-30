@@ -14,7 +14,7 @@ Server::~Server()
 
 NetSocket* Server::NewSocket(Net* net)
 {
-	return new NetSocketUV(net);
+	return new NetSocket(net);
 }
 
 int Server::connect(const char* ip)

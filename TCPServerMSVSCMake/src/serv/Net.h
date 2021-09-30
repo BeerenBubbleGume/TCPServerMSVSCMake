@@ -21,7 +21,7 @@ class Net
 public:
 	Net();
 	~Net();
-
+	int ClientID;
 	int bytes_read;
 	unsigned char* DataBuff;
 	size_t buff_length;
@@ -30,7 +30,7 @@ public:
 #ifdef WIN32
 	SOCKET tcp_socket;
 	void Connect(sockaddr_in *addr, SOCKET socket);
-	virtual char Recive(SOCKET socket, void *buf, size_t len);
+	virtual char Recive();
 	virtual void Send(char *data, size_t len);
 	void closesock(SOCKET sock);
 	bool CreateSocket(void* sockptr, sockaddr_in* addr);

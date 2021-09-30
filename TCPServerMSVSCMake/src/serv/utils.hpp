@@ -113,4 +113,30 @@ public:
 
 };
 
+class CArrayBase
+{
+protected:
+	int max_existing;
+	int k_existing;
+	int* m_existing;
+
+	int max_deleted;
+	int k_deleted;
+	int* m_deleted;
+
+	int max_indexed;
+	int* m_indexed;
+
+public:
+
+	CArrayBase();
+	virtual ~CArrayBase();
+
+
+	void FromExistingToDeleted(int index);
+	void AddToDeleted(int index);
+};
+
+
+
 

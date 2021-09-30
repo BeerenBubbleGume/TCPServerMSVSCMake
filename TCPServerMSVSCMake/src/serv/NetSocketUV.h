@@ -16,7 +16,7 @@ public:
 	NetSocketUV(Net* _Net);
 	~NetSocketUV();
 	Net* net;
-	
+	void* sock;
 
 	bool Create(const char* ip, bool udp_tcp, int port, bool listen);
 	
@@ -25,7 +25,7 @@ public:
 	bool ConnectUV(int port, const char* ip, sockaddr_in* addr);
 	bool Accept();
 
-	void SendTCP(char* buf);
+	void SendTCP(NET_BUFFER_INDEX* buf);
 	void SendUDP(char* buf);
 	void ReciveTCP();
 	void ReciveUDP();
