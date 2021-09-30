@@ -3,7 +3,6 @@
 #define SERVERUV_H
 
 #include "NetSocketUV.hpp"
-#include "Net.hpp"
 
 //extern bool udp_tcp;
 
@@ -18,7 +17,7 @@ public:
 	char* IDArray;
 	
 	int connect(const char* ip);
-	char* GetClientID();
+	std::string GetClientID();
 	void SetID(void* NewClient);
 	
 	

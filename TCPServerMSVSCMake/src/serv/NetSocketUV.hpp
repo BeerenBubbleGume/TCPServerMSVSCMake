@@ -13,8 +13,7 @@
 class NetSocketUV : public NetSocket, public Net
 {
 public:
-	
-	NetSocketUV();
+
 	NetSocketUV(Net* _Net);
 	~NetSocketUV();
 	NetSocket* net;

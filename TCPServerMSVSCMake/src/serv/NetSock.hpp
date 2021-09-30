@@ -1,7 +1,7 @@
 #pragma once
 #ifndef NETSOCK_H
 #define NETSOCKET_H
-#include <unistd.h>
+//#include <unistd.h>
 #include <cstring>
 #include <cstdio>
 #include <iostream>
@@ -22,7 +22,7 @@ class NetSocket
 {
 public:
 
-	NetSocket();
+	NetSocket(Net* net);
 	~NetSocket();
 	NetBuffer* rbuffer;
 	void Destroy();

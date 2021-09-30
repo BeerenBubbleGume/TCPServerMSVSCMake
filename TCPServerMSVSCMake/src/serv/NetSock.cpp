@@ -3,9 +3,10 @@
 
 
 
-NetSocket::NetSocket()
+NetSocket::NetSocket(Net* net)
 {
 	addr = nullptr;
+	this->net = net;
 }
 
 NetSocket::~NetSocket()
