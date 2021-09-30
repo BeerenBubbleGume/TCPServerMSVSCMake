@@ -126,10 +126,10 @@ void Net::Connect(sockaddr_in* addr, int sock)
 }
 char Net::Recive()
 {
-	tcp_socket = socket(AF_INET, SOCK_STREAM, 0);
-	net_addr->sin_family = AF_INET;
-	net_addr->sin_port = htons(8000);
-	net_addr->sin_addr.s_addr = htonl(INADDR_ANY);
+	//tcp_socket = socket(AF_INET, SOCK_STREAM, 0);
+	//net_addr->sin_family = AF_INET;
+	//net_addr->sin_port = htons(8000);
+	//net_addr->sin_addr.s_addr = htonl(INADDR_ANY);
 
 	return recv(tcp_socket, DataBuff, buff_length, 0);
 }
