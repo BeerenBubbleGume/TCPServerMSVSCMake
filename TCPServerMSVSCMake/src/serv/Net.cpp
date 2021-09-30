@@ -1,4 +1,4 @@
-#include "Net.h"
+#include "Net.hpp"
 #include <cassert>
 
 Net::Net()
@@ -51,11 +51,6 @@ bool Net::CreateSocket(void* sockptr, sockaddr_in* addr)
 		fprintf(stderr, "Cannot create tcp_socket");
 		return false;
 	}
-	return false;
-}
-
-bool Net::IsServer()
-{
 	return false;
 }
 
@@ -159,18 +154,5 @@ void Net::closesock(int socket)
 #endif // WIN32
 
 
-void Net::OnLostConnection(void* socket)
-{
-	if (socket)
-	{
-		std::cout << "Lost connection with socket!" << std::endl;
-#ifdef WIN32
-		closesock((SOCKET)socket);
-		
-#else
-		//closesock((int)socket);
-#endif // !WIN32
 
-	}
-}
 

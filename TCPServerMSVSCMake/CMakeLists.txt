@@ -6,18 +6,20 @@ add_subdirectory("src")
 
 
 # �������� �������� � ����������� ���� ����� �������.
-add_executable (TCPServerMSVSCMake	"src/serv/Net.h"
+add_executable (TCPServerMSVSCMake	"src/serv/Net.hpp"
 									"src/serv/Net.cpp"
 									"src/serv/NetBuffer.cpp"
-									"src/serv/NetBuffer.h"
-									"src/serv/NetSock.h"
+									"src/serv/NetBuffer.hpp"
+									"src/serv/NetSock.hpp"
 									"src/serv/NetSock.cpp"
-									"src/serv/NetSocketUV.h"
+									"src/serv/NetSocketUV.hpp"
 									"src/serv/NetSocketUV.cpp"
-									"src/serv/ServerUV.h"
+									"src/serv/ServerUV.hpp"
 									"src/serv/ServerUV.cpp"
 									"TCPServerMSVSCMake.cpp"
-									"TCPServerMSVSCMake.h" "src/serv/utils.hpp" "src/serv/utils.cpp")
+									"src/serv/utils.hpp"
+									"src/serv/utils.cpp"
+									"TCPServerMSVSCMake.hpp")
 
 # TODO: �������� ����� � ������� �������, ���� ��� ����������.
 IF(WIN32)

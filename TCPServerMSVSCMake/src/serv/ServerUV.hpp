@@ -2,13 +2,13 @@
 #ifndef SERVERUV_H
 #define SERVERUV_H
 
-#include "NetSocketUV.h"
-#include "Net.h"
-#include "NetBuffer.h"
+#include "NetSocketUV.hpp"
+#include "Net.hpp"
 
 extern bool udp_tcp;
 
-class Server : public NetSocketUV {
+class Server : public NetSocketUV 
+{
 public:
 
 	Server();
@@ -17,7 +17,6 @@ public:
 	sockaddr_in* net_addr;
 	char* IDArray;
 	
-	NetSocket* NewSocket(Net* net);
 	int connect(const char* ip);
 	char* GetClientID();
 	void SetID(void* NewClient);

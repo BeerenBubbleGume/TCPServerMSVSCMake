@@ -2,9 +2,9 @@
 #ifndef TCPSERVERMVSCMAKE_H
 #define TCPSEVERMSVSCMAKE_H
 
-#include "src/serv/ServerUV.h"
-#include "src/serv/NetBuffer.h"
-#include "src/serv/NetSock.h"
+#include "src/serv/ServerUV.hpp"
+#include "src/serv/NetBuffer.hpp"
+#include "src/serv/NetSock.hpp"
 
 char* ip;
 
