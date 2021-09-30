@@ -27,6 +27,8 @@ public:
 	size_t buff_length;
 	sockaddr_in *net_addr;
 	bool IsServer();
+
+
 #ifdef WIN32
 	SOCKET tcp_socket;
 	void Connect(sockaddr_in *addr, SOCKET socket);

@@ -1,20 +1,14 @@
 #include <stdint.h>
-#include "ServerUV.h"
+#include "ServerUV.hpp"
 #include <string.h>
 Server::Server()
 {
 	//NetBuffer* netbuff = new NetBuffer;
-	Net* net = new Net;
 	IDArray = new char[1024];
 }
 
 Server::~Server()
 {
-}
-
-NetSocket* Server::NewSocket(Net* net)
-{
-	return new NetSocket(net);
 }
 
 int Server::connect(const char* ip)

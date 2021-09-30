@@ -1,4 +1,4 @@
-#include "Net.h"
+#include "Net.hpp"
 #include <cassert>
 
 Net::Net()

@@ -2,13 +2,18 @@
 #ifndef NETSOCKETUV_H
 #define NETSOCKETUV_H
 
+#include <cassert>
+#include <fstream>
+#include <cstring>
+#include <cstdint>
+#include <inttypes.h>
 #include <iostream>
-#include "NetSock.h"
-#include "NetBuffer.h"
-#include "Net.h"
+#include "NetSock.hpp"
+#include "Net.hpp"
+#include "utils.hpp"
 #include "../../libs/includes/uv.h"
 
-class NetSocketUV : public NetSocket
+class NetSocketUV : public NetSocket, public Net
 {
 public:
 	
@@ -25,10 +30,10 @@ public:
 	bool ConnectUV(int port, const char* ip, sockaddr_in* addr);
 	bool Accept();
 
-	void SendTCP(NET_BUFFER_INDEX* buf);
-	void SendUDP(char* buf);
-	void ReciveTCP();
-	void ReciveUDP();
+	virtual void SendTCP(NET_BUFFER_INDEX* buf) override;
+	virtual void SendUDP(NET_BUFFER_INDEX* buf) override;
+	virtual void ReceiveTCP() override;
+	virtual void ReceiveUPD() override;
 	void Destroy();
 
 	static void OnConnect(uv_stream_t* stream, int status);
