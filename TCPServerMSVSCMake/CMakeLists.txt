@@ -6,9 +6,7 @@ add_subdirectory("src")
 
 
 # �������� �������� � ����������� ���� ����� �������.
-add_executable (TCPServerMSVSCMake	"src/serv/Net.hpp"
-									"src/serv/Net.cpp"
-									"src/serv/NetSock.hpp"
+add_executable (TCPServerMSVSCMake	"src/serv/NetSock.hpp"
 									"src/serv/NetSock.cpp"
 									"src/serv/NetSocketUV.hpp"
 									"src/serv/NetSocketUV.cpp"

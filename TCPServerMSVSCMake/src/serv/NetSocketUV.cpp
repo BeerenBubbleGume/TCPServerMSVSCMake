@@ -4,26 +4,31 @@
 */
 
 #include "NetSocketUV.hpp"
-#include "Net.cpp"
 
 
 //bool udp_tcp;
 static uv_loop_t *loop = uv_default_loop();
 static uv_tcp_t *server = new uv_tcp_t;
 
-NetSocketUV::NetSocketUV(Net *_Net) : public NetSocket
+NetSocketUV::NetSocketUV(Net *_Net) : NetSocket()
 {
-		
+	net = (NetSocket*)malloc((sizeof(NetSocket)));
+	status = errno;
+	sock = nullptr;
+	NetBuffer* nb = new NetBuffer;
+	_Net = new Net;
 }
 
 NetSocketUV::~NetSocketUV()
 {
+	status = 0;
+	delete[] sock;
+	delete[] net;
 }
 
 bool NetSocketUV::Create(const char *ip, bool udp_tcp, int port, bool listen)
 {
 	//NetSocketUV::Create(ip, udp_tcp, port, listen);
-
 	if (udp_tcp)
 	{
 		sock = malloc(sizeof(TCP_SOCKET));
@@ -68,15 +73,16 @@ bool NetSocketUV::Create(const char *ip, bool udp_tcp, int port, bool listen)
 
 bool NetSocketUV::GetIP(const char *ip, bool own_or_peer)
 {
-	sockaddr_in *addr = net_addr;
+	//sockaddr_in *addr;
 	if (own_or_peer)
 	{
 		std::cout << "Set IP to socket!" << std::endl;
-		assert(0 == uv_ip4_addr(ip, 8000, addr));
-		ConnectUV(8000, ip, addr);
+		assert(0 == uv_ip4_addr(ip, 8000, net_addr));
+		ConnectUV(8000, ip, net_addr);
 		return true;
 	}
-	return false;
+	else
+		return false;
 }
 
 bool NetSocketUV::ConnectUV(int port, const char *ip, sockaddr_in *addr)

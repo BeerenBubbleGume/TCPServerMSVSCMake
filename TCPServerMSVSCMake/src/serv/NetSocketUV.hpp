@@ -6,11 +6,10 @@
 #include <cstring>
 #include <inttypes.h>
 #include "NetSock.hpp"
-#include "Net.hpp"
 #include "utils.hpp"
 #include "../../libs/includes/uv.h"
 
-class NetSocketUV : public NetSocket, public Net
+class NetSocketUV : public NetSocket
 {
 public:
 

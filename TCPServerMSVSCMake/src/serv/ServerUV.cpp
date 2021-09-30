@@ -1,14 +1,19 @@
 #include <stdint.h>
 #include "ServerUV.hpp"
 #include <string.h>
-Server::Server()
+
+Server::Server(Net* net) : NetSocketUV(net)
 {
+	this->net = net;
 	//NetBuffer* netbuff = new NetBuffer;
 	IDArray = new char[1024];
 }
 
 Server::~Server()
 {
+	this->net = nullptr;
+	delete[] IDArray;
+
 }
 
 int Server::connect(const char* ip)
@@ -31,7 +36,7 @@ int Server::connect(const char* ip)
 std::string Server::GetClientID()
 {
 	char ServerPath[] = { "rtsp://192.168.0.109:554/" };
-	return ServerPath + ClientID;
+	return ServerPath + net->ClientID;
 }
 
 void Server::SetID(void* NewClient)
@@ -41,7 +46,7 @@ void Server::SetID(void* NewClient)
 		for (int i = 0; i <= INT16_MAX; i++)
 		{
 			counter = i;
-			ClientID = counter;
+			net->ClientID = counter;
 			*IDArray = counter;
 		}
 	else

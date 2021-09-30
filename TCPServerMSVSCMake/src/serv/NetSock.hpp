@@ -1,28 +1,66 @@
 #pragma once
 #ifndef NETSOCK_H
 #define NETSOCKET_H
-//#include <unistd.h>
+#ifdef WIN32
+#include <WinSock2.h>
+#pragma comment(lib, "ws2_32.lib")
+#else
+#include <unistd.h>
+#include <sys/socket.h>
+#include <sys/types.h>
+#endif // WIN32
 #include <cstring>
 #include <cstdio>
 #include <iostream>
-#include "Net.hpp"
+#include <cassert>
 #include "../../libs/includes/uv.h"
 #include "utils.hpp"
 
-bool udp_tcp;
-
 #define SENDER_SIZE_UV sizeof(uv_write_t)
+class Net;
 struct NetBuffer;
 struct Net_Address;
 struct NET_BUFFER_INDEX;
 struct NET_BUFFER_INDEX;
 struct MEM_DATA;
 
-class NetSocket
+class Net
+{
+public:
+	Net();
+	virtual ~Net();
+	int ClientID;
+	int bytes_read;
+	unsigned char* DataBuff;
+	size_t buff_length;
+	sockaddr_in* net_addr;
+	bool udp_tcp;
+
+#ifdef WIN32
+	SOCKET tcp_socket;
+	void Connect(sockaddr_in* addr, SOCKET socket);
+	virtual char Recive();
+	virtual void Send(char* data, size_t len);
+	void closesock(SOCKET sock);
+	bool CreateSocket(void* sockptr, sockaddr_in* addr);
+
+#else
+	int tcp_socket;
+	void Connect(sockaddr_in* addr, int socket);
+	char Recive();
+	void Send(char* data, unsigned int len, void* sockptr, sockaddr_in* addr);
+	void closesock(int sock);
+	bool CreateSocket(void* sockptr, sockaddr_in* addr);
+
+#endif // WIN32
+};
+
+class NetSocket : public Net
 {
 public:
 
-	NetSocket(Net* net);
+	NetSocket();
+	
 	~NetSocket();
 	NetBuffer* rbuffer;
 	void Destroy();
@@ -66,7 +104,7 @@ struct Send_Message
 NetSocket* GetPtrSocket(void* ptr);
 NetSocket* GetNetSocketPtr(void* uv_socket);
 
-struct NetBuffer : Net
+struct NetBuffer : public Net
 {
 public:
 
@@ -89,7 +127,7 @@ public:
 	int length;
 	int position;
 	unsigned char* data;
-
+	
 	
 };
 
@@ -138,7 +176,7 @@ struct NET_BUFFER_LIST : public CArrayBase
 
 	NET_BUFFER_LIST();
 	virtual ~NET_BUFFER_LIST();
-
+	
 	void SetOwner(Net* owner) { net = owner; }
 
 	int AddBuffer(const MEM_DATA& buffer);

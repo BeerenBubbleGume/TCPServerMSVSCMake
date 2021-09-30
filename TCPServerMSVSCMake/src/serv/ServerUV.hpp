@@ -10,9 +10,9 @@ class Server : public NetSocketUV
 {
 public:
 
-	Server();
+	Server(Net* net);
 	~Server();
-	
+	Net* net;
 	sockaddr_in* net_addr;
 	char* IDArray;
 	

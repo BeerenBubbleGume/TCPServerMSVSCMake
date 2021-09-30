@@ -7,12 +7,12 @@ int main() {
 
 	ip = {"127.0.0.1"};
 	std::cout << "Main:" << std::endl;
-	//Net* net = new Net;
+	Net* net = new Net;
 	//NetSocket* netsock = new NetSocket;
 	//NetSocketUV* netsockuv = new NetSocketUV;
-	Server server;
+	Server* server = (Server*)malloc(sizeof(Server));
 
-	server.connect(ip);
+	server->connect(ip);
 	
 	
 
