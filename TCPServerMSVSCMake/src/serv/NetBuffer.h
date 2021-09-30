@@ -8,7 +8,7 @@
 #include <string>
 
 
-struct NetBuffer : NET_BUFFER_INDEX
+struct NetBuffer : public Net
 {
 public:
 	NetBuffer();
@@ -23,6 +23,26 @@ public:
 	
 	void* sock;
 	
+};
+
+struct NET_BUFFER_INDEX : public NetBuffer
+{
+public:
+	NET_BUFFER_INDEX(int index) : NetBuffer()
+	{
+		this->index = index;
+	}
+
+	int GetIndex() { return index; }
+protected:
+	int index;
+};
+struct Net_Address
+{
+
+	int port;
+	void FromStringIP(const char* ip);
+	void Serialize();
 };
 
 #endif // NETBUFFER_H

@@ -48,9 +48,5 @@ public:
 	void OnLostConnection(void *socket);
 };
 
-struct NET_BUFFER_INDEX : Net
-{
-
-};
 
 #endif // !NET_H

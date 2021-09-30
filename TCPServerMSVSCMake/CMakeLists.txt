@@ -17,7 +17,7 @@ add_executable (TCPServerMSVSCMake	"src/serv/Net.h"
 									"src/serv/ServerUV.h"
 									"src/serv/ServerUV.cpp"
 									"TCPServerMSVSCMake.cpp"
-									"TCPServerMSVSCMake.h")
+									"TCPServerMSVSCMake.h" "src/serv/utils.hpp" "src/serv/utils.cpp")
 
 # TODO: �������� ����� � ������� �������, ���� ��� ����������.
 IF(WIN32)
