@@ -6,6 +6,7 @@
 #include "NetSocketUV.hpp"
 #include "Net.cpp"
 
+
 bool udp_tcp;
 static uv_loop_t *loop = uv_default_loop();
 static uv_tcp_t *server = new uv_tcp_t;
@@ -42,6 +43,30 @@ bool NetSocketUV::Create(const char *ip, bool udp_tcp, int port, bool listen)
 		{
 			GetIP(ip, true);
 		}
+	}
+	else
+	{
+		sock = malloc(sizeof(UDP_SOCKET));
+		memset(sock, 0, sizeof(UDP_SOCKET));
+		uv_udp_t* udp = GetPtrUDP(sock);
+		int r = uv_udp_init(loop, udp);
+		assert(r == 0);
+
+		struct sockaddr_in broadcast_addr;
+		uv_ip4_addr("0.0.0.0", port, &broadcast_addr);
+		r = uv_udp_bind(udp, (const struct sockaddr*)&broadcast_addr, 0);
+		assert(r == 0);
+
+		r = uv_udp_set_broadcast(udp, 1);
+		assert(r == 0);
+
+		if (listen)
+		{
+			r = uv_udp_recv_start(udp, OnAllocBuffer, OnReadUDP);
+			assert(r == 0);
+		}
+
+		((UDP_SOCKET*)sock)->net_socket = this;
 	}
 	else
 	{
