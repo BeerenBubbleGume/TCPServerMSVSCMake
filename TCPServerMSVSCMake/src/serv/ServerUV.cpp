@@ -21,10 +21,12 @@ int Server::connect(const char* ip)
 	if (ip)
 	{
 		//udp_tcp = true;
-		if (net_addr)
-		{
-			return Create(ip, true, 8000, true);
-		}
+		std::cout << "_______________________________" << std::endl
+				<<
+					"==========Start server!==========" << std::endl
+				<<
+					"__________________________________" << std::endl;
+		return Create(ip, true, 8000, true);
 	}
 	else
 	{

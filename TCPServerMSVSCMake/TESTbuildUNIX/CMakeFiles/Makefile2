@@ -113,12 +113,12 @@ src/serv/clean:
 CMakeFiles/TCPServerMSVSCMake.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TCPServerMSVSCMake.dir/build.make CMakeFiles/TCPServerMSVSCMake.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TCPServerMSVSCMake.dir/build.make CMakeFiles/TCPServerMSVSCMake.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/dkhaziev/Документы/GitHub/BeerenBubbleGume/BeerenBubbleGume/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/TESTbuildUNIX/CMakeFiles --progress-num=1,2,3,4,5,6,7 "Built target TCPServerMSVSCMake"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/dkhaziev/Документы/GitHub/BeerenBubbleGume/BeerenBubbleGume/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/TESTbuildUNIX/CMakeFiles --progress-num=1,2,3,4,5,6 "Built target TCPServerMSVSCMake"
 .PHONY : CMakeFiles/TCPServerMSVSCMake.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/TCPServerMSVSCMake.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/dkhaziev/Документы/GitHub/BeerenBubbleGume/BeerenBubbleGume/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/TESTbuildUNIX/CMakeFiles 7
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/dkhaziev/Документы/GitHub/BeerenBubbleGume/BeerenBubbleGume/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/TESTbuildUNIX/CMakeFiles 6
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/TCPServerMSVSCMake.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/dkhaziev/Документы/GitHub/BeerenBubbleGume/BeerenBubbleGume/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/TESTbuildUNIX/CMakeFiles 0
 .PHONY : CMakeFiles/TCPServerMSVSCMake.dir/rule

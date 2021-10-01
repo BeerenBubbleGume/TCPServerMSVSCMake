@@ -96,13 +96,15 @@ bool Net::CreateSocket(void* sockptr, sockaddr_in* addr)
 {
 	if (sockptr)
 	{
-		int nsock = static_cast<int>(reinterpret_cast<intptr_t>(sockptr));
-		nsock = socket(AF_INET, SOCK_STREAM, 0);
-		if (nsock > 0)
+		tcp_socket = socket(AF_INET, SOCK_STREAM, 0);
+		if (tcp_socket > 0)
 		{
-			printf("Socket created success!\n");
-			Connect(addr, nsock);
+			std::cout << "Socet created success!" << std::endl;
 			return true;
+		}
+		else
+		{
+			return false;
 		}
 	}
 	else
@@ -113,20 +115,18 @@ bool Net::CreateSocket(void* sockptr, sockaddr_in* addr)
 	return false;
 }
 
-void Net::Connect(sockaddr_in* addr, int sock)
+void Net::Connect()
 {
 	socklen_t socklen = ('localhost', 8000);
-	if (bind(sock, (sockaddr*)addr, socklen) != 0)
+	if (bind(tcp_socket, (sockaddr*)net_addr, socklen) == 0)
 	{
-		fprintf(stderr, "Bind error!\n");
-		exit(1);
+		printf("Bind success\n");
 	}
-	if (listen(sock, 1024) != 0)
+	if (listen(tcp_socket, 1024) == 0)
 	{
-		fprintf(stderr, "Listen error\n");
-		exit(2);
+		printf("Listen success\n");
 	}
-	int a = accept(sock, (sockaddr*)addr, (socklen_t*)sizeof(addr));
+	int a = accept(tcp_socket, (sockaddr*)net_addr, &socklen);
 	if (a)
 	{
 		fprintf(stderr, "Cannot accept!\n");
@@ -141,14 +141,8 @@ char Net::Recive()
 
 	return recv(tcp_socket, DataBuff, buff_length, 0);
 }
-void Net::Send(char* data, unsigned int len, void* sockptr, sockaddr_in* addr)
+void Net::Send(char* data, unsigned int len)
 {
-	tcp_socket = static_cast<int>(reinterpret_cast<intptr_t>(sockptr));
-	net_addr = addr;
-	net_addr->sin_family = AF_INET;
-	net_addr->sin_port = htons(8000);
-	net_addr->sin_addr.s_addr = htonl(INADDR_ANY);
-
 	while (true)
 	{
 		if (send(tcp_socket, (char*)data, len, 0) == 0)

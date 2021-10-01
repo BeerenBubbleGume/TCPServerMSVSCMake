@@ -38,10 +38,10 @@ bool NetSocketUV::Create(const char *ip, bool udp_tcp, int port, bool listen)
 		loop = uv_default_loop();
 		uv_loop_init(loop);
 		std::cout << "Create socket!" << std::endl;
-		if(CreateSocket(sock, net_addr) == true)
-		{
-			GetIP(ip, true);
-		}
+		assert(CreateSocket(sock, net_addr) == true);
+		std::cout << "UV socket created success!" << std::endl;
+		assert(GetIP(ip, true) == true);
+		
 	}
 	else
 	{
@@ -73,11 +73,12 @@ bool NetSocketUV::Create(const char *ip, bool udp_tcp, int port, bool listen)
 
 bool NetSocketUV::GetIP(const char *ip, bool own_or_peer)
 {
+	std::cout << "GetIP" << std::endl;
 	//sockaddr_in *addr;
 	if (own_or_peer)
 	{
 		std::cout << "Set IP to socket!" << std::endl;
-		assert(0 == uv_ip4_addr(ip, 8000, net_addr));
+		assert(uv_ip4_addr(ip, 8000, net_addr) == 0);
 		ConnectUV(8000, ip, net_addr);
 		return true;
 	}
