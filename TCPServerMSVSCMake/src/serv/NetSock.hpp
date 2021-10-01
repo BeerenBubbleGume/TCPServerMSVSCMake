@@ -18,6 +18,7 @@
 
 #define SENDER_SIZE_UV sizeof(uv_write_t)
 class Net;
+class NetSocket;
 struct NetBuffer;
 struct Net_Address;
 struct NET_BUFFER_INDEX;
@@ -32,7 +33,7 @@ public:
 	int ClientID;
 	int bytes_read;
 	unsigned char* DataBuff;
-	size_t buff_length;
+	unsigned int buff_length;
 	sockaddr_in* net_addr;
 	bool udp_tcp;
 
@@ -40,7 +41,7 @@ public:
 	SOCKET tcp_socket;
 	void Connect(sockaddr_in* addr, SOCKET socket);
 	virtual char Recive();
-	virtual void Send(char* data, size_t len);
+	virtual void Send(char* data, unsigned int len);
 	void closesock(SOCKET sock);
 	bool CreateSocket(void* sockptr, sockaddr_in* addr);
 
@@ -55,6 +56,35 @@ public:
 #endif // WIN32
 };
 
+struct NetBuffer : public Net
+{
+public:
+
+	NetBuffer();
+	virtual ~NetBuffer();
+
+	NET_BUFFER_INDEX* owner;
+	unsigned char* GetData() { return DataBuff; }
+	size_t GetLength();
+	int SetLength(unsigned int length);
+	void Add(int length, void* data);
+	void Delete(int length);
+
+	int HasMessage(NetSocket* sockt);
+	void Reset() { position = 0; length = 0; }
+	int GetPosition() { return position; }
+	void SetPosition(int pos) { position = pos; }
+	void SetMaxSize(int size);
+	unsigned int GetMaxLength() { return buff_length; }
+
+	Net net;
+	int length;
+	int position;
+	//unsigned char* data;
+
+
+};
+
 class NetSocket : public Net
 {
 public:
@@ -62,9 +92,9 @@ public:
 	NetSocket();
 	
 	~NetSocket();
-	NetBuffer* rbuffer;
+	NetBuffer rbuffer;
 	void Destroy();
-	NetBuffer* GetReciveBuffer() { return rbuffer; }	
+	NetBuffer* GetReciveBuffer() { return &rbuffer; }	
 
 	virtual void SendTCP(NET_BUFFER_INDEX* buf) = 0;
 	virtual void SendUDP(NET_BUFFER_INDEX* buf) = 0;
@@ -78,6 +108,7 @@ public:
 
 	bool IsServer();
 
+	
 	Net_Address* addr;
 	Net* net;
 	NetSocket* receiving_socket;
@@ -103,35 +134,6 @@ struct Send_Message
 
 NetSocket* GetPtrSocket(void* ptr);
 NetSocket* GetNetSocketPtr(void* uv_socket);
-
-struct NetBuffer : public Net
-{
-public:
-
-	NetBuffer();
-	virtual ~NetBuffer();
-
-	NET_BUFFER_INDEX* owner;
-	unsigned char* GetData() { return DataBuff; }
-	size_t GetLength();
-	int SetLength(unsigned int length);
-	void Add(int length, void* data);
-	void Delete(int length);
-
-	int HasMessage(NetSocket* sockt);
-	void Reset() { position = 0; length = 0; }
-	int GetPosition() { return position; }
-	void SetPosition(int pos) { position = pos; }
-	void SetMaxSize(int size);
-	int GetMaxLength() { return max_length; }
-
-	int max_length;
-	int length;
-	int position;
-	//unsigned char* data;
-	
-	
-};
 
 struct NET_BUFFER_INDEX : public NetBuffer
 {

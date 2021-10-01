@@ -3,8 +3,8 @@
 Net::Net()
 {
 	net_addr = new sockaddr_in;
-	DataBuff = new unsigned char;
-	buff_length = 0;
+	buff_length = 1024;
+	DataBuff = new unsigned char[1];
 	bytes_read = 0;
 	ClientID = 0;
 
@@ -31,11 +31,16 @@ Net::Net()
 
 Net::~Net()
 {
-	delete[] DataBuff;
-	buff_length = 0;
-	ClientID = 0;
-	delete[] net_addr;
-	bytes_read = 0;
+	if(DataBuff)
+		free(DataBuff);
+	if(buff_length != 0)
+		buff_length = NULL;
+	if(ClientID)
+		ClientID = NULL;
+	if(net_addr)
+		free(net_addr);
+	if(bytes_read)
+		bytes_read = 0;
 }
 #ifdef WIN32
 bool Net::CreateSocket(void* sockptr, sockaddr_in* addr)
@@ -46,7 +51,7 @@ bool Net::CreateSocket(void* sockptr, sockaddr_in* addr)
 		if (tcp_socket > 0)
 		{
 			std::cout << "Socet created success!" << std::endl;
-			Connect(addr, tcp_socket);
+
 			return true;
 		}
 		else
@@ -72,7 +77,7 @@ char Net::Recive()
 {
 	return recv(tcp_socket, (char*)DataBuff, buff_length, 0);
 }
-void Net::Send(char* data, size_t len)
+void Net::Send(char* data, unsigned int len)
 {
 
 	while (true)
@@ -158,9 +163,8 @@ void Net::closesock(int socket)
 NetSocket::NetSocket()
 {
 	addr = nullptr;
-	net = new Net;
+	//net = new Net;
 	receiving_socket = (NetSocket*)malloc(sizeof(NetSocket));
-	rbuffer = new NetBuffer;
 }
 
 NetSocket::~NetSocket()
@@ -170,6 +174,12 @@ NetSocket::~NetSocket()
 
 void NetSocket::Destroy()
 {
+	if(addr)
+		free(addr);
+	if(receiving_socket)
+		free(receiving_socket);
+	if(DataBuff)
+		free(DataBuff);
 }
 
 void NetSocket::SendMessenge(NET_BUFFER_INDEX* buf, Net_Address* addr)
@@ -219,14 +229,19 @@ void NetSocket::OnLostConnection(void* socket)
 
 bool NetSocket::IsServer()
 {
-	return false;
+	if (tcp_socket && net_addr)
+		return true;
+	else
+		return false;
 }
 
 
 NetBuffer::NetBuffer()
 {
-	owner = NULL;
-	max_length = 0;
+	//net = new Net;
+	owner = nullptr;
+	DataBuff = new unsigned char[1];
+	buff_length = 1024;
 	length = 0;
 	position = 0;
 	udp_tcp = false;
@@ -234,8 +249,10 @@ NetBuffer::NetBuffer()
 
 NetBuffer::~NetBuffer()
 {
-	free(DataBuff);
-	buff_length = NULL;
+	if(DataBuff)
+		free(DataBuff);
+	if(buff_length != 0)
+		buff_length = NULL;
 }
 
 size_t NetBuffer::GetLength()
@@ -250,8 +267,8 @@ int NetBuffer::HasMessage(NetSocket* sockt)
 
 void NetBuffer::SetMaxSize(int size)
 {
-	max_length = size;
-	DataBuff = new unsigned char[max_length];
+	buff_length = size;
+	DataBuff = new unsigned char[buff_length];
 }
 
 int NetBuffer::SetLength(unsigned int length)
@@ -265,13 +282,13 @@ int NetBuffer::SetLength(unsigned int length)
 void NetBuffer::Add(int length, void* data)
 {
 	int len = this->length + length;
-	if (max_length < len)
+	if (buff_length < len)
 	{
 		// ��������� ����������
-		max_length = len;
-		unsigned char* vdata = new unsigned char[max_length];
+		buff_length = len;
+		unsigned char* vdata = new unsigned char[buff_length];
 		memcpy(vdata, this->DataBuff, this->length);
-		delete[]this->DataBuff;
+		delete[] this->DataBuff;
 		this->DataBuff = vdata;
 	}
 
