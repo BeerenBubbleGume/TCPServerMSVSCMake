@@ -236,7 +236,7 @@ bool NetSocket::IsServer()
 }
 
 
-NetBuffer::NetBuffer()
+NetBuffer::NetBuffer() : Net()
 {
 	net = new Net;
 	owner = new NET_BUFFER_INDEX;
