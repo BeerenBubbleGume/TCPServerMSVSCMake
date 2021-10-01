@@ -3,7 +3,7 @@
 Net::Net()
 {
 	net_addr = new sockaddr_in;
-	buff_length = 1024;
+	buff_length = 0;
 	DataBuff = new unsigned char[1];
 	bytes_read = 0;
 	ClientID = 0;
@@ -31,16 +31,16 @@ Net::Net()
 
 Net::~Net()
 {
-	if(DataBuff)
-		free(DataBuff);
-	if(buff_length != 0)
-		buff_length = NULL;
-	if(ClientID)
-		ClientID = NULL;
-	if(net_addr)
-		free(net_addr);
-	if(bytes_read)
-		bytes_read = 0;
+	//if(DataBuff)
+		//free(DataBuff);
+	//if(buff_length != 0)
+		//buff_length = NULL;
+	//if(ClientID)
+		//ClientID = NULL;
+	//if(net_addr)
+		//free(net_addr);
+	//if(bytes_read)
+		//bytes_read = 0;
 }
 #ifdef WIN32
 bool Net::CreateSocket(void* sockptr, sockaddr_in* addr)
@@ -163,7 +163,7 @@ void Net::closesock(int socket)
 NetSocket::NetSocket()
 {
 	addr = nullptr;
-	//net = new Net;
+	net = new Net;
 	receiving_socket = (NetSocket*)malloc(sizeof(NetSocket));
 }
 
@@ -236,12 +236,12 @@ bool NetSocket::IsServer()
 }
 
 
-NetBuffer::NetBuffer()
+NetBuffer::NetBuffer() : Net()
 {
-	//net = new Net;
-	owner = nullptr;
+	net = new Net;
+	owner = new NET_BUFFER_INDEX;
 	DataBuff = new unsigned char[1];
-	buff_length = 1024;
+	buff_length = 0;
 	length = 0;
 	position = 0;
 	udp_tcp = false;
@@ -323,6 +323,11 @@ void Net_Address::Serialize()
 {
 }
 
+NetBufferUV::~NetBufferUV()
+{
+	index = NULL;
+}
+
 uv_write_t* NetBufferUV::GetPtrWrite()
 {
 	return (uv_write_t*)sender_object;
@@ -402,4 +407,10 @@ void NET_BUFFER_LIST::DeleteBuffer(int index)
 			FromExistingToDeleted(index);
 		}
 	}
+}
+
+NET_BUFFER_INDEX::~NET_BUFFER_INDEX()
+{
+	if(index != 0)
+		index = 0;
 }
