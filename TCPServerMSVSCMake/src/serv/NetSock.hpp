@@ -46,9 +46,9 @@ public:
 
 #else
 	int tcp_socket;
-	void Connect(sockaddr_in* addr, int socket);
+	void Connect();
 	char Recive();
-	void Send(char* data, unsigned int len, void* sockptr, sockaddr_in* addr);
+	void Send(char* data, unsigned int len);
 	void closesock(int sock);
 	bool CreateSocket(void* sockptr, sockaddr_in* addr);
 
@@ -112,7 +112,7 @@ public:
 	virtual ~NetBuffer();
 
 	NET_BUFFER_INDEX* owner;
-	unsigned char* GetData() { return data; }
+	unsigned char* GetData() { return DataBuff; }
 	size_t GetLength();
 	int SetLength(unsigned int length);
 	void Add(int length, void* data);
@@ -122,11 +122,13 @@ public:
 	void Reset() { position = 0; length = 0; }
 	int GetPosition() { return position; }
 	void SetPosition(int pos) { position = pos; }
+	void SetMaxSize(int size);
+	int GetMaxLength() { return max_length; }
 
 	int max_length;
 	int length;
 	int position;
-	unsigned char* data;
+	//unsigned char* data;
 	
 	
 };

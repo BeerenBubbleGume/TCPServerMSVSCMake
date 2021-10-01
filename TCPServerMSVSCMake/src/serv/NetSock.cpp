@@ -96,13 +96,15 @@ bool Net::CreateSocket(void* sockptr, sockaddr_in* addr)
 {
 	if (sockptr)
 	{
-		int nsock = static_cast<int>(reinterpret_cast<intptr_t>(sockptr));
-		nsock = socket(AF_INET, SOCK_STREAM, 0);
-		if (nsock > 0)
+		tcp_socket = socket(AF_INET, SOCK_STREAM, 0);
+		if (tcp_socket > 0)
 		{
-			printf("Socket created success!\n");
-			Connect(addr, nsock);
+			std::cout << "Socet created success!" << std::endl;
 			return true;
+		}
+		else
+		{
+			return false;
 		}
 	}
 	else
@@ -113,20 +115,18 @@ bool Net::CreateSocket(void* sockptr, sockaddr_in* addr)
 	return false;
 }
 
-void Net::Connect(sockaddr_in* addr, int sock)
+void Net::Connect()
 {
 	socklen_t socklen = ('localhost', 8000);
-	if (bind(sock, (sockaddr*)addr, socklen) != 0)
+	if (bind(tcp_socket, (sockaddr*)net_addr, socklen) == 0)
 	{
-		fprintf(stderr, "Bind error!\n");
-		exit(1);
+		printf("Bind success\n");
 	}
-	if (listen(sock, 1024) != 0)
+	if (listen(tcp_socket, 1024) == 0)
 	{
-		fprintf(stderr, "Listen error\n");
-		exit(2);
+		printf("Listen success\n");
 	}
-	int a = accept(sock, (sockaddr*)addr, (socklen_t*)sizeof(addr));
+	int a = accept(tcp_socket, (sockaddr*)net_addr, &socklen);
 	if (a)
 	{
 		fprintf(stderr, "Cannot accept!\n");
@@ -141,14 +141,8 @@ char Net::Recive()
 
 	return recv(tcp_socket, DataBuff, buff_length, 0);
 }
-void Net::Send(char* data, unsigned int len, void* sockptr, sockaddr_in* addr)
+void Net::Send(char* data, unsigned int len)
 {
-	tcp_socket = static_cast<int>(reinterpret_cast<intptr_t>(sockptr));
-	net_addr = addr;
-	net_addr->sin_family = AF_INET;
-	net_addr->sin_port = htons(8000);
-	net_addr->sin_addr.s_addr = htonl(INADDR_ANY);
-
 	while (true)
 	{
 		if (send(tcp_socket, (char*)data, len, 0) == 0)
@@ -254,6 +248,12 @@ int NetBuffer::HasMessage(NetSocket* sockt)
 	return 0;
 }
 
+void NetBuffer::SetMaxSize(int size)
+{
+	max_length = size;
+	DataBuff = new unsigned char[max_length];
+}
+
 int NetBuffer::SetLength(unsigned int length)
 {
 	if (length >= buff_length)
@@ -270,20 +270,20 @@ void NetBuffer::Add(int length, void* data)
 		// ��������� ����������
 		max_length = len;
 		unsigned char* vdata = new unsigned char[max_length];
-		memcpy(vdata, this->data, this->length);
-		delete[]this->data;
-		this->data = vdata;
+		memcpy(vdata, this->DataBuff, this->length);
+		delete[]this->DataBuff;
+		this->DataBuff = vdata;
 	}
 
 	if (data)
-		memcpy(this->data + this->length, data, length);
+		memcpy(this->DataBuff + this->length, data, length);
 	this->length = len;
 }
 
 void NetBuffer::Delete(int length)
 {
 	int size = this->length - length;
-	memcpy(data, data + length, size);
+	memcpy(DataBuff, DataBuff + length, size);
 	this->length -= size;
 }
 
@@ -335,7 +335,44 @@ NET_BUFFER_LIST::~NET_BUFFER_LIST()
 }
 
 int NET_BUFFER_LIST::AddBuffer(const MEM_DATA& buffer)
-{
+{	/*
+	int index = FromDeletedToExisting();
+	if (index == -1)
+	{
+		int size = sizeof(NET_BUFFER_INDEX*);
+		int k_buffer2 = k_buffer + k_buffer / 4;
+		m_buffer = (NET_BUFFER_INDEX**)realloc(m_buffer, size * (k_buffer2));
+
+		for (int i = k_buffer; i < k_buffer2; i++)
+			m_buffer[i] = NULL;
+		IncreaseDeleted(k_buffer, k_buffer2 - 1);
+		index = FromDeletedToExisting();
+		k_buffer = k_buffer2;
+	}
+
+	NET_BUFFER_INDEX* buf = m_buffer[index];
+	if (!buf)
+	{
+		buf = net->NewBuffer(index);
+		buf->owner = (NET_BUFFER_INDEX*)this;
+		m_buffer[index] = buf;
+	}
+
+	buf->Reset();
+	int max_len = buf->GetMaxLength();
+	if (max_len < buffer.length)
+	{
+		// ����� ��������� ������ ������
+		buf->SetMaxSize(buffer.length);
+	}
+
+	unsigned char* dest = buf->GetData();
+	if (buffer.data)
+		memcpy(dest, buffer.data, buffer.length);
+	buf->SetLength(buffer.length);
+
+	return index;
+	*/
 	return 0;
 }
 

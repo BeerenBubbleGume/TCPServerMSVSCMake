@@ -69,24 +69,10 @@ include CMakeFiles/TCPServerMSVSCMake.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/TCPServerMSVSCMake.dir/flags.make
 
-CMakeFiles/TCPServerMSVSCMake.dir/src/serv/Net.cpp.o: CMakeFiles/TCPServerMSVSCMake.dir/flags.make
-CMakeFiles/TCPServerMSVSCMake.dir/src/serv/Net.cpp.o: ../src/serv/Net.cpp
-CMakeFiles/TCPServerMSVSCMake.dir/src/serv/Net.cpp.o: CMakeFiles/TCPServerMSVSCMake.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dkhaziev/Документы/GitHub/BeerenBubbleGume/BeerenBubbleGume/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/TESTbuildUNIX/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/TCPServerMSVSCMake.dir/src/serv/Net.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TCPServerMSVSCMake.dir/src/serv/Net.cpp.o -MF CMakeFiles/TCPServerMSVSCMake.dir/src/serv/Net.cpp.o.d -o CMakeFiles/TCPServerMSVSCMake.dir/src/serv/Net.cpp.o -c /home/dkhaziev/Документы/GitHub/BeerenBubbleGume/BeerenBubbleGume/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/Net.cpp
-
-CMakeFiles/TCPServerMSVSCMake.dir/src/serv/Net.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/TCPServerMSVSCMake.dir/src/serv/Net.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dkhaziev/Документы/GitHub/BeerenBubbleGume/BeerenBubbleGume/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/Net.cpp > CMakeFiles/TCPServerMSVSCMake.dir/src/serv/Net.cpp.i
-
-CMakeFiles/TCPServerMSVSCMake.dir/src/serv/Net.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/TCPServerMSVSCMake.dir/src/serv/Net.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dkhaziev/Документы/GitHub/BeerenBubbleGume/BeerenBubbleGume/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/Net.cpp -o CMakeFiles/TCPServerMSVSCMake.dir/src/serv/Net.cpp.s
-
 CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.o: CMakeFiles/TCPServerMSVSCMake.dir/flags.make
 CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.o: ../src/serv/NetSock.cpp
 CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.o: CMakeFiles/TCPServerMSVSCMake.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dkhaziev/Документы/GitHub/BeerenBubbleGume/BeerenBubbleGume/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/TESTbuildUNIX/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dkhaziev/Документы/GitHub/BeerenBubbleGume/BeerenBubbleGume/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/TESTbuildUNIX/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.o -MF CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.o.d -o CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.o -c /home/dkhaziev/Документы/GitHub/BeerenBubbleGume/BeerenBubbleGume/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/NetSock.cpp
 
 CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.i: cmake_force
@@ -100,7 +86,7 @@ CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.s: cmake_force
 CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.o: CMakeFiles/TCPServerMSVSCMake.dir/flags.make
 CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.o: ../src/serv/NetSocketUV.cpp
 CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.o: CMakeFiles/TCPServerMSVSCMake.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dkhaziev/Документы/GitHub/BeerenBubbleGume/BeerenBubbleGume/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/TESTbuildUNIX/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dkhaziev/Документы/GitHub/BeerenBubbleGume/BeerenBubbleGume/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/TESTbuildUNIX/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.o -MF CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.o.d -o CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.o -c /home/dkhaziev/Документы/GitHub/BeerenBubbleGume/BeerenBubbleGume/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/NetSocketUV.cpp
 
 CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.i: cmake_force
@@ -114,7 +100,7 @@ CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.s: cmake_force
 CMakeFiles/TCPServerMSVSCMake.dir/src/serv/ServerUV.cpp.o: CMakeFiles/TCPServerMSVSCMake.dir/flags.make
 CMakeFiles/TCPServerMSVSCMake.dir/src/serv/ServerUV.cpp.o: ../src/serv/ServerUV.cpp
 CMakeFiles/TCPServerMSVSCMake.dir/src/serv/ServerUV.cpp.o: CMakeFiles/TCPServerMSVSCMake.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dkhaziev/Документы/GitHub/BeerenBubbleGume/BeerenBubbleGume/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/TESTbuildUNIX/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/TCPServerMSVSCMake.dir/src/serv/ServerUV.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dkhaziev/Документы/GitHub/BeerenBubbleGume/BeerenBubbleGume/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/TESTbuildUNIX/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/TCPServerMSVSCMake.dir/src/serv/ServerUV.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TCPServerMSVSCMake.dir/src/serv/ServerUV.cpp.o -MF CMakeFiles/TCPServerMSVSCMake.dir/src/serv/ServerUV.cpp.o.d -o CMakeFiles/TCPServerMSVSCMake.dir/src/serv/ServerUV.cpp.o -c /home/dkhaziev/Документы/GitHub/BeerenBubbleGume/BeerenBubbleGume/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/ServerUV.cpp
 
 CMakeFiles/TCPServerMSVSCMake.dir/src/serv/ServerUV.cpp.i: cmake_force
@@ -128,7 +114,7 @@ CMakeFiles/TCPServerMSVSCMake.dir/src/serv/ServerUV.cpp.s: cmake_force
 CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.o: CMakeFiles/TCPServerMSVSCMake.dir/flags.make
 CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.o: ../TCPServerMSVSCMake.cpp
 CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.o: CMakeFiles/TCPServerMSVSCMake.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dkhaziev/Документы/GitHub/BeerenBubbleGume/BeerenBubbleGume/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/TESTbuildUNIX/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dkhaziev/Документы/GitHub/BeerenBubbleGume/BeerenBubbleGume/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/TESTbuildUNIX/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.o -MF CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.o.d -o CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.o -c /home/dkhaziev/Документы/GitHub/BeerenBubbleGume/BeerenBubbleGume/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/TCPServerMSVSCMake.cpp
 
 CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.i: cmake_force
@@ -142,7 +128,7 @@ CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.s: cmake_force
 CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: CMakeFiles/TCPServerMSVSCMake.dir/flags.make
 CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../src/serv/utils.cpp
 CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: CMakeFiles/TCPServerMSVSCMake.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dkhaziev/Документы/GitHub/BeerenBubbleGume/BeerenBubbleGume/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/TESTbuildUNIX/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dkhaziev/Документы/GitHub/BeerenBubbleGume/BeerenBubbleGume/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/TESTbuildUNIX/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o -MF CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o.d -o CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o -c /home/dkhaziev/Документы/GitHub/BeerenBubbleGume/BeerenBubbleGume/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/utils.cpp
 
 CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.i: cmake_force
@@ -155,7 +141,6 @@ CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.s: cmake_force
 
 # Object files for target TCPServerMSVSCMake
 TCPServerMSVSCMake_OBJECTS = \
-"CMakeFiles/TCPServerMSVSCMake.dir/src/serv/Net.cpp.o" \
 "CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.o" \
 "CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.o" \
 "CMakeFiles/TCPServerMSVSCMake.dir/src/serv/ServerUV.cpp.o" \
@@ -165,7 +150,6 @@ TCPServerMSVSCMake_OBJECTS = \
 # External object files for target TCPServerMSVSCMake
 TCPServerMSVSCMake_EXTERNAL_OBJECTS =
 
-TCPServerMSVSCMake: CMakeFiles/TCPServerMSVSCMake.dir/src/serv/Net.cpp.o
 TCPServerMSVSCMake: CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.o
 TCPServerMSVSCMake: CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.o
 TCPServerMSVSCMake: CMakeFiles/TCPServerMSVSCMake.dir/src/serv/ServerUV.cpp.o
@@ -174,7 +158,7 @@ TCPServerMSVSCMake: CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o
 TCPServerMSVSCMake: CMakeFiles/TCPServerMSVSCMake.dir/build.make
 TCPServerMSVSCMake: ../libs/lib/libuv.so
 TCPServerMSVSCMake: CMakeFiles/TCPServerMSVSCMake.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/dkhaziev/Документы/GitHub/BeerenBubbleGume/BeerenBubbleGume/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/TESTbuildUNIX/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable TCPServerMSVSCMake"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/dkhaziev/Документы/GitHub/BeerenBubbleGume/BeerenBubbleGume/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/TESTbuildUNIX/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable TCPServerMSVSCMake"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/TCPServerMSVSCMake.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

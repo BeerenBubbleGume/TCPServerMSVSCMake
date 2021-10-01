@@ -13,9 +13,8 @@ public:
 	Server(Net* net);
 	~Server();
 	Net* net;
-	sockaddr_in* net_addr;
 	char* IDArray;
-	
+
 	int connect(const char* ip);
 	std::string GetClientID();
 	void SetID(void* NewClient);

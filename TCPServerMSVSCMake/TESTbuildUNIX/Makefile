@@ -153,30 +153,6 @@ TCPServerMSVSCMake.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TCPServerMSVSCMake.dir/build.make CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.s
 .PHONY : TCPServerMSVSCMake.cpp.s
 
-src/serv/Net.o: src/serv/Net.cpp.o
-.PHONY : src/serv/Net.o
-
-# target to build an object file
-src/serv/Net.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TCPServerMSVSCMake.dir/build.make CMakeFiles/TCPServerMSVSCMake.dir/src/serv/Net.cpp.o
-.PHONY : src/serv/Net.cpp.o
-
-src/serv/Net.i: src/serv/Net.cpp.i
-.PHONY : src/serv/Net.i
-
-# target to preprocess a source file
-src/serv/Net.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TCPServerMSVSCMake.dir/build.make CMakeFiles/TCPServerMSVSCMake.dir/src/serv/Net.cpp.i
-.PHONY : src/serv/Net.cpp.i
-
-src/serv/Net.s: src/serv/Net.cpp.s
-.PHONY : src/serv/Net.s
-
-# target to generate assembly for a file
-src/serv/Net.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/TCPServerMSVSCMake.dir/build.make CMakeFiles/TCPServerMSVSCMake.dir/src/serv/Net.cpp.s
-.PHONY : src/serv/Net.cpp.s
-
 src/serv/NetSock.o: src/serv/NetSock.cpp.o
 .PHONY : src/serv/NetSock.o
 
@@ -285,9 +261,6 @@ help:
 	@echo "... TCPServerMSVSCMake.o"
 	@echo "... TCPServerMSVSCMake.i"
 	@echo "... TCPServerMSVSCMake.s"
-	@echo "... src/serv/Net.o"
-	@echo "... src/serv/Net.i"
-	@echo "... src/serv/Net.s"
 	@echo "... src/serv/NetSock.o"
 	@echo "... src/serv/NetSock.i"
 	@echo "... src/serv/NetSock.s"
