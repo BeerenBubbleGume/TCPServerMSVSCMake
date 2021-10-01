@@ -77,7 +77,7 @@ public:
 	void SetMaxSize(int size);
 	unsigned int GetMaxLength() { return buff_length; }
 
-	Net net;
+	Net* net;
 	int length;
 	int position;
 	//unsigned char* data;
@@ -142,7 +142,8 @@ public:
 	{
 		this->index = index;
 	}
-
+	NET_BUFFER_INDEX(){};
+	~NET_BUFFER_INDEX();
 	int GetIndex() { return index; }
 protected:
 	int index;
@@ -164,7 +165,10 @@ struct NetBufferUV : public NET_BUFFER_INDEX
 public:
 	char sender_object[SENDER_SIZE_UV];
 
-	NetBufferUV(int index) : NET_BUFFER_INDEX(index) {}
+	NetBufferUV(int index) : NET_BUFFER_INDEX(index) 
+	{
+		this->index = index;
+	}
 	virtual ~NetBufferUV();
 
 	uv_write_t* GetPtrWrite();

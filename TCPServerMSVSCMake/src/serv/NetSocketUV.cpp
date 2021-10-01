@@ -188,7 +188,7 @@ void OnReadTCP(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)
 	else
 	{
 		std::cout << "Reading UV socket" << std::endl;
-		NetBuffer *recv_buff = socket->net->GetReciveBuffer();
+		NetBuffer* recv_buff = new NetBuffer;
 		assert(buf->base == (char*)recv_buff->GetData());
 		recv_buff->SetLength(nread);
 		socket->ReceiveTCP();
