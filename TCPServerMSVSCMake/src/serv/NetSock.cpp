@@ -3,8 +3,6 @@
 Net::Net()
 {
 	net_addr = new sockaddr_in;
-	buff_length = 0;
-	DataBuff = new unsigned char[1];
 	bytes_read = 0;
 	ClientID = 0;
 
@@ -31,8 +29,6 @@ Net::Net()
 
 Net::~Net()
 {
-	//if(DataBuff)
-		//free(DataBuff);
 	//if(buff_length != 0)
 		//buff_length = NULL;
 	//if(ClientID)
@@ -75,7 +71,7 @@ void Net::Connect(sockaddr_in* addr, SOCKET socket)
 }
 char Net::Recive()
 {
-	return recv(tcp_socket, (char*)DataBuff, buff_length, 0);
+	return recv(tcp_socket, (char*)recv_buf.DataBuff, recv_buf.length, 0);
 }
 void Net::Send(char* data, unsigned int len)
 {
@@ -160,10 +156,10 @@ void Net::closesock(int socket)
 }
 #endif // WIN32
 
-NetSocket::NetSocket()
+NetSocket::NetSocket(Net* net)
 {
 	addr = nullptr;
-	net = new Net;
+	this->net = net;
 	receiving_socket = (NetSocket*)malloc(sizeof(NetSocket));
 }
 
@@ -178,8 +174,6 @@ void NetSocket::Destroy()
 		free(addr);
 	if(receiving_socket)
 		free(receiving_socket);
-	if(DataBuff)
-		free(DataBuff);
 }
 
 void NetSocket::SendMessenge(NET_BUFFER_INDEX* buf, Net_Address* addr)
@@ -236,28 +230,27 @@ bool NetSocket::IsServer()
 }
 
 
-NetBuffer::NetBuffer() : Net()
+NetBuffer::NetBuffer()
 {
-	net = new Net;
-	owner = new NET_BUFFER_INDEX;
-	DataBuff = new unsigned char[1];
-	buff_length = 0;
+	owner = NULL;
+	DataBuff = new unsigned char;
 	length = 0;
 	position = 0;
-	udp_tcp = false;
 }
 
 NetBuffer::~NetBuffer()
 {
-	if(DataBuff)
-		free(DataBuff);
-	if(buff_length != 0)
-		buff_length = NULL;
+	/*
+	if (DataBuff)
+		delete[] DataBuff;
+	*/
+	if(length != 0)
+		length = NULL;
 }
 
 size_t NetBuffer::GetLength()
 {
-	return buff_length;
+	return length;
 }
 
 int NetBuffer::HasMessage(NetSocket* sockt)
@@ -267,26 +260,26 @@ int NetBuffer::HasMessage(NetSocket* sockt)
 
 void NetBuffer::SetMaxSize(int size)
 {
-	buff_length = size;
-	DataBuff = new unsigned char[buff_length];
+	length = size;
+	DataBuff = new unsigned char[length];
 }
 
 int NetBuffer::SetLength(unsigned int length)
 {
-	if (length >= buff_length)
+	if (length >= length)
 	{
-		return buff_length = length;
+		return length = length;
 	}
 }
 
 void NetBuffer::Add(int length, void* data)
 {
 	int len = this->length + length;
-	if (buff_length < len)
+	if (length < len)
 	{
 		// ��������� ����������
-		buff_length = len;
-		unsigned char* vdata = new unsigned char[buff_length];
+		length = len;
+		unsigned char* vdata = new unsigned char[length];
 		memcpy(vdata, this->DataBuff, this->length);
 		delete[] this->DataBuff;
 		this->DataBuff = vdata;
@@ -302,6 +295,21 @@ void NetBuffer::Delete(int length)
 	int size = this->length - length;
 	memcpy(DataBuff, DataBuff + length, size);
 	this->length -= size;
+}
+
+Net_Address::Net_Address()
+{
+	address = NULL;
+	port = NULL;
+}
+
+Net_Address::~Net_Address()
+{
+	if (address && port)
+	{
+		delete[] address;
+		port = NULL;
+	}
 }
 
 void Net_Address::FromStringIP(const char* ip)
@@ -340,24 +348,41 @@ uv_udp_send_t* NetBufferUV::GetPtrSend()
 
 NET_BUFFER_LIST::NET_BUFFER_LIST() : CArrayBase()
 {
-	net = nullptr;
-
-	k_buffer = 0;
-	m_buffer = nullptr;
+	net = NULL;
+	
+	k_buffer = NULL;
+	m_buffer = new NET_BUFFER_INDEX*;
 
 	k_buffer = 10;
 	m_buffer = (NET_BUFFER_INDEX**)malloc(k_buffer * sizeof(NET_BUFFER_INDEX*));
 	for (int i = 0; i < k_buffer; i++)
 		m_buffer[i] = NULL;
+	IncreaseDeleted(0, k_buffer - 1);
 	
 }
 
 NET_BUFFER_LIST::~NET_BUFFER_LIST()
 {
+	for (int i = 0; i < k_buffer; i++)
+	{
+		if (m_buffer[i])
+		{
+			delete m_buffer[i];
+			m_buffer[i] = NULL;
+		}
+	}
+
+	if (m_buffer)
+	{
+		free(m_buffer);
+		m_buffer = NULL;
+	}
+
+	k_buffer = 0;
 }
 
 int NET_BUFFER_LIST::AddBuffer(const MEM_DATA& buffer)
-{	/*
+{	
 	int index = FromDeletedToExisting();
 	if (index == -1)
 	{
@@ -375,8 +400,8 @@ int NET_BUFFER_LIST::AddBuffer(const MEM_DATA& buffer)
 	NET_BUFFER_INDEX* buf = m_buffer[index];
 	if (!buf)
 	{
-		buf = net->NewBuffer(index);
-		buf->owner = (NET_BUFFER_INDEX*)this;
+		buf = (NET_BUFFER_INDEX*)malloc(sizeof(NET_BUFFER_INDEX));
+		buf->owner = this;
 		m_buffer[index] = buf;
 	}
 
@@ -394,7 +419,7 @@ int NET_BUFFER_LIST::AddBuffer(const MEM_DATA& buffer)
 	buf->SetLength(buffer.length);
 
 	return index;
-	*/
+	
 	return 0;
 }
 

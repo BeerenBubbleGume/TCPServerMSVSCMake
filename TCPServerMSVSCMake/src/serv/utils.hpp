@@ -133,8 +133,10 @@ public:
 	CArrayBase();
 	virtual ~CArrayBase();
 
-
+	void IncreaseDeleted(int from, int to);
+	int FromDeletedToExisting();
 	void FromExistingToDeleted(int index);
+	void AddToExisting(int index);
 	void AddToDeleted(int index);
 };
 

@@ -4,7 +4,6 @@
 
 Server::Server(Net* net) : NetSocketUV(net)
 {
-	this->net = net;
 	IDArray = new char[1024];
 }
 

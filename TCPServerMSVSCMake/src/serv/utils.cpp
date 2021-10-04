@@ -719,14 +719,14 @@ CArrayBase::CArrayBase()
 {
 	max_existing = 0;
 	k_existing = 0;
-	m_existing = nullptr;
+	m_existing = NULL;
 
 	max_deleted = 0;
 	k_deleted = 0;
-	m_deleted = nullptr;
+	m_deleted = NULL;
 
 	max_indexed = 0;
-	m_indexed = nullptr;
+	m_indexed = NULL;
 }
 
 CArrayBase::~CArrayBase()
@@ -753,6 +753,25 @@ CArrayBase::~CArrayBase()
 	}
 }
 
+void CArrayBase::IncreaseDeleted(int from, int to)
+{
+	int count = to - from + 1;
+	for (int i = 0; i < count; i++)
+		AddToDeleted(from + i);
+}
+
+int CArrayBase::FromDeletedToExisting()
+{
+	int index = -1;
+	if (k_deleted)
+	{
+		k_deleted--;
+		index = m_deleted[k_deleted];
+		AddToExisting(index);
+	}
+	return index;
+}
+
 void CArrayBase::FromExistingToDeleted(int index)
 {
 	assert(max_indexed > index);
@@ -766,6 +785,44 @@ void CArrayBase::FromExistingToDeleted(int index)
 		m_indexed[k_existing] = from;
 	}
 	AddToDeleted(index);
+}
+
+void CArrayBase::AddToExisting(int index)
+{
+	int i;
+
+	if (max_indexed <= index)
+	{
+		int index1 = index + 1;
+		int max_indexed2 = index1 + index1 / 4;
+		int* vm_indexed = new int[max_indexed2];
+		for (i = 0; i < max_indexed; i++)
+			vm_indexed[i] = m_indexed[i];
+		for (i = max_indexed; i < max_indexed2; i++)
+			vm_indexed[i] = -1;
+		if (m_indexed)
+			delete[]m_indexed;
+		m_indexed = vm_indexed;
+		max_indexed = max_indexed2;
+	}
+	m_indexed[index] = k_existing;
+
+	if (max_existing == k_existing)
+	{
+		int step = max_existing / 4;
+		if (step < 4)
+			step = 4;
+		int vmax_existing = max_existing + step;
+		int* vm_existing = new int[vmax_existing];
+		for (i = 0; i < max_existing; i++)
+			vm_existing[i] = m_existing[i];
+		if (m_existing)
+			delete[]m_existing;
+		m_existing = vm_existing;
+		max_existing = vmax_existing;
+	}
+	m_existing[k_existing] = index;
+	k_existing++;
 }
 
 void CArrayBase::AddToDeleted(int index)

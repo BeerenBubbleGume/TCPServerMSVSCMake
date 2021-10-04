@@ -14,7 +14,6 @@ class NetSocketUV : public NetSocket
 public:
 
 	NetSocketUV(Net* _Net);
-	NetSocketUV();
 	~NetSocketUV();
 	NetSocket* net;
 	void* sock;
@@ -23,7 +22,7 @@ public:
 	
 	bool SetConnectedSocketToReadMode(uv_stream_t* stream);
 	bool GetIP(const char* ip, bool own_or_peer);
-	bool ConnectUV(int port, const char* ip, sockaddr_in* addr);
+	bool ConnectUV(Net_Address* addr);
 	bool Accept();
 
 	void SendTCP(NET_BUFFER_INDEX* buf) override;
@@ -32,11 +31,11 @@ public:
 	void ReceiveUPD() override;
 	void Destroy();
 
-	
-
 	static void RunLoop(uv_loop_t* loop);
-
+	uv_loop_t* theloop;
 	int status;
+
+	
 };
 
 void OnConnect(uv_stream_t* stream, int status);
@@ -48,10 +47,9 @@ void OnWrite(uv_write_t* req, int status);
 
 uv_tcp_t* GetPtrTCP(void* ptr);
 uv_udp_t* GetPtrUDP(void* ptr);
-uv_loop_t* GetLoop(void* prt);
+uv_loop_t* GetLoop(Net* net);
 uv_stream_t* GetPtrStream(void* ptr);
 NetBuffer* GetPtrBuffer(void* ptr);
-
 
 #endif // !NETSOCKETUV_H
 

@@ -17,13 +17,43 @@
 #include "utils.hpp"
 
 #define SENDER_SIZE_UV sizeof(uv_write_t)
-class Net;
-class NetSocket;
+
 struct NetBuffer;
 struct Net_Address;
 struct NET_BUFFER_INDEX;
-struct NET_BUFFER_INDEX;
+struct NET_BUFFER_LIST;
 struct MEM_DATA;
+class CArrayBase;
+class NetSocket;
+
+struct NetBuffer
+{
+public:
+
+	NetBuffer();
+	virtual ~NetBuffer();
+
+	NET_BUFFER_LIST* owner;
+	unsigned char* GetData() { return DataBuff; }
+	size_t GetLength();
+	int SetLength(unsigned int length);
+	void Add(int length, void* data);
+	void Delete(int length);
+
+	int HasMessage(NetSocket* sockt);
+	void Reset() { position = 0; length = 0; }
+	int GetPosition() { return position; }
+	void SetPosition(int pos) { position = pos; }
+	void SetMaxSize(int size);
+	unsigned int GetMaxLength() { return length; }
+
+	int length;
+	int position;
+	//unsigned char* data;
+	unsigned char* DataBuff;
+	//unsigned int buff_length;
+
+};
 
 class Net
 {
@@ -32,10 +62,12 @@ public:
 	virtual ~Net();
 	int ClientID;
 	int bytes_read;
-	unsigned char* DataBuff;
-	unsigned int buff_length;
+	
 	sockaddr_in* net_addr;
 	bool udp_tcp;
+
+	NetBuffer recv_buf;
+	NetBuffer* GetRecvBuffer() { return &recv_buf; }
 
 #ifdef WIN32
 	SOCKET tcp_socket;
@@ -56,45 +88,14 @@ public:
 #endif // WIN32
 };
 
-struct NetBuffer : public Net
-{
-public:
-
-	NetBuffer();
-	virtual ~NetBuffer();
-
-	NET_BUFFER_INDEX* owner;
-	unsigned char* GetData() { return DataBuff; }
-	size_t GetLength();
-	int SetLength(unsigned int length);
-	void Add(int length, void* data);
-	void Delete(int length);
-
-	int HasMessage(NetSocket* sockt);
-	void Reset() { position = 0; length = 0; }
-	int GetPosition() { return position; }
-	void SetPosition(int pos) { position = pos; }
-	void SetMaxSize(int size);
-	unsigned int GetMaxLength() { return buff_length; }
-
-	Net* net;
-	int length;
-	int position;
-	//unsigned char* data;
-
-
-};
-
 class NetSocket : public Net
 {
 public:
 
-	NetSocket();
+	NetSocket(Net* net);
 	
 	~NetSocket();
-	NetBuffer rbuffer;
 	void Destroy();
-	NetBuffer* GetReciveBuffer() { return &rbuffer; }	
 
 	virtual void SendTCP(NET_BUFFER_INDEX* buf) = 0;
 	virtual void SendUDP(NET_BUFFER_INDEX* buf) = 0;
@@ -108,7 +109,6 @@ public:
 
 	bool IsServer();
 
-	
 	Net_Address* addr;
 	Net* net;
 	NetSocket* receiving_socket;
@@ -140,13 +140,14 @@ struct NET_BUFFER_INDEX : public NetBuffer
 public:
 	NET_BUFFER_INDEX(int index) : NetBuffer()
 	{
+		net = new Net;
 		this->index = index;
 	}
-	NET_BUFFER_INDEX(){};
 	~NET_BUFFER_INDEX();
 	int GetIndex() { return index; }
 protected:
 	int index;
+	Net* net;
 };
 
 struct Net_Address
@@ -165,9 +166,8 @@ struct NetBufferUV : public NET_BUFFER_INDEX
 public:
 	char sender_object[SENDER_SIZE_UV];
 
-	NetBufferUV(int index) : NET_BUFFER_INDEX(index) 
+	NetBufferUV(int index) : NET_BUFFER_INDEX(index)
 	{
-		this->index = index;
 	}
 	virtual ~NetBufferUV();
 
