@@ -12,13 +12,9 @@
 
 NetSocketUV::NetSocketUV(Net *_Net) : NetSocket(net)
 {
-	//this->net = net;
+	this->net = net;
 	sock = NULL;
-	status = errno;
-	theloop = new uv_loop_t;
-	memset(theloop, 0, sizeof(theloop));
-	int r = uv_loop_init(theloop);
-	assert(r == 0);
+	status = errno;	
 }
 
 NetSocketUV::~NetSocketUV()
@@ -28,7 +24,7 @@ NetSocketUV::~NetSocketUV()
 	//delete[] net;
 }
 
-bool NetSocketUV::Create(const char *ip, bool udp_tcp, int port, bool listen)
+bool NetSocketUV::Create(Net_Address* addr, bool udp_tcp,bool listen)
 {
 	//NetSocketUV::Create(ip, udp_tcp, port, listen);
 	uv_loop_t* loop = GetLoop(net);
@@ -41,7 +37,7 @@ bool NetSocketUV::Create(const char *ip, bool udp_tcp, int port, bool listen)
 
 		
 		std::cout << "Create socket!" << std::endl;
-		//assert(CreateSocket(sock, net_addr) == true);
+		assert(CreateSocket(sock, net_addr) == true);
 
 		int r = uv_tcp_init(loop, GetPtrTCP(sock));
 		assert(r == 0);
@@ -52,12 +48,11 @@ bool NetSocketUV::Create(const char *ip, bool udp_tcp, int port, bool listen)
 		uv_tcp_t* tcp = GetPtrTCP(sock);
 		if (listen)
 		{
-			sockaddr_in* addr = new sockaddr_in;
-			uv_ip4_addr(ip, port, addr);
+			sockaddr_in* sock_addres = new sockaddr_in;
+			uv_ip4_addr(addr->address, addr->port, sock_addres);
 			int b = uv_tcp_bind(tcp, (sockaddr*)addr, 0);
 			assert(b == 0);
-			b = uv_listen((uv_stream_t*)tcp, 1024, OnConnect);
-			if (b)
+			if (GetIP(addr, true) == true)
 				return false;
 		}
 		
@@ -71,7 +66,7 @@ bool NetSocketUV::Create(const char *ip, bool udp_tcp, int port, bool listen)
 		assert(r == 0);
 
 		struct sockaddr_in broadcast_addr;
-		uv_ip4_addr(ip, port, &broadcast_addr);
+		uv_ip4_addr(addr->address, addr->port, &broadcast_addr);
 		r = uv_udp_bind(udp, (const struct sockaddr*)&broadcast_addr, 0);
 		assert(r == 0);
 
@@ -88,22 +83,26 @@ bool NetSocketUV::Create(const char *ip, bool udp_tcp, int port, bool listen)
 	}
 	return true;
 }
-/*
-bool NetSocketUV::GetIP(const char *ip, bool own_or_peer)
+
+bool NetSocketUV::GetIP(Net_Address* addr, bool own_or_peer)
 {
-	std::cout << "GetIP" << std::endl;
-	sockaddr_in *addr = new sockaddr_in;
 	if (own_or_peer)
 	{
+		uv_tcp_t* tcp = GetPtrTCP(sock);
 		std::cout << "Set IP to socket!" << std::endl;
-		assert(uv_ip4_addr(ip, 8000, addr) == 0);
-		if(ConnectUV() == true)
+		int r = uv_listen((uv_stream_t*)tcp, 1024, OnConnect);;
+		if (r == 0)
+		{
+			uv_loop_t* loop = GetLoop(net);
+			RunLoop(loop);
 			return true;
+		}
+
 	}
 	else
 		return false;
 }
-
+/*
 bool NetSocketUV::ConnectUV(Net_Address* addr)
 {
 	sockaddr_in dest;
@@ -343,9 +342,17 @@ NetBuffer *GetPtrBuffer(void *ptr)
 
 uv_loop_t *GetLoop(Net* net)
 {
-	NetSocketUV* serv = (NetSocketUV*)net;
-	//assert(serv->theloop != nullptr);
-	return serv->theloop;
+	net = new Net;
+	NetSocketUV* serv = (NetSocketUV*)(net);
+	if (net != nullptr)
+	{
+		serv->theloop = uv_default_loop();
+		int r = uv_loop_init(serv->theloop);
+		assert(r == 0);
+		return serv->theloop;
+	}
+	else
+		return nullptr;
 }
 
 

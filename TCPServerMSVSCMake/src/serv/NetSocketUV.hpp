@@ -15,13 +15,13 @@ public:
 
 	NetSocketUV(Net* _Net);
 	~NetSocketUV();
-	NetSocket* net;
+	
 	void* sock;
 
-	bool Create(const char* ip, bool udp_tcp, int port, bool listen);
+	bool Create(Net_Address* addr, bool udp_tcp, bool listen);
 	
 	bool SetConnectedSocketToReadMode(uv_stream_t* stream);
-	bool GetIP(const char* ip, bool own_or_peer);
+	bool GetIP(Net_Address* addr, bool own_or_peer);
 	bool ConnectUV(Net_Address* addr);
 	bool Accept();
 
@@ -34,7 +34,6 @@ public:
 	static void RunLoop(uv_loop_t* loop);
 	uv_loop_t* theloop;
 	int status;
-
 	
 };
 

@@ -158,8 +158,8 @@ void Net::closesock(int socket)
 
 NetSocket::NetSocket(Net* net)
 {
-	addr = nullptr;
 	this->net = net;
+	addr = nullptr;
 	receiving_socket = (NetSocket*)malloc(sizeof(NetSocket));
 }
 
@@ -205,28 +205,19 @@ NetSocket* GetNetSocketPtr(void* uv_socket)
 	return GetPtrSocket(((char*)uv_socket) - sizeof(void*));
 }
 
-void NetSocket::OnLostConnection(void* socket)
+void Net::OnLostConnection(void* socket)
 {
-	Net net;
 	if (socket)
 	{
 		std::cout << "Lost connection with socket!" << std::endl;
 #ifdef WIN32
-		net.Net::closesock((SOCKET)socket);
+		closesock((SOCKET)socket);
 
 #else
-		net.Net::closesock(static_cast<int>(reinterpret_cast<intptr_t>(socket)));
+		closesock(static_cast<int>(reinterpret_cast<intptr_t>(socket)));
 #endif // !WIN32
 
 	}
-}
-
-bool NetSocket::IsServer()
-{
-	if (tcp_socket && net_addr)
-		return true;
-	else
-		return false;
 }
 
 
@@ -327,8 +318,18 @@ void Net_Address::FromStringIP(const char* ip)
 	}
 }
 
-void Net_Address::Serialize()
+void Net_Address::Serialize(CString* stream)
 {
+	if (stream->IsEmpty())
+	{
+		//stream >> address;
+		//stream >> port;
+	}
+	else
+	{
+		//stream << address;
+		//stream << port;
+	}
 }
 
 NetBufferUV::~NetBufferUV()

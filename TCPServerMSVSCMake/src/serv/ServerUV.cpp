@@ -4,6 +4,8 @@
 
 Server::Server(Net* net) : NetSocketUV(net)
 {
+	this->net = net;
+	net_sockuv = new NetSocketUV(this->net);
 	IDArray = new char[1024];
 }
 
@@ -14,9 +16,9 @@ Server::~Server()
 
 }
 
-int Server::connect(const char* ip)
+int Server::connect(Net_Address* addr)
 {
-	if (ip)
+	if (addr)
 	{
 		//udp_tcp = true;
 		std::cout << "_______________________________" << std::endl
@@ -24,7 +26,7 @@ int Server::connect(const char* ip)
 					"==========Start server!==========" << std::endl
 				<<
 					"__________________________________" << std::endl;
-		return Create(ip, true, 8000, true);
+		return Create(addr, true, true);
 	}
 	else
 	{

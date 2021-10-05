@@ -13,9 +13,10 @@ public:
 	Server(Net* net);
 	~Server();
 	Net* net;
+	NetSocketUV* net_sockuv;
 	char* IDArray;
 
-	int connect(const char* ip);
+	int connect(Net_Address* addr);
 	std::string GetClientID();
 	void SetID(void* NewClient);
 	

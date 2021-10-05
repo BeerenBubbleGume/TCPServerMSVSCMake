@@ -65,9 +65,12 @@ public:
 	
 	sockaddr_in* net_addr;
 	bool udp_tcp;
-
+	
 	NetBuffer recv_buf;
 	NetBuffer* GetRecvBuffer() { return &recv_buf; }
+
+	virtual void OnLostConnection(void* sock);
+	virtual bool IsServer() { return true; }
 
 #ifdef WIN32
 	SOCKET tcp_socket;
@@ -105,9 +108,7 @@ public:
 
 	void SendMessenge(NET_BUFFER_INDEX* buf, Net_Address* addr);
 	bool IsTCP() { return udp_tcp; }
-	void OnLostConnection(void* socket);
 
-	bool IsServer();
 
 	Net_Address* addr;
 	Net* net;
@@ -140,7 +141,7 @@ struct NET_BUFFER_INDEX : public NetBuffer
 public:
 	NET_BUFFER_INDEX(int index) : NetBuffer()
 	{
-		net = new Net;
+		//net = new Net;
 		this->index = index;
 	}
 	~NET_BUFFER_INDEX();
@@ -158,7 +159,7 @@ public:
 	CString address;
 	int port;
 	void FromStringIP(const char* ip);
-	void Serialize();
+	void Serialize(CString* stream);
 };
 
 struct NetBufferUV : public NET_BUFFER_INDEX
