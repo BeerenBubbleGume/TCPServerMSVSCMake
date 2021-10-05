@@ -16,9 +16,9 @@ Server::~Server()
 
 }
 
-int Server::connect(Net_Address* addr)
+int Server::connect(bool connection)
 {
-	if (addr)
+	if (connection)
 	{
 		//udp_tcp = true;
 		std::cout << "_______________________________" << std::endl
@@ -26,7 +26,12 @@ int Server::connect(Net_Address* addr)
 					"==========Start server!==========" << std::endl
 				<<
 					"__________________________________" << std::endl;
-		return Create(addr, true, true);
+
+		Net_Address addr;
+		addr.address = { "127.0.0.1" };
+		addr.port = 8000;
+
+		return Create(&addr, true, true);
 	}
 	else
 	{

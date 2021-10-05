@@ -12,7 +12,7 @@
 
 NetSocketUV::NetSocketUV(Net *_Net) : NetSocket(net)
 {
-	this->net = net;
+	//this->net = net;
 	sock = NULL;
 	status = errno;	
 }
@@ -28,74 +28,93 @@ bool NetSocketUV::Create(Net_Address* addr, bool udp_tcp,bool listen)
 {
 	//NetSocketUV::Create(ip, udp_tcp, port, listen);
 	uv_loop_t* loop = GetLoop(net);
-	assert(loop != nullptr);
-	if (udp_tcp)
+	if (loop)
 	{
-		sock = malloc(sizeof(TCP_SOCKET));
-		//memset(sock, 0, sizeof(TCP_SOCKET));
-		((TCP_SOCKET *)sock)->net_socket = this;
-
-		
-		std::cout << "Create socket!" << std::endl;
-		assert(CreateSocket(sock, net_addr) == true);
-
-		int r = uv_tcp_init(loop, GetPtrTCP(sock));
-		assert(r == 0);
-
-		r = uv_tcp_nodelay(GetPtrTCP(sock), true);
-		assert(r == 0);
-
-		uv_tcp_t* tcp = GetPtrTCP(sock);
-		if (listen)
+		std::cout << "Loop have been initialize!" << std::endl;
+		if (udp_tcp)
 		{
-			sockaddr_in* sock_addres = new sockaddr_in;
-			uv_ip4_addr(addr->address, addr->port, sock_addres);
-			int b = uv_tcp_bind(tcp, (sockaddr*)addr, 0);
-			assert(b == 0);
-			if (GetIP(addr, true) == true)
-				return false;
+			sock = malloc(sizeof(TCP_SOCKET));
+			memset(sock, 0, sizeof(TCP_SOCKET));
+			((TCP_SOCKET*)sock)->net_socket = this;
+
+
+			std::cout << "Create socket!" << std::endl;
+			assert(CreateSocket(sock, net_addr) == true);
+
+			int r = uv_tcp_init(loop, GetPtrTCP(sock));
+			assert(r == 0);
+
+			//r = uv_tcp_nodelay(GetPtrTCP(sock), true);
+			//assert(r == 0);
+
+			uv_tcp_t* tcp = GetPtrTCP(sock);
+			
+			if (listen)
+			{
+				sockaddr_in* sock_addres = new sockaddr_in;
+				int i = uv_ip4_addr(addr->address, addr->port, sock_addres);
+				assert(i == 0);
+				int b = uv_tcp_bind(tcp, (sockaddr*)sock_addres, 0);
+				assert(b == 0);
+				if (GetIP(addr, true, (uv_stream_t*)tcp) == true)
+					return true;
+				else
+					return false;
+			}
+
 		}
-		
+		else
+		{
+			sock = malloc(sizeof(UDP_SOCKET));
+			memset(sock, 0, sizeof(UDP_SOCKET));
+			uv_udp_t* udp = GetPtrUDP(sock);
+			int r = uv_udp_init(loop, udp);
+			assert(r == 0);
+
+			struct sockaddr_in broadcast_addr;
+			uv_ip4_addr(addr->address, addr->port, &broadcast_addr);
+			r = uv_udp_bind(udp, (const struct sockaddr*)&broadcast_addr, 0);
+			assert(r == 0);
+
+			r = uv_udp_set_broadcast(udp, 1);
+			assert(r == 0);
+
+			if (listen)
+			{
+				r = uv_udp_recv_start(udp, OnAllocBuffer, OnReadUDP);
+				assert(r == 0);
+			}
+
+			((UDP_SOCKET*)sock)->net_socket = this;
+		}
+		return true;
 	}
 	else
 	{
-		sock = malloc(sizeof(UDP_SOCKET));
-		memset(sock, 0, sizeof(UDP_SOCKET));
-		uv_udp_t* udp = GetPtrUDP(sock);
-		int r = uv_udp_init(loop, udp);
-		assert(r == 0);
-
-		struct sockaddr_in broadcast_addr;
-		uv_ip4_addr(addr->address, addr->port, &broadcast_addr);
-		r = uv_udp_bind(udp, (const struct sockaddr*)&broadcast_addr, 0);
-		assert(r == 0);
-
-		r = uv_udp_set_broadcast(udp, 1);
-		assert(r == 0);
-
-		if (listen)
-		{
-			r = uv_udp_recv_start(udp, OnAllocBuffer, OnReadUDP);
-			assert(r == 0);
-		}
-
-		((UDP_SOCKET*)sock)->net_socket = this;
+		std::cout << "Loop cannot been initialized!" << std::endl;
+		return false;
 	}
-	return true;
+	
 }
 
-bool NetSocketUV::GetIP(Net_Address* addr, bool own_or_peer)
+bool NetSocketUV::GetIP(Net_Address* addr, bool own_or_peer, uv_stream_t* stream)
 {
 	if (own_or_peer)
 	{
-		uv_tcp_t* tcp = GetPtrTCP(sock);
+		//uv_tcp_t* tcp = GetPtrTCP(sock);
 		std::cout << "Set IP to socket!" << std::endl;
-		int r = uv_listen((uv_stream_t*)tcp, 1024, OnConnect);;
-		if (r == 0)
+		udp_tcp = true;
+		bool r = Accept(stream);
+		if (r == true)
 		{
 			uv_loop_t* loop = GetLoop(net);
 			RunLoop(loop);
 			return true;
+		}
+		else
+		{
+			fprintf(stderr, "Listening UV socket error!", uv_err_name(r));
+			return false;
 		}
 
 	}
@@ -120,15 +139,12 @@ bool NetSocketUV::ConnectUV(Net_Address* addr)
 	return false;
 }
 */
-bool NetSocketUV::Accept()
+bool NetSocketUV::Accept(uv_stream_t* stream)
 {
 	if (udp_tcp)
 	{
-		int list;
-		
-		uv_tcp_t* socket = GetPtrTCP(net);
-
-		if (list = uv_listen((uv_stream_t*)socket, 1024, OnConnect)  == 0)
+		int list = 0;
+		if (list = uv_listen(stream, 1024, OnConnect)  == 0)
 		{
 			std::cout << "Start listening UV socket!" << std::endl;
 			return true;
@@ -145,10 +161,10 @@ bool NetSocketUV::Accept()
 //высылаем данные по TCP протаколу
 void NetSocketUV::SendTCP(NET_BUFFER_INDEX *buf)
 {
-	if (buf->length > 0)
+	if (buf->buff_length > 0)
 	{
 		uv_buf_t buffer;
-		buffer.len = buf->length;
+		buffer.len = buf->buff_length;
 		buffer.base = (char*)buf->DataBuff;
 		int r = uv_write(((NetBufferUV*)buf)->GetPtrWrite(), (uv_stream_t*)GetPtrTCP(sock), &buffer, 1, OnWrite);
 		assert(r == 0);
@@ -166,7 +182,7 @@ void NetSocketUV::ReceiveTCP()
 	recv_buf.Add(received_bytes, recv_buffer->GetData());
 
 	if (net->IsServer())
-		Recive();
+		ReciveTCP();
 }
 
 void NetSocketUV::ReceiveUPD()
@@ -178,9 +194,12 @@ bool NetSocketUV::SetConnectedSocketToReadMode(uv_stream_t *stream)
 	if (udp_tcp)
 	{
 		std::cout << "Setting connected UV socket to reading mode!" << std::endl;
-		uv_tcp_t* tcp = GetPtrTCP(stream);
-		int r = uv_read_start((uv_stream_t*)tcp, OnAllocBuffer, OnReadTCP);
-		return (r == 0);
+		int r = uv_read_start(stream, OnAllocBuffer, OnReadTCP);
+		if (r == 0)
+			return true;
+		else
+			return false;
+
 	}
 	return false;
 }
@@ -189,33 +208,30 @@ bool NetSocketUV::SetConnectedSocketToReadMode(uv_stream_t *stream)
 void OnReadTCP(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)
 {
 
-	NetSocketUV* socket = (NetSocketUV*)GetNetSocketPtr(stream);
-	
+	NetSocket* socket = GetNetSocketPtr(stream);
+	std::cout << "Receiving..." << std::endl;
 	if (nread < 0)
 	{
-		if (nread == UV_EOF)
-		{
-			std::cout << "read buff < 0" << std::endl;
-			socket->net->OnLostConnection(socket);
-		}
+		std::cout << "read buff < 0" << std::endl;
+		//socket->net->OnLostConnection(socket);
 	}
 	else
 	{
 		std::cout << "Reading UV socket" << std::endl;
-		NetBuffer* recv_buff = socket->net->GetRecvBuffer();
+		NetBuffer* recv_buff = socket->GetRecvBuffer();
 		assert(buf->base == (char*)recv_buff->GetData());
 		recv_buff->SetLength(nread);
 		socket->ReceiveTCP();
-		//NET_BUFFER_INDEX* buf = (NET_BUFFER_INDEX*)recv_buff->GetData();
-		//socket->SendTCP(buf);
+		socket->SendTCP((NET_BUFFER_INDEX*)recv_buff->GetData());
 	}
 }
 
 //callback функция которая выделяет место под буффер данных
 void OnAllocBuffer(uv_handle_t *handle, size_t suggested_size, uv_buf_t *buf)
 {
+	std::cout << "Allocating buffer" << std::endl;
 	NetSocket* socket = GetNetSocketPtr(handle);
-	NetBuffer* recv_buffer = new NetBuffer;
+	NetBuffer* recv_buffer = socket->GetRecvBuffer();
 
 	unsigned int max_length = recv_buffer->GetMaxLength();
 	if (max_length < suggested_size)
@@ -261,6 +277,7 @@ void NetSocketUV::RunLoop(uv_loop_t *loop)
 {
 	if (loop)
 	{
+		std::cout << "Run loop!" << std::endl;
 		uv_run((uv_loop_t *)loop, UV_RUN_DEFAULT);
 	}
 	else
@@ -281,10 +298,12 @@ void OnConnect(uv_stream_t* stream, int status)
 	}
 
 	NetSocketUV* netsock = (NetSocketUV*)GetNetSocketPtr(stream);
+	
 	uv_loop_t* loop = GetLoop(netsock);
 	uv_tcp_t* client = new uv_tcp_t;
-	memset(client, 0, sizeof(uv_tcp_t*));
 	uv_tcp_init(loop, client);
+
+
 	int r = uv_accept(stream, (uv_stream_t*)client);
 	if (r)
 	{
@@ -293,8 +312,9 @@ void OnConnect(uv_stream_t* stream, int status)
 		exit(4);
 	}
 	std::cout << "Net connetction" << std::endl;
-	bool c = netsock->SetConnectedSocketToReadMode((uv_stream_t*)client) == true;
-	assert(c == true);
+	netsock->udp_tcp = true;
+	netsock->SetConnectedSocketToReadMode((uv_stream_t*)client);
+	//assert(c == true);
 }
 //удаляем сокет libuv и приметив сокета
 void NetSocketUV::Destroy()
@@ -342,14 +362,14 @@ NetBuffer *GetPtrBuffer(void *ptr)
 
 uv_loop_t *GetLoop(Net* net)
 {
-	net = new Net;
-	NetSocketUV* serv = (NetSocketUV*)(net);
+	//NetSocketUV* serv = (NetSocketUV*)(net);
 	if (net != nullptr)
 	{
-		serv->theloop = uv_default_loop();
-		int r = uv_loop_init(serv->theloop);
-		assert(r == 0);
-		return serv->theloop;
+		uv_loop_t* theloop;
+		theloop = uv_default_loop();
+		//int r = uv_loop_init(serv->theloop);
+		//assert(r == 0);
+		return theloop;
 	}
 	else
 		return nullptr;

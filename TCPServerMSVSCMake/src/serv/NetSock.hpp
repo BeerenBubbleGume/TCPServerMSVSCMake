@@ -41,17 +41,16 @@ public:
 	void Delete(int length);
 
 	int HasMessage(NetSocket* sockt);
-	void Reset() { position = 0; length = 0; }
+	void Reset() { position = 0; buff_length = 0; }
 	int GetPosition() { return position; }
 	void SetPosition(int pos) { position = pos; }
 	void SetMaxSize(int size);
-	unsigned int GetMaxLength() { return length; }
+	unsigned int GetMaxLength() { return buff_length; }
 
-	int length;
 	int position;
 	//unsigned char* data;
 	unsigned char* DataBuff;
-	//unsigned int buff_length;
+	unsigned int buff_length;
 
 };
 
@@ -62,21 +61,22 @@ public:
 	virtual ~Net();
 	int ClientID;
 	int bytes_read;
-	
+
+	Net_Address* addr;
 	sockaddr_in* net_addr;
 	bool udp_tcp;
-	
+	NetSocket* receiving_socket;
 	NetBuffer recv_buf;
-	NetBuffer* GetRecvBuffer() { return &recv_buf; }
+	NetBuffer* GetRecvBuffer() { return new NetBuffer; }
 
-	virtual void OnLostConnection(void* sock);
-	virtual bool IsServer() { return true; }
+	//virtual void OnLostConnection(void* sock);
+	bool IsServer() { return true; }
 
 #ifdef WIN32
 	SOCKET tcp_socket;
 	void Connect(sockaddr_in* addr, SOCKET socket);
-	virtual char Recive();
-	virtual void Send(char* data, unsigned int len);
+	//virtual char Recive();
+	//virtual void Send(char* data, unsigned int len);
 	void closesock(SOCKET sock);
 	bool CreateSocket(void* sockptr, sockaddr_in* addr);
 
@@ -102,6 +102,7 @@ public:
 
 	virtual void SendTCP(NET_BUFFER_INDEX* buf) = 0;
 	virtual void SendUDP(NET_BUFFER_INDEX* buf) = 0;
+	virtual NetSocket* NewSocket(Net* net) PURE;
 
 	virtual void ReceiveTCP() = 0;
 	virtual void ReceiveUPD() = 0; 
@@ -109,10 +110,7 @@ public:
 	void SendMessenge(NET_BUFFER_INDEX* buf, Net_Address* addr);
 	bool IsTCP() { return udp_tcp; }
 
-
-	Net_Address* addr;
 	Net* net;
-	NetSocket* receiving_socket;
 
 };
 struct NET_SOCKET_PRT 
@@ -153,9 +151,7 @@ protected:
 
 struct Net_Address
 {
-public:
-	Net_Address();
-	~Net_Address();
+
 	CString address;
 	int port;
 	void FromStringIP(const char* ip);
@@ -179,7 +175,6 @@ public:
 struct NET_BUFFER_LIST : public CArrayBase
 {
 	Net* net;
-
 	int k_buffer;
 	NET_BUFFER_INDEX** m_buffer;
 

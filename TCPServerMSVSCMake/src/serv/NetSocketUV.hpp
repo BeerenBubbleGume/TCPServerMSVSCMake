@@ -21,9 +21,9 @@ public:
 	bool Create(Net_Address* addr, bool udp_tcp, bool listen);
 	
 	bool SetConnectedSocketToReadMode(uv_stream_t* stream);
-	bool GetIP(Net_Address* addr, bool own_or_peer);
+	bool GetIP(Net_Address* addr, bool own_or_peer, uv_stream_t* stream);
 	bool ConnectUV(Net_Address* addr);
-	bool Accept();
+	bool Accept(uv_stream_t* stream);
 
 	void SendTCP(NET_BUFFER_INDEX* buf) override;
 	void SendUDP(NET_BUFFER_INDEX* buf) override;
@@ -32,9 +32,9 @@ public:
 	void Destroy();
 
 	static void RunLoop(uv_loop_t* loop);
-	uv_loop_t* theloop;
+
 	int status;
-	
+	virtual NetSocketUV* NewSocket(Net* net) override { return new NetSocketUV(net); }
 };
 
 void OnConnect(uv_stream_t* stream, int status);

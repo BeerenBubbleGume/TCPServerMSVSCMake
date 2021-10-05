@@ -16,7 +16,7 @@ public:
 	NetSocketUV* net_sockuv;
 	char* IDArray;
 
-	int connect(Net_Address* addr);
+	int connect(bool connection);
 	std::string GetClientID();
 	void SetID(void* NewClient);
 	

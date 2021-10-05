@@ -3,20 +3,22 @@
 
 #include "TCPServerMSVSCMake.hpp"
 
+
+
 int main() {
 
-	ip = {"127.0.0.1"};
 	std::cout << "Main:" << std::endl;
+	Net* net = (Net*)malloc(sizeof(Net*));
+	Server* server = new Server(net);
 
-	Server* server = (Server*)malloc(sizeof(Server));
-	Net_Address* addr = new Net_Address;
-	
-	addr->address = ip;
-	addr->port = 8000;
-
-	server->connect(addr);
-	
-	
-
-	return 0;
+	if(server->connect(true) == true)
+	{
+		std::cout << "Server have been started!" << std::endl;
+		return 0; 
+	}
+	else
+	{
+		std::cout << "Server was chashed started!" << std::endl;
+		exit(1);
+	}
 }

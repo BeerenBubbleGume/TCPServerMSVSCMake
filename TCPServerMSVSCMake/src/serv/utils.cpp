@@ -1,5 +1,5 @@
 ﻿#include "utils.hpp"
-#include <cassert>
+
 
 CString::CString()
 {
@@ -112,7 +112,7 @@ CString& CString::operator=(const CString& so)
 
 CString& CString::operator=(const char* s)
 {
-	int len = strlen(s);
+	unsigned int len = strlen(s);
 	delete[] cstring;
 	cstring = new char[len + 1];
 	strcpy(cstring, s);

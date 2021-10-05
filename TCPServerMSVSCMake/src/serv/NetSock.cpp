@@ -5,25 +5,12 @@ Net::Net()
 	net_addr = new sockaddr_in;
 	bytes_read = 0;
 	ClientID = 0;
+	addr = new Net_Address;
 
-#ifdef WIN32
-	WSADATA wsdata;
-	WORD DLLVersion = MAKEWORD(2, 1);
-	if (WSAStartup(DLLVersion, &wsdata))
-	{
-		std::cout << "WSAStartup crush!" << std::endl;
-		exit(0);
-	}
-	
-	net_addr->sin_family = AF_INET;
-	net_addr->sin_port = htons(8000);
-	net_addr->sin_addr.S_un.S_addr = htonl(INADDR_ANY);
-#else
-	tcp_socket = socket(AF_INET, SOCK_STREAM, 0);
-	net_addr->sin_family = AF_INET;
-	net_addr->sin_port = htons(8000);
-	net_addr->sin_addr.s_addr = htonl(INADDR_ANY);
-#endif // WIN32
+	receiving_socket = (NetSocket*)malloc(sizeof(NetSocket));
+
+	udp_tcp = false;
+	//tcp_socket = CreateSocket((void*)tcp_socket, net_addr);
 
 }
 
@@ -69,9 +56,10 @@ void Net::Connect(sockaddr_in* addr, SOCKET socket)
 	assert(listen(socket, 1024) == SOCKET_ERROR);
 	assert(accept(socket, (sockaddr*)addr, (int*)sizeof(addr)));
 }
+/*
 char Net::Recive()
 {
-	return recv(tcp_socket, (char*)recv_buf.DataBuff, recv_buf.length, 0);
+	return recv(tcp_socket, (char*)recv_buf.DataBuff, recv_buf.buff_length, 0);
 }
 void Net::Send(char* data, unsigned int len)
 {
@@ -86,7 +74,7 @@ void Net::Send(char* data, unsigned int len)
 		}
 	}
 }
-
+*/
 void Net::closesock(SOCKET sock)
 {
 	closesocket(sock);
@@ -159,8 +147,6 @@ void Net::closesock(int socket)
 NetSocket::NetSocket(Net* net)
 {
 	this->net = net;
-	addr = nullptr;
-	receiving_socket = (NetSocket*)malloc(sizeof(NetSocket));
 }
 
 NetSocket::~NetSocket()
@@ -204,7 +190,7 @@ NetSocket* GetNetSocketPtr(void* uv_socket)
 {
 	return GetPtrSocket(((char*)uv_socket) - sizeof(void*));
 }
-
+/*
 void Net::OnLostConnection(void* socket)
 {
 	if (socket)
@@ -219,29 +205,24 @@ void Net::OnLostConnection(void* socket)
 
 	}
 }
-
+*/
 
 NetBuffer::NetBuffer()
 {
 	owner = NULL;
 	DataBuff = new unsigned char;
-	length = 0;
+	buff_length = 0;
 	position = 0;
 }
 
 NetBuffer::~NetBuffer()
 {
-	/*
-	if (DataBuff)
-		delete[] DataBuff;
-	*/
-	if(length != 0)
-		length = NULL;
+	Delete(buff_length);
 }
 
 size_t NetBuffer::GetLength()
 {
-	return length;
+	return buff_length;
 }
 
 int NetBuffer::HasMessage(NetSocket* sockt)
@@ -251,56 +232,41 @@ int NetBuffer::HasMessage(NetSocket* sockt)
 
 void NetBuffer::SetMaxSize(int size)
 {
-	length = size;
-	DataBuff = new unsigned char[length];
+	buff_length = size;
+	DataBuff = new unsigned char[buff_length];
 }
 
 int NetBuffer::SetLength(unsigned int length)
 {
-	if (length >= length)
+	if (length >= buff_length)
 	{
-		return length = length;
+		return buff_length = length;
 	}
 }
 
 void NetBuffer::Add(int length, void* data)
 {
-	int len = this->length + length;
+	int len = this->buff_length + length;
 	if (length < len)
 	{
 		// ��������� ����������
 		length = len;
 		unsigned char* vdata = new unsigned char[length];
-		memcpy(vdata, this->DataBuff, this->length);
+		memcpy(vdata, this->DataBuff, this->buff_length);
 		delete[] this->DataBuff;
 		this->DataBuff = vdata;
 	}
 
 	if (data)
-		memcpy(this->DataBuff + this->length, data, length);
-	this->length = len;
+		memcpy(this->DataBuff + this->buff_length, data, length);
+	this->buff_length = len;
 }
 
 void NetBuffer::Delete(int length)
 {
-	int size = this->length - length;
+	int size = this->buff_length - length;
 	memcpy(DataBuff, DataBuff + length, size);
-	this->length -= size;
-}
-
-Net_Address::Net_Address()
-{
-	address = NULL;
-	port = NULL;
-}
-
-Net_Address::~Net_Address()
-{
-	if (address && port)
-	{
-		delete[] address;
-		port = NULL;
-	}
+	this->buff_length -= size;
 }
 
 void Net_Address::FromStringIP(const char* ip)
@@ -349,10 +315,9 @@ uv_udp_send_t* NetBufferUV::GetPtrSend()
 
 NET_BUFFER_LIST::NET_BUFFER_LIST() : CArrayBase()
 {
-	net = NULL;
-	
+	net = nullptr;
 	k_buffer = NULL;
-	m_buffer = new NET_BUFFER_INDEX*;
+	m_buffer = NULL;
 
 	k_buffer = 10;
 	m_buffer = (NET_BUFFER_INDEX**)malloc(k_buffer * sizeof(NET_BUFFER_INDEX*));
