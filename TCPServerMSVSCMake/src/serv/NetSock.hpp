@@ -12,6 +12,7 @@
 #include <cstring>
 #include <cstdio>
 #include <iostream>
+#include <stdint.h>
 #include <cassert>
 #include "../../libs/includes/uv.h"
 #include "utils.hpp"
@@ -69,16 +70,16 @@ public:
 	NetBuffer recv_buf;
 	NetBuffer* GetRecvBuffer() { return new NetBuffer; }
 
-	//virtual void OnLostConnection(void* sock);
+	void OnLostConnection(void* sock);
 	bool IsServer() { return true; }
-
+	void ReciveMessege();
 #ifdef WIN32
 	SOCKET tcp_socket;
 	void Connect(sockaddr_in* addr, SOCKET socket);
 	//virtual char Recive();
 	//virtual void Send(char* data, unsigned int len);
 	void closesock(SOCKET sock);
-	bool CreateSocket(void* sockptr, sockaddr_in* addr);
+	bool CreateSocket();
 
 #else
 	int tcp_socket;
@@ -86,7 +87,7 @@ public:
 	char Recive();
 	void Send(char* data, unsigned int len);
 	void closesock(int sock);
-	bool CreateSocket(void* sockptr, sockaddr_in* addr);
+	bool CreateSocket();
 
 #endif // WIN32
 };
@@ -100,12 +101,13 @@ public:
 	~NetSocket();
 	void Destroy();
 
-	virtual void SendTCP(NET_BUFFER_INDEX* buf) = 0;
-	virtual void SendUDP(NET_BUFFER_INDEX* buf) = 0;
+	virtual bool Create(Net_Address* addr, bool udp_tcp, bool listen);
+	virtual void SendTCP(NET_BUFFER_INDEX* buf) PURE;
+	virtual void SendUDP(NET_BUFFER_INDEX* buf) PURE;
 	virtual NetSocket* NewSocket(Net* net) PURE;
 
-	virtual void ReceiveTCP() = 0;
-	virtual void ReceiveUPD() = 0; 
+	virtual void ReceiveTCP() PURE;
+	virtual void ReceiveUPD() PURE; 
 
 	void SendMessenge(NET_BUFFER_INDEX* buf, Net_Address* addr);
 	bool IsTCP() { return udp_tcp; }
@@ -139,19 +141,16 @@ struct NET_BUFFER_INDEX : public NetBuffer
 public:
 	NET_BUFFER_INDEX(int index) : NetBuffer()
 	{
-		//net = new Net;
 		this->index = index;
 	}
 	~NET_BUFFER_INDEX();
 	int GetIndex() { return index; }
 protected:
 	int index;
-	Net* net;
 };
 
 struct Net_Address
 {
-
 	CString address;
 	int port;
 	void FromStringIP(const char* ip);

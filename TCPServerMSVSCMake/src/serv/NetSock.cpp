@@ -5,10 +5,10 @@ Net::Net()
 	net_addr = new sockaddr_in;
 	bytes_read = 0;
 	ClientID = 0;
-	addr = new Net_Address;
+	addr = nullptr;
 
 	receiving_socket = (NetSocket*)malloc(sizeof(NetSocket));
-
+	
 	udp_tcp = false;
 	//tcp_socket = CreateSocket((void*)tcp_socket, net_addr);
 
@@ -26,21 +26,14 @@ Net::~Net()
 		//bytes_read = 0;
 }
 #ifdef WIN32
-bool Net::CreateSocket(void* sockptr, sockaddr_in* addr)
+bool Net::CreateSocket()
 {
-	if (sockptr)
+	tcp_socket = socket(AF_INET, SOCK_STREAM, 0);
+	if (tcp_socket > 0)
 	{
-		tcp_socket = socket(AF_INET, SOCK_STREAM, 0);
-		if (tcp_socket > 0)
-		{
-			std::cout << "Socet created success!" << std::endl;
+		std::cout << "Socet created success!" << std::endl;
 
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		return true;
 	}
 	else
 	{
@@ -48,6 +41,15 @@ bool Net::CreateSocket(void* sockptr, sockaddr_in* addr)
 		return false;
 	}
 	return false;
+}
+
+void Net::ReciveMessege()
+{
+	int length = recv_buf.GetMaxLength();
+	unsigned char* data = recv_buf.GetData();
+	tcp_socket = socket(AF_INET, SOCK_STREAM, 0);
+	int r = recv(tcp_socket, (char*)data, length, 0);
+
 }
 
 void Net::Connect(sockaddr_in* addr, SOCKET socket)
@@ -81,20 +83,13 @@ void Net::closesock(SOCKET sock)
 	WSACleanup();
 }
 #else
-bool Net::CreateSocket(void* sockptr, sockaddr_in* addr)
+bool Net::CreateSocket()
 {
-	if (sockptr)
+	tcp_socket = socket(AF_INET, SOCK_STREAM, 0);
+	if (tcp_socket > 0)
 	{
-		tcp_socket = socket(AF_INET, SOCK_STREAM, 0);
-		if (tcp_socket > 0)
-		{
-			std::cout << "Socet created success!" << std::endl;
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		std::cout << "Socet created success!" << std::endl;
+		return true;
 	}
 	else
 	{
@@ -162,6 +157,19 @@ void NetSocket::Destroy()
 		free(receiving_socket);
 }
 
+bool NetSocket::Create(Net_Address* addr, bool udp_tcp, bool listen)
+{
+#ifdef WIN32
+	if (CreateSocket())
+		return true;
+#else
+	if (CreateSocket())
+		retunr ture;
+#endif // WIN32
+	return false;
+
+}
+
 void NetSocket::SendMessenge(NET_BUFFER_INDEX* buf, Net_Address* addr)
 {
 	if (buf)
@@ -190,7 +198,7 @@ NetSocket* GetNetSocketPtr(void* uv_socket)
 {
 	return GetPtrSocket(((char*)uv_socket) - sizeof(void*));
 }
-/*
+
 void Net::OnLostConnection(void* socket)
 {
 	if (socket)
@@ -205,19 +213,21 @@ void Net::OnLostConnection(void* socket)
 
 	}
 }
-*/
+
 
 NetBuffer::NetBuffer()
 {
-	owner = NULL;
-	DataBuff = new unsigned char;
+	owner = nullptr;
+	DataBuff = nullptr;
 	buff_length = 0;
 	position = 0;
 }
 
 NetBuffer::~NetBuffer()
 {
-	Delete(buff_length);
+	if (DataBuff)
+		delete[] DataBuff;
+	buff_length = 0;
 }
 
 size_t NetBuffer::GetLength()
@@ -249,7 +259,6 @@ void NetBuffer::Add(int length, void* data)
 	int len = this->buff_length + length;
 	if (length < len)
 	{
-		// ��������� ����������
 		length = len;
 		unsigned char* vdata = new unsigned char[length];
 		memcpy(vdata, this->DataBuff, this->buff_length);
@@ -258,7 +267,7 @@ void NetBuffer::Add(int length, void* data)
 	}
 
 	if (data)
-		memcpy(this->DataBuff + this->buff_length, data, length);
+		memcpy(&this->DataBuff, data, length);
 	this->buff_length = len;
 }
 
@@ -310,17 +319,18 @@ uv_write_t* NetBufferUV::GetPtrWrite()
 
 uv_udp_send_t* NetBufferUV::GetPtrSend()
 {
-	return nullptr;
+	return (uv_udp_send_t*)sender_object;
 }
 
 NET_BUFFER_LIST::NET_BUFFER_LIST() : CArrayBase()
 {
-	net = nullptr;
+	net = new Net;
 	k_buffer = NULL;
 	m_buffer = NULL;
 
 	k_buffer = 10;
-	m_buffer = (NET_BUFFER_INDEX**)malloc(k_buffer * sizeof(NET_BUFFER_INDEX*));
+	m_buffer = new NET_BUFFER_INDEX*[k_buffer];
+	memcpy(m_buffer, 0, sizeof(NET_BUFFER_INDEX**));
 	for (int i = 0; i < k_buffer; i++)
 		m_buffer[i] = NULL;
 	IncreaseDeleted(0, k_buffer - 1);
@@ -337,13 +347,13 @@ NET_BUFFER_LIST::~NET_BUFFER_LIST()
 			m_buffer[i] = NULL;
 		}
 	}
-
+	/*
 	if (m_buffer)
 	{
-		free(m_buffer);
+		delete[] m_buffer;
 		m_buffer = NULL;
 	}
-
+	*/
 	k_buffer = 0;
 }
 
