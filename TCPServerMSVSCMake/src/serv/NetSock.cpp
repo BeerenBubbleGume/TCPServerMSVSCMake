@@ -6,141 +6,30 @@ Net::Net()
 	bytes_read = 0;
 	ClientID = 0;
 	addr = nullptr;
-
-	receiving_socket = (NetSocket*)malloc(sizeof(NetSocket));
-	
-	udp_tcp = false;
-	//tcp_socket = CreateSocket((void*)tcp_socket, net_addr);
-
+	recv_buf = new NetBuffer;
 }
 
 Net::~Net()
 {
-	//if(buff_length != 0)
-		//buff_length = NULL;
-	//if(ClientID)
-		//ClientID = NULL;
-	//if(net_addr)
-		//free(net_addr);
-	//if(bytes_read)
-		//bytes_read = 0;
 }
-#ifdef WIN32
-bool Net::CreateSocket()
-{
-	tcp_socket = socket(AF_INET, SOCK_STREAM, 0);
-	if (tcp_socket > 0)
-	{
-		std::cout << "Socet created success!" << std::endl;
 
-		return true;
-	}
-	else
-	{
-		fprintf(stderr, "Cannot create tcp_socket");
-		return false;
-	}
-	return false;
-}
 
 void Net::ReciveMessege()
 {
-	int length = recv_buf.GetMaxLength();
-	unsigned char* data = recv_buf.GetData();
-	tcp_socket = socket(AF_INET, SOCK_STREAM, 0);
-	int r = recv(tcp_socket, (char*)data, length, 0);
-
-}
-
-void Net::Connect(sockaddr_in* addr, SOCKET socket)
-{
-	assert(bind(socket, (sockaddr*)addr, sizeof(addr)) == SOCKET_ERROR);
-	assert(listen(socket, 1024) == SOCKET_ERROR);
-	assert(accept(socket, (sockaddr*)addr, (int*)sizeof(addr)));
-}
-/*
-char Net::Recive()
-{
-	return recv(tcp_socket, (char*)recv_buf.DataBuff, recv_buf.buff_length, 0);
-}
-void Net::Send(char* data, unsigned int len)
-{
-
-	while (true)
-	{
-		bytes_read = send(tcp_socket, data, len, 0);
-		if (bytes_read <= 0)
-		{
-			fprintf(stderr, "sending error!\n");
-			break;
-		}
-	}
-}
-*/
-void Net::closesock(SOCKET sock)
-{
-	closesocket(sock);
-	WSACleanup();
-}
-#else
-bool Net::CreateSocket()
-{
-	tcp_socket = socket(AF_INET, SOCK_STREAM, 0);
-	if (tcp_socket > 0)
-	{
-		std::cout << "Socet created success!" << std::endl;
-		return true;
-	}
-	else
-	{
-		fprintf(stderr, "Cannot create tcp_socket");
-		return false;
-	}
-	return false;
-}
-
-void Net::Connect()
-{
-	socklen_t socklen = ('localhost', 8000);
-	if (bind(tcp_socket, (sockaddr*)net_addr, socklen) == 0)
-	{
-		printf("Bind success\n");
-	}
-	if (listen(tcp_socket, 1024) == 0)
-	{
-		printf("Listen success\n");
-	}
-	int a = accept(tcp_socket, (sockaddr*)net_addr, &socklen);
-	if (a)
-	{
-		fprintf(stderr, "Cannot accept!\n");
-	}
-}
-char Net::Recive()
-{
+	int length = recv_buf->GetMaxLength();
+	unsigned char* data = recv_buf->GetData();
 	//tcp_socket = socket(AF_INET, SOCK_STREAM, 0);
-	//net_addr->sin_family = AF_INET;
-	//net_addr->sin_port = htons(8000);
-	//net_addr->sin_addr.s_addr = htonl(INADDR_ANY);
+	//int r = recv(tcp_socket, (char*)data, length, 0);
 
-	return recv(tcp_socket, DataBuff, buff_length, 0);
 }
-void Net::Send(char* data, unsigned int len)
-{
-	while (true)
-	{
-		if (send(tcp_socket, (char*)data, len, 0) == 0)
-			break;
-	}
-}
-void Net::closesock(int socket)
-{
-	close(socket);
-}
-#endif // WIN32
+
+
 
 NetSocket::NetSocket(Net* net)
 {
+	addr = nullptr;
+	port = 0;
+	udp_tcp = false;
 	this->net = net;
 }
 
@@ -199,17 +88,7 @@ NetSocket* GetNetSocketPtr(void* uv_socket)
 
 void Net::OnLostConnection(void* socket)
 {
-	if (socket)
-	{
-		std::cout << "Lost connection with socket!" << std::endl;
-#ifdef WIN32
-		closesock((SOCKET)socket);
-
-#else
-		closesock(static_cast<int>(reinterpret_cast<intptr_t>(socket)));
-#endif // !WIN32
-
-	}
+	
 }
 
 
@@ -239,7 +118,7 @@ int NetBuffer::HasMessage(NetSocket* sockt)
 
 void NetBuffer::SetMaxSize(int size)
 {
-	Clear();
+	//Clear();
 
 	buff_length = size;
 	DataBuff = new unsigned char[buff_length];

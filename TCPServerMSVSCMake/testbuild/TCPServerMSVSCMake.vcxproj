@@ -1,0 +1,338 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{618EF1AD-7B96-3B8D-AA6F-E0B776F7340A}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>x64</Platform>
+    <ProjectName>TCPServerMSVSCMake</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\testbuild\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">TCPServerMSVSCMake.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">TCPServerMSVSCMake</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\testbuild\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">TCPServerMSVSCMake.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">TCPServerMSVSCMake</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\testbuild\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">TCPServerMSVSCMake.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">TCPServerMSVSCMake</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\testbuild\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">TCPServerMSVSCMake.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">TCPServerMSVSCMake</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\uv.h;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\uv.h;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\uv.h;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>..\libs\lib\uv.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>A:/Cpp repos/TCPServerMSVSCMake/TCPServerMSVSCMake/testbuild/Debug/TCPServerMSVSCMake.lib</ImportLibrary>
+      <ProgramDataBaseFile>A:/Cpp repos/TCPServerMSVSCMake/TCPServerMSVSCMake/testbuild/Debug/TCPServerMSVSCMake.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\uv.h;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\uv.h;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\uv.h;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>..\libs\lib\uv.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>A:/Cpp repos/TCPServerMSVSCMake/TCPServerMSVSCMake/testbuild/Release/TCPServerMSVSCMake.lib</ImportLibrary>
+      <ProgramDataBaseFile>A:/Cpp repos/TCPServerMSVSCMake/TCPServerMSVSCMake/testbuild/Release/TCPServerMSVSCMake.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\uv.h;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="MinSizeRel"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\uv.h;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\uv.h;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>..\libs\lib\uv.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>A:/Cpp repos/TCPServerMSVSCMake/TCPServerMSVSCMake/testbuild/MinSizeRel/TCPServerMSVSCMake.lib</ImportLibrary>
+      <ProgramDataBaseFile>A:/Cpp repos/TCPServerMSVSCMake/TCPServerMSVSCMake/testbuild/MinSizeRel/TCPServerMSVSCMake.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\uv.h;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="RelWithDebInfo"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\uv.h;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\uv.h;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>..\libs\lib\uv.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>A:/Cpp repos/TCPServerMSVSCMake/TCPServerMSVSCMake/testbuild/RelWithDebInfo/TCPServerMSVSCMake.lib</ImportLibrary>
+      <ProgramDataBaseFile>A:/Cpp repos/TCPServerMSVSCMake/TCPServerMSVSCMake/testbuild/RelWithDebInfo/TCPServerMSVSCMake.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule A:/Cpp repos/TCPServerMSVSCMake/TCPServerMSVSCMake/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+A:\Cmake\bin\cmake.exe "-SA:/Cpp repos/TCPServerMSVSCMake/TCPServerMSVSCMake" "-BA:/Cpp repos/TCPServerMSVSCMake/TCPServerMSVSCMake/testbuild" --check-stamp-file "A:/Cpp repos/TCPServerMSVSCMake/TCPServerMSVSCMake/testbuild/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">A:\Cmake\share\cmake-3.21\Modules\CMakeCInformation.cmake;A:\Cmake\share\cmake-3.21\Modules\CMakeCXXInformation.cmake;A:\Cmake\share\cmake-3.21\Modules\CMakeCommonLanguageInclude.cmake;A:\Cmake\share\cmake-3.21\Modules\CMakeGenericSystem.cmake;A:\Cmake\share\cmake-3.21\Modules\CMakeInitializeConfigs.cmake;A:\Cmake\share\cmake-3.21\Modules\CMakeLanguageInformation.cmake;A:\Cmake\share\cmake-3.21\Modules\CMakeRCInformation.cmake;A:\Cmake\share\cmake-3.21\Modules\CMakeSystemSpecificInformation.cmake;A:\Cmake\share\cmake-3.21\Modules\CMakeSystemSpecificInitialize.cmake;A:\Cmake\share\cmake-3.21\Modules\Compiler\CMakeCommonCompilerMacros.cmake;A:\Cmake\share\cmake-3.21\Modules\Compiler\MSVC-C.cmake;A:\Cmake\share\cmake-3.21\Modules\Compiler\MSVC-CXX.cmake;A:\Cmake\share\cmake-3.21\Modules\Platform\Windows-MSVC-C.cmake;A:\Cmake\share\cmake-3.21\Modules\Platform\Windows-MSVC-CXX.cmake;A:\Cmake\share\cmake-3.21\Modules\Platform\Windows-MSVC.cmake;A:\Cmake\share\cmake-3.21\Modules\Platform\Windows.cmake;A:\Cmake\share\cmake-3.21\Modules\Platform\WindowsPaths.cmake;A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\testbuild\CMakeFiles\3.21.1\CMakeCCompiler.cmake;A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\testbuild\CMakeFiles\3.21.1\CMakeCXXCompiler.cmake;A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\testbuild\CMakeFiles\3.21.1\CMakeRCCompiler.cmake;A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\testbuild\CMakeFiles\3.21.1\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\testbuild\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule A:/Cpp repos/TCPServerMSVSCMake/TCPServerMSVSCMake/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+A:\Cmake\bin\cmake.exe "-SA:/Cpp repos/TCPServerMSVSCMake/TCPServerMSVSCMake" "-BA:/Cpp repos/TCPServerMSVSCMake/TCPServerMSVSCMake/testbuild" --check-stamp-file "A:/Cpp repos/TCPServerMSVSCMake/TCPServerMSVSCMake/testbuild/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">A:\Cmake\share\cmake-3.21\Modules\CMakeCInformation.cmake;A:\Cmake\share\cmake-3.21\Modules\CMakeCXXInformation.cmake;A:\Cmake\share\cmake-3.21\Modules\CMakeCommonLanguageInclude.cmake;A:\Cmake\share\cmake-3.21\Modules\CMakeGenericSystem.cmake;A:\Cmake\share\cmake-3.21\Modules\CMakeInitializeConfigs.cmake;A:\Cmake\share\cmake-3.21\Modules\CMakeLanguageInformation.cmake;A:\Cmake\share\cmake-3.21\Modules\CMakeRCInformation.cmake;A:\Cmake\share\cmake-3.21\Modules\CMakeSystemSpecificInformation.cmake;A:\Cmake\share\cmake-3.21\Modules\CMakeSystemSpecificInitialize.cmake;A:\Cmake\share\cmake-3.21\Modules\Compiler\CMakeCommonCompilerMacros.cmake;A:\Cmake\share\cmake-3.21\Modules\Compiler\MSVC-C.cmake;A:\Cmake\share\cmake-3.21\Modules\Compiler\MSVC-CXX.cmake;A:\Cmake\share\cmake-3.21\Modules\Platform\Windows-MSVC-C.cmake;A:\Cmake\share\cmake-3.21\Modules\Platform\Windows-MSVC-CXX.cmake;A:\Cmake\share\cmake-3.21\Modules\Platform\Windows-MSVC.cmake;A:\Cmake\share\cmake-3.21\Modules\Platform\Windows.cmake;A:\Cmake\share\cmake-3.21\Modules\Platform\WindowsPaths.cmake;A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\testbuild\CMakeFiles\3.21.1\CMakeCCompiler.cmake;A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\testbuild\CMakeFiles\3.21.1\CMakeCXXCompiler.cmake;A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\testbuild\CMakeFiles\3.21.1\CMakeRCCompiler.cmake;A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\testbuild\CMakeFiles\3.21.1\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\testbuild\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule A:/Cpp repos/TCPServerMSVSCMake/TCPServerMSVSCMake/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+A:\Cmake\bin\cmake.exe "-SA:/Cpp repos/TCPServerMSVSCMake/TCPServerMSVSCMake" "-BA:/Cpp repos/TCPServerMSVSCMake/TCPServerMSVSCMake/testbuild" --check-stamp-file "A:/Cpp repos/TCPServerMSVSCMake/TCPServerMSVSCMake/testbuild/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">A:\Cmake\share\cmake-3.21\Modules\CMakeCInformation.cmake;A:\Cmake\share\cmake-3.21\Modules\CMakeCXXInformation.cmake;A:\Cmake\share\cmake-3.21\Modules\CMakeCommonLanguageInclude.cmake;A:\Cmake\share\cmake-3.21\Modules\CMakeGenericSystem.cmake;A:\Cmake\share\cmake-3.21\Modules\CMakeInitializeConfigs.cmake;A:\Cmake\share\cmake-3.21\Modules\CMakeLanguageInformation.cmake;A:\Cmake\share\cmake-3.21\Modules\CMakeRCInformation.cmake;A:\Cmake\share\cmake-3.21\Modules\CMakeSystemSpecificInformation.cmake;A:\Cmake\share\cmake-3.21\Modules\CMakeSystemSpecificInitialize.cmake;A:\Cmake\share\cmake-3.21\Modules\Compiler\CMakeCommonCompilerMacros.cmake;A:\Cmake\share\cmake-3.21\Modules\Compiler\MSVC-C.cmake;A:\Cmake\share\cmake-3.21\Modules\Compiler\MSVC-CXX.cmake;A:\Cmake\share\cmake-3.21\Modules\Platform\Windows-MSVC-C.cmake;A:\Cmake\share\cmake-3.21\Modules\Platform\Windows-MSVC-CXX.cmake;A:\Cmake\share\cmake-3.21\Modules\Platform\Windows-MSVC.cmake;A:\Cmake\share\cmake-3.21\Modules\Platform\Windows.cmake;A:\Cmake\share\cmake-3.21\Modules\Platform\WindowsPaths.cmake;A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\testbuild\CMakeFiles\3.21.1\CMakeCCompiler.cmake;A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\testbuild\CMakeFiles\3.21.1\CMakeCXXCompiler.cmake;A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\testbuild\CMakeFiles\3.21.1\CMakeRCCompiler.cmake;A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\testbuild\CMakeFiles\3.21.1\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\testbuild\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule A:/Cpp repos/TCPServerMSVSCMake/TCPServerMSVSCMake/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+A:\Cmake\bin\cmake.exe "-SA:/Cpp repos/TCPServerMSVSCMake/TCPServerMSVSCMake" "-BA:/Cpp repos/TCPServerMSVSCMake/TCPServerMSVSCMake/testbuild" --check-stamp-file "A:/Cpp repos/TCPServerMSVSCMake/TCPServerMSVSCMake/testbuild/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">A:\Cmake\share\cmake-3.21\Modules\CMakeCInformation.cmake;A:\Cmake\share\cmake-3.21\Modules\CMakeCXXInformation.cmake;A:\Cmake\share\cmake-3.21\Modules\CMakeCommonLanguageInclude.cmake;A:\Cmake\share\cmake-3.21\Modules\CMakeGenericSystem.cmake;A:\Cmake\share\cmake-3.21\Modules\CMakeInitializeConfigs.cmake;A:\Cmake\share\cmake-3.21\Modules\CMakeLanguageInformation.cmake;A:\Cmake\share\cmake-3.21\Modules\CMakeRCInformation.cmake;A:\Cmake\share\cmake-3.21\Modules\CMakeSystemSpecificInformation.cmake;A:\Cmake\share\cmake-3.21\Modules\CMakeSystemSpecificInitialize.cmake;A:\Cmake\share\cmake-3.21\Modules\Compiler\CMakeCommonCompilerMacros.cmake;A:\Cmake\share\cmake-3.21\Modules\Compiler\MSVC-C.cmake;A:\Cmake\share\cmake-3.21\Modules\Compiler\MSVC-CXX.cmake;A:\Cmake\share\cmake-3.21\Modules\Platform\Windows-MSVC-C.cmake;A:\Cmake\share\cmake-3.21\Modules\Platform\Windows-MSVC-CXX.cmake;A:\Cmake\share\cmake-3.21\Modules\Platform\Windows-MSVC.cmake;A:\Cmake\share\cmake-3.21\Modules\Platform\Windows.cmake;A:\Cmake\share\cmake-3.21\Modules\Platform\WindowsPaths.cmake;A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\testbuild\CMakeFiles\3.21.1\CMakeCCompiler.cmake;A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\testbuild\CMakeFiles\3.21.1\CMakeCXXCompiler.cmake;A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\testbuild\CMakeFiles\3.21.1\CMakeRCCompiler.cmake;A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\testbuild\CMakeFiles\3.21.1\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\testbuild\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\NetSock.hpp" />
+    <ClCompile Include="A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\NetSock.cpp" />
+    <ClInclude Include="A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\NetSocketUV.hpp" />
+    <ClCompile Include="A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\NetSocketUV.cpp" />
+    <ClInclude Include="A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\ServerUV.hpp" />
+    <ClCompile Include="A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\ServerUV.cpp" />
+    <ClCompile Include="A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\TCPServerMSVSCMake.cpp" />
+    <ClInclude Include="A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\utils.hpp" />
+    <ClCompile Include="A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\utils.cpp" />
+    <ClInclude Include="A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\TCPServerMSVSCMake.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\testbuild\ZERO_CHECK.vcxproj">
+      <Project>{CA7C0E3D-E320-3A4E-9CB7-2AE38D7DF40C}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

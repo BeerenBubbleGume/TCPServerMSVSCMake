@@ -1,0 +1,23 @@
+# CMake generation dependency list for this directory.
+A:/Cmake/share/cmake-3.21/Modules/CMakeCInformation.cmake
+A:/Cmake/share/cmake-3.21/Modules/CMakeCXXInformation.cmake
+A:/Cmake/share/cmake-3.21/Modules/CMakeCommonLanguageInclude.cmake
+A:/Cmake/share/cmake-3.21/Modules/CMakeGenericSystem.cmake
+A:/Cmake/share/cmake-3.21/Modules/CMakeInitializeConfigs.cmake
+A:/Cmake/share/cmake-3.21/Modules/CMakeLanguageInformation.cmake
+A:/Cmake/share/cmake-3.21/Modules/CMakeRCInformation.cmake
+A:/Cmake/share/cmake-3.21/Modules/CMakeSystemSpecificInformation.cmake
+A:/Cmake/share/cmake-3.21/Modules/CMakeSystemSpecificInitialize.cmake
+A:/Cmake/share/cmake-3.21/Modules/Compiler/CMakeCommonCompilerMacros.cmake
+A:/Cmake/share/cmake-3.21/Modules/Compiler/MSVC-C.cmake
+A:/Cmake/share/cmake-3.21/Modules/Compiler/MSVC-CXX.cmake
+A:/Cmake/share/cmake-3.21/Modules/Platform/Windows-MSVC-C.cmake
+A:/Cmake/share/cmake-3.21/Modules/Platform/Windows-MSVC-CXX.cmake
+A:/Cmake/share/cmake-3.21/Modules/Platform/Windows-MSVC.cmake
+A:/Cmake/share/cmake-3.21/Modules/Platform/Windows.cmake
+A:/Cmake/share/cmake-3.21/Modules/Platform/WindowsPaths.cmake
+A:/Cpp repos/TCPServerMSVSCMake/TCPServerMSVSCMake/CMakeLists.txt
+A:/Cpp repos/TCPServerMSVSCMake/TCPServerMSVSCMake/testbuild/CMakeFiles/3.21.1/CMakeCCompiler.cmake
+A:/Cpp repos/TCPServerMSVSCMake/TCPServerMSVSCMake/testbuild/CMakeFiles/3.21.1/CMakeCXXCompiler.cmake
+A:/Cpp repos/TCPServerMSVSCMake/TCPServerMSVSCMake/testbuild/CMakeFiles/3.21.1/CMakeRCCompiler.cmake
+A:/Cpp repos/TCPServerMSVSCMake/TCPServerMSVSCMake/testbuild/CMakeFiles/3.21.1/CMakeSystem.cmake

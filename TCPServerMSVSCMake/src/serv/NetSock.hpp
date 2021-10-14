@@ -46,10 +46,10 @@ public:
 	int GetPosition() { return position; }
 	void SetPosition(int pos) { position = pos; }
 	void SetMaxSize(int size);
-	unsigned int GetMaxLength() { return max_length; }
+	unsigned int GetMaxLength() { return max_length = 0; }
 	void Clear();
+
 	int position;
-	//unsigned char* data;
 	unsigned int max_length;
 	unsigned char* DataBuff;
 	unsigned int buff_length;
@@ -67,30 +67,15 @@ public:
 	Net_Address* addr;
 	sockaddr_in* net_addr;
 	bool udp_tcp;
-	NetSocket* receiving_socket;
-	NetBuffer recv_buf;
-	NetBuffer* GetRecvBuffer() { return &recv_buf; }
+	NetBuffer* recv_buf;
+	
+	NetBuffer* GetRecvBuffer() { return recv_buf; }
+	
 
 	void OnLostConnection(void* sock);
 	bool IsServer() { return true; }
 	void ReciveMessege();
-#ifdef WIN32
-	SOCKET tcp_socket;
-	void Connect(sockaddr_in* addr, SOCKET socket);
-	//virtual char Recive();
-	//virtual void Send(char* data, unsigned int len);
-	void closesock(SOCKET sock);
-	bool CreateSocket();
 
-#else
-	int tcp_socket;
-	void Connect();
-	char Recive();
-	void Send(char* data, unsigned int len);
-	void closesock(int sock);
-	bool CreateSocket();
-
-#endif // WIN32
 };
 
 class NetSocket
@@ -105,7 +90,6 @@ public:
 	virtual bool Create(Net_Address* addr, int port, bool udp_tcp);
 	virtual void SendTCP(NET_BUFFER_INDEX* buf) PURE;
 	virtual void SendUDP(NET_BUFFER_INDEX* buf) PURE;
-	virtual NetSocket* NewSocket(Net* net) PURE;
 
 	virtual void ReceiveTCP() PURE;
 	virtual void ReceiveUPD() PURE; 

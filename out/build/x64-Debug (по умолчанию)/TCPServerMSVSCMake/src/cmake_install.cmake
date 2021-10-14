@@ -1,8 +1,8 @@
-# Install script for directory: C:/Users/drhaz/source/repos/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/src
+# Install script for directory: A:/Cpp repos/TCPServerMSVSCMake/TCPServerMSVSCMake/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Users/drhaz/Source/Repos/BeerenBubbleGume/TCPServerMSVSCMake/out/install/x64-Debug (по умолчанию)")
+  set(CMAKE_INSTALL_PREFIX "A:/Cpp repos/TCPServerMSVSCMake/out/install/x64-Debug (по умолчанию)")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -34,8 +34,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("C:/Users/drhaz/source/repos/BeerenBubbleGume/TCPServerMSVSCMake/out/build/x64-Debug (по умолчанию)/TCPServerMSVSCMake/src/serv/cmake_install.cmake")
-  include("C:/Users/drhaz/source/repos/BeerenBubbleGume/TCPServerMSVSCMake/out/build/x64-Debug (по умолчанию)/TCPServerMSVSCMake/src/client/cmake_install.cmake")
+  include("A:/Cpp repos/TCPServerMSVSCMake/out/build/x64-Debug (по умолчанию)/TCPServerMSVSCMake/src/serv/cmake_install.cmake")
 
 endif()
 

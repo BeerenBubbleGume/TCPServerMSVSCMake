@@ -1,8 +1,8 @@
-# Install script for directory: C:/Users/drhaz/source/repos/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv
+# Install script for directory: A:/Cpp repos/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Users/drhaz/Source/Repos/BeerenBubbleGume/TCPServerMSVSCMake/out/install/x64-Debug (по умолчанию)")
+  set(CMAKE_INSTALL_PREFIX "A:/Cpp repos/TCPServerMSVSCMake/out/install/x64-Debug (по умолчанию)")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 

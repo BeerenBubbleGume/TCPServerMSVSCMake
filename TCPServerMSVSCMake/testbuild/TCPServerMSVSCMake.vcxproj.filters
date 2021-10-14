@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\NetSock.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\NetSocketUV.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\ServerUV.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\TCPServerMSVSCMake.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\utils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\NetSock.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\NetSocketUV.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\ServerUV.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\utils.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\TCPServerMSVSCMake.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="A:\Cpp repos\TCPServerMSVSCMake\TCPServerMSVSCMake\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{C87F706F-7137-3D56-BC2F-1A92758CB546}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{DE531114-6BCE-35FA-AC09-ACD0D903721C}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

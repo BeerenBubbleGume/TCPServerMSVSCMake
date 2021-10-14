@@ -16,16 +16,17 @@ NetSocketUV::NetSocketUV(Net *_Net) : NetSocket(net)
 NetSocketUV::~NetSocketUV()
 {
 	status = 0;
-	free(sock);
-	free(server);
-	free(client);
+	//free(sock);
+	//free(server);
+	//free(client);
 	//delete[] net;
 }
 
 bool NetSocketUV::Create(Net_Address* addr, int port, bool udp_tcp)
 {
 	NetSocket::Create(addr, udp_tcp, listen);
-	if (loop)
+	uv_loop_t* mloop = GetLoop(net);
+	if (mloop)
 	{
 		std::cout << "Loop have been initialize!" << std::endl;
 		if (udp_tcp)
@@ -38,22 +39,26 @@ bool NetSocketUV::Create(Net_Address* addr, int port, bool udp_tcp)
 			std::cout << "Create socket!" << std::endl;
 			//assert(net->CreateSocket() == true);
 
-			int r = uv_tcp_init(loop, server);
+			int r = uv_tcp_init(mloop, GetPtrServerTCP(sock));
 			assert(r == 0);
 
-			//r = uv_tcp_nodelay(server, true);
-			//assert(r == 0);
+			r = uv_tcp_nodelay(GetPtrServerTCP(sock), true);
+			assert(r == 0);
 			
 			sockaddr_in* sock_addres = new sockaddr_in;
 			int i = uv_ip4_addr(addr->address, addr->port, sock_addres);
 			assert(i == 0);
-			int b = uv_tcp_bind(server, (sockaddr*)sock_addres, 0);
+			int b = uv_tcp_bind(GetPtrServerTCP(sock), (sockaddr*)sock_addres, 0);
 			assert(b == 0);
-			if (GetIP(addr, true, (uv_stream_t*)server) == true)
-				return true;
-			else
-				return false;			
 
+			int listen = uv_listen((uv_stream_t*)GetPtrServerTCP(sock), 1024, OnConnect);
+			if (listen == 0)
+			{
+				if (GetIP(addr, true) == true)
+					return true;
+				else
+					return false;
+			}			
 		}
 		else
 		{
@@ -89,24 +94,18 @@ bool NetSocketUV::Create(Net_Address* addr, int port, bool udp_tcp)
 	
 }
 
-bool NetSocketUV::GetIP(Net_Address* addr, bool own_or_peer, uv_stream_t* stream)
+bool NetSocketUV::GetIP(Net_Address* addr, bool own_or_peer)
 {
 	if (own_or_peer)
 	{
 		//uv_tcp_t* tcp = GetPtrTCP(sock);
 		std::cout << "Set IP to socket!" << std::endl;
 		udp_tcp = true;
-		bool r = Accept(stream);
-		if (r == true)
-		{
-			return true;
-		}
-		else
-		{
-			fprintf(stderr, "Listening UV socket error!", uv_err_name(r));
-			return false;
-		}
 
+		uv_loop_t* sloop = GetLoop(net);
+		RunLoop(sloop);
+
+		return true;
 	}
 	else
 		return false;
@@ -129,25 +128,23 @@ bool NetSocketUV::ConnectUV(Net_Address* addr)
 	return false;
 }
 */
-bool NetSocketUV::Accept(uv_stream_t* stream)
+bool NetSocketUV::Accept()
 {
-	if (udp_tcp)
+	uv_tcp_t* server = GetPtrServerTCP(sock);
+	uv_tcp_t* client = GetPtrClientTCP(sock);
+	if (uv_accept((uv_stream_t*)server, (uv_stream_t*)client) == 0)
 	{
-		int list = 0;
-		if (list = uv_listen(stream, 1024, OnConnect)  == 0)
+		if (uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadTCP))
 		{
-			std::cout << "Start listening UV socket!" << std::endl;
-			uv_run(loop, UV_RUN_DEFAULT);
+			std::cout << "Start accepting RTSP!" << std::endl;
 			return true;
 		}
 		else
 		{
-			fprintf(stderr, "Cannot listen UV socket!\n", uv_err_name(list));
-			exit(2);
+			std::cout << "Cannot start reading!" << std::endl;
 			return false;
 		}
 	}
-	
 }
 
 //высылаем данные по TCP протаколу
@@ -171,7 +168,7 @@ void NetSocketUV::ReceiveTCP()
 {
 	NetBuffer* recv_buffer = net->GetRecvBuffer();
 	int received_bytes = recv_buffer->GetLength();
-	net->recv_buf.Add(received_bytes, recv_buffer->GetData());
+	net->recv_buf->Add(received_bytes, recv_buffer->GetData());
 
 	if (net->IsServer())
 		net->ReciveMessege();
@@ -181,9 +178,9 @@ void NetSocketUV::ReceiveUPD()
 {
 }
 
-bool NetSocketUV::SetConnectedSocketToReadMode(uv_stream_t *stream)
+bool NetSocketUV::SetConnectedSocketToReadMode()
 {
-	if (udp_tcp)
+	/*if (udp_tcp)
 	{
 		std::cout << "Setting connected UV socket to reading mode!" << std::endl;
 		int r = uv_read_start(stream, OnAllocBuffer, OnReadTCP);
@@ -192,15 +189,14 @@ bool NetSocketUV::SetConnectedSocketToReadMode(uv_stream_t *stream)
 		else
 			return false;
 
-	}
+	}*/
 	return false;
 }
 
 //callback функция которая вызываемая uv_read_start - записывает полученные данные в массив данных
 void OnReadTCP(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)
 {
-	Net* net = new Net;
-	NetSocketUV* uvsocket = new NetSocketUV(net);
+	NetSocketUV* uvsocket = (NetSocketUV*)GetNetSocketPtr(stream);
 	std::cout << "Receiving..." << std::endl;
 	if (nread < 0)
 	{
@@ -211,7 +207,7 @@ void OnReadTCP(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)
 	{
 		std::cout << "Reading UV socket" << std::endl;
 		NetBuffer* recv_buff = uvsocket->net->GetRecvBuffer();
-		assert(buf->base == (char*)recv_buff->GetData());
+		assert(buf->base == (char*)recv_buff->DataBuff);
 		recv_buff->SetMaxSize(nread);
 		uvsocket->ReceiveTCP();
 		uvsocket->SendTCP((NET_BUFFER_INDEX*)recv_buff->GetData());
@@ -222,9 +218,10 @@ void OnReadTCP(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)
 void OnAllocBuffer(uv_handle_t *handle, size_t suggested_size, uv_buf_t *buf)
 {
 	std::cout << "Allocating buffer" << std::endl;
-	NetBuffer* recv_buffer = new NetBuffer;
+	NetSocketUV* nsock = (NetSocketUV*)GetNetSocketPtr(handle);
+	NetBuffer* recv_buffer = nsock->net->GetRecvBuffer();
 
-	unsigned int max_length = recv_buffer->GetMaxLength();
+	unsigned int max_length = 0;
 	if (max_length < suggested_size)
 		recv_buffer->SetMaxSize(suggested_size);
 
@@ -287,23 +284,8 @@ void OnConnect(uv_stream_t* stream, int status)
 		fprintf(stderr, "New connection error %s\n", uv_strerror(status));
 		return;
 	}
-	Net* net = new Net;
-	NetSocketUV* netsock = new NetSocketUV(net);
-	
-	uv_tcp_init(netsock->loop, netsock->client);
-	//uv_loop_init(netsock->loop);
-
-	int r = uv_accept(stream, (uv_stream_t*)netsock->client);
-	if (r)
-	{
-		// ���������� ���������� �� �������
-		uv_close((uv_handle_t *)netsock->client, OnCloseSocket); // ������� �����, ������� ��� ������ ��� ����������
-		exit(4);
-	}
-	std::cout << "Net connetction" << std::endl;
-	netsock->udp_tcp = true;
-	bool c = netsock->SetConnectedSocketToReadMode((uv_stream_t*)netsock->client);
-	assert(c == true);
+	NetSocketUV* netsock = (NetSocketUV*)GetNetSocketPtr(stream);
+	netsock->Accept();
 }
 //удаляем сокет libuv и приметив сокета
 void NetSocketUV::Destroy()
@@ -332,36 +314,38 @@ uv_tcp_t *GetPtrTCP(void *ptr)
 	return (uv_tcp_t*)(((char*)ptr) + sizeof(void*));
 }
 
+uv_tcp_t* GetPtrServerTCP(void* ptr)
+{
+	NetSocketUV* client = (NetSocketUV*)GetNetSocketPtr(ptr);
+	return client->server;
+}
+
+uv_tcp_t* GetPtrClientTCP(void* ptr)
+{
+	NetSocketUV* serv = (NetSocketUV*)GetNetSocketPtr(ptr);
+	return serv->client;
+}
+
 uv_udp_t *GetPtrUDP(void *ptr)
 {
 	return (uv_udp_t *)(((char *)ptr) + sizeof(void *));
 }
 
-uv_stream_t *GetPtrStream(void *ptr)
-{
-	return (uv_stream_t *)(((char *)ptr) + sizeof(void *));
-}
-
-NetBuffer *GetPtrBuffer(void *ptr)
-{
-	return (NetBuffer *)(((char *)ptr) + sizeof(void *));
-}
-/*
 uv_loop_t *GetLoop(Net* net)
 {
-	//NetSocketUV* serv = (NetSocketUV*)(net);
+	NetSocketUV* serv = (NetSocketUV*)(net);
 	if (net != nullptr)
 	{
 		uv_loop_t* theloop;
 		theloop = uv_default_loop();
-		//int r = uv_loop_init(serv->theloop);
+		//int r = uv_loop_init(serv->loop);
 		//assert(r == 0);
 		return theloop;
 	}
 	else
 		return nullptr;
 }
-*/
+
 
 
 /*

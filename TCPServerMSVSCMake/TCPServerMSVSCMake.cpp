@@ -3,8 +3,6 @@
 
 #include "TCPServerMSVSCMake.hpp"
 
-
-
 int main() {
 
 	std::cout << "Main:" << std::endl;
@@ -18,7 +16,7 @@ int main() {
 	}
 	else
 	{
-		std::cout << "Server was chashed started!" << std::endl;
+		std::cout << "Server was crashed!" << std::endl;
 		exit(1);
 	}
 }
