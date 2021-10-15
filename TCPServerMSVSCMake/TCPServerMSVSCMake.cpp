@@ -14,11 +14,12 @@ int main() {
 	if(server->connect(true) == true)
 	{
 		std::cout << "Server have been started!" << std::endl;
+		//server->SendTCP();
 		return 0; 
 	}
 	else
 	{
-		std::cout << "Server was chashed started!" << std::endl;
+		std::cout << "Server was crashed!" << std::endl;
 		exit(1);
 	}
 }

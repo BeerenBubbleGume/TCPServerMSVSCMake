@@ -63,34 +63,17 @@ public:
 	virtual ~Net();
 	int ClientID;
 	int bytes_read;
-
+	//sockaddr_in* sock_addres;
 	Net_Address* addr;
-	sockaddr_in* net_addr;
 	bool udp_tcp;
 	NetSocket* receiving_socket;
 	NetBuffer recv_buf;
+	
 	NetBuffer* GetRecvBuffer() { return &recv_buf; }
-
+	//virtual NetSocket* NewSocket(Net* net) PURE;
 	void OnLostConnection(void* sock);
 	bool IsServer() { return true; }
 	void ReciveMessege();
-#ifdef WIN32
-	SOCKET tcp_socket;
-	void Connect(sockaddr_in* addr, SOCKET socket);
-	//virtual char Recive();
-	//virtual void Send(char* data, unsigned int len);
-	void closesock(SOCKET sock);
-	bool CreateSocket();
-
-#else
-	int tcp_socket;
-	void Connect();
-	char Recive();
-	void Send(char* data, unsigned int len);
-	void closesock(int sock);
-	bool CreateSocket();
-
-#endif // WIN32
 };
 
 class NetSocket

@@ -58,7 +58,7 @@ void Server::SetID(void* NewClient)
 		}
 	else
 	{
-		fprintf(stderr, "New client is null!");
+		fprintf(stderr, "New client is does not exist!");
 		exit(1);
 	}
 }
