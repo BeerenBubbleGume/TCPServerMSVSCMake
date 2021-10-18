@@ -239,7 +239,7 @@ void OnReadUDP(uv_udp_t* handle, ssize_t nread, const uv_buf_t* buf, const struc
 	socket->net->addr->port = port_ptr[1];
 	socket->net->addr->port += port_ptr[0] << 8;
 
-	//ReceiveUPD();
+	socket->ReceiveUPD();
 }
 
 //callback функция вызываемая из Accept
