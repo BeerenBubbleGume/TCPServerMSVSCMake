@@ -1,0 +1,108 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1
+					],
+					"jsonFile" : "directory-.-RelWithDebInfo-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"projectIndex" : 0,
+					"source" : "."
+				},
+				{
+					"build" : "TCPServerMSVSCMake",
+					"childIndexes" : 
+					[
+						2
+					],
+					"jsonFile" : "directory-TCPServerMSVSCMake-RelWithDebInfo-228b41e02a9087bc3a27.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "TCPServerMSVSCMake",
+					"targetIndexes" : 
+					[
+						0
+					]
+				},
+				{
+					"build" : "TCPServerMSVSCMake/src",
+					"childIndexes" : 
+					[
+						3
+					],
+					"jsonFile" : "directory-TCPServerMSVSCMake.src-RelWithDebInfo-5071dd96f08e1fb82e59.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 0,
+					"source" : "TCPServerMSVSCMake/src"
+				},
+				{
+					"build" : "TCPServerMSVSCMake/src/serv",
+					"jsonFile" : "directory-TCPServerMSVSCMake.src.serv-RelWithDebInfo-1c35ab510e39265c3f90.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"parentIndex" : 2,
+					"projectIndex" : 0,
+					"source" : "TCPServerMSVSCMake/src/serv"
+				}
+			],
+			"name" : "RelWithDebInfo",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					],
+					"name" : "TCPServerMSVSCMake",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 1,
+					"id" : "TCPServerMSVSCMake::@c1fa6790a5be207d0e6d",
+					"jsonFile" : "target-TCPServerMSVSCMake-RelWithDebInfo-df8afc7f250449fc5ab5.json",
+					"name" : "TCPServerMSVSCMake",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/Operator/source/repos/TCPServerMSVSCMake/out/build/x64-Release",
+		"source" : "C:/Users/Operator/source/repos/TCPServerMSVSCMake"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}

@@ -52,7 +52,7 @@ bool NetSocket::Create(Net_Address* addr, int port, bool udp_tcp)
 
 }
 
-void NetSocket::SendMessenge(NET_BUFFER_INDEX* buf, Net_Address* addr)
+/*void NetSocket::SendMessenge(NET_BUFFER_INDEX* buf, Net_Address* addr)
 {
 	if (buf)
 	{
@@ -69,7 +69,7 @@ void NetSocket::SendMessenge(NET_BUFFER_INDEX* buf, Net_Address* addr)
 			SendUDP(buf);
 		}
 	}
-}
+}*/
 
 NetSocket* GetPtrSocket(void* ptr)
 {

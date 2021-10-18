@@ -86,14 +86,14 @@ public:
 	void Destroy();
 
 	virtual bool Create(Net_Address* addr, int port, bool udp_tcp);
-	virtual void SendTCP(NET_BUFFER_INDEX* buf) PURE;
-	virtual void SendUDP(NET_BUFFER_INDEX* buf) PURE;
+	//virtual void SendTCP(NET_BUFFER_INDEX* buf) PURE;
+	//virtual void SendUDP(NET_BUFFER_INDEX* buf) PURE;
 	virtual NetSocket* NewSocket(Net* net) PURE;
 
-	virtual void ReceiveTCP() PURE;
-	virtual void ReceiveUPD() PURE; 
+	//virtual void ReceiveTCP() PURE;
+	//virtual void ReceiveUPD() PURE; 
 
-	void SendMessenge(NET_BUFFER_INDEX* buf, Net_Address* addr);
+	//void SendMessenge(NET_BUFFER_INDEX* buf, Net_Address* addr);
 	
 	bool IsTCP() { return udp_tcp; }
 	
