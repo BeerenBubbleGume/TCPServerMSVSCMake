@@ -27,11 +27,7 @@ int Server::connect(bool connection)
 				<<
 					"__________________________________" << std::endl;
 
-		Net_Address addr;
-		addr.address = { "127.0.0.1" };
-		addr.port = 8000;
-
-		return Create(&addr, true, true);
+		return Create(8000, true, true);
 	}
 	else
 	{

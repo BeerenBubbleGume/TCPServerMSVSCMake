@@ -85,10 +85,10 @@ public:
 	~NetSocket();
 	void Destroy();
 
-	virtual bool Create(Net_Address* addr, int port, bool udp_tcp);
+	virtual bool Create(int port, bool udp_tcp, bool listen);
 	virtual void SendTCP(NET_BUFFER_INDEX* buf) PURE;
 	virtual void SendUDP(NET_BUFFER_INDEX* buf) PURE;
-	virtual NetSocket* NewSocket(Net* net) PURE;
+	//virtual NetSocket* NewSocket(Net* net) PURE;
 
 	virtual void ReceiveTCP() PURE;
 	virtual void ReceiveUPD() PURE; 

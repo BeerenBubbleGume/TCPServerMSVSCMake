@@ -1,5 +1,7 @@
 ﻿#include "NetSock.hpp"
 
+int SERVER_DEFAULT_PORT = 8000;
+
 Net::Net()
 {
 	//sock_addres = new sockaddr_in;
@@ -26,6 +28,9 @@ void Net::ReciveMessege()
 NetSocket::NetSocket(Net* net)
 {
 	this->net = net;
+	addr = new Net_Address;
+	port = 0;
+	udp_tcp = false;
 }
 
 NetSocket::~NetSocket()
@@ -41,7 +46,7 @@ void NetSocket::Destroy()
 	//	free(receiving_socket);
 }
 
-bool NetSocket::Create(Net_Address* addr, int port, bool udp_tcp)
+bool NetSocket::Create(int port, bool udp_tcp, bool listen)
 {
 	this->udp_tcp = udp_tcp;
 	this->port = port;
@@ -175,6 +180,8 @@ void Net_Address::FromStringIP(const char* ip)
 		port = port_str.StringToInt();
 		address = address.Left(pos);
 	}
+	else
+		port = SERVER_DEFAULT_PORT;
 }
 
 void Net_Address::Serialize(CString* stream)

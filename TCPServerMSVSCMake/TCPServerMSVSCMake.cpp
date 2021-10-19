@@ -8,7 +8,7 @@
 int main() {
 
 	std::cout << "Main:" << std::endl;
-	Net* net = (Net*)malloc(sizeof(Net*));
+	Net* net = new Net;
 	Server* server = new Server(net);
 
 	if(server->connect(true) == true)

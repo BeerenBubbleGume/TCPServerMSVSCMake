@@ -1,4 +1,5 @@
 #include "NetSocketUV.hpp"
+//#pragma comment(lib, "../../libs/lib/libuv.lib")
 
 NetSocketUV::NetSocketUV(Net *_Net) : NetSocket(net)
 {
@@ -6,7 +7,7 @@ NetSocketUV::NetSocketUV(Net *_Net) : NetSocket(net)
 	sock = NULL;
 	status = errno;	
 	loop = uv_default_loop();
-	server = new uv_tcp_t;
+	//server = new uv_tcp_t;
 }
 
 NetSocketUV::~NetSocketUV()
@@ -18,41 +19,39 @@ NetSocketUV::~NetSocketUV()
 	//delete[] net;
 }
 
-bool NetSocketUV::Create(Net_Address* addr, int port, bool udp_tcp)
+bool NetSocketUV::Create(int port, bool udp_tcp, bool listen)
 {	
-	NetSocket::Create(addr, udp_tcp, true);
+	NetSocket::Create(udp_tcp, udp_tcp, listen);
 	if (loop)
 	{
 		
 		if (udp_tcp)
 		{
-			sock = malloc(sizeof(TCP_SOCKET));
+			sock = new TCP_SOCKET;
 			memset(sock, 0, sizeof(TCP_SOCKET));
 			((TCP_SOCKET*)sock)->net_socket = this;
 			
-			int r = uv_tcp_init(loop, server);
+			uv_tcp_t* tcp = GetPtrTCP(sock);
+
+			int r = uv_tcp_init(loop, tcp);
 			assert(r == 0);
 
-			r = uv_tcp_nodelay(server, true);
+			r = uv_tcp_nodelay(tcp, true);
 			assert(r == 0);
-			
-			sockaddr_in* sock_addres = new sockaddr_in;
-			int i = uv_ip4_addr(addr->address, addr->port, sock_addres);
-			assert(i == 0);
-			int b = uv_tcp_bind(server, (sockaddr*)sock_addres, 0);
-			assert(b == 0);
 
-			int listen = uv_listen((uv_stream_t*)server, 1024, OnAccept);
-			if (listen == 0)
+			if (listen)
 			{
+				sockaddr_in* sock_addres = new sockaddr_in;
 				
-				std::cout << "Loop have been initialize!" << std::endl;
-				return uv_run(loop, UV_RUN_DEFAULT);
-			}
-			else
-			{
-				std::cout << "Cannot accept" << std::endl;
-				return false;
+				int i = uv_ip4_addr("127.0.0.1", 8000, sock_addres);
+				assert(i == 0);
+				int b = uv_tcp_bind(tcp, (sockaddr*)sock_addres, 0);
+				assert(b == 0);
+				int listen = uv_listen((uv_stream_t*)tcp, 1024, OnAccept);
+				if (listen)
+					return false;
+				else
+					return uv_run(loop, UV_RUN_DEFAULT);
 			}
 				
 		}
@@ -86,8 +85,6 @@ bool NetSocketUV::Create(Net_Address* addr, int port, bool udp_tcp)
 		std::cout << "Loop cannot been initialized!" << std::endl;
 		return false;
 	}
-	
-	
 }
 
 bool NetSocketUV::GetIP(Net_Address* addr, bool own_or_peer)
@@ -105,12 +102,14 @@ bool NetSocketUV::GetIP(Net_Address* addr, bool own_or_peer)
 
 bool NetSocketUV::Accept(uv_stream_t* handle)
 {
-	uv_tcp_t* stream = new uv_tcp_t;
-	uv_tcp_init(loop, stream);
+	NetSocketUV* accept_sock = NewSocket(net);
+	accept_sock->Create(8000, true, false);
+	uv_tcp_t* client = GetPtrTCP(accept_sock->sock);
+	uv_tcp_init(loop, client);
 
-	if (uv_accept((uv_stream_t*)server, (uv_stream_t*)stream) == 0)
+	if (uv_accept(handle, (uv_stream_t*)client) == 0)
 	{
-		if (uv_read_start((uv_stream_t*)stream, OnAllocBuffer, OnReadTCP) == 0)
+		if (uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadTCP) == 0)
 		{
 			std::cout << "Start accepting RTSP from: " << std::endl;
 			return true;
@@ -136,7 +135,7 @@ void NetSocketUV::SendTCP(NET_BUFFER_INDEX *buf)
 		uv_buf_t buffer;
 		buffer.len = buf->buff_length;
 		buffer.base = (char*)buf->DataBuff;
-		int r = uv_write(((NetBufferUV*)buf)->GetPtrWrite(), (uv_stream_t*)server, &buffer, 1, OnWrite);
+		int r = uv_write(((NetBufferUV*)buf)->GetPtrWrite(), (uv_stream_t*)GetPtrTCP(sock), &buffer, 1, OnWrite);
 		assert(r == 0);
 	}
 }
