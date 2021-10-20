@@ -3,7 +3,7 @@
 
 NetSocketUV::NetSocketUV(Net *_Net) : NetSocket(net)
 {
-	this->net = net;
+	//this->net = net;
 	sock = NULL;
 	status = errno;	
 	loop = uv_default_loop();
@@ -22,7 +22,8 @@ NetSocketUV::~NetSocketUV()
 bool NetSocketUV::Create(int port, bool udp_tcp, bool listen)
 {	
 	NetSocket::Create(udp_tcp, udp_tcp, listen);
-	if (loop)
+	uv_loop_t* sloop = GetLoop(net);
+	if (sloop)
 	{
 		
 		if (udp_tcp)
@@ -47,11 +48,11 @@ bool NetSocketUV::Create(int port, bool udp_tcp, bool listen)
 				assert(i == 0);
 				int b = uv_tcp_bind(tcp, (sockaddr*)sock_addres, 0);
 				assert(b == 0);
-				int listen = uv_listen((uv_stream_t*)tcp, 1024, OnAccept);
-				if (listen)
+				int l = uv_listen((uv_stream_t*)tcp, 1024, OnAccept);
+				if (l)
 					return false;
 				else
-					return uv_run(loop, UV_RUN_DEFAULT);
+					return uv_run(sloop, UV_RUN_DEFAULT);
 			}
 				
 		}
@@ -105,13 +106,15 @@ bool NetSocketUV::Accept(uv_stream_t* handle)
 	NetSocketUV* accept_sock = NewSocket(net);
 	accept_sock->Create(8000, true, false);
 	uv_tcp_t* client = GetPtrTCP(accept_sock->sock);
-	uv_tcp_init(loop, client);
+	//uv_tcp_init(GetLoop(net), client);
 
 	if (uv_accept(handle, (uv_stream_t*)client) == 0)
 	{
 		if (uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadTCP) == 0)
 		{
-			std::cout << "Start accepting RTSP from: " << std::endl;
+			sockaddr sockname;
+			int socklen = sizeof sockname;
+			std::cout << "Start accepting RTSP from: " << uv_tcp_getsockname(client, &sockname, &socklen) << std::endl;
 			return true;
 		}
 		else
@@ -298,8 +301,8 @@ NetBuffer *GetPtrBuffer(void *ptr)
 
 uv_loop_t *GetLoop(Net* net)
 {
-	NetSocketUV* serv = (NetSocketUV*)net;
-	return (serv->loop);
+	NetSocketUV serv = (NetSocketUV)net;
+	return (serv.loop);
 }
 
  /*

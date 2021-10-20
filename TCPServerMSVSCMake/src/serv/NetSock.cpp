@@ -4,12 +4,11 @@ int SERVER_DEFAULT_PORT = 8000;
 
 Net::Net()
 {
-	//sock_addres = new sockaddr_in;
 	bytes_read = 0;
 	ClientID = 0;
 	addr = nullptr;
 	receiving_socket = (NetSocket*)malloc(sizeof(NetSocket));
-
+	recv_buf = *(NetBuffer*)malloc(sizeof(NetBuffer));
 }
 
 Net::~Net()
@@ -132,7 +131,7 @@ void NetBuffer::Clear()
 		DataBuff = nullptr;
 	}
 	buff_length = 0;
-	
+	max_length = 0;
 }
 
 int NetBuffer::SetLength(unsigned int length)
