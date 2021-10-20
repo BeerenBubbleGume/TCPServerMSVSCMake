@@ -50,7 +50,7 @@ public:
 	void Clear();
 	int position;
 	//unsigned char* data;
-	unsigned int max_length;
+	unsigned int max_length = 0;
 	unsigned char* DataBuff;
 	unsigned int buff_length;
 
@@ -86,12 +86,12 @@ public:
 	void Destroy();
 
 	virtual bool Create(int port, bool udp_tcp, bool listen);
-	virtual void SendTCP(NET_BUFFER_INDEX* buf) PURE;
-	virtual void SendUDP(NET_BUFFER_INDEX* buf) PURE;
+	virtual void SendTCP(NET_BUFFER_INDEX* buf) = 0;
+	virtual void SendUDP(NET_BUFFER_INDEX* buf) = 0;
 	//virtual NetSocket* NewSocket(Net* net) PURE;
 
-	virtual void ReceiveTCP() PURE;
-	virtual void ReceiveUPD() PURE; 
+	virtual void ReceiveTCP() = 0;
+	virtual void ReceiveUPD() = 0; 
 
 	//void SendMessenge(NET_BUFFER_INDEX* buf, Net_Address* addr);
 	

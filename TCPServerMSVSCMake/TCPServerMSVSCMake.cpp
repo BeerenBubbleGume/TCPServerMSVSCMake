@@ -10,7 +10,6 @@ int main() {
 	std::cout << "Main:" << std::endl;
 	Net* net = new Net;
 	Server* server = new Server(net);
-	NetBuffer* newbuffer = new NetBuffer;
 
 	if(server->connect(true) == true)
 	{
