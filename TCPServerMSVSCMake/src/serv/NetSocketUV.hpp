@@ -14,16 +14,15 @@ class NetSocketUV : public NetSocket
 {
 public:
 	
-	NetSocketUV(Net* _Net);
-	~NetSocketUV();
-	
+	NetSocketUV(Net* net);
+	virtual ~NetSocketUV();
+
 	void* sock;
 
 	virtual bool Create(int port, bool udp_tcp, bool listen);
 	
 	bool SetConnectedSocketToReadMode(uv_stream_t* stream);
 	bool GetIP(Net_Address* addr, bool own_or_peer);
-	//bool ConnectUV(Net_Address* addr);
 	bool Accept(uv_stream_t* handle);
 
 	void SendTCP(NET_BUFFER_INDEX* buf);
@@ -39,10 +38,6 @@ public:
 	}
 
 	uv_loop_t* loop;
-	//uv_tcp_t* server;
-	//uv_tcp_t* client;
-	//uv_udp_t* udp;
-
 };
 
 void OnAccept(uv_stream_t* stream, int status);

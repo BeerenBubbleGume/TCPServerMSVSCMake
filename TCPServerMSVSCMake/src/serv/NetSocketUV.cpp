@@ -1,22 +1,16 @@
 #include "NetSocketUV.hpp"
-//#pragma comment(lib, "../../libs/lib/libuv.lib")
 
-NetSocketUV::NetSocketUV(Net *_Net) : NetSocket(net)
+NetSocketUV::NetSocketUV(Net* net) : NetSocket(net)
 {
-	//this->net = net;
+	this->net = net;
 	sock = NULL;
 	status = errno;	
 	loop = uv_default_loop();
-	//server = new uv_tcp_t;
 }
 
 NetSocketUV::~NetSocketUV()
 {
 	status = 0;
-	//free(sock);
-	//free(server);
-	//free(client);
-	//delete[] net;
 }
 
 bool NetSocketUV::Create(int port, bool udp_tcp, bool listen)
@@ -185,6 +179,7 @@ void OnReadTCP(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)
 	{
 		std::cout << "read buff < 0" << std::endl;
 		uvsocket->net->OnLostConnection(uvsocket);
+		OnCloseSocket((uv_handle_t*)stream);
 	}
 	else
 	{
@@ -193,7 +188,15 @@ void OnReadTCP(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)
 		assert(buf->base == (char*)recv_buff->GetData());
 		recv_buff->SetMaxSize(nread);
 		uvsocket->ReceiveTCP();
-		uvsocket->SendTCP((NET_BUFFER_INDEX*)recv_buff->GetData());
+		
+		MEM_DATA data;
+		data.data = recv_buff->GetData();
+		data.length = recv_buff->GetLength();
+		int index = recv_buff->owner->AddBuffer(data);
+		
+		NET_BUFFER_INDEX* bi = recv_buff->owner->Get(index);
+
+		uvsocket->SendMessenge(bi);
 	}
 }
 
@@ -289,53 +292,8 @@ uv_udp_t *GetPtrUDP(void *ptr)
 	return (uv_udp_t *)(((char *)ptr) + sizeof(void *));
 }
 
-uv_stream_t *GetPtrStream(void *ptr)
-{
-	return (uv_stream_t *)(((char *)ptr) + sizeof(void *));
-}
-
-NetBuffer *GetPtrBuffer(void *ptr)
-{
-	return (NetBuffer *)(((char *)ptr) + sizeof(void *));
-}
-
 uv_loop_t *GetLoop(Net* net)
 {
 	NetSocketUV serv = (NetSocketUV)net;
 	return (serv.loop);
 }
-
- /*
-bool NetSocketUV::ConnectUV(Net_Address* addr)
-{
-	sockaddr_in dest;
-	uv_ip4_addr(addr->address, addr->port, &dest);
-
-	uv_tcp_t* tcp = GetPtrTCP(sock);
-	UV_CONNECT_DATA* connect_data = &((NetSocket*)net)->connect_data;
-	connect_data->net = net;
-	if (!uv_tcp_connect(connect_data, tcp, (const struct sockaddr*)&dest, OnConnect))
-	{
-		uv_loop_t* loop = GetLoop(net);
-		uv_run(loop, UV_RUN_DEFAULT);
-		return true;
-	}
-	return false;
-}
-*/
-
-/*
-void OnConnect(uv_connect_t* req, int status)
-{
-	Net* net = ((UV_CONNECT_DATA*)req)->net;
-	if (status == 0)
-	{
-		net->OnConnect(true);
-	}
-	else
-	{
-		//ErrorLibUV(status);
-		net->OnConnect(false);
-	}
-}
-*/

@@ -6,12 +6,11 @@
 
 //extern bool udp_tcp;
 
-class Server : public NetSocketUV 
+class Server
 {
 public:
-
-	Server(Net* net);
-	~Server();
+	Server();
+	virtual ~Server();
 	Net* net;
 	NetSocketUV* net_sockuv;
 	char* IDArray;

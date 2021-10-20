@@ -1,19 +1,16 @@
 #include <stdint.h>
 #include "ServerUV.hpp"
-#include <string.h>
 
-Server::Server(Net* net) : NetSocketUV(net)
+Server::Server()
 {
-	this->net = net;
-	net_sockuv = new NetSocketUV(this->net);
+	net = new Net;
+	net_sockuv = new NetSocketUV(net);
 	IDArray = new char[1024];
 }
 
 Server::~Server()
 {
-	this->net = nullptr;
 	delete[] IDArray;
-
 }
 
 int Server::connect(bool connection)
@@ -27,7 +24,7 @@ int Server::connect(bool connection)
 				<<
 					"__________________________________" << std::endl;
 
-		return Create(8000, true, true);
+		return net_sockuv->Create(8000, true, true);
 	}
 	else
 	{
@@ -39,7 +36,7 @@ int Server::connect(bool connection)
 std::string Server::GetClientID()
 {
 	char ServerPath[] = { "rtsp://192.168.0.109:554/" };
-	return ServerPath + net->ClientID;
+	return ServerPath + net_sockuv->net->ClientID;
 }
 
 void Server::SetID(void* NewClient)
@@ -49,7 +46,7 @@ void Server::SetID(void* NewClient)
 		for (int i = 0; i <= INT16_MAX; i++)
 		{
 			counter = i;
-			net->ClientID = counter;
+			net_sockuv->net->ClientID = counter;
 			*IDArray = counter;
 		}
 	else

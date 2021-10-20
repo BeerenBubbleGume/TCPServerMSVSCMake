@@ -32,7 +32,7 @@ struct NetBuffer
 public:
 
 	NetBuffer();
-	virtual ~NetBuffer();
+	~NetBuffer();
 
 	NET_BUFFER_LIST* owner;
 	unsigned char* GetData() { return DataBuff; }
@@ -49,8 +49,8 @@ public:
 	unsigned int GetMaxLength() { return max_length; }
 	void Clear();
 	int position;
-	//unsigned char* data;
-	unsigned int max_length = 0;
+	
+	unsigned int max_length;
 	unsigned char* DataBuff;
 	unsigned int buff_length;
 
@@ -60,10 +60,10 @@ class Net
 {
 public:
 	Net();
-	virtual ~Net();
+	~Net();
 	int ClientID;
 	int bytes_read;
-	//sockaddr_in* sock_addres;
+	
 	Net_Address* addr;
 	bool udp_tcp;
 	NetSocket* receiving_socket;
@@ -82,7 +82,7 @@ public:
 
 	NetSocket(Net* net);
 	
-	~NetSocket();
+	virtual ~NetSocket();
 	void Destroy();
 
 	virtual bool Create(int port, bool udp_tcp, bool listen);
@@ -93,7 +93,7 @@ public:
 	virtual void ReceiveTCP() = 0;
 	virtual void ReceiveUPD() = 0; 
 
-	//void SendMessenge(NET_BUFFER_INDEX* buf, Net_Address* addr);
+	void SendMessenge(NET_BUFFER_INDEX* buf, Net_Address* addr = nullptr);
 	
 	bool IsTCP() { return udp_tcp; }
 	
@@ -141,13 +141,13 @@ struct Net_Address
 {
 	CString address;
 	int port;
+
 	void FromStringIP(const char* ip);
 	void Serialize(CString* stream);
 };
 
 struct NetBufferUV : public NET_BUFFER_INDEX
 {
-public:
 	char sender_object[SENDER_SIZE_UV];
 
 	NetBufferUV(int index) : NET_BUFFER_INDEX(index)
@@ -164,7 +164,7 @@ struct NET_BUFFER_LIST : public CArrayBase
 	Net* net;
 	int k_buffer;
 	NET_BUFFER_INDEX** m_buffer;
-
+	
 	NET_BUFFER_LIST();
 	virtual ~NET_BUFFER_LIST();
 	

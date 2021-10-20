@@ -8,20 +8,31 @@ Net::Net()
 	ClientID = 0;
 	addr = nullptr;
 	receiving_socket = (NetSocket*)malloc(sizeof(NetSocket));
-	recv_buf = *(NetBuffer*)malloc(sizeof(NetBuffer));
 }
 
 Net::~Net()
 {
+	if (bytes_read != 0)
+		bytes_read = 0;
+	if (ClientID != 0)
+		ClientID = 0;
+	if (addr)
+	{
+		delete addr;
+		addr = nullptr;
+	}
+	if (receiving_socket)
+	{
+		delete receiving_socket;
+		receiving_socket = nullptr;
+	}
 }
 
 void Net::ReciveMessege()
 {
 	int length = recv_buf.GetMaxLength();
 	unsigned char* data = recv_buf.GetData();
-	//tcp_socket = socket(AF_INET, SOCK_STREAM, 0);
-	//int r = recv(tcp_socket, (char*)data, length, 0);
-
+	
 }
 
 NetSocket::NetSocket(Net* net)
@@ -30,6 +41,7 @@ NetSocket::NetSocket(Net* net)
 	addr = new Net_Address;
 	port = 0;
 	udp_tcp = false;
+
 }
 
 NetSocket::~NetSocket()
@@ -39,10 +51,21 @@ NetSocket::~NetSocket()
 
 void NetSocket::Destroy()
 {
-	//if(addr)
-	//	free(addr);
-	//if(receiving_socket)
-	//	free(receiving_socket);
+	if (addr)
+	{
+		delete addr;
+		addr = 0;
+	}
+	if (port != 0)
+		port = 0;
+	/* if (net)
+	* {
+	*	delete[] net;
+	*	net = nullptr;
+	* }
+	*/
+	if (udp_tcp == true)
+		udp_tcp = false;
 }
 
 bool NetSocket::Create(int port, bool udp_tcp, bool listen)
@@ -53,10 +76,9 @@ bool NetSocket::Create(int port, bool udp_tcp, bool listen)
 		this->addr = new Net_Address;
 
 	return true;
-
 }
 
-/*void NetSocket::SendMessenge(NET_BUFFER_INDEX* buf, Net_Address* addr)
+void NetSocket::SendMessenge(NET_BUFFER_INDEX* buf, Net_Address* addr)
 {
 	if (buf)
 	{
@@ -68,16 +90,16 @@ bool NetSocket::Create(int port, bool udp_tcp, bool listen)
 		}
 		else
 		{
-		//	if (addr)
-		//		*(this->addr) = *addr;
+			if (addr)
+				*(this->addr) = *addr;
 			SendUDP(buf);
 		}
 	}
-}*/
+}
 
 NetSocket* GetPtrSocket(void* ptr)
 {
-	return (NetSocket*)ptr;
+	return *((NetSocket**)ptr);
 }
 
 NetSocket* GetNetSocketPtr(void* uv_socket)
@@ -89,7 +111,6 @@ void Net::OnLostConnection(void* socket)
 {
 	
 }
-
 
 NetBuffer::NetBuffer()
 {
@@ -127,8 +148,8 @@ void NetBuffer::Clear()
 {
 	if (DataBuff)
 	{
-		delete[] DataBuff;
-		DataBuff = nullptr;
+		delete []DataBuff;
+		DataBuff = NULL;
 	}
 	buff_length = 0;
 	max_length = 0;
@@ -185,16 +206,6 @@ void Net_Address::FromStringIP(const char* ip)
 
 void Net_Address::Serialize(CString* stream)
 {
-	if (stream->IsEmpty())
-	{
-		//stream >> address;
-		//stream >> port;
-	}
-	else
-	{
-		//stream << address;
-		//stream << port;
-	}
 }
 
 NetBufferUV::~NetBufferUV()
@@ -214,7 +225,7 @@ uv_udp_send_t* NetBufferUV::GetPtrSend()
 
 NET_BUFFER_LIST::NET_BUFFER_LIST() : CArrayBase()
 {
-	net = new Net;
+	net = nullptr;
 	k_buffer = NULL;
 	m_buffer = NULL;
 
@@ -237,13 +248,13 @@ NET_BUFFER_LIST::~NET_BUFFER_LIST()
 			m_buffer[i] = NULL;
 		}
 	}
-	/*
+	
 	if (m_buffer)
 	{
 		delete[] m_buffer;
 		m_buffer = NULL;
 	}
-	*/
+	
 	k_buffer = 0;
 }
 
