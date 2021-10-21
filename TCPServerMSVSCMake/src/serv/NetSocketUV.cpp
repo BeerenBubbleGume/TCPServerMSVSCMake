@@ -100,7 +100,8 @@ bool NetSocketUV::Accept(uv_stream_t* handle)
 	NetSocketUV* accept_sock = NewSocket(net);
 	accept_sock->Create(8000, true, false);
 	uv_tcp_t* client = GetPtrTCP(accept_sock->sock);
-	//uv_tcp_init(GetLoop(net), client);
+
+	SetID(client);
 
 	if (uv_accept(handle, (uv_stream_t*)client) == 0)
 	{
@@ -112,10 +113,7 @@ bool NetSocketUV::Accept(uv_stream_t* handle)
 			return true;
 		}
 		else
-		{
-			std::cout << "Cannot start reading!" << std::endl;
 			return false;
-		}
 	}
 	else
 	{
@@ -155,20 +153,7 @@ void NetSocketUV::ReceiveUPD()
 {
 }
 
-bool NetSocketUV::SetConnectedSocketToReadMode(uv_stream_t *stream)
-{
-	if (udp_tcp)
-	{
-		std::cout << "Setting connected UV socket to reading mode!" << std::endl;
-		int r = uv_read_start(stream, OnAllocBuffer, OnReadTCP);
-		if (r == 0)
-			return true;
-		else
-			return false;
 
-	}
-	return false;
-}
 
 //callback функция которая вызываемая uv_read_start - записывает полученные данные в массив данных
 void OnReadTCP(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)
@@ -188,14 +173,11 @@ void OnReadTCP(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)
 		assert(buf->base == (char*)recv_buff->GetData());
 		recv_buff->SetMaxSize(nread);
 		uvsocket->ReceiveTCP();
-		
-		MEM_DATA data;
-		data.data = recv_buff->GetData();
-		data.length = recv_buff->GetLength();
-		int index = recv_buff->owner->AddBuffer(data);
-		
-		NET_BUFFER_INDEX* bi = recv_buff->owner->Get(index);
 
+		NET_BUFFER_LIST list;
+		list.SetOwner(uvsocket->net);
+		NET_BUFFER_INDEX* bi = uvsocket->PrepareMessage(uvsocket->net->ClientID, recv_buff->buff_length, recv_buff->DataBuff);
+		
 		uvsocket->SendMessenge(bi);
 	}
 }
@@ -282,6 +264,31 @@ void NetSocketUV::Destroy()
 	NetSocket::Destroy();
 }
 
+NET_BUFFER_INDEX* NetSocketUV::PrepareMessage(unsigned int sender_id, int length, const unsigned char* data)
+{
+	int struct_size = sizeof(Send_Message);
+	int len = length + struct_size;
+
+	int len16 = len;
+
+	NET_BUFFER_LIST* list = net->GetSendList();
+	MEM_DATA buf;
+	buf.data = nullptr;
+	buf.length = len16;
+	int index = list->AddBuffer(buf);
+	NET_BUFFER_INDEX* bi = list->Get(index);
+	bi->SetLength(len);
+	unsigned char* buf_data = bi->GetData();
+	Send_Message* sm = (Send_Message*)buf_data;
+
+	sm->sender = sender_id;
+	sm->len = length;
+	if (length)
+		memcpy(&(buf_data[struct_size]), data, length);
+
+	return bi;
+}
+
 uv_tcp_t *GetPtrTCP(void *ptr)
 {
 	return (uv_tcp_t*)(((char*)ptr) + sizeof(void*));
@@ -297,3 +304,19 @@ uv_loop_t *GetLoop(Net* net)
 	NetSocketUV serv = (NetSocketUV)net;
 	return (serv.loop);
 }
+/*
+bool NetSocketUV::SetConnectedSocketToReadMode(uv_stream_t *stream)
+{
+	if (udp_tcp)
+	{
+		std::cout << "Setting connected UV socket to reading mode!" << std::endl;
+		int r = uv_read_start(stream, OnAllocBuffer, OnReadTCP);
+		if (r == 0)
+			return true;
+		else
+			return false;
+
+	}
+	return false;
+}
+*/

@@ -9,7 +9,6 @@
 #include "utils.hpp"
 #include "../../libs/includes/uv.h"
 
-
 class NetSocketUV : public NetSocket
 {
 public:
@@ -21,15 +20,17 @@ public:
 
 	virtual bool Create(int port, bool udp_tcp, bool listen);
 	
-	bool SetConnectedSocketToReadMode(uv_stream_t* stream);
+	//bool SetConnectedSocketToReadMode(uv_stream_t* stream);
 	bool GetIP(Net_Address* addr, bool own_or_peer);
 	bool Accept(uv_stream_t* handle);
-
+	void SetID(void* NewClient) {};
 	void SendTCP(NET_BUFFER_INDEX* buf);
 	void SendUDP(NET_BUFFER_INDEX* buf);
 	void ReceiveTCP();
 	void ReceiveUPD();
 	void Destroy();
+
+	NET_BUFFER_INDEX* PrepareMessage(unsigned int sender_id, int length, const unsigned char* data);
 
 	int status;
 	NetSocketUV* NewSocket(Net* net)
@@ -50,8 +51,7 @@ void OnWrite(uv_write_t* req, int status);
 uv_tcp_t* GetPtrTCP(void* ptr);
 uv_udp_t* GetPtrUDP(void* ptr);
 uv_loop_t* GetLoop(Net* net);
-uv_stream_t* GetPtrStream(void* ptr);
-NetBuffer* GetPtrBuffer(void* ptr);
+
 
 
 #endif // !NETSOCKETUV_H

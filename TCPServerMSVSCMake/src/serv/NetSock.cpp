@@ -8,6 +8,7 @@ Net::Net()
 	ClientID = 0;
 	addr = nullptr;
 	receiving_socket = (NetSocket*)malloc(sizeof(NetSocket));
+	
 }
 
 Net::~Net()
@@ -108,13 +109,12 @@ NetSocket* GetNetSocketPtr(void* uv_socket)
 }
 
 void Net::OnLostConnection(void* socket)
-{
-	
+{	
 }
 
 NetBuffer::NetBuffer()
 {
-	owner = nullptr;
+	owner =nullptr;
 	DataBuff = nullptr;
 	max_length = 0;
 	buff_length = 0;
@@ -140,27 +140,24 @@ void NetBuffer::SetMaxSize(int size)
 {
 	Clear();
 
-	buff_length = size;
-	DataBuff = new unsigned char[buff_length];
+	max_length = size;
+	DataBuff = new unsigned char[max_length];
 }
 
 void NetBuffer::Clear()
 {
 	if (DataBuff)
 	{
-		delete []DataBuff;
-		DataBuff = NULL;
+		delete[] DataBuff;
+		DataBuff = nullptr;
 	}
 	buff_length = 0;
 	max_length = 0;
 }
 
-int NetBuffer::SetLength(unsigned int length)
+void NetBuffer::SetLength(unsigned int length)
 {
-	if (length >= buff_length)
-	{
-		return buff_length = length;
-	}
+	buff_length = length;
 }
 
 void NetBuffer::Add(int length, void* data)
@@ -231,7 +228,7 @@ NET_BUFFER_LIST::NET_BUFFER_LIST() : CArrayBase()
 
 	k_buffer = 10;
 	m_buffer = new NET_BUFFER_INDEX*[k_buffer];
-	memcpy(m_buffer, 0, sizeof(NET_BUFFER_INDEX**));
+	//memcpy(m_buffer, 0, sizeof(NET_BUFFER_INDEX**));
 	for (int i = 0; i < k_buffer; i++)
 		m_buffer[i] = NULL;
 	IncreaseDeleted(0, k_buffer - 1);
@@ -296,8 +293,6 @@ int NET_BUFFER_LIST::AddBuffer(const MEM_DATA& buffer)
 	buf->SetLength(buffer.length);
 
 	return index;
-	
-	return 0;
 }
 
 void NET_BUFFER_LIST::DeleteBuffer(int index)
