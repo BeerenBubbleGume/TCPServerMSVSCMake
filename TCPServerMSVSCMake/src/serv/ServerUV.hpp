@@ -6,7 +6,7 @@
 
 //extern bool udp_tcp;
 
-class Server
+class Server : NetSocket
 {
 public:
 	Server();
@@ -16,9 +16,14 @@ public:
 	char* IDArray;
 
 	int connect(bool connection);
+
 	std::string GetClientID();
-	void SetID(void* NewClient);
-	
+	virtual void SetID(void* NewClient) override;
+	virtual void SendTCP(NET_BUFFER_INDEX* buf) override	{ net_sockuv->SendTCP(buf); }
+	virtual void ReceiveTCP() override						{ net_sockuv->ReceiveTCP(); }
+	virtual void SendUDP(NET_BUFFER_INDEX* buf) override	{ net_sockuv->SendUDP(buf); }
+	virtual void ReceiveUPD() override						{ net_sockuv->ReceiveUPD(); }
+
 	
 };
 

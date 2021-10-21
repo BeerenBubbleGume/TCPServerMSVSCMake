@@ -1,7 +1,7 @@
 #include <stdint.h>
 #include "ServerUV.hpp"
 
-Server::Server()
+Server::Server() : NetSocket(net)
 {
 	net = new Net;
 	net_sockuv = new NetSocketUV(net);
@@ -18,13 +18,11 @@ int Server::connect(bool connection)
 	if (connection)
 	{
 		//udp_tcp = true;
-		std::cout << "_______________________________" << std::endl
-				<<
-					"==========Start server!==========" << std::endl
-				<<
-					"__________________________________" << std::endl;
+		std::cout << "==========Start server!==========" << std::endl;
+			
+		net_sockuv->Create(8000, true, true);
 
-		return net_sockuv->Create(8000, true, true);
+		return 0;
 	}
 	else
 	{
@@ -55,5 +53,6 @@ void Server::SetID(void* NewClient)
 		exit(1);
 	}
 }
+
 
 

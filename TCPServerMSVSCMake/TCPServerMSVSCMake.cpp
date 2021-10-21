@@ -9,10 +9,9 @@ int main() {
 
 	std::cout << "Main:" << std::endl;
 	Net* net = new Net;
-	Server* server = new Server;
-	NetSocketUV* newsocket = new NetSocketUV(net);
+	Server server;
 
-	if(server->connect(true) == true)
+	if(server.connect(true) == true)
 	{
 		std::cout << "Server have been started!" << std::endl;
 		//server->SendTCP();

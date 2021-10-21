@@ -26,6 +26,18 @@ struct NET_BUFFER_LIST;
 struct MEM_DATA;
 class CArrayBase;
 class NetSocket;
+class Net;
+
+struct NET_SOCKET_PRT 
+{
+	NetSocket* net_socket;
+};
+struct TCP_SOCKET : public NET_SOCKET_PRT, uv_tcp_t
+{
+};
+struct UDP_SOCKET : public NET_SOCKET_PRT, uv_udp_t
+{
+};
 
 struct NetBuffer
 {
@@ -37,7 +49,7 @@ public:
 	NET_BUFFER_LIST* owner;
 	unsigned char* GetData() { return DataBuff; }
 	size_t GetLength();
-	int SetLength(unsigned int length);
+	void SetLength(unsigned int length);
 	void Add(int length, void* data);
 	void Delete(int length);
 
@@ -56,6 +68,23 @@ public:
 
 };
 
+struct NET_BUFFER_LIST : public CArrayBase
+{
+	Net* net;
+	int k_buffer;
+	NET_BUFFER_INDEX** m_buffer;
+	
+	NET_BUFFER_LIST();
+	virtual ~NET_BUFFER_LIST();
+	
+	void SetOwner(Net* owner) { net = owner; }
+
+	int AddBuffer(const MEM_DATA& buffer);
+	void DeleteBuffer(int index);
+
+	NET_BUFFER_INDEX* Get(int index) { return m_buffer[index]; }
+};
+
 class Net
 {
 public:
@@ -65,15 +94,18 @@ public:
 	int bytes_read;
 	
 	Net_Address* addr;
-	bool udp_tcp;
-	NetSocket* receiving_socket;
 	NetBuffer recv_buf;
-	
+
 	NetBuffer* GetRecvBuffer() { return &recv_buf; }
-	//virtual NetSocket* NewSocket(Net* net) PURE;
 	void OnLostConnection(void* sock);
 	bool IsServer() { return true; }
 	void ReciveMessege();
+	NET_BUFFER_LIST* GetSendList() { return &sending_list; }
+
+protected:
+	bool udp_tcp;
+	NetSocket* receiving_socket;
+	NET_BUFFER_LIST sending_list;
 };
 
 class NetSocket
@@ -86,10 +118,12 @@ public:
 	void Destroy();
 
 	virtual bool Create(int port, bool udp_tcp, bool listen);
+	
 	virtual void SendTCP(NET_BUFFER_INDEX* buf) = 0;
 	virtual void SendUDP(NET_BUFFER_INDEX* buf) = 0;
-	//virtual NetSocket* NewSocket(Net* net) PURE;
-
+	
+	virtual void SetID(void* NewClient) = 0;
+	
 	virtual void ReceiveTCP() = 0;
 	virtual void ReceiveUPD() = 0; 
 
@@ -103,16 +137,7 @@ public:
 	Net* net;
 
 };
-struct NET_SOCKET_PRT 
-{
-	NetSocket* net_socket;
-};
-struct TCP_SOCKET : public NET_SOCKET_PRT, uv_tcp_t
-{
-};
-struct UDP_SOCKET : public NET_SOCKET_PRT, uv_udp_t
-{
-};
+
 
 struct Send_Message
 {
@@ -126,7 +151,6 @@ NetSocket* GetNetSocketPtr(void* uv_socket);
 
 struct NET_BUFFER_INDEX : public NetBuffer
 {
-public:
 	NET_BUFFER_INDEX(int index) : NetBuffer()
 	{
 		this->index = index;
@@ -157,23 +181,6 @@ struct NetBufferUV : public NET_BUFFER_INDEX
 
 	uv_write_t* GetPtrWrite();
 	uv_udp_send_t* GetPtrSend();
-
-};
-struct NET_BUFFER_LIST : public CArrayBase
-{
-	Net* net;
-	int k_buffer;
-	NET_BUFFER_INDEX** m_buffer;
-	
-	NET_BUFFER_LIST();
-	virtual ~NET_BUFFER_LIST();
-	
-	void SetOwner(Net* owner) { net = owner; }
-
-	int AddBuffer(const MEM_DATA& buffer);
-	void DeleteBuffer(int index);
-
-	NET_BUFFER_INDEX* Get(int index) { return m_buffer[index]; }
 };
 
 struct MEM_DATA
@@ -193,5 +200,4 @@ struct MEM_DATA
 		return false;
 	}
 };
-
 #endif // !NETSOCK_H
