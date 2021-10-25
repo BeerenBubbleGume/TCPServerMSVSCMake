@@ -149,7 +149,7 @@ void NetBuffer::Clear()
 	if (DataBuff)
 	{
 		delete[] DataBuff;
-		DataBuff = nullptr;
+		memset(DataBuff, NULL, sizeof(DataBuff));
 	}
 	buff_length = 0;
 	max_length = 0;
@@ -227,8 +227,7 @@ NET_BUFFER_LIST::NET_BUFFER_LIST() : CArrayBase()
 	m_buffer = NULL;
 
 	k_buffer = 10;
-	m_buffer = new NET_BUFFER_INDEX*[k_buffer];
-	//memcpy(m_buffer, 0, sizeof(NET_BUFFER_INDEX**));
+	m_buffer = (NET_BUFFER_INDEX**)malloc(k_buffer * sizeof(NET_BUFFER_INDEX**));
 	for (int i = 0; i < k_buffer; i++)
 		m_buffer[i] = NULL;
 	IncreaseDeleted(0, k_buffer - 1);
@@ -287,7 +286,7 @@ int NET_BUFFER_LIST::AddBuffer(const MEM_DATA& buffer)
 		buf->SetMaxSize(buffer.length);
 	}
 
-	unsigned char* dest = buf->GetData();
+	unsigned char* dest = buf->DataBuff;
 	if (buffer.data)
 		memcpy(dest, buffer.data, buffer.length);
 	buf->SetLength(buffer.length);
