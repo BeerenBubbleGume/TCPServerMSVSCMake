@@ -101,7 +101,7 @@ bool NetSocketUV::Accept(uv_stream_t* handle)
 	accept_sock->Create(8000, true, false);
 	uv_tcp_t* client = GetPtrTCP(accept_sock->sock);
 
-	SetID(client);
+	//SetID(client);
 
 	if (uv_accept(handle, (uv_stream_t*)client) == 0)
 	{
@@ -125,11 +125,11 @@ bool NetSocketUV::Accept(uv_stream_t* handle)
 //высылаем данные по TCP протаколу
 void NetSocketUV::SendTCP(NET_BUFFER_INDEX *buf)
 {
-	if (buf->buff_length > 0)
+	if (buf->GetLength() > 0)
 	{
 		uv_buf_t buffer;
-		buffer.len = buf->buff_length;
-		buffer.base = (char*)buf->DataBuff;
+		buffer.len = buf->GetLength();
+		buffer.base = (char*)&buf->GetData();
 		int r = uv_write(((NetBufferUV*)buf)->GetPtrWrite(), (uv_stream_t*)GetPtrTCP(sock), &buffer, 1, OnWrite);
 		assert(r == 0);
 	}
@@ -143,7 +143,7 @@ void NetSocketUV::ReceiveTCP()
 {
 	NetBuffer* recv_buffer = net->GetRecvBuffer();
 	int received_bytes = recv_buffer->GetLength();
-	net->recv_buf.Add(received_bytes, recv_buffer->GetData());
+	net->recv_buf.Add(received_bytes, recv_buffer->GetData().data());
 
 	if (net->IsServer())
 		net->ReciveMessege();
@@ -168,15 +168,16 @@ void OnReadTCP(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)
 	}
 	else
 	{
-		std::cout << "Reading UV socket" << std::endl;
+		std::cout << "Reading UV socket from client with ID:" << uvsocket->GetClientID() << std::endl;
 		NetBuffer* recv_buff = uvsocket->net->GetRecvBuffer();
-		assert(buf->base == (char*)recv_buff->GetData());
+		std::vector<unsigned char*> data = recv_buff->GetData();
+		assert(buf->base == reinterpret_cast<char*>(data.data()));
 		recv_buff->SetMaxSize(nread);
 		uvsocket->ReceiveTCP();
 
 		NET_BUFFER_LIST list;
 		list.SetOwner(uvsocket->net);
-		NET_BUFFER_INDEX* bi = uvsocket->PrepareMessage(uvsocket->net->ClientID, recv_buff->buff_length, recv_buff->DataBuff);
+		NET_BUFFER_INDEX* bi = uvsocket->PrepareMessage(uvsocket->net->ClientID, recv_buff->GetLength(), reinterpret_cast<void*>(recv_buff->GetData().data()));
 		
 		uvsocket->SendMessenge(bi);
 	}
@@ -194,7 +195,7 @@ void OnAllocBuffer(uv_handle_t *handle, size_t suggested_size, uv_buf_t *buf)
 		recv_buffer->SetMaxSize(suggested_size);
 
 	buf->len = suggested_size;
-	buf->base = (char*)recv_buffer->GetData();
+	buf->base = reinterpret_cast<char*>(recv_buffer->GetData().data());
 }
 
 //функция закрывающая libuv сокет
@@ -217,7 +218,7 @@ void OnReadUDP(uv_udp_t* handle, ssize_t nread, const uv_buf_t* buf, const struc
 {
 	NetSocket* socket = GetNetSocketPtr(handle);
 	NetBuffer* recv_buffer = socket->net->GetRecvBuffer();
-	assert(buf->base == (char*)recv_buffer->GetData());
+	assert(buf->base == (char*)&recv_buffer->GetData());
 	recv_buffer->SetLength(nread);
 
 	int r = uv_ip4_name((sockaddr_in*)addr, address_converter, sizeof(address_converter));
@@ -264,7 +265,7 @@ void NetSocketUV::Destroy()
 	NetSocket::Destroy();
 }
 
-NET_BUFFER_INDEX* NetSocketUV::PrepareMessage(unsigned int sender_id, int length, const unsigned char* data)
+NET_BUFFER_INDEX* NetSocketUV::PrepareMessage(unsigned int sender_id, int length, void* data)
 {
 	int struct_size = sizeof(Send_Message);
 	int len = length + struct_size;
@@ -278,13 +279,13 @@ NET_BUFFER_INDEX* NetSocketUV::PrepareMessage(unsigned int sender_id, int length
 	int index = list->AddBuffer(buf);
 	NET_BUFFER_INDEX* bi = list->Get(index);
 	bi->SetLength(len);
-	unsigned char* buf_data = bi->GetData();
-	Send_Message* sm = (Send_Message*)buf_data;
+	std::vector<unsigned char*> buf_data = bi->GetData();
+	Send_Message* sm = (Send_Message*)reinterpret_cast<char*>(buf_data.data());
 
 	sm->sender = sender_id;
 	sm->len = length;
 	if (length)
-		memcpy(&(buf_data[struct_size]), data, length);
+		memcpy(&(buf_data[struct_size]), &data, length);
 
 	return bi;
 }

@@ -14,6 +14,7 @@
 #include <iostream>
 #include <stdint.h>
 #include <cassert>
+#include <vector>
 #include "../../libs/includes/uv.h"
 #include "utils.hpp"
 
@@ -47,24 +48,23 @@ public:
 	~NetBuffer();
 
 	NET_BUFFER_LIST* owner;
-	unsigned char* GetData() { return DataBuff; }
+	std::vector<unsigned char*> GetData() { return DataBuff; }
 	size_t GetLength();
 	void SetLength(unsigned int length);
 	void Add(int length, void* data);
 	void Delete(int length);
-
 	int HasMessage(NetSocket* sockt);
-	void Reset() { position = 0; buff_length = 0; }
+	void Reset() { position = 0; DataBuff.resize(0); }
 	int GetPosition() { return position; }
 	void SetPosition(int pos) { position = pos; }
 	void SetMaxSize(int size);
-	unsigned int GetMaxLength() { return max_length; }
+	unsigned int GetMaxLength() { return DataBuff.size(); }
 	void Clear();
-	int position;
 	
-	unsigned int max_length;
-	unsigned char* DataBuff;
-	unsigned int buff_length;
+protected:
+
+	int position;
+	std::vector<unsigned char*> DataBuff;
 
 };
 
@@ -92,6 +92,7 @@ public:
 	~Net();
 	int ClientID;
 	int bytes_read;
+	uint64_t* IDArray;
 	
 	Net_Address* addr;
 	NetBuffer recv_buf;
@@ -122,7 +123,8 @@ public:
 	virtual void SendTCP(NET_BUFFER_INDEX* buf) = 0;
 	virtual void SendUDP(NET_BUFFER_INDEX* buf) = 0;
 	
-	virtual void SetID(void* NewClient) = 0;
+	virtual void SetID(void* NewClient);
+	virtual std::string GetClientID();
 	
 	virtual void ReceiveTCP() = 0;
 	virtual void ReceiveUPD() = 0; 

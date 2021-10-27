@@ -8,7 +8,7 @@ Net::Net()
 	ClientID = 0;
 	addr = nullptr;
 	receiving_socket = (NetSocket*)malloc(sizeof(NetSocket));
-	
+	IDArray = new uint64_t(INT16_MAX);
 }
 
 Net::~Net()
@@ -32,7 +32,7 @@ Net::~Net()
 void Net::ReciveMessege()
 {
 	int length = recv_buf.GetMaxLength();
-	unsigned char* data = recv_buf.GetData();
+	//std::vector<unsigned char> data = recv_buf.GetData().data();
 	
 }
 
@@ -42,6 +42,7 @@ NetSocket::NetSocket(Net* net)
 	addr = new Net_Address;
 	port = 0;
 	udp_tcp = false;
+	
 
 }
 
@@ -77,6 +78,32 @@ bool NetSocket::Create(int port, bool udp_tcp, bool listen)
 		this->addr = new Net_Address;
 
 	return true;
+}
+
+std::string NetSocket::GetClientID()
+{
+	char ServerPathURL[] = { "rtsp://192.168.0.141:554" };
+	char IDPathURL = (char)net->ClientID;
+	char PostfixURL[] = { "/mjpeg" };
+	std::string URLstr{ ServerPathURL + IDPathURL, PostfixURL };
+	return URLstr;
+}
+
+void NetSocket::SetID(void* NewClient)
+{
+	int counter = 0;
+	if (NewClient != nullptr)
+		for (int i = 0; i <= INT16_MAX; i++)
+		{
+			counter = i;
+			net->ClientID = counter;
+			net->IDArray[i] = (unsigned)net->ClientID;
+		}
+	else
+	{
+		fprintf(stderr, "New client is does not exist!");
+		exit(1);
+	}
 }
 
 void NetSocket::SendMessenge(NET_BUFFER_INDEX* buf, Net_Address* addr)
@@ -115,9 +142,6 @@ void Net::OnLostConnection(void* socket)
 NetBuffer::NetBuffer()
 {
 	owner =nullptr;
-	DataBuff = nullptr;
-	max_length = 0;
-	buff_length = 0;
 	position = 0;
 }
 
@@ -128,7 +152,7 @@ NetBuffer::~NetBuffer()
 
 size_t NetBuffer::GetLength()
 {
-	return buff_length;
+	return DataBuff.size();
 }
 
 int NetBuffer::HasMessage(NetSocket* sockt)
@@ -140,48 +164,46 @@ void NetBuffer::SetMaxSize(int size)
 {
 	Clear();
 
-	max_length = size;
-	DataBuff = new unsigned char[max_length];
+	DataBuff.resize(size);
+	
 }
 
 void NetBuffer::Clear()
 {
-	if (DataBuff)
+	if (!DataBuff.empty())
 	{
-		delete[] DataBuff;
-		DataBuff = nullptr;
+		DataBuff.clear();
 	}
-	buff_length = 0;
-	max_length = 0;
 }
 
 void NetBuffer::SetLength(unsigned int length)
 {
-	buff_length = length;
+	DataBuff.resize(length);
 }
 
 void NetBuffer::Add(int length, void* data)
 {
-	int len = this->buff_length + length;
+	int len = this->DataBuff.size() + length;
 	if (length < len)
 	{
 		length = len;
 		unsigned char* vdata = new unsigned char[length];
-		memcpy(vdata, this->DataBuff, this->buff_length);
-		delete[] this->DataBuff;
-		this->DataBuff = vdata;
+		memcpy(vdata, &this->DataBuff, this->DataBuff.size());
+		this->DataBuff.clear();
+		this->DataBuff.push_back(vdata);
 	}
 
 	if (data)
 		memcpy(&this->DataBuff, data, length);
-	this->buff_length = len;
+	DataBuff.resize(len);
 }
 
 void NetBuffer::Delete(int length)
 {
-	int size = this->buff_length - length;
-	memcpy(DataBuff, DataBuff + length, size);
-	this->buff_length -= size;
+	int size = this->DataBuff.size() - length;
+	//memcpy(&DataBuff, DataBuff + length, size);
+	//DataBuff.
+	this->DataBuff.resize(-size);
 }
 
 void Net_Address::FromStringIP(const char* ip)
@@ -227,8 +249,7 @@ NET_BUFFER_LIST::NET_BUFFER_LIST() : CArrayBase()
 	m_buffer = NULL;
 
 	k_buffer = 10;
-	m_buffer = new NET_BUFFER_INDEX*[k_buffer];
-	//memcpy(m_buffer, 0, sizeof(NET_BUFFER_INDEX**));
+	m_buffer = (NET_BUFFER_INDEX**)malloc(k_buffer * sizeof(NET_BUFFER_INDEX*));
 	for (int i = 0; i < k_buffer; i++)
 		m_buffer[i] = NULL;
 	IncreaseDeleted(0, k_buffer - 1);
@@ -280,17 +301,16 @@ int NET_BUFFER_LIST::AddBuffer(const MEM_DATA& buffer)
 	}
 
 	buf->Reset();
-	int max_len = buf->GetMaxLength();
-	if (max_len < buffer.length)
-	{
-		// ����� ��������� ������ ������
-		buf->SetMaxSize(buffer.length);
-	}
-
-	unsigned char* dest = buf->GetData();
+	//int max_len = buf->GetMaxLength();
+	//if (max_len < buffer.length)
+	//{
+	//	// ����� ��������� ������ ������
+	//	buf->SetMaxSize(buffer.length);
+	//}
+	unsigned char* dest = reinterpret_cast<unsigned char*>(buf->GetData().data());
 	if (buffer.data)
 		memcpy(dest, buffer.data, buffer.length);
-	buf->SetLength(buffer.length);
+	//buf->SetLength(buffer.length);
 
 	return index;
 }

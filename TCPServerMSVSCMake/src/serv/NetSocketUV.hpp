@@ -23,14 +23,15 @@ public:
 	//bool SetConnectedSocketToReadMode(uv_stream_t* stream);
 	bool GetIP(Net_Address* addr, bool own_or_peer);
 	bool Accept(uv_stream_t* handle);
-	void SetID(void* NewClient) {};
+	void SetID(void* NewClient)			{ NetSocket::SetID(NewClient); }
+	virtual std::string GetClientID()	{ return NetSocket::GetClientID(); }
 	void SendTCP(NET_BUFFER_INDEX* buf);
 	void SendUDP(NET_BUFFER_INDEX* buf);
 	void ReceiveTCP();
 	void ReceiveUPD();
 	void Destroy();
 
-	NET_BUFFER_INDEX* PrepareMessage(unsigned int sender_id, int length, const unsigned char* data);
+	NET_BUFFER_INDEX* PrepareMessage(unsigned int sender_id, int length, void* data);
 
 	int status;
 	NetSocketUV* NewSocket(Net* net)
