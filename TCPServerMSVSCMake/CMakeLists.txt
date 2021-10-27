@@ -1,4 +1,4 @@
-# CMakeList.txt: ������ CMake ��� TCPServerMSVSCMake; �������� �������� ��� � �����������,
+﻿# CMakeList.txt: ������ CMake ��� TCPServerMSVSCMake; �������� �������� ��� � �����������,
 # ������� ����� ������ ��� ����������� �������.
 cmake_minimum_required (VERSION 3.8)
 

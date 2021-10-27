@@ -1,8 +1,8 @@
-# Install script for directory: C:/Users/Operator/source/repos/TCPServerMSVSCMake
+# Install script for directory: A:/Cpp repos/TCPServerMSVSCMake
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Users/Operator/Source/Repos/TCPServerMSVSCMake/out/install/x64-Debug")
+  set(CMAKE_INSTALL_PREFIX "A:/Cpp repos/TCPServerMSVSCMake/out/install/x64-Debug")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -34,7 +34,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("C:/Users/Operator/source/repos/TCPServerMSVSCMake/out/build/x64-Debug/TCPServerMSVSCMake/cmake_install.cmake")
+  include("A:/Cpp repos/TCPServerMSVSCMake/out/build/x64-Debug/TCPServerMSVSCMake/cmake_install.cmake")
 
 endif()
 
@@ -46,5 +46,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/Operator/source/repos/TCPServerMSVSCMake/out/build/x64-Debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "A:/Cpp repos/TCPServerMSVSCMake/out/build/x64-Debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
