@@ -62,7 +62,7 @@
 			[
 				{
 					"backtrace" : 3,
-					"path" : "A:/Cpp repos/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/uv.h"
+					"path" : "C:/Users/Operator/source/repos/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/uv.h"
 				}
 			],
 			"language" : "CXX",
@@ -99,7 +99,7 @@
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "..\\..\\..\\..\\TCPServerMSVSCMake\\libs\\lib\\uv.lib",
+				"fragment" : "..\\..\\..\\TCPServerMSVSCMake\\libs\\lib\\uv.lib",
 				"role" : "libraries"
 			},
 			{
