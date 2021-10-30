@@ -143,10 +143,10 @@ void NetSocketUV::ReceiveTCP()
 {
 	NetBuffer* recv_buffer = net->GetRecvBuffer();
 	int received_bytes = recv_buffer->GetLength();
-	net->recv_buf.Add(received_bytes, recv_buffer->GetData().data());
+	//net->recv_buf.Add(received_bytes, (void*)&recv_buffer->GetData());
 
-	if (net->IsServer())
-		net->ReciveMessege();
+	//if (net->IsServer())
+	//	net->ReciveMessege();
 }
 
 void NetSocketUV::ReceiveUPD()
@@ -170,13 +170,14 @@ void OnReadTCP(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)
 	{
 		std::cout << "Reading UV socket from client with ID:" << uvsocket->GetClientID() << std::endl;
 		NetBuffer* recv_buff = uvsocket->net->GetRecvBuffer();
-		std::vector<unsigned char*> data = recv_buff->GetData();
-		assert(buf->base == reinterpret_cast<char*>(data.data()));
-		recv_buff->SetMaxSize(nread);
-		uvsocket->ReceiveTCP();
+		char* data = reinterpret_cast<char*>(recv_buff->GetData().data());
+		assert(buf->base == data);
+		uvsocket->net->recv_buf.Add(nread, (void*)buf);
+		//recv_buff->SetMaxSize(nread);
+		//uvsocket->ReceiveTCP();
 
-		NET_BUFFER_LIST list;
-		list.SetOwner(uvsocket->net);
+		NET_BUFFER_LIST *list = uvsocket->net->GetSendList();
+		list->SetOwner(uvsocket->net);
 		NET_BUFFER_INDEX* bi = uvsocket->PrepareMessage(uvsocket->net->ClientID, recv_buff->GetLength(), reinterpret_cast<void*>(recv_buff->GetData().data()));
 		
 		uvsocket->SendMessenge(bi);
@@ -190,12 +191,12 @@ void OnAllocBuffer(uv_handle_t *handle, size_t suggested_size, uv_buf_t *buf)
 	NetSocketUV* net_sock = (NetSocketUV*)GetNetSocketPtr(handle);
 	NetBuffer* recv_buffer = net_sock->net->GetRecvBuffer();
 
-	unsigned int max_length = recv_buffer->GetMaxLength();
+	unsigned int max_length = recv_buffer->GetLength();
 	if (max_length < suggested_size)
 		recv_buffer->SetMaxSize(suggested_size);
-
+	unsigned char* databuff = reinterpret_cast<unsigned char*>(recv_buffer->GetData().data());
 	buf->len = suggested_size;
-	buf->base = reinterpret_cast<char*>(recv_buffer->GetData().data());
+	buf->base = reinterpret_cast<char*>(databuff);
 }
 
 //функция закрывающая libuv сокет
@@ -219,7 +220,7 @@ void OnReadUDP(uv_udp_t* handle, ssize_t nread, const uv_buf_t* buf, const struc
 	NetSocket* socket = GetNetSocketPtr(handle);
 	NetBuffer* recv_buffer = socket->net->GetRecvBuffer();
 	assert(buf->base == (char*)&recv_buffer->GetData());
-	recv_buffer->SetLength(nread);
+	//recv_buffer->SetLength(nread);
 
 	int r = uv_ip4_name((sockaddr_in*)addr, address_converter, sizeof(address_converter));
 	socket->net->addr->address = address_converter;
@@ -278,11 +279,11 @@ NET_BUFFER_INDEX* NetSocketUV::PrepareMessage(unsigned int sender_id, int length
 	buf.length = len16;
 	int index = list->AddBuffer(buf);
 	NET_BUFFER_INDEX* bi = list->Get(index);
-	bi->SetLength(len);
-	std::vector<unsigned char*> buf_data = bi->GetData();
-	Send_Message* sm = (Send_Message*)reinterpret_cast<char*>(buf_data.data());
+	//bi->SetLength(len);
+	unsigned char* buf_data = (unsigned char*)bi->GetData().data();
+	Send_Message* sm = (Send_Message*)buf_data;
 
-	sm->sender = sender_id;
+	//sm->sender = sender_id;
 	sm->len = length;
 	if (length)
 		memcpy(&(buf_data[struct_size]), &data, length);

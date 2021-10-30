@@ -48,8 +48,8 @@ public:
 	~NetBuffer();
 
 	NET_BUFFER_LIST* owner;
-	std::vector<unsigned char*> GetData() { return DataBuff; }
-	size_t GetLength();
+	auto &GetData() { return DataBuff; }
+	size_t GetLength() { return DataBuff.size(); }
 	void SetLength(unsigned int length);
 	void Add(int length, void* data);
 	void Delete(int length);
@@ -58,7 +58,6 @@ public:
 	int GetPosition() { return position; }
 	void SetPosition(int pos) { position = pos; }
 	void SetMaxSize(int size);
-	unsigned int GetMaxLength() { return DataBuff.size(); }
 	void Clear();
 	
 protected:

@@ -31,7 +31,6 @@ Net::~Net()
 
 void Net::ReciveMessege()
 {
-	int length = recv_buf.GetMaxLength();
 	//std::vector<unsigned char> data = recv_buf.GetData().data();
 	
 }
@@ -150,11 +149,6 @@ NetBuffer::~NetBuffer()
 	Clear();
 }
 
-size_t NetBuffer::GetLength()
-{
-	return DataBuff.size();
-}
-
 int NetBuffer::HasMessage(NetSocket* sockt)
 {
 	return 0;
@@ -165,7 +159,6 @@ void NetBuffer::SetMaxSize(int size)
 	Clear();
 
 	DataBuff.resize(size);
-	
 }
 
 void NetBuffer::Clear()
@@ -173,6 +166,7 @@ void NetBuffer::Clear()
 	if (!DataBuff.empty())
 	{
 		DataBuff.clear();
+		//DataBuff.resize(0);
 	}
 }
 
@@ -183,19 +177,15 @@ void NetBuffer::SetLength(unsigned int length)
 
 void NetBuffer::Add(int length, void* data)
 {
-	int len = this->DataBuff.size() + length;
-	if (length < len)
-	{
-		length = len;
-		unsigned char* vdata = new unsigned char[length];
-		memcpy(vdata, &this->DataBuff, this->DataBuff.size());
-		this->DataBuff.clear();
-		this->DataBuff.push_back(vdata);
-	}
+	unsigned int len = length;
+	unsigned char* vdata = new unsigned char[len];
+	memcpy(vdata, &DataBuff, DataBuff.size());
+	DataBuff.clear();
+	DataBuff.push_back(vdata);
 
 	if (data)
 		memcpy(&this->DataBuff, data, length);
-	DataBuff.resize(len);
+	//DataBuff.resize(len);
 }
 
 void NetBuffer::Delete(int length)
