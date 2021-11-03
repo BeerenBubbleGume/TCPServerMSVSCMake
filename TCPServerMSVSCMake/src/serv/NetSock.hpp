@@ -50,20 +50,20 @@ public:
 	NET_BUFFER_LIST* owner;
 	auto &GetData() { return DataBuff; }
 	size_t GetLength() { return DataBuff.size(); }
-	void SetLength(unsigned int length);
+	void SetLength(size_t length);
 	void Add(int length, void* data);
 	void Delete(int length);
 	int HasMessage(NetSocket* sockt);
 	void Reset() { position = 0; DataBuff.resize(0); }
 	int GetPosition() { return position; }
 	void SetPosition(int pos) { position = pos; }
-	void SetMaxSize(int size);
+	void SetMaxSize(size_t size);
 	void Clear();
 	
 protected:
 
 	int position;
-	std::vector<unsigned char*> DataBuff;
+	std::vector<char*> DataBuff;
 
 };
 
@@ -80,7 +80,7 @@ struct NET_BUFFER_LIST : public CArrayBase
 
 	int AddBuffer(const MEM_DATA& buffer);
 	void DeleteBuffer(int index);
-
+	void Clear();
 	NET_BUFFER_INDEX* Get(int index) { return m_buffer[index]; }
 };
 
@@ -101,6 +101,7 @@ public:
 	bool IsServer() { return true; }
 	void ReciveMessege();
 	NET_BUFFER_LIST* GetSendList() { return &sending_list; }
+	NET_BUFFER_INDEX* PrepareMessage(unsigned int sender_id, size_t length, unsigned char* data);
 
 protected:
 	bool udp_tcp;
@@ -138,7 +139,6 @@ public:
 	Net* net;
 
 };
-
 
 struct Send_Message
 {

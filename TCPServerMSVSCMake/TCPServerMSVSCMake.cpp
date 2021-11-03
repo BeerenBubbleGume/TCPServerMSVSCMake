@@ -3,9 +3,7 @@
 
 #include "TCPServerMSVSCMake.hpp"
 
-
-
-int main() {
+int main(int argc, char *argv[]) {
 
 	std::cout << "Main:" << std::endl;
 	Net* net = new Net;

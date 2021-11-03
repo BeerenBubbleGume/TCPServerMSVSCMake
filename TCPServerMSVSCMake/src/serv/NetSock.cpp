@@ -45,6 +45,34 @@ NetSocket::NetSocket(Net* net)
 
 }
 
+NET_BUFFER_INDEX* Net::PrepareMessage(unsigned int sender_id, size_t length, unsigned char* data)
+{
+	int struct_size = sizeof Send_Message;
+	size_t len = struct_size + length;
+	assert(len > 0);
+
+	NET_BUFFER_LIST* list = GetSendList();
+	MEM_DATA buf;
+	buf.data = nullptr;
+	buf.length = len;
+	int index = list->AddBuffer(buf);
+	NET_BUFFER_INDEX* bi = list->Get(index);
+	std::vector<char*> new_buf;
+	new_buf.erase(new_buf.begin(), new_buf.end());
+	std::copy(bi->GetData().begin(), bi->GetData().end(), std::back_inserter(new_buf));
+	Send_Message* sm = reinterpret_cast<Send_Message*>(new_buf.data());
+	sm->sender = sender_id;
+	sm->len = length;
+	
+	unsigned char* data_buf = reinterpret_cast<unsigned char*>(new_buf.data());
+
+
+	if (length)
+		memcpy(&(data_buf[struct_size]), data, length);
+
+	return bi;
+}
+
 NetSocket::~NetSocket()
 {
 	Destroy();
@@ -154,38 +182,41 @@ int NetBuffer::HasMessage(NetSocket* sockt)
 	return 0;
 }
 
-void NetBuffer::SetMaxSize(int size)
+void NetBuffer::SetMaxSize(size_t size)
 {
 	Clear();
 
-	DataBuff.resize(size);
+	if(size > DataBuff.size())
+		DataBuff.resize(size, NULL);
 }
 
 void NetBuffer::Clear()
 {
 	if (!DataBuff.empty())
 	{
-		DataBuff.clear();
-		//DataBuff.resize(0);
+		DataBuff.erase(DataBuff.begin(), DataBuff.end());
+		DataBuff.reserve(0);
 	}
+	
 }
 
-void NetBuffer::SetLength(unsigned int length)
+void NetBuffer::SetLength(size_t length)
 {
-	DataBuff.resize(length);
+	if(length > DataBuff.size())
+		DataBuff.reserve(length);
 }
 
 void NetBuffer::Add(int length, void* data)
 {
-	unsigned int len = length;
-	unsigned char* vdata = new unsigned char[len];
-	memcpy(vdata, &DataBuff, DataBuff.size());
-	DataBuff.clear();
-	DataBuff.push_back(vdata);
+	unsigned char *vdata = new unsigned char[length];
+	memcpy(vdata, DataBuff.data(), length);
+	DataBuff.erase(DataBuff.begin(), DataBuff.end());
+	DataBuff.push_back((char*)data);
 
 	if (data)
-		memcpy(&this->DataBuff, data, length);
-	//DataBuff.resize(len);
+		memcpy(&DataBuff + DataBuff.size(), data, length);
+	DataBuff.resize(length);
+	
 }
 
 void NetBuffer::Delete(int length)
@@ -248,22 +279,7 @@ NET_BUFFER_LIST::NET_BUFFER_LIST() : CArrayBase()
 
 NET_BUFFER_LIST::~NET_BUFFER_LIST()
 {
-	for (int i = 0; i < k_buffer; i++)
-	{
-		if (m_buffer[i])
-		{
-			delete m_buffer[i];
-			m_buffer[i] = NULL;
-		}
-	}
-	
-	if (m_buffer)
-	{
-		delete[] m_buffer;
-		m_buffer = NULL;
-	}
-	
-	k_buffer = 0;
+	Clear();
 }
 
 int NET_BUFFER_LIST::AddBuffer(const MEM_DATA& buffer)
@@ -291,12 +307,12 @@ int NET_BUFFER_LIST::AddBuffer(const MEM_DATA& buffer)
 	}
 
 	buf->Reset();
-	//int max_len = buf->GetMaxLength();
-	//if (max_len < buffer.length)
-	//{
-	//	// ����� ��������� ������ ������
-	//	buf->SetMaxSize(buffer.length);
-	//}
+
+//	if (buf->GetData().size() < buffer.length)
+//	{
+//		buf->SetMaxSize(buffer.length);
+//	}
+	
 	unsigned char* dest = reinterpret_cast<unsigned char*>(buf->GetData().data());
 	if (buffer.data)
 		memcpy(dest, buffer.data, buffer.length);
@@ -314,6 +330,25 @@ void NET_BUFFER_LIST::DeleteBuffer(int index)
 			FromExistingToDeleted(index);
 		}
 	}
+}
+
+void NET_BUFFER_LIST::Clear()
+{
+	
+	for (int i = 0; i < k_buffer; i++)
+	{
+		if (m_buffer[i])
+		{
+			delete m_buffer[i];
+			m_buffer[i] = nullptr;
+		}
+	}
+	if (m_buffer)
+	{
+		free(m_buffer);
+		m_buffer = nullptr;
+	}
+	k_buffer = 0;
 }
 
 NET_BUFFER_INDEX::~NET_BUFFER_INDEX()

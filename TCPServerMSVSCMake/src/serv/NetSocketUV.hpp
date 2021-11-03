@@ -31,7 +31,7 @@ public:
 	void ReceiveUPD();
 	void Destroy();
 
-	NET_BUFFER_INDEX* PrepareMessage(unsigned int sender_id, int length, void* data);
+	//NET_BUFFER_INDEX* PrepareMessage(unsigned int sender_id, size_t length, unsigned char* data);
 
 	int status;
 	NetSocketUV* NewSocket(Net* net)
