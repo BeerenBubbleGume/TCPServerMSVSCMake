@@ -48,22 +48,22 @@ public:
 	~NetBuffer();
 
 	NET_BUFFER_LIST* owner;
-	auto &GetData() { return DataBuff; }
-	size_t GetLength() { return DataBuff.size(); }
+	auto &GetData()																				{ return DataBuff; }
+	size_t GetLength()																			{ return DataBuff.capacity(); }
 	void SetLength(size_t length);
 	void Add(int length, void* data);
 	void Delete(int length);
 	int HasMessage(NetSocket* sockt);
-	void Reset() { position = 0; DataBuff.resize(0); }
-	int GetPosition() { return position; }
-	void SetPosition(int pos) { position = pos; }
+	void Reset()																				{ position = 0; DataBuff.resize(0); }
+	int GetPosition()																			{ return position; }
+	void SetPosition(int pos)																	{ position = pos; }
 	void SetMaxSize(size_t size);
 	void Clear();
 	
 protected:
 
 	int position;
-	std::vector<char*> DataBuff;
+	std::vector<unsigned char*> DataBuff;
 
 };
 
@@ -81,7 +81,7 @@ struct NET_BUFFER_LIST : public CArrayBase
 	int AddBuffer(const MEM_DATA& buffer);
 	void DeleteBuffer(int index);
 	void Clear();
-	NET_BUFFER_INDEX* Get(int index) { return m_buffer[index]; }
+	NET_BUFFER_INDEX* Get(int index)																{ return m_buffer[index]; }
 };
 
 class Net
@@ -89,21 +89,26 @@ class Net
 public:
 	Net();
 	~Net();
-	int ClientID;
-	int bytes_read;
-	uint64_t* IDArray;
+	
 	
 	Net_Address* addr;
-	NetBuffer recv_buf;
+	
 
-	NetBuffer* GetRecvBuffer() { return &recv_buf; }
+	NetBuffer* GetRecvBuffer()																		{ return &recv_buf; }
 	void OnLostConnection(void* sock);
-	bool IsServer() { return true; }
+	bool IsServer()																					{ return true; }
 	void ReciveMessege();
-	NET_BUFFER_LIST* GetSendList() { return &sending_list; }
+	NET_BUFFER_LIST* GetSendList()																	{ return &sending_list; }
 	NET_BUFFER_INDEX* PrepareMessage(unsigned int sender_id, size_t length, unsigned char* data);
+	int GetIDPath()																					{ return ClientID; }
+	auto GetIDArray()																				{ return IDArray; }
 
 protected:
+
+	int ClientID;
+	int bytes_read;
+	std::vector<int> IDArray;
+	NetBuffer recv_buf;
 	bool udp_tcp;
 	NetSocket* receiving_socket;
 	NET_BUFFER_LIST sending_list;

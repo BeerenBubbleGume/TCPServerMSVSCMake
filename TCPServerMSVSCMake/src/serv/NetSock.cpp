@@ -5,10 +5,11 @@ int SERVER_DEFAULT_PORT = 8000;
 Net::Net()
 {
 	bytes_read = 0;
+	udp_tcp = false;
 	ClientID = 0;
 	addr = nullptr;
-	receiving_socket = (NetSocket*)malloc(sizeof(NetSocket));
-	IDArray = new uint64_t(INT16_MAX);
+	receiving_socket = nullptr;
+	sending_list.SetOwner(this);
 }
 
 Net::~Net()
@@ -38,11 +39,10 @@ void Net::ReciveMessege()
 NetSocket::NetSocket(Net* net)
 {
 	this->net = net;
-	addr = new Net_Address;
+	addr = nullptr;
 	port = 0;
 	udp_tcp = false;
 	
-
 }
 
 NET_BUFFER_INDEX* Net::PrepareMessage(unsigned int sender_id, size_t length, unsigned char* data)
@@ -53,22 +53,19 @@ NET_BUFFER_INDEX* Net::PrepareMessage(unsigned int sender_id, size_t length, uns
 
 	NET_BUFFER_LIST* list = GetSendList();
 	MEM_DATA buf;
-	buf.data = nullptr;
+	buf.data = data;
 	buf.length = len;
 	int index = list->AddBuffer(buf);
 	NET_BUFFER_INDEX* bi = list->Get(index);
-	std::vector<char*> new_buf;
-	new_buf.erase(new_buf.begin(), new_buf.end());
-	std::copy(bi->GetData().begin(), bi->GetData().end(), std::back_inserter(new_buf));
-	Send_Message* sm = reinterpret_cast<Send_Message*>(new_buf.data());
-	sm->sender = sender_id;
-	sm->len = length;
 	
-	unsigned char* data_buf = reinterpret_cast<unsigned char*>(new_buf.data());
-
-
+	std::vector<unsigned char*> data_buf = bi->GetData();
+	
 	if (length)
-		memcpy(&(data_buf[struct_size]), data, length);
+	{
+		data_buf.reserve(struct_size);
+		data_buf.push_back(data);
+	}
+		
 
 	return bi;
 }
@@ -110,7 +107,7 @@ bool NetSocket::Create(int port, bool udp_tcp, bool listen)
 std::string NetSocket::GetClientID()
 {
 	char ServerPathURL[] = { "rtsp://192.168.0.141:554" };
-	char IDPathURL = (char)net->ClientID;
+	char IDPathURL = (char)net->GetIDPath();
 	char PostfixURL[] = { "/mjpeg" };
 	std::string URLstr{ ServerPathURL + IDPathURL, PostfixURL };
 	return URLstr;
@@ -119,13 +116,18 @@ std::string NetSocket::GetClientID()
 void NetSocket::SetID(void* NewClient)
 {
 	int counter = 0;
+	int ID = net->GetIDPath();
+	std::vector<int> Array = net->GetIDArray();
 	if (NewClient != nullptr)
+	{
 		for (int i = 0; i <= INT16_MAX; i++)
 		{
 			counter = i;
-			net->ClientID = counter;
-			net->IDArray[i] = (unsigned)net->ClientID;
+			ID = counter;
+			Array.push_back(ID);
 		}
+
+	}
 	else
 	{
 		fprintf(stderr, "New client is does not exist!");
@@ -187,7 +189,7 @@ void NetBuffer::SetMaxSize(size_t size)
 	Clear();
 
 	if(size > DataBuff.size())
-		DataBuff.resize(size, NULL);
+		DataBuff.reserve(size);
 }
 
 void NetBuffer::Clear()
@@ -211,11 +213,11 @@ void NetBuffer::Add(int length, void* data)
 	unsigned char *vdata = new unsigned char[length];
 	memcpy(vdata, DataBuff.data(), length);
 	DataBuff.erase(DataBuff.begin(), DataBuff.end());
-	DataBuff.push_back((char*)data);
+	DataBuff.push_back((unsigned char*)data);
 
 	if (data)
 		memcpy(&DataBuff + DataBuff.size(), data, length);
-	DataBuff.resize(length);
+	DataBuff.reserve(length);
 	
 }
 
@@ -224,7 +226,7 @@ void NetBuffer::Delete(int length)
 	int size = this->DataBuff.size() - length;
 	//memcpy(&DataBuff, DataBuff + length, size);
 	//DataBuff.
-	this->DataBuff.resize(-size);
+	this->DataBuff.reserve(-size);
 }
 
 void Net_Address::FromStringIP(const char* ip)
@@ -313,10 +315,13 @@ int NET_BUFFER_LIST::AddBuffer(const MEM_DATA& buffer)
 //		buf->SetMaxSize(buffer.length);
 //	}
 	
-	unsigned char* dest = reinterpret_cast<unsigned char*>(buf->GetData().data());
+	std::vector<unsigned char*> dest;
 	if (buffer.data)
-		memcpy(dest, buffer.data, buffer.length);
-	//buf->SetLength(buffer.length);
+	{
+		dest.reserve(buf->GetData().size());
+		dest.push_back(buffer.data);
+	}
+//	buf->SetLength(buffer.length);
 
 	return index;
 }

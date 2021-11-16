@@ -4,9 +4,7 @@
 
 #include "NetSocketUV.hpp"
 
-//extern bool udp_tcp;
-
-class Server : NetSocket
+class Server : NetSocketUV
 {
 public:
 	Server();
@@ -15,8 +13,8 @@ public:
 
 protected:
 
-	Net* net;
-	NetSocketUV* net_sockuv;
+	Net*					net;
+	NetSocketUV*			net_sockuv;
 
 	std::string GetClientID()					override						{ return NetSocket::GetClientID(); }
 	virtual void SetID(void* NewClient)			override						{ NetSocket::SetID(NewClient); }

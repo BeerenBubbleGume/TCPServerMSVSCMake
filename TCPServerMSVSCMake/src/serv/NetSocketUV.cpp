@@ -2,10 +2,10 @@
 
 NetSocketUV::NetSocketUV(Net* net) : NetSocket(net)
 {
-	this->net = net;
 	sock = NULL;
 	status = errno;	
 	loop = uv_default_loop();
+	
 }
 
 NetSocketUV::~NetSocketUV()
@@ -143,7 +143,7 @@ void NetSocketUV::ReceiveTCP()
 {
 	NetBuffer* recv_buffer = net->GetRecvBuffer();
 	int received_bytes = recv_buffer->GetLength();
-	net->recv_buf.Add(received_bytes, (void*)&recv_buffer->GetData());
+	recv_buffer->Add(received_bytes, (void*)&recv_buffer->GetData());
 
 	//if (net->IsServer())
 	//	net->ReciveMessege();
@@ -172,24 +172,19 @@ void OnReadTCP(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)
 		NetBuffer* recv_buff = uvsocket->net->GetRecvBuffer();
 		char* data = reinterpret_cast<char*>(recv_buff->GetData().data());
 		assert(buf->base == data);
-		uvsocket->net->recv_buf.Add(nread, (void*)buf);
 		recv_buff->SetMaxSize(nread);
 		uvsocket->ReceiveTCP();
 
-		NET_BUFFER_LIST *list = uvsocket->net->GetSendList();
-		list->SetOwner(uvsocket->net);
-		size_t len = recv_buff->GetLength();
-		assert(nread == len);
-		NET_BUFFER_INDEX* bi = uvsocket->net->PrepareMessage(uvsocket->net->ClientID, len, (unsigned char*)data);
+		NET_BUFFER_INDEX* bi = uvsocket->net->PrepareMessage(0, nread, (unsigned char*)data);
 		
-		uvsocket->SendMessenge(bi);
+		uvsocket->SendTCP(bi);
 	}
 }
 
 //callback функция которая выделяет место под буффер данных
 void OnAllocBuffer(uv_handle_t *handle, size_t suggested_size, uv_buf_t *buf)
 {
-	std::cout << "Allocating buffer" << std::endl;
+	auto dc = std::make_unique<NetBuffer>();
 	NetSocketUV* net_sock = (NetSocketUV*)GetNetSocketPtr(handle);
 	NetBuffer* recv_buffer = net_sock->net->GetRecvBuffer();
 
@@ -204,7 +199,9 @@ void OnAllocBuffer(uv_handle_t *handle, size_t suggested_size, uv_buf_t *buf)
 //функция закрывающая libuv сокет
 void OnCloseSocket(uv_handle_t *handle)
 {
-	free(handle);
+	char* ptr = (char*)handle;
+	ptr -= sizeof(void*);
+	free(ptr);
 }
 
 void OnWrite(uv_write_t *req, int status)
