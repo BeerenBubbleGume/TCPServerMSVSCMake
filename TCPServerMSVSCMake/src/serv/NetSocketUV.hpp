@@ -7,6 +7,7 @@
 #include <inttypes.h>
 #include "NetSock.hpp"
 #include "utils.hpp"
+#include "ProxyServer.hpp"
 #include "../../libs/includes/uv.h"
 
 class NetSocketUV : public NetSocket
@@ -26,13 +27,14 @@ public:
 	bool Accept(uv_stream_t* handle);
 	
 	void SetID(void* NewClient)												{ NetSocket::SetID(NewClient); }
-	virtual std::string GetClientID()										{ return NetSocket::GetClientID(); }
+	virtual CString* GetClientID()											{ return NetSocket::GetClientID(); }
 
 	void SendTCP(NET_BUFFER_INDEX* buf);
 	void SendUDP(NET_BUFFER_INDEX* buf);
 	void ReceiveTCP();
 	void ReceiveUPD();
 	void Destroy();
+	virtual void generateRTSPURL(CString* clientURI);
 
 	//NET_BUFFER_INDEX* PrepareMessage(unsigned int sender_id, size_t length, unsigned char* data);
 

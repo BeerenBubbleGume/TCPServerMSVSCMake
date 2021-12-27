@@ -48,22 +48,25 @@ public:
 	~NetBuffer();
 
 	NET_BUFFER_LIST* owner;
-	auto &GetData()																				{ return DataBuff; }
-	size_t GetLength()																			{ return DataBuff.capacity(); }
+	auto GetData()																				{ return DataBuff; }
+	size_t GetLength()																			{ return buff_length; }
 	void SetLength(size_t length);
 	void Add(int length, void* data);
 	void Delete(int length);
 	int HasMessage(NetSocket* sockt);
-	void Reset()																				{ position = 0; DataBuff.resize(0); }
+	void Reset()																				{ position = 0; buff_length = 0; }
 	int GetPosition()																			{ return position; }
 	void SetPosition(int pos)																	{ position = pos; }
 	void SetMaxSize(size_t size);
 	void Clear();
+	unsigned GetMaxSize()																		{ return max_length; }
 	
 protected:
 
 	int position;
-	std::vector<unsigned char*> DataBuff;
+	unsigned char* DataBuff;
+	unsigned buff_length;
+	unsigned max_length;
 
 };
 
@@ -102,12 +105,13 @@ public:
 	NET_BUFFER_INDEX* PrepareMessage(unsigned int sender_id, size_t length, unsigned char* data);
 	int GetIDPath()																					{ return ClientID; }
 	auto GetIDArray()																				{ return IDArray; }
+	auto GetConnectSockaddr()																		{ return fConnectionSockaddr; }
 
 protected:
-
+	sockaddr fConnectionSockaddr;
 	int ClientID;
 	int bytes_read;
-	std::vector<int> IDArray;
+	int* IDArray;
 	NetBuffer recv_buf;
 	bool udp_tcp;
 	NetSocket* receiving_socket;
@@ -129,7 +133,7 @@ public:
 	virtual void SendUDP(NET_BUFFER_INDEX* buf) = 0;
 	
 	virtual void SetID(void* NewClient);
-	virtual std::string GetClientID();
+	virtual CString* GetClientID();
 	
 	virtual void ReceiveTCP() = 0;
 	virtual void ReceiveUPD() = 0; 

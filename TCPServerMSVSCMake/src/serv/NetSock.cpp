@@ -7,6 +7,7 @@ Net::Net()
 	bytes_read = 0;
 	udp_tcp = false;
 	ClientID = 0;
+	IDArray = nullptr;
 	addr = nullptr;
 	receiving_socket = nullptr;
 	sending_list.SetOwner(this);
@@ -58,12 +59,11 @@ NET_BUFFER_INDEX* Net::PrepareMessage(unsigned int sender_id, size_t length, uns
 	int index = list->AddBuffer(buf);
 	NET_BUFFER_INDEX* bi = list->Get(index);
 	
-	std::vector<unsigned char*> data_buf = bi->GetData();
+	unsigned char* buf_data = bi->GetData();
 	
 	if (length)
 	{
-		data_buf.reserve(struct_size);
-		data_buf.push_back(data);
+		memcpy(&(buf_data[struct_size]), data, length);
 	}
 		
 
@@ -104,12 +104,14 @@ bool NetSocket::Create(int port, bool udp_tcp, bool listen)
 	return true;
 }
 
-std::string NetSocket::GetClientID()
+CString* NetSocket::GetClientID()
 {
 	char ServerPathURL[] = { "rtsp://192.168.0.141:554" };
-	char IDPathURL = (char)net->GetIDPath();
-	char PostfixURL[] = { "/mjpeg" };
-	std::string URLstr{ ServerPathURL + IDPathURL, PostfixURL };
+	char IDPathURL = static_cast<char>(net->GetIDPath());
+	
+	char* ptrStrSP = ServerPathURL + IDPathURL;
+
+	CString* URLstr = new CString(ptrStrSP);
 	return URLstr;
 }
 
@@ -117,14 +119,14 @@ void NetSocket::SetID(void* NewClient)
 {
 	int counter = 0;
 	int ID = net->GetIDPath();
-	std::vector<int> Array = net->GetIDArray();
+	int* Array = net->GetIDArray();
 	if (NewClient != nullptr)
 	{
 		for (int i = 0; i <= INT16_MAX; i++)
 		{
 			counter = i;
 			ID = counter;
-			Array.push_back(ID);
+			Array[i] = ID;
 		}
 
 	}
@@ -171,6 +173,9 @@ void Net::OnLostConnection(void* socket)
 NetBuffer::NetBuffer()
 {
 	owner =nullptr;
+	DataBuff = nullptr;
+	buff_length = 0;
+	max_length = 0;
 	position = 0;
 }
 
@@ -188,45 +193,54 @@ void NetBuffer::SetMaxSize(size_t size)
 {
 	Clear();
 
-	if(size > DataBuff.size())
-		DataBuff.reserve(size);
+	if (size > max_length)
+	{
+		buff_length = size;
+		DataBuff = new unsigned char[buff_length];
+	}
 }
 
 void NetBuffer::Clear()
 {
-	if (!DataBuff.empty())
+	if (DataBuff)
 	{
-		DataBuff.erase(DataBuff.begin(), DataBuff.end());
-		DataBuff.reserve(0);
+		delete[] DataBuff;
+		//DataBuff = nullptr;
 	}
+	max_length = 0;
+	buff_length = 0;
 	
 }
 
 void NetBuffer::SetLength(size_t length)
 {
-	if(length > DataBuff.size())
-		DataBuff.reserve(length);
+	buff_length = length;
 }
 
 void NetBuffer::Add(int length, void* data)
 {
-	unsigned char *vdata = new unsigned char[length];
-	memcpy(vdata, DataBuff.data(), length);
-	DataBuff.erase(DataBuff.begin(), DataBuff.end());
-	DataBuff.push_back((unsigned char*)data);
-
+	int len = buff_length + length;
+	if (max_length < len)
+	{
+		// ��������� ����������
+		max_length = len;
+		unsigned char* vdata = new unsigned char[max_length];
+		memcpy(vdata, DataBuff, buff_length);
+		delete[] DataBuff;
+		DataBuff = vdata;
+	}
 	if (data)
-		memcpy(&DataBuff + DataBuff.size(), data, length);
-	DataBuff.reserve(length);
+		memcpy(DataBuff + buff_length, data, length);
+	buff_length = length;
 	
 }
 
 void NetBuffer::Delete(int length)
 {
-	int size = this->DataBuff.size() - length;
-	//memcpy(&DataBuff, DataBuff + length, size);
+	int size = buff_length - length;
+	memcpy(&DataBuff, DataBuff + length, size);
 	//DataBuff.
-	this->DataBuff.reserve(-size);
+	this->buff_length -= size;
 }
 
 void Net_Address::FromStringIP(const char* ip)
@@ -273,6 +287,7 @@ NET_BUFFER_LIST::NET_BUFFER_LIST() : CArrayBase()
 
 	k_buffer = 10;
 	m_buffer = (NET_BUFFER_INDEX**)malloc(k_buffer * sizeof(NET_BUFFER_INDEX*));
+	//memcpy(m_buffer, 0, k_buffer);
 	for (int i = 0; i < k_buffer; i++)
 		m_buffer[i] = NULL;
 	IncreaseDeleted(0, k_buffer - 1);
@@ -309,19 +324,19 @@ int NET_BUFFER_LIST::AddBuffer(const MEM_DATA& buffer)
 	}
 
 	buf->Reset();
-
-//	if (buf->GetData().size() < buffer.length)
-//	{
-//		buf->SetMaxSize(buffer.length);
-//	}
 	
-	std::vector<unsigned char*> dest;
+	int max_len=buf->GetMaxSize();
+	if (max_len < buffer.length)
+	{
+		buf->SetMaxSize(buffer.length);
+	}
+	
+	unsigned char* dest = buf->GetData();
 	if (buffer.data)
 	{
-		dest.reserve(buf->GetData().size());
-		dest.push_back(buffer.data);
+		memcpy(dest, buffer.data, buffer.length);
 	}
-//	buf->SetLength(buffer.length);
+	buf->SetLength(buffer.length);
 
 	return index;
 }

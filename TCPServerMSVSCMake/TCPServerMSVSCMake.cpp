@@ -3,7 +3,7 @@
 
 #include "TCPServerMSVSCMake.hpp"
 
-int main(int argc, char *argv[]) {
+int main() {
 
 	std::cout << "Main:" << std::endl;
 	Server server;

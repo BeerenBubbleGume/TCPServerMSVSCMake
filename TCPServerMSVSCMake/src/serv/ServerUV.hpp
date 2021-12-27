@@ -16,7 +16,7 @@ protected:
 	Net*					net;
 	NetSocketUV*			net_sockuv;
 
-	std::string GetClientID()					override						{ return NetSocket::GetClientID(); }
+	CString* GetClientID()					override							{ return NetSocket::GetClientID(); }
 	virtual void SetID(void* NewClient)			override						{ NetSocket::SetID(NewClient); }
 	virtual void SendTCP(NET_BUFFER_INDEX* buf) override						{ net_sockuv->SendTCP(buf); }
 	virtual void ReceiveTCP()					override						{ net_sockuv->ReceiveTCP(); }
