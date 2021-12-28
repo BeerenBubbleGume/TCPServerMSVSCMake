@@ -1,7 +1,7 @@
 #include <stdint.h>
 #include "ServerUV.hpp"
 
-Server::Server() : NetSocketUV(net)
+Server::Server()
 {
 	net			 = new Net;
 	net_sockuv	 = new NetSocketUV(net);

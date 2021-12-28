@@ -1,14 +1,5 @@
 #pragma once
-#ifndef NETSOCKETUV_H
-#define NETSOCKETUV_H
-
-#include <cassert>
-#include <cstring>
-#include <inttypes.h>
-#include "NetSock.hpp"
-#include "utils.hpp"
-#include "ProxyServer.hpp"
-#include "../../libs/includes/uv.h"
+#include "includes.hpp"
 
 class NetSocketUV : public NetSocket
 {
@@ -24,24 +15,54 @@ public:
 	//bool SetConnectedSocketToReadMode(uv_stream_t* stream);
 	bool GetIP(Net_Address* addr, bool own_or_peer);
 	
-	bool Accept(uv_stream_t* handle);
+	bool Accept(uv_tcp_t* handle);
 	
-	void SetID(void* NewClient)												{ NetSocket::SetID(NewClient); }
-	virtual CString* GetClientID()											{ return NetSocket::GetClientID(); }
+	void SetID(void* NewClient)													{ NetSocket::SetID(NewClient); }
+	//virtual const char* GetClientID()											{ return NetSocket::GetClientID(); }
 
 	void SendTCP(NET_BUFFER_INDEX* buf);
 	void SendUDP(NET_BUFFER_INDEX* buf);
 	void ReceiveTCP();
 	void ReceiveUPD();
 	void Destroy();
-	virtual void generateRTSPURL(CString* clientURI);
 
-	//NET_BUFFER_INDEX* PrepareMessage(unsigned int sender_id, size_t length, unsigned char* data);
+	static void GenerateRTSPURL(void* Data)										{ NetSocketUV::RTSPProxyServer::StartProxyServer(Data); }
 
 	int status;
-	NetSocketUV* NewSocket(Net* net)										{ return new NetSocketUV(net); }
-
+	static NetSocketUV* NewSocket(Net* net)										{ return new NetSocketUV(net); }
 	uv_loop_t* loop;
+
+protected:
+	class RTSPProxyServer : public RTSPServer
+	{
+	public:
+		static RTSPProxyServer* createNew(UsageEnvironment& env, Port ourPort = 554,
+			UserAuthenticationDatabase* authDatabase = NULL,
+			unsigned reclamationSeconds = 65);
+
+		static void anonceStream(RTSPServer* rtspServer, ServerMediaSession* sms, char const* streamName);
+
+		static void StartProxyServer(/*CString* inputURL, */void* Data);
+		bool StopProxyServer(void* clientData);
+		int getSocket4() { return fServerSocketIPv4; }
+		int getSocket6() { return fServerSocketIPv6; }
+		static void ip4SocketHandler(void* data, int mask) {
+			RTSPProxyServer* server = (RTSPProxyServer*)data;
+			server->incomingConnectionHandlerIPv4();
+		}
+		static void ip6SocketHandler(void* data, int mask) {
+			RTSPProxyServer* server = (RTSPProxyServer*)data;
+			server->incomingConnectionHandlerIPv6();
+		}
+
+	protected:
+		virtual ~RTSPProxyServer();
+		RTSPProxyServer(UsageEnvironment& env,
+			int ourSocketIPv4, int ourSocketIPv6, Port ourPort,
+			UserAuthenticationDatabase* authDatabase,
+			unsigned reclamationSeconds);
+
+	};
 };
 
 void OnAccept(uv_stream_t* stream, int status);
@@ -54,10 +75,6 @@ void OnWrite(uv_write_t* req, int status);
 uv_tcp_t* GetPtrTCP(void* ptr);
 uv_udp_t* GetPtrUDP(void* ptr);
 uv_loop_t* GetLoop(Net* net);
-
-
-
-#endif // !NETSOCKETUV_H
 
 
 

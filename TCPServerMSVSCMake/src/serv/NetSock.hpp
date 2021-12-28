@@ -1,23 +1,6 @@
 #pragma once
-#ifndef NETSOCK_H
-#define NETSOCKET_H
-#ifdef WIN32
-#include <WinSock2.h>
-#pragma comment(lib, "ws2_32.lib")
-#else
-#include <unistd.h>
-#include <sys/socket.h>
-#include <sys/types.h>
-#endif // WIN32
-#include <cstring>
-#include <cstdio>
-#include <iostream>
-#include <stdint.h>
-#include <cassert>
-#include <vector>
-#include "../../libs/includes/uv.h"
 #include "utils.hpp"
-
+#include "../../includes/uv.h"
 #define SENDER_SIZE_UV sizeof(uv_write_t)
 
 struct NetBuffer;
@@ -35,6 +18,7 @@ struct NET_SOCKET_PRT
 };
 struct TCP_SOCKET : public NET_SOCKET_PRT, uv_tcp_t
 {
+	uv_stream_t* handle;
 };
 struct UDP_SOCKET : public NET_SOCKET_PRT, uv_udp_t
 {
@@ -133,7 +117,7 @@ public:
 	virtual void SendUDP(NET_BUFFER_INDEX* buf) = 0;
 	
 	virtual void SetID(void* NewClient);
-	virtual CString* GetClientID();
+	virtual const char* GetClientID();
 	
 	virtual void ReceiveTCP() = 0;
 	virtual void ReceiveUPD() = 0; 
@@ -141,7 +125,7 @@ public:
 	void SendMessenge(NET_BUFFER_INDEX* buf, Net_Address* addr = nullptr);
 	
 	bool IsTCP() { return udp_tcp; }
-	
+	Net* getNet() { return net; }
 	bool udp_tcp;
 	int port;
 	Net_Address* addr;
@@ -210,4 +194,3 @@ struct MEM_DATA
 		return false;
 	}
 };
-#endif // !NETSOCK_H

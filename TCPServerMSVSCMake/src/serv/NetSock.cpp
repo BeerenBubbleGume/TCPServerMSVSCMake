@@ -7,7 +7,8 @@ Net::Net()
 	bytes_read = 0;
 	udp_tcp = false;
 	ClientID = 0;
-	IDArray = nullptr;
+	IDArray = new int[10000000];
+	IDArray[1] = 1;
 	addr = nullptr;
 	receiving_socket = nullptr;
 	sending_list.SetOwner(this);
@@ -104,14 +105,9 @@ bool NetSocket::Create(int port, bool udp_tcp, bool listen)
 	return true;
 }
 
-CString* NetSocket::GetClientID()
+const char* NetSocket::GetClientID()
 {
-	char ServerPathURL[] = { "rtsp://192.168.0.141:554" };
-	char IDPathURL = static_cast<char>(net->GetIDPath());
-	
-	char* ptrStrSP = ServerPathURL + IDPathURL;
-
-	CString* URLstr = new CString(ptrStrSP);
+	const char* URLstr = new const char(net->GetIDPath());
 	return URLstr;
 }
 
@@ -122,11 +118,12 @@ void NetSocket::SetID(void* NewClient)
 	int* Array = net->GetIDArray();
 	if (NewClient != nullptr)
 	{
-		for (int i = 0; i <= INT16_MAX; i++)
+		for (int i = 0; i < sizeof(Array); i++)
 		{
 			counter = i;
 			ID = counter;
 			Array[i] = ID;
+			
 		}
 
 	}

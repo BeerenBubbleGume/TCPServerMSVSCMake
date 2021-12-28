@@ -16,9 +16,7 @@ add_executable (TCPServerMSVSCMake	"src/serv/NetSock.hpp"
 									"src/serv/utils.hpp"
 									"src/serv/utils.cpp"
 									"TCPServerMSVSCMake.hpp" 
-									"src/serv/ProxyServer.cpp" 
-									"src/serv/ProxyServer.hpp" 
-)
+									"src/serv/includes.hpp")
 # TODO: �������� ����� � ������� �������, ���� ��� ����������.
 IF(WIN32)
 	target_include_directories(TCPServerMSVSCMake PUBLIC

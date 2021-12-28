@@ -1,10 +1,8 @@
 #pragma once
 #ifndef SERVERUV_H
-#define SERVERUV_H
+#include "includes.hpp"
 
-#include "NetSocketUV.hpp"
-
-class Server : NetSocketUV
+class Server
 {
 public:
 	Server();
@@ -16,12 +14,13 @@ protected:
 	Net*					net;
 	NetSocketUV*			net_sockuv;
 
-	CString* GetClientID()					override							{ return NetSocket::GetClientID(); }
-	virtual void SetID(void* NewClient)			override						{ NetSocket::SetID(NewClient); }
-	virtual void SendTCP(NET_BUFFER_INDEX* buf) override						{ net_sockuv->SendTCP(buf); }
-	virtual void ReceiveTCP()					override						{ net_sockuv->ReceiveTCP(); }
-	virtual void SendUDP(NET_BUFFER_INDEX* buf) override						{ net_sockuv->SendUDP(buf); }
-	virtual void ReceiveUPD()					override						{ net_sockuv->ReceiveUPD(); }
+	/*CString* GetClientID()												{ return NetSocket::GetClientID(); }
+	virtual void SetID(void* NewClient)									{ NetSocket::SetID(NewClient); }*/
+	
+	/*virtual void SendTCP(NET_BUFFER_INDEX* buf) 						{ net_sockuv->SendTCP(buf); }
+	virtual void ReceiveTCP()											{ net_sockuv->ReceiveTCP(); }
+	virtual void SendUDP(NET_BUFFER_INDEX* buf) 						{ net_sockuv->SendUDP(buf); }
+	virtual void ReceiveUPD()											{ net_sockuv->ReceiveUPD(); }*/
 
 	
 };
