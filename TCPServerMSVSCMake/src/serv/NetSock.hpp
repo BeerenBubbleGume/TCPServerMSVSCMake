@@ -1,5 +1,6 @@
 #pragma once
 #include "utils.hpp"
+#include <vector>
 #include "../../includes/uv.h"
 #define SENDER_SIZE_UV sizeof(uv_write_t)
 
@@ -91,11 +92,14 @@ public:
 	auto GetIDArray()																				{ return IDArray; }
 	auto GetConnectSockaddr()																		{ return fConnectionSockaddr; }
 
+	virtual void setIDPath(uint16_t ID)																	{ ClientID = ID; }
+	virtual void setIDArray(uint16_t* IDArray)															{ this->IDArray = IDArray; }
+
 protected:
 	sockaddr fConnectionSockaddr;
 	int ClientID;
 	int bytes_read;
-	int* IDArray;
+	uint16_t* IDArray;
 	NetBuffer recv_buf;
 	bool udp_tcp;
 	NetSocket* receiving_socket;

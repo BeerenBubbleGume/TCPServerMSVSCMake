@@ -31,7 +31,8 @@ public:
 	int status;
 	static NetSocketUV* NewSocket(Net* net)										{ return new NetSocketUV(net); }
 	uv_loop_t* loop;
-
+	
+	
 protected:
 	class RTSPProxyServer : public RTSPServer
 	{
@@ -61,7 +62,33 @@ protected:
 			int ourSocketIPv4, int ourSocketIPv6, Port ourPort,
 			UserAuthenticationDatabase* authDatabase,
 			unsigned reclamationSeconds);
+		friend class DemandServerMediaSubsession;
+		friend class NetSocketUV;
+		friend class NetBuffer;
+	};
+	class DemandServerMediaSubsession : public OnDemandServerMediaSubsession
+	{
+	public:
+		static DemandServerMediaSubsession* createNew(Net* net, UsageEnvironment& env, Boolean reuseFirstSource);
+		virtual ~DemandServerMediaSubsession();
+		static ServerMediaSession* createNewSMS(UsageEnvironment& env, const char* fileName, FILE* fid);
+		virtual char const* sdpLines(int addressFamily) { return OnDemandServerMediaSubsession::sdpLines(addressFamily); }
+		
+	protected:
+		virtual FramedSource* createNewStreamSource(unsigned clientSessionId, unsigned& estBitrate);
+		virtual RTPSink* createNewRTPSink(Groupsock* rtpGroupsock, unsigned char rtpPayloadTypeIfDynamic, FramedSource* inputSource);
+		//int verbosityLevel() const { return ((ProxyServerMediaSession*)fParentSession)->fVerbosityLevel; }
+	private:
 
+		DemandServerMediaSubsession(Net* net, UsageEnvironment& env, Boolean reuseFirstSource);
+		static void subsessionByeHandler(void* clientData);
+		void subsessionByeHandler();
+
+		/*u_int8_t* fBuffer;
+		u_int64_t fBufferSize;*/
+		friend class RTSPProxyServer;
+		friend class NetSocketUV;
+		Net* net;
 	};
 };
 
