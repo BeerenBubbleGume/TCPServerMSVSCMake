@@ -123,7 +123,11 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/ServerUV.cpp.o: \
  /usr/include/c++/8/bits/locale_facets.tcc \
  /usr/include/c++/8/bits/basic_ios.tcc \
  /usr/include/c++/8/bits/ostream.tcc /usr/include/c++/8/istream \
- /usr/include/c++/8/bits/istream.tcc /usr/include/c++/8/cassert \
+ /usr/include/c++/8/bits/istream.tcc /usr/include/c++/8/fstream \
+ /usr/include/c++/8/bits/codecvt.h \
+ /usr/include/c++/8/x86_64-redhat-linux/bits/basic_file.h \
+ /usr/include/c++/8/x86_64-redhat-linux/bits/c++io.h \
+ /usr/include/c++/8/bits/fstream.tcc /usr/include/c++/8/cassert \
  /usr/include/assert.h /usr/include/c++/8/vector \
  /usr/include/c++/8/bits/stl_construct.h \
  /usr/include/c++/8/bits/stl_uninitialized.h /usr/include/c++/8/utility \

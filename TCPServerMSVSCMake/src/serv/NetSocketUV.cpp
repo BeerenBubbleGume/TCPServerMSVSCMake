@@ -73,7 +73,9 @@ bool NetSocketUV::Create(int port, bool udp_tcp, bool listen)
 				assert(i == 0);
 				int b = uv_tcp_bind(tcp, (sockaddr*)sock_addres, 0);
 				assert(b == 0);
-				int l = uv_listen((uv_stream_t*)tcp, 1024, OnAccept);
+				uv_thread_t acceptingThread;
+				uv_thread_create(&acceptingThread, OnListining, tcp);
+				int l = uv_thread_join(&acceptingThread);
 				if (l)
 					return false;
 				else
@@ -125,7 +127,7 @@ bool NetSocketUV::GetIP(Net_Address* addr, bool own_or_peer)
 		return false;
 }
 
-bool NetSocketUV::Accept(uv_tcp_t* handle)
+bool NetSocketUV::Accept(uv_handle_t* handle)
 {
 	NetSocketUV* accept_sock = NewSocket(net);
 	accept_sock->Create(554, true, false);
@@ -142,7 +144,7 @@ bool NetSocketUV::Accept(uv_tcp_t* handle)
 		{
 			return true;
 		}
-		else
+		else 
 			return false;
 	}
 	else
@@ -235,27 +237,24 @@ void OnWrite(uv_write_t *req, int status)
 	for (int i = 0; i < offset; ++i)
 		outFile.write((const char*)buf->GetData(), offset);
 	outFile.close();
-	uv_thread_t proxyThread;
-	uv_thread_create(&proxyThread, NetSocketUV::GenerateRTSPURL, uvsocket);
-	uv_thread_join(&proxyThread);
 
 	list->DeleteBuffer(index);
 	
 }
 void AfterCreateFile(uv_fs_t* req)
 {
-	uv_file h264 = 1;
-	req->file.fd = h264;
-	uv_buf_t buffer;
+	// uv_file h264 = 1;
+	// req->file.fd = h264;
+	// uv_buf_t buffer;
 	
-	int offset = offsetof(NetBufferUV, sender_object);
-	NetBufferUV* buf = (NetBufferUV*)(((char*)req) - offset);
-	NET_BUFFER_LIST* list = (NET_BUFFER_LIST*)buf->owner;
-	int index = buf->GetIndex();
-	NetSocketUV* uvsocket = (NetSocketUV*)GetNetSocketPtr(req);
+	// int offset = offsetof(NetBufferUV, sender_object);
+	// NetBufferUV* buf = (NetBufferUV*)(((char*)req) - offset);
+	// NET_BUFFER_LIST* list = (NET_BUFFER_LIST*)buf->owner;
+	// int index = buf->GetIndex();
+	// NetSocketUV* uvsocket = (NetSocketUV*)GetNetSocketPtr(req);
 
-	uv_fs_write(req->loop, req, h264, &buffer, 1, UV_FS_O_CREAT, OnWriteFile);
-	list->DeleteBuffer(index);
+	// uv_fs_write(req->loop, req, h264, &buffer, 1, UV_FS_O_CREAT, OnWriteFile);
+	// list->DeleteBuffer(index);
 }
 void OnWriteFile(uv_fs_t* req)
 {
@@ -280,6 +279,11 @@ void OnReadUDP(uv_udp_t* handle, ssize_t nread, const uv_buf_t* buf, const struc
 	socket->ReceiveUPD();
 }
 
+void OnListining(void* tcp)
+{
+	int l = uv_listen((uv_stream_t*)tcp, 1024, OnAccept);
+}
+
 void OnAccept(uv_stream_t* stream, int status)
 {
 	std::cout << "___ On Connetc ___" << std::endl;
@@ -288,10 +292,8 @@ void OnAccept(uv_stream_t* stream, int status)
 		fprintf(stderr, "New connection error %s\n", uv_strerror(status));
 		return;
 	}
-	uv_thread_t connectThread;
-	
 	NetSocketUV* net_sock = (NetSocketUV*)GetNetSocketPtr(stream);
-	net_sock->Accept((uv_tcp_t*)stream);
+	net_sock->Accept((uv_handle_t*)stream);
 }
 
 void NetSocketUV::Destroy()

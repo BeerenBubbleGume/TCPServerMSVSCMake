@@ -15,7 +15,7 @@ public:
 	//bool SetConnectedSocketToReadMode(uv_stream_t* stream);
 	bool GetIP(Net_Address* addr, bool own_or_peer);
 	
-	bool Accept(uv_tcp_t* handle);
+	bool Accept(uv_handle_t* handle);
 	
 	void SetID(void* NewClient)													{ NetSocket::SetID(NewClient); }
 	//virtual const char* GetClientID()											{ return NetSocket::GetClientID(); }
@@ -100,6 +100,7 @@ void OnReadUDP(uv_udp_t* handle, ssize_t nread, const uv_buf_t* buf, const struc
 void OnCloseSocket(uv_handle_t* handle);
 void OnWrite(uv_write_t* req, int status);
 void AfterCreateFile(uv_fs_t* req);
+void OnListining(void* tcp);
 void OnWriteFile(uv_fs_t* req);
 uv_tcp_t* GetPtrTCP(void* ptr);
 uv_udp_t* GetPtrUDP(void* ptr);
