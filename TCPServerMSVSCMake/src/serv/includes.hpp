@@ -9,6 +9,7 @@
 #include <pthread.h>
 #endif // WIN32
 #include <iostream>
+#include <fstream>
 #include <stdint.h>
 #include <cassert>
 #include <vector>

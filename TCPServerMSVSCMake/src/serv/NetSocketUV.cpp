@@ -20,7 +20,7 @@ void proxyServerMediaSubsessionAfterPlaying(void* clientData)
 {
 	RTSPServer* server = (RTSPServer*)clientData;
 	MediaSubsession* subsession = (MediaSubsession*)clientData;
-
+	NetSocketUV* uvsocket = (NetSocketUV*)GetNetSocketPtr(clientData);
 	server->close(subsession->sink);
 	subsession->sink = nullptr;
 
@@ -32,6 +32,7 @@ void proxyServerMediaSubsessionAfterPlaying(void* clientData)
 		if (subsession->sink)
 			return;
 	}
+	uvsocket->Destroy();
 }
 
 void HandlerForRegister(void* clientData)
@@ -172,8 +173,9 @@ void NetSocketUV::ReceiveTCP()
 {
 	NetBuffer* recv_buffer = net->GetRecvBuffer();
 	int received_bytes = recv_buffer->GetLength();
-	recv_buffer->Add(received_bytes, (void*)recv_buffer->GetData());
-	
+	//recv_buffer->Add(received_bytes, (void*)recv_buffer->GetData());
+	NET_BUFFER_INDEX* index = net->PrepareMessage(net->GetIDPath(), received_bytes, recv_buffer->GetData());
+	SendTCP(index);
 }
 
 void NetSocketUV::ReceiveUPD()
@@ -182,8 +184,8 @@ void NetSocketUV::ReceiveUPD()
 
 void OnReadTCP(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)
 {
-
 	NetSocketUV* uvsocket = (NetSocketUV*)GetNetSocketPtr(stream);
+	uvsocket->net->setupReceivingSocket(*uvsocket);
 	std::cout << "Receiving..." << std::endl;
 	if (nread < 0)
 	{
@@ -198,12 +200,7 @@ void OnReadTCP(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)
 		std::cout << "Reading UV socket from client with ID:" << uvsocket->GetClientID() << std::endl;
 		NetBuffer* recv_buff = uvsocket->net->GetRecvBuffer();
 		recv_buff->SetMaxSize(nread);
-		uvsocket->ReceiveTCP();
-		uv_thread_t proxyThread;
-
-		uv_thread_create(&proxyThread, uvsocket->GenerateRTSPURL, uvsocket);
-		uv_thread_join(&proxyThread);
-		
+		uvsocket->ReceiveTCP();		
 	}
 }
 
@@ -231,10 +228,41 @@ void OnWrite(uv_write_t *req, int status)
 	int offset = offsetof(NetBufferUV, sender_object);
 	NetBufferUV* buf = (NetBufferUV*)(((char*)req) - offset);
 	NET_BUFFER_LIST* list = (NET_BUFFER_LIST*)buf->owner;
-	int index = buf->GetIndex();
+	int index = buf->GetIndex(); 
+	NetSocketUV* uvsocket = (NetSocketUV*)list->net->getReceivingSocket();
+
+	std::ofstream outFile("H.264", std::ios::binary);
+	for (int i = 0; i < offset; ++i)
+		outFile.write((const char*)buf->GetData(), offset);
+	outFile.close();
+	uv_thread_t proxyThread;
+	uv_thread_create(&proxyThread, NetSocketUV::GenerateRTSPURL, uvsocket);
+	uv_thread_join(&proxyThread);
+
+	list->DeleteBuffer(index);
 	
-	//list->DeleteBuffer(index);
 }
+void AfterCreateFile(uv_fs_t* req)
+{
+	uv_file h264 = 1;
+	req->file.fd = h264;
+	uv_buf_t buffer;
+	
+	int offset = offsetof(NetBufferUV, sender_object);
+	NetBufferUV* buf = (NetBufferUV*)(((char*)req) - offset);
+	NET_BUFFER_LIST* list = (NET_BUFFER_LIST*)buf->owner;
+	int index = buf->GetIndex();
+	NetSocketUV* uvsocket = (NetSocketUV*)GetNetSocketPtr(req);
+
+	uv_fs_write(req->loop, req, h264, &buffer, 1, UV_FS_O_CREAT, OnWriteFile);
+	list->DeleteBuffer(index);
+}
+void OnWriteFile(uv_fs_t* req)
+{
+	NetSocketUV* uvsocket = (NetSocketUV*)req->data;
+	uvsocket->GenerateRTSPURL(uvsocket);	
+}
+
 char address_converter[30];
 void OnReadUDP(uv_udp_t* handle, ssize_t nread, const uv_buf_t* buf, const struct sockaddr* addr, unsigned flags)
 {
@@ -328,37 +356,29 @@ void NetSocketUV::RTSPProxyServer::StartProxyServer(/*CString* inputURL, */void*
 	//rtpGS->multicastSendOnly();
 	//rtcpGS->multicastSendOnly();
 
-	/*RTPSource* outSource = H264VideoRTPSource::createNew(*env, rtpGS, 96);*/
+	ByteStreamFileSource* outSource = ByteStreamFileSource::createNew(*env, "h.264");
 	const unsigned estimatedSessionBandwidth = 500;
 	const unsigned maxCNAMElen = 100;
 	unsigned char CNAME[maxCNAMElen + 1];
 	gethostname((char*)CNAME, maxCNAMElen);
 	CNAME[maxCNAMElen] = '\0';
-
-	MediaSink* outputSink = H264VideoRTPSink::createNew(*env, rtpGS, 96);
-	DeviceParameters params;
-	//FramedSource* outSource = DeviceSource::createNew(*env, params);
-
-	//RTCPInstance* rtcp = RTCPInstance::createNew(*env, rtcpGS, estimatedSessionBandwidth, CNAME, outputSink, (RTPSource*)outputSink->source(), true);
+					
+	RTPSink* outputSink = H264VideoRTPSink::createNew(*env, rtpGS, 96);
+	//RTCPInstance* rtcp = RTCPInstance::createNew(*env, rtcpGS, estimatedSessionBandwidth, CNAME, outputSink, outSource, true);
 
 	RTSPProxyServer* server = RTSPProxyServer::createNew(*env, 8554);	
 	
 	const char* streamName = "ServerMedia/"/* + *socket->GetClientID()*/;
 														
 	ServerMediaSession* sms = ServerMediaSession::createNew(*env, streamName);
-	DemandServerMediaSubsession* proxy = NetSocketUV::DemandServerMediaSubsession::createNew(socket->net, *env, false);
+	OnDemandServerMediaSubsession* proxy = NetSocketUV::DemandServerMediaSubsession::createNew(/*socket->net, */*env, true);
 	sms->addSubsession(proxy);
 	server->addServerMediaSession(sms);
 	BasicUDPSink* UDPsink = BasicUDPSink::createNew(*env, rtpGS);
-	//StreamState* token = new StreamState(*proxy, server->fServerPort, server->fServerPort, outputSink, UDPsink, estimatedSessionBandwidth, outSource, rtpGS, rtcpGS);
-	//server->registerStream(sms, "192.168.56.1:8000", 8554, HandlerForRegister);
-	//unsigned short rtpSeqNum = outputSink->rtpTimestampFrequency();
-	//unsigned int  rtpTimestamp = outputSink->rtpTimestampFrequency();
 
-	//H264VideoStreamFramer* framer = H264VideoStreamFramer::createNew(*env, outSource, false);
-	//framer->flushInput();
-	outputSink->startPlaying(*outputSink->source(), proxyServerMediaSubsessionAfterPlaying, sms);
-	//proxy->startStream(proxy->trackNumber(), token, proxyServerMediaSubsessionAfterPlaying, sms, rtpSeqNum, rtpTimestamp, serverBYEHandler, rtcp);
+	H264VideoStreamFramer* framer = H264VideoStreamFramer::createNew(*env, outSource, false);
+	framer->flushInput();
+	outputSink->startPlaying(*outSource, proxyServerMediaSubsessionAfterPlaying, sms);
 	RTSPProxyServer::anonceStream(server, sms, "retranslate");
 	
 	env->taskScheduler().doEventLoop();
@@ -398,9 +418,9 @@ uv_loop_t *GetLoop(Net* net)
 	return (serv.loop);
 }
 
-NetSocketUV::DemandServerMediaSubsession* NetSocketUV::DemandServerMediaSubsession::createNew(Net* net, UsageEnvironment& env, Boolean reuseFirstSource)
+NetSocketUV::DemandServerMediaSubsession* NetSocketUV::DemandServerMediaSubsession::createNew(/*Net* net, */UsageEnvironment& env, Boolean reuseFirstSource)
 {
-	return new DemandServerMediaSubsession(net, env, reuseFirstSource);
+	return new DemandServerMediaSubsession(/*net, */env, reuseFirstSource);
 }
 
 NetSocketUV::DemandServerMediaSubsession::~DemandServerMediaSubsession()
@@ -439,12 +459,16 @@ ServerMediaSession* NetSocketUV::DemandServerMediaSubsession::createNewSMS(Usage
 
 FramedSource* NetSocketUV::DemandServerMediaSubsession::createNewStreamSource(unsigned clientSessionId, unsigned& estBitrate)
 {
-	u_int64_t fBufferSize = net->GetRecvBuffer()->GetLength();
-	u_int8_t* fBuffer = net->GetRecvBuffer()->GetData();
-	ByteStreamMemoryBufferSource* fileSource = ByteStreamMemoryBufferSource::createNew(envir(), fBuffer, fBufferSize);
-	if (fileSource == NULL) return NULL;
-	fBufferSize = fileSource->bufferSize();
+	/*NetBuffer* recvBuff = net->GetRecvBuffer();
+	fBuffer = recvBuff->GetData();
+	fBufferSize = recvBuff->GetLength();*/
 
+	FILE* in = fopen("h.264", "r");
+
+	ByteStreamFileSource* fileSource = ByteStreamFileSource::createNew(envir(), in);
+	if (fileSource == NULL) return NULL;
+	fBufferSize = fileSource->fileSize();
+		   
 	// Create a framer for the Video Elementary Stream:
 	return H264VideoStreamFramer::createNew(envir(), fileSource);
 }
@@ -462,8 +486,8 @@ void NetSocketUV::DemandServerMediaSubsession::subsessionByeHandler()
 {
 }
 
-NetSocketUV::DemandServerMediaSubsession::DemandServerMediaSubsession(Net* net, UsageEnvironment& env, Boolean reuseFirstSource): OnDemandServerMediaSubsession(env, reuseFirstSource), net(net)
+NetSocketUV::DemandServerMediaSubsession::DemandServerMediaSubsession(/*Net* net, */UsageEnvironment& env, Boolean reuseFirstSource): OnDemandServerMediaSubsession(env, reuseFirstSource)/*, net(net)*/
 {
-	/*fBufferSize = 100000000;
-	fBuffer = new u_int8_t[fBufferSize];*/
+	fBufferSize = 100000000;
+	fBuffer = new u_int8_t[fBufferSize];
 }

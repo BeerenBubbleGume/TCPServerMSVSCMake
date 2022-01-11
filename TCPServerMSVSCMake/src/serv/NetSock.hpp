@@ -88,6 +88,8 @@ public:
 	void ReciveMessege();
 	NET_BUFFER_LIST* GetSendList()																	{ return &sending_list; }
 	NET_BUFFER_INDEX* PrepareMessage(unsigned int sender_id, size_t length, unsigned char* data);
+	NetSocket* getReceivingSocket()																	{ return receiving_socket; }
+	void setupReceivingSocket(NetSocket& socket)													{ receiving_socket = &socket; }
 	int GetIDPath()																					{ return ClientID; }
 	auto GetIDArray()																				{ return IDArray; }
 	auto GetConnectSockaddr()																		{ return fConnectionSockaddr; }

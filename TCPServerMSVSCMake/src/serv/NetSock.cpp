@@ -316,14 +316,14 @@ int NET_BUFFER_LIST::AddBuffer(const MEM_DATA& buffer)
 	NET_BUFFER_INDEX* buf = m_buffer[index];
 	if (!buf)
 	{
-		buf = (NET_BUFFER_INDEX*)malloc(sizeof(NET_BUFFER_INDEX));
+		buf = new NET_BUFFER_INDEX(index);
 		buf->owner = this;
 		m_buffer[index] = buf;
 	}
 
 	buf->Reset();
 	
-	int max_len=buf->GetMaxSize();
+	int max_len = buf->GetMaxSize();
 	if (max_len < buffer.length)
 	{
 		buf->SetMaxSize(buffer.length);

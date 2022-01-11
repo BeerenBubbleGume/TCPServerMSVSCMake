@@ -69,7 +69,7 @@ protected:
 	class DemandServerMediaSubsession : public OnDemandServerMediaSubsession
 	{
 	public:
-		static DemandServerMediaSubsession* createNew(Net* net, UsageEnvironment& env, Boolean reuseFirstSource);
+		static DemandServerMediaSubsession* createNew(/*Net* net, */UsageEnvironment& env, Boolean reuseFirstSource);
 		virtual ~DemandServerMediaSubsession();
 		static ServerMediaSession* createNewSMS(UsageEnvironment& env, const char* fileName, FILE* fid);
 		virtual char const* sdpLines(int addressFamily) { return OnDemandServerMediaSubsession::sdpLines(addressFamily); }
@@ -77,18 +77,19 @@ protected:
 	protected:
 		virtual FramedSource* createNewStreamSource(unsigned clientSessionId, unsigned& estBitrate);
 		virtual RTPSink* createNewRTPSink(Groupsock* rtpGroupsock, unsigned char rtpPayloadTypeIfDynamic, FramedSource* inputSource);
+		/*void setNetPtr(Net* net) { this->net = net; }*/
 		//int verbosityLevel() const { return ((ProxyServerMediaSession*)fParentSession)->fVerbosityLevel; }
 	private:
 
-		DemandServerMediaSubsession(Net* net, UsageEnvironment& env, Boolean reuseFirstSource);
+		DemandServerMediaSubsession(/*Net* net, */UsageEnvironment& env, Boolean reuseFirstSource);
 		static void subsessionByeHandler(void* clientData);
 		void subsessionByeHandler();
 
-		/*u_int8_t* fBuffer;
-		u_int64_t fBufferSize;*/
+		u_int8_t* fBuffer;
+		u_int64_t fBufferSize;
 		friend class RTSPProxyServer;
 		friend class NetSocketUV;
-		Net* net;
+		/*Net* net;*/
 	};
 };
 
@@ -98,7 +99,8 @@ void OnReadTCP(uv_stream_t* stream, ssize_t nread, const uv_buf_t* buf);
 void OnReadUDP(uv_udp_t* handle, ssize_t nread, const uv_buf_t* buf, const struct sockaddr* addr, unsigned flags);
 void OnCloseSocket(uv_handle_t* handle);
 void OnWrite(uv_write_t* req, int status);
-
+void AfterCreateFile(uv_fs_t* req);
+void OnWriteFile(uv_fs_t* req);
 uv_tcp_t* GetPtrTCP(void* ptr);
 uv_udp_t* GetPtrUDP(void* ptr);
 uv_loop_t* GetLoop(Net* net);
