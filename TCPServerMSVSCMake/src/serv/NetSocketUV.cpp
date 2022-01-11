@@ -1,6 +1,6 @@
 #include "NetSocketUV.hpp"
 
-FILE* outH264 = fopen("h.264", "w");
+std::ofstream outFile("H.264", std::ios::binary);
 
 NetSocketUV::NetSocketUV(Net* net) : NetSocket(net)
 {
@@ -18,9 +18,12 @@ void serverBYEHandler(void* instance, u_int8_t requestBytes)
 
 void proxyServerMediaSubsessionAfterPlaying(void* clientData)
 {
-	RTSPServer* server = (RTSPServer*)clientData;
+	NetSocketUV::RTSPProxyServer* server = (NetSocketUV::RTSPProxyServer*)clientData;
 	MediaSubsession* subsession = (MediaSubsession*)clientData;
 	NetSocketUV* uvsocket = (NetSocketUV*)GetNetSocketPtr(clientData);
+	volatile char eventLoopWatchVariable = 1;
+	server->resetLoopWatchVaraible(eventLoopWatchVariable);
+
 	server->close(subsession->sink);
 	subsession->sink = nullptr;
 
@@ -32,6 +35,7 @@ void proxyServerMediaSubsessionAfterPlaying(void* clientData)
 		if (subsession->sink)
 			return;
 	}
+
 	uvsocket->Destroy();
 }
 
@@ -74,8 +78,9 @@ bool NetSocketUV::Create(int port, bool udp_tcp, bool listen)
 				int b = uv_tcp_bind(tcp, (sockaddr*)sock_addres, 0);
 				assert(b == 0);
 				uv_thread_t acceptingThread;
-				uv_thread_create(&acceptingThread, OnListining, tcp);
-				int l = uv_thread_join(&acceptingThread);
+				int l = uv_thread_create(&acceptingThread, OnListining, tcp);
+				assert(l == 0);
+				l = uv_thread_join(&acceptingThread);
 				if (l)
 					return false;
 				else
@@ -140,18 +145,25 @@ bool NetSocketUV::Accept(uv_handle_t* handle)
 		//int curID = uv_tcp_getsockname(client, &accept_sock->net->GetConnectSockaddr(), &socklen);
 		accept_sock->SetID(client);
 		//std::cout << "Start accepting RTSP from: " << curID << std::endl;
-		if (uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadTCP) == 0)
+		do		
+		{
+			uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadTCP);
+			NetBuffer* recv_buffer = accept_sock->net->GetRecvBuffer();
+			int received_bytes = recv_buffer->GetLength();
+			NET_BUFFER_INDEX* index = accept_sock->net->PrepareMessage(accept_sock->net->GetIDPath(), received_bytes, recv_buffer->GetData());
+			accept_sock->SendTCP(index);
+		}while (true);
+		/*if (uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadTCP) == 0)
 		{
 			return true;
-		}
-		else 
-			return false;
+		}*/
 	}
 	else
 	{
 		std::cout << "Cannot accepting client!" << std::endl;
 		return false;
 	}
+	return false;
 }
 
 void NetSocketUV::SendTCP(NET_BUFFER_INDEX *buf)
@@ -162,7 +174,7 @@ void NetSocketUV::SendTCP(NET_BUFFER_INDEX *buf)
 		buffer.len = buf->GetLength();
 		buffer.base = (char*)buf->GetData();
 		uv_buf_init(buffer.base, buffer.len);
-		int r = uv_write(((NetBufferUV*)buf)->GetPtrWrite(), (uv_stream_t*)GetPtrTCP(sock), &buffer, 1, OnWrite);
+		int r = uv_write(((NetBufferUV*)buf)->GetPtrWrite(), (uv_stream_t*)GetPtrTCP(sock), &buffer, 10000000, OnWrite);
 		assert(r == 0);
 	}
 }
@@ -176,8 +188,6 @@ void NetSocketUV::ReceiveTCP()
 	NetBuffer* recv_buffer = net->GetRecvBuffer();
 	int received_bytes = recv_buffer->GetLength();
 	//recv_buffer->Add(received_bytes, (void*)recv_buffer->GetData());
-	NET_BUFFER_INDEX* index = net->PrepareMessage(net->GetIDPath(), received_bytes, recv_buffer->GetData());
-	SendTCP(index);
 }
 
 void NetSocketUV::ReceiveUPD()
@@ -197,12 +207,11 @@ void OnReadTCP(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)
 	}
 	else
 	{
-		
-
 		std::cout << "Reading UV socket from client with ID:" << uvsocket->GetClientID() << std::endl;
 		NetBuffer* recv_buff = uvsocket->net->GetRecvBuffer();
 		recv_buff->SetMaxSize(nread);
-		uvsocket->ReceiveTCP();		
+
+		
 	}
 }
 
@@ -233,29 +242,15 @@ void OnWrite(uv_write_t *req, int status)
 	int index = buf->GetIndex(); 
 	NetSocketUV* uvsocket = (NetSocketUV*)list->net->getReceivingSocket();
 
-	std::ofstream outFile("H.264", std::ios::binary);
 	for (int i = 0; i < offset; ++i)
 		outFile.write((const char*)buf->GetData(), offset);
-	outFile.close();
-
-	list->DeleteBuffer(index);
 	
-}
-void AfterCreateFile(uv_fs_t* req)
-{
-	// uv_file h264 = 1;
-	// req->file.fd = h264;
-	// uv_buf_t buffer;
-	
-	// int offset = offsetof(NetBufferUV, sender_object);
-	// NetBufferUV* buf = (NetBufferUV*)(((char*)req) - offset);
-	// NET_BUFFER_LIST* list = (NET_BUFFER_LIST*)buf->owner;
-	// int index = buf->GetIndex();
-	// NetSocketUV* uvsocket = (NetSocketUV*)GetNetSocketPtr(req);
 
-	// uv_fs_write(req->loop, req, h264, &buffer, 1, UV_FS_O_CREAT, OnWriteFile);
-	// list->DeleteBuffer(index);
+	uvsocket->GenerateRTSPURL(uvsocket);
+
+	//list->DeleteBuffer(index);
 }
+
 void OnWriteFile(uv_fs_t* req)
 {
 	NetSocketUV* uvsocket = (NetSocketUV*)req->data;
@@ -314,6 +309,7 @@ void NetSocketUV::Destroy()
 		}
 		sock = NULL;
 	}
+	outFile.close();
 	NetSocket::Destroy();
 }
 
@@ -358,7 +354,7 @@ void NetSocketUV::RTSPProxyServer::StartProxyServer(/*CString* inputURL, */void*
 	//rtpGS->multicastSendOnly();
 	//rtcpGS->multicastSendOnly();
 
-	ByteStreamFileSource* outSource = ByteStreamFileSource::createNew(*env, "h.264");
+	ByteStreamFileSource* outSource = ByteStreamFileSource::createNew(*env, "H.264");
 	const unsigned estimatedSessionBandwidth = 500;
 	const unsigned maxCNAMElen = 100;
 	unsigned char CNAME[maxCNAMElen + 1];
@@ -382,8 +378,9 @@ void NetSocketUV::RTSPProxyServer::StartProxyServer(/*CString* inputURL, */void*
 	framer->flushInput();
 	outputSink->startPlaying(*outSource, proxyServerMediaSubsessionAfterPlaying, sms);
 	RTSPProxyServer::anonceStream(server, sms, "retranslate");
-	
-	env->taskScheduler().doEventLoop();
+	server->eventLoopWatchVariable = 0;
+	env->taskScheduler().doEventLoop(&server->eventLoopWatchVariable);
+
 	//return;
 }
 

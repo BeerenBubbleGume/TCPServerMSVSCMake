@@ -31,9 +31,7 @@ public:
 	int status;
 	static NetSocketUV* NewSocket(Net* net)										{ return new NetSocketUV(net); }
 	uv_loop_t* loop;
-	
-	
-protected:
+
 	class RTSPProxyServer : public RTSPServer
 	{
 	public:
@@ -55,7 +53,7 @@ protected:
 			RTSPProxyServer* server = (RTSPProxyServer*)data;
 			server->incomingConnectionHandlerIPv6();
 		}
-
+		void resetLoopWatchVaraible(volatile char eventLoopWatchVariable) { this->eventLoopWatchVariable = eventLoopWatchVariable; }
 	protected:
 		virtual ~RTSPProxyServer();
 		RTSPProxyServer(UsageEnvironment& env,
@@ -65,7 +63,10 @@ protected:
 		friend class DemandServerMediaSubsession;
 		friend class NetSocketUV;
 		friend class NetBuffer;
+		volatile char eventLoopWatchVariable;
 	};
+
+protected:
 	class DemandServerMediaSubsession : public OnDemandServerMediaSubsession
 	{
 	public:
