@@ -135,9 +135,9 @@ bool NetSocketUV::Accept(uv_tcp_t* handle)
 	{
 		sockaddr sockname;
 		int socklen = sizeof accept_sock->net->GetConnectSockaddr();
-		int curID = uv_tcp_getsockname(client, &accept_sock->net->GetConnectSockaddr(), &socklen);
+		//int curID = uv_tcp_getsockname(client, &accept_sock->net->GetConnectSockaddr(), &socklen);
 		accept_sock->SetID(client);
-		std::cout << "Start accepting RTSP from: " << curID << std::endl;
+		//std::cout << "Start accepting RTSP from: " << curID << std::endl;
 		if (uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadTCP) == 0)
 		{
 			return true;

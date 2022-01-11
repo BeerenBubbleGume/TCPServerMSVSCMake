@@ -48,7 +48,7 @@ NetSocket::NetSocket(Net* net)
 
 NET_BUFFER_INDEX* Net::PrepareMessage(unsigned int sender_id, size_t length, unsigned char* data)
 {
-	int struct_size = sizeof Send_Message;
+	int struct_size = sizeof (Send_Message);
 	size_t len = struct_size + length;
 	assert(len > 0);
 
@@ -114,10 +114,10 @@ void NetSocket::SetID(void* NewClient)
 {
 	int counter = 0;
 	int ID = net->GetIDPath();
-	uint16_t* Array = new uint16_t[MAXINT16];
+	uint16_t* Array = new uint16_t[1000000];
 	if (NewClient != nullptr)
 	{
-		for (int i = 1; i < MAXINT16; i++)
+		for (int i = 1; i < 1000000; i++)
 		{
 			counter = i;
 			ID = counter;

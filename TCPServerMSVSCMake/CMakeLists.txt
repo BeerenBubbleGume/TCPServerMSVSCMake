@@ -44,9 +44,14 @@ ELSE()
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/UsageEnvironment)
 	target_link_libraries(TCPServerMSVSCMake
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libuv_a.a
-								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/UsageEnvironment.a
-								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/liveMedia.a
-								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/groupsock.a
-								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/BasicUsageEnvironment.a
-								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/pthread.a)
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libliveMedia.a
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libBasicUsageEnvironment.a
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libUsageEnvironment.a
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libgroupsock.a
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libssl.a
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libcrypto.a
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libz.a
+								#${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libpthread.so
+								pthread
+								-ldl)
 ENDIF()
