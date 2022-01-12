@@ -853,3 +853,53 @@ void CArrayBase::AddToDeleted(int index)
 	m_deleted[k_deleted] = index;
 	k_deleted++;
 }
+
+CStreamFile::CStreamFile()
+{
+}
+
+CStreamFile::~CStreamFile()
+{
+}
+
+void CStreamFile::Close()
+{
+}
+
+unsigned int CStreamFile::GetLength()
+{
+	return 0;
+}
+
+unsigned int CStreamFile::GetPosition()
+{
+	return 0;
+}
+
+void CStreamFile::SetPosition(unsigned int pos)
+{
+}
+
+unsigned int CStreamFile::Write(void* m_data, unsigned int k_data)
+{
+	return 0;
+}
+
+unsigned int CStreamFile::Read(void* m_data, unsigned int k_data)
+{
+	return 0;
+}
+
+bool CStreamFile::IsStoring()
+{
+	return false;
+}
+
+bool CStreamFile::IsLoading()
+{
+	return false;
+}
+
+void CStreamFile::SetMode(int mode)
+{
+}

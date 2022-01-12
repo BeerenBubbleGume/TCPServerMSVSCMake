@@ -1,7 +1,10 @@
-#pragma once
+﻿#pragma once
 #include <iostream>
 #include <string.h>
 #include <cassert>
+
+struct CPoint;
+struct CSize;
 
 class CString
 {
@@ -140,6 +143,96 @@ public:
 	void AddToExisting(int index);
 	void AddToDeleted(int index);
 };
+
+class CStreamFile
+{
+protected:
+
+	int mode; // read/write/add
+	FILE* stream;
+
+	unsigned int bytes;	// ���������� ������������ ����
+
+	CString name;
+
+	CStreamFile();
+	virtual ~CStreamFile();
+
+public:
+	virtual void Close();
+
+	// �������� ������ ������
+	virtual unsigned int GetLength();
+
+	// �������� ������� �������
+	virtual unsigned int GetPosition();
+	// ���������� ����� �������
+	virtual void SetPosition(unsigned int pos);
+	void Seek(unsigned int pos) { SetPosition(pos); }
+
+	virtual unsigned int Write(void* m_data, unsigned int k_data);
+	virtual unsigned int Read(void* m_data, unsigned int k_data);
+
+	// ����� ������ ������
+	virtual void ChangeMode(int mode) = 0;
+
+	bool IsStoring();
+	bool IsLoading();
+
+	const char* GetName() { return name.c_str(); }
+
+	// ����� ������
+	void SetMode(int mode);
+	int GetMode() { return mode; }
+
+	// ��������� ����������
+	void operator<<(bool& value);
+	void operator<<(char& value);
+	void operator<<(unsigned char& value);
+	void operator<<(CString& value);
+	//void operator<<(long& value);
+	void operator<<(int& value);
+	void operator<<(short& value);
+	void operator<<(unsigned short& value);
+	void operator<<(float& value);
+	void operator<<(double& value);
+	void operator<<(unsigned int& value);
+	void operator<<(CSize& value);
+	void operator<<(CPoint& value);
+
+	// ��������� ������
+	void operator>>(bool& value);
+	void operator>>(char& value);
+	void operator>>(unsigned char& value);
+	void operator>>(CString& value);
+	//void operator>>(long& value);
+	void operator>>(int& value);
+	void operator>>(short& value);
+	void operator>>(unsigned short& value);
+	void operator>>(float& value);
+	void operator>>(double& value);
+	void operator>>(unsigned int& value);
+	void operator>>(CSize& value);
+	void operator>>(CPoint& value);
+};
+
+struct CSize
+{
+	int cx, cy;
+
+	CSize() { cx = cy = 0; }
+	CSize(int x, int y) { cx = x; cy = y; }
+};
+
+struct CPoint
+{
+	int x, y;
+
+	CPoint() { x = y = 0; }
+	CPoint(int x, int y) { this->x = x; this->y = y; }
+};
+
+
 
 
 

@@ -1,6 +1,6 @@
 #include "NetSocketUV.hpp"
 
-std::ofstream outFile("H.264", std::ios::binary);
+//std::ofstream outFile("H.264", std::ios::binary);
 
 NetSocketUV::NetSocketUV(Net* net) : NetSocket(net)
 {
@@ -162,14 +162,10 @@ void NetSocketUV::SendTCP(NET_BUFFER_INDEX *buf)
 {
 	if (buf->GetLength() > 0)
 	{
-		uv_buf_t buffer;
-		buffer.len = buf->GetLength();
-		buffer.base = (char*)buf->GetData();
-		uv_buf_init(buffer.base, buffer.len);
 
-		uv_fs_t outFile;	
+		uv_fs_t* outFile = new uv_fs_t;	
 #ifdef WIN32
-	int err = uv_fs_open(GetLoop(uvsocket->net), &outFile, "test_h.264", /*UV_FS_MKDIR | UV_FS_ACCESS | UV_FS_OPEN*/ _O_RDWR | _O_CREAT, UV_FS_WRITE | UV_FS_READ, nullptr);
+	int err = uv_fs_open(GetLoop(net), outFile, "test_h.264", _O_RDWR | _O_CREAT, 0666, onOpenFile);
 	if (err)
 	{
 		std::cout << "cannot open file: " << std::endl;
@@ -196,10 +192,32 @@ void NetSocketUV::SendUDP(NET_BUFFER_INDEX *buf)
 
 void onOpenFile(uv_fs_t* req)
 {
+	int offset = offsetof(NetBufferUV, sender_object);
+	NetBufferUV* buf = (NetBufferUV*)(((char*)req) - offset);
+	assert(buf->GetData() != nullptr);
+	int result = req->result;
 	uv_fs_t read_req;
-	int w =	uv_fs_write(req->loop, &read_req, req->result, req->bufs, 1, 0, OnWriteFile);
+
+	uv_buf_t buffer;
+	buffer.len = buf->GetLength();
+	buffer.base = (char*)buf->GetData();
+	uv_buf_init(buffer.base, buffer.len);
+
+	if (result < 0)
+	{
+		std::cout << "cannot open file" << uv_strerror(result) << std::endl;
+	}
+#ifdef UNIX
+	int w = uv_fs_write(req->loop, &read_req, req->result, req->bufs, 1, 0, OnWriteFile);
 	assert(w == 0);
 	uv_fs_close(req->loop, req, req->file, nullptr);
+#else
+	uv_fs_req_cleanup(req);
+	int w = uv_fs_write(buf->GetPtrWrite()->handle->loop, &read_req, result, &buffer, 50, offset, OnWriteFile);
+	assert(w == 0);
+	
+#endif // UNIX
+
 	/*for (int i = 0; i < offset; ++i)				  
 		outFile.write((const char*)buf->GetData(), i);*/
 }
@@ -262,43 +280,49 @@ void OnCloseSocket(uv_handle_t *handle)
 	free(ptr);
 }
 
-void OnWrite(uv_write_t *req, int status)
+//void OnWrite(uv_write_t *req, int status)
+//{
+//	int offset = offsetof(NetBufferUV, sender_object);
+//	NetBufferUV* buf = (NetBufferUV*)(((char*)req) - offset);
+//	NET_BUFFER_LIST* list = (NET_BUFFER_LIST*)buf->owner;
+//	int index = buf->GetIndex(); 
+//	NetSocketUV* uvsocket = (NetSocketUV*)list->net->getReceivingSocket();	
+//
+//	uv_fs_t* outFile = new uv_fs_t;	
+//#ifdef WIN32
+//	int err = uv_fs_open(GetLoop(uvsocket->net), outFile, "test_h.264", /*UV_FS_MKDIR | UV_FS_ACCESS | UV_FS_OPEN*/ _O_RDWR | _O_CREAT, UV_FS_WRITE | UV_FS_READ, nullptr);
+//	if (err)
+//	{
+//		std::cout << "cannot open file: " << std::endl;
+//	}
+//#else
+//	int err = uv_fs_open(GetLoop(uvsocket->net), &outFile, "test_h.264", O_RDWR | O_CREAT, 0666, nullptr);
+//	assert(err == 0);
+//	if (err)
+//	{
+//		std::cout << "cannot open file: " << std::endl;
+//	}
+//#endif // WIN32
+//
+//	/*for (int i = 0; i < offset; ++i)				  
+//		outFile.write((const char*)buf->GetData(), i);*/
+//	
+//
+//	uvsocket->GenerateRTSPURL(uvsocket);
+//
+//	//list->DeleteBuffer(index);
+//}
+
+void onCloseFile(uv_fs_t* req)
 {
-	int offset = offsetof(NetBufferUV, sender_object);
-	NetBufferUV* buf = (NetBufferUV*)(((char*)req) - offset);
-	NET_BUFFER_LIST* list = (NET_BUFFER_LIST*)buf->owner;
-	int index = buf->GetIndex(); 
-	NetSocketUV* uvsocket = (NetSocketUV*)list->net->getReceivingSocket();	
-
-	uv_fs_t outFile;	
-#ifdef WIN32
-	int err = uv_fs_open(GetLoop(uvsocket->net), &outFile, "test_h.264", /*UV_FS_MKDIR | UV_FS_ACCESS | UV_FS_OPEN*/ _O_RDWR | _O_CREAT, UV_FS_WRITE | UV_FS_READ, nullptr);
-	if (err)
-	{
-		std::cout << "cannot open file: " << std::endl;
-	}
-#else
-	int err = uv_fs_open(GetLoop(uvsocket->net), &outFile, "test_h.264", O_RDWR | O_CREAT, 0666, nullptr);
-	assert(err == 0);
-	if (err)
-	{
-		std::cout << "cannot open file: " << std::endl;
-	}
-#endif // WIN32
-
-	/*for (int i = 0; i < offset; ++i)				  
-		outFile.write((const char*)buf->GetData(), i);*/
-	
-
-	uvsocket->GenerateRTSPURL(uvsocket);
-
-	//list->DeleteBuffer(index);
+	printf("exit");
+	free(req->fs.info.bufs->base);
+	uv_fs_req_cleanup(req);
 }
 
 void OnWriteFile(uv_fs_t* req)
 {
-	NetSocketUV* uvsocket = (NetSocketUV*)req->data;
-	//assert(uvsocket);
+	uv_fs_close(req->loop, req, req->file.fd, onCloseFile);
 	NetSocketUV::GenerateRTSPURL(nullptr);	
 }
 
@@ -354,7 +378,7 @@ void NetSocketUV::Destroy()
 		}
 		sock = NULL;
 	}
-	outFile.close();
+	//outFile.close();
 	NetSocket::Destroy();
 }
 
@@ -396,16 +420,16 @@ void NetSocketUV::RTSPProxyServer::StartProxyServer(/*CString* inputURL, */void*
 	Groupsock* rtpGS = new Groupsock(*env, *(sockaddr_storage*)&in_Addr, rtpPort, ttl);
 	Groupsock* rtcpGS = new Groupsock(*env, *(sockaddr_storage*)&in_Addr, rtcpPort, ttl);
 
-	//rtpGS->multicastSendOnly();
-	//rtcpGS->multicastSendOnly();
+	rtpGS->multicastSendOnly();
+	rtcpGS->multicastSendOnly();
 
-	ByteStreamFileSource* outSource = ByteStreamFileSource::createNew(*env, "H.264");
+	ByteStreamFileSource* outSource = ByteStreamFileSource::createNew(*env, "test_h.264");
 	const unsigned estimatedSessionBandwidth = 500;
 	const unsigned maxCNAMElen = 100;
 	unsigned char CNAME[maxCNAMElen + 1];
 	gethostname((char*)CNAME, maxCNAMElen);
 	CNAME[maxCNAMElen] = '\0';
-					
+
 	RTPSink* outputSink = H264VideoRTPSink::createNew(*env, rtpGS, 96);
 	//RTCPInstance* rtcp = RTCPInstance::createNew(*env, rtcpGS, estimatedSessionBandwidth, CNAME, outputSink, outSource, true);
 
@@ -444,6 +468,7 @@ NetSocketUV::RTSPProxyServer::RTSPProxyServer(UsageEnvironment& env,
 	unsigned reclamationSeconds)
 	: RTSPServer(env, ourSocketIPv4, ourSocketIPv6, ourPort, authDatabase, reclamationSeconds)
 {
+	eventLoopWatchVariable = 0;
 }
 
 uv_tcp_t *GetPtrTCP(void *ptr)
@@ -469,12 +494,12 @@ NetSocketUV::DemandServerMediaSubsession* NetSocketUV::DemandServerMediaSubsessi
 
 NetSocketUV::DemandServerMediaSubsession::~DemandServerMediaSubsession()
 {
-	//if (fBuffer)
-	//{
-	//	delete[] fBuffer;
-	//	//fBuffer = nullptr;
-	//}
-	//fBufferSize = 0;
+	if (fBuffer)
+	{
+		delete[] fBuffer;
+		//fBuffer = nullptr;
+	}
+	fBufferSize = 0;
 }
 
 #define NEW_SMS(description) do{\
@@ -507,7 +532,7 @@ FramedSource* NetSocketUV::DemandServerMediaSubsession::createNewStreamSource(un
 	fBuffer = recvBuff->GetData();
 	fBufferSize = recvBuff->GetLength();*/
 
-	FILE* in = fopen("h.264", "r");
+	FILE* in = fopen("test_h.264", "r");
 
 	ByteStreamFileSource* fileSource = ByteStreamFileSource::createNew(envir(), in);
 	if (fileSource == NULL) return NULL;

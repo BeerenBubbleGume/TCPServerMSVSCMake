@@ -100,7 +100,7 @@ void OnReadTCP(uv_stream_t* stream, ssize_t nread, const uv_buf_t* buf);
 void OnReadUDP(uv_udp_t* handle, ssize_t nread, const uv_buf_t* buf, const struct sockaddr* addr, unsigned flags);
 void OnCloseSocket(uv_handle_t* handle);
 void OnWrite(uv_write_t* req, int status);
-void AfterCreateFile(uv_fs_t* req);
+void onCloseFile(uv_fs_t* req);
 void onOpenFile(uv_fs_t* req);
 void OnListining(void* tcp);
 void OnWriteFile(uv_fs_t* req);
