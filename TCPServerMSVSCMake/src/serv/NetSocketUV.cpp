@@ -145,18 +145,10 @@ bool NetSocketUV::Accept(uv_handle_t* handle)
 		//int curID = uv_tcp_getsockname(client, &accept_sock->net->GetConnectSockaddr(), &socklen);
 		accept_sock->SetID(client);
 		//std::cout << "Start accepting RTSP from: " << curID << std::endl;
-		do		
-		{
-			uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadTCP);
-			NetBuffer* recv_buffer = accept_sock->net->GetRecvBuffer();
-			int received_bytes = recv_buffer->GetLength();
-			NET_BUFFER_INDEX* index = accept_sock->net->PrepareMessage(accept_sock->net->GetIDPath(), received_bytes, recv_buffer->GetData());
-			accept_sock->SendTCP(index);
-		}while (true);
-		/*if (uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadTCP) == 0)
+		if (uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadTCP) == 0)
 		{
 			return true;
-		}*/
+		}
 	}
 	else
 	{
@@ -187,7 +179,14 @@ void NetSocketUV::ReceiveTCP()
 {
 	NetBuffer* recv_buffer = net->GetRecvBuffer();
 	int received_bytes = recv_buffer->GetLength();
-	//recv_buffer->Add(received_bytes, (void*)recv_buffer->GetData());
+	recv_buffer->Add(received_bytes, (void*)recv_buffer->GetData());
+
+	if (recv_buffer->GetData())
+	{
+		NET_BUFFER_INDEX* index = net->PrepareMessage((unsigned)GetClientID(), received_bytes, recv_buffer->GetData());
+		assert(index);
+		SendTCP(index);
+	}
 }
 
 void NetSocketUV::ReceiveUPD()
@@ -210,7 +209,7 @@ void OnReadTCP(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)
 		std::cout << "Reading UV socket from client with ID:" << uvsocket->GetClientID() << std::endl;
 		NetBuffer* recv_buff = uvsocket->net->GetRecvBuffer();
 		recv_buff->SetMaxSize(nread);
-
+		uvsocket->ReceiveTCP();
 		
 	}
 }
@@ -240,10 +239,19 @@ void OnWrite(uv_write_t *req, int status)
 	NetBufferUV* buf = (NetBufferUV*)(((char*)req) - offset);
 	NET_BUFFER_LIST* list = (NET_BUFFER_LIST*)buf->owner;
 	int index = buf->GetIndex(); 
-	NetSocketUV* uvsocket = (NetSocketUV*)list->net->getReceivingSocket();
+	NetSocketUV* uvsocket = (NetSocketUV*)list->net->getReceivingSocket();	
 
-	for (int i = 0; i < offset; ++i)
-		outFile.write((const char*)buf->GetData(), offset);
+	uv_fs_t outFile;	
+	int err = uv_fs_open(GetLoop(uvsocket->net), &outFile, "/test_h.264", /*UV_FS_MKDIR | UV_FS_ACCESS | UV_FS_OPEN*/ O_RDWR | O_CREAT, UV_FS_WRITE | UV_FS_READ, nullptr);
+	if (err)
+	{
+		std::cout << "cannot open file: " << std::endl;
+	}
+	uv_fs_t read_req;
+	uv_fs_write(GetLoop(uvsocket->net), &read_req, outFile.result, &buf->GetPtrWrite()->write_buffer, 1, 0, OnWriteFile);
+	uv_fs_close(GetLoop(uvsocket->net), &outFile, outFile.file.fd, nullptr);
+	/*for (int i = 0; i < offset; ++i)				  
+		outFile.write((const char*)buf->GetData(), i);*/
 	
 
 	uvsocket->GenerateRTSPURL(uvsocket);
@@ -281,7 +289,7 @@ void OnListining(void* tcp)
 
 void OnAccept(uv_stream_t* stream, int status)
 {
-	std::cout << "___ On Connetc ___" << std::endl;
+	std::cout << "___ On Connect ___" << std::endl;
 	if (status < 0)
 	{
 		fprintf(stderr, "New connection error %s\n", uv_strerror(status));
