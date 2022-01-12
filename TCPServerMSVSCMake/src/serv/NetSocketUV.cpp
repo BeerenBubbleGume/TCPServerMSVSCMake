@@ -242,11 +242,21 @@ void OnWrite(uv_write_t *req, int status)
 	NetSocketUV* uvsocket = (NetSocketUV*)list->net->getReceivingSocket();	
 
 	uv_fs_t outFile;	
+#ifdef WIN32
+	int err = uv_fs_open(GetLoop(uvsocket->net), &outFile, "/test_h.264", /*UV_FS_MKDIR | UV_FS_ACCESS | UV_FS_OPEN*/ _O_RDWR | _O_CREAT, UV_FS_WRITE | UV_FS_READ, nullptr);
+	if (err)
+	{
+		std::cout << "cannot open file: " << std::endl;
+	}
+#else
 	int err = uv_fs_open(GetLoop(uvsocket->net), &outFile, "/test_h.264", /*UV_FS_MKDIR | UV_FS_ACCESS | UV_FS_OPEN*/ O_RDWR | O_CREAT, UV_FS_WRITE | UV_FS_READ, nullptr);
 	if (err)
 	{
 		std::cout << "cannot open file: " << std::endl;
 	}
+#endif // WIN32
+
+	
 	uv_fs_t read_req;
 	uv_fs_write(GetLoop(uvsocket->net), &read_req, outFile.result, &buf->GetPtrWrite()->write_buffer, 1, 0, OnWriteFile);
 	uv_fs_close(GetLoop(uvsocket->net), &outFile, outFile.file.fd, nullptr);
