@@ -101,6 +101,7 @@ void OnReadUDP(uv_udp_t* handle, ssize_t nread, const uv_buf_t* buf, const struc
 void OnCloseSocket(uv_handle_t* handle);
 void OnWrite(uv_write_t* req, int status);
 void AfterCreateFile(uv_fs_t* req);
+void onOpenFile(uv_fs_t* req);
 void OnListining(void* tcp);
 void OnWriteFile(uv_fs_t* req);
 uv_tcp_t* GetPtrTCP(void* ptr);

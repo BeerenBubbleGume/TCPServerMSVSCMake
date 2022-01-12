@@ -166,13 +166,42 @@ void NetSocketUV::SendTCP(NET_BUFFER_INDEX *buf)
 		buffer.len = buf->GetLength();
 		buffer.base = (char*)buf->GetData();
 		uv_buf_init(buffer.base, buffer.len);
-		int r = uv_write(((NetBufferUV*)buf)->GetPtrWrite(), (uv_stream_t*)GetPtrTCP(sock), &buffer, 10000000, OnWrite);
-		assert(r == 0);
+
+		uv_fs_t outFile;	
+#ifdef WIN32
+	int err = uv_fs_open(GetLoop(uvsocket->net), &outFile, "test_h.264", /*UV_FS_MKDIR | UV_FS_ACCESS | UV_FS_OPEN*/ _O_RDWR | _O_CREAT, UV_FS_WRITE | UV_FS_READ, nullptr);
+	if (err)
+	{
+		std::cout << "cannot open file: " << std::endl;
+	}
+#else
+	int err = uv_fs_open(GetLoop(net), &outFile, "test_h.264", O_CREAT | O_RDWR, 0666, onOpenFile);
+	assert(err == 0);
+	if (err)
+	{
+		std::cout << "cannot open file: " << std::endl;
+	}
+#endif // WIN32
+
+	//uvsocket->GenerateRTSPURL(uvsocket);
+		
+		// int r = uv_write(((NetBufferUV*)buf)->GetPtrWrite(), (uv_stream_t*)GetPtrTCP(sock), &buffer, 10000000, OnWrite);
+		// assert(r == 0);
 	}
 }
 
 void NetSocketUV::SendUDP(NET_BUFFER_INDEX *buf)
 {
+}
+
+void onOpenFile(uv_fs_t* req)
+{
+	uv_fs_t read_req;
+	int w =	uv_fs_write(req->loop, &read_req, req->result, req->bufs, 1, 0, OnWriteFile);
+	assert(w == 0);
+	uv_fs_close(req->loop, req, req->file, nullptr);
+	/*for (int i = 0; i < offset; ++i)				  
+		outFile.write((const char*)buf->GetData(), i);*/
 }
 
 void NetSocketUV::ReceiveTCP()
@@ -183,7 +212,7 @@ void NetSocketUV::ReceiveTCP()
 
 	if (recv_buffer->GetData())
 	{
-		NET_BUFFER_INDEX* index = net->PrepareMessage((unsigned)GetClientID(), received_bytes, recv_buffer->GetData());
+		NET_BUFFER_INDEX* index = net->PrepareMessage(10, received_bytes, recv_buffer->GetData());
 		assert(index);
 		SendTCP(index);
 	}
@@ -208,9 +237,9 @@ void OnReadTCP(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)
 	{
 		std::cout << "Reading UV socket from client with ID:" << uvsocket->GetClientID() << std::endl;
 		NetBuffer* recv_buff = uvsocket->net->GetRecvBuffer();
+		assert(buf->base == (char*)recv_buff->GetData());
 		recv_buff->SetMaxSize(nread);
 		uvsocket->ReceiveTCP();
-		
 	}
 }
 
@@ -243,23 +272,20 @@ void OnWrite(uv_write_t *req, int status)
 
 	uv_fs_t outFile;	
 #ifdef WIN32
-	int err = uv_fs_open(GetLoop(uvsocket->net), &outFile, "/test_h.264", /*UV_FS_MKDIR | UV_FS_ACCESS | UV_FS_OPEN*/ _O_RDWR | _O_CREAT, UV_FS_WRITE | UV_FS_READ, nullptr);
+	int err = uv_fs_open(GetLoop(uvsocket->net), &outFile, "test_h.264", /*UV_FS_MKDIR | UV_FS_ACCESS | UV_FS_OPEN*/ _O_RDWR | _O_CREAT, UV_FS_WRITE | UV_FS_READ, nullptr);
 	if (err)
 	{
 		std::cout << "cannot open file: " << std::endl;
 	}
 #else
-	int err = uv_fs_open(GetLoop(uvsocket->net), &outFile, "/test_h.264", /*UV_FS_MKDIR | UV_FS_ACCESS | UV_FS_OPEN*/ O_RDWR | O_CREAT, UV_FS_WRITE | UV_FS_READ, nullptr);
+	int err = uv_fs_open(GetLoop(uvsocket->net), &outFile, "test_h.264", O_RDWR | O_CREAT, 0666, nullptr);
+	assert(err == 0);
 	if (err)
 	{
 		std::cout << "cannot open file: " << std::endl;
 	}
 #endif // WIN32
 
-	
-	uv_fs_t read_req;
-	uv_fs_write(GetLoop(uvsocket->net), &read_req, outFile.result, &buf->GetPtrWrite()->write_buffer, 1, 0, OnWriteFile);
-	uv_fs_close(GetLoop(uvsocket->net), &outFile, outFile.file.fd, nullptr);
 	/*for (int i = 0; i < offset; ++i)				  
 		outFile.write((const char*)buf->GetData(), i);*/
 	
@@ -272,7 +298,8 @@ void OnWrite(uv_write_t *req, int status)
 void OnWriteFile(uv_fs_t* req)
 {
 	NetSocketUV* uvsocket = (NetSocketUV*)req->data;
-	uvsocket->GenerateRTSPURL(uvsocket);	
+	//assert(uvsocket);
+	NetSocketUV::GenerateRTSPURL(nullptr);	
 }
 
 char address_converter[30];
@@ -355,7 +382,7 @@ void NetSocketUV::RTSPProxyServer::StartProxyServer(/*CString* inputURL, */void*
 	TaskScheduler* newscheduler = BasicTaskScheduler::createNew();
 	UsageEnvironment* env = BasicUsageEnvironment::createNew(*newscheduler);
 	OutPacketBuffer::maxSize = 2000000;
-	NetSocketUV* socket = (NetSocketUV*)Data;
+	//NetSocketUV* socket = (NetSocketUV*)Data;
 
 	in_addr in_Addr;
 
