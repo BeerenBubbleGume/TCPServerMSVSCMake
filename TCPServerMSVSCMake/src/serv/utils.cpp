@@ -1,5 +1,6 @@
 ﻿#include "utils.hpp"
 
+#define INVERT_BYTES(VAR)
 
 CString::CString()
 {
@@ -856,50 +857,414 @@ void CArrayBase::AddToDeleted(int index)
 
 CStreamFile::CStreamFile()
 {
+	mode = STREAM_READ;
+	bytes = 0;
+	name = "";
+	stream = nullptr;
 }
 
 CStreamFile::~CStreamFile()
 {
+	if (stream)
+	{
+		fclose(stream);
+		stream = nullptr;
+	}
+	bytes = 0;
+	if (name)
+	{
+		delete name;
+		name = nullptr;
+	}
+	mode = STREAM_READ;
+}
+
+FILE* CStreamFile::fopen_file(const char* name, const char* mode)
+{
+	FILE* stream = NULL;
+#ifdef WIN32
+	// ��� Windows ���������� �������������� ������ utf8 � utf16
+	wchar_t* wfile = (wchar_t*)utf8to16((unsigned const char*)name);
+	wchar_t* wm = (wchar_t*)utf8to16((unsigned const char*)mode);
+	stream = _wfopen(wfile, wm);
+	delete[]wfile;
+	delete[]wm;
+#else
+	stream = fopen(file, mode);
+#endif
+	return stream;
+}
+
+const unsigned short* CStreamFile::utf8to16(const unsigned char* str_utf8)
+{
+	unsigned short* str16 = NULL;
+	if (str_utf8)
+	{
+		// ���������� ����� �������� ������, ������, ��� ������ ������������ �� 0
+		int length = 0;
+		while (true)
+		{
+			short s = str_utf8[length];
+			length++;
+			if (!s)
+				break;
+		}
+
+		int factor = 5;
+
+		int end = length * factor;
+		str16 = new unsigned short[end];
+
+		// ���������� ����� ���������� ��� ������ �������, ��� ��� ������� ����������� ������ ������
+		const UTF8* vstr_utf8 = str_utf8;
+		const UTF8** source = &vstr_utf8;
+		UTF16* vstr16 = str16;
+		UTF16** target = &vstr16;
+
+		ConversionResult result = __ConvertUTF8toUTF16(
+			source, (const UTF8*)(&(str_utf8[length])),
+			target, &(str16[end]), lenientConversion);
+
+		if (result != conversionOK)
+		{
+			delete[]str16;
+			str16 = NULL;
+		}
+	}
+
+	return str16;
 }
 
 void CStreamFile::Close()
 {
+	if (stream)
+	{
+		fclose(stream);
+		stream = nullptr;
+		name = "";
+	}
+}
+
+bool CStreamFile::Open(const char* fileName, int mode)
+{
+	name = fileName;
+	ChangeMode(mode);
+	if (!stream)
+	{
+		this->mode = STREAM_READ;
+		name = "";
+	}
+	return stream != nullptr;
 }
 
 unsigned int CStreamFile::GetLength()
 {
-	return 0;
+	unsigned int len = 0;
+	if (stream)
+	{
+		unsigned int pos = ftell(stream);
+		fseek(stream, 0, SEEK_END);
+		len = ftell(stream);
+		fseek(stream, pos, SEEK_SET);
+	}
+	return len;
 }
 
 unsigned int CStreamFile::GetPosition()
 {
-	return 0;
+	unsigned int pos = 0;
+	if (stream)
+	{
+		pos = ftell(stream);
+	}
+	return pos;
 }
 
 void CStreamFile::SetPosition(unsigned int pos)
 {
+	if (stream && IsLoading())
+	{
+		fseek(stream, pos, SEEK_SET);
+	}
 }
 
 unsigned int CStreamFile::Write(void* m_data, unsigned int k_data)
 {
-	return 0;
+	bytes = 0;
+	if (stream && IsStoring())
+	{
+		bytes = fwrite(m_data, 1, k_data, stream);
+	}
+	return bytes;
 }
 
 unsigned int CStreamFile::Read(void* m_data, unsigned int k_data)
 {
-	return 0;
+	bytes = 0;
+	if (stream && IsLoading())
+		bytes = fread(m_data, 1, k_data, stream);
+	return bytes;
+}
+
+void CStreamFile::ChangeMode(int mode)
+{
+	CString vname = name;
+	Close();
+	name = vname;
+
+	CString smode;
+	switch (mode)
+	{
+	case STREAM_READ:
+		smode = "rb";
+		break;
+	case STREAM_WRITE:
+		smode = "wb";
+		break;
+
+	case STREAM_ADD:
+		smode = "ab";
+		break;
+
+	default:
+		return;
+	}
+
+	this->mode = mode;
+	
+	stream = fopen_file(name, smode.c_str());
 }
 
 bool CStreamFile::IsStoring()
 {
-	return false;
+	return (mode != STREAM_READ);
 }
 
 bool CStreamFile::IsLoading()
 {
-	return false;
+	return (mode == STREAM_READ);
 }
 
 void CStreamFile::SetMode(int mode)
 {
+	if (mode != this->mode && mode >= STREAM_READ && mode <= STREAM_ADD)
+		ChangeMode(mode);
+}
+
+void CStreamFile::operator<<(bool& value)
+{
+	char* v = (char*)value;
+	Write(v, 1);
+}
+
+void CStreamFile::operator<<(char& value)
+{
+	char* v = (char*)value;
+	Write(v, 1);
+}
+
+void CStreamFile::operator<<(unsigned char& value)
+{
+	char* v = (char*)&value;
+	Write(v, 1);
+}
+
+void CStreamFile::operator<<(CString& value)
+{
+	int len = value.GetLength();
+	if (len >= 0xff)
+	{
+		unsigned char vlen = 0xff;
+		Write((char*)&value, 1);
+		unsigned short vlen2 = len;
+		*this << vlen2;
+	}
+	else
+	{
+		unsigned char vlen = (unsigned char)len;
+		Write((char*)&vlen, 1);
+	}
+
+	if (len)
+	{
+		char* v = (char*)(const char*)value;
+		Write(v, len);
+	}
+}
+
+void CStreamFile::operator<<(int& value)
+{
+	int v2 = value;
+	INVERT_BYTES(2);
+	char* v = (char*)&v2;
+	Write(v, 2);
+}
+
+void CStreamFile::operator<<(short& value)
+{
+	short v2 = value;
+	INVERT_BYTES(v2);
+	char* v = (char*)&v2;
+	Write(v, 2);
+}
+
+void CStreamFile::operator<<(unsigned short& value)
+{
+	short v2 = value;
+	INVERT_BYTES(v2);
+	char* v = (char*)&v2;
+	Write(v, 2);
+}
+
+void CStreamFile::operator<<(float& value)
+{
+	float v2 = value;
+	INVERT_BYTES(v2);
+	char* v = (char*)&v2;
+	Write(v, 4);
+}
+
+void CStreamFile::operator<<(double& value)
+{
+	double v2 = value;
+	INVERT_BYTES(v2);
+	char* v = (char*)&v2;
+	Write(v, 8);
+}
+
+void CStreamFile::operator<<(unsigned int& value)
+{
+	unsigned int v2 = value;
+	INVERT_BYTES(v2);
+	char* v = (char*)&v2;
+	Write(v, 4);
+}
+
+void CStreamFile::operator<<(CSize& value)
+{
+	int v2 = value.cx;
+	INVERT_BYTES(v2);
+	char* v = (char*)&v2;
+	Write(v, 4);
+
+	v2 = value.cy;
+	INVERT_BYTES(v2);
+	v = (char*)&v2;
+	Write(v, 4);
+}
+
+void CStreamFile::operator<<(CPoint& value)
+{
+	int v2 = value.x;
+	INVERT_BYTES(v2);
+	char* v = (char*)(&v2);
+	Write(v, 4);
+
+	v2 = value.y;
+	INVERT_BYTES(v2);
+	v = (char*)(&v2);
+	Write(v, 4);
+}
+
+void CStreamFile::operator>>(bool& value)
+{
+	char* v = (char*)(&value);
+	Read(v, 1);
+}
+
+void CStreamFile::operator>>(char& value)
+{
+}
+
+void CStreamFile::operator>>(unsigned char& value)
+{
+	char* v = (char*)(&value);
+	Read(v, 1);
+}
+
+void CStreamFile::operator>>(CString& value)
+{
+	int len;
+	unsigned char vlen;
+	Read((char*)&vlen, 1);
+	if (vlen == 0xff)
+	{
+		unsigned short vlen2;
+		(*this) >> vlen2;
+		len = vlen2;
+	}
+	else
+		len = vlen;
+
+	if (len)
+	{
+		value.SetLength(len);
+		char* m = (char*)value.c_str();
+		Read(m, len);
+		m[len] = 0;
+	}
+	else
+		value = "";
+}
+
+void CStreamFile::operator>>(int& value)
+{
+	char* v = (char*)(&value);
+	Read(v, 4);
+	INVERT_BYTES(value);
+}
+
+void CStreamFile::operator>>(short& value)
+{
+	char* v = (char*)(&value);
+	Read(v, 2);
+	INVERT_BYTES(value);
+}
+
+void CStreamFile::operator>>(unsigned short& value)
+{
+	char* v = (char*)(&value);
+	Read(v, 2);
+	INVERT_BYTES(value);
+}
+
+void CStreamFile::operator>>(float& value)
+{
+	char* v = (char*)(&value);
+	Read(v, 4);
+	INVERT_BYTES(value);
+}
+
+void CStreamFile::operator>>(double& value)
+{
+	char* v = (char*)(&value);
+	Read(v, 8);
+	INVERT_BYTES(value);
+}
+
+void CStreamFile::operator>>(unsigned int& value)
+{
+	char* v = (char*)(&value);
+	Read(v, 4);
+	INVERT_BYTES(value);
+}
+
+void CStreamFile::operator>>(CSize& value)
+{
+	char* v = (char*)(&value.cx);
+	Read(v, 4);
+	INVERT_BYTES(value.cx);
+	v = (char*)(&value.cy);
+	Read(v, 4);
+	INVERT_BYTES(value.cy);
+}
+
+void CStreamFile::operator>>(CPoint& value)
+{
+	char* v = (char*)(&value.x);
+	Read(v, 4);
+	INVERT_BYTES(value.x);
+	v = (char*)(&value.y);
+	Read(v, 4);
+	INVERT_BYTES(value.y);
 }

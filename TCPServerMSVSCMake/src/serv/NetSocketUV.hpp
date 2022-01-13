@@ -74,12 +74,13 @@ protected:
 		virtual ~DemandServerMediaSubsession();
 		static ServerMediaSession* createNewSMS(UsageEnvironment& env, const char* fileName, FILE* fid);
 		virtual char const* sdpLines(int addressFamily) { return OnDemandServerMediaSubsession::sdpLines(addressFamily); }
-		
+		void pauseStream1(unsigned clientID, void* streamToken);
+
 	protected:
 		virtual FramedSource* createNewStreamSource(unsigned clientSessionId, unsigned& estBitrate);
 		virtual RTPSink* createNewRTPSink(Groupsock* rtpGroupsock, unsigned char rtpPayloadTypeIfDynamic, FramedSource* inputSource);
 		/*void setNetPtr(Net* net) { this->net = net; }*/
-		//int verbosityLevel() const { return ((ProxyServerMediaSession*)fParentSession)->fVerbosityLevel; }
+		
 	private:
 
 		DemandServerMediaSubsession(/*Net* net, */UsageEnvironment& env, Boolean reuseFirstSource);

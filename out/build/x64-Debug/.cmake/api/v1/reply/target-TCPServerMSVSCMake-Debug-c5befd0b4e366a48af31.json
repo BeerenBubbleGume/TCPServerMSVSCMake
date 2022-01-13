@@ -35,13 +35,13 @@
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 31,
+				"line" : 33,
 				"parent" : 0
 			},
 			{
 				"command" : 2,
 				"file" : 0,
-				"line" : 22,
+				"line" : 24,
 				"parent" : 0
 			}
 		]
@@ -108,7 +108,8 @@
 				3,
 				5,
 				6,
-				8
+				8,
+				12
 			]
 		}
 	],
@@ -180,7 +181,8 @@
 				4,
 				7,
 				9,
-				10
+				10,
+				11
 			]
 		},
 		{
@@ -191,7 +193,8 @@
 				3,
 				5,
 				6,
-				8
+				8,
+				12
 			]
 		}
 	],
@@ -256,6 +259,17 @@
 			"backtrace" : 1,
 			"path" : "TCPServerMSVSCMake/src/serv/includes.hpp",
 			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "TCPServerMSVSCMake/src/serv/utf.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "TCPServerMSVSCMake/src/serv/utf.cpp",
+			"sourceGroupIndex" : 1
 		}
 	],
 	"type" : "EXECUTABLE"

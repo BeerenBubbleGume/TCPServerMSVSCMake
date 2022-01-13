@@ -2,9 +2,12 @@
 #include <iostream>
 #include <string.h>
 #include <cassert>
+#include "utf.hpp"
 
 struct CPoint;
 struct CSize;
+
+enum STREAM_MODE{STREAM_READ, STREAM_WRITE, STREAM_ADD, STREAM_MAX, STREAM_ERROR = -2};
 
 class CString
 {
@@ -95,7 +98,7 @@ public:
 
 	CString GetPathOnly();
 	CString GetFileNameOnly();
-
+	
 	void Trim();
 	int GetParamCount();
 
@@ -115,7 +118,6 @@ public:
 
 	void DeleteLastSlash();
 	bool IsVariableName();
-
 };
 
 class CArrayBase
@@ -148,49 +150,53 @@ class CStreamFile
 {
 protected:
 
-	int mode; // read/write/add
+	int mode;
 	FILE* stream;
 
-	unsigned int bytes;	// ���������� ������������ ����
+	unsigned int bytes;
 
 	CString name;
 
-	CStreamFile();
-	virtual ~CStreamFile();
+	FILE* fopen_file(const char* name, const char* mode);
+	const unsigned short* utf8to16(const unsigned char* str_utf8);
+
 
 public:
 	virtual void Close();
+	bool Open(const char* fileName, int mode);
+	
+	CStreamFile();
+	virtual ~CStreamFile();
+	
 
-	// �������� ������ ������
 	virtual unsigned int GetLength();
 
-	// �������� ������� �������
+	
 	virtual unsigned int GetPosition();
-	// ���������� ����� �������
+
 	virtual void SetPosition(unsigned int pos);
 	void Seek(unsigned int pos) { SetPosition(pos); }
 
 	virtual unsigned int Write(void* m_data, unsigned int k_data);
 	virtual unsigned int Read(void* m_data, unsigned int k_data);
 
-	// ����� ������ ������
-	virtual void ChangeMode(int mode) = 0;
+	
+	virtual void ChangeMode(int mode);
 
 	bool IsStoring();
 	bool IsLoading();
 
 	const char* GetName() { return name.c_str(); }
 
-	// ����� ������
 	void SetMode(int mode);
 	int GetMode() { return mode; }
 
-	// ��������� ����������
+
 	void operator<<(bool& value);
 	void operator<<(char& value);
 	void operator<<(unsigned char& value);
 	void operator<<(CString& value);
-	//void operator<<(long& value);
+	
 	void operator<<(int& value);
 	void operator<<(short& value);
 	void operator<<(unsigned short& value);
@@ -200,12 +206,12 @@ public:
 	void operator<<(CSize& value);
 	void operator<<(CPoint& value);
 
-	// ��������� ������
+	
 	void operator>>(bool& value);
 	void operator>>(char& value);
 	void operator>>(unsigned char& value);
 	void operator>>(CString& value);
-	//void operator>>(long& value);
+
 	void operator>>(int& value);
 	void operator>>(short& value);
 	void operator>>(unsigned short& value);

@@ -21,6 +21,7 @@
 #include "NetSock.hpp"
 #include "NetSocketUV.hpp"
 #include "utils.hpp"
+#include "utf.hpp"
 
 #include <liveMedia.hh>
 #include <BasicUsageEnvironment.hh>
