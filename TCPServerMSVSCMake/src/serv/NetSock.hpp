@@ -13,16 +13,26 @@ class CArrayBase;
 class NetSocket;
 class Net;
 
-struct NET_SOCKET_PRT 
+struct NET_SOCKET_PTR
 {
 	NetSocket* net_socket;
 };
-struct TCP_SOCKET : public NET_SOCKET_PRT, uv_tcp_t
+struct TCP_SOCKET : public NET_SOCKET_PTR, uv_tcp_t
 {
 	uv_stream_t* handle;
 };
-struct UDP_SOCKET : public NET_SOCKET_PRT, uv_udp_t
+struct UDP_SOCKET : public NET_SOCKET_PTR, uv_udp_t
 {
+};
+struct POLL_SOCKET : public NET_SOCKET_PTR, uv_poll_t
+{
+};
+
+enum CON_MODE
+{
+	UDP,
+	TCP,
+	POLL
 };
 
 struct NetBuffer

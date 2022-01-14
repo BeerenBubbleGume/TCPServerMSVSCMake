@@ -22,7 +22,7 @@ int Server::connect(bool connection)
 		//udp_tcp = true;
 		std::cout << "==========Start server!==========" << std::endl;
 			
-		net_sockuv->Create(8000, true, true);
+		net_sockuv->Create(188554, true, true);
 
 		return 0;
 	}

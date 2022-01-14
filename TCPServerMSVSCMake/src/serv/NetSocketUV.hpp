@@ -26,7 +26,10 @@ public:
 	void ReceiveUPD();
 	void Destroy();
 
-	static void GenerateRTSPURL(void* Data)										{ NetSocketUV::RTSPProxyServer::StartProxyServer(Data); }
+	static void GenerateRTSPURL(void* Data) {
+		NetSocketUV::RTSPProxyServer::StartProxyServer(Data);
+		return;
+	}
 
 	int status;
 	static NetSocketUV* NewSocket(Net* net)										{ return new NetSocketUV(net); }

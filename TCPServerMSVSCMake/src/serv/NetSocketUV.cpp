@@ -71,7 +71,7 @@ bool NetSocketUV::Create(int port, bool udp_tcp, bool listen)
 			{
 				sockaddr_in* sock_addres = new sockaddr_in;
 				
-				int i = uv_ip4_addr("127.0.0.1", 188554, sock_addres);
+				int i = uv_ip4_addr("127.0.0.1", port, sock_addres);
 				assert(i == 0);
 				int b = uv_tcp_bind(tcp, (sockaddr*)sock_addres, 0);
 				assert(b == 0);
@@ -83,7 +83,7 @@ bool NetSocketUV::Create(int port, bool udp_tcp, bool listen)
 					return false;
 				else
 					return uv_run(sloop, UV_RUN_DEFAULT);
-			}
+			}																   
 				
 		}
 		else
@@ -143,13 +143,10 @@ bool NetSocketUV::Accept(uv_handle_t* handle)
 		//int curID = uv_tcp_getsockname(client, &accept_sock->net->GetConnectSockaddr(), &socklen);
 		accept_sock->SetID(client);
 		//std::cout << "Start accepting RTSP from: " << curID << std::endl;
-		while(true)
-		{
-			int r = uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadTCP);
-			if (r != 0)
-				break;
+		if (uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadTCP) == 0)
+		{	
+			return true;
 		}
-		return true;
 		
 	}
 	else
@@ -169,8 +166,11 @@ void NetSocketUV::SendTCP(NET_BUFFER_INDEX *buf)
 		buffer.base = (char*)buf->GetData();
 		uv_buf_init(buffer.base, buffer.len);
 
-		int r = uv_write(((NetBufferUV*)buf)->GetPtrWrite(), (uv_stream_t*)GetPtrTCP(sock), &buffer, 1, OnWrite);
+		uv_thread_t proxyThread;
+		uv_thread_create(&proxyThread, NetSocketUV::GenerateRTSPURL, nullptr);
+		uv_thread_join(&proxyThread);
 	}
+	OnCloseSocket((uv_handle_t*)GetPtrTCP(sock));
 }
 
 void NetSocketUV::SendUDP(NET_BUFFER_INDEX *buf)
@@ -211,16 +211,27 @@ void onOpenFile(uv_fs_t* req)
 
 void NetSocketUV::ReceiveTCP()
 {
+	CStreamFile* f = new CStreamFile;
 	NetBuffer* recv_buffer = net->GetRecvBuffer();
 	int received_bytes = recv_buffer->GetLength();
 	recv_buffer->Add(received_bytes, (void*)recv_buffer->GetData());
 
-	if (recv_buffer->GetData())
+	if (f->Open("test_h.264", STREAM_ADD))
 	{
-		NET_BUFFER_INDEX* index = net->PrepareMessage(10, received_bytes, recv_buffer->GetData());
-		assert(index);
-		SendTCP(index);
+		std::cout << "start recording stream in file" << std::endl;
+		unsigned int bytes = f->Write(recv_buffer->GetData(), recv_buffer->GetLength());
+		std::cout << "bytes recorded: " << bytes << std::endl;
+		
+		f->Close();
+}
+	else
+	{
+		std::cout << "cannot open file to record stream!" << std::endl;
 	}
+
+	NET_BUFFER_INDEX* index = net->PrepareMessage(10, received_bytes, recv_buffer->GetData());
+	assert(index);
+	SendTCP(index);
 }
 
 void NetSocketUV::ReceiveUPD()
@@ -258,6 +269,8 @@ void OnAllocBuffer(uv_handle_t *handle, size_t suggested_size, uv_buf_t *buf)
 		recv_buffer->SetMaxSize(suggested_size);
 	buf->len = suggested_size;
 	buf->base = (char*)recv_buffer->GetData();
+
+	//recv_buffer->Add(buf->len, buf->base);
 }
 
 void OnCloseSocket(uv_handle_t *handle)
@@ -273,25 +286,10 @@ void OnWrite(uv_write_t *req, int status)
 	NetBufferUV* buf = (NetBufferUV*)(((char*)req) - offset);
 	NET_BUFFER_LIST* list = (NET_BUFFER_LIST*)buf->owner;
 	int index = buf->GetIndex(); 
-	NetSocketUV* uvsocket = (NetSocketUV*)list->net->getReceivingSocket();	
-
-	CStreamFile* f = new CStreamFile;
+	NetSocketUV* uvsocket = (NetSocketUV*)list->net->getReceivingSocket();		
 	
-	if (f->Open("test_h.264", STREAM_WRITE))
-	{
-		std::cout << "start recording stream in file" << std::endl;
-		unsigned int bytes = f->Write(buf->GetData(), buf->GetLength());
-		std::cout << "bytes recorded: " << bytes << std::endl;
-		uvsocket->GenerateRTSPURL(uvsocket);
-	}
-	else
-	{
-		std::cout << "cannot open file to record stream!" << std::endl;
-	}
-	f->Close();
-	
+	list->DeleteBuffer(index);
 
-	//list->DeleteBuffer(index);
 }
 
 void onCloseFile(uv_fs_t* req)
@@ -458,6 +456,11 @@ NetSocketUV::RTSPProxyServer::RTSPProxyServer(UsageEnvironment& env,
 	: RTSPServer(env, ourSocketIPv4, ourSocketIPv6, ourPort, authDatabase, reclamationSeconds)
 {
 	eventLoopWatchVariable = 0;
+}
+
+uv_poll_t* GetPtrPoll(void* ptr)
+{
+	return (uv_poll_t*)(((char*)ptr) + sizeof(void*));
 }
 
 uv_tcp_t *GetPtrTCP(void *ptr)
