@@ -29,14 +29,16 @@ IF(WIN32)
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/UsageEnvironment/
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/openssl/
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/
-								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/zlib.h)
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/zlib.h
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/uv)
 	target_link_libraries(TCPServerMSVSCMake 
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/uv.lib
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/UsageEnvironment.lib
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/liveMedia.lib
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/groupsock.lib
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/BasicUsageEnvironment.lib
-								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/pthread.lib)
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/pthread.lib
+								)
 ELSE()
 	target_include_directories(TCPServerMSVSCMake PUBLIC
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/
