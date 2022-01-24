@@ -22,15 +22,14 @@ add_executable (TCPServerMSVSCMake	"src/serv/NetSock.hpp"
 # TODO: �������� ����� � ������� �������, ���� ��� ����������.
 IF(WIN32)
 	target_include_directories(TCPServerMSVSCMake PUBLIC
-								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/uv.h
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/BasicUsageEnvironment/
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/liveMedia/
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/groupsock/
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/UsageEnvironment/
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/openssl/
-								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/zlib.h
-								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/uv)
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/
+								)
 	target_link_libraries(TCPServerMSVSCMake 
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/uv.lib
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/UsageEnvironment.lib

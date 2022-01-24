@@ -1,8 +1,5 @@
 ﻿#pragma once
-#include <iostream>
-#include <string.h>
-#include <cassert>
-#include "utf.hpp"
+#include "includes.hpp"
 
 struct CPoint;
 struct CSize;

@@ -1,7 +1,6 @@
 #pragma once
 #include "utils.hpp"
-#include <vector>
-#include "../../includes/uv.h"
+#include "includes.hpp"
 #define SENDER_SIZE_UV sizeof(uv_write_t)
 
 struct NetBuffer;

@@ -1,4 +1,5 @@
 #include "NetSocketUV.hpp"
+#pragma comment(lib, "../../libs/lib/uv.lib")
 
 //std::ofstream outFile("H.264", std::ios::binary);
 
