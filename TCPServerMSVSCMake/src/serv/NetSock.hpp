@@ -27,12 +27,7 @@ struct POLL_SOCKET : public NET_SOCKET_PTR, uv_poll_t
 {
 };
 
-enum CON_MODE
-{
-	UDP,
-	TCP,
-	POLL
-};
+
 
 struct NetBuffer
 {
