@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "includes.hpp"
+#include "utf.hpp"
 
 struct CPoint;
 struct CSize;

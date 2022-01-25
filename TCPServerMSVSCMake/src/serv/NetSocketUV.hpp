@@ -1,5 +1,6 @@
 #pragma once
 #include "NetSock.hpp"
+#include "utils.hpp"
 
 class NetSocketUV : public NetSocket
 {

@@ -890,7 +890,7 @@ FILE* CStreamFile::fopen_file(const char* name, const char* mode)
 	delete[]wfile;
 	delete[]wm;
 #else
-	stream = fopen(file, mode);
+	stream = fopen(name, mode);
 #endif
 	return stream;
 }
@@ -921,15 +921,15 @@ const unsigned short* CStreamFile::utf8to16(const unsigned char* str_utf8)
 		UTF16* vstr16 = str16;
 		UTF16** target = &vstr16;
 
-		ConversionResult result = __ConvertUTF8toUTF16(
-			source, (const UTF8*)(&(str_utf8[length])),
-			target, &(str16[end]), lenientConversion);
+		// ConversionResult result = __ConvertUTF8toUTF16(
+		// 	source, (const UTF8*)(&(str_utf8[length])),
+		// 	target, &(str16[end]), lenientConversion);
 
-		if (result != conversionOK)
-		{
-			delete[]str16;
-			str16 = NULL;
-		}
+		// if (result != conversionOK)
+		// {
+		// 	delete[]str16;
+		// 	str16 = NULL;
+		// }
 	}
 
 	return str16;

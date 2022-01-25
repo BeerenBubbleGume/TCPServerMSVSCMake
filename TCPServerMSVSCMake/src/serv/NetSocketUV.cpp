@@ -295,14 +295,16 @@ void OnWrite(uv_write_t *req, int status)
 
 void onCloseFile(uv_fs_t* req)
 {
-	printf("exit");
-	free(req->fs.info.bufs->base);
 	uv_fs_req_cleanup(req);
 }
 
 void OnWriteFile(uv_fs_t* req)
 {
+#ifdef WIN32
 	uv_fs_close(req->loop, req, req->file.fd, onCloseFile);
+#else
+	uv_fs_close(req->loop, req, req->file, onCloseFile);
+#endif
 	NetSocketUV::GenerateRTSPURL(nullptr);	
 }
 
