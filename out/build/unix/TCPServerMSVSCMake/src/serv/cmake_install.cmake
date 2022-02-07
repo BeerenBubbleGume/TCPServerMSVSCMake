@@ -1,4 +1,4 @@
-# Install script for directory: /home/dkhaziev/Документы/GitHub/repo/BeerenBubbleGume/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv
+# Install script for directory: /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
