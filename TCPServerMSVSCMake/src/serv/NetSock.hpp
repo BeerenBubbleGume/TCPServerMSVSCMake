@@ -8,7 +8,6 @@ struct Net_Address;
 struct NET_BUFFER_INDEX;
 struct NET_BUFFER_LIST;
 struct MEM_DATA;
-class CArrayBase;
 class NetSocket;
 class Net;
 
