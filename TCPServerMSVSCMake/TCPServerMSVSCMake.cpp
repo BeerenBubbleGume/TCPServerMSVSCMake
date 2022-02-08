@@ -7,7 +7,7 @@ int main() {
 
 	std::cout << "Main:" << std::endl;
 	Server server;
-
+	
 	if(server.connect(true) == true)
 	{
 		return 0; 

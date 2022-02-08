@@ -14,7 +14,7 @@ public:
 	virtual bool Create(int port, bool udp_tcp, bool listen);
 	
 	//bool SetConnectedSocketToReadMode(uv_stream_t* stream);
-	bool GetIP(Net_Address* addr, bool own_or_peer);
+	const char* GetIP(Net_Address* addr, bool own_or_peer);
 	
 	bool Accept(uv_handle_t* handle);
 	

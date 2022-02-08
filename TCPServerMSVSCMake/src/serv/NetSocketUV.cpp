@@ -119,16 +119,36 @@ bool NetSocketUV::Create(int port, bool udp_tcp, bool listen)
 	}
 }
 
-bool NetSocketUV::GetIP(Net_Address* addr, bool own_or_peer)
+const char* NetSocketUV::GetIP(Net_Address* addr, bool own_or_peer)
 {
 	if (own_or_peer)
 	{
 		std::cout << "Set IP to socket!" << std::endl;
 		udp_tcp = true;
+		struct addrinfo hints, *info, *p;
+		int gai_result;
 
+		char hostname[1024];
+		hostname[1023] = '\0';
+		gethostname(hostname, 1023);
+
+		memset(&hints, 0, sizeof hints);
+		hints.ai_family = AF_UNSPEC; /*either IPV4 or IPV6*/
+		hints.ai_socktype = SOCK_STREAM;
+		hints.ai_flags = AI_CANONNAME;
+		if ((gai_result = getaddrinfo(hostname, "http", &hints, &info)) != 0) {
+			fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(gai_result));
+			exit(1);
+		}
+
+		for (p = info; p != NULL; p = p->ai_next) {
+			printf("hostname: %s\n", p->ai_canonname);
+		}
+
+		freeaddrinfo(info);
 	}
 	else
-		return false;
+		return nullptr;
 }
 
 bool NetSocketUV::Accept(uv_handle_t* handle)
