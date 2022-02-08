@@ -166,10 +166,10 @@ void NetSocketUV::SendTCP(NET_BUFFER_INDEX *buf)
 		buffer.len = buf->GetLength();
 		buffer.base = (char*)buf->GetData();
 		uv_buf_init(buffer.base, buffer.len);
-
-		uv_thread_t proxyThread;
+		NetSocketUV::GenerateRTSPURL(buf);
+		/*uv_thread_t proxyThread;
 		uv_thread_create(&proxyThread, NetSocketUV::GenerateRTSPURL, nullptr);
-		uv_thread_join(&proxyThread);
+		uv_thread_join(&proxyThread);*/
 	}
 	OnCloseSocket((uv_handle_t*)GetPtrTCP(sock));
 }
@@ -217,7 +217,7 @@ void NetSocketUV::ReceiveTCP()
 	int received_bytes = recv_buffer->GetLength();
 	recv_buffer->Add(received_bytes, (void*)recv_buffer->GetData());
 
-	if (f->Open("test_h.264", STREAM_ADD))
+	if (f->Open("test_h.264", STREAM_WRITE))
 	{
 		std::cout << "start recording stream in file" << std::endl;
 		unsigned int bytes = f->Write(recv_buffer->GetData(), recv_buffer->GetLength());
@@ -415,7 +415,7 @@ void NetSocketUV::RTSPProxyServer::StartProxyServer(/*CString* inputURL, */void*
 	RTPSink* outputSink = H264VideoRTPSink::createNew(*env, rtpGS, 96);
 	//RTCPInstance* rtcp = RTCPInstance::createNew(*env, rtcpGS, estimatedSessionBandwidth, CNAME, outputSink, outSource, true);
 
-	RTSPProxyServer* server = RTSPProxyServer::createNew(*env, 8554);	
+	RTSPProxyServer* server = RTSPProxyServer::createNew(*env, 554);	
 	
 	const char* streamName = "ServerMedia/"/* + *socket->GetClientID()*/;
 														
