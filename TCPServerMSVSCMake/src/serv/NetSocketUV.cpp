@@ -136,7 +136,7 @@ const char* NetSocketUV::GetIP(Net_Address* addr, bool own_or_peer)
 		hints.ai_family = AF_UNSPEC; /*either IPV4 or IPV6*/
 		hints.ai_socktype = SOCK_STREAM;
 		hints.ai_flags = AI_CANONNAME;
-		if ((gai_result = getaddrinfo(hostname, "http", &hints, &info)) != 0) {
+		if ((gai_result = getaddrinfo(hostname, "rtsp", &hints, &info)) != 0) {
 			fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(gai_result));
 			exit(1);
 		}
