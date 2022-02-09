@@ -1,31 +1,15 @@
 #pragma once
 #include "utils.hpp"
 #include "includes.hpp"
-#define SENDER_SIZE_UV sizeof(uv_write_t)
 
-struct NetBuffer;
-struct Net_Address;
-struct NET_BUFFER_INDEX;
-struct NET_BUFFER_LIST;
-struct MEM_DATA;
-class NetSocket;
-class Net;
 
-struct NET_SOCKET_PTR
-{
-	NetSocket* net_socket;
-};
-struct TCP_SOCKET : public NET_SOCKET_PTR, uv_tcp_t
-{
-	uv_stream_t* handle;
-};
-struct UDP_SOCKET : public NET_SOCKET_PTR, uv_udp_t
-{
-};
-struct POLL_SOCKET : public NET_SOCKET_PTR, uv_poll_t
-{
-};
-
+//struct NetBuffer;
+//struct Net_Address;
+//struct NET_BUFFER_INDEX;
+//struct NET_BUFFER_LIST;
+//struct MEM_DATA;
+//class NetSocket;
+//class Net;
 
 
 struct NetBuffer
@@ -173,18 +157,7 @@ struct Net_Address
 	void Serialize(CString* stream);
 };
 
-struct NetBufferUV : public NET_BUFFER_INDEX
-{
-	char sender_object[SENDER_SIZE_UV];
 
-	NetBufferUV(int index) : NET_BUFFER_INDEX(index)
-	{
-	}
-	virtual ~NetBufferUV();
-
-	uv_write_t* GetPtrWrite();
-	uv_udp_send_t* GetPtrSend();
-};
 
 struct MEM_DATA
 {

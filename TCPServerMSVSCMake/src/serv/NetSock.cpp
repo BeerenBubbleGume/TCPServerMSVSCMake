@@ -262,21 +262,6 @@ void Net_Address::Serialize(CString* stream)
 {
 }
 
-NetBufferUV::~NetBufferUV()
-{
-	index = NULL;
-}
-
-uv_write_t* NetBufferUV::GetPtrWrite()
-{
-	return (uv_write_t*)sender_object;
-}
-
-uv_udp_send_t* NetBufferUV::GetPtrSend()
-{
-	return (uv_udp_send_t*)sender_object;
-}
-
 NET_BUFFER_LIST::NET_BUFFER_LIST() : CArrayBase()
 {
 	net = nullptr;

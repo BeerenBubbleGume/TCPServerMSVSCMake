@@ -2,6 +2,38 @@
 #include "NetSock.hpp"
 #include "utils.hpp"
 
+using namespace libuv;
+
+#define SENDER_SIZE_UV sizeof(uv_write_t)
+
+struct NET_SOCKET_PTR
+{
+	NetSocket* net_socket;
+};
+struct TCP_SOCKET : public NET_SOCKET_PTR, uv_tcp_t
+{
+	uv_stream_t* handle;
+};
+struct UDP_SOCKET : public NET_SOCKET_PTR, uv_udp_t
+{
+};
+struct POLL_SOCKET : public NET_SOCKET_PTR, uv_poll_t
+{
+};
+
+struct NetBufferUV : public NET_BUFFER_INDEX
+{
+	char sender_object[SENDER_SIZE_UV];
+
+	NetBufferUV(int index) : NET_BUFFER_INDEX(index)
+	{
+	}
+	virtual ~NetBufferUV();
+
+	uv_write_t* GetPtrWrite();
+	uv_udp_send_t* GetPtrSend();
+};
+
 class NetSocketUV : public NetSocket
 {
 public:
@@ -27,91 +59,26 @@ public:
 	void ReceiveUPD();
 	void Destroy();
 
-	static void GenerateRTSPURL(void* Data) {
-		NetSocketUV::RTSPProxyServer::StartProxyServer(Data);
-		return;
-	}
-
 	int status;
 	static NetSocketUV* NewSocket(Net* net)										{ return new NetSocketUV(net); }
 	uv_loop_t* loop;
 
-	class RTSPProxyServer : public RTSPServer
-	{
-	public:
-		static RTSPProxyServer* createNew(UsageEnvironment& env, Port ourPort = 554,
-			UserAuthenticationDatabase* authDatabase = NULL,
-			unsigned reclamationSeconds = 65);
-
-		static void anonceStream(RTSPServer* rtspServer, ServerMediaSession* sms, char const* streamName);
-
-		static void StartProxyServer(/*CString* inputURL, */void* Data);
-		bool StopProxyServer(void* clientData);
-		int getSocket4() { return fServerSocketIPv4; }
-		int getSocket6() { return fServerSocketIPv6; }
-		static void ip4SocketHandler(void* data, int mask) {
-			RTSPProxyServer* server = (RTSPProxyServer*)data;
-			server->incomingConnectionHandlerIPv4();
-		}
-		static void ip6SocketHandler(void* data, int mask) {
-			RTSPProxyServer* server = (RTSPProxyServer*)data;
-			server->incomingConnectionHandlerIPv6();
-		}
-		void resetLoopWatchVaraible(volatile char eventLoopWatchVariable) { this->eventLoopWatchVariable = eventLoopWatchVariable; }
-	protected:
-		virtual ~RTSPProxyServer();
-		RTSPProxyServer(UsageEnvironment& env,
-			int ourSocketIPv4, int ourSocketIPv6, Port ourPort,
-			UserAuthenticationDatabase* authDatabase,
-			unsigned reclamationSeconds);
-		friend class DemandServerMediaSubsession;
-		friend class NetSocketUV;
-		friend class NetBuffer;
-		volatile char eventLoopWatchVariable;
-	};
-
-protected:
-	class DemandServerMediaSubsession : public OnDemandServerMediaSubsession
-	{
-	public:
-		static DemandServerMediaSubsession* createNew(/*Net* net, */UsageEnvironment& env, Boolean reuseFirstSource);
-		virtual ~DemandServerMediaSubsession();
-		static ServerMediaSession* createNewSMS(UsageEnvironment& env, const char* fileName, FILE* fid);
-		virtual char const* sdpLines(int addressFamily) { return OnDemandServerMediaSubsession::sdpLines(addressFamily); }
-		void pauseStream1(unsigned clientID, void* streamToken);
-
-	protected:
-		virtual FramedSource* createNewStreamSource(unsigned clientSessionId, unsigned& estBitrate);
-		virtual RTPSink* createNewRTPSink(Groupsock* rtpGroupsock, unsigned char rtpPayloadTypeIfDynamic, FramedSource* inputSource);
-		/*void setNetPtr(Net* net) { this->net = net; }*/
-		
-	private:
-
-		DemandServerMediaSubsession(/*Net* net, */UsageEnvironment& env, Boolean reuseFirstSource);
-		static void subsessionByeHandler(void* clientData);
-		void subsessionByeHandler();
-
-		u_int8_t* fBuffer;
-		u_int64_t fBufferSize;
-		friend class RTSPProxyServer;
-		friend class NetSocketUV;
-		/*Net* net;*/
-	};
+	
 };
 
-void OnAccept(uv_stream_t* stream, int status);
-void OnAllocBuffer(uv_handle_t* handle, size_t suggested_size, uv_buf_t* buf);
-void OnReadTCP(uv_stream_t* stream, ssize_t nread, const uv_buf_t* buf);
-void OnReadUDP(uv_udp_t* handle, ssize_t nread, const uv_buf_t* buf, const struct sockaddr* addr, unsigned flags);
-void OnCloseSocket(uv_handle_t* handle);
-void OnWrite(uv_write_t* req, int status);
-void onCloseFile(uv_fs_t* req);
-void onOpenFile(uv_fs_t* req);
+void OnAccept(libuv::uv_stream_t* stream, int status);
+void OnAllocBuffer(libuv::uv_handle_t* handle, size_t suggested_size, libuv::uv_buf_t* buf);
+void OnReadTCP(libuv::uv_stream_t* stream, libuv::ssize_t nread, const libuv::uv_buf_t* buf);
+void OnReadUDP(libuv::uv_udp_t* handle, libuv::ssize_t nread, const libuv::uv_buf_t* buf, const struct sockaddr* addr, unsigned flags);
+void OnCloseSocket(libuv::uv_handle_t* handle);
+void OnWrite(libuv::uv_write_t* req, int status);
+void onCloseFile(libuv::uv_fs_t* req);
+void onOpenFile(libuv::uv_fs_t* req);
 void OnListining(void* tcp);
-void OnWriteFile(uv_fs_t* req);
-uv_tcp_t* GetPtrTCP(void* ptr);
-uv_udp_t* GetPtrUDP(void* ptr);
-uv_loop_t* GetLoop(Net* net);
+void OnWriteFile(libuv::uv_fs_t* req);
+libuv::uv_tcp_t* GetPtrTCP(void* ptr);
+libuv::uv_udp_t* GetPtrUDP(void* ptr);
+libuv::uv_loop_t* GetLoop(Net* net);
 
 
 
