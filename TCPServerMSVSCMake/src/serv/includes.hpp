@@ -33,10 +33,5 @@ namespace libuv
 {
 #include "../uv.h"
 }
-
-namespace uv_net
-{
-#include "NetSocketUV.cpp"
-}
 #include "utf.hpp"
 

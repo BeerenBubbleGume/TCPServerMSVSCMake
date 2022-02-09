@@ -1,7 +1,6 @@
 #include <stdint.h>
 #include "ServerUV.hpp"
 
-using namespace uv_net;
 
 void HandlerForRegister(void* clientData)
 {

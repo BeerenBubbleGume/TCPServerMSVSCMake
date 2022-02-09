@@ -1,6 +1,7 @@
 #pragma once
 #ifndef SERVERUV_H
 #include "includes.hpp"
+#include "NetSocketUV.hpp"
 
 using namespace live555;
 
@@ -14,7 +15,7 @@ public:
 protected:
 
 	Net*				net;
-	uv_net::NetSocketUV*	net_sockuv;
+	NetSocketUV*	net_sockuv;
 
 	/*CString* GetClientID()												{ return NetSocket::GetClientID(); }
 	virtual void SetID(void* NewClient)									{ NetSocket::SetID(NewClient); }*/

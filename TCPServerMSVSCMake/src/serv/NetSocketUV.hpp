@@ -66,19 +66,19 @@ public:
 	
 };
 
-void OnAccept(libuv::uv_stream_t* stream, int status);
-void OnAllocBuffer(libuv::uv_handle_t* handle, size_t suggested_size, libuv::uv_buf_t* buf);
-void OnReadTCP(libuv::uv_stream_t* stream, libuv::ssize_t nread, const libuv::uv_buf_t* buf);
-void OnReadUDP(libuv::uv_udp_t* handle, libuv::ssize_t nread, const libuv::uv_buf_t* buf, const struct sockaddr* addr, unsigned flags);
-void OnCloseSocket(libuv::uv_handle_t* handle);
-void OnWrite(libuv::uv_write_t* req, int status);
-void onCloseFile(libuv::uv_fs_t* req);
-void onOpenFile(libuv::uv_fs_t* req);
+void OnAccept(uv_stream_t* stream, int status);
+void OnAllocBuffer(uv_handle_t* handle, size_t suggested_size, uv_buf_t* buf);
+void OnReadTCP(uv_stream_t* stream, ssize_t nread, const uv_buf_t* buf);
+void OnReadUDP(uv_udp_t* handle, ssize_t nread, const uv_buf_t* buf, const struct sockaddr* addr, unsigned flags);
+void OnCloseSocket(uv_handle_t* handle);
+void OnWrite(uv_write_t* req, int status);
+void onCloseFile(uv_fs_t* req);
+void onOpenFile(uv_fs_t* req);
 void OnListining(void* tcp);
-void OnWriteFile(libuv::uv_fs_t* req);
-libuv::uv_tcp_t* GetPtrTCP(void* ptr);
-libuv::uv_udp_t* GetPtrUDP(void* ptr);
-libuv::uv_loop_t* GetLoop(Net* net);
+void OnWriteFile(uv_fs_t* req);
+uv_tcp_t* GetPtrTCP(void* ptr);
+uv_udp_t* GetPtrUDP(void* ptr);
+uv_loop_t* GetLoop(Net* net);
 
 
 
