@@ -220,7 +220,7 @@ void NetSocketUV::ReceiveTCP()
 	int received_bytes = recv_buffer->GetLength();
 	recv_buffer->Add(received_bytes, (void*)recv_buffer->GetData());
 
-	if (f->Open("test_h.264", STREAM_WRITE))
+	if (f->Open("test_h.264", STREAM_WRITE && STREAM_READ))
 	{
 		std::cout << "start recording stream in file" << std::endl;
 		unsigned int bytes = f->Write(recv_buffer->GetData(), recv_buffer->GetLength());
