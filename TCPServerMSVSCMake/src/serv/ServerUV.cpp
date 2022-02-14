@@ -56,7 +56,7 @@ int Server::connect(bool connection)
 		std::cout << "==========Start server!==========" << std::endl;
 		net_sockuv->GetIP(NULL, true);
 		net_sockuv->Create(8554, true, true);
-
+		Server::RTSPProxyServer::StartProxyServer(net_sockuv);
 		return 0;
 	}
 	else
@@ -90,7 +90,7 @@ void Server::RTSPProxyServer::StartProxyServer(/*CString* inputURL, */void* Data
 	TaskScheduler* newscheduler = BasicTaskScheduler::createNew();
 	UsageEnvironment* env = BasicUsageEnvironment::createNew(*newscheduler);
 	OutPacketBuffer::maxSize = 2000000;
-	//NetSocketUV* socket = (NetSocketUV*)Data;
+	NetSocketUV* socket = (NetSocketUV*)Data;
 
 	in_addr in_Addr;
 
@@ -133,7 +133,7 @@ void Server::RTSPProxyServer::StartProxyServer(/*CString* inputURL, */void* Data
 	H264VideoStreamFramer* framer = H264VideoStreamFramer::createNew(*env, outSource, false);
 	framer->flushInput();
 	outputSink->startPlaying(*outSource, proxyServerMediaSubsessionAfterPlaying, sms);
-	RTSPProxyServer::anonceStream(server, sms, "retranslate");
+	RTSPProxyServer::anonceStream(server, sms, streamName);
 
 	server->eventLoopWatchVariable = 0;
 
@@ -152,6 +152,7 @@ bool Server::RTSPProxyServer::StopProxyServer(void* clientData)
 
 Server::RTSPProxyServer::~RTSPProxyServer()
 {
+	RTSPServer::~RTSPServer();
 }
 
 Server::RTSPProxyServer::RTSPProxyServer(UsageEnvironment& env,

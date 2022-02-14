@@ -39,7 +39,7 @@ bool NetSocketUV::Create(int port, bool udp_tcp, bool listen)
 			{
 				sockaddr_in* sock_addres = new sockaddr_in;
 				
-				int i = uv_ip4_addr("0.0.0.0", port, sock_addres);
+				int i = uv_ip4_addr("127.0.0.1", port, sock_addres);
 				assert(i == 0);
 				int b = uv_tcp_bind(tcp, (sockaddr*)sock_addres, 0);
 				assert(b == 0);
