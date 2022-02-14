@@ -208,11 +208,11 @@ void NetSocketUV::ReceiveTCP()
 	if (f->Open("test_h.264", STREAM_ADD))
 	{
 		std::cout << "start recording stream in file" << std::endl;
-		unsigned int bytes = f->Write(recv_buffer->GetData(), recv_buffer->GetLength());
-		std::cout << "bytes recorded: " << bytes << std::endl;
-		
-		f->Close();
-}
+		while (recv_buffer->GetData() != nullptr) {
+			unsigned int bytes = f->Write(recv_buffer->GetData(), recv_buffer->GetLength());
+			std::cout << "bytes recorded: " << bytes << std::endl;
+		}
+	}
 	else
 	{
 		std::cout << "cannot open file to record stream!" << std::endl;
@@ -221,6 +221,7 @@ void NetSocketUV::ReceiveTCP()
 	NET_BUFFER_INDEX* index = net->PrepareMessage(10, received_bytes, recv_buffer->GetData());
 	assert(index);
 	SendTCP(index);
+	f->Close();
 }
 
 void NetSocketUV::ReceiveUPD()
