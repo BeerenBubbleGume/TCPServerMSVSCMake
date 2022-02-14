@@ -152,7 +152,6 @@ bool Server::RTSPProxyServer::StopProxyServer(void* clientData)
 
 Server::RTSPProxyServer::~RTSPProxyServer()
 {
-	RTSPServer::~RTSPServer();
 }
 
 Server::RTSPProxyServer::RTSPProxyServer(UsageEnvironment& env,
