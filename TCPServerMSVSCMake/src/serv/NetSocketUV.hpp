@@ -4,6 +4,8 @@
 
 using namespace libuv;
 
+struct NetBufferUV;
+
 #define SENDER_SIZE_UV sizeof(uv_write_t)
 
 struct NET_SOCKET_PTR
@@ -28,10 +30,13 @@ struct NetBufferUV : public NET_BUFFER_INDEX
 	NetBufferUV(int index) : NET_BUFFER_INDEX(index)
 	{
 	}
-	virtual ~NetBufferUV();
+	virtual ~NetBufferUV()
+	{
+		index = 0;
+	}
 
-	uv_write_t* GetPtrWrite();
-	uv_udp_send_t* GetPtrSend();
+	uv_write_t* GetPtrWrite() {return (uv_write_t*)sender_object;}
+	uv_udp_send_t* GetPtrSend() {return (uv_udp_send_t*)sender_object;};
 };
 
 class NetSocketUV : public NetSocket

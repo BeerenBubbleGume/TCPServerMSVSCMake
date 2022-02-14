@@ -1,21 +1,6 @@
 #include "NetSocketUV.hpp"
 #pragma comment(lib, "../../libs/lib/uv.lib")
 
-NetBufferUV::~NetBufferUV()
-{
-	index = NULL;
-}
-
-uv_write_t* NetBufferUV::GetPtrWrite()
-{
-	return (uv_write_t*)sender_object;
-}
-
-uv_udp_send_t* NetBufferUV::GetPtrSend()
-{
-	return (uv_udp_send_t*)sender_object;
-}
-
 NetSocketUV::NetSocketUV(Net* net) : NetSocket(net)
 {
 	sock = NULL;
