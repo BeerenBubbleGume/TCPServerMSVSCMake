@@ -363,7 +363,7 @@ int Server::connect(bool connection)
 		//udp_tcp = true;
 		std::cout << "==========Start server!==========" << std::endl;
 		//net_sockuv->GetIP(NULL, true);
-		if (net_sockuv->Create(9554, true, true) == true)
+		if (net_sockuv->Create(8554, true, true) == true)
 			return 0;
 	}
 	else
@@ -403,7 +403,7 @@ void Server::StartTranslation()
 
 	RTPSink* outputSink = H264VideoRTPSink::createNew(*env, rtpGS, 96);
 
-	RTSPServer* server = RTSPServer::createNew(*env, 8554);
+	RTSPServer* server = RTSPServer::createNew(*env, 554);
 
 	const char* streamName = "ServerMedia/"/* + *socket->GetClientID()*/;
 
