@@ -137,238 +137,6 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.o:
  /usr/include/asm/socket.h /usr/include/asm-generic/socket.h \
  /usr/include/asm/sockios.h /usr/include/asm-generic/sockios.h \
  /usr/include/bits/types/struct_osockaddr.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/liveMedia.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/JPEG2000VideoRTPSource.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/MultiFramedRTPSource.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/RTPSource.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/FramedSource.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/groupsock/NetCommon.h \
- /usr/include/sys/time.h /usr/include/netinet/in.h /usr/include/bits/in.h \
- /usr/include/arpa/inet.h /usr/include/netdb.h /usr/include/rpc/netdb.h \
- /usr/include/bits/types/sigevent_t.h \
- /usr/include/bits/types/__sigval_t.h /usr/include/bits/netdb.h \
- /usr/include/c++/8/stdlib.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/MediaSource.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/Media.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/liveMedia_version.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/UsageEnvironment/HashTable.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/UsageEnvironment/Boolean.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/UsageEnvironment/UsageEnvironment.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/UsageEnvironment/UsageEnvironment_version.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/UsageEnvironment/strDup.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/RTPInterface.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/TLSState.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/ssl.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/e_os2.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/opensslconf.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/opensslv.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/comp.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/crypto.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/safestack.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/stack.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/ossl_typ.h \
- /usr/lib/gcc/x86_64-redhat-linux/8/include/limits.h \
- /usr/lib/gcc/x86_64-redhat-linux/8/include/syslimits.h \
- /usr/include/limits.h /usr/include/bits/posix1_lim.h \
- /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
- /usr/include/bits/posix2_lim.h /usr/include/bits/xopen_lim.h \
- /usr/include/bits/uio_lim.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/cryptoerr.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/symhacks.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/comperr.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/bio.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/bioerr.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/x509.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/buffer.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/buffererr.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/evp.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/evperr.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/objects.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/obj_mac.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/asn1.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/asn1err.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/bn.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/bnerr.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/objectserr.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/ec.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/ecerr.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/rsa.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/rsaerr.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/dsa.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/dh.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/dherr.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/dsaerr.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/sha.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/x509err.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/x509_vfy.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/lhash.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/pkcs7.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/pkcs7err.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/pem.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/pemerr.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/hmac.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/async.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/asyncerr.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/ct.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/cterr.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/sslerr.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/ssl2.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/ssl3.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/tls1.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/dtls1.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/srtp.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/groupsock/Groupsock.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/groupsock/groupsock_version.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/groupsock/NetInterface.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/groupsock/NetAddress.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/groupsock/GroupEId.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/SRTPCryptographicContext.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/MIKEY.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/JPEG2000VideoRTPSink.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/VideoRTPSink.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/MultiFramedRTPSink.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/RTPSink.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/MediaSink.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/MPEG1or2AudioRTPSink.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/AudioRTPSink.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/MP3ADURTPSink.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/MPEG1or2VideoRTPSink.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/MPEG4ESVideoRTPSink.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/AMRAudioFileSink.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/FileSink.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/H264VideoFileSink.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/H264or5VideoFileSink.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/H265VideoFileSink.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/OggFileSink.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/BasicUDPSink.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/GSMAudioRTPSink.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/H263plusVideoRTPSink.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/H264VideoRTPSink.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/H264or5VideoRTPSink.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/FramedFilter.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/H265VideoRTPSink.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/DVVideoRTPSource.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/DVVideoRTPSink.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/DVVideoStreamFramer.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/H264VideoStreamFramer.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/H264or5VideoStreamFramer.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/MPEGVideoStreamFramer.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/H265VideoStreamFramer.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/H264VideoStreamDiscreteFramer.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/H264or5VideoStreamDiscreteFramer.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/H265VideoStreamDiscreteFramer.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/JPEGVideoRTPSink.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/SimpleRTPSink.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/uLawAudioFilter.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/MPEG2IndexFromTransportStream.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/MPEG2TransportStreamTrickModeFilter.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/MPEG2TransportStreamIndexFile.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/ByteStreamMultiFileSource.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/ByteStreamFileSource.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/FramedFileSource.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/ByteStreamMemoryBufferSource.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/BasicUDPSource.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/SimpleRTPSource.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/MPEG1or2AudioRTPSource.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/MPEG4LATMAudioRTPSource.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/MPEG4LATMAudioRTPSink.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/MPEG4ESVideoRTPSource.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/MPEG4GenericRTPSource.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/MP3ADURTPSource.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/QCELPAudioRTPSource.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/AMRAudioRTPSource.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/AMRAudioSource.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/JPEGVideoRTPSource.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/JPEGVideoSource.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/MPEG1or2VideoRTPSource.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/VorbisAudioRTPSource.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/TheoraVideoRTPSource.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/VP8VideoRTPSource.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/VP9VideoRTPSource.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/RawVideoRTPSource.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/MPEG2TransportStreamFromPESSource.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/MPEG2TransportStreamMultiplexor.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/MPEG1or2Demux.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/MPEG1or2DemuxedElementaryStream.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/MPEG2TransportStreamFromESSource.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/MPEG2TransportStreamFramer.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/ADTSAudioFileSource.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/ADTSAudioStreamDiscreteFramer.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/H261VideoRTPSource.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/H263plusVideoRTPSource.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/H264VideoRTPSource.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/H265VideoRTPSource.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/MP3FileSource.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/MP3ADU.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/MP3ADUinterleaving.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/MP3Transcoder.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/MP3ADUTranscoder.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/MPEG1or2AudioStreamFramer.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/H263plusVideoStreamFramer.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/AC3AudioStreamFramer.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/AC3AudioRTPSource.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/AC3AudioRTPSink.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/VorbisAudioRTPSink.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/TheoraVideoRTPSink.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/VP8VideoRTPSink.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/VP9VideoRTPSink.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/MPEG4GenericRTPSink.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/RawVideoRTPSink.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/RawVideoFrameParameters.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/MPEG1or2VideoStreamDiscreteFramer.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/MPEG1or2VideoStreamFramer.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/MPEG4VideoStreamDiscreteFramer.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/MPEG4VideoStreamFramer.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/DeviceSource.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/AudioInputDevice.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/WAVAudioFileSource.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/StreamReplicator.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/RTSPRegisterSender.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/RTSPClient.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/MediaSession.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/RTCP.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/DigestAuthentication.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/RTSPServer.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/GenericMediaServer.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/ServerMediaSession.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/SIPClient.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/QuickTimeFileSink.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/QuickTimeGenericRTPSource.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/AVIFileSink.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/PassiveServerMediaSubsession.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/MPEG4VideoFileServerMediaSubsession.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/FileServerMediaSubsession.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/OnDemandServerMediaSubsession.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/H264VideoFileServerMediaSubsession.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/H265VideoFileServerMediaSubsession.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/WAVAudioFileServerMediaSubsession.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/AMRAudioFileServerMediaSubsession.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/AMRAudioFileSource.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/AMRAudioRTPSink.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/T140TextRTPSink.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/TextRTPSink.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/MP3AudioFileServerMediaSubsession.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/MPEG1or2VideoFileServerMediaSubsession.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/MPEG1or2FileServerDemux.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/MPEG2TransportFileServerMediaSubsession.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/H263plusVideoFileServerMediaSubsession.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/ADTSAudioFileServerMediaSubsession.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/DVVideoFileServerMediaSubsession.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/AC3AudioFileServerMediaSubsession.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/MPEG2TransportUDPServerMediaSubsession.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/MatroskaFileServerDemux.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/MatroskaFile.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/OggFileServerDemux.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/OggFile.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/MPEG2TransportStreamDemux.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/ProxyServerMediaSession.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/MediaTranscodingTable.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/HLSSegmenter.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/MPEG2TransportStreamAccumulator.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/BasicUsageEnvironment/BasicUsageEnvironment.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/BasicUsageEnvironment/BasicUsageEnvironment0.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/BasicUsageEnvironment/BasicUsageEnvironment_version.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/BasicUsageEnvironment/DelayQueue.hh \
  /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/uv.h \
  /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/uv/errno.h \
  /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/uv/version.h \
@@ -385,12 +153,22 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.o:
  /usr/include/bits/types/struct_statx.h /usr/include/fcntl.h \
  /usr/include/bits/fcntl.h /usr/include/bits/fcntl-linux.h \
  /usr/include/linux/falloc.h /usr/include/dirent.h \
- /usr/include/bits/dirent.h /usr/include/netinet/tcp.h \
+ /usr/include/bits/dirent.h /usr/include/bits/posix1_lim.h \
+ /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
+ /usr/include/netinet/in.h /usr/include/bits/in.h \
+ /usr/include/netinet/tcp.h /usr/include/arpa/inet.h /usr/include/netdb.h \
+ /usr/include/rpc/netdb.h /usr/include/bits/types/sigevent_t.h \
+ /usr/include/bits/types/__sigval_t.h /usr/include/bits/netdb.h \
  /usr/include/termios.h /usr/include/bits/termios.h \
  /usr/include/sys/ttydefaults.h /usr/include/pwd.h \
  /usr/include/semaphore.h /usr/include/bits/semaphore.h \
- /usr/include/sys/param.h /usr/include/signal.h \
- /usr/include/bits/signum.h /usr/include/bits/signum-generic.h \
+ /usr/include/sys/param.h \
+ /usr/lib/gcc/x86_64-redhat-linux/8/include/limits.h \
+ /usr/lib/gcc/x86_64-redhat-linux/8/include/syslimits.h \
+ /usr/include/limits.h /usr/include/bits/posix2_lim.h \
+ /usr/include/bits/xopen_lim.h /usr/include/bits/uio_lim.h \
+ /usr/include/signal.h /usr/include/bits/signum.h \
+ /usr/include/bits/signum-generic.h \
  /usr/include/bits/types/sig_atomic_t.h \
  /usr/include/bits/types/siginfo_t.h /usr/include/bits/siginfo-arch.h \
  /usr/include/bits/siginfo-consts.h \
@@ -404,5 +182,4 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.o:
  /usr/include/asm/param.h /usr/include/asm-generic/param.h \
  /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/uv/threadpool.h \
  /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/uv/linux.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/BasicUsageEnvironment/../uv.h \
  /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/utf.hpp

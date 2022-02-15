@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes -I/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/BasicUsageEnvironment -I/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia -I/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/groupsock -I/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/UsageEnvironment
+CXX_INCLUDES = -I/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes
 
 CXX_FLAGS =  -gstabs+ -gstabs -D _DEBUG -O -std=c++17
 

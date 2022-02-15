@@ -173,13 +173,6 @@ TCPServerMSVSCMake/TCPServerMSVSCMake: TCPServerMSVSCMake/CMakeFiles/TCPServerMS
 TCPServerMSVSCMake/TCPServerMSVSCMake: TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utf.cpp.o
 TCPServerMSVSCMake/TCPServerMSVSCMake: TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/build.make
 TCPServerMSVSCMake/TCPServerMSVSCMake: ../../../TCPServerMSVSCMake/libs/lib/libuv_a.a
-TCPServerMSVSCMake/TCPServerMSVSCMake: ../../../TCPServerMSVSCMake/libs/lib/libliveMedia.a
-TCPServerMSVSCMake/TCPServerMSVSCMake: ../../../TCPServerMSVSCMake/libs/lib/libBasicUsageEnvironment.a
-TCPServerMSVSCMake/TCPServerMSVSCMake: ../../../TCPServerMSVSCMake/libs/lib/libUsageEnvironment.a
-TCPServerMSVSCMake/TCPServerMSVSCMake: ../../../TCPServerMSVSCMake/libs/lib/libgroupsock.a
-TCPServerMSVSCMake/TCPServerMSVSCMake: ../../../TCPServerMSVSCMake/libs/lib/libssl.a
-TCPServerMSVSCMake/TCPServerMSVSCMake: ../../../TCPServerMSVSCMake/libs/lib/libcrypto.a
-TCPServerMSVSCMake/TCPServerMSVSCMake: ../../../TCPServerMSVSCMake/libs/lib/libz.a
 TCPServerMSVSCMake/TCPServerMSVSCMake: TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable TCPServerMSVSCMake"
 	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/TCPServerMSVSCMake && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/TCPServerMSVSCMake.dir/link.txt --verbose=$(VERBOSE)
