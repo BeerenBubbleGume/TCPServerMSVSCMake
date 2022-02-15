@@ -32,11 +32,11 @@ IF(WIN32)
 								)
 ELSE()
 	target_include_directories(RTSP PUBLIC
-								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/
-								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/BasicUsageEnvironment
-								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/liveMedia
-								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/groupsock
-								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/UsageEnvironment)
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/include/
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/include/BasicUsageEnvironment
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/include/liveMedia
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/include/groupsock
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/include/UsageEnvironment)
 	target_link_libraries(RTSP
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libliveMedia.a
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libBasicUsageEnvironment.a
