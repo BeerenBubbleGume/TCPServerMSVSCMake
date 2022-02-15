@@ -53,8 +53,7 @@ bool NetSocketUV::Create(int port, bool udp_tcp, bool listen)
 				int l = uv_listen((uv_stream_t*)tcp, 1024, OnAccept);
 				if (l)
 					return false;
-				else
-					return uv_run(sloop, UV_RUN_DEFAULT);
+				return uv_run(sloop, UV_RUN_DEFAULT);
 			}																   
 				
 		}
