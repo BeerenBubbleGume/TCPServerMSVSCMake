@@ -99,10 +99,10 @@ protected:
 
 public:
 
-	static void GenerateRTSPURL(void* Data) {
+	/*static void GenerateRTSPURL(void* Data) {
 		RTSPProxyServer::StartProxyServer(Data);
 		return;
-	}
+	}*/
 
 protected:
 	
