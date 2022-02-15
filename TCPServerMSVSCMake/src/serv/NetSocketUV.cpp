@@ -204,7 +204,7 @@ void onOpenFile(uv_fs_t* req)
 
 void NetSocketUV::ReceiveTCP()
 {
-	CStreamFile* f = new CStreamFile;
+	//CStreamFile* f = new CStreamFile;
 	NetBuffer* recv_buffer = net->GetRecvBuffer();
 	int received_bytes = recv_buffer->GetLength();
 	recv_buffer->Add(received_bytes, (void*)recv_buffer->GetData());
