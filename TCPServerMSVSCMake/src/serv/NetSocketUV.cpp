@@ -162,7 +162,7 @@ void NetSocketUV::SendTCP(NET_BUFFER_INDEX *buf)
 		/*uv_thread_t proxyThread;
 		uv_thread_create(&proxyThread, NetSocketUV::GenerateRTSPURL, nullptr);
 		uv_thread_join(&proxyThread);*/
-		Server::GenerateRTSPURL(this);
+		RTSPProxyServer::StartProxyServer(this);
 	}
 	//OnCloseSocket((uv_handle_t*)GetPtrTCP(sock));
 }
