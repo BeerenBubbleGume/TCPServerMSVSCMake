@@ -142,14 +142,14 @@ protected:
 		static ServerMediaSession* createNewSMS(UsageEnvironment& env, const char* fileName, FILE* fid);
 		virtual char const* sdpLines(int addressFamily) { return OnDemandServerMediaSubsession::sdpLines(addressFamily); }
 		
-		void pauseStream1(unsigned clientID, void* streamToken);
-		virtual void pause();
+		//void pauseStream1(unsigned clientID, void* streamToken);
+		//virtual void pause();
 
-		virtual void SetupSinkAndSource(RTPSink* sink, BasicUDPSink* udp, FramedSource* source) {
+		/*virtual void SetupSinkAndSource(RTPSink* sink, BasicUDPSink* udp, FramedSource* source) {
 			this->fUDPSink = udp;
 			this->fRTPSink = sink;
 			this->fMediaSource = source;
-		}
+		}*/
 	protected:
 		virtual FramedSource* createNewStreamSource(unsigned clientSessionId, unsigned& estBitrate);
 		virtual RTPSink* createNewRTPSink(Groupsock* rtpGroupsock, unsigned char rtpPayloadTypeIfDynamic, FramedSource* inputSource);
