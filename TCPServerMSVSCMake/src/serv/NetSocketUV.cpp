@@ -51,7 +51,7 @@ bool NetSocketUV::Create(int port, bool udp_tcp, bool listen)
 				assert(l == 0);
 				l = uv_thread_join(&acceptingThread);*/
 				int l = uv_listen((uv_stream_t*)tcp, 1024, OnAccept);
-				if (l)
+				if (l != 0)
 					return false;
 				return uv_run(sloop, UV_RUN_DEFAULT);
 			}																   
@@ -125,7 +125,7 @@ const char* NetSocketUV::GetIP(Net_Address* addr, bool own_or_peer)
 bool NetSocketUV::Accept(uv_handle_t* handle)
 {
 	NetSocketUV* accept_sock = NewSocket(net);
-	accept_sock->Create(554, true, false);
+	accept_sock->Create(0, true, false);
 	uv_tcp_t* client = GetPtrTCP(accept_sock->sock);
 
 	if (uv_accept((uv_stream_t*)handle, (uv_stream_t*)client) == 0)
