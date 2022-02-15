@@ -73,6 +73,10 @@ public:
 
 #ifndef SERVER_LIVE
 #define SERVER_LIVE
+
+class RTSPProxyServer;
+class DemandServerMediaSubsession;
+
 class Server
 {
 public:
