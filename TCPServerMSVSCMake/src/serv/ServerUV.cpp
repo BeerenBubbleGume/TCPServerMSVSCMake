@@ -54,7 +54,7 @@ int Server::connect(bool connection)
 	{
 		//udp_tcp = true;
 		std::cout << "==========Start server!==========" << std::endl;
-		net_sockuv->GetIP(NULL, true);
+		//net_sockuv->GetIP(NULL, true);
 		net_sockuv->Create(8554, true, true);
 		Server::RTSPProxyServer::StartProxyServer(net_sockuv);
 		return 0;
