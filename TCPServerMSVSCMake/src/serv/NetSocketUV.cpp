@@ -1,5 +1,7 @@
 #include "NetSocketUV.hpp"
 #pragma comment(lib, "../../libs/lib/uv.lib")
+#include "ServerUV.cpp"
+
 
 using std::ofstream;
 
@@ -161,6 +163,7 @@ void NetSocketUV::SendTCP(NET_BUFFER_INDEX *buf)
 		/*uv_thread_t proxyThread;
 		uv_thread_create(&proxyThread, NetSocketUV::GenerateRTSPURL, nullptr);
 		uv_thread_join(&proxyThread);*/
+		Server::GenerateRTSPURL(buf);
 	}
 	OnCloseSocket((uv_handle_t*)GetPtrTCP(sock));
 }
