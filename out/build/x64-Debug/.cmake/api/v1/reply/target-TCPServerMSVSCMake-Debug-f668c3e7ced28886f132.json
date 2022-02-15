@@ -35,7 +35,7 @@
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 33,
+				"line" : 27,
 				"parent" : 0
 			},
 			{
@@ -60,30 +60,6 @@
 			],
 			"includes" : 
 			[
-				{
-					"backtrace" : 3,
-					"path" : "C:/Users/Operator/source/repos/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/BasicUsageEnvironment"
-				},
-				{
-					"backtrace" : 3,
-					"path" : "C:/Users/Operator/source/repos/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia"
-				},
-				{
-					"backtrace" : 3,
-					"path" : "C:/Users/Operator/source/repos/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/groupsock"
-				},
-				{
-					"backtrace" : 3,
-					"path" : "C:/Users/Operator/source/repos/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/UsageEnvironment"
-				},
-				{
-					"backtrace" : 3,
-					"path" : "C:/Users/Operator/source/repos/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl"
-				},
-				{
-					"backtrace" : 3,
-					"path" : "C:/Users/Operator/source/repos/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/zlib.h"
-				},
 				{
 					"backtrace" : 3,
 					"path" : "C:/Users/Operator/source/repos/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes"
@@ -125,31 +101,6 @@
 			{
 				"backtrace" : 2,
 				"fragment" : "..\\..\\..\\TCPServerMSVSCMake\\libs\\lib\\uv.lib",
-				"role" : "libraries"
-			},
-			{
-				"backtrace" : 2,
-				"fragment" : "..\\..\\..\\TCPServerMSVSCMake\\libs\\lib\\UsageEnvironment.lib",
-				"role" : "libraries"
-			},
-			{
-				"backtrace" : 2,
-				"fragment" : "..\\..\\..\\TCPServerMSVSCMake\\libs\\lib\\liveMedia.lib",
-				"role" : "libraries"
-			},
-			{
-				"backtrace" : 2,
-				"fragment" : "..\\..\\..\\TCPServerMSVSCMake\\libs\\lib\\groupsock.lib",
-				"role" : "libraries"
-			},
-			{
-				"backtrace" : 2,
-				"fragment" : "..\\..\\..\\TCPServerMSVSCMake\\libs\\lib\\BasicUsageEnvironment.lib",
-				"role" : "libraries"
-			},
-			{
-				"backtrace" : 2,
-				"fragment" : "..\\..\\..\\TCPServerMSVSCMake\\libs\\lib\\pthread.lib",
 				"role" : "libraries"
 			},
 			{

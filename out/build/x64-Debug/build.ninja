@@ -79,7 +79,7 @@ build cmake_object_order_depends_target_TCPServerMSVSCMake: phony || TCPServerMS
 
 build TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv\NetSock.cpp.obj: CXX_COMPILER__TCPServerMSVSCMake_Debug C$:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\NetSock.cpp || cmake_object_order_depends_target_TCPServerMSVSCMake
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc -gstabs+ -gstabs -D _DEBUG -O /MDd /Zi /Ob0 /Od /RTC1 -std:c++17
-  INCLUDES = -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\BasicUsageEnvironment -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\liveMedia -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\groupsock -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\UsageEnvironment -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\openssl -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\zlib.h -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes
+  INCLUDES = -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes
   OBJECT_DIR = TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir
   OBJECT_FILE_DIR = TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv
   TARGET_COMPILE_PDB = TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\
@@ -87,7 +87,7 @@ build TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv\NetSock.cpp.
 
 build TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv\NetSocketUV.cpp.obj: CXX_COMPILER__TCPServerMSVSCMake_Debug C$:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\NetSocketUV.cpp || cmake_object_order_depends_target_TCPServerMSVSCMake
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc -gstabs+ -gstabs -D _DEBUG -O /MDd /Zi /Ob0 /Od /RTC1 -std:c++17
-  INCLUDES = -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\BasicUsageEnvironment -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\liveMedia -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\groupsock -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\UsageEnvironment -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\openssl -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\zlib.h -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes
+  INCLUDES = -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes
   OBJECT_DIR = TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir
   OBJECT_FILE_DIR = TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv
   TARGET_COMPILE_PDB = TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\
@@ -95,7 +95,7 @@ build TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv\NetSocketUV.
 
 build TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv\ServerUV.cpp.obj: CXX_COMPILER__TCPServerMSVSCMake_Debug C$:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\ServerUV.cpp || cmake_object_order_depends_target_TCPServerMSVSCMake
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc -gstabs+ -gstabs -D _DEBUG -O /MDd /Zi /Ob0 /Od /RTC1 -std:c++17
-  INCLUDES = -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\BasicUsageEnvironment -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\liveMedia -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\groupsock -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\UsageEnvironment -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\openssl -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\zlib.h -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes
+  INCLUDES = -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes
   OBJECT_DIR = TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir
   OBJECT_FILE_DIR = TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv
   TARGET_COMPILE_PDB = TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\
@@ -103,7 +103,7 @@ build TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv\ServerUV.cpp
 
 build TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\TCPServerMSVSCMake.cpp.obj: CXX_COMPILER__TCPServerMSVSCMake_Debug C$:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\TCPServerMSVSCMake.cpp || cmake_object_order_depends_target_TCPServerMSVSCMake
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc -gstabs+ -gstabs -D _DEBUG -O /MDd /Zi /Ob0 /Od /RTC1 -std:c++17
-  INCLUDES = -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\BasicUsageEnvironment -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\liveMedia -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\groupsock -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\UsageEnvironment -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\openssl -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\zlib.h -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes
+  INCLUDES = -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes
   OBJECT_DIR = TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir
   OBJECT_FILE_DIR = TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir
   TARGET_COMPILE_PDB = TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\
@@ -111,7 +111,7 @@ build TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\TCPServerMSVSCMake.cp
 
 build TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv\utils.cpp.obj: CXX_COMPILER__TCPServerMSVSCMake_Debug C$:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\utils.cpp || cmake_object_order_depends_target_TCPServerMSVSCMake
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc -gstabs+ -gstabs -D _DEBUG -O /MDd /Zi /Ob0 /Od /RTC1 -std:c++17
-  INCLUDES = -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\BasicUsageEnvironment -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\liveMedia -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\groupsock -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\UsageEnvironment -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\openssl -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\zlib.h -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes
+  INCLUDES = -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes
   OBJECT_DIR = TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir
   OBJECT_FILE_DIR = TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv
   TARGET_COMPILE_PDB = TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\
@@ -119,7 +119,7 @@ build TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv\utils.cpp.ob
 
 build TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv\utf.cpp.obj: CXX_COMPILER__TCPServerMSVSCMake_Debug C$:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\utf.cpp || cmake_object_order_depends_target_TCPServerMSVSCMake
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc -gstabs+ -gstabs -D _DEBUG -O /MDd /Zi /Ob0 /Od /RTC1 -std:c++17
-  INCLUDES = -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\BasicUsageEnvironment -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\liveMedia -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\groupsock -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\UsageEnvironment -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\openssl -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\zlib.h -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes
+  INCLUDES = -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes
   OBJECT_DIR = TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir
   OBJECT_FILE_DIR = TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv
   TARGET_COMPILE_PDB = TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\
@@ -133,10 +133,10 @@ build TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv\utf.cpp.obj:
 #############################################
 # Link the executable TCPServerMSVSCMake\TCPServerMSVSCMake.exe
 
-build TCPServerMSVSCMake\TCPServerMSVSCMake.exe: CXX_EXECUTABLE_LINKER__TCPServerMSVSCMake_Debug TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv\NetSock.cpp.obj TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv\NetSocketUV.cpp.obj TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv\ServerUV.cpp.obj TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\TCPServerMSVSCMake.cpp.obj TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv\utils.cpp.obj TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv\utf.cpp.obj | ..\..\..\TCPServerMSVSCMake\libs\lib\uv.lib ..\..\..\TCPServerMSVSCMake\libs\lib\UsageEnvironment.lib ..\..\..\TCPServerMSVSCMake\libs\lib\liveMedia.lib ..\..\..\TCPServerMSVSCMake\libs\lib\groupsock.lib ..\..\..\TCPServerMSVSCMake\libs\lib\BasicUsageEnvironment.lib ..\..\..\TCPServerMSVSCMake\libs\lib\pthread.lib
+build TCPServerMSVSCMake\TCPServerMSVSCMake.exe: CXX_EXECUTABLE_LINKER__TCPServerMSVSCMake_Debug TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv\NetSock.cpp.obj TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv\NetSocketUV.cpp.obj TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv\ServerUV.cpp.obj TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\TCPServerMSVSCMake.cpp.obj TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv\utils.cpp.obj TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv\utf.cpp.obj | ..\..\..\TCPServerMSVSCMake\libs\lib\uv.lib
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc -gstabs+ -gstabs -D _DEBUG -O /MDd /Zi /Ob0 /Od /RTC1
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
-  LINK_LIBRARIES = ..\..\..\TCPServerMSVSCMake\libs\lib\uv.lib  ..\..\..\TCPServerMSVSCMake\libs\lib\UsageEnvironment.lib  ..\..\..\TCPServerMSVSCMake\libs\lib\liveMedia.lib  ..\..\..\TCPServerMSVSCMake\libs\lib\groupsock.lib  ..\..\..\TCPServerMSVSCMake\libs\lib\BasicUsageEnvironment.lib  ..\..\..\TCPServerMSVSCMake\libs\lib\pthread.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
+  LINK_LIBRARIES = ..\..\..\TCPServerMSVSCMake\libs\lib\uv.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
   OBJECT_DIR = TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir
   POST_BUILD = cd .
   PRE_LINK = cd .

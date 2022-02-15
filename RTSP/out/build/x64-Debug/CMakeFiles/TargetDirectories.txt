@@ -1,0 +1,9 @@
+C:/Users/Operator/source/repos/TCPServerMSVSCMake/RTSP/out/build/x64-Debug/CMakeFiles/edit_cache.dir
+C:/Users/Operator/source/repos/TCPServerMSVSCMake/RTSP/out/build/x64-Debug/CMakeFiles/RTSP.dir
+C:/Users/Operator/source/repos/TCPServerMSVSCMake/RTSP/out/build/x64-Debug/CMakeFiles/rebuild_cache.dir
+C:/Users/Operator/source/repos/TCPServerMSVSCMake/RTSP/out/build/x64-Debug/libs/CMakeFiles/edit_cache.dir
+C:/Users/Operator/source/repos/TCPServerMSVSCMake/RTSP/out/build/x64-Debug/libs/CMakeFiles/rebuild_cache.dir
+C:/Users/Operator/source/repos/TCPServerMSVSCMake/RTSP/out/build/x64-Debug/libs/lib/CMakeFiles/edit_cache.dir
+C:/Users/Operator/source/repos/TCPServerMSVSCMake/RTSP/out/build/x64-Debug/libs/lib/CMakeFiles/rebuild_cache.dir
+C:/Users/Operator/source/repos/TCPServerMSVSCMake/RTSP/out/build/x64-Debug/libs/include/CMakeFiles/edit_cache.dir
+C:/Users/Operator/source/repos/TCPServerMSVSCMake/RTSP/out/build/x64-Debug/libs/include/CMakeFiles/rebuild_cache.dir
