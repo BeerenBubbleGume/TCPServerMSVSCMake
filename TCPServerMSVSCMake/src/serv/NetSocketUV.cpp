@@ -471,7 +471,7 @@ void Server::RTSPProxyServer::StartProxyServer(/*CString* inputURL, */void* Data
 	rtpGS->multicastSendOnly();
 	rtcpGS->multicastSendOnly();
 
-	ByteStreamFileSource* outSource = ByteStreamFileSource::createNew(*env, "test_h.264");
+	ByteStreamFileSource* outSource = ByteStreamFileSource::createNew(*env, "out_h.264");
 	const unsigned estimatedSessionBandwidth = 500;
 	const unsigned maxCNAMElen = 100;
 	unsigned char CNAME[maxCNAMElen + 1];
