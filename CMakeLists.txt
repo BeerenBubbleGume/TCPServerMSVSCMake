@@ -9,3 +9,4 @@ project ("TCPServerMSVSCMake")
 
 # Включите подпроекты.
 add_subdirectory ("TCPServerMSVSCMake")
+add_subdirectory("RTSP")
