@@ -1,14 +1,8 @@
 # ninja log v5
-7	651	6666236096900020	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utf.cpp.obj	652485757855e8ab
 6	537	6666290884526075	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utf.cpp.obj	eefa3c7fceef8654
 5	1024	6666291321360576	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/ServerUV.cpp.obj	10ce5dbcfe5d3fe5
+1	1079	6666291321897359	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.obj	2e1abea84b829265
 8	1061	6666291321702166	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.obj	37b95c52cf795b5e
 10	1063	6666291321731442	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.obj	68e0c5e16af765b2
-1	1079	6666291321897359	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.obj	2e1abea84b829265
-3	1091	6666291322024248	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.obj	58b6ddde3cd071db
-1	790	6666291442130432	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.obj	58b6ddde3cd071db
-0	895	6666291783439656	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.obj	58b6ddde3cd071db
-896	1134	6666291785772297	TCPServerMSVSCMake/TCPServerMSVSCMake.exe	e315a225a1bedd1
-1	933	6666315308065855	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.obj	58b6ddde3cd071db
 1	759	6666315416813358	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.obj	58b6ddde3cd071db
 760	862	6666315417652701	TCPServerMSVSCMake/TCPServerMSVSCMake.exe	e315a225a1bedd1

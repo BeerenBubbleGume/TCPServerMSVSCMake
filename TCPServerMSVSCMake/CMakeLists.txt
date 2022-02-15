@@ -32,5 +32,6 @@ ELSE()
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/)
 	target_link_libraries(TCPServerMSVSCMake
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libuv_a.a
+								pthread
 								-ldl)
 ENDIF()
