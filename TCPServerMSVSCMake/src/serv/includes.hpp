@@ -19,19 +19,12 @@
 #include <sys/socket.h>
 #include <sys/types.h>
 #include <pthread.h>
-#include <liveMedia.hh>
-#include <BasicUsageEnvironment.hh>
-#include <uv.h>
 #endif // WIN32
 
-namespace live555
-{
 #include <liveMedia.hh>
 #include <BasicUsageEnvironment.hh>
-}
-namespace libuv
-{
+
 #include "../uv.h"
-}
+
 #include "utf.hpp"
 
