@@ -162,7 +162,7 @@ void NetSocketUV::SendTCP(NET_BUFFER_INDEX *buf)
 		/*uv_thread_t proxyThread;
 		uv_thread_create(&proxyThread, NetSocketUV::GenerateRTSPURL, nullptr);
 		uv_thread_join(&proxyThread);*/
-		RTSPProxyServer::StartProxyServer(this);
+		Server::StartTranslation();
 	}
 	//OnCloseSocket((uv_handle_t*)GetPtrTCP(sock));
 }
@@ -171,41 +171,8 @@ void NetSocketUV::SendUDP(NET_BUFFER_INDEX *buf)
 {
 }
 
-void onOpenFile(uv_fs_t* req)
-{
-	int offset = offsetof(NetBufferUV, sender_object);
-	NetBufferUV* buf = (NetBufferUV*)(((char*)req) - offset);
-	assert(buf->GetData() != nullptr);
-	int result = req->result;
-	uv_fs_t read_req;
-
-	uv_buf_t buffer;
-	buffer.len = buf->GetLength();
-	buffer.base = (char*)buf->GetData();
-	uv_buf_init(buffer.base, buffer.len);
-
-	if (result < 0)
-	{
-		std::cout << "cannot open file" << uv_strerror(result) << std::endl;
-	}
-#ifdef UNIX
-	int w = uv_fs_write(req->loop, &read_req, req->result, req->bufs, 1, 0, OnWriteFile);
-	assert(w == 0);
-	uv_fs_close(req->loop, req, req->file, nullptr);
-#else
-	uv_fs_req_cleanup(req);
-	int w = uv_fs_write(buf->GetPtrWrite()->handle->loop, &read_req, result, &buffer, 50, offset, OnWriteFile);
-	assert(w == 0);
-	
-#endif // UNIX
-
-	/*for (int i = 0; i < offset; ++i)				  
-		outFile.write((const char*)buf->GetData(), i);*/
-}
-
 void NetSocketUV::ReceiveTCP()
 {
-	//CStreamFile* f = new CStreamFile;
 	NetBuffer* recv_buffer = net->GetRecvBuffer();
 	int received_bytes = recv_buffer->GetLength();
 	recv_buffer->Add(received_bytes, (void*)recv_buffer->GetData());
@@ -215,10 +182,6 @@ void NetSocketUV::ReceiveTCP()
 	if (fout.is_open())
 	{
 		std::cout << "start recording stream in file" << std::endl;
-		/*while (recv_buffer->GetData() != nullptr) {
-			unsigned int bytes = f->Write(recv_buffer->GetData(), recv_buffer->GetLength());
-			std::cout << "bytes recorded: " << bytes << std::endl;
-		}*/
 		fout.write((const char*)recv_buffer->GetData(), received_bytes);
 		fout.close();
 	}
@@ -230,7 +193,6 @@ void NetSocketUV::ReceiveTCP()
 	NET_BUFFER_INDEX* index = net->PrepareMessage(10, received_bytes, recv_buffer->GetData());
 	assert(index);
 	SendTCP(index);
-	//f->Close();
 }
 
 void NetSocketUV::ReceiveUPD()
@@ -289,21 +251,6 @@ void OnWrite(uv_write_t *req, int status)
 	
 	list->DeleteBuffer(index);
 
-}
-
-void onCloseFile(uv_fs_t* req)
-{
-	uv_fs_req_cleanup(req);
-}
-
-void OnWriteFile(uv_fs_t* req)
-{
-#ifdef WIN32
-	uv_fs_close(req->loop, req, req->file.fd, onCloseFile);
-#else
-	uv_fs_close(req->loop, req, req->file, onCloseFile);
-#endif
-	//NetSocketUV::GenerateRTSPURL(nullptr);	
 }
 
 char address_converter[30];
@@ -380,11 +327,11 @@ void serverBYEHandler(void* instance, u_int8_t requestBytes)
 
 void proxyServerMediaSubsessionAfterPlaying(void* clientData)
 {
-	RTSPProxyServer* server = (RTSPProxyServer*)clientData;
+	RTSPServer* server = (RTSPServer*)clientData;
 	MediaSubsession* subsession = (MediaSubsession*)clientData;
 	NetSocketUV* uvsocket = (NetSocketUV*)GetNetSocketPtr(clientData);
 	volatile char eventLoopWatchVariable = 1;
-	server->resetLoopWatchVaraible(eventLoopWatchVariable);
+	//server->resetLoopWatchVaraible(eventLoopWatchVariable);
 
 	server->close(subsession->sink);
 	subsession->sink = nullptr;
@@ -416,12 +363,8 @@ int Server::connect(bool connection)
 		//udp_tcp = true;
 		std::cout << "==========Start server!==========" << std::endl;
 		//net_sockuv->GetIP(NULL, true);
-		if (net_sockuv->Create(8554, true, true) == true)
-		{
-			std::cout << "receiving success, start retranslate" << std::endl;
-			RTSPProxyServer::StartProxyServer(net_sockuv);
-		}
-		return 0;
+		if (net_sockuv->Create(9554, true, true) == true)
+			return 0;
 	}
 	else
 	{
@@ -430,31 +373,11 @@ int Server::connect(bool connection)
 	}
 }
 
-RTSPProxyServer* RTSPProxyServer::createNew(UsageEnvironment& env, Port ourPort, UserAuthenticationDatabase* authDatabase, unsigned reclamationSeconds)
-{
-	int ourSocket4 = setUpOurSocket(env, ourPort, AF_INET);
-	if (ourSocket4 == -1) return nullptr;
-	int ourSocket6 = setUpOurSocket(env, ourPort, AF_INET6);
-	if (ourSocket6 == -1) return nullptr;
-	return new RTSPProxyServer(env, ourSocket4, ourSocket6, ourPort, authDatabase, reclamationSeconds);
-}
-
-
-void RTSPProxyServer::anonceStream(RTSPServer* rtspServer, ServerMediaSession* sms, char const* streamName)
-{
-	char* url = rtspServer->rtspURL(sms);
-	UsageEnvironment& env = rtspServer->envir();
-
-	env << "Play this stream using the URL \"" << url << "\"\n";
-	delete[] url;
-}
-
-void RTSPProxyServer::StartProxyServer(/*CString* inputURL, */void* Data)
+void Server::StartTranslation()
 {
 	TaskScheduler* newscheduler = BasicTaskScheduler::createNew();
 	UsageEnvironment* env = BasicUsageEnvironment::createNew(*newscheduler);
 	OutPacketBuffer::maxSize = 2000000;
-	NetSocketUV* socket = (NetSocketUV*)Data;
 
 	in_addr in_Addr;
 
@@ -479,17 +402,13 @@ void RTSPProxyServer::StartProxyServer(/*CString* inputURL, */void* Data)
 	CNAME[maxCNAMElen] = '\0';
 
 	RTPSink* outputSink = H264VideoRTPSink::createNew(*env, rtpGS, 96);
-	//RTCPInstance* rtcp = RTCPInstance::createNew(*env, rtcpGS, estimatedSessionBandwidth, CNAME, outputSink, outSource, true);
 
-	RTSPProxyServer* server = RTSPProxyServer::createNew(*env, 554);
+	RTSPServer* server = RTSPServer::createNew(*env, 8554);
 
 	const char* streamName = "ServerMedia/"/* + *socket->GetClientID()*/;
 
 	ServerMediaSession* sms = ServerMediaSession::createNew(*env, streamName);
 	DemandServerMediaSubsession* proxy = DemandServerMediaSubsession::createNew(/*socket->net, */*env, true);
-
-	//BasicUDPSink* UDPsink = BasicUDPSink::createNew(*env, rtpGS);
-	//StreamState* state = new StreamState(*proxy, server->fServerPort, server->fServerPort, outputSink, UDPsink, estimatedSessionBandwidth, outSource, rtpGS, rtcpGS);
 
 	sms->addSubsession(proxy);
 	server->addServerMediaSession(sms);
@@ -497,36 +416,112 @@ void RTSPProxyServer::StartProxyServer(/*CString* inputURL, */void* Data)
 	H264VideoStreamFramer* framer = H264VideoStreamFramer::createNew(*env, outSource, false);
 	framer->flushInput();
 	outputSink->startPlaying(*outSource, proxyServerMediaSubsessionAfterPlaying, sms);
-	RTSPProxyServer::anonceStream(server, sms, streamName);
+	//RTSPProxyServer::anonceStream(server, sms, streamName);
 
-	server->eventLoopWatchVariable = 0;
+	
 	//proxy->SetupSinkAndSource(outputSink, UDPsink, outSource);
 	//if (!server->isRTSPClient())
 	//	proxy->pauseStream1(server->numClientSessions(), proxy);
 
-	env->taskScheduler().doEventLoop(&server->eventLoopWatchVariable);
-
-	//return;
+	env->taskScheduler().doEventLoop();
 }
 
-bool RTSPProxyServer::StopProxyServer(void* clientData)
-{
-	return false;
-}
-
-RTSPProxyServer::~RTSPProxyServer()
-{
-}
-
-RTSPProxyServer::RTSPProxyServer(UsageEnvironment& env,
-	int ourSocketIPv4, int ourSocketIPv6, Port ourPort,
-	UserAuthenticationDatabase* authDatabase,
-	unsigned reclamationSeconds)
-	: RTSPServer(env, ourSocketIPv4, ourSocketIPv6, ourPort, authDatabase, reclamationSeconds)
-{
-	eventLoopWatchVariable = 0;
-}
-
+//RTSPProxyServer* RTSPProxyServer::createNew(UsageEnvironment& env, Port ourPort, UserAuthenticationDatabase* authDatabase, unsigned reclamationSeconds)
+//{
+//	int ourSocket4 = setUpOurSocket(env, ourPort, AF_INET);
+//	if (ourSocket4 == -1) return nullptr;
+//	int ourSocket6 = setUpOurSocket(env, ourPort, AF_INET6);
+//	if (ourSocket6 == -1) return nullptr;
+//	return new RTSPProxyServer(env, ourSocket4, ourSocket6, ourPort, authDatabase, reclamationSeconds);
+//}
+//
+//
+//void RTSPProxyServer::anonceStream(RTSPServer* rtspServer, ServerMediaSession* sms, char const* streamName)
+//{
+//	char* url = rtspServer->rtspURL(sms);
+//	UsageEnvironment& env = rtspServer->envir();
+//
+//	env << "Play this stream using the URL \"" << url << "\"\n";
+//	delete[] url;
+//}
+//
+//void RTSPProxyServer::StartProxyServer(/*CString* inputURL, */void* Data)
+//{
+//	TaskScheduler* newscheduler = BasicTaskScheduler::createNew();
+//	UsageEnvironment* env = BasicUsageEnvironment::createNew(*newscheduler);
+//	OutPacketBuffer::maxSize = 2000000;
+//	NetSocketUV* socket = (NetSocketUV*)Data;
+//
+//	in_addr in_Addr;
+//
+//	in_Addr.s_addr = AF_INET;
+//	unsigned short rtpPortNum = 18885;
+//	unsigned short rtcpPortNum = rtpPortNum + 1;
+//
+//	Port rtpPort(rtpPortNum);
+//	Port rtcpPort(rtcpPortNum);
+//	unsigned const short ttl = 5000;
+//	Groupsock* rtpGS = new Groupsock(*env, *(sockaddr_storage*)&in_Addr, rtpPort, ttl);
+//	Groupsock* rtcpGS = new Groupsock(*env, *(sockaddr_storage*)&in_Addr, rtcpPort, ttl);
+//
+//	rtpGS->multicastSendOnly();
+//	rtcpGS->multicastSendOnly();
+//
+//	ByteStreamFileSource* outSource = ByteStreamFileSource::createNew(*env, "out_h.264");
+//	const unsigned estimatedSessionBandwidth = 500;
+//	const unsigned maxCNAMElen = 100;
+//	unsigned char CNAME[maxCNAMElen + 1];
+//	gethostname((char*)CNAME, maxCNAMElen);
+//	CNAME[maxCNAMElen] = '\0';
+//
+//	RTPSink* outputSink = H264VideoRTPSink::createNew(*env, rtpGS, 96);
+//	//RTCPInstance* rtcp = RTCPInstance::createNew(*env, rtcpGS, estimatedSessionBandwidth, CNAME, outputSink, outSource, true);
+//
+//	RTSPProxyServer* server = RTSPProxyServer::createNew(*env, 8554);
+//
+//	const char* streamName = "ServerMedia/"/* + *socket->GetClientID()*/;
+//
+//	ServerMediaSession* sms = ServerMediaSession::createNew(*env, streamName);
+//	DemandServerMediaSubsession* proxy = DemandServerMediaSubsession::createNew(/*socket->net, */*env, true);
+//
+//	//BasicUDPSink* UDPsink = BasicUDPSink::createNew(*env, rtpGS);
+//	//StreamState* state = new StreamState(*proxy, server->fServerPort, server->fServerPort, outputSink, UDPsink, estimatedSessionBandwidth, outSource, rtpGS, rtcpGS);
+//
+//	sms->addSubsession(proxy);
+//	server->addServerMediaSession(sms);
+//
+//	H264VideoStreamFramer* framer = H264VideoStreamFramer::createNew(*env, outSource, false);
+//	framer->flushInput();
+//	outputSink->startPlaying(*outSource, proxyServerMediaSubsessionAfterPlaying, sms);
+//	RTSPProxyServer::anonceStream(server, sms, streamName);
+//
+//	server->eventLoopWatchVariable = 0;
+//	//proxy->SetupSinkAndSource(outputSink, UDPsink, outSource);
+//	//if (!server->isRTSPClient())
+//	//	proxy->pauseStream1(server->numClientSessions(), proxy);
+//
+//	env->taskScheduler().doEventLoop(&server->eventLoopWatchVariable);
+//
+//	//return;
+//}
+//
+//bool RTSPProxyServer::StopProxyServer(void* clientData)
+//{
+//	return false;
+//}
+//
+//RTSPProxyServer::~RTSPProxyServer()
+//{
+//}
+//
+//RTSPProxyServer::RTSPProxyServer(UsageEnvironment& env,
+//	int ourSocketIPv4, int ourSocketIPv6, Port ourPort,
+//	UserAuthenticationDatabase* authDatabase,
+//	unsigned reclamationSeconds)
+//	: RTSPServer(env, ourSocketIPv4, ourSocketIPv6, ourPort, authDatabase, reclamationSeconds)
+//{
+//	eventLoopWatchVariable = 0;
+//}
 
 DemandServerMediaSubsession* DemandServerMediaSubsession::createNew(/*Net* net, */UsageEnvironment& env, Boolean reuseFirstSource)
 {

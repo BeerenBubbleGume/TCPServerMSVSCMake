@@ -83,22 +83,12 @@ public:
 	Server();
 	virtual ~Server();
 	int connect(bool connection);
+	static void StartTranslation();
 
 protected:
 
 	Net* net;
 	NetSocketUV* net_sockuv;
-
-	/*CString* GetClientID()												{ return NetSocket::GetClientID(); }
-	virtual void SetID(void* NewClient)									{ NetSocket::SetID(NewClient); }*/
-
-	/*virtual void SendTCP(NET_BUFFER_INDEX* buf) 						{ net_sockuv->SendTCP(buf); }
-	virtual void ReceiveTCP()											{ net_sockuv->ReceiveTCP(); }
-	virtual void SendUDP(NET_BUFFER_INDEX* buf) 						{ net_sockuv->SendUDP(buf); }
-	virtual void ReceiveUPD()											{ net_sockuv->ReceiveUPD(); }*/
-
-public:
-
 	/*static void GenerateRTSPURL(void* Data) {
 		RTSPProxyServer::StartProxyServer(Data);
 		return;
@@ -109,37 +99,37 @@ protected:
 
 };
 
-class RTSPProxyServer : public RTSPServer
-{
-public:
-	static RTSPProxyServer* createNew(UsageEnvironment& env, Port ourPort = 554,
-		UserAuthenticationDatabase* authDatabase = NULL,
-		unsigned reclamationSeconds = 65);
-
-	static void anonceStream(RTSPServer* rtspServer, ServerMediaSession* sms, char const* streamName);
-
-	static void StartProxyServer(/*CString* inputURL, */void* Data);
-	bool StopProxyServer(void* clientData);
-	int getSocket4() { return fServerSocketIPv4; }
-	int getSocket6() { return fServerSocketIPv6; }
-	static void ip4SocketHandler(void* data, int mask) {
-		RTSPProxyServer* server = (RTSPProxyServer*)data;
-		server->incomingConnectionHandlerIPv4();
-	}
-	static void ip6SocketHandler(void* data, int mask) {
-		RTSPProxyServer* server = (RTSPProxyServer*)data;
-		server->incomingConnectionHandlerIPv6();
-	}
-	void resetLoopWatchVaraible(volatile char eventLoopWatchVariable) { this->eventLoopWatchVariable = eventLoopWatchVariable; }
-protected:
-	virtual ~RTSPProxyServer();
-	RTSPProxyServer(UsageEnvironment& env,
-		int ourSocketIPv4, int ourSocketIPv6, Port ourPort,
-		UserAuthenticationDatabase* authDatabase,
-		unsigned reclamationSeconds);
-	friend class DemandServerMediaSubsession;
-	volatile char eventLoopWatchVariable;
-};
+//class RTSPProxyServer : public RTSPServer
+//{
+//public:
+//	static RTSPProxyServer* createNew(UsageEnvironment& env, Port ourPort = 554,
+//		UserAuthenticationDatabase* authDatabase = NULL,
+//		unsigned reclamationSeconds = 65);
+//
+//	static void anonceStream(RTSPServer* rtspServer, ServerMediaSession* sms, char const* streamName);
+//
+//	static void StartProxyServer(/*CString* inputURL, */void* Data);
+//	bool StopProxyServer(void* clientData);
+//	int getSocket4() { return fServerSocketIPv4; }
+//	int getSocket6() { return fServerSocketIPv6; }
+//	static void ip4SocketHandler(void* data, int mask) {
+//		RTSPProxyServer* server = (RTSPProxyServer*)data;
+//		server->incomingConnectionHandlerIPv4();
+//	}
+//	static void ip6SocketHandler(void* data, int mask) {
+//		RTSPProxyServer* server = (RTSPProxyServer*)data;
+//		server->incomingConnectionHandlerIPv6();
+//	}
+//	void resetLoopWatchVaraible(volatile char eventLoopWatchVariable) { this->eventLoopWatchVariable = eventLoopWatchVariable; }
+//protected:
+//	virtual ~RTSPProxyServer();
+//	RTSPProxyServer(UsageEnvironment& env,
+//		int ourSocketIPv4, int ourSocketIPv6, Port ourPort,
+//		UserAuthenticationDatabase* authDatabase,
+//		unsigned reclamationSeconds);
+//	friend class DemandServerMediaSubsession;
+//	volatile char eventLoopWatchVariable;
+//};
 
 class DemandServerMediaSubsession : public OnDemandServerMediaSubsession
 {
