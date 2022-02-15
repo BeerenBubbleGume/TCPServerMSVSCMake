@@ -159,11 +159,11 @@ protected:
 		static void subsessionByeHandler(void* clientData);
 		void subsessionByeHandler();
 
-		FramedSource* fMediaSource;
-		RTPSink* fRTPSink;
-		BasicUDPSink* fUDPSink;
-		Boolean fAreCurrentlyPlaying;
-		Boolean fReuseFirstSource;
+		//FramedSource* fMediaSource;
+		//RTPSink* fRTPSink;
+		//BasicUDPSink* fUDPSink;
+		//Boolean fAreCurrentlyPlaying;
+		//Boolean fReuseFirstSource;
 		u_int8_t* fBuffer;
 		u_int64_t fBufferSize;
 		friend class RTSPProxyServer;
