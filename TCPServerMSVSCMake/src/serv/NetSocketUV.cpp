@@ -489,7 +489,7 @@ void Server::RTSPProxyServer::StartProxyServer(/*CString* inputURL, */void* Data
 	DemandServerMediaSubsession* proxy = Server::DemandServerMediaSubsession::createNew(/*socket->net, */*env, true);
 
 	BasicUDPSink* UDPsink = BasicUDPSink::createNew(*env, rtpGS);
-	StreamState* state = new StreamState(*proxy, server->fServerPort, server->fServerPort, outputSink, UDPsink, estimatedSessionBandwidth, outSource, rtpGS, rtcpGS);
+	//StreamState* state = new StreamState(*proxy, server->fServerPort, server->fServerPort, outputSink, UDPsink, estimatedSessionBandwidth, outSource, rtpGS, rtcpGS);
 
 	sms->addSubsession(proxy);
 	server->addServerMediaSession(sms);
@@ -500,9 +500,9 @@ void Server::RTSPProxyServer::StartProxyServer(/*CString* inputURL, */void* Data
 	RTSPProxyServer::anonceStream(server, sms, streamName);
 
 	server->eventLoopWatchVariable = 0;
-
+	proxy->SetupSinkAndSource(outputSink, UDPsink, outSource);
 	if (!server->isRTSPClient())
-		proxy->pauseStream1(server->numClientSessions(), state);
+		proxy->pauseStream1(server->numClientSessions(), proxy);
 
 	env->taskScheduler().doEventLoop(&server->eventLoopWatchVariable);
 
@@ -573,7 +573,7 @@ FramedSource* Server::DemandServerMediaSubsession::createNewStreamSource(unsigne
 	fBuffer = recvBuff->GetData();
 	fBufferSize = recvBuff->GetLength();*/
 
-	FILE* in = fopen("test_h.264", "r");
+	FILE* in = fopen("out_h.264", "r");
 
 	ByteStreamFileSource* fileSource = ByteStreamFileSource::createNew(envir(), in);
 	if (fileSource == NULL) return NULL;
@@ -590,7 +590,18 @@ RTPSink* Server::DemandServerMediaSubsession::createNewRTPSink(Groupsock* rtpGro
 
 void Server::DemandServerMediaSubsession::pauseStream1(unsigned clientID, void* streamToken)
 {
-	OnDemandServerMediaSubsession::pauseStream(clientID, streamToken);
+	if (fReuseFirstSource) return;
+	
+	DemandServerMediaSubsession* state = (DemandServerMediaSubsession*)streamToken;
+	if (state != NULL) state->pause();
+}
+
+void Server::DemandServerMediaSubsession::pause()
+{
+	if (fRTPSink != NULL) fRTPSink->stopPlaying();
+	if (fUDPSink != NULL) fUDPSink->stopPlaying();
+	if (fMediaSource != NULL) fMediaSource->stopGettingFrames();
+	fAreCurrentlyPlaying = False;
 }
 
 void Server::DemandServerMediaSubsession::subsessionByeHandler(void* clientData)
