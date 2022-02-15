@@ -1,6 +1,9 @@
 #include "NetSocketUV.hpp"
 #pragma comment(lib, "../../libs/lib/uv.lib")
 
+using std::ofstream;
+
+
 NetSocketUV::NetSocketUV(Net* net) : NetSocket(net)
 {
 	sock = NULL;
@@ -43,10 +46,11 @@ bool NetSocketUV::Create(int port, bool udp_tcp, bool listen)
 				assert(i == 0);
 				int b = uv_tcp_bind(tcp, (sockaddr*)sock_addres, 0);
 				assert(b == 0);
-				uv_thread_t acceptingThread;
+				/*uv_thread_t acceptingThread;
 				int l = uv_thread_create(&acceptingThread, OnListining, tcp);
 				assert(l == 0);
-				l = uv_thread_join(&acceptingThread);
+				l = uv_thread_join(&acceptingThread);*/
+				int l = uv_listen((uv_stream_t*)tcp, 1024, OnAccept);
 				if (l)
 					return false;
 				else
@@ -204,14 +208,18 @@ void NetSocketUV::ReceiveTCP()
 	NetBuffer* recv_buffer = net->GetRecvBuffer();
 	int received_bytes = recv_buffer->GetLength();
 	recv_buffer->Add(received_bytes, (void*)recv_buffer->GetData());
-
-	if (f->Open("test_h.264", STREAM_ADD))
+	
+	std::ofstream fout;
+	fout.open("out_h.264", std::ios::app | std::ios::binary);
+	if (fout.is_open())
 	{
 		std::cout << "start recording stream in file" << std::endl;
-		while (recv_buffer->GetData() != nullptr) {
+		/*while (recv_buffer->GetData() != nullptr) {
 			unsigned int bytes = f->Write(recv_buffer->GetData(), recv_buffer->GetLength());
 			std::cout << "bytes recorded: " << bytes << std::endl;
-		}
+		}*/
+		fout.write((const char*)recv_buffer->GetData(), received_bytes);
+		fout.close();
 	}
 	else
 	{
@@ -221,7 +229,7 @@ void NetSocketUV::ReceiveTCP()
 	NET_BUFFER_INDEX* index = net->PrepareMessage(10, received_bytes, recv_buffer->GetData());
 	assert(index);
 	SendTCP(index);
-	f->Close();
+	//f->Close();
 }
 
 void NetSocketUV::ReceiveUPD()
