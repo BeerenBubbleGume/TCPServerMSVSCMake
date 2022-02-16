@@ -174,7 +174,7 @@ void NetSocketUV::ReceiveTCP()
 	recv_buffer->Add(received_bytes, (void*)recv_buffer->GetData());
 	
 	std::ofstream fout;
-	fout.open("out_h.264", std::ios::app | std::ios::binary);
+	fout.open("out_h.264", std::ios::binary);
 	if (fout.is_open())
 	{
 		std::cout << "start recording stream in file" << std::endl;
@@ -197,23 +197,23 @@ void NetSocketUV::ReceiveTCP()
 	//pclose(proxy);
 
 	pid_t pid, cmd;
-	int pin[2], pout[2]; // пара пайпов для обмена со скриптом
+	int pin[2], pout[2]; // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	if (pipe(pin) || pipe(pout))
 		err(EX_OSERR, "pipes");
 
-	if (!(cmd = fork())) { // запуск скрипта с аргументами
+	if (!(cmd = fork())) { // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		close(pin[1]);
 		close(pout[0]);
-		dup2(pin[0], 0);     // заменим stdin скрипта на наш ввод
-		dup2(pout[1], 1);    // перекинем stdout скрипта на наc
-							 // stderr скрипта остался тем же, что и у нас
+		dup2(pin[0], 0);     // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ stdin пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+		dup2(pout[1], 1);    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ stdout пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅc
+							 // stderr пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅ, пїЅпїЅпїЅ пїЅ пїЅ пїЅпїЅпїЅ
 		execvp("./RTSP", (char* const*)GetClientID());
 		err(EX_UNAVAILABLE, "exec %s", "RTSP");
 	}
 	if (cmd == -1)
 		err(EX_OSERR, "fork");
 
-	// эти дескрипторы более не нужны
+	// пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 	close(pin[0]);
 	close(pout[1]);
 
@@ -221,14 +221,14 @@ void NetSocketUV::ReceiveTCP()
 	size_t ssize = 0;
 	ssize_t l;
 
-	// для примера читаем stdin и передаем в скрипт
+	// пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ stdin пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	while ((l = getline(&str, &ssize, stdin)) > 0)
 		if (write(pin[1], str, l) != l)
 			err(EX_IOERR, "write pipe");
 
-	close(pin[1]); // пошлем EOF на stdin скрипта
+	close(pin[1]); // пїЅпїЅпїЅпїЅпїЅпїЅ EOF пїЅпїЅ stdin пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-	// читаем вывод скрипта и для примера печатаем его
+	// пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ
 	FILE* progout = fdopen(pout[0], "r");
 	while (getline(&str, &ssize, progout) > 0)
 		puts(str);
