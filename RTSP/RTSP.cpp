@@ -43,9 +43,9 @@ RTSPProxyServer* RTSPProxyServer::createNew(UsageEnvironment& env, Port ourPort,
 void RTSPProxyServer::anonceStream(RTSPServer* rtspServer, ServerMediaSession* sms, char const* streamName)
 {
 	char* url = rtspServer->rtspURL(sms);
-	UsageEnvironment& env = rtspServer->envir();
+	//UsageEnvironment& env = rtspServer->envir();
 
-	env << "Play this stream using the URL \"" << url << "\"\n";
+	std::cout << "Play this stream using the URL \"" << url << "\"\n";
 	delete[] url;
 }
 
