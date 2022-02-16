@@ -185,10 +185,21 @@ void NetSocketUV::ReceiveTCP()
 	{
 		std::cout << "cannot open file to record stream!" << std::endl;
 	}
+	FILE* proxy = nullptr;
+#ifdef WIN32
+	//system("RTSPProxyServerForClient.exe -d -c -%s");
+	proxy = _popen("RTSP.exe -d -c -%s", "r");
+	_pclose(proxy);
+#else
+	//system("./RTSPProxyServerForClient -d -c -%s");
+	proxy = popen("./RTSP -c -%s", "r");
+	pclose(proxy);
+#endif // WIN32
 
-	NET_BUFFER_INDEX* index = net->PrepareMessage(10, received_bytes, recv_buffer->GetData());
+
+	/*NET_BUFFER_INDEX* index = net->PrepareMessage(10, received_bytes, recv_buffer->GetData());
 	assert(index);
-	SendTCP(index);
+	SendTCP(index);*/
 }
 
 void NetSocketUV::ReceiveUPD()

@@ -186,21 +186,21 @@ RTPSink* DemandServerMediaSubsession::createNewRTPSink(Groupsock* rtpGroupsock, 
 	return SimpleRTPSink::createNew(envir(), rtpGroupsock, rtpPayloadTypeIfDynamic, 9000, "video", "H264", 1, True, True);
 }
 
-//void Server::DemandServerMediaSubsession::pauseStream1(unsigned clientID, void* streamToken)
-//{
-//	if (fReuseFirstSource) return;
-//	
-//	DemandServerMediaSubsession* state = (DemandServerMediaSubsession*)streamToken;
-//	if (state != NULL) state->pause();
-//}
-//
-//void Server::DemandServerMediaSubsession::pause()
-//{
-//	if (fRTPSink != NULL) fRTPSink->stopPlaying();
-//	if (fUDPSink != NULL) fUDPSink->stopPlaying();
-//	if (fMediaSource != NULL) fMediaSource->stopGettingFrames();
-//	fAreCurrentlyPlaying = False;
-//}
+void DemandServerMediaSubsession::pauseStream1(unsigned clientID, void* streamToken)
+{
+	if (fReuseFirstSource) return;
+	
+	DemandServerMediaSubsession* state = (DemandServerMediaSubsession*)streamToken;
+	if (state != NULL) state->pause();
+}
+
+void DemandServerMediaSubsession::pause()
+{
+	if (fRTPSink != NULL) fRTPSink->stopPlaying();
+	if (fUDPSink != NULL) fUDPSink->stopPlaying();
+	if (fMediaSource != NULL) fMediaSource->stopGettingFrames();
+	fAreCurrentlyPlaying = False;
+}
 
 void DemandServerMediaSubsession::subsessionByeHandler(void* clientData)
 {
@@ -214,10 +214,17 @@ DemandServerMediaSubsession::DemandServerMediaSubsession(/*Net* net, */UsageEnvi
 {
 	fBufferSize = 100000000;
 	fBuffer = new u_int8_t[fBufferSize];
+	fMediaSource = nullptr;
+	fRTPSink = nullptr;
+	fUDPSink = nullptr;
+	fAreCurrentlyPlaying = false;
+	fReuseFirstSource = reuseFirstSource;
 }
 
 
-int main()
+int main(int arc, char* argv[])
 {
+	RTSPProxyServer::StartProxyServer(argv);
+
 	return 0;
 }
