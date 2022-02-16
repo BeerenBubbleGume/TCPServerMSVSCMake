@@ -14,6 +14,13 @@
 #include <WS2tcpip.h>
 #pragma comment(lib, "ws2_32.lib")
 #else
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/wait.h>
+#include <fcntl.h>
+#include <err.h>
+#include <sysexits.h>
+#include <errno.h>
 #include <unistd.h>
 #include <pthread.h>
 #include <sys/socket.h>
