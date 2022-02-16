@@ -484,6 +484,36 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.o: ../
   /usr/include/string.h \
   /usr/include/strings.h \
   /usr/include/inttypes.h \
+  /usr/include/c++/8/stdlib.h \
+  /usr/include/sys/wait.h \
+  /usr/include/signal.h \
+  /usr/include/bits/signum.h \
+  /usr/include/bits/signum-generic.h \
+  /usr/include/bits/types/sig_atomic_t.h \
+  /usr/include/bits/types/siginfo_t.h \
+  /usr/include/bits/types/__sigval_t.h \
+  /usr/include/bits/siginfo-arch.h \
+  /usr/include/bits/siginfo-consts.h \
+  /usr/include/bits/siginfo-consts-arch.h \
+  /usr/include/bits/types/sigval_t.h \
+  /usr/include/bits/types/sigevent_t.h \
+  /usr/include/bits/sigevent-consts.h \
+  /usr/include/bits/sigaction.h \
+  /usr/include/bits/sigcontext.h \
+  /usr/include/bits/types/stack_t.h \
+  /usr/include/sys/ucontext.h \
+  /usr/include/bits/sigstack.h \
+  /usr/include/bits/ss_flags.h \
+  /usr/include/bits/types/struct_sigstack.h \
+  /usr/include/bits/sigthread.h \
+  /usr/include/fcntl.h \
+  /usr/include/bits/fcntl.h \
+  /usr/include/bits/fcntl-linux.h \
+  /usr/include/bits/types/struct_iovec.h \
+  /usr/include/linux/falloc.h \
+  /usr/include/bits/stat.h \
+  /usr/include/err.h \
+  /usr/include/sysexits.h \
   /usr/include/unistd.h \
   /usr/include/bits/posix_opt.h \
   /usr/include/bits/environments.h \
@@ -491,7 +521,6 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.o: ../
   /usr/include/bits/getopt_posix.h \
   /usr/include/bits/getopt_core.h \
   /usr/include/sys/socket.h \
-  /usr/include/bits/types/struct_iovec.h \
   /usr/include/bits/socket.h \
   /usr/include/bits/socket_type.h \
   /usr/include/bits/sockaddr.h \
@@ -505,7 +534,6 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.o: ../
   ../../../TCPServerMSVSCMake/libs/includes/uv/version.h \
   ../../../TCPServerMSVSCMake/libs/includes/uv/unix.h \
   /usr/include/sys/stat.h \
-  /usr/include/bits/stat.h \
   /usr/include/bits/statx.h \
   /usr/include/linux/stat.h \
   /usr/include/linux/types.h \
@@ -522,10 +550,6 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.o: ../
   /usr/include/bits/statx-generic.h \
   /usr/include/bits/types/struct_statx_timestamp.h \
   /usr/include/bits/types/struct_statx.h \
-  /usr/include/fcntl.h \
-  /usr/include/bits/fcntl.h \
-  /usr/include/bits/fcntl-linux.h \
-  /usr/include/linux/falloc.h \
   /usr/include/dirent.h \
   /usr/include/bits/dirent.h \
   /usr/include/bits/posix1_lim.h \
@@ -537,8 +561,6 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.o: ../
   /usr/include/arpa/inet.h \
   /usr/include/netdb.h \
   /usr/include/rpc/netdb.h \
-  /usr/include/bits/types/sigevent_t.h \
-  /usr/include/bits/types/__sigval_t.h \
   /usr/include/bits/netdb.h \
   /usr/include/termios.h \
   /usr/include/bits/termios.h \
@@ -553,24 +575,6 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.o: ../
   /usr/include/bits/posix2_lim.h \
   /usr/include/bits/xopen_lim.h \
   /usr/include/bits/uio_lim.h \
-  /usr/include/signal.h \
-  /usr/include/bits/signum.h \
-  /usr/include/bits/signum-generic.h \
-  /usr/include/bits/types/sig_atomic_t.h \
-  /usr/include/bits/types/siginfo_t.h \
-  /usr/include/bits/siginfo-arch.h \
-  /usr/include/bits/siginfo-consts.h \
-  /usr/include/bits/siginfo-consts-arch.h \
-  /usr/include/bits/types/sigval_t.h \
-  /usr/include/bits/sigevent-consts.h \
-  /usr/include/bits/sigaction.h \
-  /usr/include/bits/sigcontext.h \
-  /usr/include/bits/types/stack_t.h \
-  /usr/include/sys/ucontext.h \
-  /usr/include/bits/sigstack.h \
-  /usr/include/bits/ss_flags.h \
-  /usr/include/bits/types/struct_sigstack.h \
-  /usr/include/bits/sigthread.h \
   /usr/include/bits/param.h \
   /usr/include/linux/param.h \
   /usr/include/asm/param.h \
@@ -773,6 +777,36 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.o:
   /usr/include/string.h \
   /usr/include/strings.h \
   /usr/include/inttypes.h \
+  /usr/include/c++/8/stdlib.h \
+  /usr/include/sys/wait.h \
+  /usr/include/signal.h \
+  /usr/include/bits/signum.h \
+  /usr/include/bits/signum-generic.h \
+  /usr/include/bits/types/sig_atomic_t.h \
+  /usr/include/bits/types/siginfo_t.h \
+  /usr/include/bits/types/__sigval_t.h \
+  /usr/include/bits/siginfo-arch.h \
+  /usr/include/bits/siginfo-consts.h \
+  /usr/include/bits/siginfo-consts-arch.h \
+  /usr/include/bits/types/sigval_t.h \
+  /usr/include/bits/types/sigevent_t.h \
+  /usr/include/bits/sigevent-consts.h \
+  /usr/include/bits/sigaction.h \
+  /usr/include/bits/sigcontext.h \
+  /usr/include/bits/types/stack_t.h \
+  /usr/include/sys/ucontext.h \
+  /usr/include/bits/sigstack.h \
+  /usr/include/bits/ss_flags.h \
+  /usr/include/bits/types/struct_sigstack.h \
+  /usr/include/bits/sigthread.h \
+  /usr/include/fcntl.h \
+  /usr/include/bits/fcntl.h \
+  /usr/include/bits/fcntl-linux.h \
+  /usr/include/bits/types/struct_iovec.h \
+  /usr/include/linux/falloc.h \
+  /usr/include/bits/stat.h \
+  /usr/include/err.h \
+  /usr/include/sysexits.h \
   /usr/include/unistd.h \
   /usr/include/bits/posix_opt.h \
   /usr/include/bits/environments.h \
@@ -780,7 +814,6 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.o:
   /usr/include/bits/getopt_posix.h \
   /usr/include/bits/getopt_core.h \
   /usr/include/sys/socket.h \
-  /usr/include/bits/types/struct_iovec.h \
   /usr/include/bits/socket.h \
   /usr/include/bits/socket_type.h \
   /usr/include/bits/sockaddr.h \
@@ -794,7 +827,6 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.o:
   ../../../TCPServerMSVSCMake/libs/includes/uv/version.h \
   ../../../TCPServerMSVSCMake/libs/includes/uv/unix.h \
   /usr/include/sys/stat.h \
-  /usr/include/bits/stat.h \
   /usr/include/bits/statx.h \
   /usr/include/linux/stat.h \
   /usr/include/linux/types.h \
@@ -811,10 +843,6 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.o:
   /usr/include/bits/statx-generic.h \
   /usr/include/bits/types/struct_statx_timestamp.h \
   /usr/include/bits/types/struct_statx.h \
-  /usr/include/fcntl.h \
-  /usr/include/bits/fcntl.h \
-  /usr/include/bits/fcntl-linux.h \
-  /usr/include/linux/falloc.h \
   /usr/include/dirent.h \
   /usr/include/bits/dirent.h \
   /usr/include/bits/posix1_lim.h \
@@ -826,8 +854,6 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.o:
   /usr/include/arpa/inet.h \
   /usr/include/netdb.h \
   /usr/include/rpc/netdb.h \
-  /usr/include/bits/types/sigevent_t.h \
-  /usr/include/bits/types/__sigval_t.h \
   /usr/include/bits/netdb.h \
   /usr/include/termios.h \
   /usr/include/bits/termios.h \
@@ -842,24 +868,6 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.o:
   /usr/include/bits/posix2_lim.h \
   /usr/include/bits/xopen_lim.h \
   /usr/include/bits/uio_lim.h \
-  /usr/include/signal.h \
-  /usr/include/bits/signum.h \
-  /usr/include/bits/signum-generic.h \
-  /usr/include/bits/types/sig_atomic_t.h \
-  /usr/include/bits/types/siginfo_t.h \
-  /usr/include/bits/siginfo-arch.h \
-  /usr/include/bits/siginfo-consts.h \
-  /usr/include/bits/siginfo-consts-arch.h \
-  /usr/include/bits/types/sigval_t.h \
-  /usr/include/bits/sigevent-consts.h \
-  /usr/include/bits/sigaction.h \
-  /usr/include/bits/sigcontext.h \
-  /usr/include/bits/types/stack_t.h \
-  /usr/include/sys/ucontext.h \
-  /usr/include/bits/sigstack.h \
-  /usr/include/bits/ss_flags.h \
-  /usr/include/bits/types/struct_sigstack.h \
-  /usr/include/bits/sigthread.h \
   /usr/include/bits/param.h \
   /usr/include/linux/param.h \
   /usr/include/asm/param.h \
@@ -1454,7 +1462,11 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 
 ../../../TCPServerMSVSCMake/src/serv/ServerUV.hpp:
 
+/usr/include/sysexits.h:
+
 ../../../TCPServerMSVSCMake/src/serv/ServerUV.cpp:
+
+/usr/include/sys/wait.h:
 
 ../../../TCPServerMSVSCMake/src/serv/utf.hpp:
 
@@ -1589,6 +1601,8 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 /usr/include/c++/8/bits/ostream.tcc:
 
 /usr/include/c++/8/bits/basic_ios.tcc:
+
+/usr/include/err.h:
 
 /usr/include/bits/types/stack_t.h:
 
@@ -1773,6 +1787,8 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 /usr/include/c++/8/system_error:
 
 /usr/include/c++/8/bits/ptr_traits.h:
+
+/usr/include/c++/8/stdlib.h:
 
 /usr/include/bits/stdint-intn.h:
 

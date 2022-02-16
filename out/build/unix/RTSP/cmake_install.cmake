@@ -1,4 +1,4 @@
-# Install script for directory: /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake
+# Install script for directory: /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/RTSP
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -44,18 +44,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/TCPServerMSVSCMake/cmake_install.cmake")
-  include("/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/RTSP/cmake_install.cmake")
+  include("/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/RTSP/libs/cmake_install.cmake")
 
 endif()
 
-if(CMAKE_INSTALL_COMPONENT)
-  set(CMAKE_INSTALL_MANIFEST "install_manifest_${CMAKE_INSTALL_COMPONENT}.txt")
-else()
-  set(CMAKE_INSTALL_MANIFEST "install_manifest.txt")
-endif()
-
-string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
-       "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/${CMAKE_INSTALL_MANIFEST}"
-     "${CMAKE_INSTALL_MANIFEST_CONTENT}")
