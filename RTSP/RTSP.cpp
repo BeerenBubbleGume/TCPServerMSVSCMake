@@ -12,10 +12,10 @@ void serverBYEHandler(void* instance, u_int8_t requestBytes)
 
 void proxyServerMediaSubsessionAfterPlaying(void* clientData)
 {
-	RTSPServer* server = (RTSPServer*)clientData;
+	RTSPProxyServer* server = (RTSPProxyServer*)clientData;
 	MediaSubsession* subsession = (MediaSubsession*)clientData;
 	volatile char eventLoopWatchVariable = 1;
-	//server->resetLoopWatchVaraible(eventLoopWatchVariable);
+	server->resetLoopWatchVaraible(eventLoopWatchVariable);
 
 	server->close(subsession->sink);
 	subsession->sink = nullptr;
@@ -78,17 +78,12 @@ void RTSPProxyServer::StartProxyServer(/*CString* inputURL, */void* Data)
 	CNAME[maxCNAMElen] = '\0';
 
 	RTPSink* outputSink = H264VideoRTPSink::createNew(*env, rtpGS, 96);
-	//RTCPInstance* rtcp = RTCPInstance::createNew(*env, rtcpGS, estimatedSessionBandwidth, CNAME, outputSink, outSource, true);
-
 	RTSPProxyServer* server = RTSPProxyServer::createNew(*env, 8554);
 
 	const char* streamName = "ServerMedia/"/* + *socket->GetClientID()*/;
 
 	ServerMediaSession* sms = ServerMediaSession::createNew(*env, streamName);
 	DemandServerMediaSubsession* proxy = DemandServerMediaSubsession::createNew(/*socket->net, */*env, true);
-
-	//BasicUDPSink* UDPsink = BasicUDPSink::createNew(*env, rtpGS);
-	//StreamState* state = new StreamState(*proxy, server->fServerPort, server->fServerPort, outputSink, UDPsink, estimatedSessionBandwidth, outSource, rtpGS, rtcpGS);
 
 	sms->addSubsession(proxy);
 	server->addServerMediaSession(sms);
@@ -167,10 +162,6 @@ ServerMediaSession* DemandServerMediaSubsession::createNewSMS(UsageEnvironment& 
 
 FramedSource* DemandServerMediaSubsession::createNewStreamSource(unsigned clientSessionId, unsigned& estBitrate)
 {
-	/*NetBuffer* recvBuff = net->GetRecvBuffer();
-	fBuffer = recvBuff->GetData();
-	fBufferSize = recvBuff->GetLength();*/
-
 	FILE* in = fopen("out_h.264", "r");
 
 	ByteStreamFileSource* fileSource = ByteStreamFileSource::createNew(envir(), in);

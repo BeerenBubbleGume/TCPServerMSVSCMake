@@ -192,10 +192,64 @@ void NetSocketUV::ReceiveTCP()
 	_pclose(proxy);
 #else
 	//system("./RTSPProxyServerForClient -d -c -%s");
-	proxy = popen("./RTSP -c -%s", "r");
-	pclose(proxy);
-#endif // WIN32
+	//proxy = popen("./RTSP -c -%s", "r");
+	//pclose(proxy);
 
+	pid_t pid, cmd;
+	int pin[2], pout[2]; // пара пайпов для обмена со скриптом
+	if (pipe(pin) || pipe(pout))
+		err(EX_OSERR, "pipes");
+
+	if (!(cmd = fork())) { // запуск скрипта с аргументами
+		close(pin[1]);
+		close(pout[0]);
+		dup2(pin[0], 0);     // заменим stdin скрипта на наш ввод
+		dup2(pout[1], 1);    // перекинем stdout скрипта на наc
+							 // stderr скрипта остался тем же, что и у нас
+		execvp("./RTSP", "./RTSP" + 1);
+		err(EX_UNAVAILABLE, "exec %s", av[1]);
+	}
+	if (cmd == -1)
+		err(EX_OSERR, "fork");
+
+	// эти дескрипторы более не нужны
+	close(pin[0]);
+	close(pout[1]);
+
+	char* str = 0;
+	size_t ssize = 0;
+	ssize_t l;
+
+	// для примера читаем stdin и передаем в скрипт
+	while ((l = getline(&str, &ssize, stdin)) > 0)
+		if (write(pin[1], str, l) != l)
+			err(EX_IOERR, "write pipe");
+
+	close(pin[1]); // пошлем EOF на stdin скрипта
+
+	// читаем вывод скрипта и для примера печатаем его
+	FILE* progout = fdopen(pout[0], "r");
+	while (getline(&str, &ssize, progout) > 0)
+		puts(str);
+
+	free(str);
+	int status;
+	errno = 0;
+	if ((pid = wait(&status)) != cmd) {
+		if (errno)
+			err(EX_SOFTWARE, "wait");
+		else
+			errx(EX_SOFTWARE, "wait unexpected PID %ld (waited %ld)",
+				(long)pid, (long)cmd);
+	}
+	if (WIFEXITED(status))
+		printf("%s exit code %d\n", "RTSP", WEXITSTATUS(status));
+	else
+		printf("%s terminated by %d\n", "RTSP", WTERMSIG(status));
+
+	//return puts("End") == EOF;
+#endif // WIN32
+	
 
 	/*NET_BUFFER_INDEX* index = net->PrepareMessage(10, received_bytes, recv_buffer->GetData());
 	assert(index);
