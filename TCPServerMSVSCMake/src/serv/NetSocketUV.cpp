@@ -180,6 +180,7 @@ void NetSocketUV::ReceiveTCP()
 		std::cout << "start recording stream in file" << std::endl;
 		fout.write((const char*)recv_buffer->GetData(), received_bytes);
 		fout.close();
+		recv_buffer->Delete(received_bytes);
 	}
 	else
 	{
