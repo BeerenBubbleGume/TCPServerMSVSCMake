@@ -206,7 +206,7 @@ void NetSocketUV::ReceiveTCP()
 		dup2(pin[0], 0);     // заменим stdin скрипта на наш ввод
 		dup2(pout[1], 1);    // перекинем stdout скрипта на наc
 							 // stderr скрипта остался тем же, что и у нас
-		execvp("./RTSP", GetClientID());
+		execvp("./RTSP", (char* const*)GetClientID());
 		err(EX_UNAVAILABLE, "exec %s", "RTSP");
 	}
 	if (cmd == -1)
