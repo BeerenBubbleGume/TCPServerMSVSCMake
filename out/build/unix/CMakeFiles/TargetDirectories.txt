@@ -7,3 +7,12 @@
 /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/TCPServerMSVSCMake/src/CMakeFiles/edit_cache.dir
 /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/TCPServerMSVSCMake/src/serv/CMakeFiles/rebuild_cache.dir
 /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/TCPServerMSVSCMake/src/serv/CMakeFiles/edit_cache.dir
+/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/RTSP/CMakeFiles/rebuild_cache.dir
+/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/RTSP/CMakeFiles/RTSP.dir
+/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/RTSP/CMakeFiles/edit_cache.dir
+/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/RTSP/libs/CMakeFiles/rebuild_cache.dir
+/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/RTSP/libs/CMakeFiles/edit_cache.dir
+/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/RTSP/libs/lib/CMakeFiles/rebuild_cache.dir
+/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/RTSP/libs/lib/CMakeFiles/edit_cache.dir
+/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/RTSP/libs/include/CMakeFiles/rebuild_cache.dir
+/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/RTSP/libs/include/CMakeFiles/edit_cache.dir
