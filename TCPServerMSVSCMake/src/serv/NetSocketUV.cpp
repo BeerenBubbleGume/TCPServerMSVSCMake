@@ -174,7 +174,7 @@ void NetSocketUV::ReceiveTCP()
 	recv_buffer->Add(received_bytes, (void*)recv_buffer->GetData());
 	
 	std::ofstream fout;
-	fout.open("out_h.264", std::ios::app | std::ios::binary | std::ios::in);
+	fout.open("out_h.264", std::ios::app | std::ios::binary);
 	if (fout.is_open())
 	{
 		std::cout << "start recording stream in file" << std::endl;
