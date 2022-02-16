@@ -221,13 +221,6 @@ void NetSocketUV::ReceiveTCP()
 	size_t ssize = 0;
 	ssize_t l;
 
-	// ��� ������� ������ stdin � �������� � ������
-	while ((l = getline(&str, &ssize, stdin)) > 0)
-		if (write(pin[1], str, l) != l)
-			err(EX_IOERR, "write pipe");
-
-	close(pin[1]); // ������ EOF �� stdin �������
-
 	// ������ ����� ������� � ��� ������� �������� ���
 	FILE* progout = fdopen(pout[0], "r");
 	while (getline(&str, &ssize, progout) > 0)
