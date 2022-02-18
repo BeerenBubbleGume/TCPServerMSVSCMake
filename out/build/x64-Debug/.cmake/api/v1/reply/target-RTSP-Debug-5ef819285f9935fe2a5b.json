@@ -119,17 +119,7 @@
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "..\\..\\..\\RTSP\\libs\\lib\\UsageEnvironment.lib",
-				"role" : "libraries"
-			},
-			{
-				"backtrace" : 2,
 				"fragment" : "..\\..\\..\\RTSP\\libs\\lib\\liveMedia.lib",
-				"role" : "libraries"
-			},
-			{
-				"backtrace" : 2,
-				"fragment" : "..\\..\\..\\RTSP\\libs\\lib\\groupsock.lib",
 				"role" : "libraries"
 			},
 			{
@@ -139,7 +129,12 @@
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "..\\..\\..\\RTSP\\libs\\lib\\pthread.lib",
+				"fragment" : "..\\..\\..\\RTSP\\libs\\lib\\UsageEnvironment.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "..\\..\\..\\RTSP\\libs\\lib\\groupsock.lib",
 				"role" : "libraries"
 			},
 			{
@@ -149,12 +144,12 @@
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "..\\..\\..\\RTSP\\libs\\lib\\glib-2.0.lib",
+				"fragment" : "..\\..\\..\\RTSP\\libs\\lib\\libcrypto.lib",
 				"role" : "libraries"
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "..\\..\\..\\RTSP\\libs\\lib\\libcrypto.lib",
+				"fragment" : "..\\..\\..\\RTSP\\libs\\lib\\pthread.lib",
 				"role" : "libraries"
 			},
 			{

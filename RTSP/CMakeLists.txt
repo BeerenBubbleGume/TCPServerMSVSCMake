@@ -20,15 +20,13 @@ IF(WIN32)
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/include/
 								)
 	target_link_libraries(RTSP	PUBLIC
-								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/UsageEnvironment.lib
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/liveMedia.lib
-								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/groupsock.lib
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/BasicUsageEnvironment.lib
-								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/pthread.lib
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/UsageEnvironment.lib
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/groupsock.lib
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libssl.lib
-								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/glib-2.0.lib
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libcrypto.lib
-
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/pthread.lib
 								)
 ELSE()
 	target_include_directories(RTSP PUBLIC

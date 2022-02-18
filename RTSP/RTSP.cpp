@@ -3,7 +3,7 @@
 
 #include "RTSP.h"
 
-
+#pragma comment(lib, "ws2_32.lib")
 
 void serverBYEHandler(void* instance, u_int8_t requestBytes)
 {

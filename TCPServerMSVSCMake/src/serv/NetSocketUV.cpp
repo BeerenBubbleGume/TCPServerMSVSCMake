@@ -133,9 +133,7 @@ bool NetSocketUV::Accept(uv_handle_t* handle)
 	{
 		sockaddr sockname;
 		int socklen = sizeof accept_sock->net->GetConnectSockaddr();
-		//int curID = uv_tcp_getsockname(client, &accept_sock->net->GetConnectSockaddr(), &socklen);
 		accept_sock->SetID(client);
-		//std::cout << "Start accepting RTSP from: " << curID << std::endl;
 		if (uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadTCP) == 0)
 		{	
 			return true;
@@ -152,15 +150,12 @@ bool NetSocketUV::Accept(uv_handle_t* handle)
 
 void NetSocketUV::SendTCP(NET_BUFFER_INDEX *buf)
 {
-	if (buf->GetLength() > 0)
-	{
-		uv_buf_t buffer;
-		buffer.len = buf->GetLength();
-		buffer.base = (char*)buf->GetData();
-		uv_buf_init(buffer.base, buffer.len);
-		
-	}
-	//OnCloseSocket((uv_handle_t*)GetPtrTCP(sock));
+	uv_buf_t buffer;
+	buffer.base = "REGISTER";
+	buffer.len = sizeof buffer.base;
+	uv_buf_init(buffer.base, buffer.len);
+	
+	uv_write(((NetBufferUV*)buf)->GetPtrWrite(), (uv_stream_t*)GetPtrTCP(sock), &buffer, 1, OnWrite);
 }
 
 void NetSocketUV::SendUDP(NET_BUFFER_INDEX *buf)
@@ -172,82 +167,70 @@ void NetSocketUV::ReceiveTCP()
 	NetBuffer* recv_buffer = net->GetRecvBuffer();
 	int received_bytes = recv_buffer->GetLength();
 	recv_buffer->Add(received_bytes, (void*)recv_buffer->GetData());
-	
-	std::ofstream fout;
-	fout.open("out_h.264", std::ios::binary);
-	if (fout.is_open())
-	{
-		std::cout << "start recording stream in file" << std::endl;
-		fout.write((const char*)recv_buffer->GetData(), received_bytes);
-		fout.close(); 
-		recv_buffer->Delete(received_bytes);
-	}
-	else
-	{
-		std::cout << "cannot open file to record stream!" << std::endl;
-	}
-	FILE* proxy = nullptr;
-#ifdef WIN32
-	//system("RTSPProxyServerForClient.exe -d -c -%s");
-	proxy = _popen("RTSP.exe -d -c -%s", "r");
-	_pclose(proxy);
-#else
-	//system("./RTSPProxyServerForClient -d -c -%s");
-	//proxy = popen("./RTSP -c -%s", "r");
-	//pclose(proxy);
 
-	pid_t pid, cmd;
-	int pin[2], pout[2]; // ���� ������ ��� ������ �� ��������
-	if (pipe(pin) || pipe(pout))
-		err(EX_OSERR, "pipes");
 
-	if (!(cmd = fork())) { // ������ ������� � �����������
-		close(pin[1]);
-		close(pout[0]);
-		dup2(pin[0], 0);     // ������� stdin ������� �� ��� ����
-		dup2(pout[1], 1);    // ��������� stdout ������� �� ��c
-							 // stderr ������� ������� ��� ��, ��� � � ���
-		execvp("./RTSP", (char* const*)GetClientID());
-		err(EX_UNAVAILABLE, "exec %s", "RTSP");
-	}
-	if (cmd == -1)
-		err(EX_OSERR, "fork");
 
-	// ��� ����������� ����� �� �����
-	close(pin[0]);
-	close(pout[1]);
+//	FILE* proxy = nullptr;
+//#ifdef WIN32
+//	//system("RTSPProxyServerForClient.exe -d -c -%s");
+//	proxy = _popen("RTSP.exe -d -c -%s", "r");
+//	_pclose(proxy);
+//#else
+//	//system("./RTSPProxyServerForClient -d -c -%s");
+//	//proxy = popen("./RTSP -c -%s", "r");
+//	//pclose(proxy);
+//
+//	pid_t pid, cmd;
+//	int pin[2], pout[2]; // ���� ������ ��� ������ �� ��������
+//	if (pipe(pin) || pipe(pout))
+//		err(EX_OSERR, "pipes");
+//
+//	if (!(cmd = fork())) { // ������ ������� � �����������
+//		close(pin[1]);
+//		close(pout[0]);
+//		dup2(pin[0], 0);     // ������� stdin ������� �� ��� ����
+//		dup2(pout[1], 1);    // ��������� stdout ������� �� ��c
+//							 // stderr ������� ������� ��� ��, ��� � � ���
+//		execvp("./RTSP", (char* const*)GetClientID());
+//		err(EX_UNAVAILABLE, "exec %s", "RTSP");
+//	}
+//	if (cmd == -1)
+//		err(EX_OSERR, "fork");
+//
+//	// ��� ����������� ����� �� �����
+//	close(pin[0]);
+//	close(pout[1]);
+//
+//	char* str = 0;
+//	size_t ssize = 0;
+//	ssize_t l;
+//
+//	// ������ ����� ������� � ��� ������� �������� ���
+//	FILE* progout = fdopen(pout[0], "r");
+//	while (getline(&str, &ssize, progout) > 0)
+//		puts(str);
+//
+//	free(str);
+//	int status;
+//	errno = 0;
+//	if ((pid = wait(&status)) != cmd) {
+//		if (errno)
+//			err(EX_SOFTWARE, "wait");
+//		else
+//			errx(EX_SOFTWARE, "wait unexpected PID %ld (waited %ld)",
+//				(long)pid, (long)cmd);
+//	}
+//	if (WIFEXITED(status))
+//		printf("%s exit code %d\n", "RTSP", WEXITSTATUS(status));
+//	else
+//		printf("%s terminated by %d\n", "RTSP", WTERMSIG(status));
+//
+//	//return puts("End") == EOF;
+//#endif // WIN32
 
-	char* str = 0;
-	size_t ssize = 0;
-	ssize_t l;
-
-	// ������ ����� ������� � ��� ������� �������� ���
-	FILE* progout = fdopen(pout[0], "r");
-	while (getline(&str, &ssize, progout) > 0)
-		puts(str);
-
-	free(str);
-	int status;
-	errno = 0;
-	if ((pid = wait(&status)) != cmd) {
-		if (errno)
-			err(EX_SOFTWARE, "wait");
-		else
-			errx(EX_SOFTWARE, "wait unexpected PID %ld (waited %ld)",
-				(long)pid, (long)cmd);
-	}
-	if (WIFEXITED(status))
-		printf("%s exit code %d\n", "RTSP", WEXITSTATUS(status));
-	else
-		printf("%s terminated by %d\n", "RTSP", WTERMSIG(status));
-
-	//return puts("End") == EOF;
-#endif // WIN32
-	
-
-	/*NET_BUFFER_INDEX* index = net->PrepareMessage(10, received_bytes, recv_buffer->GetData());
+	NET_BUFFER_INDEX* index = net->PrepareMessage(10, received_bytes, recv_buffer->GetData());
 	assert(index);
-	SendTCP(index);*/
+	SendTCP(index);
 }
 
 void NetSocketUV::ReceiveUPD()
@@ -270,9 +253,26 @@ void OnReadTCP(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)
 		std::cout << "Reading UV socket from client with ID:" << uvsocket->GetClientID() << std::endl;
 		NetBuffer* recv_buff = uvsocket->net->GetRecvBuffer();
 		assert(buf->base == (char*)recv_buff->GetData());
+
+		uv_fs_t fs_req;
+		std::ofstream fout;
+		fout.open("out_h.264", std::ios::binary | std::ios::app);
+		if (fout.is_open())
+		{
+			std::cout << "start recording stream in file" << std::endl;
+			fout.write(buf->base, buf->len);
+			fout.close();
+		}
+		else
+		{
+			std::cout << "cannot open file to record stream!" << std::endl;
+		}
+
 		recv_buff->SetMaxSize(nread);
 		uvsocket->ReceiveTCP();
+		//uv_update_time(GetLoop(uvsocket->net));
 	}
+	
 }
 
 void OnAllocBuffer(uv_handle_t *handle, size_t suggested_size, uv_buf_t *buf)
@@ -305,7 +305,7 @@ void OnWrite(uv_write_t *req, int status)
 	NetSocketUV* uvsocket = (NetSocketUV*)list->net->getReceivingSocket();		
 	
 	list->DeleteBuffer(index);
-
+	uv_update_time(GetLoop(uvsocket->net));
 }
 
 char address_converter[30];
