@@ -305,7 +305,7 @@ void OnWrite(uv_write_t *req, int status)
 	NetSocketUV* uvsocket = (NetSocketUV*)list->net->getReceivingSocket();		
 	
 	list->DeleteBuffer(index);
-	uv_update_time(GetLoop(uvsocket->net));
+//	uv_update_time(GetLoop(uvsocket->net));
 }
 
 char address_converter[30];
