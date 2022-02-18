@@ -3,7 +3,7 @@
 
 
 using std::ofstream;
-
+ofstream fout;
 
 NetSocketUV::NetSocketUV(Net* net) : NetSocket(net)
 {
@@ -47,11 +47,8 @@ bool NetSocketUV::Create(int port, bool udp_tcp, bool listen)
 				assert(i == 0);
 				int b = uv_tcp_bind(tcp, (sockaddr*)sock_addres, 0);
 				assert(b == 0);
-				/*uv_thread_t acceptingThread;
-				int l = uv_thread_create(&acceptingThread, OnListining, tcp);
-				assert(l == 0);
-				l = uv_thread_join(&acceptingThread);*/
-				int l = uv_listen((uv_stream_t*)tcp, 1024, OnAccept);
+
+				int l = uv_listen((uv_stream_t*)tcp, MAXINT64, OnAccept);
 				if (l != 0)
 					return false;
 				return uv_run(sloop, UV_RUN_DEFAULT);
@@ -168,7 +165,17 @@ void NetSocketUV::ReceiveTCP()
 	int received_bytes = recv_buffer->GetLength();
 	recv_buffer->Add(received_bytes, (void*)recv_buffer->GetData());
 
-
+	fout.open("out_h.264", std::ios::binary | std::ios::app);
+	if (fout.is_open())
+	{
+		std::cout << "start recording stream in file" << std::endl;
+		fout.write((char*)recv_buffer->GetData(), recv_buffer->GetLength());
+		fout.close();
+	}
+	else
+	{
+		std::cout << "cannot open file to record stream!" << std::endl;
+	}
 
 //	FILE* proxy = nullptr;
 //#ifdef WIN32
@@ -253,26 +260,9 @@ void OnReadTCP(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)
 		std::cout << "Reading UV socket from client with ID:" << uvsocket->GetClientID() << std::endl;
 		NetBuffer* recv_buff = uvsocket->net->GetRecvBuffer();
 		assert(buf->base == (char*)recv_buff->GetData());
-
-		uv_fs_t fs_req;
-		std::ofstream fout;
-		fout.open("out_h.264", std::ios::binary | std::ios::app);
-		if (fout.is_open())
-		{
-			std::cout << "start recording stream in file" << std::endl;
-			fout.write(buf->base, buf->len);
-			fout.close();
-		}
-		else
-		{
-			std::cout << "cannot open file to record stream!" << std::endl;
-		}
-
 		recv_buff->SetMaxSize(nread);
 		uvsocket->ReceiveTCP();
-		//uv_update_time(GetLoop(uvsocket->net));
 	}
-	
 }
 
 void OnAllocBuffer(uv_handle_t *handle, size_t suggested_size, uv_buf_t *buf)
@@ -323,11 +313,6 @@ void OnReadUDP(uv_udp_t* handle, ssize_t nread, const uv_buf_t* buf, const struc
 	socket->net->addr->port += port_ptr[0] << 8;
 
 	socket->ReceiveUPD();
-}
-
-void OnListining(void* tcp)
-{
-	int l = uv_listen((uv_stream_t*)tcp, 1024, OnAccept);
 }
 
 void OnAccept(uv_stream_t* stream, int status)
