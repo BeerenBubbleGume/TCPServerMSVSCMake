@@ -76,10 +76,10 @@ build CMakeFiles\RTSP.dir\RTSP.cpp.obj: CXX_COMPILER__RTSP_Debug C$:\Users\Opera
 #############################################
 # Link the executable RTSP.exe
 
-build RTSP.exe: CXX_EXECUTABLE_LINKER__RTSP_Debug CMakeFiles\RTSP.dir\RTSP.cpp.obj | ..\..\..\libs\lib\UsageEnvironment.lib ..\..\..\libs\lib\liveMedia.lib ..\..\..\libs\lib\groupsock.lib ..\..\..\libs\lib\BasicUsageEnvironment.lib ..\..\..\libs\lib\pthread.lib ..\..\..\libs\lib\libssl.lib ..\..\..\libs\lib\glib-2.0.lib ..\..\..\libs\lib\libcrypto.lib
+build RTSP.exe: CXX_EXECUTABLE_LINKER__RTSP_Debug CMakeFiles\RTSP.dir\RTSP.cpp.obj | ..\..\..\libs\lib\liveMedia.lib ..\..\..\libs\lib\BasicUsageEnvironment.lib ..\..\..\libs\lib\UsageEnvironment.lib ..\..\..\libs\lib\groupsock.lib ..\..\..\libs\lib\libssl.lib ..\..\..\libs\lib\libcrypto.lib ..\..\..\libs\lib\pthread.lib
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
-  LINK_LIBRARIES = ..\..\..\libs\lib\UsageEnvironment.lib  ..\..\..\libs\lib\liveMedia.lib  ..\..\..\libs\lib\groupsock.lib  ..\..\..\libs\lib\BasicUsageEnvironment.lib  ..\..\..\libs\lib\pthread.lib  ..\..\..\libs\lib\libssl.lib  ..\..\..\libs\lib\glib-2.0.lib  ..\..\..\libs\lib\libcrypto.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
+  LINK_LIBRARIES = ..\..\..\libs\lib\liveMedia.lib  ..\..\..\libs\lib\BasicUsageEnvironment.lib  ..\..\..\libs\lib\UsageEnvironment.lib  ..\..\..\libs\lib\groupsock.lib  ..\..\..\libs\lib\libssl.lib  ..\..\..\libs\lib\libcrypto.lib  ..\..\..\libs\lib\pthread.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
   OBJECT_DIR = CMakeFiles\RTSP.dir
   POST_BUILD = cd .
   PRE_LINK = cd .

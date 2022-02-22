@@ -1,9 +1,12 @@
 #include "NetSocketUV.hpp"
 //#pragma comment(lib, "../../libs/lib/uv.lib")
 
-
 using std::ofstream;
 ofstream fout;
+
+uv_fs_t fs_req;
+uv_fs_t write_req;
+uv_fs_t close_req;
 
 NetSocketUV::NetSocketUV(Net* net) : NetSocket(net)
 {
@@ -163,81 +166,30 @@ void NetSocketUV::ReceiveTCP()
 {
 	NetBuffer* recv_buffer = net->GetRecvBuffer();
 	int received_bytes = recv_buffer->GetLength();
-	recv_buffer->Add(received_bytes, (void*)recv_buffer->GetData());
+	uv_fs_open(loop, &fs_req, "out_h.264", O_RDWR | O_CREAT, 0666, onOpenFile);
 
-	fout.open("out_h.264", std::ios::binary | std::ios::app);
-	if (fout.is_open())
-	{
-		std::cout << "start recording stream in file" << std::endl;
-		fout.write((char*)recv_buffer->GetData(), recv_buffer->GetLength());
-		fout.close();
-	}
-	else
-	{
-		std::cout << "cannot open file to record stream!" << std::endl;
-	}
-
-//	FILE* proxy = nullptr;
-//#ifdef WIN32
-//	//system("RTSPProxyServerForClient.exe -d -c -%s");
-//	proxy = _popen("RTSP.exe -d -c -%s", "r");
-//	_pclose(proxy);
-//#else
+	
+	
+	FILE* proxy = nullptr;
+#ifdef WIN32
+	//system("RTSPProxyServerForClient.exe -d -c -%s");
+	proxy = _popen("RTSP.exe -d -c -%s", "r");
+	_pclose(proxy);
+#else
 //	//system("./RTSPProxyServerForClient -d -c -%s");
-//	//proxy = popen("./RTSP -c -%s", "r");
-//	//pclose(proxy);
-//
-//	pid_t pid, cmd;
-//	int pin[2], pout[2]; // ���� ������ ��� ������ �� ��������
-//	if (pipe(pin) || pipe(pout))
-//		err(EX_OSERR, "pipes");
-//
-//	if (!(cmd = fork())) { // ������ ������� � �����������
-//		close(pin[1]);
-//		close(pout[0]);
-//		dup2(pin[0], 0);     // ������� stdin ������� �� ��� ����
-//		dup2(pout[1], 1);    // ��������� stdout ������� �� ��c
-//							 // stderr ������� ������� ��� ��, ��� � � ���
-//		execvp("./RTSP", (char* const*)GetClientID());
-//		err(EX_UNAVAILABLE, "exec %s", "RTSP");
-//	}
-//	if (cmd == -1)
-//		err(EX_OSERR, "fork");
-//
-//	// ��� ����������� ����� �� �����
-//	close(pin[0]);
-//	close(pout[1]);
-//
-//	char* str = 0;
-//	size_t ssize = 0;
-//	ssize_t l;
-//
-//	// ������ ����� ������� � ��� ������� �������� ���
-//	FILE* progout = fdopen(pout[0], "r");
-//	while (getline(&str, &ssize, progout) > 0)
-//		puts(str);
-//
-//	free(str);
-//	int status;
-//	errno = 0;
-//	if ((pid = wait(&status)) != cmd) {
-//		if (errno)
-//			err(EX_SOFTWARE, "wait");
-//		else
-//			errx(EX_SOFTWARE, "wait unexpected PID %ld (waited %ld)",
-//				(long)pid, (long)cmd);
-//	}
-//	if (WIFEXITED(status))
-//		printf("%s exit code %d\n", "RTSP", WEXITSTATUS(status));
-//	else
-//		printf("%s terminated by %d\n", "RTSP", WTERMSIG(status));
-//
-//	//return puts("End") == EOF;
-//#endif // WIN32
+	proxy = popen("./RTSP -c -%s", "r");
+	pclose(proxy);
 
-	NET_BUFFER_INDEX* index = net->PrepareMessage(10, received_bytes, recv_buffer->GetData());
+#endif // WIN32
+
+	uv_buf_t buffer = uv_buf_init(".", 1);
+	uv_write_t* wr_req = new uv_write_t;
+
+	uv_write(wr_req, (uv_stream_t*)GetPtrTCP(sock), &buffer, 1, OnWrite);
+
+	/*NET_BUFFER_INDEX* index = net->PrepareMessage(10, received_bytes, recv_buffer->GetData());
 	assert(index);
-	SendTCP(index);
+	SendTCP(index);*/
 }
 
 void NetSocketUV::ReceiveUPD()
@@ -254,6 +206,7 @@ void OnReadTCP(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)
 		std::cout << "read buff < 0" << std::endl;
 		uvsocket->net->OnLostConnection(uvsocket);
 		OnCloseSocket((uv_handle_t*)stream);
+		//fclose(uvsocket->getFile());
 	}
 	else
 	{
@@ -288,14 +241,37 @@ void OnCloseSocket(uv_handle_t *handle)
 
 void OnWrite(uv_write_t *req, int status)
 {
-	int offset = offsetof(NetBufferUV, sender_object);
+	/*int offset = offsetof(NetBufferUV, sender_object);
 	NetBufferUV* buf = (NetBufferUV*)(((char*)req) - offset);
 	NET_BUFFER_LIST* list = (NET_BUFFER_LIST*)buf->owner;
 	int index = buf->GetIndex(); 
 	NetSocketUV* uvsocket = (NetSocketUV*)list->net->getReceivingSocket();		
 	
-	list->DeleteBuffer(index);
-//	uv_update_time(GetLoop(uvsocket->net));
+	list->DeleteBuffer(index);*/
+	//uv_update_time(GetLoop(uvsocket->net));
+	free(req);
+}
+
+void onCloseFile(uv_fs_t* req)
+{
+	printf("exit");
+	free(req->fs.info.bufs->base);
+	uv_fs_req_cleanup(&write_req);
+}
+
+void onOpenFile(uv_fs_t* req)
+{
+	int result = req->result;
+	int r;
+	
+	if (result < 0) {
+		printf("Error at opening file: %s\n", uv_strerror((int)req->result));
+	}
+	printf("Successfully opened file.\n");
+
+	uv_fs_req_cleanup(req);
+	r = uv_fs_write(uv_default_loop(), &write_req, result, req->fs.info.bufs, 1, 0, OnWriteFile);
+	
 }
 
 char address_converter[30];
@@ -388,6 +364,17 @@ int Server::connect(bool connection)
 uv_poll_t* GetPtrPoll(void* ptr)
 {
 	return (uv_poll_t*)(((char*)ptr) + sizeof(void*));
+}
+
+void OnWriteFile(uv_fs_t* req)
+{
+	int result = req->result;
+	int r;
+
+	if (result < 0) {
+		printf("Error at writing file: %s\n", uv_strerror(result));
+	}
+	r = uv_fs_close(uv_default_loop(), &close_req, req->file.fd, onCloseFile);
 }
 
 uv_tcp_t *GetPtrTCP(void *ptr)

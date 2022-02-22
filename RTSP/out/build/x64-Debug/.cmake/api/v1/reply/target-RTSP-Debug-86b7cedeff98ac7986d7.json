@@ -108,17 +108,7 @@
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "..\\..\\..\\libs\\lib\\UsageEnvironment.lib",
-				"role" : "libraries"
-			},
-			{
-				"backtrace" : 2,
 				"fragment" : "..\\..\\..\\libs\\lib\\liveMedia.lib",
-				"role" : "libraries"
-			},
-			{
-				"backtrace" : 2,
-				"fragment" : "..\\..\\..\\libs\\lib\\groupsock.lib",
 				"role" : "libraries"
 			},
 			{
@@ -128,7 +118,12 @@
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "..\\..\\..\\libs\\lib\\pthread.lib",
+				"fragment" : "..\\..\\..\\libs\\lib\\UsageEnvironment.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "..\\..\\..\\libs\\lib\\groupsock.lib",
 				"role" : "libraries"
 			},
 			{
@@ -138,12 +133,12 @@
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "..\\..\\..\\libs\\lib\\glib-2.0.lib",
+				"fragment" : "..\\..\\..\\libs\\lib\\libcrypto.lib",
 				"role" : "libraries"
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "..\\..\\..\\libs\\lib\\libcrypto.lib",
+				"fragment" : "..\\..\\..\\libs\\lib\\pthread.lib",
 				"role" : "libraries"
 			},
 			{

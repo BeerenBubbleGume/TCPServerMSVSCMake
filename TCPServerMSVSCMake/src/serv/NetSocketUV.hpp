@@ -59,14 +59,16 @@ public:
 
 	void SendTCP(NET_BUFFER_INDEX* buf);
 	void SendUDP(NET_BUFFER_INDEX* buf);
-	void ReceiveTCP();
-	void ReceiveUPD();
-	void Destroy();
+	void				ReceiveTCP();
+	void				ReceiveUPD();
+	void				Destroy();
 
 	int status;
 	static NetSocketUV* NewSocket(Net* net)										{ return new NetSocketUV(net); }
 	uv_loop_t* loop;
-
+	FILE*				getFile()																{ return pout; }
+protected:
+	FILE* pout;
 	
 };
 #endif
@@ -114,6 +116,3 @@ void OnWriteFile(uv_fs_t* req);
 uv_tcp_t* GetPtrTCP(void* ptr);
 uv_udp_t* GetPtrUDP(void* ptr);
 uv_loop_t* GetLoop(Net* net);
-
-
-
