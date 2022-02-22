@@ -325,11 +325,6 @@ void NetSocketUV::Destroy()
 	NetSocket::Destroy();
 }
 
-
-void HandlerForRegister(void* clientData)
-{
-}
-
 Server::Server()
 {
 	net = new Net;
@@ -374,6 +369,7 @@ void OnWriteFile(uv_fs_t* req)
 	if (result < 0) {
 		printf("Error at writing file: %s\n", uv_strerror(result));
 	}
+	uv_fs_req_cleanup(req);
 	r = uv_fs_close(uv_default_loop(), &close_req, req->file.fd, onCloseFile);
 }
 
