@@ -11,6 +11,7 @@
 						1,
 						4
 					],
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.8"
@@ -24,6 +25,7 @@
 					[
 						2
 					],
+					"jsonFile" : "directory-TCPServerMSVSCMake-Debug-228b41e02a9087bc3a27.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.8"
@@ -42,6 +44,7 @@
 					[
 						3
 					],
+					"jsonFile" : "directory-TCPServerMSVSCMake.src-Debug-5071dd96f08e1fb82e59.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.8"
@@ -52,6 +55,7 @@
 				},
 				{
 					"build" : "TCPServerMSVSCMake/src/serv",
+					"jsonFile" : "directory-TCPServerMSVSCMake.src.serv-Debug-1c35ab510e39265c3f90.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.8"
@@ -66,6 +70,7 @@
 					[
 						5
 					],
+					"jsonFile" : "directory-RTSP-Debug-836f9e4bd27cb72b376f.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.8"
@@ -85,6 +90,7 @@
 						6,
 						7
 					],
+					"jsonFile" : "directory-RTSP.libs-Debug-b406b9abee1433efa0ea.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.8"
@@ -95,6 +101,7 @@
 				},
 				{
 					"build" : "RTSP/libs/lib",
+					"jsonFile" : "directory-RTSP.libs.lib-Debug-1d25f1cc01f8f1aeee8e.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.8"
@@ -105,6 +112,7 @@
 				},
 				{
 					"build" : "RTSP/libs/include",
+					"jsonFile" : "directory-RTSP.libs.include-Debug-6f00ab393e036108740f.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.8"
@@ -156,14 +164,14 @@
 				{
 					"directoryIndex" : 4,
 					"id" : "RTSP::@3b94aae68d1102a14b92",
-					"jsonFile" : "target-RTSP-Debug-fd744529cdd81fdc1e8a.json",
+					"jsonFile" : "target-RTSP-Debug-5ef819285f9935fe2a5b.json",
 					"name" : "RTSP",
 					"projectIndex" : 1
 				},
 				{
 					"directoryIndex" : 1,
 					"id" : "TCPServerMSVSCMake::@c1fa6790a5be207d0e6d",
-					"jsonFile" : "target-TCPServerMSVSCMake-Debug-ffb5ba9592f1d6f07773.json",
+					"jsonFile" : "target-TCPServerMSVSCMake-Debug-f668c3e7ced28886f132.json",
 					"name" : "TCPServerMSVSCMake",
 					"projectIndex" : 0
 				}
@@ -173,12 +181,12 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "A:/Cpp repos/TCPServerMSVSCMake/out/build/x64-Debug",
-		"source" : "A:/Cpp repos/TCPServerMSVSCMake"
+		"build" : "C:/Users/Operator/source/repos/TCPServerMSVSCMake/out/build/x64-Debug",
+		"source" : "C:/Users/Operator/source/repos/TCPServerMSVSCMake"
 	},
 	"version" : 
 	{
 		"major" : 2,
-		"minor" : 2
+		"minor" : 3
 	}
 }
