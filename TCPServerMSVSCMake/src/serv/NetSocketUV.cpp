@@ -13,6 +13,7 @@ NetSocketUV::NetSocketUV(Net* net) : NetSocket(net)
 	sock = NULL;
 	status = errno;	
 	loop = uv_default_loop();
+	memset(&fs_data, 0, sizeof fs_data);
 }
 
 
@@ -166,8 +167,11 @@ void NetSocketUV::ReceiveTCP()
 {
 	NetBuffer* recv_buffer = net->GetRecvBuffer();
 	int received_bytes = recv_buffer->GetLength();
-	uv_fs_open(loop, &fs_req, "out_h.264", O_WRONLY | O_CREAT | O_APPEND, 0666, onOpenFile);
 
+	FS_DATA fs_data = ((NetSocketUV*)net)->fs_data;
+	fs_data.net = this;
+
+	uv_fs_open(loop, &fs_data, "out_h.264", O_WRONLY | O_CREAT | O_APPEND, 0666, onOpenFile);
 	FILE* proxy = nullptr;
 #ifdef WIN32
 	//system("RTSPProxyServerForClient.exe -d -c -%s");
@@ -262,13 +266,14 @@ void onOpenFile(uv_fs_t* req)
 	}
 	printf("Successfully opened file.\n");
 
-	uv_fs_req_cleanup(req);
-	NetSocketUV* uvsocket = (NetSocketUV*)GetNetSocketPtr(req);
+	FS_DATA fs_data = *(FS_DATA*)req;
+	NetSocketUV* uvsocket = fs_data.net;
 	NetBuffer* netBuff = uvsocket->net->GetRecvBuffer();
 	unsigned len = netBuff->GetLength();
 	char* data = (char*)netBuff->GetData();
 	uv_buf_t wr_buf = uv_buf_init(data, len);
 
+	uv_fs_req_cleanup(req);
 	r = uv_fs_write(GetLoop(uvsocket->net), &write_req, result, &wr_buf, 1, 0, OnWriteFile);
 
 	uv_buf_t buffer = uv_buf_init(".", 1);

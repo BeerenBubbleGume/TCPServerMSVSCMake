@@ -7,6 +7,9 @@
 struct NetBufferUV;
 #define SENDER_SIZE_UV sizeof(uv_write_t)
 
+class NetSocketUV;
+
+
 struct NET_SOCKET_PTR
 {
 	NetSocket* net_socket;
@@ -18,8 +21,9 @@ struct TCP_SOCKET : public NET_SOCKET_PTR, uv_tcp_t
 struct UDP_SOCKET : public NET_SOCKET_PTR, uv_udp_t
 {
 };
-struct POLL_SOCKET : public NET_SOCKET_PTR, uv_poll_t
+struct FS_DATA : public uv_fs_t
 {
+	NetSocketUV* net;
 };
 
 struct NetBufferUV : public NET_BUFFER_INDEX
@@ -69,7 +73,7 @@ public:
 	FILE*				getFile()																{ return pout; }
 protected:
 	FILE* pout;
-	
+	FS_DATA fs_data;
 };
 #endif
 

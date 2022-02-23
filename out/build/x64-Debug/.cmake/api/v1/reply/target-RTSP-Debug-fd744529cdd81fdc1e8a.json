@@ -62,31 +62,31 @@
 			[
 				{
 					"backtrace" : 3,
-					"path" : "C:/Users/Operator/source/repos/TCPServerMSVSCMake/RTSP/libs/include/BasicUsageEnvironment"
+					"path" : "A:/Cpp repos/TCPServerMSVSCMake/RTSP/libs/include/BasicUsageEnvironment"
 				},
 				{
 					"backtrace" : 3,
-					"path" : "C:/Users/Operator/source/repos/TCPServerMSVSCMake/RTSP/libs/include/liveMedia"
+					"path" : "A:/Cpp repos/TCPServerMSVSCMake/RTSP/libs/include/liveMedia"
 				},
 				{
 					"backtrace" : 3,
-					"path" : "C:/Users/Operator/source/repos/TCPServerMSVSCMake/RTSP/libs/include/groupsock"
+					"path" : "A:/Cpp repos/TCPServerMSVSCMake/RTSP/libs/include/groupsock"
 				},
 				{
 					"backtrace" : 3,
-					"path" : "C:/Users/Operator/source/repos/TCPServerMSVSCMake/RTSP/libs/include/UsageEnvironment"
+					"path" : "A:/Cpp repos/TCPServerMSVSCMake/RTSP/libs/include/UsageEnvironment"
 				},
 				{
 					"backtrace" : 3,
-					"path" : "C:/Users/Operator/source/repos/TCPServerMSVSCMake/RTSP/libs/include/openssl"
+					"path" : "A:/Cpp repos/TCPServerMSVSCMake/RTSP/libs/include/openssl"
 				},
 				{
 					"backtrace" : 3,
-					"path" : "C:/Users/Operator/source/repos/TCPServerMSVSCMake/RTSP/libs/include/zlib.h"
+					"path" : "A:/Cpp repos/TCPServerMSVSCMake/RTSP/libs/include/zlib.h"
 				},
 				{
 					"backtrace" : 3,
-					"path" : "C:/Users/Operator/source/repos/TCPServerMSVSCMake/RTSP/libs/include"
+					"path" : "A:/Cpp repos/TCPServerMSVSCMake/RTSP/libs/include"
 				}
 			],
 			"language" : "CXX",
@@ -119,37 +119,37 @@
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "..\\..\\..\\RTSP\\libs\\lib\\liveMedia.lib",
+				"fragment" : "..\\..\\..\\..\\RTSP\\libs\\lib\\liveMedia.lib",
 				"role" : "libraries"
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "..\\..\\..\\RTSP\\libs\\lib\\BasicUsageEnvironment.lib",
+				"fragment" : "..\\..\\..\\..\\RTSP\\libs\\lib\\BasicUsageEnvironment.lib",
 				"role" : "libraries"
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "..\\..\\..\\RTSP\\libs\\lib\\UsageEnvironment.lib",
+				"fragment" : "..\\..\\..\\..\\RTSP\\libs\\lib\\UsageEnvironment.lib",
 				"role" : "libraries"
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "..\\..\\..\\RTSP\\libs\\lib\\groupsock.lib",
+				"fragment" : "..\\..\\..\\..\\RTSP\\libs\\lib\\groupsock.lib",
 				"role" : "libraries"
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "..\\..\\..\\RTSP\\libs\\lib\\libssl.lib",
+				"fragment" : "..\\..\\..\\..\\RTSP\\libs\\lib\\libssl.lib",
 				"role" : "libraries"
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "..\\..\\..\\RTSP\\libs\\lib\\libcrypto.lib",
+				"fragment" : "..\\..\\..\\..\\RTSP\\libs\\lib\\libcrypto.lib",
 				"role" : "libraries"
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "..\\..\\..\\RTSP\\libs\\lib\\pthread.lib",
+				"fragment" : "..\\..\\..\\..\\RTSP\\libs\\lib\\pthread.lib",
 				"role" : "libraries"
 			},
 			{
