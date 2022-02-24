@@ -252,7 +252,7 @@ void OnWrite(uv_write_t *req, int status)
 void onCloseFile(uv_fs_t* req)
 {
 	printf("exit");
-	free(req->fs.info.bufs->base);
+	free(req->bufs->base);
 	uv_fs_req_cleanup(&write_req);
 }
 
@@ -274,12 +274,6 @@ void onOpenFile(uv_fs_t* req)
 
 	uv_fs_req_cleanup(req);
 	r = uv_fs_write(uv_default_loop(), &write_req, result, &wr_buf, 1, 0, OnWriteFile);
-
-	uv_buf_t buffer = uv_buf_init(".", 1);
-	uv_write_t* wr_req = new uv_write_t;
-
-	uv_write(wr_req, (uv_stream_t*)GetPtrTCP(req), &buffer, 1, OnWrite);
-	
 }
 
 char address_converter[30];
@@ -377,8 +371,14 @@ void OnWriteFile(uv_fs_t* req)
 	if (result < 0) {
 		printf("Error at writing file: %s\n", uv_strerror(result));
 	}
+
+	uv_buf_t buffer = uv_buf_init(".", 1);
+	uv_write_t* wr_req = new uv_write_t;
+
+	uv_write(wr_req, (uv_stream_t*)GetPtrTCP(req), &buffer, 1, OnWrite);
+
 	uv_fs_req_cleanup(req);
-	r = uv_fs_close(uv_default_loop(), &close_req, req->file.fd, onCloseFile);
+	r = uv_fs_close(uv_default_loop(), &close_req, result, onCloseFile);
 }
 
 uv_tcp_t *GetPtrTCP(void *ptr)
