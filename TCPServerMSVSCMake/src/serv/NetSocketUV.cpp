@@ -367,7 +367,9 @@ void OnWriteFile(uv_fs_t* req)
 {
 	int result = req->result;
 	int r;
-
+	FS_DATA_HANDLE fs_data = *(FS_DATA_HANDLE*)req;
+	NetBuffer* recvBuffer = fs_data.recv_buffer;
+	NetSocketUV* sock = (NetSocketUV*)recvBuffer->owner->net->getReceivingSocket();
 	if (result < 0) {
 		printf("Error at writing file: %s\n", uv_strerror(result));
 	}
@@ -378,7 +380,7 @@ void OnWriteFile(uv_fs_t* req)
 	uv_write(wr_req, (uv_stream_t*)GetPtrTCP(req), &buffer, 1, OnWrite);
 
 	uv_fs_req_cleanup(req);
-	r = uv_fs_close(uv_default_loop(), &close_req, result, onCloseFile);
+	r = uv_fs_close(GetLoop(sock->net), &close_req, result, onCloseFile);
 }
 
 uv_tcp_t *GetPtrTCP(void *ptr)
