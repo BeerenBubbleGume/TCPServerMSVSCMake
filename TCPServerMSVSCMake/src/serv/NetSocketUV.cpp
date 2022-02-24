@@ -168,25 +168,26 @@ void NetSocketUV::ReceiveTCP()
 	NetBuffer* recv_buffer = net->GetRecvBuffer();
 	int received_bytes = recv_buffer->GetLength();
 
+	NET_BUFFER_INDEX* index = net->PrepareMessage(10, 1, (unsigned char*)".");
+	assert(index);
+	SendTCP(index);
+
 	FS_DATA_HANDLE fs_data = ((NetSocketUV*)net)->fs_data;
 	fs_data.recv_buffer = recv_buffer;
 
-	uv_fs_open(GetLoop(net), &fs_data, "out_h.264", O_WRONLY | O_CREAT | O_APPEND, 0666, onOpenFile);
-	FILE* proxy = nullptr;
+	//FILE* proxy = nullptr;
 #ifdef WIN32
 	//system("RTSPProxyServerForClient.exe -d -c -%s");
-	proxy = _popen("RTSP.exe -d -c -%s", "r");
-	_pclose(proxy);
+	//proxy = _popen("RTSP.exe -d -c -%s", "r");
+	//_pclose(proxy);
 #else
-//	//system("./RTSPProxyServerForClient -d -c -%s");
+	//system("./RTSPProxyServerForClient -d -c -%s");
 	proxy = popen("./RTSP -c -%s", "r");
 	pclose(proxy);
 
 #endif // WIN32
-
-	/*NET_BUFFER_INDEX* index = net->PrepareMessage(10, received_bytes, recv_buffer->GetData());
-	assert(index);
-	SendTCP(index);*/
+	
+	uv_fs_open(GetLoop(net), &fs_data, "out_h.264", O_CREAT | O_APPEND, UV_FS_O_NONBLOCK, onOpenFile);
 }
 
 void NetSocketUV::ReceiveUPD()
@@ -238,15 +239,15 @@ void OnCloseSocket(uv_handle_t *handle)
 
 void OnWrite(uv_write_t *req, int status)
 {
-	/*int offset = offsetof(NetBufferUV, sender_object);
+	int offset = offsetof(NetBufferUV, sender_object);
 	NetBufferUV* buf = (NetBufferUV*)(((char*)req) - offset);
 	NET_BUFFER_LIST* list = (NET_BUFFER_LIST*)buf->owner;
 	int index = buf->GetIndex(); 
 	NetSocketUV* uvsocket = (NetSocketUV*)list->net->getReceivingSocket();		
 	
-	list->DeleteBuffer(index);*/
-	//uv_update_time(GetLoop(uvsocket->net));
-	free(req);
+	list->DeleteBuffer(index);
+	uv_update_time(GetLoop(uvsocket->net));
+	//free(req);
 }
 
 void onCloseFile(uv_fs_t* req)
@@ -275,10 +276,10 @@ void onOpenFile(uv_fs_t* req)
 	uv_fs_req_cleanup(req);
 	r = uv_fs_write(uv_default_loop(), &write_req, result, &wr_buf, 1, 0, OnWriteFile);
 
-	uv_buf_t buffer = uv_buf_init(".", 1);
+	/*uv_buf_t buffer = uv_buf_init(".", 1);
 	uv_write_t* wr_req = new uv_write_t;
 
-	uv_write(wr_req, (uv_stream_t*)GetPtrTCP(req), &buffer, 1, OnWrite);
+	uv_write(wr_req, (uv_stream_t*)GetPtrTCP(req), &buffer, 1, OnWrite);*/
 	
 }
 
@@ -378,7 +379,7 @@ void OnWriteFile(uv_fs_t* req)
 		printf("Error at writing file: %s\n", uv_strerror(result));
 	}
 	uv_fs_req_cleanup(req);
-	r = uv_fs_close(uv_default_loop(), &close_req, req->file.fd, onCloseFile);
+	r = uv_fs_close(uv_default_loop(), &close_req, result, onCloseFile);
 }
 
 uv_tcp_t *GetPtrTCP(void *ptr)
