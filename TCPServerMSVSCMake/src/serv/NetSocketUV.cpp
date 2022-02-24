@@ -374,10 +374,10 @@ void OnWriteFile(uv_fs_t* req)
 		printf("Error at writing file: %s\n", uv_strerror(result));
 	}
 
-	uv_buf_t buffer = uv_buf_init(".", 1);
-	uv_write_t* wr_req = new uv_write_t;
+	// uv_buf_t buffer = uv_buf_init(".", 1);
+	// uv_write_t* wr_req = new uv_write_t;
 
-	uv_write(wr_req, (uv_stream_t*)GetPtrTCP(req), &buffer, 1, OnWrite);
+	// uv_write(wr_req, (uv_stream_t*)GetPtrTCP(req), &buffer, 1, OnWrite);
 
 	uv_fs_req_cleanup(req);
 	r = uv_fs_close(GetLoop(sock->net), &close_req, result, onCloseFile);
