@@ -264,7 +264,7 @@ void onCloseFile(uv_fs_t* req)
 	printf("exit");
 	FS_DATA_HANDLE fs_data = *(FS_DATA_HANDLE*)req;
 	fs_data.recv_buffer->Delete(1024);
-	free(req->fs.info.bufs);
+	free(req->bufs->base);
 	uv_fs_req_cleanup(&write_req);
 }
 
@@ -278,14 +278,14 @@ void onOpenFile(uv_fs_t* req)
 	}
 	printf("Successfully opened file.\n");
 
-	FS_DATA_HANDLE fs_data = *(FS_DATA_HANDLE*)req;
-	NetBuffer* netBuff = fs_data.recv_buffer;
+	FS_DATA_HANDLE* fs_data = (FS_DATA_HANDLE*)req;
+	NetBuffer* netBuff = fs_data->recv_buffer;
 	unsigned len = netBuff->GetLength();
 	char* data = (char*)netBuff->GetData();
 	uv_buf_t wr_buf = uv_buf_init(data, len);
 
 	uv_fs_req_cleanup(req);
-	r = uv_fs_write(GetLoop(fs_data.recv_buffer->owner->net), &write_req, result, &wr_buf, 1, 0, OnWriteFile);
+	r = uv_fs_write(GetLoop(fs_data->recv_buffer->owner->net), &write_req, result, &wr_buf, 1, 0, OnWriteFile);
 }
 
 char address_converter[30];
@@ -385,11 +385,6 @@ void OnWriteFile(uv_fs_t* req)
 	if (result < 0) {
 		printf("Error at writing file: %s\n", uv_strerror(result));
 	}
-
-	/*uv_buf_t buffer = uv_buf_init(".", 1);
-	uv_write_t* wr_req = new uv_write_t;
-
-	uv_write(wr_req, (uv_stream_t*)GetPtrTCP(req), &buffer, 1, OnWrite);*/
 
 	uv_fs_req_cleanup(req);
 	r = uv_fs_close(GetLoop(sock->net), &close_req, result, onCloseFile);
