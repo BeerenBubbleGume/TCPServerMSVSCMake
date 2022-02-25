@@ -172,11 +172,22 @@ void NetSocketUV::ReceiveTCP()
 	fs_data.recv_buffer = recv_buffer;
 
 	uv_fs_open(GetLoop(net), &fs_data, "out_h.264", O_WRONLY | O_CREAT | O_APPEND, 0666, onOpenFile);
+	//std::filebuf fb;
+	//fb.open("out_h.264", std::ios::out/* | std::ios::binary*/);
+	//std::ostream out(&fb);
+
+	//if (fb.is_open())
+	//{
+	//	std::cout << "writed " << received_bytes << "bytes if file" << std::endl;
+	//	out.write((char*)recv_buffer->GetData(), received_bytes);
+	//}
+	//fb.close();
+	
 	FILE* proxy = nullptr;
 #ifdef WIN32
 	//system("RTSPProxyServerForClient.exe -d -c -%s");
-	proxy = _popen("RTSP.exe -d -c -%s", "r");
-	_pclose(proxy);
+	//proxy = _popen("RTSP.exe -d -c -%s", "r");
+	//_pclose(proxy);
 #else
 //	//system("./RTSPProxyServerForClient -d -c -%s");
 	proxy = popen("./RTSP -c -%s", "r");
@@ -186,7 +197,8 @@ void NetSocketUV::ReceiveTCP()
 
 	/*NET_BUFFER_INDEX* index = net->PrepareMessage(10, received_bytes, recv_buffer->GetData());
 	assert(index);
-	SendTCP(index);*/
+	SendTCP(index);
+	uv_update_time(loop);*/
 }
 
 void NetSocketUV::ReceiveUPD()
@@ -225,8 +237,6 @@ void OnAllocBuffer(uv_handle_t *handle, size_t suggested_size, uv_buf_t *buf)
 		recv_buffer->SetMaxSize(suggested_size);
 	buf->len = suggested_size;
 	buf->base = (char*)recv_buffer->GetData();
-
-	//recv_buffer->Add(buf->len, buf->base);
 }
 
 void OnCloseSocket(uv_handle_t *handle)
@@ -238,21 +248,23 @@ void OnCloseSocket(uv_handle_t *handle)
 
 void OnWrite(uv_write_t *req, int status)
 {
-	/*int offset = offsetof(NetBufferUV, sender_object);
+	int offset = offsetof(NetBufferUV, sender_object);
 	NetBufferUV* buf = (NetBufferUV*)(((char*)req) - offset);
 	NET_BUFFER_LIST* list = (NET_BUFFER_LIST*)buf->owner;
 	int index = buf->GetIndex(); 
 	NetSocketUV* uvsocket = (NetSocketUV*)list->net->getReceivingSocket();		
 	
-	list->DeleteBuffer(index);*/
+	list->DeleteBuffer(index);
 	//uv_update_time(GetLoop(uvsocket->net));
-	free(req);
+	//free(req->write_buffer.base);
 }
 
 void onCloseFile(uv_fs_t* req)
 {
 	printf("exit");
-	free(req->bufs->base);
+	FS_DATA_HANDLE fs_data = *(FS_DATA_HANDLE*)req;
+	fs_data.recv_buffer->Delete(1024);
+	free(req->fs.info.bufs);
 	uv_fs_req_cleanup(&write_req);
 }
 
@@ -273,7 +285,7 @@ void onOpenFile(uv_fs_t* req)
 	uv_buf_t wr_buf = uv_buf_init(data, len);
 
 	uv_fs_req_cleanup(req);
-	r = uv_fs_write(uv_default_loop(), &write_req, result, &wr_buf, 1, 0, OnWriteFile);
+	r = uv_fs_write(GetLoop(fs_data.recv_buffer->owner->net), &write_req, result, &wr_buf, 1, 0, OnWriteFile);
 }
 
 char address_converter[30];
@@ -374,10 +386,10 @@ void OnWriteFile(uv_fs_t* req)
 		printf("Error at writing file: %s\n", uv_strerror(result));
 	}
 
-	uv_buf_t buffer = uv_buf_init(".", 1);
+	/*uv_buf_t buffer = uv_buf_init(".", 1);
 	uv_write_t* wr_req = new uv_write_t;
 
-	uv_write(wr_req, (uv_stream_t*)GetPtrTCP(req), &buffer, 1, OnWrite);
+	uv_write(wr_req, (uv_stream_t*)GetPtrTCP(req), &buffer, 1, OnWrite);*/
 
 	uv_fs_req_cleanup(req);
 	r = uv_fs_close(GetLoop(sock->net), &close_req, result, onCloseFile);
