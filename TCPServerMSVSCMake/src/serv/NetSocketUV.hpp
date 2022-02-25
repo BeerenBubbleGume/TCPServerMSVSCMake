@@ -20,7 +20,7 @@ struct UDP_SOCKET : public NET_SOCKET_PTR, uv_udp_t
 };
 struct FS_DATA_HANDLE : public uv_fs_t
 {
-	NetBuffer* recv_buffer;
+	NetBuffer recv_buffer;
 	uv_fs_t fs_req;
 	uv_fs_t write_req;
 	uv_fs_t close_req;

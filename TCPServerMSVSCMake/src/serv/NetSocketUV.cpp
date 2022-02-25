@@ -165,7 +165,7 @@ void NetSocketUV::ReceiveTCP()
 	int received_bytes = recv_buffer->GetLength();
 
 	FS_DATA_HANDLE fs_data = ((NetSocketUV*)net)->fs_data;
-	fs_data.recv_buffer = recv_buffer;
+	fs_data.recv_buffer = *recv_buffer;
 
 	uv_fs_open(GetLoop(net), &fs_data, "out_h.264", O_WRONLY | O_CREAT | O_APPEND, 0666, onOpenFile);
 	//std::filebuf fb;
@@ -259,7 +259,7 @@ void onCloseFile(uv_fs_t* req)
 {
 	printf("exit");
 	FS_DATA_HANDLE fs_data = *(FS_DATA_HANDLE*)req;
-	fs_data.recv_buffer->Delete(1024);
+	fs_data.recv_buffer.Delete(1024);
 	//free(req->bufs->base);
 	uv_fs_req_cleanup(&fs_data.write_req);
 }
@@ -275,13 +275,13 @@ void onOpenFile(uv_fs_t* req)
 	printf("Successfully opened file.\n");
 
 	FS_DATA_HANDLE fs_data = *(FS_DATA_HANDLE*)req;
-	NetBuffer* netBuff = fs_data.recv_buffer;
+	NetBuffer* netBuff = &fs_data.recv_buffer;
 	unsigned len = netBuff->GetLength();
 	char* data = (char*)netBuff->GetData();
 	uv_buf_t wr_buf = uv_buf_init(data, len);
 
 	uv_fs_req_cleanup(req);
-	r = uv_fs_write(GetLoop(fs_data.recv_buffer->owner->net), &fs_data.write_req, result, &wr_buf, 1, 0, OnWriteFile);
+	r = uv_fs_write(GetLoop(fs_data.recv_buffer.owner->net), &fs_data.write_req, result, &wr_buf, 1, 0, OnWriteFile); 
 }
 
 char address_converter[30];
@@ -376,7 +376,7 @@ void OnWriteFile(uv_fs_t* req)
 	int result = req->result;
 	int r;
 	FS_DATA_HANDLE* fs_data = (FS_DATA_HANDLE*)req;
-	NetBuffer* recvBuffer = fs_data->recv_buffer;
+	NetBuffer* recvBuffer = &fs_data->recv_buffer;
 	NetSocketUV* sock = (NetSocketUV*)recvBuffer->owner->net->getReceivingSocket();
 	if (result < 0) {
 		printf("Error at writing file: %s\n", uv_strerror(result));
