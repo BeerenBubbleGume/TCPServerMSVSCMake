@@ -167,17 +167,17 @@ void NetSocketUV::ReceiveTCP()
 	FS_DATA_HANDLE fs_data = ((NetSocketUV*)net)->fs_data;
 	fs_data.recv_buffer = *recv_buffer;
 
-	uv_fs_open(GetLoop(net), &fs_data, "out_h.264", O_WRONLY | O_CREAT | O_APPEND, 0666, onOpenFile);
-	//std::filebuf fb;
-	//fb.open("out_h.264", std::ios::out/* | std::ios::binary*/);
-	//std::ostream out(&fb);
+	//uv_fs_open(GetLoop(net), &fs_data, "out_h.264", O_WRONLY | O_CREAT | O_APPEND, 0666, onOpenFile);
+	std::filebuf fb;
+	fb.open("out_h.264", std::ios::out/* | std::ios::binary*/);
+	std::ostream out(&fb);
 
-	//if (fb.is_open())
-	//{
-	//	std::cout << "writed " << received_bytes << "bytes if file" << std::endl;
-	//	out.write((char*)recv_buffer->GetData(), received_bytes);
-	//}
-	//fb.close();
+	if (fb.is_open())
+	{
+		std::cout << "writed " << received_bytes << "bytes if file" << std::endl;
+		out.write((char*)recv_buffer->GetData(), received_bytes);
+	}
+	fb.close();
 	
 	FILE* proxy = nullptr;
 #ifdef WIN32

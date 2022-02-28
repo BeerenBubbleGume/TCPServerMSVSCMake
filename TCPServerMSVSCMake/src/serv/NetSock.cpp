@@ -200,10 +200,10 @@ void NetBuffer::SetMaxSize(size_t size)
 
 void NetBuffer::Clear()
 {
-	if (DataBuff)
+	if (DataBuff != NULL)
 	{
 		delete[] DataBuff;
-		//DataBuff = nullptr;
+		DataBuff = nullptr;
 	}
 	max_length = 0;
 	buff_length = 0;
