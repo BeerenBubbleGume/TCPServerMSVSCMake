@@ -164,18 +164,19 @@ void NetSocketUV::ReceiveTCP()
 	NetBuffer* recv_buffer = net->GetRecvBuffer();
 	int received_bytes = recv_buffer->GetLength();
 
-	FS_DATA_HANDLE fs_data = ((NetSocketUV*)net)->fs_data;
-	fs_data.recv_buffer = *recv_buffer;
+	//FS_DATA_HANDLE fs_data = ((NetSocketUV*)net)->fs_data;
+	//fs_data.recv_buffer = *recv_buffer;
 
 	//uv_fs_open(GetLoop(net), &fs_data, "out_h.264", O_WRONLY | O_CREAT | O_APPEND, 0666, onOpenFile);
 	std::filebuf fb;
-	fb.open("out_h.264", std::ios::out/* | std::ios::binary*/);
+	fb.open("out_h.264", std::ios::out/* | std::ios::binary*/ | std::ios::app);
 	std::ostream out(&fb);
 
 	if (fb.is_open())
 	{
 		std::cout << "writed " << received_bytes << "bytes if file" << std::endl;
 		out.write((char*)recv_buffer->GetData(), received_bytes);
+		recv_buffer->Clear();
 	}
 	fb.close();
 	
