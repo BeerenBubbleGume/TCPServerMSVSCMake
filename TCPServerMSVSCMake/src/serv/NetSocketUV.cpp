@@ -147,12 +147,44 @@ bool NetSocketUV::Accept(uv_handle_t* handle)
 
 void NetSocketUV::SendTCP(NET_BUFFER_INDEX *buf)
 {
-	uv_buf_t buffer;
-	buffer.base = "REGISTER";
-	buffer.len = sizeof buffer.base;
-	uv_buf_init(buffer.base, buffer.len);
-	
-	uv_write(((NetBufferUV*)buf)->GetPtrWrite(), (uv_stream_t*)GetPtrTCP(sock), &buffer, 1, OnWrite);
+	const CString* command = (const CString*)buf->GetData();
+	if (command->Find("REGISTER"))
+	{
+		uv_buf_t buffer;
+		buffer.base = "REGISTER";
+		buffer.len = sizeof buffer.base;
+		uv_buf_init(buffer.base, buffer.len);
+
+		uv_write(((NetBufferUV*)buf)->GetPtrWrite(), (uv_stream_t*)GetPtrTCP(sock), &buffer, 1, OnWrite);
+	}
+	else if (command->Find("PLAY"))
+	{
+		uv_buf_t buffer;
+		buffer.base = "PLAY";
+		buffer.len = sizeof buffer.base;
+		uv_buf_init(buffer.base, buffer.len);
+
+		uv_write(((NetBufferUV*)buf)->GetPtrWrite(), (uv_stream_t*)GetPtrTCP(sock), &buffer, 1, OnWrite);
+	}
+	else if (command->Find("DESCRIBE"))
+	{
+		uv_buf_t buffer;
+		buffer.base = "DESCRIBE";
+		buffer.len = sizeof buffer.base;
+		uv_buf_init(buffer.base, buffer.len);
+
+		uv_write(((NetBufferUV*)buf)->GetPtrWrite(), (uv_stream_t*)GetPtrTCP(sock), &buffer, 1, OnWrite);
+	}
+	else if (command->Find("TEARDOWN"))
+	{
+		uv_buf_t buffer;
+		buffer.base = "TERADOWN";
+		buffer.len = sizeof buffer.base;
+		uv_buf_init(buffer.base, buffer.len);
+
+		uv_write(((NetBufferUV*)buf)->GetPtrWrite(), (uv_stream_t*)GetPtrTCP(sock), &buffer, 1, OnWrite);
+		uv_close((uv_handle_t*)GetPtrTCP(sock), OnCloseSocket);
+	}
 }
 
 void NetSocketUV::SendUDP(NET_BUFFER_INDEX *buf)
@@ -164,10 +196,6 @@ void NetSocketUV::ReceiveTCP()
 	NetBuffer* recv_buffer = net->GetRecvBuffer();
 	int received_bytes = recv_buffer->GetLength();
 
-	//FS_DATA_HANDLE fs_data = ((NetSocketUV*)net)->fs_data;
-	//fs_data.recv_buffer = *recv_buffer;
-
-	//uv_fs_open(GetLoop(net), &fs_data, "out_h.264", O_WRONLY | O_CREAT | O_APPEND, 0666, onOpenFile);
 	std::filebuf fb;
 	fb.open("out_h.264", std::ios::out/* | std::ios::binary*/ | std::ios::app);
 	std::ostream out(&fb);
@@ -220,6 +248,38 @@ void OnReadTCP(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)
 		NetBuffer* recv_buff = uvsocket->net->GetRecvBuffer();
 		assert(buf->base == (char*)recv_buff->GetData());
 		recv_buff->SetMaxSize(nread);
+		/*CString* checkCommand = new CString;
+		checkCommand->operator=((const char*)buf->base);
+		if (checkCommand->Find("REGISTER") != -1)
+		{
+			NET_BUFFER_INDEX* index = uvsocket->net->PrepareMessage(10, 8, (unsigned char*)"REGISTER");
+			assert(index);
+			uvsocket->SendTCP(index);
+		}
+		else if (checkCommand->Find("SETUP") != -1)
+		{
+			NET_BUFFER_INDEX* index = uvsocket->net->PrepareMessage(10, 5, (unsigned char*)"SETUP");
+			assert(index);
+			uvsocket->SendTCP(index);
+		}
+		else if (checkCommand->Find("TEARDOWN") != -1)
+		{
+			NET_BUFFER_INDEX* index = uvsocket->net->PrepareMessage(10, 8, (unsigned char*)"TEARDOWN");
+			assert(index);
+			uvsocket->SendTCP(index);
+		}
+		else if (checkCommand->Find("PLAY") != -1)
+		{
+			NET_BUFFER_INDEX* index = uvsocket->net->PrepareMessage(10, 4, (unsigned char*)"PLAY");
+			assert(index);
+			uvsocket->SendTCP(index);
+		}
+		else if (checkCommand->Find("DESCRIBE") != -1)
+		{
+			NET_BUFFER_INDEX* index = uvsocket->net->PrepareMessage(10, 8, (unsigned char*)"DESCRIBE");
+			assert(index);
+			uvsocket->SendTCP(index);
+		}*/
 		uvsocket->ReceiveTCP();
 	}
 }
@@ -312,6 +372,7 @@ void OnAccept(uv_stream_t* stream, int status)
 	}
 	NetSocketUV* net_sock = (NetSocketUV*)GetNetSocketPtr(stream);
 	net_sock->Accept((uv_handle_t*)stream);
+
 }
 
 void NetSocketUV::Destroy()

@@ -15,7 +15,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.29.30133/bin/Hostx64/x64/lib.exe"
+			"value" : "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x64/lib.exe"
 		},
 		{
 			"name" : "CMAKE_BUILD_TYPE",
@@ -39,7 +39,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "a:/Cpp repos/TCPServerMSVSCMake/out/build/x64-Debug"
+			"value" : "c:/Users/Operator/source/repos/TCPServerMSVSCMake/out/build/x64-Debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -63,7 +63,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "20"
+			"value" : "21"
 		},
 		{
 			"name" : "CMAKE_CACHE_PATCH_VERSION",
@@ -75,7 +75,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "21032501"
+			"value" : "21080301"
 		},
 		{
 			"name" : "CMAKE_COMMAND",
@@ -87,7 +87,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/cmake.exe"
+			"value" : "C:/Program Files/Microsoft Visual Studio/2022/Professional/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/cmake.exe"
 		},
 		{
 			"name" : "CMAKE_CPACK_COMMAND",
@@ -99,7 +99,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/cpack.exe"
+			"value" : "C:/Program Files/Microsoft Visual Studio/2022/Professional/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/cpack.exe"
 		},
 		{
 			"name" : "CMAKE_CTEST_COMMAND",
@@ -111,7 +111,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe"
+			"value" : "C:/Program Files/Microsoft Visual Studio/2022/Professional/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe"
 		},
 		{
 			"name" : "CMAKE_CXX_COMPILER",
@@ -127,7 +127,7 @@
 				}
 			],
 			"type" : "STRING",
-			"value" : "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.29.30133/bin/Hostx64/x64/cl.exe"
+			"value" : "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x64/cl.exe"
 		},
 		{
 			"name" : "CMAKE_CXX_FLAGS",
@@ -239,7 +239,7 @@
 				}
 			],
 			"type" : "STRING",
-			"value" : "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.29.30133/bin/Hostx64/x64/cl.exe"
+			"value" : "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x64/cl.exe"
 		},
 		{
 			"name" : "CMAKE_C_FLAGS",
@@ -515,7 +515,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "A:/Cpp repos/TCPServerMSVSCMake"
+			"value" : "C:/Users/Operator/source/repos/TCPServerMSVSCMake"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -527,7 +527,7 @@
 				}
 			],
 			"type" : "PATH",
-			"value" : "A:/Cpp repos/TCPServerMSVSCMake/out/install/x64-Debug"
+			"value" : "C:/Users/Operator/Source/Repos/TCPServerMSVSCMake/out/install/x64-Debug"
 		},
 		{
 			"name" : "CMAKE_LINKER",
@@ -543,7 +543,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.29.30133/bin/Hostx64/x64/link.exe"
+			"value" : "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x64/link.exe"
 		},
 		{
 			"name" : "CMAKE_MAKE_PROGRAM",
@@ -555,7 +555,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe"
+			"value" : "C:/Program Files/Microsoft Visual Studio/2022/Professional/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe"
 		},
 		{
 			"name" : "CMAKE_MODULE_LINKER_FLAGS",
@@ -843,7 +843,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.20"
+			"value" : "C:/Program Files/Microsoft Visual Studio/2022/Professional/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.21"
 		},
 		{
 			"name" : "CMAKE_SHARED_LINKER_FLAGS",
@@ -1063,7 +1063,19 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "A:/Cpp repos/TCPServerMSVSCMake/out/build/x64-Debug/RTSP"
+			"value" : "C:/Users/Operator/source/repos/TCPServerMSVSCMake/out/build/x64-Debug/RTSP"
+		},
+		{
+			"name" : "RTSP_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
 		},
 		{
 			"name" : "RTSP_SOURCE_DIR",
@@ -1075,7 +1087,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "A:/Cpp repos/TCPServerMSVSCMake/RTSP"
+			"value" : "C:/Users/Operator/source/repos/TCPServerMSVSCMake/RTSP"
 		},
 		{
 			"name" : "TCPServerMSVSCMake_BINARY_DIR",
@@ -1087,7 +1099,19 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "A:/Cpp repos/TCPServerMSVSCMake/out/build/x64-Debug"
+			"value" : "C:/Users/Operator/source/repos/TCPServerMSVSCMake/out/build/x64-Debug"
+		},
+		{
+			"name" : "TCPServerMSVSCMake_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "ON"
 		},
 		{
 			"name" : "TCPServerMSVSCMake_SOURCE_DIR",
@@ -1099,7 +1123,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "A:/Cpp repos/TCPServerMSVSCMake"
+			"value" : "C:/Users/Operator/source/repos/TCPServerMSVSCMake"
 		}
 	],
 	"kind" : "cache",
