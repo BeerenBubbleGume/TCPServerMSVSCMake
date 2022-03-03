@@ -197,11 +197,12 @@ void NetSocketUV::ReceiveTCP()
 	int received_bytes = recv_buffer->GetLength();
 	
 	/*FILE* stream = fopen("out_h.264", "w+");*/
-	fout.open("out_h.264", std::ios::app | std::ios::binary);
+	fout.open("in_binary_h.264", std::ios::app | std::ios::binary);
 	if (fout.is_open())
 	{
 		fout.write((char*)recv_buffer->GetData(), received_bytes);
 		fout.close();
+		setupDecoder();
 	}
 	else
 	{
@@ -260,38 +261,6 @@ void OnReadTCP(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)
 		NetBuffer* recv_buff = uvsocket->net->GetRecvBuffer();
 		assert(buf->base == (char*)recv_buff->GetData());
 		recv_buff->SetMaxSize(nread);
-		/*CString* checkCommand = new CString;
-		checkCommand->operator=((const char*)buf->base);
-		if (checkCommand->Find("REGISTER") != -1)
-		{
-			NET_BUFFER_INDEX* index = uvsocket->net->PrepareMessage(10, 8, (unsigned char*)"REGISTER");
-			assert(index);
-			uvsocket->SendTCP(index);
-		}
-		else if (checkCommand->Find("SETUP") != -1)
-		{
-			NET_BUFFER_INDEX* index = uvsocket->net->PrepareMessage(10, 5, (unsigned char*)"SETUP");
-			assert(index);
-			uvsocket->SendTCP(index);
-		}
-		else if (checkCommand->Find("TEARDOWN") != -1)
-		{
-			NET_BUFFER_INDEX* index = uvsocket->net->PrepareMessage(10, 8, (unsigned char*)"TEARDOWN");
-			assert(index);
-			uvsocket->SendTCP(index);
-		}
-		else if (checkCommand->Find("PLAY") != -1)
-		{
-			NET_BUFFER_INDEX* index = uvsocket->net->PrepareMessage(10, 4, (unsigned char*)"PLAY");
-			assert(index);
-			uvsocket->SendTCP(index);
-		}
-		else if (checkCommand->Find("DESCRIBE") != -1)
-		{
-			NET_BUFFER_INDEX* index = uvsocket->net->PrepareMessage(10, 8, (unsigned char*)"DESCRIBE");
-			assert(index);
-			uvsocket->SendTCP(index);
-		}*/
 		uvsocket->ReceiveTCP();
 	}
 }
