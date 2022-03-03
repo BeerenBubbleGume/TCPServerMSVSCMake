@@ -82,41 +82,41 @@ extern "C" {
 	static void pgm_save(unsigned char* buf, int wrap, int xsize, int ysize, char* filename);
 	static void setupDecoder();
 	static void decode(AVCodecContext* dec_cont, AVFrame* frame, AVPacket* packet, const char* fileName);
-}
-#endif //extern "C"
+
+#endif
 
 #ifndef SERVER_LIVE
 #define SERVER_LIVE
 
-class RTSPProxyServer;
-class DemandServerMediaSubsession;
+	class RTSPProxyServer;
+	class DemandServerMediaSubsession;
 
-class Server
-{
-public:
-	Server();
-	virtual ~Server();
-	int connect(bool connection);
-	static void StartTranslation();
+	class Server
+	{
+	public:
+		Server();
+		virtual ~Server();
+		int connect(bool connection);
+		static void StartTranslation();
 
-protected:
+	protected:
 
-	Net* net;
-	NetSocketUV* net_sockuv;
-	/*static void GenerateRTSPURL(void* Data) {
-		RTSPProxyServer::StartProxyServer(Data);
-		return;
-	}*/
+		Net* net;
+		NetSocketUV* net_sockuv;
+		/*static void GenerateRTSPURL(void* Data) {
+			RTSPProxyServer::StartProxyServer(Data);
+			return;
+		}*/
 
-protected:
-	
+	protected:
 
-};
+
+	};
 
 
 
 #endif
-
+}
 void OnAccept(uv_stream_t* stream, int status);
 void OnAllocBuffer(uv_handle_t* handle, size_t suggested_size, uv_buf_t* buf);
 void OnReadTCP(uv_stream_t* stream, ssize_t nread, const uv_buf_t* buf);
