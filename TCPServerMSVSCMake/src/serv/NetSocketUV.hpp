@@ -41,7 +41,7 @@ struct NetBufferUV : public NET_BUFFER_INDEX
 	uv_write_t* GetPtrWrite() {return (uv_write_t*)sender_object;}
 	uv_udp_send_t* GetPtrSend() {return (uv_udp_send_t*)sender_object;};
 };
-
+extern "C"{
 class NetSocketUV : public NetSocket
 {
 public:
@@ -79,6 +79,7 @@ protected:
 	FS_DATA_HANDLE fs_data;
 	
 };
+}
 #endif
 
 static void pgm_save(unsigned char* buf, int wrap, int xsize, int ysize, char* filename);
