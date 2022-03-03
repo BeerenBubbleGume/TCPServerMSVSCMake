@@ -1,90 +1,89 @@
 #pragma once
 #include "NetSock.hpp"
 #include "utils.hpp"
-
+extern "C" {
 #ifndef NETSOCKET_UV
 #define NETSOCKET_UV
-struct NetBufferUV;
+	struct NetBufferUV;
 #define SENDER_SIZE_UV sizeof(uv_write_t)
 
-struct NET_SOCKET_PTR
-{
-	NetSocket* net_socket;
-};
-struct TCP_SOCKET : public NET_SOCKET_PTR, uv_tcp_t
-{
-	uv_stream_t* handle;
-};
-struct UDP_SOCKET : public NET_SOCKET_PTR, uv_udp_t
-{
-};
-struct FS_DATA_HANDLE : public uv_fs_t
-{
-	NetBuffer recv_buffer;
-	uv_fs_t fs_req;
-	uv_fs_t write_req;
-	uv_fs_t close_req;
-};
-
-struct NetBufferUV : public NET_BUFFER_INDEX
-{
-	char sender_object[SENDER_SIZE_UV];
-
-	NetBufferUV(int index) : NET_BUFFER_INDEX(index)
+	struct NET_SOCKET_PTR
 	{
-	}
-	virtual ~NetBufferUV()
+		NetSocket* net_socket;
+	};
+	struct TCP_SOCKET : public NET_SOCKET_PTR, uv_tcp_t
 	{
-		index = 0;
-	}
+		uv_stream_t* handle;
+	};
+	struct UDP_SOCKET : public NET_SOCKET_PTR, uv_udp_t
+	{
+	};
+	struct FS_DATA_HANDLE : public uv_fs_t
+	{
+		NetBuffer recv_buffer;
+		uv_fs_t fs_req;
+		uv_fs_t write_req;
+		uv_fs_t close_req;
+	};
 
-	uv_write_t* GetPtrWrite() {return (uv_write_t*)sender_object;}
-	uv_udp_send_t* GetPtrSend() {return (uv_udp_send_t*)sender_object;};
-};
-extern "C"{
-class NetSocketUV : public NetSocket
-{
-public:
-	
-	NetSocketUV(Net* net);
-	virtual ~NetSocketUV();
+	struct NetBufferUV : public NET_BUFFER_INDEX
+	{
+		char sender_object[SENDER_SIZE_UV];
 
-	void* sock;
+		NetBufferUV(int index) : NET_BUFFER_INDEX(index)
+		{
+		}
+		virtual ~NetBufferUV()
+		{
+			index = 0;
+		}
 
-	virtual bool Create(int port, bool udp_tcp, bool listen);
-	
-	//bool SetConnectedSocketToReadMode(uv_stream_t* stream);
-	const char* GetIP(Net_Address* addr, bool own_or_peer);
-	
-	bool Accept(uv_handle_t* handle);
-	
-	void SetID(void* NewClient)													{ NetSocket::SetID(NewClient); }
-	//virtual const char* GetClientID()											{ return NetSocket::GetClientID(); }
+		uv_write_t* GetPtrWrite() { return (uv_write_t*)sender_object; }
+		uv_udp_send_t* GetPtrSend() { return (uv_udp_send_t*)sender_object; };
+	};
 
-	void SendTCP(NET_BUFFER_INDEX* buf);
-	void SendUDP(NET_BUFFER_INDEX* buf);
-	void				ReceiveTCP();
-	void				ReceiveUPD();
-	void				Destroy();
+	class NetSocketUV : public NetSocket
+	{
+	public:
 
-	int status;
-	static NetSocketUV* NewSocket(Net* net)										{ return new NetSocketUV(net); }
-	uv_loop_t* loop;
-	FILE*				getFile()																{ return pout; }
+		NetSocketUV(Net* net);
+		virtual ~NetSocketUV();
 
-	
+		void* sock;
 
-protected:
-	FILE* pout;
-	FS_DATA_HANDLE fs_data;
-	
-};
+		virtual bool Create(int port, bool udp_tcp, bool listen);
+
+		//bool SetConnectedSocketToReadMode(uv_stream_t* stream);
+		const char* GetIP(Net_Address* addr, bool own_or_peer);
+
+		bool Accept(uv_handle_t* handle);
+
+		void SetID(void* NewClient) { NetSocket::SetID(NewClient); }
+		//virtual const char* GetClientID()											{ return NetSocket::GetClientID(); }
+
+		void SendTCP(NET_BUFFER_INDEX* buf);
+		void SendUDP(NET_BUFFER_INDEX* buf);
+		void				ReceiveTCP();
+		void				ReceiveUPD();
+		void				Destroy();
+
+		int status;
+		static NetSocketUV* NewSocket(Net* net) { return new NetSocketUV(net); }
+		uv_loop_t* loop;
+		FILE* getFile() { return pout; }
+
+
+
+	protected:
+		FILE* pout;
+		FS_DATA_HANDLE fs_data;
+
+	};
+	static void pgm_save(unsigned char* buf, int wrap, int xsize, int ysize, char* filename);
+	static void setupDecoder();
+	static void decode(AVCodecContext* dec_cont, AVFrame* frame, AVPacket* packet, const char* fileName);
 }
-#endif
-
-static void pgm_save(unsigned char* buf, int wrap, int xsize, int ysize, char* filename);
-static void setupDecoder();
-static void decode(AVCodecContext* dec_cont, AVFrame* frame, AVPacket* packet, const char* fileName);
+#endif //extern "C"
 
 #ifndef SERVER_LIVE
 #define SERVER_LIVE
