@@ -147,12 +147,44 @@ bool NetSocketUV::Accept(uv_handle_t* handle)
 
 void NetSocketUV::SendTCP(NET_BUFFER_INDEX *buf)
 {
-	uv_buf_t buffer;
-	buffer.base = "REGISTER";
-	buffer.len = sizeof buffer.base;
-	uv_buf_init(buffer.base, buffer.len);
-	
-	uv_write(((NetBufferUV*)buf)->GetPtrWrite(), (uv_stream_t*)GetPtrTCP(sock), &buffer, 1, OnWrite);
+	const CString* command = (const CString*)buf->GetData();
+	if (command->Find("REGISTER"))
+	{
+		uv_buf_t buffer;
+		buffer.base = "REGISTER";
+		buffer.len = sizeof buffer.base;
+		uv_buf_init(buffer.base, buffer.len);
+
+		uv_write(((NetBufferUV*)buf)->GetPtrWrite(), (uv_stream_t*)GetPtrTCP(sock), &buffer, 1, OnWrite);
+	}
+	else if (command->Find("PLAY"))
+	{
+		uv_buf_t buffer;
+		buffer.base = "PLAY";
+		buffer.len = sizeof buffer.base;
+		uv_buf_init(buffer.base, buffer.len);
+
+		uv_write(((NetBufferUV*)buf)->GetPtrWrite(), (uv_stream_t*)GetPtrTCP(sock), &buffer, 1, OnWrite);
+	}
+	else if (command->Find("DESCRIBE"))
+	{
+		uv_buf_t buffer;
+		buffer.base = "DESCRIBE";
+		buffer.len = sizeof buffer.base;
+		uv_buf_init(buffer.base, buffer.len);
+
+		uv_write(((NetBufferUV*)buf)->GetPtrWrite(), (uv_stream_t*)GetPtrTCP(sock), &buffer, 1, OnWrite);
+	}
+	else if (command->Find("TEARDOWN"))
+	{
+		uv_buf_t buffer;
+		buffer.base = "TERADOWN";
+		buffer.len = sizeof buffer.base;
+		uv_buf_init(buffer.base, buffer.len);
+
+		uv_write(((NetBufferUV*)buf)->GetPtrWrite(), (uv_stream_t*)GetPtrTCP(sock), &buffer, 1, OnWrite);
+		uv_close((uv_handle_t*)GetPtrTCP(sock), OnCloseSocket);
+	}
 }
 
 void NetSocketUV::SendUDP(NET_BUFFER_INDEX *buf)
@@ -163,27 +195,36 @@ void NetSocketUV::ReceiveTCP()
 {
 	NetBuffer* recv_buffer = net->GetRecvBuffer();
 	int received_bytes = recv_buffer->GetLength();
-
-	FS_DATA_HANDLE fs_data = ((NetSocketUV*)net)->fs_data;
-	fs_data.recv_buffer = *recv_buffer;
-
-	//uv_fs_open(GetLoop(net), &fs_data, "out_h.264", O_WRONLY | O_CREAT | O_APPEND, 0666, onOpenFile);
-	std::filebuf fb;
-	fb.open("out_h.264", std::ios::out/* | std::ios::binary*/);
-	std::ostream out(&fb);
-
-	if (fb.is_open())
+	
+	/*FILE* stream = fopen("out_h.264", "w+");*/
+	fout.open("out_h.264", std::ios::app | std::ios::binary);
+	if (fout.is_open())
 	{
-		std::cout << "writed " << received_bytes << "bytes if file" << std::endl;
-		out.write((char*)recv_buffer->GetData(), received_bytes);
+		fout.write((char*)recv_buffer->GetData(), received_bytes);
+		fout.close();
 	}
-	fb.close();
+	else
+	{
+		printf("cannot open file\n");
+	}
+
+	//std::filebuf fb;
+	//fb.open("out_h.264", std::ios::out/* | std::ios::binary*/ | std::ios::app);
+	//std::ostream out(&fb);
+
+	//if (fb.is_open())
+	//{
+	//	std::cout << "writed " << received_bytes << "bytes if file" << std::endl;
+	//	out.write((char*)recv_buffer->GetData(), received_bytes);
+	//	recv_buffer->Clear();
+	//}
+	//fb.close();
 	
 	FILE* proxy = nullptr;
 #ifdef WIN32
 	//system("RTSPProxyServerForClient.exe -d -c -%s");
-	//proxy = _popen("RTSP.exe -d -c -%s", "r");
-	//_pclose(proxy);
+	proxy = _popen("RTSP.exe -d -c -%s", "r");
+	_pclose(proxy);
 #else
 //	//system("./RTSPProxyServerForClient -d -c -%s");
 	proxy = popen("./RTSP -c -%s", "r");
@@ -219,6 +260,38 @@ void OnReadTCP(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)
 		NetBuffer* recv_buff = uvsocket->net->GetRecvBuffer();
 		assert(buf->base == (char*)recv_buff->GetData());
 		recv_buff->SetMaxSize(nread);
+		/*CString* checkCommand = new CString;
+		checkCommand->operator=((const char*)buf->base);
+		if (checkCommand->Find("REGISTER") != -1)
+		{
+			NET_BUFFER_INDEX* index = uvsocket->net->PrepareMessage(10, 8, (unsigned char*)"REGISTER");
+			assert(index);
+			uvsocket->SendTCP(index);
+		}
+		else if (checkCommand->Find("SETUP") != -1)
+		{
+			NET_BUFFER_INDEX* index = uvsocket->net->PrepareMessage(10, 5, (unsigned char*)"SETUP");
+			assert(index);
+			uvsocket->SendTCP(index);
+		}
+		else if (checkCommand->Find("TEARDOWN") != -1)
+		{
+			NET_BUFFER_INDEX* index = uvsocket->net->PrepareMessage(10, 8, (unsigned char*)"TEARDOWN");
+			assert(index);
+			uvsocket->SendTCP(index);
+		}
+		else if (checkCommand->Find("PLAY") != -1)
+		{
+			NET_BUFFER_INDEX* index = uvsocket->net->PrepareMessage(10, 4, (unsigned char*)"PLAY");
+			assert(index);
+			uvsocket->SendTCP(index);
+		}
+		else if (checkCommand->Find("DESCRIBE") != -1)
+		{
+			NET_BUFFER_INDEX* index = uvsocket->net->PrepareMessage(10, 8, (unsigned char*)"DESCRIBE");
+			assert(index);
+			uvsocket->SendTCP(index);
+		}*/
 		uvsocket->ReceiveTCP();
 	}
 }
@@ -311,6 +384,7 @@ void OnAccept(uv_stream_t* stream, int status)
 	}
 	NetSocketUV* net_sock = (NetSocketUV*)GetNetSocketPtr(stream);
 	net_sock->Accept((uv_handle_t*)stream);
+
 }
 
 void NetSocketUV::Destroy()
@@ -333,6 +407,137 @@ void NetSocketUV::Destroy()
 	}
 	//outFile.close();
 	NetSocket::Destroy();
+}
+
+void NetSocketUV::decode(AVCodecContext* dec_cont, AVFrame* frame, AVPacket* packet, const char* fileName)
+{
+	char buf[1024];
+	int ret;
+
+	ret = avcodec_send_packet(dec_cont, packet);
+	if (ret < 0)
+	{
+		fprintf(stderr, "Error sending a packet for decoding!\n");
+		exit(1);
+	}
+	while (ret >= 0) {
+		ret = avcodec_receive_frame(dec_cont, frame);
+		if (ret == AVERROR(EAGAIN) || ret == AVERROR_EOF)
+			return;
+		else if (ret < 0) 
+		{
+			fprintf(stderr, "Error during decoding\n");
+			exit(1);
+			
+		}
+		
+		printf("saving frame %3d\n", dec_cont->frame_number);
+		fflush(stdout);
+			
+		snprintf(buf, sizeof(buf), "%s-%d", fileName, dec_cont->frame_number);
+		pgm_save(frame->data[0], frame->linesize[0], frame->width, frame->height, buf);
+	}
+}
+
+void NetSocketUV::pgm_save(unsigned char* buf, int wrap, int xsize, int ysize, char* filename)
+{
+	FILE* f;
+	int i;
+
+	f = fopen(filename, "w");
+	fprintf(f, "P5\n%d\n%d", xsize, ysize, 255);
+	for (i = 0; i < ysize; i++)
+		fwrite(buf + i * wrap, 1, xsize, f);
+	fclose(f);
+}
+
+void NetSocketUV::setupDecoder()
+{
+	const char* fileName, * outFileName;
+	const AVCodec* codec;
+	AVCodecParserContext* parser;
+	AVCodecContext* cont = nullptr;
+	FILE* file;
+
+	AVFrame* frame;
+	uint8_t inBuff[4096 + AV_INPUT_BUFFER_PADDING_SIZE];
+	uint8_t* data;
+	size_t data_size;
+	int ret;
+	AVPacket* packet;
+
+
+	fileName = "in_binary_h.264";
+	outFileName = "out_h.264";
+
+	packet = av_packet_alloc();
+	if (!packet)
+	{
+		exit(1);
+	}
+	memset(inBuff + 4096, 0, AV_INPUT_BUFFER_PADDING_SIZE);
+	codec = avcodec_find_decoder(AV_CODEC_ID_H264);
+	if (!codec)
+	{
+		fprintf(stderr, "Codec not found\n");
+		exit(1);
+	}
+	parser = av_parser_init(codec->id);
+	if (!parser)
+	{
+		fprintf(stderr, "parser not found\n");
+		exit(1);
+	}
+	cont = avcodec_alloc_context3(codec);
+	if (!cont)
+	{
+		fprintf(stderr, "Could not allocate video codec context!\n");
+		exit(1);
+	}
+
+	if (avcodec_open2(cont, codec, nullptr) < 0)
+	{
+		fprintf(stderr, "Could not open codec\n");
+		exit(1);
+	}
+	file = fopen(fileName, "rb");
+	if (!file)
+	{
+		fprintf(stderr, "Could not open %s\n", fileName);
+		exit(1);
+	}
+	frame = av_frame_alloc();
+	if (!frame)
+	{
+		fprintf(stderr, "Could not allocate video frame\n");
+		exit(1);
+	}
+	while (!feof(file))
+	{
+		data_size = fread(inBuff, 1, 4096, file);
+		if (!data_size)
+			break;
+		data = inBuff;
+		while (data_size > 0)
+		{
+			ret = av_parser_parse2(parser, cont, &packet->data, &packet->size, data, data_size, AV_NOPTS_VALUE, AV_NOPTS_VALUE, 0);
+			if (ret < 0)
+			{
+				fprintf(stderr, "Error while parsing\n");
+				exit(1);
+			}
+			data += ret;
+			data_size -= ret;
+			if (packet->size)
+				decode(cont, frame, packet, outFileName);
+		}
+	}
+	decode(cont, frame, nullptr, outFileName);
+	fclose(file);
+	av_parser_close(parser);
+	avcodec_free_context(&cont);
+	av_frame_free(&frame);
+	av_packet_free(&packet);
 }
 
 Server::Server()
