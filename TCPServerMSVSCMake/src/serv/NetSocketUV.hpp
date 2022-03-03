@@ -71,10 +71,14 @@ public:
 	static NetSocketUV* NewSocket(Net* net)										{ return new NetSocketUV(net); }
 	uv_loop_t* loop;
 	FILE*				getFile()																{ return pout; }
+
+	static void decode(AVCodecContext* dec_cont, AVFrame* frame, AVPacket* packet, const char* fileName);
+
 protected:
 	FILE* pout;
 	FS_DATA_HANDLE fs_data;
-	
+	static void pgm_save(unsigned char* buf, int wrap, int xsize, int ysize, char* filename);
+	void setupDecoder();
 };
 #endif
 
@@ -105,6 +109,8 @@ protected:
 	
 
 };
+
+
 
 #endif
 

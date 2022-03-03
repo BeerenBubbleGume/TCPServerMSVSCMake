@@ -9,6 +9,12 @@
 #include <cstring>
 #include <inttypes.h>
 
+#include <avcodec.h>
+#include <avfilter.h>
+#include <avdevice.h>
+#include <ffversion.h>
+
+
 #ifdef WIN32
 #include <WinSock2.h>
 #include <WS2tcpip.h>
