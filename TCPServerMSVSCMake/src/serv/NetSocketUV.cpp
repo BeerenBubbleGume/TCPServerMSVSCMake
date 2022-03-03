@@ -409,7 +409,7 @@ void NetSocketUV::Destroy()
 	NetSocket::Destroy();
 }
 
-void NetSocketUV::decode(AVCodecContext* dec_cont, AVFrame* frame, AVPacket* packet, const char* fileName)
+void decode(AVCodecContext* dec_cont, AVFrame* frame, AVPacket* packet, const char* fileName)
 {
 	char buf[1024];
 	int ret;
@@ -439,7 +439,7 @@ void NetSocketUV::decode(AVCodecContext* dec_cont, AVFrame* frame, AVPacket* pac
 	}
 }
 
-void NetSocketUV::pgm_save(unsigned char* buf, int wrap, int xsize, int ysize, char* filename)
+void pgm_save(unsigned char* buf, int wrap, int xsize, int ysize, char* filename)
 {
 	FILE* f;
 	int i;
@@ -451,7 +451,7 @@ void NetSocketUV::pgm_save(unsigned char* buf, int wrap, int xsize, int ysize, c
 	fclose(f);
 }
 
-void NetSocketUV::setupDecoder()
+void setupDecoder()
 {
 	const char* fileName, * outFileName;
 	const AVCodec* codec;
