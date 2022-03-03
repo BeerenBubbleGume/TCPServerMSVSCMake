@@ -5,10 +5,6 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.o
  /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/TCPServerMSVSCMake.cpp
  /usr/include/stdc-predef.h
  /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/TCPServerMSVSCMake.hpp
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/NetSocketUV.hpp
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/NetSock.hpp
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/utils.hpp
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/includes.hpp
  /usr/include/c++/8/iostream
  /usr/include/c++/8/x86_64-redhat-linux/bits/c++config.h
  /usr/include/bits/wordsize.h
@@ -95,15 +91,7 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.o
  /usr/include/bits/sched.h
  /usr/include/bits/types/struct_sched_param.h
  /usr/include/bits/cpu-set.h
- /usr/include/time.h
- /usr/include/bits/time.h
- /usr/include/bits/timex.h
- /usr/include/bits/types/struct_timeval.h
- /usr/include/bits/types/clock_t.h
- /usr/include/bits/types/struct_tm.h
- /usr/include/bits/types/clockid_t.h
- /usr/include/bits/types/timer_t.h
- /usr/include/bits/types/struct_itimerspec.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/time.h
  /usr/include/bits/pthreadtypes.h
  /usr/include/bits/thread-shared-types.h
  /usr/include/bits/pthreadtypes-arch.h
@@ -133,10 +121,14 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.o
  /usr/include/bits/waitflags.h
  /usr/include/bits/waitstatus.h
  /usr/include/sys/types.h
+ /usr/include/bits/types/clock_t.h
+ /usr/include/bits/types/clockid_t.h
+ /usr/include/bits/types/timer_t.h
  /usr/include/sys/select.h
  /usr/include/bits/select.h
  /usr/include/bits/types/sigset_t.h
  /usr/include/bits/types/__sigset_t.h
+ /usr/include/bits/types/struct_timeval.h
  /usr/include/alloca.h
  /usr/include/bits/stdlib-bsearch.h
  /usr/include/bits/stdlib-float.h
@@ -178,6 +170,10 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.o
  /usr/include/c++/8/bits/ostream.tcc
  /usr/include/c++/8/istream
  /usr/include/c++/8/bits/istream.tcc
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/NetSocketUV.hpp
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/NetSock.hpp
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/utils.hpp
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/includes.hpp
  /usr/include/c++/8/fstream
  /usr/include/c++/8/bits/codecvt.h
  /usr/include/c++/8/x86_64-redhat-linux/bits/basic_file.h
@@ -197,7 +193,94 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.o
  /usr/include/string.h
  /usr/include/strings.h
  /usr/include/inttypes.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/avcodec.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/samplefmt.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/attributes.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/avutil.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/common.h
+ /usr/lib/gcc/x86_64-redhat-linux/8/include/limits.h
+ /usr/lib/gcc/x86_64-redhat-linux/8/include/syslimits.h
+ /usr/include/limits.h
+ /usr/include/bits/posix1_lim.h
+ /usr/include/bits/local_lim.h
+ /usr/include/linux/limits.h
+ /usr/include/bits/posix2_lim.h
+ /usr/include/bits/xopen_lim.h
+ /usr/include/bits/uio_lim.h
+ /usr/include/c++/8/math.h
+ /usr/include/c++/8/cmath
+ /usr/include/math.h
+ /usr/include/bits/math-vector.h
+ /usr/include/bits/libm-simd-decl-stubs.h
+ /usr/include/bits/flt-eval-method.h
+ /usr/include/bits/fp-logb.h
+ /usr/include/bits/fp-fast.h
+ /usr/include/bits/mathcalls-helper-functions.h
+ /usr/include/bits/mathcalls.h
+ /usr/include/bits/mathcalls-narrow.h
+ /usr/include/bits/iscanonical.h
+ /usr/include/bits/mathinline.h
+ /usr/include/c++/8/bits/specfun.h
+ /usr/include/c++/8/tr1/gamma.tcc
+ /usr/include/c++/8/tr1/special_function_util.h
+ /usr/include/c++/8/tr1/bessel_function.tcc
+ /usr/include/c++/8/tr1/special_function_util.h
+ /usr/include/c++/8/tr1/beta_function.tcc
+ /usr/include/c++/8/tr1/ell_integral.tcc
+ /usr/include/c++/8/tr1/exp_integral.tcc
+ /usr/include/c++/8/tr1/hypergeometric.tcc
+ /usr/include/c++/8/tr1/legendre_function.tcc
+ /usr/include/c++/8/tr1/modified_bessel_func.tcc
+ /usr/include/c++/8/tr1/poly_hermite.tcc
+ /usr/include/c++/8/tr1/poly_laguerre.tcc
+ /usr/include/c++/8/tr1/riemann_zeta.tcc
  /usr/include/c++/8/stdlib.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/attributes.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/macros.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/avconfig.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/mem.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/avutil.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/version.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/error.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/rational.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/mathematics.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/intfloat.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/log.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/pixfmt.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/buffer.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/dict.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/frame.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/buffer.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/dict.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/samplefmt.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/log.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/pixfmt.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/rational.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/codec.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/hwcontext.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/frame.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/codec_id.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/version.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/version.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/codec_desc.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/codec_id.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/codec_par.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/defs.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/packet.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/version.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavfilter/avfilter.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavfilter/version.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavdevice/avdevice.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavdevice/version.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/opt.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavformat/avformat.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/codec.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/codec_par.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/defs.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/packet.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavformat/avio.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavformat/version.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/ffversion.h
  /usr/include/sys/wait.h
  /usr/include/signal.h
  /usr/include/bits/signum.h
@@ -265,9 +348,6 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.o
  /usr/include/bits/types/struct_statx.h
  /usr/include/dirent.h
  /usr/include/bits/dirent.h
- /usr/include/bits/posix1_lim.h
- /usr/include/bits/local_lim.h
- /usr/include/linux/limits.h
  /usr/include/netinet/in.h
  /usr/include/bits/in.h
  /usr/include/netinet/tcp.h
@@ -282,12 +362,6 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.o
  /usr/include/semaphore.h
  /usr/include/bits/semaphore.h
  /usr/include/sys/param.h
- /usr/lib/gcc/x86_64-redhat-linux/8/include/limits.h
- /usr/lib/gcc/x86_64-redhat-linux/8/include/syslimits.h
- /usr/include/limits.h
- /usr/include/bits/posix2_lim.h
- /usr/include/bits/xopen_lim.h
- /usr/include/bits/uio_lim.h
  /usr/include/bits/param.h
  /usr/include/linux/param.h
  /usr/include/asm/param.h
@@ -388,15 +462,7 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.o
  /usr/include/bits/sched.h
  /usr/include/bits/types/struct_sched_param.h
  /usr/include/bits/cpu-set.h
- /usr/include/time.h
- /usr/include/bits/time.h
- /usr/include/bits/timex.h
- /usr/include/bits/types/struct_timeval.h
- /usr/include/bits/types/clock_t.h
- /usr/include/bits/types/struct_tm.h
- /usr/include/bits/types/clockid_t.h
- /usr/include/bits/types/timer_t.h
- /usr/include/bits/types/struct_itimerspec.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/time.h
  /usr/include/bits/pthreadtypes.h
  /usr/include/bits/thread-shared-types.h
  /usr/include/bits/pthreadtypes-arch.h
@@ -426,10 +492,14 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.o
  /usr/include/bits/waitflags.h
  /usr/include/bits/waitstatus.h
  /usr/include/sys/types.h
+ /usr/include/bits/types/clock_t.h
+ /usr/include/bits/types/clockid_t.h
+ /usr/include/bits/types/timer_t.h
  /usr/include/sys/select.h
  /usr/include/bits/select.h
  /usr/include/bits/types/sigset_t.h
  /usr/include/bits/types/__sigset_t.h
+ /usr/include/bits/types/struct_timeval.h
  /usr/include/alloca.h
  /usr/include/bits/stdlib-bsearch.h
  /usr/include/bits/stdlib-float.h
@@ -490,7 +560,94 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.o
  /usr/include/string.h
  /usr/include/strings.h
  /usr/include/inttypes.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/avcodec.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/samplefmt.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/attributes.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/avutil.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/common.h
+ /usr/lib/gcc/x86_64-redhat-linux/8/include/limits.h
+ /usr/lib/gcc/x86_64-redhat-linux/8/include/syslimits.h
+ /usr/include/limits.h
+ /usr/include/bits/posix1_lim.h
+ /usr/include/bits/local_lim.h
+ /usr/include/linux/limits.h
+ /usr/include/bits/posix2_lim.h
+ /usr/include/bits/xopen_lim.h
+ /usr/include/bits/uio_lim.h
+ /usr/include/c++/8/math.h
+ /usr/include/c++/8/cmath
+ /usr/include/math.h
+ /usr/include/bits/math-vector.h
+ /usr/include/bits/libm-simd-decl-stubs.h
+ /usr/include/bits/flt-eval-method.h
+ /usr/include/bits/fp-logb.h
+ /usr/include/bits/fp-fast.h
+ /usr/include/bits/mathcalls-helper-functions.h
+ /usr/include/bits/mathcalls.h
+ /usr/include/bits/mathcalls-narrow.h
+ /usr/include/bits/iscanonical.h
+ /usr/include/bits/mathinline.h
+ /usr/include/c++/8/bits/specfun.h
+ /usr/include/c++/8/tr1/gamma.tcc
+ /usr/include/c++/8/tr1/special_function_util.h
+ /usr/include/c++/8/tr1/bessel_function.tcc
+ /usr/include/c++/8/tr1/special_function_util.h
+ /usr/include/c++/8/tr1/beta_function.tcc
+ /usr/include/c++/8/tr1/ell_integral.tcc
+ /usr/include/c++/8/tr1/exp_integral.tcc
+ /usr/include/c++/8/tr1/hypergeometric.tcc
+ /usr/include/c++/8/tr1/legendre_function.tcc
+ /usr/include/c++/8/tr1/modified_bessel_func.tcc
+ /usr/include/c++/8/tr1/poly_hermite.tcc
+ /usr/include/c++/8/tr1/poly_laguerre.tcc
+ /usr/include/c++/8/tr1/riemann_zeta.tcc
  /usr/include/c++/8/stdlib.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/attributes.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/macros.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/avconfig.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/mem.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/avutil.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/version.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/error.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/rational.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/mathematics.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/intfloat.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/log.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/pixfmt.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/buffer.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/dict.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/frame.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/buffer.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/dict.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/samplefmt.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/log.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/pixfmt.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/rational.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/codec.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/hwcontext.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/frame.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/codec_id.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/version.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/version.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/codec_desc.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/codec_id.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/codec_par.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/defs.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/packet.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/version.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavfilter/avfilter.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavfilter/version.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavdevice/avdevice.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavdevice/version.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/opt.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavformat/avformat.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/codec.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/codec_par.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/defs.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/packet.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavformat/avio.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavformat/version.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/ffversion.h
  /usr/include/sys/wait.h
  /usr/include/signal.h
  /usr/include/bits/signum.h
@@ -558,9 +715,6 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.o
  /usr/include/bits/types/struct_statx.h
  /usr/include/dirent.h
  /usr/include/bits/dirent.h
- /usr/include/bits/posix1_lim.h
- /usr/include/bits/local_lim.h
- /usr/include/linux/limits.h
  /usr/include/netinet/in.h
  /usr/include/bits/in.h
  /usr/include/netinet/tcp.h
@@ -575,12 +729,6 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.o
  /usr/include/semaphore.h
  /usr/include/bits/semaphore.h
  /usr/include/sys/param.h
- /usr/lib/gcc/x86_64-redhat-linux/8/include/limits.h
- /usr/lib/gcc/x86_64-redhat-linux/8/include/syslimits.h
- /usr/include/limits.h
- /usr/include/bits/posix2_lim.h
- /usr/include/bits/xopen_lim.h
- /usr/include/bits/uio_lim.h
  /usr/include/bits/param.h
  /usr/include/linux/param.h
  /usr/include/asm/param.h
@@ -682,15 +830,7 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.o
  /usr/include/bits/sched.h
  /usr/include/bits/types/struct_sched_param.h
  /usr/include/bits/cpu-set.h
- /usr/include/time.h
- /usr/include/bits/time.h
- /usr/include/bits/timex.h
- /usr/include/bits/types/struct_timeval.h
- /usr/include/bits/types/clock_t.h
- /usr/include/bits/types/struct_tm.h
- /usr/include/bits/types/clockid_t.h
- /usr/include/bits/types/timer_t.h
- /usr/include/bits/types/struct_itimerspec.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/time.h
  /usr/include/bits/pthreadtypes.h
  /usr/include/bits/thread-shared-types.h
  /usr/include/bits/pthreadtypes-arch.h
@@ -720,10 +860,14 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.o
  /usr/include/bits/waitflags.h
  /usr/include/bits/waitstatus.h
  /usr/include/sys/types.h
+ /usr/include/bits/types/clock_t.h
+ /usr/include/bits/types/clockid_t.h
+ /usr/include/bits/types/timer_t.h
  /usr/include/sys/select.h
  /usr/include/bits/select.h
  /usr/include/bits/types/sigset_t.h
  /usr/include/bits/types/__sigset_t.h
+ /usr/include/bits/types/struct_timeval.h
  /usr/include/alloca.h
  /usr/include/bits/stdlib-bsearch.h
  /usr/include/bits/stdlib-float.h
@@ -784,7 +928,94 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.o
  /usr/include/string.h
  /usr/include/strings.h
  /usr/include/inttypes.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/avcodec.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/samplefmt.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/attributes.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/avutil.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/common.h
+ /usr/lib/gcc/x86_64-redhat-linux/8/include/limits.h
+ /usr/lib/gcc/x86_64-redhat-linux/8/include/syslimits.h
+ /usr/include/limits.h
+ /usr/include/bits/posix1_lim.h
+ /usr/include/bits/local_lim.h
+ /usr/include/linux/limits.h
+ /usr/include/bits/posix2_lim.h
+ /usr/include/bits/xopen_lim.h
+ /usr/include/bits/uio_lim.h
+ /usr/include/c++/8/math.h
+ /usr/include/c++/8/cmath
+ /usr/include/math.h
+ /usr/include/bits/math-vector.h
+ /usr/include/bits/libm-simd-decl-stubs.h
+ /usr/include/bits/flt-eval-method.h
+ /usr/include/bits/fp-logb.h
+ /usr/include/bits/fp-fast.h
+ /usr/include/bits/mathcalls-helper-functions.h
+ /usr/include/bits/mathcalls.h
+ /usr/include/bits/mathcalls-narrow.h
+ /usr/include/bits/iscanonical.h
+ /usr/include/bits/mathinline.h
+ /usr/include/c++/8/bits/specfun.h
+ /usr/include/c++/8/tr1/gamma.tcc
+ /usr/include/c++/8/tr1/special_function_util.h
+ /usr/include/c++/8/tr1/bessel_function.tcc
+ /usr/include/c++/8/tr1/special_function_util.h
+ /usr/include/c++/8/tr1/beta_function.tcc
+ /usr/include/c++/8/tr1/ell_integral.tcc
+ /usr/include/c++/8/tr1/exp_integral.tcc
+ /usr/include/c++/8/tr1/hypergeometric.tcc
+ /usr/include/c++/8/tr1/legendre_function.tcc
+ /usr/include/c++/8/tr1/modified_bessel_func.tcc
+ /usr/include/c++/8/tr1/poly_hermite.tcc
+ /usr/include/c++/8/tr1/poly_laguerre.tcc
+ /usr/include/c++/8/tr1/riemann_zeta.tcc
  /usr/include/c++/8/stdlib.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/attributes.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/macros.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/avconfig.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/mem.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/avutil.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/version.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/error.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/rational.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/mathematics.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/intfloat.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/log.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/pixfmt.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/buffer.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/dict.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/frame.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/buffer.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/dict.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/samplefmt.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/log.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/pixfmt.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/rational.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/codec.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/hwcontext.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/frame.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/codec_id.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/version.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/version.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/codec_desc.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/codec_id.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/codec_par.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/defs.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/packet.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/version.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavfilter/avfilter.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavfilter/version.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavdevice/avdevice.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavdevice/version.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/opt.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavformat/avformat.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/codec.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/codec_par.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/defs.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/packet.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavformat/avio.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavformat/version.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/ffversion.h
  /usr/include/sys/wait.h
  /usr/include/signal.h
  /usr/include/bits/signum.h
@@ -852,9 +1083,6 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.o
  /usr/include/bits/types/struct_statx.h
  /usr/include/dirent.h
  /usr/include/bits/dirent.h
- /usr/include/bits/posix1_lim.h
- /usr/include/bits/local_lim.h
- /usr/include/linux/limits.h
  /usr/include/netinet/in.h
  /usr/include/bits/in.h
  /usr/include/netinet/tcp.h
@@ -869,12 +1097,6 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.o
  /usr/include/semaphore.h
  /usr/include/bits/semaphore.h
  /usr/include/sys/param.h
- /usr/lib/gcc/x86_64-redhat-linux/8/include/limits.h
- /usr/lib/gcc/x86_64-redhat-linux/8/include/syslimits.h
- /usr/include/limits.h
- /usr/include/bits/posix2_lim.h
- /usr/include/bits/xopen_lim.h
- /usr/include/bits/uio_lim.h
  /usr/include/bits/param.h
  /usr/include/linux/param.h
  /usr/include/asm/param.h
@@ -974,15 +1196,7 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/ServerUV.cpp.o
  /usr/include/bits/sched.h
  /usr/include/bits/types/struct_sched_param.h
  /usr/include/bits/cpu-set.h
- /usr/include/time.h
- /usr/include/bits/time.h
- /usr/include/bits/timex.h
- /usr/include/bits/types/struct_timeval.h
- /usr/include/bits/types/clock_t.h
- /usr/include/bits/types/struct_tm.h
- /usr/include/bits/types/clockid_t.h
- /usr/include/bits/types/timer_t.h
- /usr/include/bits/types/struct_itimerspec.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/time.h
  /usr/include/bits/pthreadtypes.h
  /usr/include/bits/thread-shared-types.h
  /usr/include/bits/pthreadtypes-arch.h
@@ -1012,10 +1226,14 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/ServerUV.cpp.o
  /usr/include/bits/waitflags.h
  /usr/include/bits/waitstatus.h
  /usr/include/sys/types.h
+ /usr/include/bits/types/clock_t.h
+ /usr/include/bits/types/clockid_t.h
+ /usr/include/bits/types/timer_t.h
  /usr/include/sys/select.h
  /usr/include/bits/select.h
  /usr/include/bits/types/sigset_t.h
  /usr/include/bits/types/__sigset_t.h
+ /usr/include/bits/types/struct_timeval.h
  /usr/include/alloca.h
  /usr/include/bits/stdlib-bsearch.h
  /usr/include/bits/stdlib-float.h
@@ -1076,7 +1294,94 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/ServerUV.cpp.o
  /usr/include/string.h
  /usr/include/strings.h
  /usr/include/inttypes.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/avcodec.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/samplefmt.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/attributes.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/avutil.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/common.h
+ /usr/lib/gcc/x86_64-redhat-linux/8/include/limits.h
+ /usr/lib/gcc/x86_64-redhat-linux/8/include/syslimits.h
+ /usr/include/limits.h
+ /usr/include/bits/posix1_lim.h
+ /usr/include/bits/local_lim.h
+ /usr/include/linux/limits.h
+ /usr/include/bits/posix2_lim.h
+ /usr/include/bits/xopen_lim.h
+ /usr/include/bits/uio_lim.h
+ /usr/include/c++/8/math.h
+ /usr/include/c++/8/cmath
+ /usr/include/math.h
+ /usr/include/bits/math-vector.h
+ /usr/include/bits/libm-simd-decl-stubs.h
+ /usr/include/bits/flt-eval-method.h
+ /usr/include/bits/fp-logb.h
+ /usr/include/bits/fp-fast.h
+ /usr/include/bits/mathcalls-helper-functions.h
+ /usr/include/bits/mathcalls.h
+ /usr/include/bits/mathcalls-narrow.h
+ /usr/include/bits/iscanonical.h
+ /usr/include/bits/mathinline.h
+ /usr/include/c++/8/bits/specfun.h
+ /usr/include/c++/8/tr1/gamma.tcc
+ /usr/include/c++/8/tr1/special_function_util.h
+ /usr/include/c++/8/tr1/bessel_function.tcc
+ /usr/include/c++/8/tr1/special_function_util.h
+ /usr/include/c++/8/tr1/beta_function.tcc
+ /usr/include/c++/8/tr1/ell_integral.tcc
+ /usr/include/c++/8/tr1/exp_integral.tcc
+ /usr/include/c++/8/tr1/hypergeometric.tcc
+ /usr/include/c++/8/tr1/legendre_function.tcc
+ /usr/include/c++/8/tr1/modified_bessel_func.tcc
+ /usr/include/c++/8/tr1/poly_hermite.tcc
+ /usr/include/c++/8/tr1/poly_laguerre.tcc
+ /usr/include/c++/8/tr1/riemann_zeta.tcc
  /usr/include/c++/8/stdlib.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/attributes.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/macros.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/avconfig.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/mem.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/avutil.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/version.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/error.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/rational.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/mathematics.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/intfloat.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/log.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/pixfmt.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/buffer.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/dict.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/frame.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/buffer.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/dict.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/samplefmt.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/log.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/pixfmt.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/rational.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/codec.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/hwcontext.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/frame.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/codec_id.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/version.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/version.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/codec_desc.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/codec_id.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/codec_par.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/defs.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/packet.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/version.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavfilter/avfilter.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavfilter/version.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavdevice/avdevice.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavdevice/version.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/opt.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavformat/avformat.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/codec.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/codec_par.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/defs.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/packet.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavformat/avio.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavformat/version.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/ffversion.h
  /usr/include/sys/wait.h
  /usr/include/signal.h
  /usr/include/bits/signum.h
@@ -1144,9 +1449,6 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/ServerUV.cpp.o
  /usr/include/bits/types/struct_statx.h
  /usr/include/dirent.h
  /usr/include/bits/dirent.h
- /usr/include/bits/posix1_lim.h
- /usr/include/bits/local_lim.h
- /usr/include/linux/limits.h
  /usr/include/netinet/in.h
  /usr/include/bits/in.h
  /usr/include/netinet/tcp.h
@@ -1161,12 +1463,6 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/ServerUV.cpp.o
  /usr/include/semaphore.h
  /usr/include/bits/semaphore.h
  /usr/include/sys/param.h
- /usr/lib/gcc/x86_64-redhat-linux/8/include/limits.h
- /usr/lib/gcc/x86_64-redhat-linux/8/include/syslimits.h
- /usr/include/limits.h
- /usr/include/bits/posix2_lim.h
- /usr/include/bits/xopen_lim.h
- /usr/include/bits/uio_lim.h
  /usr/include/bits/param.h
  /usr/include/linux/param.h
  /usr/include/asm/param.h
@@ -1274,15 +1570,7 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o
  /usr/include/bits/sched.h
  /usr/include/bits/types/struct_sched_param.h
  /usr/include/bits/cpu-set.h
- /usr/include/time.h
- /usr/include/bits/time.h
- /usr/include/bits/timex.h
- /usr/include/bits/types/struct_timeval.h
- /usr/include/bits/types/clock_t.h
- /usr/include/bits/types/struct_tm.h
- /usr/include/bits/types/clockid_t.h
- /usr/include/bits/types/timer_t.h
- /usr/include/bits/types/struct_itimerspec.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/time.h
  /usr/include/bits/pthreadtypes.h
  /usr/include/bits/thread-shared-types.h
  /usr/include/bits/pthreadtypes-arch.h
@@ -1312,10 +1600,14 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o
  /usr/include/bits/waitflags.h
  /usr/include/bits/waitstatus.h
  /usr/include/sys/types.h
+ /usr/include/bits/types/clock_t.h
+ /usr/include/bits/types/clockid_t.h
+ /usr/include/bits/types/timer_t.h
  /usr/include/sys/select.h
  /usr/include/bits/select.h
  /usr/include/bits/types/sigset_t.h
  /usr/include/bits/types/__sigset_t.h
+ /usr/include/bits/types/struct_timeval.h
  /usr/include/alloca.h
  /usr/include/bits/stdlib-bsearch.h
  /usr/include/bits/stdlib-float.h
@@ -1376,7 +1668,94 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o
  /usr/include/string.h
  /usr/include/strings.h
  /usr/include/inttypes.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/avcodec.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/samplefmt.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/attributes.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/avutil.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/common.h
+ /usr/lib/gcc/x86_64-redhat-linux/8/include/limits.h
+ /usr/lib/gcc/x86_64-redhat-linux/8/include/syslimits.h
+ /usr/include/limits.h
+ /usr/include/bits/posix1_lim.h
+ /usr/include/bits/local_lim.h
+ /usr/include/linux/limits.h
+ /usr/include/bits/posix2_lim.h
+ /usr/include/bits/xopen_lim.h
+ /usr/include/bits/uio_lim.h
+ /usr/include/c++/8/math.h
+ /usr/include/c++/8/cmath
+ /usr/include/math.h
+ /usr/include/bits/math-vector.h
+ /usr/include/bits/libm-simd-decl-stubs.h
+ /usr/include/bits/flt-eval-method.h
+ /usr/include/bits/fp-logb.h
+ /usr/include/bits/fp-fast.h
+ /usr/include/bits/mathcalls-helper-functions.h
+ /usr/include/bits/mathcalls.h
+ /usr/include/bits/mathcalls-narrow.h
+ /usr/include/bits/iscanonical.h
+ /usr/include/bits/mathinline.h
+ /usr/include/c++/8/bits/specfun.h
+ /usr/include/c++/8/tr1/gamma.tcc
+ /usr/include/c++/8/tr1/special_function_util.h
+ /usr/include/c++/8/tr1/bessel_function.tcc
+ /usr/include/c++/8/tr1/special_function_util.h
+ /usr/include/c++/8/tr1/beta_function.tcc
+ /usr/include/c++/8/tr1/ell_integral.tcc
+ /usr/include/c++/8/tr1/exp_integral.tcc
+ /usr/include/c++/8/tr1/hypergeometric.tcc
+ /usr/include/c++/8/tr1/legendre_function.tcc
+ /usr/include/c++/8/tr1/modified_bessel_func.tcc
+ /usr/include/c++/8/tr1/poly_hermite.tcc
+ /usr/include/c++/8/tr1/poly_laguerre.tcc
+ /usr/include/c++/8/tr1/riemann_zeta.tcc
  /usr/include/c++/8/stdlib.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/attributes.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/macros.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/avconfig.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/mem.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/avutil.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/version.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/error.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/rational.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/mathematics.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/intfloat.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/log.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/pixfmt.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/buffer.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/dict.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/frame.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/buffer.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/dict.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/samplefmt.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/log.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/pixfmt.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/rational.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/codec.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/hwcontext.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/frame.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/codec_id.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/version.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/version.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/codec_desc.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/codec_id.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/codec_par.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/defs.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/packet.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/version.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavfilter/avfilter.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavfilter/version.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavdevice/avdevice.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavdevice/version.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/opt.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavformat/avformat.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/codec.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/codec_par.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/defs.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/packet.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavformat/avio.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavformat/version.h
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/ffversion.h
  /usr/include/sys/wait.h
  /usr/include/signal.h
  /usr/include/bits/signum.h
@@ -1444,9 +1823,6 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o
  /usr/include/bits/types/struct_statx.h
  /usr/include/dirent.h
  /usr/include/bits/dirent.h
- /usr/include/bits/posix1_lim.h
- /usr/include/bits/local_lim.h
- /usr/include/linux/limits.h
  /usr/include/netinet/in.h
  /usr/include/bits/in.h
  /usr/include/netinet/tcp.h
@@ -1461,12 +1837,6 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o
  /usr/include/semaphore.h
  /usr/include/bits/semaphore.h
  /usr/include/sys/param.h
- /usr/lib/gcc/x86_64-redhat-linux/8/include/limits.h
- /usr/lib/gcc/x86_64-redhat-linux/8/include/syslimits.h
- /usr/include/limits.h
- /usr/include/bits/posix2_lim.h
- /usr/include/bits/xopen_lim.h
- /usr/include/bits/uio_lim.h
  /usr/include/bits/param.h
  /usr/include/linux/param.h
  /usr/include/asm/param.h

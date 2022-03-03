@@ -40,7 +40,7 @@ ELSE()
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/libavfilter
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/libavutil
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/libswresample
-								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/libswcale)
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/libswscale)
 	target_link_libraries(TCPServerMSVSCMake
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libuv_a.a
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libavcodec.a
@@ -48,7 +48,7 @@ ELSE()
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libavfilter.a
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libavutil.a
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libswresample.a
-								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libswcale.a
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libswscale.a
 								pthread
 								-ldl)
 ENDIF()
