@@ -231,8 +231,6 @@ void NetSocketUV::ReceiveTCP()
 	//}
 	//fb.close();
 
-#endif // WIN32
-
 	/*NET_BUFFER_INDEX* index = net->PrepareMessage(10, received_bytes, recv_buffer->GetData());
 	assert(index);
 	SendTCP(index);
