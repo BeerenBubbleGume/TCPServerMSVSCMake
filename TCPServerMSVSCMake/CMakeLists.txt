@@ -33,12 +33,13 @@ IF(WIN32)
 ELSE()
 	target_include_directories(TCPServerMSVSCMake PUBLIC
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/
-								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/libavcodec
-								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/libavdevice
-								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/libavfilter
-								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/libavutil
-								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/libswresample
-								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/libswscale)
+								#${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/libavcodec
+								#${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/libavdevice
+								#${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/libavfilter
+								#${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/libavutil
+								#${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/libswresample
+								#${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/libswscale
+								)
 	target_link_libraries(TCPServerMSVSCMake
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libuv_a.a
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libavcodec.a
