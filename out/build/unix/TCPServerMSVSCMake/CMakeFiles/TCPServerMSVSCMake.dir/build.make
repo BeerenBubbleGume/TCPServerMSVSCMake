@@ -97,24 +97,10 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.s:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.s"
 	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/TCPServerMSVSCMake && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/NetSocketUV.cpp -o CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.s
 
-TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/ServerUV.cpp.o: TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/flags.make
-TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/ServerUV.cpp.o: ../../../TCPServerMSVSCMake/src/serv/ServerUV.cpp
-TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/ServerUV.cpp.o: TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/ServerUV.cpp.o"
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/TCPServerMSVSCMake && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/ServerUV.cpp.o -MF CMakeFiles/TCPServerMSVSCMake.dir/src/serv/ServerUV.cpp.o.d -o CMakeFiles/TCPServerMSVSCMake.dir/src/serv/ServerUV.cpp.o -c /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/ServerUV.cpp
-
-TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/ServerUV.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/TCPServerMSVSCMake.dir/src/serv/ServerUV.cpp.i"
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/TCPServerMSVSCMake && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/ServerUV.cpp > CMakeFiles/TCPServerMSVSCMake.dir/src/serv/ServerUV.cpp.i
-
-TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/ServerUV.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/TCPServerMSVSCMake.dir/src/serv/ServerUV.cpp.s"
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/TCPServerMSVSCMake && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/ServerUV.cpp -o CMakeFiles/TCPServerMSVSCMake.dir/src/serv/ServerUV.cpp.s
-
 TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.o: TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/flags.make
 TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.o: ../../../TCPServerMSVSCMake/TCPServerMSVSCMake.cpp
 TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.o: TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.o"
 	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/TCPServerMSVSCMake && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.o -MF CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.o.d -o CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.o -c /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/TCPServerMSVSCMake.cpp
 
 TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.i: cmake_force
@@ -128,7 +114,7 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.s: c
 TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/flags.make
 TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../../../TCPServerMSVSCMake/src/serv/utils.cpp
 TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o"
 	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/TCPServerMSVSCMake && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o -MF CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o.d -o CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o -c /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/utils.cpp
 
 TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.i: cmake_force
@@ -142,7 +128,7 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.s: cmake
 TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utf.cpp.o: TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/flags.make
 TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utf.cpp.o: ../../../TCPServerMSVSCMake/src/serv/utf.cpp
 TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utf.cpp.o: TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utf.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utf.cpp.o"
 	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/TCPServerMSVSCMake && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utf.cpp.o -MF CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utf.cpp.o.d -o CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utf.cpp.o -c /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/utf.cpp
 
 TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utf.cpp.i: cmake_force
@@ -157,7 +143,6 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utf.cpp.s: cmake_f
 TCPServerMSVSCMake_OBJECTS = \
 "CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.o" \
 "CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.o" \
-"CMakeFiles/TCPServerMSVSCMake.dir/src/serv/ServerUV.cpp.o" \
 "CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.o" \
 "CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o" \
 "CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utf.cpp.o"
@@ -167,7 +152,6 @@ TCPServerMSVSCMake_EXTERNAL_OBJECTS =
 
 TCPServerMSVSCMake/TCPServerMSVSCMake: TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.o
 TCPServerMSVSCMake/TCPServerMSVSCMake: TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.o
-TCPServerMSVSCMake/TCPServerMSVSCMake: TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/ServerUV.cpp.o
 TCPServerMSVSCMake/TCPServerMSVSCMake: TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.o
 TCPServerMSVSCMake/TCPServerMSVSCMake: TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o
 TCPServerMSVSCMake/TCPServerMSVSCMake: TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utf.cpp.o
@@ -180,7 +164,7 @@ TCPServerMSVSCMake/TCPServerMSVSCMake: ../../../TCPServerMSVSCMake/libs/lib/liba
 TCPServerMSVSCMake/TCPServerMSVSCMake: ../../../TCPServerMSVSCMake/libs/lib/libswresample.a
 TCPServerMSVSCMake/TCPServerMSVSCMake: ../../../TCPServerMSVSCMake/libs/lib/libswscale.a
 TCPServerMSVSCMake/TCPServerMSVSCMake: TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable TCPServerMSVSCMake"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable TCPServerMSVSCMake"
 	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/TCPServerMSVSCMake && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/TCPServerMSVSCMake.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

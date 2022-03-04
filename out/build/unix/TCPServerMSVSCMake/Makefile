@@ -202,30 +202,6 @@ src/serv/NetSocketUV.cpp.s:
 	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/build.make TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.s
 .PHONY : src/serv/NetSocketUV.cpp.s
 
-src/serv/ServerUV.o: src/serv/ServerUV.cpp.o
-.PHONY : src/serv/ServerUV.o
-
-# target to build an object file
-src/serv/ServerUV.cpp.o:
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/build.make TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/ServerUV.cpp.o
-.PHONY : src/serv/ServerUV.cpp.o
-
-src/serv/ServerUV.i: src/serv/ServerUV.cpp.i
-.PHONY : src/serv/ServerUV.i
-
-# target to preprocess a source file
-src/serv/ServerUV.cpp.i:
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/build.make TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/ServerUV.cpp.i
-.PHONY : src/serv/ServerUV.cpp.i
-
-src/serv/ServerUV.s: src/serv/ServerUV.cpp.s
-.PHONY : src/serv/ServerUV.s
-
-# target to generate assembly for a file
-src/serv/ServerUV.cpp.s:
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/build.make TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/ServerUV.cpp.s
-.PHONY : src/serv/ServerUV.cpp.s
-
 src/serv/utf.o: src/serv/utf.cpp.o
 .PHONY : src/serv/utf.o
 
@@ -292,9 +268,6 @@ help:
 	@echo "... src/serv/NetSocketUV.o"
 	@echo "... src/serv/NetSocketUV.i"
 	@echo "... src/serv/NetSocketUV.s"
-	@echo "... src/serv/ServerUV.o"
-	@echo "... src/serv/ServerUV.i"
-	@echo "... src/serv/ServerUV.s"
 	@echo "... src/serv/utf.o"
 	@echo "... src/serv/utf.i"
 	@echo "... src/serv/utf.s"
