@@ -8,11 +8,12 @@
 #include <cerrno>
 #include <cstring>
 #include <inttypes.h>
-
+extern "C"{
 #include <avcodec.h>
 #include <avfilter.h>
 #include <avdevice.h>
 #include <ffversion.h>
+}
 
 
 #ifdef WIN32

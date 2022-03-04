@@ -171,11 +171,7 @@
 				{
 					"directoryIndex" : 1,
 					"id" : "TCPServerMSVSCMake::@c1fa6790a5be207d0e6d",
-<<<<<<< HEAD:out/build/x64-Debug/.cmake/api/v1/reply/codemodel-v2-7305adb50c4a4fc3cc1b.json
-					"jsonFile" : "target-TCPServerMSVSCMake-Debug-f668c3e7ced28886f132.json",
-=======
-					"jsonFile" : "target-TCPServerMSVSCMake-Debug-848d85b1d3bd8d9c090d.json",
->>>>>>> 84df85e6facd276acdd5ce6ba30d964c193be7ab:out/build/x64-Debug/.cmake/api/v1/reply/codemodel-v2-a1cad512b945c1333173.json
+					"jsonFile" : "target-TCPServerMSVSCMake-Debug-fb67691eae40919d47be.json",
 					"name" : "TCPServerMSVSCMake",
 					"projectIndex" : 0
 				}

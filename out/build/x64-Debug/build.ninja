@@ -93,14 +93,6 @@ build TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv\NetSocketUV.
   TARGET_COMPILE_PDB = TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\
   TARGET_PDB = TCPServerMSVSCMake\TCPServerMSVSCMake.pdb
 
-build TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv\ServerUV.cpp.obj: CXX_COMPILER__TCPServerMSVSCMake_Debug C$:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\ServerUV.cpp || cmake_object_order_depends_target_TCPServerMSVSCMake
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc -gstabs+ -gstabs -D _DEBUG -O /MDd /Zi /Ob0 /Od /RTC1 -std:c++17
-  INCLUDES = -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\libavcodec -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\libavdevice -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\libavfilter -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\libavutil -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\libswresample -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\libswcale
-  OBJECT_DIR = TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir
-  OBJECT_FILE_DIR = TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv
-  TARGET_COMPILE_PDB = TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\
-  TARGET_PDB = TCPServerMSVSCMake\TCPServerMSVSCMake.pdb
-
 build TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\TCPServerMSVSCMake.cpp.obj: CXX_COMPILER__TCPServerMSVSCMake_Debug C$:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\TCPServerMSVSCMake.cpp || cmake_object_order_depends_target_TCPServerMSVSCMake
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc -gstabs+ -gstabs -D _DEBUG -O /MDd /Zi /Ob0 /Od /RTC1 -std:c++17
   INCLUDES = -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\libavcodec -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\libavdevice -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\libavfilter -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\libavutil -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\libswresample -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\libswcale
@@ -133,7 +125,7 @@ build TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv\utf.cpp.obj:
 #############################################
 # Link the executable TCPServerMSVSCMake\TCPServerMSVSCMake.exe
 
-build TCPServerMSVSCMake\TCPServerMSVSCMake.exe: CXX_EXECUTABLE_LINKER__TCPServerMSVSCMake_Debug TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv\NetSock.cpp.obj TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv\NetSocketUV.cpp.obj TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv\ServerUV.cpp.obj TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\TCPServerMSVSCMake.cpp.obj TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv\utils.cpp.obj TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv\utf.cpp.obj | ..\..\..\TCPServerMSVSCMake\libs\lib\uv.lib
+build TCPServerMSVSCMake\TCPServerMSVSCMake.exe: CXX_EXECUTABLE_LINKER__TCPServerMSVSCMake_Debug TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv\NetSock.cpp.obj TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv\NetSocketUV.cpp.obj TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\TCPServerMSVSCMake.cpp.obj TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv\utils.cpp.obj TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv\utf.cpp.obj | ..\..\..\TCPServerMSVSCMake\libs\lib\uv.lib
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc -gstabs+ -gstabs -D _DEBUG -O /MDd /Zi /Ob0 /Od /RTC1
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
   LINK_LIBRARIES = ..\..\..\TCPServerMSVSCMake\libs\lib\uv.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib

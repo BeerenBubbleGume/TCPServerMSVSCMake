@@ -133,7 +133,17 @@ bool NetSocketUV::Accept(uv_handle_t* handle)
 		accept_sock->SetID(client);
 		if (uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadTCP) == 0)
 		{	
+			FILE* proxy = nullptr;
+#ifdef WIN32
+			//system("RTSPProxyServerForClient.exe -d -c -%s");
+			proxy = _popen("RTSP.exe -d -c -%s", "r");
+			_pclose(proxy);
+#else
+			//	//system("./RTSPProxyServerForClient -d -c -%s");
+			proxy = popen("./RTSP -c -%s", "r");
+			pclose(proxy);
 			return true;
+#endif
 		}
 		
 	}
@@ -220,16 +230,6 @@ void NetSocketUV::ReceiveTCP()
 	//	recv_buffer->Clear();
 	//}
 	//fb.close();
-	
-	FILE* proxy = nullptr;
-#ifdef WIN32
-	//system("RTSPProxyServerForClient.exe -d -c -%s");
-	proxy = _popen("RTSP.exe -d -c -%s", "r");
-	_pclose(proxy);
-#else
-//	//system("./RTSPProxyServerForClient -d -c -%s");
-	proxy = popen("./RTSP -c -%s", "r");
-	pclose(proxy);
 
 #endif // WIN32
 
