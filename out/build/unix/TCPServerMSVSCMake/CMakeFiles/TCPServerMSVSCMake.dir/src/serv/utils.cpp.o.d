@@ -190,19 +190,6 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: \
  /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/defs.h \
  /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/packet.h \
  /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/version.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavfilter/avfilter.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavfilter/version.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavdevice/avdevice.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavdevice/version.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/opt.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavformat/avformat.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/codec.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/codec_par.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/defs.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/packet.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavformat/avio.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavformat/version.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/ffversion.h \
  /usr/include/sys/wait.h /usr/include/signal.h /usr/include/bits/signum.h \
  /usr/include/bits/signum-generic.h \
  /usr/include/bits/types/sig_atomic_t.h \

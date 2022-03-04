@@ -1,7 +1,7 @@
-prefix=/usr/local
+prefix=/home/dkhaziev/ffmpeg_build
 exec_prefix=${prefix}
-libdir=/usr/local/lib
-includedir=/usr/local/include
+libdir=/home/dkhaziev/ffmpeg_build/lib
+includedir=/home/dkhaziev/ffmpeg_build/include
 
 Name: libavcodec
 Description: FFmpeg codec library
@@ -9,6 +9,6 @@ Version: 59.21.103
 Requires: libswresample >= 4.4.100, libavutil >= 57.22.100
 Requires.private: 
 Conflicts:
-Libs: -L${libdir}  -lavcodec -liconv -lm -latomic -llzma -L/mingw64/lib -lz -lmfplat -lmfuuid -lole32 -lstrmiids -lole32 -luser32
+Libs: -L${libdir}  -lavcodec -L/home/dkhaziev/ffmpeg_build/lib -lvpx -lm -lm -lpthread -L/home/dkhaziev/ffmpeg_build/lib -lvpx -lm -lm -lpthread -L/home/dkhaziev/ffmpeg_build/lib -lvpx -lm -lm -lpthread -L/home/dkhaziev/ffmpeg_build/lib -lvpx -lm -lm -lpthread -pthread -lm -llzma -lz -L/home/dkhaziev/ffmpeg_build/lib -lfdk-aac -lm -lmp3lame -lm -L/home/dkhaziev/ffmpeg_build/lib -lopus -lm -L/home/dkhaziev/ffmpeg_build/lib -lx264 -lpthread -lm -ldl
 Libs.private: 
 Cflags: -I${includedir}

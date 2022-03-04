@@ -48,5 +48,6 @@ ELSE()
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libswresample.a
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libswscale.a
 								pthread
-								-ldl)
+								-ldl
+								)
 ENDIF()

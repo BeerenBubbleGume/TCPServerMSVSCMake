@@ -1,14 +1,14 @@
-prefix=/usr/local
+prefix=/home/dkhaziev/ffmpeg_build
 exec_prefix=${prefix}
-libdir=/usr/local/lib
-includedir=/usr/local/include
+libdir=/home/dkhaziev/ffmpeg_build/lib
+includedir=/home/dkhaziev/ffmpeg_build/include
 
 Name: libavfilter
 Description: FFmpeg audio/video filtering library
 Version: 8.27.100
-Requires: libswscale >= 6.5.100, libavformat >= 59.17.102, libavcodec >= 59.21.103, libswresample >= 4.4.100, libavutil >= 57.22.100
+Requires: libswscale >= 6.5.100, libpostproc >= 56.4.100, libavformat >= 59.17.102, libavcodec >= 59.21.103, libswresample >= 4.4.100, libavutil >= 57.22.100
 Requires.private: 
 Conflicts:
-Libs: -L${libdir}  -lavfilter -lm -latomic
+Libs: -L${libdir}  -lavfilter -pthread -lm -lfreetype -lz -lbz2 -lpng16 -lm -lm -lz
 Libs.private: 
 Cflags: -I${includedir}

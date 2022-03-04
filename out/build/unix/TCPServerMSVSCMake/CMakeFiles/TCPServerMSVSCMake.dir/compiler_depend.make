@@ -267,19 +267,6 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.o: .
   ../../../TCPServerMSVSCMake/libs/includes/libavcodec/defs.h \
   ../../../TCPServerMSVSCMake/libs/includes/libavcodec/packet.h \
   ../../../TCPServerMSVSCMake/libs/includes/libavcodec/version.h \
-  ../../../TCPServerMSVSCMake/libs/includes/libavfilter/avfilter.h \
-  ../../../TCPServerMSVSCMake/libs/includes/libavfilter/version.h \
-  ../../../TCPServerMSVSCMake/libs/includes/libavdevice/avdevice.h \
-  ../../../TCPServerMSVSCMake/libs/includes/libavdevice/version.h \
-  ../../../TCPServerMSVSCMake/libs/includes/libavutil/opt.h \
-  ../../../TCPServerMSVSCMake/libs/includes/libavformat/avformat.h \
-  ../../../TCPServerMSVSCMake/libs/includes/libavcodec/codec.h \
-  ../../../TCPServerMSVSCMake/libs/includes/libavcodec/codec_par.h \
-  ../../../TCPServerMSVSCMake/libs/includes/libavcodec/defs.h \
-  ../../../TCPServerMSVSCMake/libs/includes/libavcodec/packet.h \
-  ../../../TCPServerMSVSCMake/libs/includes/libavformat/avio.h \
-  ../../../TCPServerMSVSCMake/libs/includes/libavformat/version.h \
-  ../../../TCPServerMSVSCMake/libs/includes/libavutil/ffversion.h \
   /usr/include/sys/wait.h \
   /usr/include/signal.h \
   /usr/include/bits/signum.h \
@@ -633,19 +620,6 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.o: ../
   ../../../TCPServerMSVSCMake/libs/includes/libavcodec/defs.h \
   ../../../TCPServerMSVSCMake/libs/includes/libavcodec/packet.h \
   ../../../TCPServerMSVSCMake/libs/includes/libavcodec/version.h \
-  ../../../TCPServerMSVSCMake/libs/includes/libavfilter/avfilter.h \
-  ../../../TCPServerMSVSCMake/libs/includes/libavfilter/version.h \
-  ../../../TCPServerMSVSCMake/libs/includes/libavdevice/avdevice.h \
-  ../../../TCPServerMSVSCMake/libs/includes/libavdevice/version.h \
-  ../../../TCPServerMSVSCMake/libs/includes/libavutil/opt.h \
-  ../../../TCPServerMSVSCMake/libs/includes/libavformat/avformat.h \
-  ../../../TCPServerMSVSCMake/libs/includes/libavcodec/codec.h \
-  ../../../TCPServerMSVSCMake/libs/includes/libavcodec/codec_par.h \
-  ../../../TCPServerMSVSCMake/libs/includes/libavcodec/defs.h \
-  ../../../TCPServerMSVSCMake/libs/includes/libavcodec/packet.h \
-  ../../../TCPServerMSVSCMake/libs/includes/libavformat/avio.h \
-  ../../../TCPServerMSVSCMake/libs/includes/libavformat/version.h \
-  ../../../TCPServerMSVSCMake/libs/includes/libavutil/ffversion.h \
   /usr/include/sys/wait.h \
   /usr/include/signal.h \
   /usr/include/bits/signum.h \
@@ -1000,19 +974,6 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.o:
   ../../../TCPServerMSVSCMake/libs/includes/libavcodec/defs.h \
   ../../../TCPServerMSVSCMake/libs/includes/libavcodec/packet.h \
   ../../../TCPServerMSVSCMake/libs/includes/libavcodec/version.h \
-  ../../../TCPServerMSVSCMake/libs/includes/libavfilter/avfilter.h \
-  ../../../TCPServerMSVSCMake/libs/includes/libavfilter/version.h \
-  ../../../TCPServerMSVSCMake/libs/includes/libavdevice/avdevice.h \
-  ../../../TCPServerMSVSCMake/libs/includes/libavdevice/version.h \
-  ../../../TCPServerMSVSCMake/libs/includes/libavutil/opt.h \
-  ../../../TCPServerMSVSCMake/libs/includes/libavformat/avformat.h \
-  ../../../TCPServerMSVSCMake/libs/includes/libavcodec/codec.h \
-  ../../../TCPServerMSVSCMake/libs/includes/libavcodec/codec_par.h \
-  ../../../TCPServerMSVSCMake/libs/includes/libavcodec/defs.h \
-  ../../../TCPServerMSVSCMake/libs/includes/libavcodec/packet.h \
-  ../../../TCPServerMSVSCMake/libs/includes/libavformat/avio.h \
-  ../../../TCPServerMSVSCMake/libs/includes/libavformat/version.h \
-  ../../../TCPServerMSVSCMake/libs/includes/libavutil/ffversion.h \
   /usr/include/sys/wait.h \
   /usr/include/signal.h \
   /usr/include/bits/signum.h \
@@ -1369,19 +1330,6 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
   ../../../TCPServerMSVSCMake/libs/includes/libavcodec/defs.h \
   ../../../TCPServerMSVSCMake/libs/includes/libavcodec/packet.h \
   ../../../TCPServerMSVSCMake/libs/includes/libavcodec/version.h \
-  ../../../TCPServerMSVSCMake/libs/includes/libavfilter/avfilter.h \
-  ../../../TCPServerMSVSCMake/libs/includes/libavfilter/version.h \
-  ../../../TCPServerMSVSCMake/libs/includes/libavdevice/avdevice.h \
-  ../../../TCPServerMSVSCMake/libs/includes/libavdevice/version.h \
-  ../../../TCPServerMSVSCMake/libs/includes/libavutil/opt.h \
-  ../../../TCPServerMSVSCMake/libs/includes/libavformat/avformat.h \
-  ../../../TCPServerMSVSCMake/libs/includes/libavcodec/codec.h \
-  ../../../TCPServerMSVSCMake/libs/includes/libavcodec/codec_par.h \
-  ../../../TCPServerMSVSCMake/libs/includes/libavcodec/defs.h \
-  ../../../TCPServerMSVSCMake/libs/includes/libavcodec/packet.h \
-  ../../../TCPServerMSVSCMake/libs/includes/libavformat/avio.h \
-  ../../../TCPServerMSVSCMake/libs/includes/libavformat/version.h \
-  ../../../TCPServerMSVSCMake/libs/includes/libavutil/ffversion.h \
   /usr/include/sys/wait.h \
   /usr/include/signal.h \
   /usr/include/bits/signum.h \
@@ -1486,14 +1434,6 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 
 /usr/include/asm/param.h:
 
-/usr/include/sys/param.h:
-
-/usr/include/semaphore.h:
-
-/usr/include/bits/termios.h:
-
-/usr/include/termios.h:
-
 /usr/include/c++/8/bits/ostream.tcc:
 
 ../../../TCPServerMSVSCMake/libs/includes/libavutil/mem.h:
@@ -1504,10 +1444,6 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 
 /usr/include/c++/8/x86_64-redhat-linux/bits/error_constants.h:
 
-/usr/include/bits/semaphore.h:
-
-/usr/include/bits/types/error_t.h:
-
 /usr/include/netinet/in.h:
 
 /usr/include/asm/errno.h:
@@ -1515,8 +1451,6 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 /usr/include/bits/types/struct_FILE.h:
 
 /usr/include/string.h:
-
-../../../TCPServerMSVSCMake/libs/includes/libavutil/ffversion.h:
 
 /usr/include/stdio.h:
 
@@ -1672,10 +1606,6 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 
 /usr/include/bits/sched.h:
 
-/usr/include/bits/param.h:
-
-/usr/include/bits/floatn-common.h:
-
 /usr/include/c++/8/new:
 
 /usr/include/bits/types/wint_t.h:
@@ -1707,10 +1637,6 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 /usr/include/c++/8/cstdint:
 
 /usr/include/bits/posix_opt.h:
-
-/usr/include/linux/param.h:
-
-../../../TCPServerMSVSCMake/libs/includes/uv/errno.h:
 
 /usr/include/bits/cpu-set.h:
 
@@ -1790,6 +1716,10 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 
 /usr/include/c++/8/bits/streambuf.tcc:
 
+/usr/include/bits/types/cookie_io_functions_t.h:
+
+/usr/include/strings.h:
+
 /usr/include/c++/8/string_view:
 
 /usr/include/c++/8/x86_64-redhat-linux/bits/ctype_inline.h:
@@ -1832,6 +1762,8 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 
 ../../../TCPServerMSVSCMake/TCPServerMSVSCMake.cpp:
 
+/usr/include/semaphore.h:
+
 /usr/include/c++/8/exception:
 
 /usr/include/c++/8/backward/binders.h:
@@ -1849,8 +1781,6 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 /usr/include/c++/8/x86_64-redhat-linux/bits/c++locale.h:
 
 /usr/include/sys/stat.h:
-
-../../../TCPServerMSVSCMake/libs/includes/libavfilter/avfilter.h:
 
 /usr/include/bits/waitstatus.h:
 
@@ -1891,8 +1821,6 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 /usr/include/c++/8/math.h:
 
 /usr/include/sys/cdefs.h:
-
-../../../TCPServerMSVSCMake/libs/includes/libavformat/avformat.h:
 
 /usr/include/asm/socket.h:
 
@@ -1960,8 +1888,6 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 
 /usr/include/c++/8/bits/vector.tcc:
 
-../../../TCPServerMSVSCMake/libs/includes/libavdevice/version.h:
-
 /usr/include/linux/types.h:
 
 /usr/include/linux/stat.h:
@@ -1979,8 +1905,6 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 ../../../TCPServerMSVSCMake/libs/includes/libavutil/common.h:
 
 /usr/include/c++/8/initializer_list:
-
-../../../TCPServerMSVSCMake/libs/includes/libavfilter/version.h:
 
 /usr/include/c++/8/streambuf:
 
@@ -2018,8 +1942,6 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 
 /usr/include/math.h:
 
-../../../TCPServerMSVSCMake/libs/includes/libavdevice/avdevice.h:
-
 /usr/include/bits/flt-eval-method.h:
 
 /usr/include/c++/8/ext/atomicity.h:
@@ -2047,8 +1969,6 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 ../../../TCPServerMSVSCMake/libs/includes/libavutil/intfloat.h:
 
 /usr/include/bits/mathinline.h:
-
-../../../TCPServerMSVSCMake/libs/includes/libavformat/version.h:
 
 /usr/include/c++/8/cstring:
 
@@ -2095,14 +2015,6 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 /usr/include/bits/setjmp.h:
 
 ../../../TCPServerMSVSCMake/libs/includes/libavcodec/packet.h:
-
-../../../TCPServerMSVSCMake/libs/includes/libavutil/opt.h:
-
-/usr/include/bits/types/cookie_io_functions_t.h:
-
-/usr/include/strings.h:
-
-../../../TCPServerMSVSCMake/libs/includes/libavformat/avio.h:
 
 /usr/include/sched.h:
 
@@ -2164,10 +2076,6 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 
 /usr/include/asm/posix_types_64.h:
 
-/usr/include/sys/ttydefaults.h:
-
-/usr/include/bits/types/struct_statx_timestamp.h:
-
 /usr/include/dirent.h:
 
 /usr/include/netinet/tcp.h:
@@ -2176,6 +2084,28 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 
 /usr/include/rpc/netdb.h:
 
+/usr/include/bits/termios.h:
+
 /usr/include/c++/8/cerrno:
 
 /usr/include/bits/netdb.h:
+
+/usr/include/termios.h:
+
+/usr/include/bits/types/struct_statx_timestamp.h:
+
+/usr/include/sys/ttydefaults.h:
+
+/usr/include/bits/types/error_t.h:
+
+/usr/include/bits/semaphore.h:
+
+/usr/include/sys/param.h:
+
+/usr/include/bits/floatn-common.h:
+
+/usr/include/bits/param.h:
+
+../../../TCPServerMSVSCMake/libs/includes/uv/errno.h:
+
+/usr/include/linux/param.h:

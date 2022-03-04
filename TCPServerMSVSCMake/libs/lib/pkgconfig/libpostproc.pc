@@ -3,12 +3,12 @@ exec_prefix=${prefix}
 libdir=/home/dkhaziev/ffmpeg_build/lib
 includedir=/home/dkhaziev/ffmpeg_build/include
 
-Name: libavformat
-Description: FFmpeg container format library
-Version: 59.17.102
-Requires: libavcodec >= 59.21.103, libswresample >= 4.4.100, libavutil >= 57.22.100
+Name: libpostproc
+Description: FFmpeg postprocessing library
+Version: 56.4.100
+Requires: libavutil >= 57.22.100
 Requires.private: 
 Conflicts:
-Libs: -L${libdir}  -lavformat -lm -lbz2 -lz
+Libs: -L${libdir}  -lpostproc -lm
 Libs.private: 
 Cflags: -I${includedir}

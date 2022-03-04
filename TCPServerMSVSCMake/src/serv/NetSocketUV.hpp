@@ -76,11 +76,11 @@ protected:
 	FS_DATA_HANDLE fs_data;
 
 };
-extern "C" {
-	static void pgm_save(unsigned char* buf, int wrap, int xsize, int ysize, char* filename);
-	static void setupDecoder();
-	static void decode(AVCodecContext* dec_cont, AVFrame* frame, AVPacket* packet, const char* fileName);
-}
+
+void pgm_save(unsigned char* buf, int wrap, int xsize, int ysize, char* filename);
+void setupDecoder();
+void decode(AVCodecContext* dec_cont, AVFrame* frame, AVPacket* packet, const char* fileName);
+
 #endif
 
 #ifndef SERVER_LIVE
