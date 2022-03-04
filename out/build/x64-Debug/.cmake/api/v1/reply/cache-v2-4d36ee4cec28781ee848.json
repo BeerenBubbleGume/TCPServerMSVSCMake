@@ -123,14 +123,10 @@
 				},
 				{
 					"name" : "HELPSTRING",
-					"value" : "No help, variable specified on the command line."
+					"value" : "CXX compiler"
 				}
 			],
-<<<<<<< HEAD:out/build/x64-Debug/.cmake/api/v1/reply/cache-v2-4d36ee4cec28781ee848.json
 			"type" : "STRING",
-=======
-			"type" : "FILEPATH",
->>>>>>> 84df85e6facd276acdd5ce6ba30d964c193be7ab:out/build/x64-Debug/.cmake/api/v1/reply/cache-v2-95d75d85fb71123eaeb7.json
 			"value" : "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x64/cl.exe"
 		},
 		{
@@ -239,14 +235,10 @@
 				},
 				{
 					"name" : "HELPSTRING",
-					"value" : "No help, variable specified on the command line."
+					"value" : "C compiler"
 				}
 			],
-<<<<<<< HEAD:out/build/x64-Debug/.cmake/api/v1/reply/cache-v2-4d36ee4cec28781ee848.json
 			"type" : "STRING",
-=======
-			"type" : "FILEPATH",
->>>>>>> 84df85e6facd276acdd5ce6ba30d964c193be7ab:out/build/x64-Debug/.cmake/api/v1/reply/cache-v2-95d75d85fb71123eaeb7.json
 			"value" : "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x64/cl.exe"
 		},
 		{

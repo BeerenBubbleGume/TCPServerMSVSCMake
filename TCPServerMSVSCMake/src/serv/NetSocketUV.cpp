@@ -1,5 +1,4 @@
 #include "NetSocketUV.hpp"
-//#pragma comment(lib, "../../libs/lib/uv.lib")
 
 using std::ofstream;
 ofstream fout;
@@ -157,44 +156,7 @@ bool NetSocketUV::Accept(uv_handle_t* handle)
 
 void NetSocketUV::SendTCP(NET_BUFFER_INDEX *buf)
 {
-	const CString* command = (const CString*)buf->GetData();
-	if (command->Find("REGISTER"))
-	{
-		uv_buf_t buffer;
-		buffer.base = "REGISTER";
-		buffer.len = sizeof buffer.base;
-		uv_buf_init(buffer.base, buffer.len);
-
-		uv_write(((NetBufferUV*)buf)->GetPtrWrite(), (uv_stream_t*)GetPtrTCP(sock), &buffer, 1, OnWrite);
-	}
-	else if (command->Find("PLAY"))
-	{
-		uv_buf_t buffer;
-		buffer.base = "PLAY";
-		buffer.len = sizeof buffer.base;
-		uv_buf_init(buffer.base, buffer.len);
-
-		uv_write(((NetBufferUV*)buf)->GetPtrWrite(), (uv_stream_t*)GetPtrTCP(sock), &buffer, 1, OnWrite);
-	}
-	else if (command->Find("DESCRIBE"))
-	{
-		uv_buf_t buffer;
-		buffer.base = "DESCRIBE";
-		buffer.len = sizeof buffer.base;
-		uv_buf_init(buffer.base, buffer.len);
-
-		uv_write(((NetBufferUV*)buf)->GetPtrWrite(), (uv_stream_t*)GetPtrTCP(sock), &buffer, 1, OnWrite);
-	}
-	else if (command->Find("TEARDOWN"))
-	{
-		uv_buf_t buffer;
-		buffer.base = "TERADOWN";
-		buffer.len = sizeof buffer.base;
-		uv_buf_init(buffer.base, buffer.len);
-
-		uv_write(((NetBufferUV*)buf)->GetPtrWrite(), (uv_stream_t*)GetPtrTCP(sock), &buffer, 1, OnWrite);
-		uv_close((uv_handle_t*)GetPtrTCP(sock), OnCloseSocket);
-	}
+	
 }
 
 void NetSocketUV::SendUDP(NET_BUFFER_INDEX *buf)
@@ -230,11 +192,6 @@ void NetSocketUV::ReceiveTCP()
 	//	recv_buffer->Clear();
 	//}
 	//fb.close();
-
-	/*NET_BUFFER_INDEX* index = net->PrepareMessage(10, received_bytes, recv_buffer->GetData());
-	assert(index);
-	SendTCP(index);
-	uv_update_time(loop);*/
 }
 
 void NetSocketUV::ReceiveUPD()
@@ -251,7 +208,6 @@ void OnReadTCP(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)
 		std::cout << "read buff < 0" << std::endl;
 		uvsocket->net->OnLostConnection(uvsocket);
 		OnCloseSocket((uv_handle_t*)stream);
-		//fclose(uvsocket->getFile());
 	}
 	else
 	{
@@ -291,8 +247,6 @@ void OnWrite(uv_write_t *req, int status)
 	NetSocketUV* uvsocket = (NetSocketUV*)list->net->getReceivingSocket();		
 	
 	list->DeleteBuffer(index);
-	//uv_update_time(GetLoop(uvsocket->net));
-	//free(req->write_buffer.base);
 }
 
 void onCloseFile(uv_fs_t* req)
@@ -300,7 +254,6 @@ void onCloseFile(uv_fs_t* req)
 	printf("exit");
 	FS_DATA_HANDLE fs_data = *(FS_DATA_HANDLE*)req;
 	fs_data.recv_buffer.Delete(1024);
-	//free(req->bufs->base);
 	uv_fs_req_cleanup(&fs_data.write_req);
 }
 
@@ -372,7 +325,6 @@ void NetSocketUV::Destroy()
 		}
 		sock = NULL;
 	}
-	//outFile.close();
 	NetSocket::Destroy();
 }
 

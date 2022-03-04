@@ -8,13 +8,8 @@
 #include <cerrno>
 #include <cstring>
 #include <inttypes.h>
-extern "C"{
-#include <avcodec.h>
-#include <avfilter.h>
-#include <avdevice.h>
-#include <ffversion.h>
-}
 
+#include <avcodec.h>
 
 #ifdef WIN32
 #include <WinSock2.h>
