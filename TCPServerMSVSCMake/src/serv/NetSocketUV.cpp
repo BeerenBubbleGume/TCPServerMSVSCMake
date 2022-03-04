@@ -174,6 +174,7 @@ void NetSocketUV::ReceiveTCP()
 	{
 		fout.write((char*)recv_buffer->GetData(), received_bytes);
 		fout.close();
+		__cplusplus;
 		setupDecoder();
 	}
 	else

@@ -8,8 +8,13 @@
 #include <cerrno>
 #include <cstring>
 #include <inttypes.h>
-
+#ifdef __cplusplus
+extern "C"{
+#endif
 #include <avcodec.h>
+#ifdef __cplusplus
+}
+#endif // _cplusplus
 
 #ifdef WIN32
 #include <WinSock2.h>
