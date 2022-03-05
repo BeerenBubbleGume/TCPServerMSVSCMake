@@ -91,7 +91,15 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.o
  /usr/include/bits/sched.h
  /usr/include/bits/types/struct_sched_param.h
  /usr/include/bits/cpu-set.h
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/time.h
+ /usr/include/time.h
+ /usr/include/bits/time.h
+ /usr/include/bits/timex.h
+ /usr/include/bits/types/struct_timeval.h
+ /usr/include/bits/types/clock_t.h
+ /usr/include/bits/types/struct_tm.h
+ /usr/include/bits/types/clockid_t.h
+ /usr/include/bits/types/timer_t.h
+ /usr/include/bits/types/struct_itimerspec.h
  /usr/include/bits/pthreadtypes.h
  /usr/include/bits/thread-shared-types.h
  /usr/include/bits/pthreadtypes-arch.h
@@ -121,14 +129,10 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.o
  /usr/include/bits/waitflags.h
  /usr/include/bits/waitstatus.h
  /usr/include/sys/types.h
- /usr/include/bits/types/clock_t.h
- /usr/include/bits/types/clockid_t.h
- /usr/include/bits/types/timer_t.h
  /usr/include/sys/select.h
  /usr/include/bits/select.h
  /usr/include/bits/types/sigset_t.h
  /usr/include/bits/types/__sigset_t.h
- /usr/include/bits/types/struct_timeval.h
  /usr/include/alloca.h
  /usr/include/bits/stdlib-bsearch.h
  /usr/include/bits/stdlib-float.h
@@ -449,7 +453,15 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.o
  /usr/include/bits/sched.h
  /usr/include/bits/types/struct_sched_param.h
  /usr/include/bits/cpu-set.h
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/time.h
+ /usr/include/time.h
+ /usr/include/bits/time.h
+ /usr/include/bits/timex.h
+ /usr/include/bits/types/struct_timeval.h
+ /usr/include/bits/types/clock_t.h
+ /usr/include/bits/types/struct_tm.h
+ /usr/include/bits/types/clockid_t.h
+ /usr/include/bits/types/timer_t.h
+ /usr/include/bits/types/struct_itimerspec.h
  /usr/include/bits/pthreadtypes.h
  /usr/include/bits/thread-shared-types.h
  /usr/include/bits/pthreadtypes-arch.h
@@ -479,14 +491,10 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.o
  /usr/include/bits/waitflags.h
  /usr/include/bits/waitstatus.h
  /usr/include/sys/types.h
- /usr/include/bits/types/clock_t.h
- /usr/include/bits/types/clockid_t.h
- /usr/include/bits/types/timer_t.h
  /usr/include/sys/select.h
  /usr/include/bits/select.h
  /usr/include/bits/types/sigset_t.h
  /usr/include/bits/types/__sigset_t.h
- /usr/include/bits/types/struct_timeval.h
  /usr/include/alloca.h
  /usr/include/bits/stdlib-bsearch.h
  /usr/include/bits/stdlib-float.h
@@ -804,7 +812,15 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.o
  /usr/include/bits/sched.h
  /usr/include/bits/types/struct_sched_param.h
  /usr/include/bits/cpu-set.h
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/time.h
+ /usr/include/time.h
+ /usr/include/bits/time.h
+ /usr/include/bits/timex.h
+ /usr/include/bits/types/struct_timeval.h
+ /usr/include/bits/types/clock_t.h
+ /usr/include/bits/types/struct_tm.h
+ /usr/include/bits/types/clockid_t.h
+ /usr/include/bits/types/timer_t.h
+ /usr/include/bits/types/struct_itimerspec.h
  /usr/include/bits/pthreadtypes.h
  /usr/include/bits/thread-shared-types.h
  /usr/include/bits/pthreadtypes-arch.h
@@ -834,14 +850,10 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.o
  /usr/include/bits/waitflags.h
  /usr/include/bits/waitstatus.h
  /usr/include/sys/types.h
- /usr/include/bits/types/clock_t.h
- /usr/include/bits/types/clockid_t.h
- /usr/include/bits/types/timer_t.h
  /usr/include/sys/select.h
  /usr/include/bits/select.h
  /usr/include/bits/types/sigset_t.h
  /usr/include/bits/types/__sigset_t.h
- /usr/include/bits/types/struct_timeval.h
  /usr/include/alloca.h
  /usr/include/bits/stdlib-bsearch.h
  /usr/include/bits/stdlib-float.h
@@ -1162,7 +1174,15 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o
  /usr/include/bits/sched.h
  /usr/include/bits/types/struct_sched_param.h
  /usr/include/bits/cpu-set.h
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/time.h
+ /usr/include/time.h
+ /usr/include/bits/time.h
+ /usr/include/bits/timex.h
+ /usr/include/bits/types/struct_timeval.h
+ /usr/include/bits/types/clock_t.h
+ /usr/include/bits/types/struct_tm.h
+ /usr/include/bits/types/clockid_t.h
+ /usr/include/bits/types/timer_t.h
+ /usr/include/bits/types/struct_itimerspec.h
  /usr/include/bits/pthreadtypes.h
  /usr/include/bits/thread-shared-types.h
  /usr/include/bits/pthreadtypes-arch.h
@@ -1192,14 +1212,10 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o
  /usr/include/bits/waitflags.h
  /usr/include/bits/waitstatus.h
  /usr/include/sys/types.h
- /usr/include/bits/types/clock_t.h
- /usr/include/bits/types/clockid_t.h
- /usr/include/bits/types/timer_t.h
  /usr/include/sys/select.h
  /usr/include/bits/select.h
  /usr/include/bits/types/sigset_t.h
  /usr/include/bits/types/__sigset_t.h
- /usr/include/bits/types/struct_timeval.h
  /usr/include/alloca.h
  /usr/include/bits/stdlib-bsearch.h
  /usr/include/bits/stdlib-float.h
