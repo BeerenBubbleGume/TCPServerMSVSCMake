@@ -56,6 +56,7 @@ ELSE()
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libx264.a
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libyasm.a
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libz.a
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/liblzma.a
 								pthread
 								-ldl
 								)
