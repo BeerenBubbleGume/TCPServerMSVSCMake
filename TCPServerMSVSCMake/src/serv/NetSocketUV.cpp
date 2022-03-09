@@ -143,6 +143,8 @@ bool NetSocketUV::Accept(uv_handle_t* handle)
 			pclose(proxy);
 			return true;
 #endif
+			__cplusplus;
+			setupDecoder();
 		}
 		
 	}
@@ -174,25 +176,12 @@ void NetSocketUV::ReceiveTCP()
 	{
 		fout.write((char*)recv_buffer->GetData(), received_bytes);
 		fout.close();
-		__cplusplus;
-		setupDecoder();
 	}
 	else
 	{
 		printf("cannot open file\n");
 	}
 
-	//std::filebuf fb;
-	//fb.open("out_h.264", std::ios::out/* | std::ios::binary*/ | std::ios::app);
-	//std::ostream out(&fb);
-
-	//if (fb.is_open())
-	//{
-	//	std::cout << "writed " << received_bytes << "bytes if file" << std::endl;
-	//	out.write((char*)recv_buffer->GetData(), received_bytes);
-	//	recv_buffer->Clear();
-	//}
-	//fb.close();
 }
 
 void NetSocketUV::ReceiveUPD()
@@ -239,44 +228,7 @@ void OnCloseSocket(uv_handle_t *handle)
 	free(ptr);
 }
 
-void OnWrite(uv_write_t *req, int status)
-{
-	int offset = offsetof(NetBufferUV, sender_object);
-	NetBufferUV* buf = (NetBufferUV*)(((char*)req) - offset);
-	NET_BUFFER_LIST* list = (NET_BUFFER_LIST*)buf->owner;
-	int index = buf->GetIndex(); 
-	NetSocketUV* uvsocket = (NetSocketUV*)list->net->getReceivingSocket();		
-	
-	list->DeleteBuffer(index);
-}
 
-void onCloseFile(uv_fs_t* req)
-{
-	printf("exit");
-	FS_DATA_HANDLE fs_data = *(FS_DATA_HANDLE*)req;
-	fs_data.recv_buffer.Delete(1024);
-	uv_fs_req_cleanup(&fs_data.write_req);
-}
-
-void onOpenFile(uv_fs_t* req)
-{
-	int result = req->result;
-	int r;
-	
-	if (result < 0) {
-		printf("Error at opening file: %s\n", uv_strerror((int)req->result));
-	}
-	printf("Successfully opened file.\n");
-
-	FS_DATA_HANDLE fs_data = *(FS_DATA_HANDLE*)req;
-	NetBuffer* netBuff = &fs_data.recv_buffer;
-	unsigned len = netBuff->GetLength();
-	char* data = (char*)netBuff->GetData();
-	uv_buf_t wr_buf = uv_buf_init(data, len);
-
-	uv_fs_req_cleanup(req);
-	r = uv_fs_write(GetLoop(fs_data.recv_buffer.owner->net), &fs_data.write_req, result, &wr_buf, 1, 0, OnWriteFile); 
-}
 
 char address_converter[30];
 void OnReadUDP(uv_udp_t* handle, ssize_t nread, const uv_buf_t* buf, const struct sockaddr* addr, unsigned flags)
@@ -331,7 +283,7 @@ void NetSocketUV::Destroy()
 
 void decode(AVCodecContext* dec_cont, AVFrame* frame, AVPacket* packet, const char* fileName)
 {
-	char buf[1024];
+	char buf[10240];
 	int ret;
 
 	ret = avcodec_send_packet(dec_cont, packet);
@@ -489,11 +441,6 @@ int Server::connect(bool connection)
 		fprintf(stderr, "Server is not connetcted!\n");
 		return 1;
 	}
-}
-
-uv_poll_t* GetPtrPoll(void* ptr)
-{
-	return (uv_poll_t*)(((char*)ptr) + sizeof(void*));
 }
 
 void OnWriteFile(uv_fs_t* req)
