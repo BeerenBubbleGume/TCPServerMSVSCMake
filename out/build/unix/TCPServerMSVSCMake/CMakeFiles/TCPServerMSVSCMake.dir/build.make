@@ -163,6 +163,15 @@ TCPServerMSVSCMake/TCPServerMSVSCMake: ../../../TCPServerMSVSCMake/libs/lib/liba
 TCPServerMSVSCMake/TCPServerMSVSCMake: ../../../TCPServerMSVSCMake/libs/lib/libavutil.a
 TCPServerMSVSCMake/TCPServerMSVSCMake: ../../../TCPServerMSVSCMake/libs/lib/libswresample.a
 TCPServerMSVSCMake/TCPServerMSVSCMake: ../../../TCPServerMSVSCMake/libs/lib/libswscale.a
+TCPServerMSVSCMake/TCPServerMSVSCMake: ../../../TCPServerMSVSCMake/libs/lib/libfdk-aac.a
+TCPServerMSVSCMake/TCPServerMSVSCMake: ../../../TCPServerMSVSCMake/libs/lib/libmp3lame.a
+TCPServerMSVSCMake/TCPServerMSVSCMake: ../../../TCPServerMSVSCMake/libs/lib/libopus.a
+TCPServerMSVSCMake/TCPServerMSVSCMake: ../../../TCPServerMSVSCMake/libs/lib/libpostproc.a
+TCPServerMSVSCMake/TCPServerMSVSCMake: ../../../TCPServerMSVSCMake/libs/lib/libvpx.a
+TCPServerMSVSCMake/TCPServerMSVSCMake: ../../../TCPServerMSVSCMake/libs/lib/libx264.a
+TCPServerMSVSCMake/TCPServerMSVSCMake: ../../../TCPServerMSVSCMake/libs/lib/libyasm.a
+TCPServerMSVSCMake/TCPServerMSVSCMake: ../../../TCPServerMSVSCMake/libs/lib/libz.a
+TCPServerMSVSCMake/TCPServerMSVSCMake: ../../../TCPServerMSVSCMake/libs/lib/liblzma.a
 TCPServerMSVSCMake/TCPServerMSVSCMake: TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable TCPServerMSVSCMake"
 	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/TCPServerMSVSCMake && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/TCPServerMSVSCMake.dir/link.txt --verbose=$(VERBOSE)
