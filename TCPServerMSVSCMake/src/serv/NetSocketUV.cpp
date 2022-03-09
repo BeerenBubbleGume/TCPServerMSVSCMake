@@ -170,7 +170,7 @@ void NetSocketUV::ReceiveTCP()
 	int received_bytes = recv_buffer->GetLength();
 	
 	/*FILE* stream = fopen("out_h.264", "w+");*/
-	fout.open("in_binary_h.264", std::ios::app | std::ios::binary);
+	fout.open("in_binary_h.264", std::ios::binary);
 	if (fout.is_open())
 	{
 		fout.write((char*)recv_buffer->GetData(), received_bytes);
@@ -181,8 +181,8 @@ void NetSocketUV::ReceiveTCP()
 		printf("cannot open file\n");
 	}
 
-	__cplusplus;
-	setupDecoder();
+	//__cplusplus;
+	//setupDecoder();
 
 }
 
