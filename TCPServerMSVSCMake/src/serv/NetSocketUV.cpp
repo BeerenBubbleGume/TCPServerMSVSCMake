@@ -182,8 +182,8 @@ void NetSocketUV::ReceiveTCP()
 		printf("cannot open file\n");
 	}
 
-	//__cplusplus;
-	//setupDecoder();
+	__cplusplus;
+	setupDecoder();
 
 }
 
