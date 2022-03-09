@@ -2,6 +2,7 @@
 #include "NetSock.hpp"
 #include "utils.hpp"
 
+
 #ifndef NETSOCKET_UV
 #define NETSOCKET_UV
 struct NetBufferUV;

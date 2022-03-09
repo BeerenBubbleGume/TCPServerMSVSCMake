@@ -8,6 +8,7 @@
 #include <cerrno>
 #include <cstring>
 #include <inttypes.h>
+#include <filesystem>
 #ifdef __cplusplus
 extern "C"{
 #endif
