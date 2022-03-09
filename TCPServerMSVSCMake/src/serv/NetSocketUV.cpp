@@ -130,21 +130,21 @@ bool NetSocketUV::Accept(uv_handle_t* handle)
 		sockaddr sockname;
 		int socklen = sizeof accept_sock->net->GetConnectSockaddr();
 		accept_sock->SetID(client);
-		if (uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadTCP) == 0)
-		{	
-			FILE* proxy = nullptr;
+		uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadTCP);
+		setupDecoder();
+		FILE* proxy = nullptr;
 #ifdef WIN32
-			//system("RTSPProxyServerForClient.exe -d -c -%s");
-			proxy = _popen("RTSP.exe -d -c -%s", "r");
-			_pclose(proxy);
+		//system("RTSPProxyServerForClient.exe -d -c -%s");
+		proxy = _popen("RTSP.exe -d -c -%s", "r");
+		_pclose(proxy);
 			
 #else
-			//	//system("./RTSPProxyServerForClient -d -c -%s");
-			proxy = popen("./RTSP -c -%s", "r");
-			pclose(proxy);
-			return true;
+		//	//system("./RTSPProxyServerForClient -d -c -%s");
+		proxy = popen("./RTSP -c -%s", "r");
+		pclose(proxy);
+		return true;
 #endif
-		}
+		
 		
 	}
 	else
@@ -181,10 +181,6 @@ void NetSocketUV::ReceiveTCP()
 	{
 		printf("cannot open file\n");
 	}
-
-	__cplusplus;
-	setupDecoder();
-
 }
 
 void NetSocketUV::ReceiveUPD()
