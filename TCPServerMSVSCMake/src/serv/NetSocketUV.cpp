@@ -143,8 +143,6 @@ bool NetSocketUV::Accept(uv_handle_t* handle)
 			pclose(proxy);
 			return true;
 #endif
-			__cplusplus;
-			setupDecoder();
 		}
 		
 	}
@@ -176,6 +174,8 @@ void NetSocketUV::ReceiveTCP()
 	{
 		fout.write((char*)recv_buffer->GetData(), received_bytes);
 		fout.close();
+		__cplusplus;
+		setupDecoder();
 	}
 	else
 	{
@@ -228,6 +228,16 @@ void OnCloseSocket(uv_handle_t *handle)
 	free(ptr);
 }
 
+void OnWrite(uv_write_t *req, int status)
+{
+	int offset = offsetof(NetBufferUV, sender_object);
+	NetBufferUV* buf = (NetBufferUV*)(((char*)req) - offset);
+	NET_BUFFER_LIST* list = (NET_BUFFER_LIST*)buf->owner;
+	int index = buf->GetIndex(); 
+	NetSocketUV* uvsocket = (NetSocketUV*)list->net->getReceivingSocket();		
+	
+	list->DeleteBuffer(index);
+}
 
 
 char address_converter[30];
@@ -441,21 +451,6 @@ int Server::connect(bool connection)
 		fprintf(stderr, "Server is not connetcted!\n");
 		return 1;
 	}
-}
-
-void OnWriteFile(uv_fs_t* req)
-{
-	int result = req->result;
-	int r;
-	FS_DATA_HANDLE* fs_data = (FS_DATA_HANDLE*)req;
-	NetBuffer* recvBuffer = &fs_data->recv_buffer;
-	NetSocketUV* sock = (NetSocketUV*)recvBuffer->owner->net->getReceivingSocket();
-	if (result < 0) {
-		printf("Error at writing file: %s\n", uv_strerror(result));
-	}
-
-	uv_fs_req_cleanup(req);
-	r = uv_fs_close(GetLoop(sock->net), &fs_data->close_req, result, onCloseFile);
 }
 
 uv_tcp_t *GetPtrTCP(void *ptr)
