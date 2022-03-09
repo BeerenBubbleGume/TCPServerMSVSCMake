@@ -17,18 +17,18 @@ public:
 	~NetBuffer();
 
 	NET_BUFFER_LIST* owner;
-	auto GetData() { return DataBuff; }
-	size_t GetLength() { return buff_length; }
+	auto GetData()																				{ return DataBuff; }
+	size_t GetLength()																			{ return buff_length; }
 	void SetLength(size_t length);
 	void Add(int length, void* data);
 	void Delete(int length);
 	int HasMessage(NetSocket* sockt);
-	void Reset() { position = 0; buff_length = 0; }
-	int GetPosition() { return position; }
-	void SetPosition(int pos) { position = pos; }
+	void Reset()																				{ position = 0; buff_length = 0; }
+	int GetPosition()																			{ return position; }
+	void SetPosition(int pos)																	{ position = pos; }
 	void SetMaxSize(size_t size);
 	void Clear();
-	unsigned GetMaxSize() { return max_length; }
+	unsigned GetMaxSize()																		{ return max_length; }
 
 protected:
 
@@ -48,12 +48,12 @@ struct NET_BUFFER_LIST : public CArrayBase
 	NET_BUFFER_LIST();
 	virtual ~NET_BUFFER_LIST();
 
-	void SetOwner(Net* owner) { net = owner; }
+	void SetOwner(Net* owner)																	{ net = owner; }
 
 	int AddBuffer(const MEM_DATA& buffer);
 	void DeleteBuffer(int index);
 	void Clear();
-	NET_BUFFER_INDEX* Get(int index) { return m_buffer[index]; }
+	NET_BUFFER_INDEX* Get(int index)															{ return m_buffer[index]; }
 };
 
 class Net
@@ -65,25 +65,27 @@ public:
 
 	Net_Address* addr;
 
-	NetBuffer* GetRecvBuffer() { return &recv_buf; }
+	NetBuffer* GetRecvBuffer()																	{ return &recv_buf; }
 	void OnLostConnection(void* sock);
-	bool IsServer() { return true; }
+	bool IsServer()																				{ return true; }
 	void ReciveMessege();
-	NET_BUFFER_LIST* GetSendList() { return &sending_list; }
+	NET_BUFFER_LIST* GetSendList()																{ return &sending_list; }
 	NET_BUFFER_INDEX* PrepareMessage(unsigned int sender_id, size_t length, unsigned char* data);
-	NetSocket* getReceivingSocket() { return receiving_socket; }
-	void setupReceivingSocket(NetSocket& socket) { receiving_socket = &socket; }
-	int GetIDPath() { return ClientID; }
-	auto GetIDArray() { return IDArray; }
-	auto GetConnectSockaddr() { return fConnectionSockaddr; }
+	NetSocket* getReceivingSocket()																{ return receiving_socket; }
+	void setupReceivingSocket(NetSocket& socket)												{ receiving_socket = &socket; }
+	int GetIDPath()																				{ return ClientID; }
+	auto GetIDArray()																			{ return IDArray; }
+	auto GetConnectSockaddr()																	{ return fConnectionSockaddr; }
 
-	virtual void setIDPath(uint16_t ID) { ClientID = ID; }
-	virtual void setIDArray(uint16_t* IDArray) { this->IDArray = IDArray; }
-
+	virtual void setIDPath(uint16_t ID)															{ ClientID = ID; }
+	virtual void setIDArray(uint16_t* IDArray)													{ this->IDArray = IDArray; }
+	virtual unsigned GetClientCount()															{ return clientCount; }
+	virtual void SetClientCount(unsigned count)													{ clientCount = count; }
 protected:
 	sockaddr fConnectionSockaddr;
 	int ClientID;
 	int bytes_read;
+	unsigned clientCount;
 	uint16_t* IDArray;
 	NetBuffer recv_buf;
 	bool udp_tcp;

@@ -203,7 +203,7 @@ void OnReadTCP(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)
 	}
 	else
 	{
-		std::cout << "Reading UV socket from client with ID:" << uvsocket->GetClientID() << std::endl;
+		printf("Reading data from client with ID: %s\n", uvsocket->GetClientID());
 		NetBuffer* recv_buff = uvsocket->net->GetRecvBuffer();
 		assert(buf->base == (char*)recv_buff->GetData());
 		recv_buff->SetMaxSize(nread);

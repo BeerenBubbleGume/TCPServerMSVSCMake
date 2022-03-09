@@ -7,6 +7,7 @@ Net::Net()
 	bytes_read = 0;
 	udp_tcp = false;
 	ClientID = 0;
+	clientCount = 0;
 	IDArray = nullptr;
 	addr = nullptr;
 	receiving_socket = nullptr;
@@ -115,18 +116,12 @@ void NetSocket::SetID(void* NewClient)
 	int counter = 0;
 	int ID = net->GetIDPath();
 	uint16_t* Array = new uint16_t[1000000];
-	if (NewClient != nullptr)
+	if (NewClient)
 	{
-		for (int i = 1; i < 1000000; i++)
-		{
-			counter = i;
-			ID = counter;
-			Array[i] = ID;
-			net->setIDPath(ID);
-			net->setIDArray(Array);
-
-		}
-
+		counter++;
+		net->SetClientCount(counter);
+		Array[counter] = counter;
+		net->setIDArray(Array);
 	}
 	else
 	{
