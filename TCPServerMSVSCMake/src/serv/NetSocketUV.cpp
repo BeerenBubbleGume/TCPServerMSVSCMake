@@ -137,8 +137,7 @@ bool NetSocketUV::Accept(uv_handle_t* handle)
 			//system("RTSPProxyServerForClient.exe -d -c -%s");
 			proxy = _popen("RTSP.exe -d -c -%s", "r");
 			_pclose(proxy);
-			__cplusplus;
-			setupDecoder();
+			
 #else
 			//	//system("./RTSPProxyServerForClient -d -c -%s");
 			proxy = popen("./RTSP -c -%s", "r");
@@ -181,6 +180,9 @@ void NetSocketUV::ReceiveTCP()
 	{
 		printf("cannot open file\n");
 	}
+
+	__cplusplus;
+	setupDecoder();
 
 }
 
