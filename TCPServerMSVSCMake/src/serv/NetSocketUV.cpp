@@ -194,7 +194,7 @@ void OnReadTCP(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)
 {
 	NetSocketUV* uvsocket = (NetSocketUV*)GetNetSocketPtr(stream);
 	uvsocket->net->setupReceivingSocket(*uvsocket);
-	std::cout << "Receiving..." << std::endl;
+	printf("Reading data from client with ID: %s\n", uvsocket->GetClientID());
 	if (nread < 0)
 	{
 		std::cout << "read buff < 0" << std::endl;
@@ -203,7 +203,6 @@ void OnReadTCP(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)
 	}
 	else
 	{
-		printf("Reading data from client with ID: %s\n", uvsocket->GetClientID());
 		NetBuffer* recv_buff = uvsocket->net->GetRecvBuffer();
 		assert(buf->base == (char*)recv_buff->GetData());
 		recv_buff->SetMaxSize(nread);
