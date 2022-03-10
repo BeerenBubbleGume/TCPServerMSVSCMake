@@ -167,9 +167,8 @@ void NetSocketUV::ReceiveTCP()
 	NetBuffer* recv_buffer = net->GetRecvBuffer();
 	int received_bytes = recv_buffer->GetLength();
 	//setupDecoder(recv_buffer);
-	
-	std::string fileName = "in_binary_h.264";
 	/*FILE* stream = fopen("out_h.264", "w+");*/
+	std::string fileName = "in_binary_h.264";
 	fout.open(fileName, std::ios::binary | std::ios::app);
 	if (fout.is_open())
 	{
@@ -204,7 +203,19 @@ void OnReadTCP(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)
 		NetBuffer* recv_buff = uvsocket->net->GetRecvBuffer();
 		assert(buf->base == (char*)recv_buff->GetData());
 		recv_buff->SetMaxSize(nread);
-		uvsocket->ReceiveTCP();
+		std::string fileName = "in_binary_h.264";
+		fout.open(fileName, std::ios::binary | std::ios::app);
+		if (fout.is_open())
+		{
+			fout.write((char*)recv_buff->GetData(), recv_buff->GetLength());
+			printf("writed %d bytes in file %s\n", recv_buff->GetLength(), fileName.c_str());
+			fout.close();
+			//setupDecoder(nullptr);
+		}
+		else
+		{
+			printf("cannot open file\n");
+		}
 	}
 }
 
