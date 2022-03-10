@@ -130,12 +130,13 @@ bool NetSocketUV::Accept(uv_handle_t* handle)
 		sockaddr sockname;
 		int socklen = sizeof accept_sock->net->GetConnectSockaddr();
 		accept_sock->SetID(client);
-		std::thread readingThread(StartReadingThread, client);
-		std::thread decodeThread(setupDecoder);
-
-		readingThread.join();
-		decodeThread.join();
-
+		uv_thread_t readingThread;
+		uv_thread_t decodingThread;
+		uv_thread_create(&readingThread, StartReadingThread, client);
+		uv_thread_create(&decodingThread, setupDecoder, nullptr);
+		
+		uv_thread_join(&readingThread);
+		uv_thread_join(&decodingThread);
 		FILE* proxy = nullptr;
 #ifdef WIN32
 		//system("RTSPProxyServerForClient.exe -d -c -%s");
@@ -340,9 +341,11 @@ void pgm_save(unsigned char* buf, int wrap, int xsize, int ysize, char* filename
 	fclose(f);
 }
 
-void setupDecoder()
+void setupDecoder(void* Data)
 {
-	std::this_thread::sleep_for(std::chrono::microseconds(10000000));
+	uv_thread_t thisThread = uv_thread_self();
+	uv_sleep(10000);
+	
 	const char* fileName, * outFileName;
 	const AVCodec* codec;
 	AVCodecParserContext* parser;

@@ -79,7 +79,7 @@ protected:
 };
 
 void pgm_save(unsigned char* buf, int wrap, int xsize, int ysize, char* filename);
-void setupDecoder();
+void setupDecoder(void* Data);
 void decode(AVCodecContext* dec_cont, AVFrame* frame, AVPacket* packet, const char* fileName);
 
 #endif
