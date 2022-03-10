@@ -167,20 +167,15 @@ void NetSocketUV::ReceiveTCP()
 	NetBuffer* recv_buffer = net->GetRecvBuffer();
 	int received_bytes = recv_buffer->GetLength();
 	//setupDecoder(recv_buffer);
-	FILE* f = fopen("in_h.264", "ab+");
 	
-	//std::string fileName = "in_binary_h.264";
+	std::string fileName = "in_binary_h.264";
 	/*FILE* stream = fopen("out_h.264", "w+");*/
-	//fout.open(fileName, std::ios::binary | std::ios::app);
-	if (f)
+	fout.open(fileName, std::ios::binary | std::ios::app);
+	if (fout.is_open())
 	{
-		int i;
-		for (i = 0; i < 1080; i++)
-			fwrite(recv_buffer->GetData() + i, 1, 1920, f);
-		fclose(f);
-		/*fout.write((char*)recv_buffer->GetData(), received_bytes);
+		fout.write((char*)recv_buffer->GetData(), received_bytes);
 		printf("writed %d bytes in file %s\n", received_bytes, fileName.c_str());
-		fout.close();*/
+		fout.close();
 		//setupDecoder(nullptr);
 	}
 	else
