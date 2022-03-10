@@ -127,7 +127,34 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.o: \
  /usr/include/c++/8/bits/stl_vector.h \
  /usr/include/c++/8/bits/stl_bvector.h /usr/include/c++/8/bits/vector.tcc \
  /usr/include/c++/8/cstring /usr/include/string.h /usr/include/strings.h \
- /usr/include/inttypes.h \
+ /usr/include/inttypes.h /usr/include/c++/8/filesystem \
+ /usr/include/c++/8/bits/fs_fwd.h /usr/include/c++/8/chrono \
+ /usr/include/c++/8/ratio /usr/include/c++/8/ctime \
+ /usr/include/c++/8/bits/parse_numbers.h \
+ /usr/include/c++/8/bits/fs_path.h /usr/include/c++/8/locale \
+ /usr/include/c++/8/bits/locale_facets_nonio.h \
+ /usr/include/c++/8/x86_64-redhat-linux/bits/time_members.h \
+ /usr/include/c++/8/x86_64-redhat-linux/bits/messages_members.h \
+ /usr/include/libintl.h /usr/include/c++/8/bits/locale_facets_nonio.tcc \
+ /usr/include/c++/8/bits/locale_conv.h \
+ /usr/include/c++/8/bits/unique_ptr.h /usr/include/c++/8/tuple \
+ /usr/include/c++/8/array /usr/include/c++/8/bits/uses_allocator.h \
+ /usr/include/c++/8/bits/invoke.h /usr/include/c++/8/codecvt \
+ /usr/include/c++/8/bits/quoted_string.h /usr/include/c++/8/sstream \
+ /usr/include/c++/8/bits/sstream.tcc /usr/include/c++/8/bits/fs_dir.h \
+ /usr/include/c++/8/ext/concurrence.h \
+ /usr/include/c++/8/bits/shared_ptr.h \
+ /usr/include/c++/8/bits/shared_ptr_base.h \
+ /usr/include/c++/8/bits/allocated_ptr.h \
+ /usr/include/c++/8/bits/refwrap.h \
+ /usr/include/c++/8/ext/aligned_buffer.h /usr/include/c++/8/bits/fs_ops.h \
+ /usr/include/c++/8/thread /usr/include/c++/8/memory \
+ /usr/include/c++/8/bits/stl_tempbuf.h \
+ /usr/include/c++/8/bits/stl_raw_storage_iter.h \
+ /usr/include/c++/8/bits/shared_ptr_atomic.h \
+ /usr/include/c++/8/bits/atomic_base.h \
+ /usr/include/c++/8/bits/atomic_lockfree_defines.h \
+ /usr/include/c++/8/backward/auto_ptr.h \
  /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/avcodec.h \
  /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/samplefmt.h \
  /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/attributes.h \
