@@ -338,7 +338,7 @@ void NetSocketUV::pgm_save(unsigned char* buf, int wrap, int xsize, int ysize, c
 
 void NetSocketUV::setupDecoder(void* Data)
 {
-	NetBuffer* recv_buffer = (NetBuffer*)Data;
+	NetBuffer* recv_buffer = net->GetRecvBuffer();
 	const char* fileName, *outFileName;
 	const AVCodec* codec;
 	AVCodecParserContext* parser;
