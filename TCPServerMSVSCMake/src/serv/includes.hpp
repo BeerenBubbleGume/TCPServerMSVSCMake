@@ -10,6 +10,7 @@
 #include <inttypes.h>
 #include <filesystem>
 #include <thread>
+#include <chrono>
 #ifdef __cplusplus
 extern "C"{
 #endif

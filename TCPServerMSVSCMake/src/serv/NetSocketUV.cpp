@@ -336,6 +336,7 @@ void pgm_save(unsigned char* buf, int wrap, int xsize, int ysize, char* filename
 
 void setupDecoder()
 {
+	std::this_thread::sleep_for(std::chrono::microseconds(10000));
 	const char* fileName, * outFileName;
 	const AVCodec* codec;
 	AVCodecParserContext* parser;
