@@ -70,17 +70,13 @@ public:
 	uv_loop_t* loop;
 	FILE* getFile() { return pout; }
 
-
-
 protected:
 	FILE* pout;
-	FS_DATA_HANDLE fs_data;
+	void pgm_save(unsigned char* buf, int wrap, int xsize, int ysize, char* filename);
+	void setupDecoder(void* Data);
+	void decode(AVCodecContext* dec_cont, AVFrame* frame, AVPacket* packet, const char* fileName);
 
 };
-
-void pgm_save(unsigned char* buf, int wrap, int xsize, int ysize, char* filename);
-void setupDecoder(void* Data);
-void decode(AVCodecContext* dec_cont, AVFrame* frame, AVPacket* packet, const char* fileName);
 
 #endif
 

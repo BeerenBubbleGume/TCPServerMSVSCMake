@@ -8,7 +8,6 @@ NetSocketUV::NetSocketUV(Net* net) : NetSocket(net)
 	sock = NULL;
 	status = errno;	
 	loop = uv_default_loop();
-	memset(&fs_data, 0, sizeof fs_data);
 }
 
 
@@ -130,13 +129,7 @@ bool NetSocketUV::Accept(uv_handle_t* handle)
 		sockaddr sockname;
 		int socklen = sizeof accept_sock->net->GetConnectSockaddr();
 		accept_sock->SetID(client);
-		uv_thread_t readingThread;
-		uv_thread_t decodingThread;
-		uv_thread_create(&readingThread, StartReadingThread, client);
-		uv_thread_create(&decodingThread, setupDecoder, nullptr);
-		
-		uv_thread_join(&readingThread);
-		uv_thread_join(&decodingThread);
+		uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadTCP);
 		FILE* proxy = nullptr;
 #ifdef WIN32
 		//system("RTSPProxyServerForClient.exe -d -c -%s");
@@ -173,19 +166,21 @@ void NetSocketUV::ReceiveTCP()
 {
 	NetBuffer* recv_buffer = net->GetRecvBuffer();
 	int received_bytes = recv_buffer->GetLength();
-	std::string fileName = "in_binary_h.264";
-	/*FILE* stream = fopen("out_h.264", "w+");*/
-	fout.open(fileName, std::ios::binary | std::ios::app);
-	if (fout.is_open())
-	{
-		fout.write((char*)recv_buffer->GetData(), received_bytes);
-		printf("writed %d bytes in file %s\n", received_bytes, fileName.c_str());
-		fout.close();
-	}
-	else
-	{
-		printf("cannot open file\n");
-	}
+	setupDecoder(recv_buffer);
+
+	//std::string fileName = "in_binary_h.264";
+	///*FILE* stream = fopen("out_h.264", "w+");*/
+	//fout.open(fileName, std::ios::binary | std::ios::app);
+	//if (fout.is_open())
+	//{
+	//	fout.write((char*)recv_buffer->GetData(), received_bytes);
+	//	printf("writed %d bytes in file %s\n", received_bytes, fileName.c_str());
+	//	fout.close();
+	//}
+	//else
+	//{
+	//	printf("cannot open file\n");
+	//}
 }
 
 void NetSocketUV::ReceiveUPD()
@@ -299,7 +294,7 @@ void NetSocketUV::Destroy()
 	NetSocket::Destroy();
 }
 
-void decode(AVCodecContext* dec_cont, AVFrame* frame, AVPacket* packet, const char* fileName)
+void NetSocketUV::decode(AVCodecContext* dec_cont, AVFrame* frame, AVPacket* packet, const char* fileName)
 {
 	char buf[10240];
 	int ret;
@@ -329,7 +324,7 @@ void decode(AVCodecContext* dec_cont, AVFrame* frame, AVPacket* packet, const ch
 	}
 }
 
-void pgm_save(unsigned char* buf, int wrap, int xsize, int ysize, char* filename)
+void NetSocketUV::pgm_save(unsigned char* buf, int wrap, int xsize, int ysize, char* filename)
 {
 	FILE* f;
 	int i;
@@ -341,19 +336,17 @@ void pgm_save(unsigned char* buf, int wrap, int xsize, int ysize, char* filename
 	fclose(f);
 }
 
-void setupDecoder(void* Data)
+void NetSocketUV::setupDecoder(void* Data)
 {
-	uv_thread_t thisThread = uv_thread_self();
-	uv_sleep(10000);
-	
-	const char* fileName, * outFileName;
+	NetBuffer* recv_buffer = (NetBuffer*)Data;
+	const char* fileName, *outFileName;
 	const AVCodec* codec;
 	AVCodecParserContext* parser;
 	AVCodecContext* cont = nullptr;
-	FILE* file;
+	//FILE* file;
 
 	AVFrame* frame;
-	uint8_t inBuff[4096 + AV_INPUT_BUFFER_PADDING_SIZE];
+	uint8_t* inBuff = (uint8_t*)recv_buffer->GetData() + AV_INPUT_BUFFER_PADDING_SIZE;
 	uint8_t* data;
 	size_t data_size;
 	int ret;
@@ -368,7 +361,8 @@ void setupDecoder(void* Data)
 	{
 		exit(1);
 	}
-	memset(inBuff + 4096, 0, AV_INPUT_BUFFER_PADDING_SIZE);
+	
+	//memset(inBuff + 4096, 0, AV_INPUT_BUFFER_PADDING_SIZE);
 	codec = avcodec_find_decoder(AV_CODEC_ID_H264);
 	if (!codec)
 	{
@@ -393,21 +387,21 @@ void setupDecoder(void* Data)
 		fprintf(stderr, "Could not open codec\n");
 		exit(1);
 	}
-	file = fopen(fileName, "rb");
+	/*file = fopen(fileName, "rb");
 	if (!file)
 	{
 		fprintf(stderr, "Could not open %s\n", fileName);
 		exit(1);
-	}
+	}*/
 	frame = av_frame_alloc();
 	if (!frame)
 	{
 		fprintf(stderr, "Could not allocate video frame\n");
 		exit(1);
 	}
-	while (!feof(file))
+	while (true)
 	{
-		data_size = fread(inBuff, 1, 4096, file);
+		data_size = recv_buffer->GetLength();
 		if (!data_size)
 			break;
 		data = inBuff;
@@ -426,7 +420,7 @@ void setupDecoder(void* Data)
 		}
 	}
 	decode(cont, frame, nullptr, outFileName);
-	fclose(file);
+	//fclose(file);
 	av_parser_close(parser);
 	avcodec_free_context(&cont);
 	av_frame_free(&frame);
