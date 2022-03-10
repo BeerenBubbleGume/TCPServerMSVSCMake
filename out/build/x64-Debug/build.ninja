@@ -79,7 +79,7 @@ build cmake_object_order_depends_target_TCPServerMSVSCMake: phony || TCPServerMS
 
 build TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv\NetSock.cpp.obj: CXX_COMPILER__TCPServerMSVSCMake_Debug C$:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\NetSock.cpp || cmake_object_order_depends_target_TCPServerMSVSCMake
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc -gstabs+ -gstabs -D _DEBUG -O /MDd /Zi /Ob0 /Od /RTC1 -std:c++17
-  INCLUDES = -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\libavcodec -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\libavdevice -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\libavfilter -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\libavutil -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\libswresample -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\libswcale
+  INCLUDES = -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes
   OBJECT_DIR = TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir
   OBJECT_FILE_DIR = TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv
   TARGET_COMPILE_PDB = TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\
@@ -87,7 +87,7 @@ build TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv\NetSock.cpp.
 
 build TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv\NetSocketUV.cpp.obj: CXX_COMPILER__TCPServerMSVSCMake_Debug C$:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\NetSocketUV.cpp || cmake_object_order_depends_target_TCPServerMSVSCMake
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc -gstabs+ -gstabs -D _DEBUG -O /MDd /Zi /Ob0 /Od /RTC1 -std:c++17
-  INCLUDES = -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\libavcodec -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\libavdevice -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\libavfilter -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\libavutil -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\libswresample -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\libswcale
+  INCLUDES = -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes
   OBJECT_DIR = TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir
   OBJECT_FILE_DIR = TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv
   TARGET_COMPILE_PDB = TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\
@@ -95,7 +95,7 @@ build TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv\NetSocketUV.
 
 build TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\TCPServerMSVSCMake.cpp.obj: CXX_COMPILER__TCPServerMSVSCMake_Debug C$:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\TCPServerMSVSCMake.cpp || cmake_object_order_depends_target_TCPServerMSVSCMake
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc -gstabs+ -gstabs -D _DEBUG -O /MDd /Zi /Ob0 /Od /RTC1 -std:c++17
-  INCLUDES = -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\libavcodec -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\libavdevice -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\libavfilter -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\libavutil -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\libswresample -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\libswcale
+  INCLUDES = -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes
   OBJECT_DIR = TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir
   OBJECT_FILE_DIR = TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir
   TARGET_COMPILE_PDB = TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\
@@ -103,7 +103,7 @@ build TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\TCPServerMSVSCMake.cp
 
 build TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv\utils.cpp.obj: CXX_COMPILER__TCPServerMSVSCMake_Debug C$:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\utils.cpp || cmake_object_order_depends_target_TCPServerMSVSCMake
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc -gstabs+ -gstabs -D _DEBUG -O /MDd /Zi /Ob0 /Od /RTC1 -std:c++17
-  INCLUDES = -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\libavcodec -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\libavdevice -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\libavfilter -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\libavutil -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\libswresample -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\libswcale
+  INCLUDES = -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes
   OBJECT_DIR = TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir
   OBJECT_FILE_DIR = TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv
   TARGET_COMPILE_PDB = TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\
@@ -111,7 +111,7 @@ build TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv\utils.cpp.ob
 
 build TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv\utf.cpp.obj: CXX_COMPILER__TCPServerMSVSCMake_Debug C$:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\src\serv\utf.cpp || cmake_object_order_depends_target_TCPServerMSVSCMake
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc -gstabs+ -gstabs -D _DEBUG -O /MDd /Zi /Ob0 /Od /RTC1 -std:c++17
-  INCLUDES = -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\libavcodec -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\libavdevice -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\libavfilter -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\libavutil -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\libswresample -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes\libswcale
+  INCLUDES = -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\TCPServerMSVSCMake\libs\includes
   OBJECT_DIR = TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir
   OBJECT_FILE_DIR = TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv
   TARGET_COMPILE_PDB = TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\

@@ -21,12 +21,13 @@ add_executable (TCPServerMSVSCMake	"src/serv/NetSock.hpp"
 IF(WIN32)
 	target_include_directories(TCPServerMSVSCMake PUBLIC
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/
-								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/libavcodec
-								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/libavdevice
-								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/libavfilter
-								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/libavutil
-								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/libswresample
-								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/libswcale)
+								#${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/libavcodec
+								#${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/libavdevice
+								#${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/libavfilter
+								#${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/libavutil
+								#${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/libswresample
+								#${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/libswcale
+								)
 	target_link_libraries(TCPServerMSVSCMake 
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/uv.lib
 								)

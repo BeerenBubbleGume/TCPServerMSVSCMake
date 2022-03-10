@@ -35,7 +35,7 @@
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 30,
+				"line" : 31,
 				"parent" : 0
 			},
 			{
@@ -63,30 +63,6 @@
 				{
 					"backtrace" : 3,
 					"path" : "C:/Users/Operator/source/repos/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes"
-				},
-				{
-					"backtrace" : 3,
-					"path" : "C:/Users/Operator/source/repos/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec"
-				},
-				{
-					"backtrace" : 3,
-					"path" : "C:/Users/Operator/source/repos/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavdevice"
-				},
-				{
-					"backtrace" : 3,
-					"path" : "C:/Users/Operator/source/repos/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavfilter"
-				},
-				{
-					"backtrace" : 3,
-					"path" : "C:/Users/Operator/source/repos/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil"
-				},
-				{
-					"backtrace" : 3,
-					"path" : "C:/Users/Operator/source/repos/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libswresample"
-				},
-				{
-					"backtrace" : 3,
-					"path" : "C:/Users/Operator/source/repos/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libswcale"
 				}
 			],
 			"language" : "CXX",

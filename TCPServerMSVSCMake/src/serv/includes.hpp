@@ -11,13 +11,13 @@
 #include <filesystem>
 #include <thread>
 #include <chrono>
-#ifdef __cplusplus
-extern "C"{
-#endif
-#include <libavcodec/avcodec.h>
-#ifdef __cplusplus
-}
-#endif // _cplusplus
+//#ifdef __cplusplus
+//extern "C"{
+//#endif
+//#include <libavcodec/avcodec.h>
+//#ifdef __cplusplus
+//}
+//#endif // _cplusplus
 
 #ifdef WIN32
 #include <WinSock2.h>
