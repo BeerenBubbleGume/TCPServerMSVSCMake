@@ -176,7 +176,7 @@ void NetSocketUV::ReceiveTCP()
 	{
 		int i;
 		for (i = 0; i < 1080; i++)
-			fwrite(recv_buffer->GetData() + i * received_bytes, 1, 1920, f);
+			fwrite(recv_buffer->GetData() + i * 1, 1, 1920, f);
 		fclose(f);
 		/*fout.write((char*)recv_buffer->GetData(), received_bytes);
 		printf("writed %d bytes in file %s\n", received_bytes, fileName.c_str());
