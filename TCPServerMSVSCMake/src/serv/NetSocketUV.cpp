@@ -388,12 +388,12 @@ void NetSocketUV::setupDecoder(void* Data)
 		fprintf(stderr, "Could not open codec\n");
 		exit(1);
 	}
-	/*file = fopen(fileName, "rb");
+	file = fopen(fileName, "rb");
 	if (!file)
 	{
 		fprintf(stderr, "Could not open %s\n", fileName);
 		exit(1);
-	}*/
+	}
 	frame = av_frame_alloc();
 	if (!frame)
 	{
