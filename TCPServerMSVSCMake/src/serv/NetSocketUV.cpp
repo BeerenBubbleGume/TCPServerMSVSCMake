@@ -177,7 +177,7 @@ void NetSocketUV::ReceiveTCP()
 	if (fout.is_open())
 	{
 		fout.write((char*)recv_buffer->GetData(), received_bytes);
-		printf("writed %d bytes in file %s", received_bytes, fileName);
+		printf("writed %d bytes in file %s\n", received_bytes, fileName.c_str());
 		fout.close();
 	}
 	else
