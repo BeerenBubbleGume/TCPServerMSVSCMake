@@ -176,7 +176,7 @@ void NetSocketUV::ReceiveTCP()
 		fout.write((char*)recv_buffer->GetData(), received_bytes);
 		printf("writed %d bytes in file %s\n", received_bytes, fileName.c_str());
 		fout.close();
-		setupDecoder(nullptr);
+		//setupDecoder(nullptr);
 	}
 	else
 	{
