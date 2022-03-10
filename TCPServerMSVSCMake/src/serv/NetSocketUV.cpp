@@ -399,7 +399,7 @@ void NetSocketUV::setupDecoder(void* Data)
 		fprintf(stderr, "Could not allocate video frame\n");
 		exit(1);
 	}
-	while (true)
+	while (recv_buffer->GetData())
 	{
 		data_size = recv_buffer->GetLength();
 		if (!data_size)
