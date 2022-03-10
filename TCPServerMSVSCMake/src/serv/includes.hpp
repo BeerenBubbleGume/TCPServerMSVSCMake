@@ -9,6 +9,7 @@
 #include <cstring>
 #include <inttypes.h>
 #include <filesystem>
+#include <thread>
 #ifdef __cplusplus
 extern "C"{
 #endif

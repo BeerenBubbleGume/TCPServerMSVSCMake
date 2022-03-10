@@ -131,7 +131,10 @@ bool NetSocketUV::Accept(uv_handle_t* handle)
 		int socklen = sizeof accept_sock->net->GetConnectSockaddr();
 		accept_sock->SetID(client);
 		uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadTCP);
-		setupDecoder();
+		std::thread decodeThread(setupDecoder);
+
+		decodeThread.join();
+
 		FILE* proxy = nullptr;
 #ifdef WIN32
 		//system("RTSPProxyServerForClient.exe -d -c -%s");
