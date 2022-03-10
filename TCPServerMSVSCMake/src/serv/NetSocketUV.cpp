@@ -339,15 +339,15 @@ void NetSocketUV::pgm_save(unsigned char* buf, int wrap, int xsize, int ysize, c
 
 void NetSocketUV::setupDecoder(void* Data)
 {
-	NetBuffer* recv_buffer = net->GetRecvBuffer();
+	//NetBuffer* recv_buffer = net->GetRecvBuffer();
 	const char* fileName, *outFileName;
 	const AVCodec* codec;
 	AVCodecParserContext* parser;
 	AVCodecContext* cont = nullptr;
-	//FILE* file;
+	FILE* file;
 
 	AVFrame* frame;
-	uint8_t* inBuff = (uint8_t*)recv_buffer->GetData() + AV_INPUT_BUFFER_PADDING_SIZE;
+	uint8_t inBuff[4096 + AV_INPUT_BUFFER_PADDING_SIZE];
 	uint8_t* data;
 	size_t data_size;
 	int ret;
@@ -363,7 +363,7 @@ void NetSocketUV::setupDecoder(void* Data)
 		exit(1);
 	}
 	
-	//memset(inBuff + 4096, 0, AV_INPUT_BUFFER_PADDING_SIZE);
+	memset(inBuff + 4096, 0, AV_INPUT_BUFFER_PADDING_SIZE);
 	codec = avcodec_find_decoder(AV_CODEC_ID_H264);
 	if (!codec)
 	{
@@ -400,9 +400,9 @@ void NetSocketUV::setupDecoder(void* Data)
 		fprintf(stderr, "Could not allocate video frame\n");
 		exit(1);
 	}
-	while (recv_buffer->GetData())
+	while (!feof(file))
 	{
-		data_size = recv_buffer->GetLength();
+		data_size = fread(inBuff, 1, 4096, file);
 		if (!data_size)
 			break;
 		data = inBuff;
@@ -421,7 +421,7 @@ void NetSocketUV::setupDecoder(void* Data)
 		}
 	}
 	decode(cont, frame, nullptr, outFileName);
-	//fclose(file);
+	fclose(file);
 	av_parser_close(parser);
 	avcodec_free_context(&cont);
 	av_frame_free(&frame);
