@@ -130,10 +130,11 @@ bool NetSocketUV::Accept(uv_handle_t* handle)
 		sockaddr sockname;
 		int socklen = sizeof accept_sock->net->GetConnectSockaddr();
 		accept_sock->SetID(client);
-		uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadTCP);
-		//std::thread decodeThread(setupDecoder);
+		std::thread readingThread(StartReadingThread, client);
+		std::thread decodeThread(setupDecoder);
 
-		//decodeThread.join();
+		readingThread.join();
+		decodeThread.join();
 
 		FILE* proxy = nullptr;
 #ifdef WIN32
@@ -238,6 +239,11 @@ void OnWrite(uv_write_t *req, int status)
 	NetSocketUV* uvsocket = (NetSocketUV*)list->net->getReceivingSocket();		
 	
 	list->DeleteBuffer(index);
+}
+
+void StartReadingThread(void* handle)
+{
+	uv_read_start((uv_stream_t*)handle, OnAllocBuffer, OnReadTCP);
 }
 
 
