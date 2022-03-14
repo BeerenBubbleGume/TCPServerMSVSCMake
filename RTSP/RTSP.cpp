@@ -70,7 +70,7 @@ void RTSPProxyServer::StartProxyServer(/*CString* inputURL, */void* Data)
 	rtpGS->multicastSendOnly();
 	rtcpGS->multicastSendOnly();
 
-	ByteStreamFileSource* outSource = ByteStreamFileSource::createNew(*env, "in_binary_h.264");
+	ByteStreamFileSource* outSource = ByteStreamFileSource::createNew(*env, "in_binary_h.avi");
 	const unsigned estimatedSessionBandwidth = 500;
 	const unsigned maxCNAMElen = 100;
 	unsigned char CNAME[maxCNAMElen + 1];
@@ -82,7 +82,7 @@ void RTSPProxyServer::StartProxyServer(/*CString* inputURL, */void* Data)
 
 	const char* streamName = "ServerMedia/"/* + *socket->GetClientID()*/;
 
-	ServerMediaSession* sms = ServerMediaSession::createNew(*env, streamName);
+	ServerMediaSession* sms = ServerMediaSession::createNew(*env, streamName, outputSink->rtpmapLine(), (char*)CNAME, false, outputSink->sdpMediaType());
 	DemandServerMediaSubsession* proxy = DemandServerMediaSubsession::createNew(/*socket->net, */*env, true);
 
 	sms->addSubsession(proxy);

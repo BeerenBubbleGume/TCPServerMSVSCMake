@@ -9,6 +9,8 @@
 *.user
 *.userosscache
 *.sln.docstates
+*.avi
+*.264
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -291,6 +293,10 @@ paket-files/
 # FAKE - F# Make
 .fake/
 
+# libraries
+TCPServerMSVSCMake/libs/lib
+RTSP/lib/lib
+
 # JetBrains Rider
 .idea/
 *.sln.iml
@@ -339,3 +345,6 @@ ASALocalRun/
 # BeatPulse healthcheck temp database
 healthchecksdb
 out/build/unix/TCPServerMSVSCMake/TCPServerMSVSCMake
+out/build/x64-Debug/TCPServerMSVSCMake/in_binary_h.264
+out/build/x64-Debug/RTSP/in_binary_h.264
+out/build/x64-Debug/RTSP/in_binary_h.avi
