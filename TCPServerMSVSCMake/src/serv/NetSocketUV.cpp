@@ -130,20 +130,6 @@ bool NetSocketUV::Accept(uv_handle_t* handle)
 		int socklen = sizeof accept_sock->net->GetConnectSockaddr();
 		accept_sock->SetID(client);
 		uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadTCP);
-		FILE* proxy = nullptr;
-#ifdef WIN32
-		//system("RTSPProxyServerForClient.exe -d -c -%s");
-		proxy = _popen("RTSP.exe -d -c -%s", "r");
-		_pclose(proxy);
-			
-#else
-		//	//system("./RTSPProxyServerForClient -d -c -%s");
-		proxy = popen("./RTSP -c -%s", "r");
-		pclose(proxy);
-		return true;
-#endif
-		
-		
 	}
 	else
 	{
@@ -181,6 +167,34 @@ void NetSocketUV::ReceiveTCP()
 	{
 		printf("cannot open file\n");
 	}
+		FILE* proxy = nullptr;
+#ifdef WIN32
+		//system("RTSPProxyServerForClient.exe -d -c -%s");
+		proxy = _popen("RTSP.exe -d -c -%s", "r");
+		_pclose(proxy);
+			
+#else
+		int status;
+   		pid_t pid;
+
+    	pid = fork();
+
+    /* Handeling Chile Process */
+    if(pid == 0){
+        char* execv_str[] = {"./RTSP", NULL};
+        if (execv("./RTSP",execv_str) < 0){
+            status = -1;
+            perror("ERROR\n");
+        }
+    }
+
+    /* Handeling Chile Process Failure */
+    else if(pid < 0){
+        status = -1;
+        perror("ERROR\n");
+    }
+#endif
+
 }
 
 void NetSocketUV::ReceiveUPD()
@@ -203,7 +217,7 @@ void OnReadTCP(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)
 		NetBuffer* recv_buff = uvsocket->net->GetRecvBuffer();
 		assert(buf->base == (char*)recv_buff->GetData());
 		recv_buff->SetMaxSize(nread);
-		std::string fileName = "in_binary_h.avi";
+		std::string fileName = "in_binary_h.264";
 		fout.open(fileName, std::ios::binary | std::ios::app);
 		if (fout.is_open())
 		{
