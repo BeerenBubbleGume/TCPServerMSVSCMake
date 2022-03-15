@@ -43,13 +43,12 @@ RTSPProxyServer* RTSPProxyServer::createNew(UsageEnvironment& env, Port ourPort,
 void RTSPProxyServer::anonceStream(RTSPServer* rtspServer, ServerMediaSession* sms, char const* streamName)
 {
 	char* url = rtspServer->rtspURL(sms);
-	//UsageEnvironment& env = rtspServer->envir();
 
 	std::cout << "Play this stream using the URL \"" << url << "\"\n";
 	delete[] url;
 }
 
-void RTSPProxyServer::StartProxyServer(/*CString* inputURL, */void* Data)
+void RTSPProxyServer::StartProxyServer(void* Data)
 {
 	TaskScheduler* newscheduler = BasicTaskScheduler::createNew();
 	UsageEnvironment* env = BasicUsageEnvironment::createNew(*newscheduler);
@@ -81,8 +80,8 @@ void RTSPProxyServer::StartProxyServer(/*CString* inputURL, */void* Data)
 	RTPSink* outputSink = H264VideoRTPSink::createNew(*env, rtpGS, 96);
 	RTSPProxyServer* server = RTSPProxyServer::createNew(*env, 8554);
 
-	const char* streamName = "ServerMedia/"/* + *socket->GetClientID()*/;
-
+	const char* streamName = "ServerMedia/";
+	
 	ServerMediaSession* sms = ServerMediaSession::createNew(*env, streamName, outputSink->rtpmapLine(), (char*)CNAME, false, outputSink->sdpMediaType());
 	//DemandServerMediaSubsession* proxy = DemandServerMediaSubsession::createNew(/*socket->net, */*env, true);
 	ServerMediaSubsession* subsms = H264VideoFileServerMediaSubsession::createNew(*env, "in_binary_h.264", true);
