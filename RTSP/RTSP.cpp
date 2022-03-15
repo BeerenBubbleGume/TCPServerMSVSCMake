@@ -84,9 +84,12 @@ void RTSPProxyServer::StartProxyServer(/*CString* inputURL, */void* Data)
 	const char* streamName = "ServerMedia/"/* + *socket->GetClientID()*/;
 
 	ServerMediaSession* sms = ServerMediaSession::createNew(*env, streamName, outputSink->rtpmapLine(), (char*)CNAME, false, outputSink->sdpMediaType());
-	DemandServerMediaSubsession* proxy = DemandServerMediaSubsession::createNew(/*socket->net, */*env, true);
-	//ServerMediaSubsession* subsms = PassiveServerMediaSubsession::createNew(*outputSink, );
-	sms->addSubsession(proxy);
+	//DemandServerMediaSubsession* proxy = DemandServerMediaSubsession::createNew(/*socket->net, */*env, true);
+	ServerMediaSubsession* subsms = H264VideoFileServerMediaSubsession::createNew(*env, "in_binary_h.264", true);
+	sms->addSubsession(subsms);
+
+	ServerMediaSubsession* audiosms = MP3AudioFileServerMediaSubsession::createNew(*env, "in_binary_h.264", true, true, nullptr);
+	sms->addSubsession(audiosms);
 	server->addServerMediaSession(sms);
 
 	//H264VideoStreamFramer* framer = H264VideoStreamFramer::createNew(*env, outSource, false);

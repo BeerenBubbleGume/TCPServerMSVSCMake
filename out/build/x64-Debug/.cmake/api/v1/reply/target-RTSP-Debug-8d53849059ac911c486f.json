@@ -193,7 +193,7 @@
 		},
 		{
 			"backtrace" : 1,
-			"path" : "RTSP/RTSP.h",
+			"path" : "RTSP/RTSP.hpp",
 			"sourceGroupIndex" : 1
 		}
 	],
