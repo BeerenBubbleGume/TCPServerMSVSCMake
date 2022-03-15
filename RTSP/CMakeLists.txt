@@ -8,6 +8,7 @@ add_subdirectory("libs")
 
 # Добавьте источник в исполняемый файл этого проекта.
 add_executable (RTSP "RTSP.cpp" "RTSP.hpp")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -gstabs+ -gstabs -D _DEBUG -O")
 
 IF(WIN32)
 	target_include_directories(RTSP PUBLIC

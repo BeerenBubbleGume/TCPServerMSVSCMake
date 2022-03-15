@@ -21,12 +21,7 @@ add_executable (TCPServerMSVSCMake	"src/serv/NetSock.hpp"
 IF(WIN32)
 	target_include_directories(TCPServerMSVSCMake PUBLIC
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/
-								#${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/libavcodec
-								#${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/libavdevice
-								#${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/libavfilter
-								#${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/libavutil
-								#${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/libswresample
-								#${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/libswcale
+								
 								)
 	target_link_libraries(TCPServerMSVSCMake 
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/uv.lib
@@ -34,30 +29,11 @@ IF(WIN32)
 ELSE()
 	target_include_directories(TCPServerMSVSCMake PUBLIC
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/
-								#${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/libavcodec
-								#${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/libavdevice
-								#${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/libavfilter
-								#${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/libavutil
-								#${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/libswresample
-								#${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/libswscale
+								
 								)
 	target_link_libraries(TCPServerMSVSCMake
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libuv.a
-								#${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libavcodec.a
-								#${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libavdevice.a
-								#${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libavfilter.a
-								#${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libavutil.a
-								#${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libswresample.a
-								#${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libswscale.a
-								#${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libfdk-aac.a
-								#${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libmp3lame.a
-								#${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libopus.a
-								#${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libpostproc.a
-								#${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libvpx.a
-								#${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libx264.a
-								#${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libyasm.a
-								#${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libz.a
-								#${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/liblzma.a
+								
 								pthread
 								-ldl
 								)

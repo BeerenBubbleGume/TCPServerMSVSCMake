@@ -54,10 +54,11 @@ void RTSPProxyServer::StartProxyServer(void* Data)
 	UsageEnvironment* env = BasicUsageEnvironment::createNew(*newscheduler);
 	OutPacketBuffer::maxSize = 2000000;
 
-	RTSPProxyServer* server = RTSPProxyServer::createNew(*env, 554);
+	RTSPProxyServer* server = RTSPProxyServer::createNew(*env, 8554);
 	ServerMediaSession* sms = ServerMediaSession::createNew(*env, "serverStream");
 	sms->addSubsession(H264VideoFileServerMediaSubsession::createNew(*env, "in_binary_h.264", false));
 	server->addServerMediaSession(sms);
+	anonceStream(server, sms, "serverStream");
 	env->taskScheduler().doEventLoop(&server->eventLoopWatchVariable);
 
 	//return;

@@ -6,5 +6,5 @@ CXX_DEFINES =
 
 CXX_INCLUDES = -I/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/RTSP/libs/include -I/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/RTSP/libs/include/BasicUsageEnvironment -I/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/RTSP/libs/include/liveMedia -I/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/RTSP/libs/include/groupsock -I/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/RTSP/libs/include/UsageEnvironment
 
-CXX_FLAGS = -std=c++17
+CXX_FLAGS =  -gstabs+ -gstabs -D _DEBUG -O -std=c++17
 
