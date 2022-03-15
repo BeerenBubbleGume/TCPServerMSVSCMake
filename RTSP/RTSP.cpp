@@ -54,53 +54,10 @@ void RTSPProxyServer::StartProxyServer(void* Data)
 	UsageEnvironment* env = BasicUsageEnvironment::createNew(*newscheduler);
 	OutPacketBuffer::maxSize = 2000000;
 
-	in_addr in_Addr;
-
-	in_Addr.s_addr = AF_INET;
-	unsigned short rtpPortNum = 18885;
-	unsigned short rtcpPortNum = rtpPortNum + 1;
-
-	Port rtpPort(rtpPortNum);
-	Port rtcpPort(rtcpPortNum);
-	unsigned const short ttl = 5000;
-
-	Groupsock* rtpGS = new Groupsock(*env, *(sockaddr_storage*)&in_Addr, rtpPort, ttl);
-	Groupsock* rtcpGS = new Groupsock(*env, *(sockaddr_storage*)&in_Addr, rtcpPort, ttl);
-
-	rtpGS->multicastSendOnly();
-	rtcpGS->multicastSendOnly();
-
-	ByteStreamFileSource* outSource = ByteStreamFileSource::createNew(*env, "in_binary_h.264");
-	const unsigned estimatedSessionBandwidth = 500;
-	const unsigned maxCNAMElen = 100;
-	unsigned char CNAME[maxCNAMElen + 1];
-	gethostname((char*)CNAME, maxCNAMElen);
-	CNAME[maxCNAMElen] = '\0';
-
-	RTPSink* outputSink = H264VideoRTPSink::createNew(*env, rtpGS, 96);
-	RTSPProxyServer* server = RTSPProxyServer::createNew(*env, 8554);
-
-	const char* streamName = "ServerMedia/";
-	
-	ServerMediaSession* sms = ServerMediaSession::createNew(*env, streamName, outputSink->rtpmapLine(), (char*)CNAME, false, outputSink->sdpMediaType());
-	//DemandServerMediaSubsession* proxy = DemandServerMediaSubsession::createNew(/*socket->net, */*env, true);
-	ServerMediaSubsession* subsms = H264VideoFileServerMediaSubsession::createNew(*env, "in_binary_h.264", true);
-	sms->addSubsession(subsms);
-
-	ServerMediaSubsession* audiosms = MP3AudioFileServerMediaSubsession::createNew(*env, "in_binary_h.264", true, true, nullptr);
-	sms->addSubsession(audiosms);
+	RTSPProxyServer* server = RTSPProxyServer::createNew(*env, 554);
+	ServerMediaSession* sms = ServerMediaSession::createNew(*env, "serverStream");
+	sms->addSubsession(H264VideoFileServerMediaSubsession::createNew(*env, "in_binary_h.264", false));
 	server->addServerMediaSession(sms);
-
-	//H264VideoStreamFramer* framer = H264VideoStreamFramer::createNew(*env, outSource, false);
-	//framer->flushInput();
-	outputSink->startPlaying(*outSource, proxyServerMediaSubsessionAfterPlaying, sms);
-	RTSPProxyServer::anonceStream(server, sms, streamName);
-
-	server->eventLoopWatchVariable = 0;
-	//proxy->SetupSinkAndSource(outputSink, UDPsink, outSource);
-	//if (!server->isRTSPClient())
-	//	proxy->pauseStream1(server->numClientSessions(), proxy);
-
 	env->taskScheduler().doEventLoop(&server->eventLoopWatchVariable);
 
 	//return;
