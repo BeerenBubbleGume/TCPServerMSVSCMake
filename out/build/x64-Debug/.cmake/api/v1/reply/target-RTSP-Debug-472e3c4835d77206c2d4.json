@@ -35,13 +35,13 @@
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 22,
+				"line" : 24,
 				"parent" : 0
 			},
 			{
 				"command" : 2,
 				"file" : 0,
-				"line" : 13,
+				"line" : 14,
 				"parent" : 0
 			}
 		]
@@ -52,7 +52,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1"
+					"fragment" : "/DWIN32 /D_WINDOWS /W3 /GR /EHsc -gstabs+ -gstabs -D _DEBUG -O /MDd /Zi /Ob0 /Od /RTC1"
 				},
 				{
 					"fragment" : "-std:c++17"
@@ -60,6 +60,22 @@
 			],
 			"includes" : 
 			[
+				{
+					"backtrace" : 3,
+					"path" : "C:/Users/Operator/source/repos/TCPServerMSVSCMake/RTSP/libs/include/openssl"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "C:/Users/Operator/source/repos/TCPServerMSVSCMake/RTSP/libs/include/glib-2.0"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "C:/Users/Operator/source/repos/TCPServerMSVSCMake/RTSP/libs/include/zlib.h"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "C:/Users/Operator/source/repos/TCPServerMSVSCMake/RTSP/libs/include"
+				},
 				{
 					"backtrace" : 3,
 					"path" : "C:/Users/Operator/source/repos/TCPServerMSVSCMake/RTSP/libs/include/BasicUsageEnvironment"
@@ -75,18 +91,6 @@
 				{
 					"backtrace" : 3,
 					"path" : "C:/Users/Operator/source/repos/TCPServerMSVSCMake/RTSP/libs/include/UsageEnvironment"
-				},
-				{
-					"backtrace" : 3,
-					"path" : "C:/Users/Operator/source/repos/TCPServerMSVSCMake/RTSP/libs/include/openssl"
-				},
-				{
-					"backtrace" : 3,
-					"path" : "C:/Users/Operator/source/repos/TCPServerMSVSCMake/RTSP/libs/include/zlib.h"
-				},
-				{
-					"backtrace" : 3,
-					"path" : "C:/Users/Operator/source/repos/TCPServerMSVSCMake/RTSP/libs/include"
 				}
 			],
 			"language" : "CXX",
@@ -110,12 +114,37 @@
 		"commandFragments" : 
 		[
 			{
-				"fragment" : "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1",
+				"fragment" : "/DWIN32 /D_WINDOWS /W3 /GR /EHsc -gstabs+ -gstabs -D _DEBUG -O /MDd /Zi /Ob0 /Od /RTC1",
 				"role" : "flags"
 			},
 			{
 				"fragment" : "/machine:x64 /debug /INCREMENTAL /subsystem:console",
 				"role" : "flags"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "..\\..\\..\\RTSP\\libs\\lib\\libssl.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "..\\..\\..\\RTSP\\libs\\lib\\openssl.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "..\\..\\..\\RTSP\\libs\\lib\\glib-2.0.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "..\\..\\..\\RTSP\\libs\\lib\\libcrypto.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "..\\..\\..\\RTSP\\libs\\lib\\pthread.lib",
+				"role" : "libraries"
 			},
 			{
 				"backtrace" : 2,
@@ -135,21 +164,6 @@
 			{
 				"backtrace" : 2,
 				"fragment" : "..\\..\\..\\RTSP\\libs\\lib\\groupsock.lib",
-				"role" : "libraries"
-			},
-			{
-				"backtrace" : 2,
-				"fragment" : "..\\..\\..\\RTSP\\libs\\lib\\libssl.lib",
-				"role" : "libraries"
-			},
-			{
-				"backtrace" : 2,
-				"fragment" : "..\\..\\..\\RTSP\\libs\\lib\\libcrypto.lib",
-				"role" : "libraries"
-			},
-			{
-				"backtrace" : 2,
-				"fragment" : "..\\..\\..\\RTSP\\libs\\lib\\pthread.lib",
 				"role" : "libraries"
 			},
 			{

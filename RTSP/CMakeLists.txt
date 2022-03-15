@@ -12,22 +12,25 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -gstabs+ -gstabs -D _DEBUG -O")
 
 IF(WIN32)
 	target_include_directories(RTSP PUBLIC
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/include/openssl/
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/include/glib-2.0/
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/include/zlib.h
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/include/
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/include/BasicUsageEnvironment/
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/include/liveMedia/
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/include/groupsock/
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/include/UsageEnvironment/
-								${CMAKE_CURRENT_SOURCE_DIR}/libs/include/openssl/
-								${CMAKE_CURRENT_SOURCE_DIR}/libs/include/zlib.h
-								${CMAKE_CURRENT_SOURCE_DIR}/libs/include/
 								)
 	target_link_libraries(RTSP	PUBLIC
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libssl.lib
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/openssl.lib
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/glib-2.0.lib
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libcrypto.lib
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/pthread.lib
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/liveMedia.lib
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/BasicUsageEnvironment.lib
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/UsageEnvironment.lib
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/groupsock.lib
-								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libssl.lib
-								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libcrypto.lib
-								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/pthread.lib
 								)
 ELSE()
 	target_include_directories(RTSP PUBLIC

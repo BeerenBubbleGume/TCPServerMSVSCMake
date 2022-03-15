@@ -242,8 +242,8 @@ build RTSP\edit_cache: phony RTSP\CMakeFiles\edit_cache.util
 build cmake_object_order_depends_target_RTSP: phony || RTSP\CMakeFiles\RTSP.dir
 
 build RTSP\CMakeFiles\RTSP.dir\RTSP.cpp.obj: CXX_COMPILER__RTSP_Debug C$:\Users\Operator\source\repos\TCPServerMSVSCMake\RTSP\RTSP.cpp || cmake_object_order_depends_target_RTSP
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++17
-  INCLUDES = -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\RTSP\libs\include\BasicUsageEnvironment -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\RTSP\libs\include\liveMedia -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\RTSP\libs\include\groupsock -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\RTSP\libs\include\UsageEnvironment -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\RTSP\libs\include\openssl -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\RTSP\libs\include\zlib.h -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\RTSP\libs\include
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc -gstabs+ -gstabs -D _DEBUG -O /MDd /Zi /Ob0 /Od /RTC1 -std:c++17
+  INCLUDES = -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\RTSP\libs\include\openssl -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\RTSP\libs\include\glib-2.0 -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\RTSP\libs\include\zlib.h -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\RTSP\libs\include -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\RTSP\libs\include\BasicUsageEnvironment -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\RTSP\libs\include\liveMedia -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\RTSP\libs\include\groupsock -IC:\Users\Operator\source\repos\TCPServerMSVSCMake\RTSP\libs\include\UsageEnvironment
   OBJECT_DIR = RTSP\CMakeFiles\RTSP.dir
   OBJECT_FILE_DIR = RTSP\CMakeFiles\RTSP.dir
   TARGET_COMPILE_PDB = RTSP\CMakeFiles\RTSP.dir\
@@ -257,10 +257,10 @@ build RTSP\CMakeFiles\RTSP.dir\RTSP.cpp.obj: CXX_COMPILER__RTSP_Debug C$:\Users\
 #############################################
 # Link the executable RTSP\RTSP.exe
 
-build RTSP\RTSP.exe: CXX_EXECUTABLE_LINKER__RTSP_Debug RTSP\CMakeFiles\RTSP.dir\RTSP.cpp.obj | ..\..\..\RTSP\libs\lib\liveMedia.lib ..\..\..\RTSP\libs\lib\BasicUsageEnvironment.lib ..\..\..\RTSP\libs\lib\UsageEnvironment.lib ..\..\..\RTSP\libs\lib\groupsock.lib ..\..\..\RTSP\libs\lib\libssl.lib ..\..\..\RTSP\libs\lib\libcrypto.lib ..\..\..\RTSP\libs\lib\pthread.lib
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
+build RTSP\RTSP.exe: CXX_EXECUTABLE_LINKER__RTSP_Debug RTSP\CMakeFiles\RTSP.dir\RTSP.cpp.obj | ..\..\..\RTSP\libs\lib\libssl.lib ..\..\..\RTSP\libs\lib\openssl.lib ..\..\..\RTSP\libs\lib\glib-2.0.lib ..\..\..\RTSP\libs\lib\libcrypto.lib ..\..\..\RTSP\libs\lib\pthread.lib ..\..\..\RTSP\libs\lib\liveMedia.lib ..\..\..\RTSP\libs\lib\BasicUsageEnvironment.lib ..\..\..\RTSP\libs\lib\UsageEnvironment.lib ..\..\..\RTSP\libs\lib\groupsock.lib
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc -gstabs+ -gstabs -D _DEBUG -O /MDd /Zi /Ob0 /Od /RTC1
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
-  LINK_LIBRARIES = ..\..\..\RTSP\libs\lib\liveMedia.lib  ..\..\..\RTSP\libs\lib\BasicUsageEnvironment.lib  ..\..\..\RTSP\libs\lib\UsageEnvironment.lib  ..\..\..\RTSP\libs\lib\groupsock.lib  ..\..\..\RTSP\libs\lib\libssl.lib  ..\..\..\RTSP\libs\lib\libcrypto.lib  ..\..\..\RTSP\libs\lib\pthread.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
+  LINK_LIBRARIES = ..\..\..\RTSP\libs\lib\libssl.lib  ..\..\..\RTSP\libs\lib\openssl.lib  ..\..\..\RTSP\libs\lib\glib-2.0.lib  ..\..\..\RTSP\libs\lib\libcrypto.lib  ..\..\..\RTSP\libs\lib\pthread.lib  ..\..\..\RTSP\libs\lib\liveMedia.lib  ..\..\..\RTSP\libs\lib\BasicUsageEnvironment.lib  ..\..\..\RTSP\libs\lib\UsageEnvironment.lib  ..\..\..\RTSP\libs\lib\groupsock.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
   OBJECT_DIR = RTSP\CMakeFiles\RTSP.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
