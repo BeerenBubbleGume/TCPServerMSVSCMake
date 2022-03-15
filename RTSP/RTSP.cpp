@@ -1,7 +1,7 @@
 ﻿// RTSP.cpp: определяет точку входа для приложения.
 //
 
-#include "RTSP.h"
+#include "RTSP.hpp"
 
 #pragma comment(lib, "ws2_32.lib")
 
@@ -64,13 +64,14 @@ void RTSPProxyServer::StartProxyServer(/*CString* inputURL, */void* Data)
 	Port rtpPort(rtpPortNum);
 	Port rtcpPort(rtcpPortNum);
 	unsigned const short ttl = 5000;
+
 	Groupsock* rtpGS = new Groupsock(*env, *(sockaddr_storage*)&in_Addr, rtpPort, ttl);
 	Groupsock* rtcpGS = new Groupsock(*env, *(sockaddr_storage*)&in_Addr, rtcpPort, ttl);
 
 	rtpGS->multicastSendOnly();
 	rtcpGS->multicastSendOnly();
 
-	ByteStreamFileSource* outSource = ByteStreamFileSource::createNew(*env, "in_binary_h.avi");
+	ByteStreamFileSource* outSource = ByteStreamFileSource::createNew(*env, "in_binary_h.264");
 	const unsigned estimatedSessionBandwidth = 500;
 	const unsigned maxCNAMElen = 100;
 	unsigned char CNAME[maxCNAMElen + 1];
@@ -84,12 +85,12 @@ void RTSPProxyServer::StartProxyServer(/*CString* inputURL, */void* Data)
 
 	ServerMediaSession* sms = ServerMediaSession::createNew(*env, streamName, outputSink->rtpmapLine(), (char*)CNAME, false, outputSink->sdpMediaType());
 	DemandServerMediaSubsession* proxy = DemandServerMediaSubsession::createNew(/*socket->net, */*env, true);
-
+	//ServerMediaSubsession* subsms = PassiveServerMediaSubsession::createNew(*outputSink, );
 	sms->addSubsession(proxy);
 	server->addServerMediaSession(sms);
 
-	H264VideoStreamFramer* framer = H264VideoStreamFramer::createNew(*env, outSource, false);
-	framer->flushInput();
+	//H264VideoStreamFramer* framer = H264VideoStreamFramer::createNew(*env, outSource, false);
+	//framer->flushInput();
 	outputSink->startPlaying(*outSource, proxyServerMediaSubsessionAfterPlaying, sms);
 	RTSPProxyServer::anonceStream(server, sms, streamName);
 

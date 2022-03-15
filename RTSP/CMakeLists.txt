@@ -7,7 +7,7 @@ project ("RTSP")
 add_subdirectory("libs")
 
 # Добавьте источник в исполняемый файл этого проекта.
-add_executable (RTSP "RTSP.cpp" "RTSP.h")
+add_executable (RTSP "RTSP.cpp" "RTSP.hpp")
 
 IF(WIN32)
 	target_include_directories(RTSP PUBLIC

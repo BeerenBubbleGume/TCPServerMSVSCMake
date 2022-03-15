@@ -14,7 +14,7 @@ along with this library; if not, write to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
 **********/
 // "liveMedia"
-// Copyright (c) 1996-2021 Live Networks, Inc.  All rights reserved.
+// Copyright (c) 1996-2022 Live Networks, Inc.  All rights reserved.
 // Medium
 // C++ header
 
@@ -22,15 +22,15 @@ along with this library; if not, write to the Free Software Foundation, Inc.,
 #define _MEDIA_HH
 
 #ifndef _LIVEMEDIA_VERSION_HH
-#include <liveMedia_version.hh>
+#include "liveMedia_version.hh"
 #endif
 
 #ifndef _HASH_TABLE_HH
-#include <HashTable.hh>
+#include "HashTable.hh"
 #endif
 
 #ifndef _USAGE_ENVIRONMENT_HH
-#include <UsageEnvironment.hh>
+#include "UsageEnvironment.hh"
 #endif
 
 // Lots of files end up needing the following, so just #include them here:

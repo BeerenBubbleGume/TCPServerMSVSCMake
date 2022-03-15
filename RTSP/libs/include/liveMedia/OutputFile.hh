@@ -14,14 +14,14 @@ along with this library; if not, write to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
 **********/
 // "liveMedia"
-// Copyright (c) 1996-2021 Live Networks, Inc.  All rights reserved.
+// Copyright (c) 1996-2022 Live Networks, Inc.  All rights reserved.
 // Common routines for opening/closing named output files
 // C++ header
 
 #ifndef _OUTPUT_FILE_HH
 #define _OUTPUT_FILE_HH
 
-#include <../UsageEnvironment/UsageEnvironment.hh>
+#include <UsageEnvironment.hh>
 #include <stdio.h>
 
 FILE* OpenOutputFile(UsageEnvironment& env, char const* fileName);

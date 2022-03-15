@@ -14,7 +14,7 @@ along with this library; if not, write to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
 **********/
 // "groupsock"
-// Copyright (c) 1996-2021 Live Networks, Inc.  All rights reserved.
+// Copyright (c) 1996-2022 Live Networks, Inc.  All rights reserved.
 // Network Addresses
 // C++ header
 
@@ -22,7 +22,7 @@ along with this library; if not, write to the Free Software Foundation, Inc.,
 #define _NET_ADDRESS_HH
 
 #ifndef _HASH_TABLE_HH
-#include "../UsageEnvironment/HashTable.hh"
+#include "HashTable.hh"
 #endif
 
 #ifndef _NET_COMMON_H
@@ -30,7 +30,7 @@ along with this library; if not, write to the Free Software Foundation, Inc.,
 #endif
 
 #ifndef _USAGE_ENVIRONMENT_HH
-#include "../UsageEnvironment/UsageEnvironment.hh"
+#include "UsageEnvironment.hh"
 #endif
 
 // Definition of a type representing a low-level network address.

@@ -14,7 +14,7 @@ along with this library; if not, write to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
 **********/
 // "multikit" Multicast Application Shell
-// Copyright (c) 1996-2021, Live Networks, Inc.  All rights reserved
+// Copyright (c) 1996-2022, Live Networks, Inc.  All rights reserved
 // "Group Endpoint Id"
 // C++ header
 
@@ -22,7 +22,7 @@ along with this library; if not, write to the Free Software Foundation, Inc.,
 #define _GROUPEID_HH
 
 #ifndef _BOOLEAN_HH
-#include <UsageEnvironment/Boolean.hh>
+#include "Boolean.hh"
 #endif
 
 #ifndef _NET_ADDRESS_HH
