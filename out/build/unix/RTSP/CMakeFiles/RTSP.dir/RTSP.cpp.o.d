@@ -354,4 +354,5 @@ RTSP/CMakeFiles/RTSP.dir/RTSP.cpp.o: \
  /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/RTSP/libs/include/BasicUsageEnvironment/BasicUsageEnvironment.hh \
  /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/RTSP/libs/include/BasicUsageEnvironment/BasicUsageEnvironment0.hh \
  /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/RTSP/libs/include/BasicUsageEnvironment/BasicUsageEnvironment_version.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/RTSP/libs/include/BasicUsageEnvironment/DelayQueue.hh
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/RTSP/libs/include/BasicUsageEnvironment/DelayQueue.hh \
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/RTSP/libs/include/groupsock/GroupsockHelper.hh

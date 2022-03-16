@@ -430,7 +430,8 @@ RTSP/CMakeFiles/RTSP.dir/RTSP.cpp.o: ../../../RTSP/RTSP.cpp \
   ../../../RTSP/libs/include/BasicUsageEnvironment/BasicUsageEnvironment.hh \
   ../../../RTSP/libs/include/BasicUsageEnvironment/BasicUsageEnvironment0.hh \
   ../../../RTSP/libs/include/BasicUsageEnvironment/BasicUsageEnvironment_version.hh \
-  ../../../RTSP/libs/include/BasicUsageEnvironment/DelayQueue.hh
+  ../../../RTSP/libs/include/BasicUsageEnvironment/DelayQueue.hh \
+  ../../../RTSP/libs/include/groupsock/GroupsockHelper.hh
 
 
 ../../../RTSP/libs/include/BasicUsageEnvironment/DelayQueue.hh:
@@ -1176,6 +1177,8 @@ RTSP/CMakeFiles/RTSP.dir/RTSP.cpp.o: ../../../RTSP/RTSP.cpp \
 ../../../RTSP/libs/include/openssl/asn1err.h:
 
 ../../../RTSP/libs/include/openssl/bnerr.h:
+
+../../../RTSP/libs/include/groupsock/GroupsockHelper.hh:
 
 ../../../RTSP/libs/include/groupsock/groupsock_version.hh:
 
