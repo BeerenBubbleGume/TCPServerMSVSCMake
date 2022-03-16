@@ -41,7 +41,7 @@ bool NetSocketUV::Create(int port, bool udp_tcp, bool listen)
 			{
 				sockaddr_in* sock_addres = new sockaddr_in;
 				
-				int i = uv_ip4_addr("127.0.0.1", port, sock_addres);
+				int i = uv_ip4_addr("0.0.0.0", port, sock_addres);
 				assert(i == 0);
 				int b = uv_tcp_bind(tcp, (sockaddr*)sock_addres, 0);
 				assert(b == 0);
@@ -342,7 +342,7 @@ int Server::connect(bool connection)
 		//udp_tcp = true;
 		std::cout << "==========Start server!==========" << std::endl;
 		//net_sockuv->GetIP(NULL, true);
-		if (net_sockuv->Create(8000, true, true) == true)
+		if (net_sockuv->Create(1885, true, true) == true)
 			return 0;
 	}
 	else
