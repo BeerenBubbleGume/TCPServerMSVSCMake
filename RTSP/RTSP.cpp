@@ -55,11 +55,11 @@ void RTSPProxyServer::play()
 	in_addr inetAddr;
 	inetAddr.s_addr = AF_INET;
 	portNumBits rtpPortNum(18885);
-	Port rtpPort(rtpPortNum);
+	Port rtpPort(rtpPornNum);
 
-	Groupsock* rtpGS = new Groupsock(envir(), *(sockaddr_storage*)&inetAddr, rtpPort, 255);
+	Groupsock* rtpGS = new Groupsock(envir(), *(sockaddr_storage*)&inetAddr, rtpPort);
 
-	MPEG4ESVideoRTPSink* sink = MPEG4ESVideoRTPSink::createNew(envir(), rtpGS, *"H264");
+	MPEG4ESVideoRTPSink* sink = MPEG4ESVideoRTPSink::createNew(envir(), rtpGS, "H264");
 	sink->startPlaying(*inSource, proxyServerMediaSubsessionAfterPlaying, sink);
 }
 
@@ -71,10 +71,10 @@ void RTSPProxyServer::StartProxyServer(void* Data)
 
 	RTSPProxyServer* server = RTSPProxyServer::createNew(*env, 8554);
 	ServerMediaSession* sms = ServerMediaSession::createNew(*env, "serverStream");
-	sms->addSubsession(DemandServerMediaSubsession::createNew(*env, false));
+	sms->addSubsession(H264VideoFileServerMediaSubsession::createNew(*env, "in_binary_h.264", false)); 
 	server->addServerMediaSession(sms);
 	anonceStream(server, sms, "serverStream");
-	server->play();
+	//play();
 	env->taskScheduler().doEventLoop(&server->eventLoopWatchVariable);
 
 	//return;
