@@ -221,8 +221,13 @@ void OnReadTCP(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)
 		fout.open(fileName, std::ios::binary | std::ios::app);
 		if (fout.is_open())
 		{
-			fout.write((char*)recv_buff->GetData(), recv_buff->GetLength());
-			printf("writed %d bytes in file %s\n", recv_buff->GetLength(), fileName.c_str());
+			int i = 0;
+			while (i < 3)
+			{
+				fout.write((char*)recv_buff->GetData(), recv_buff->GetLength());
+				printf("writed %d bytes in file %s\n", recv_buff->GetLength(), fileName.c_str());
+				i++;
+			}
 			fout.close();
 			//setupDecoder(nullptr);
 			uvsocket->ReceiveTCP();
