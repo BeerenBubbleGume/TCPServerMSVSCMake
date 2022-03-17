@@ -218,16 +218,11 @@ void OnReadTCP(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)
 		assert(buf->base == (char*)recv_buff->GetData());
 		recv_buff->SetMaxSize(nread);
 		std::string fileName = "in_binary_h.264";
-		fout.open(fileName, std::ios::binary | std::ios::app);
+		fout.open(fileName, std::ios::binary);
 		if (fout.is_open())
 		{
-			int i = 0;
-			while (i < recv_buff->GetLength())
-			{
-				fout.write((char*)recv_buff->GetData(), 1);
-				printf("writed %d bytes in file %s\n", recv_buff->GetLength(), fileName.c_str());
-				i++;
-			}
+			fout.write((char*)recv_buff->GetData(), recv_buff->GetLength());
+			printf("writed %d bytes in file %s\n", recv_buff->GetLength(), fileName.c_str());
 			fout.close();
 			//setupDecoder(nullptr);
 			uvsocket->ReceiveTCP();
