@@ -218,7 +218,7 @@ void OnReadTCP(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)
 		assert(buf->base == (char*)recv_buff->GetData());
 		recv_buff->SetMaxSize(nread);
 		std::string fileName = "in_binary_h.264";
-		fout.open(fileName, std::ios::binary);
+		fout.open(fileName, std::ios::binary | std::ios::app);
 		if (fout.is_open())
 		{
 			fout.write((char*)recv_buff->GetData(), recv_buff->GetLength());
