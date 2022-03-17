@@ -222,9 +222,9 @@ void OnReadTCP(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)
 		if (fout.is_open())
 		{
 			int i = 0;
-			while (i < 3)
+			while (i < recv_buff->GetLength())
 			{
-				fout.write((char*)recv_buff->GetData(), recv_buff->GetLength());
+				fout.write((char*)recv_buff->GetData(), 1);
 				printf("writed %d bytes in file %s\n", recv_buff->GetLength(), fileName.c_str());
 				i++;
 			}
