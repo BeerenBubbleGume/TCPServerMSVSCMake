@@ -16,17 +16,17 @@ class RTSPProxyServer : public RTSPServer
 {
 public:
 	static RTSPProxyServer* 
-				createNew(UsageEnvironment& env, Port ourPort = 554,
+					createNew(UsageEnvironment& env, Port ourPort = 554,
 		UserAuthenticationDatabase* authDatabase = NULL,
 		unsigned reclamationSeconds = 65);
 
-	static void anonceStream(RTSPServer* rtspServer, ServerMediaSession* sms, char const* streamName);
-	virtual void play();
-	static void StartProxyServer(void* Data);
-	bool		StopProxyServer(void* clientData);
-	int			getSocket4()													{ return fServerSocketIPv4; }
-	int			getSocket6()													{ return fServerSocketIPv6; }
-	static void ip4SocketHandler(void* data, int mask) {
+	static void 	anonceStream(RTSPServer* rtspServer, ServerMediaSession* sms, char const* streamName);
+	virtual void 	play();
+	static void		StartProxyServer(void* Data);
+	bool			StopProxyServer(void* clientData);
+	int				getSocket4()													{ return fServerSocketIPv4; }
+	int				getSocket6()													{ return fServerSocketIPv6; }
+	static void 	ip4SocketHandler(void* data, int mask) {
 		RTSPProxyServer* server = (RTSPProxyServer*)data;
 		server->incomingConnectionHandlerIPv4();
 	}
