@@ -348,3 +348,4 @@ out/build/unix/TCPServerMSVSCMake/TCPServerMSVSCMake
 out/build/x64-Debug/TCPServerMSVSCMake/in_binary_h.264
 out/build/x64-Debug/RTSP/in_binary_h.264
 out/build/x64-Debug/RTSP/in_binary_h.avi
+*.264
