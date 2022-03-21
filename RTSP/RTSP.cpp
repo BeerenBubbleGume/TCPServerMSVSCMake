@@ -67,7 +67,7 @@ void RTSPProxyServer::StartProxyServer(void* Data)
 {
 	TaskScheduler* newscheduler = BasicTaskScheduler::createNew();
 	UsageEnvironment* env = BasicUsageEnvironment::createNew(*newscheduler);
-	OutPacketBuffer::maxSize = 2000000;
+	OutPacketBuffer::maxSize = 5000000;
 
 	RTSPProxyServer* server = RTSPProxyServer::createNew(*env, 8554);
 	ServerMediaSession* sms = ServerMediaSession::createNew(*env, "serverStream");
