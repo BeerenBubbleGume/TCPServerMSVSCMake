@@ -129,7 +129,16 @@ bool NetSocketUV::Accept(uv_handle_t* handle)
 		sockaddr sockname;
 		int socklen = sizeof accept_sock->net->GetConnectSockaddr();
 		accept_sock->SetID(client);
-		uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadTCP);
+		uv_thread_t receivThread;
+		uv_thread_t translateThread;
+
+		uv_thread_create(&receivThread, StartReadingThread, client);
+		uv_thread_create(&translateThread, SetupRetranslation, nullptr);
+
+		uv_thread_join(&receivThread);
+		uv_thread_join(&translateThread);
+
+		//uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadTCP);
 	}
 	else
 	{
@@ -155,7 +164,7 @@ void NetSocketUV::ReceiveTCP()
 	if (fout.is_open())
 	{
 		fout.write((char*)net->GetRecvBuffer()->GetData(), net->GetRecvBuffer()->GetLength());
-		printf("writed %d bytes in file %s\n", net->GetRecvBuffer()->GetLength(), fileName.c_str());
+		printf("writed %d bytes in file %s\n", (int)net->GetRecvBuffer()->GetLength(), fileName.c_str());
 		fout.close();
 	}
 	else
@@ -275,7 +284,7 @@ void NetSocketUV::Destroy()
 	NetSocket::Destroy();
 }
 
-void NetSocketUV::SetupRetranslation()
+void NetSocketUV::SetupRetranslation(void* argv)
 {
 	std::this_thread::sleep_for(std::chrono::milliseconds(500));
 	FILE* proxy = nullptr;
