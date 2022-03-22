@@ -150,51 +150,18 @@ void NetSocketUV::SendUDP(NET_BUFFER_INDEX *buf)
 
 void NetSocketUV::ReceiveTCP()
 {
-	//NetBuffer* recv_buffer = net->GetRecvBuffer();
-	//int received_bytes = recv_buffer->GetLength();
-	//setupDecoder(recv_buffer);
-	//FILE* stream = fopen("out_h.264", "w+");
-	//std::string fileName = "in_binary_h.264";
-	//fout.open(fileName, std::ios::binary);
-	//if (fout.is_open())
-	//{
-	//	fout.write((char*)recv_buffer->GetData(), received_bytes);
-	//	printf("writed %d bytes in file %s\n", received_bytes, fileName.c_str());
-	//	fout.close();
-	//	//setupDecoder(nullptr);
-	//}
-	//else
-	//{
-	//	printf("cannot open file\n");
-	//}
-		FILE* proxy = nullptr;
-#ifdef WIN32
-		//system("RTSPProxyServerForClient.exe -d -c -%s");
-		proxy = _popen("RTSP.exe -d -c -%s", "r");
-		_pclose(proxy);
-			
-#else
-		int status;
-   		pid_t pid;
-
-    	pid = fork();
-
-    /* Handeling Chile Process */
-    if(pid == 0){
-        char* execv_str[] = {"./RTSP", NULL};
-        if (execv("./RTSP",execv_str) < 0){
-            status = -1;
-            perror("ERROR\n");
-        }
-    }
-
-    /* Handeling Chile Process Failure */
-    else if(pid < 0){
-        status = -1;
-        perror("ERROR\n");
-    }
-#endif
-
+	std::string fileName = "in_binary_h.264";
+	fout.open(fileName, std::ios::binary | std::ios::app);
+	if (fout.is_open())
+	{
+		fout.write((char*)net->GetRecvBuffer()->GetData(), net->GetRecvBuffer()->GetLength());
+		printf("writed %d bytes in file %s\n", net->GetRecvBuffer()->GetLength(), fileName.c_str());
+		fout.close();
+	}
+	else
+	{
+		printf("cannot open file\n");
+	}
 }
 
 void NetSocketUV::ReceiveUPD()
@@ -217,20 +184,7 @@ void OnReadTCP(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)
 		NetBuffer* recv_buff = uvsocket->net->GetRecvBuffer();
 		assert(buf->base == (char*)recv_buff->GetData());
 		recv_buff->SetMaxSize(nread);
-		std::string fileName = "in_binary_h.264";
-		fout.open(fileName, std::ios::binary | std::ios::app);
-		if (fout.is_open())
-		{
-			fout.write((char*)recv_buff->GetData(), recv_buff->GetLength());
-			printf("writed %d bytes in file %s\n", recv_buff->GetLength(), fileName.c_str());
-			fout.close();
-			//setupDecoder(nullptr);
-			uvsocket->ReceiveTCP();
-		}
-		else
-		{
-			printf("cannot open file\n");
-		}
+		uvsocket->ReceiveTCP();
 	}
 }
 
@@ -319,6 +273,38 @@ void NetSocketUV::Destroy()
 		sock = NULL;
 	}
 	NetSocket::Destroy();
+}
+
+void NetSocketUV::SetupRetranslation()
+{
+	std::this_thread::sleep_for(std::chrono::milliseconds(500));
+	FILE* proxy = nullptr;
+#ifdef WIN32
+	//system("RTSPProxyServerForClient.exe -d -c -%s");
+	proxy = _popen("RTSP.exe -d -c -%s", "r");
+	_pclose(proxy);
+
+#else
+	int status;
+	pid_t pid;
+
+	pid = fork();
+
+	/* Handeling Chile Process */
+	if (pid == 0) {
+		char* execv_str[] = { "./RTSP", NULL };
+		if (execv("./RTSP", execv_str) < 0) {
+			status = -1;
+			perror("ERROR\n");
+		}
+	}
+
+	/* Handeling Chile Process Failure */
+	else if (pid < 0) {
+		status = -1;
+		perror("ERROR\n");
+	}
+#endif
 }
 
 Server::Server()

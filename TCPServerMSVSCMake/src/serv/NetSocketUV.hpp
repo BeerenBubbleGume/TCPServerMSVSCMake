@@ -65,6 +65,8 @@ public:
 	void				ReceiveUPD();
 	void				Destroy();
 
+	virtual void SetupRetranslation();
+
 	int status;
 	static NetSocketUV* NewSocket(Net* net) { return new NetSocketUV(net); }
 	uv_loop_t* loop;
