@@ -301,7 +301,7 @@ void NetSocketUV::SetupRetranslation(void* argv)
 		//system("RTSPProxyServerForClient.exe -d -c -%s");
 		proxy = _popen("RTSP.exe -d -c -%s", "r");
 		_pclose(proxy);
-		std::thread delay(WaitingDelay, 10);
+		std::thread delay(WaitingDelay, 10, socket);
 		delay.join();
 		delay.detach();
 		
@@ -324,7 +324,7 @@ void NetSocketUV::SetupRetranslation(void* argv)
 				std::getline(std::cin, outRTSP);
 				if (outRTSP.find("rtsp://"))
 				{
-					std::thread delay(WaitingDelay, outRTSP);
+					std::thread delay(WaitingDelay, outRTSP, socket);
 					delay.join();
 					delay.detach();
 				}
@@ -349,7 +349,8 @@ void* NetSocketUV::WaitingDelay(void* delay)
 	if (delay != nullptr)
 	{
 		std::this_thread::sleep_for(std::chrono::minutes(10));
-
+		NetSocketUV* socket = (NetSocketUV*)delay;
+		socket->Destroy();
 		return nullptr;
 	}
 	else
