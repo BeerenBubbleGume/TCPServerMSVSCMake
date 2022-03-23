@@ -304,18 +304,30 @@ void NetSocketUV::SetupRetranslation(void* argv)
 		std::thread delay(WaitingDelay, 10);
 		delay.join();
 		delay.detach();
+		
+		
 #else
 		int status;
 		pid_t pid;
 
 		pid = fork();
-
+		std::string outRTSP;
 		/* Handeling Chile Process */
 		if (pid == 0) {
 			char* execv_str[] = { "./RTSP", ID };
 			if (execv("./RTSP", execv_str) < 0) {
 				status = -1;
 				perror("ERROR\n");
+			}
+			else
+			{
+				std::getline(std::cin, outRTSP);
+				if (outRTSP.find("rtsp://"))
+				{
+					std::thread delay(WaitingDelay, outRTSP);
+					delay.join();
+					delay.detach();
+				}
 			}
 		}
 		
@@ -325,9 +337,7 @@ void NetSocketUV::SetupRetranslation(void* argv)
 			status = -1;
 			perror("ERROR\n");
 		}
-		std::thread delay(WaitingDelay, 10);
-		delay.join();
-		delay.detach();
+		
 #endif
 	}
 	
@@ -335,10 +345,10 @@ void NetSocketUV::SetupRetranslation(void* argv)
 
 void* NetSocketUV::WaitingDelay(void* delay)
 {
-	int min = static_cast<int>(reinterpret_cast<intptr_t>(delay));
-	if (min > 0)
+	
+	if (delay)
 	{
-		std::this_thread::sleep_for(std::chrono::minutes(min));
+		std::this_thread::sleep_for(std::chrono::minutes(10));
 
 		return nullptr;
 	}
