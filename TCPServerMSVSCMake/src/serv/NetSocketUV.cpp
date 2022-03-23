@@ -294,7 +294,7 @@ void NetSocketUV::SetupRetranslation(void* argv)
 	NetSocketUV* socket = (NetSocketUV*)GetNetSocketPtr(argv);
 	if(socket->GetClientID())
 	{
-		unsigned char* ID = (unsigned char*)socket->GetClientID();
+		char* ID = (char*)socket->GetClientID();
 		std::this_thread::sleep_for(std::chrono::milliseconds(500));
 		FILE* proxy = nullptr;
 #ifdef WIN32
@@ -340,7 +340,7 @@ void* NetSocketUV::WaitingDelay(void* delay)
 	{
 		std::this_thread::sleep_for(std::chrono::minutes(min));
 
-		return;
+		return nullptr;
 	}
 	else
 	{
