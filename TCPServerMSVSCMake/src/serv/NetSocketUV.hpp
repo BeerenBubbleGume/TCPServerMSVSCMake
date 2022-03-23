@@ -109,6 +109,7 @@ protected:
 
 
 #endif
+void idle_cb(uv_idle_t* idle);
 void OnAccept(uv_stream_t* stream, int status);
 void OnAllocBuffer(uv_handle_t* handle, size_t suggested_size, uv_buf_t* buf);
 void OnReadTCP(uv_stream_t* stream, ssize_t nread, const uv_buf_t* buf);

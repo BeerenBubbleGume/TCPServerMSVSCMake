@@ -130,24 +130,20 @@ bool NetSocketUV::Accept(uv_handle_t* handle)
 		int socklen = sizeof accept_sock->net->GetConnectSockaddr();
 		accept_sock->SetID(client);
 
-		std::thread receivThread(StartReadingThread, client);
-		std::thread translateThread(SetupRetranslation, this);
-
-		receivThread.join();
+		/*std::thread translateThread(SetupRetranslation, this);
 		translateThread.join();
+		translateThread.detach();*/
 
-		receivThread.detach();
-		translateThread.detach();
-
-		/*uv_thread_t receivThread;
+		uv_thread_t receivThread;
 		uv_thread_t translateThread;
 
 		uv_thread_create(&receivThread, StartReadingThread, client);
 		uv_thread_create(&translateThread, SetupRetranslation, this);
 
 		uv_thread_join(&receivThread);
-		uv_thread_join(&translateThread);*/
-
+		uv_thread_join(&translateThread);
+		
+		
 		//uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadTCP);
 	}
 	else
@@ -199,7 +195,7 @@ void OnReadTCP(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)
 	printf("Reading data from client with ID: %s\n", uvsocket->GetClientID());
 	if (nread < 0)
 	{
-		std::cout << "read buff < 0" << std::endl;
+		printf("read buffer < 0!\n");
 		uvsocket->net->OnLostConnection(uvsocket);
 		OnCloseSocket((uv_handle_t*)stream);
 	}
@@ -265,6 +261,17 @@ void OnReadUDP(uv_udp_t* handle, ssize_t nread, const uv_buf_t* buf, const struc
 	socket->ReceiveUPD();
 }
 
+void idle_cb(uv_idle_t* idle)
+{
+#ifdef WIN32
+	Sleep(100);
+#else
+	sleep(0.01);
+#endif // WIN32
+
+	uv_idle_stop(idle);
+}
+
 void OnAccept(uv_stream_t* stream, int status)
 {
 	std::cout << "___ On Connect ___" << std::endl;
@@ -304,8 +311,10 @@ void NetSocketUV::SetupRetranslation(void* argv)
 	NetSocketUV* socket = (NetSocketUV*)GetNetSocketPtr(argv);
 	if(socket->GetClientID())
 	{
+		uv_idle_t idle;
+		uv_idle_init(GetLoop(socket->net), &idle);
+		uv_idle_start(&idle, idle_cb);
 		char* ID = (char*)socket->GetClientID();
-		std::this_thread::sleep_for(std::chrono::milliseconds(500));
 		FILE* proxy = nullptr;
 #ifdef WIN32
 		//system("RTSPProxyServerForClient.exe -d -c -%s");
