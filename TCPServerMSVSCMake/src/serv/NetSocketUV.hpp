@@ -66,7 +66,7 @@ public:
 	void				Destroy();
 
 	static void SetupRetranslation(void* argv);
-	static void* VaitingDelay(void* delay);
+	static void* WaitingDelay(void* delay);
 	int status;
 	static NetSocketUV* NewSocket(Net* net) { return new NetSocketUV(net); }
 	uv_loop_t* loop;

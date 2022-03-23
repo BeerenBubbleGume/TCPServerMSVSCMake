@@ -159,7 +159,8 @@ void NetSocketUV::SendUDP(NET_BUFFER_INDEX *buf)
 
 void NetSocketUV::ReceiveTCP()
 {
-	std::string fileName = "in_binary_h.264";
+	const char* filePrefix = GetClientID();
+	std::string fileName = filePrefix + *"in_binary_h.264";
 	fout.open(fileName, std::ios::binary | std::ios::app);
 	if (fout.is_open())
 	{
@@ -293,16 +294,16 @@ void NetSocketUV::SetupRetranslation(void* argv)
 	NetSocketUV* socket = (NetSocketUV*)GetNetSocketPtr(argv);
 	if(socket->GetClientID())
 	{
-		const char* ID = socket->GetClientID();
+		unsigned char* ID = (unsigned char*)socket->GetClientID();
 		std::this_thread::sleep_for(std::chrono::milliseconds(500));
 		FILE* proxy = nullptr;
 #ifdef WIN32
 		//system("RTSPProxyServerForClient.exe -d -c -%s");
 		proxy = _popen("RTSP.exe -d -c -%s", "r");
 		_pclose(proxy);
-		std::thread delay(&socket->VaitingDelay);
+		std::thread delay(WaitingDelay, 10);
 		delay.join();
-		
+		delay.detach();
 #else
 		int status;
 		pid_t pid;
@@ -324,21 +325,22 @@ void NetSocketUV::SetupRetranslation(void* argv)
 			status = -1;
 			perror("ERROR\n");
 		}
-		std::thread delay(&socket->VaitingDelay);
+		std::thread delay(VaitingDelay, 10);
 		delay.join();
+		delay.detach();
 #endif
 	}
 	
 }
 
-void* NetSocketUV::VaitingDelay(void* delay)
+void* NetSocketUV::WaitingDelay(void* delay)
 {
 	int min = (int)delay;
 	if (delay > 0)
 	{
 		std::this_thread::sleep_for(std::chrono::minutes(min));
 
-		return (void*)1;
+		return;
 	}
 	else
 	{

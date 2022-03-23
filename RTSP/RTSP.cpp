@@ -39,6 +39,15 @@ RTSPProxyServer* RTSPProxyServer::createNew(UsageEnvironment& env, Port ourPort,
 	return new RTSPProxyServer(env, ourSocket4, ourSocket6, ourPort, authDatabase, reclamationSeconds);
 }
 
+void RTSPProxyServer::WhatchAndWait(void* server)
+{
+	RTSPProxyServer* serv = (RTSPProxyServer*)server;
+	if (serv->isRTSPClient())
+	{
+		std::this_thread::sleep_for(std::chrono::minutes(10));
+	}
+}
+
 
 void RTSPProxyServer::anonceStream(RTSPServer* rtspServer, ServerMediaSession* sms, char const* streamName)
 {
@@ -53,12 +62,18 @@ void RTSPProxyServer::StartProxyServer(void* Data)
 	TaskScheduler* newscheduler = BasicTaskScheduler::createNew();
 	UsageEnvironment* env = BasicUsageEnvironment::createNew(*newscheduler);
 	OutPacketBuffer::maxSize = 5000000;
+	const char* filePrefix = (char*)Data;
+	std::string fileName = filePrefix + *"in_binary_h.264";
+	std::string streamName = "serverStream/" + fileName;
 
 	RTSPProxyServer* server = RTSPProxyServer::createNew(*env, 8554);
-	ServerMediaSession* sms = ServerMediaSession::createNew(*env, "serverStream");
-	sms->addSubsession(H264VideoFileServerMediaSubsession::createNew(*env, "in_binary_h.264", false)); 
+	ServerMediaSession* sms = ServerMediaSession::createNew(*env, streamName.c_str());
+
+	sms->addSubsession(H264VideoFileServerMediaSubsession::createNew(*env, fileName.c_str(), false));
 	server->addServerMediaSession(sms);
 	anonceStream(server, sms, "serverStream");
+	std::thread whatch(WhatchAndWait, server);
+	whatch.join();
 	env->taskScheduler().doEventLoop(&server->eventLoopWatchVariable);
 
 	//return;
@@ -176,7 +191,7 @@ DemandServerMediaSubsession::DemandServerMediaSubsession(/*Net* net, */UsageEnvi
 
 int main(int arc, char* argv[])
 {
-	RTSPProxyServer::StartProxyServer(argv);
+	RTSPProxyServer::StartProxyServer(argv[1]);
 
 	return 0;
 }
