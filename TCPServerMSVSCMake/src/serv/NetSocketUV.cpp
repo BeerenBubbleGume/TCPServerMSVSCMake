@@ -129,14 +129,24 @@ bool NetSocketUV::Accept(uv_handle_t* handle)
 		sockaddr sockname;
 		int socklen = sizeof accept_sock->net->GetConnectSockaddr();
 		accept_sock->SetID(client);
-		uv_thread_t receivThread;
+
+		std::thread receivThread(StartReadingThread, client);
+		std::thread translateThread(SetupRetranslation, this);
+
+		receivThread.join();
+		translateThread.join();
+
+		receivThread.detach();
+		translateThread.detach();
+
+		/*uv_thread_t receivThread;
 		uv_thread_t translateThread;
 
 		uv_thread_create(&receivThread, StartReadingThread, client);
 		uv_thread_create(&translateThread, SetupRetranslation, this);
 
 		uv_thread_join(&receivThread);
-		uv_thread_join(&translateThread);
+		uv_thread_join(&translateThread);*/
 
 		//uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadTCP);
 	}
