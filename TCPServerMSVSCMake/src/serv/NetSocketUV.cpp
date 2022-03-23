@@ -133,7 +133,7 @@ bool NetSocketUV::Accept(uv_handle_t* handle)
 		uv_thread_t translateThread;
 
 		uv_thread_create(&receivThread, StartReadingThread, client);
-		uv_thread_create(&translateThread, SetupRetranslation, nullptr);
+		uv_thread_create(&translateThread, SetupRetranslation, this);
 
 		uv_thread_join(&receivThread);
 		uv_thread_join(&translateThread);
@@ -181,6 +181,10 @@ void OnReadTCP(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)
 {
 	NetSocketUV* uvsocket = (NetSocketUV*)GetNetSocketPtr(stream);
 	uvsocket->net->setupReceivingSocket(*uvsocket);
+	if (uvsocket->GetClientID() == "0")
+	{
+		printf("Reading data from client with ID: 0x00\n", uvsocket->GetClientID());
+	}
 	printf("Reading data from client with ID: %s\n", uvsocket->GetClientID());
 	if (nread < 0)
 	{
@@ -286,34 +290,61 @@ void NetSocketUV::Destroy()
 
 void NetSocketUV::SetupRetranslation(void* argv)
 {
-	std::this_thread::sleep_for(std::chrono::milliseconds(500));
-	FILE* proxy = nullptr;
+	NetSocketUV* socket = (NetSocketUV*)GetNetSocketPtr(argv);
+	if(socket->GetClientID())
+	{
+		const char* ID = socket->GetClientID();
+		std::this_thread::sleep_for(std::chrono::milliseconds(500));
+		FILE* proxy = nullptr;
 #ifdef WIN32
-	//system("RTSPProxyServerForClient.exe -d -c -%s");
-	proxy = _popen("RTSP.exe -d -c -%s", "r");
-	_pclose(proxy);
-
+		//system("RTSPProxyServerForClient.exe -d -c -%s");
+		proxy = _popen("RTSP.exe -d -c -%s", "r");
+		_pclose(proxy);
+		std::thread delay(&socket->VaitingDelay);
+		delay.join();
+		
 #else
-	int status;
-	pid_t pid;
+		int status;
+		pid_t pid;
 
-	pid = fork();
+		pid = fork();
 
-	/* Handeling Chile Process */
-	if (pid == 0) {
-		char* execv_str[] = { "./RTSP", NULL };
-		if (execv("./RTSP", execv_str) < 0) {
+		/* Handeling Chile Process */
+		if (pid == 0) {
+			char* execv_str[] = { "./RTSP", ID };
+			if (execv("./RTSP", execv_str) < 0) {
+				status = -1;
+				perror("ERROR\n");
+			}
+		}
+		
+
+		/* Handeling Chile Process Failure */
+		else if (pid < 0) {
 			status = -1;
 			perror("ERROR\n");
 		}
-	}
-
-	/* Handeling Chile Process Failure */
-	else if (pid < 0) {
-		status = -1;
-		perror("ERROR\n");
-	}
+		std::thread delay(&socket->VaitingDelay);
+		delay.join();
 #endif
+	}
+	
+}
+
+void* NetSocketUV::VaitingDelay(void* delay)
+{
+	int min = (int)delay;
+	if (delay > 0)
+	{
+		std::this_thread::sleep_for(std::chrono::minutes(min));
+
+		return (void*)1;
+	}
+	else
+	{
+		printf("delay <= 0!");
+		return 0;
+	}
 }
 
 Server::Server()
