@@ -325,7 +325,7 @@ void NetSocketUV::SetupRetranslation(void* argv)
 			status = -1;
 			perror("ERROR\n");
 		}
-		std::thread delay(VaitingDelay, 10);
+		std::thread delay(WaitingDelay, 10);
 		delay.join();
 		delay.detach();
 #endif
@@ -335,8 +335,8 @@ void NetSocketUV::SetupRetranslation(void* argv)
 
 void* NetSocketUV::WaitingDelay(void* delay)
 {
-	int min = (int)delay;
-	if (delay > 0)
+	int min = static_cast<int>(reinterpret_cast<intptr_t>(delay));
+	if (min > 0)
 	{
 		std::this_thread::sleep_for(std::chrono::minutes(min));
 
