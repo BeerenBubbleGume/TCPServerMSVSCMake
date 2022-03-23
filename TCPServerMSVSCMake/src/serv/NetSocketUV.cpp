@@ -346,7 +346,7 @@ void NetSocketUV::SetupRetranslation(void* argv)
 void* NetSocketUV::WaitingDelay(void* delay)
 {
 	
-	if (delay)
+	if (delay != nullptr)
 	{
 		std::this_thread::sleep_for(std::chrono::minutes(10));
 
