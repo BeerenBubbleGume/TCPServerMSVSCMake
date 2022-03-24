@@ -267,7 +267,7 @@ void idle_cb(uv_idle_t* idle)
 #ifdef WIN32
 	Sleep(100);
 #else
-	sleep(0.01);
+	sleep(0.1);
 #endif // WIN32
 
 	uv_idle_stop(idle);
@@ -341,7 +341,7 @@ void NetSocketUV::SetupRetranslation(void* argv)
 				{
 					std::thread delay(WaitingDelay, socket);
 					delay.join();
-					delay.detach();
+					//delay.detach();
 				}
 			}
 		}
