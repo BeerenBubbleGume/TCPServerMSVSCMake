@@ -105,9 +105,9 @@ bool NetSocket::Create(int port, bool udp_tcp, bool listen)
 	return true;
 }
 
-const char* NetSocket::GetClientID()
+char* NetSocket::GetClientID()
 {
-	const char* URLstr = new const char(net->GetIDPath());
+	char* URLstr = new char(net->GetIDPath());
 	return URLstr;
 }
 

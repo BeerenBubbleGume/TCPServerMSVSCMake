@@ -165,9 +165,10 @@ void NetSocketUV::SendUDP(NET_BUFFER_INDEX *buf)
 
 void NetSocketUV::ReceiveTCP()
 {
-	const char* filePrefix = GetClientID();
-	std::string fileName = filePrefix + *"in_binary_h.264";
-	fout.open(fileName, std::ios::binary | std::ios::app);
+	char* filePrefix = GetClientID();
+	char* name = "in_binary_h.264";
+	CString fileName(filePrefix + *name);
+	fout.open(fileName.c_str(), std::ios::binary | std::ios::app);
 	if (fout.is_open())
 	{
 		fout.write((char*)net->GetRecvBuffer()->GetData(), net->GetRecvBuffer()->GetLength());
@@ -319,18 +320,13 @@ void NetSocketUV::SetupRetranslation(void* argv)
 #ifdef WIN32
 		//system("RTSPProxyServerForClient.exe -d -c -%s");
 		proxy = _popen("RTSP.exe -d -c -%s", "r");
-		_pclose(proxy);
-		std::thread delay(WaitingDelay, 10, socket);
-		delay.join();
-		delay.detach();
-		
-		
+		_pclose(proxy);		
 #else
 		int status;
 		pid_t pid;
 
 		pid = fork();
-		std::string outRTSP;
+		CString outRTSP;
 		/* Handeling Chile Process */
 		if (pid == 0) {
 			char* execv_str[] = { "./RTSP", ID };
