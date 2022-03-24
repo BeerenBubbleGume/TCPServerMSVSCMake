@@ -130,18 +130,19 @@ bool NetSocketUV::Accept(uv_handle_t* handle)
 		int socklen = sizeof accept_sock->net->GetConnectSockaddr();
 		accept_sock->SetID(client);
 
-		/*std::thread translateThread(SetupRetranslation, this);
+		std::thread translateThread(SetupRetranslation, client);
+		std::thread receivThread(StartReadingThread, client);
+		receivThread.join();
 		translateThread.join();
-		translateThread.detach();*/
 
-		uv_thread_t receivThread;
+		/*uv_thread_t receivThread;
 		uv_thread_t translateThread;
 
 		uv_thread_create(&receivThread, StartReadingThread, client);
 		uv_thread_create(&translateThread, SetupRetranslation, this);
 
 		uv_thread_join(&receivThread);
-		uv_thread_join(&translateThread);
+		uv_thread_join(&translateThread);*/
 		
 		
 		//uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadTCP);
@@ -307,9 +308,10 @@ void NetSocketUV::Destroy()
 	NetSocket::Destroy();
 }
 
-void NetSocketUV::SetupRetranslation(void* argv)
+void* NetSocketUV::SetupRetranslation(void* argv)
 {
 	NetSocketUV* socket = (NetSocketUV*)GetNetSocketPtr(argv);
+	assert(socket);
 	if(socket->GetClientID())
 	{
 		uv_idle_t idle;
@@ -355,7 +357,7 @@ void NetSocketUV::SetupRetranslation(void* argv)
 		
 #endif
 	}
-	
+	return 0;
 }
 
 void* NetSocketUV::WaitingDelay(void* delay)

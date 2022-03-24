@@ -19,13 +19,6 @@ struct TCP_SOCKET : public NET_SOCKET_PTR, uv_tcp_t
 struct UDP_SOCKET : public NET_SOCKET_PTR, uv_udp_t
 {
 };
-struct FS_DATA_HANDLE : public uv_fs_t
-{
-	NetBuffer recv_buffer;
-	uv_fs_t fs_req;
-	uv_fs_t write_req;
-	uv_fs_t close_req;
-};
 
 struct NetBufferUV : public NET_BUFFER_INDEX
 {
@@ -39,38 +32,38 @@ struct NetBufferUV : public NET_BUFFER_INDEX
 		index = 0;
 	}
 
-	uv_write_t* GetPtrWrite() { return (uv_write_t*)sender_object; }
-	uv_udp_send_t* GetPtrSend() { return (uv_udp_send_t*)sender_object; };
+	uv_write_t*			GetPtrWrite()											{ return (uv_write_t*)sender_object; }
+	uv_udp_send_t*		GetPtrSend()											{ return (uv_udp_send_t*)sender_object; };
 };
 
 class NetSocketUV : public NetSocket
 {
 public:
 
-	NetSocketUV(Net* net);
-	virtual ~NetSocketUV();
+						NetSocketUV(Net* net);
+	virtual				~NetSocketUV();
 
 	void* sock;
 
-	virtual bool Create(int port, bool udp_tcp, bool listen);
+	virtual bool		Create(int port, bool udp_tcp, bool listen);
 
 	//bool SetConnectedSocketToReadMode(uv_stream_t* stream);
-	const char* GetIP(Net_Address* addr, bool own_or_peer);
-	bool Accept(uv_handle_t* handle);
-	void SetID(void* NewClient) { NetSocket::SetID(NewClient); }
+	const char*			GetIP(Net_Address* addr, bool own_or_peer);
+	bool				Accept(uv_handle_t* handle);
+	void				SetID(void* NewClient)									{ NetSocket::SetID(NewClient); }
 	//virtual const char* GetClientID()											{ return NetSocket::GetClientID(); }
-	void SendTCP(NET_BUFFER_INDEX* buf);
-	void SendUDP(NET_BUFFER_INDEX* buf);
+	void				SendTCP(NET_BUFFER_INDEX* buf);
+	void				SendUDP(NET_BUFFER_INDEX* buf);
 	void				ReceiveTCP();
 	void				ReceiveUPD();
 	void				Destroy();
 
-	static void SetupRetranslation(void* argv);
-	static void* WaitingDelay(void* delay);
+	static void*		SetupRetranslation(void* argv);
+	static void*		WaitingDelay(void* delay);
 	int status;
-	static NetSocketUV* NewSocket(Net* net) { return new NetSocketUV(net); }
-	uv_loop_t* loop;
-	FILE* getFile() { return pout; }
+	static NetSocketUV* NewSocket(Net* net)										{ return new NetSocketUV(net); }
+	uv_loop_t*			loop;
+	FILE*				getFile()												{ return pout; }
 
 protected:
 	FILE* pout;
@@ -88,35 +81,28 @@ protected:
 class Server
 {
 public:
-	Server();
-	virtual ~Server();
-	int connect(bool connection);
-	static void StartTranslation();
+						Server();
+	virtual				~Server();
+	int					connect(bool connection);
+	static void			StartTranslation();
 protected:
 
-	Net* net;
-	NetSocketUV* net_sockuv;
+	Net*				net;
+	NetSocketUV*		net_sockuv;
 		/*static void GenerateRTSPURL(void* Data) {
 			RTSPProxyServer::StartProxyServer(Data);
 			return;
 		}*/
-
-protected:
-
-
 };
-
-
-
 #endif
-void idle_cb(uv_idle_t* idle);
-void OnAccept(uv_stream_t* stream, int status);
-void OnAllocBuffer(uv_handle_t* handle, size_t suggested_size, uv_buf_t* buf);
-void OnReadTCP(uv_stream_t* stream, ssize_t nread, const uv_buf_t* buf);
-void OnReadUDP(uv_udp_t* handle, ssize_t nread, const uv_buf_t* buf, const struct sockaddr* addr, unsigned flags);
-void OnCloseSocket(uv_handle_t* handle);
-void OnWrite(uv_write_t* req, int status);
-void StartReadingThread(void* handle);
-uv_tcp_t* GetPtrTCP(void* ptr);
-uv_udp_t* GetPtrUDP(void* ptr);
-uv_loop_t* GetLoop(Net* net);
+void					idle_cb					(uv_idle_t* idle);
+void					OnAccept				(uv_stream_t* stream, int status);
+void					OnAllocBuffer			(uv_handle_t* handle, size_t suggested_size, uv_buf_t* buf);
+void					OnReadTCP				(uv_stream_t* stream, ssize_t nread, const uv_buf_t* buf);
+void					OnReadUDP				(uv_udp_t* handle, ssize_t nread, const uv_buf_t* buf, const struct sockaddr* addr, unsigned flags);
+void					OnCloseSocket			(uv_handle_t* handle);
+void					OnWrite					(uv_write_t* req, int status);
+void					StartReadingThread		(void* handle);
+uv_tcp_t*				GetPtrTCP				(void* ptr);
+uv_udp_t*				GetPtrUDP				(void* ptr);
+uv_loop_t*				GetLoop					(Net* net);
