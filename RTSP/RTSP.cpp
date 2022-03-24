@@ -64,8 +64,8 @@ void RTSPProxyServer::StartProxyServer(void* Data)
 	OutPacketBuffer::maxSize = 5000000;
 	char* filePrefix = (char*)Data;
 	char* name = "in_binary_h.264";
-	CString fileName(filePrefix + *name);
-	std::string streamName = "serverStream/" + (std::string)fileName;
+	std::string fileName(filePrefix + *name);
+	std::string streamName = "serverStream/" + fileName;
 
 	RTSPProxyServer* server = RTSPProxyServer::createNew(*env, 8554);
 	ServerMediaSession* sms = ServerMediaSession::createNew(*env, streamName.c_str());
