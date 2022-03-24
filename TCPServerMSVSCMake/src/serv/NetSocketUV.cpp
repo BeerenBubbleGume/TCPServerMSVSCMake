@@ -326,7 +326,7 @@ void NetSocketUV::SetupRetranslation(void* argv)
 		pid_t pid;
 
 		pid = fork();
-		CString outRTSP;
+		std::string outRTSP;
 		/* Handeling Chile Process */
 		if (pid == 0) {
 			char* execv_str[] = { "./RTSP", ID };
