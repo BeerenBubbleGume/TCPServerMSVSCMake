@@ -314,50 +314,52 @@ void* NetSocketUV::SetupRetranslation(void* argv)
 {
 	NetSocketUV* socket = (NetSocketUV*)GetNetSocketPtr(argv);
 	assert(socket);
-	if(socket->GetClientID())
+	if (socket->GetClientID())
 	{
-		uv_idle_t idle;
+		/*uv_idle_t idle;
 		uv_idle_init(GetLoop(socket->net), &idle);
-		uv_idle_start(&idle, idle_cb);
-		char* ID = (char*)socket->GetClientID();
-		FILE* proxy = nullptr;
+		uv_idle_start(&idle, idle_cb);*/
+		if (std::filesystem::exists(std::string("in_binary_h.264")) == true) {
+			char* ID = (char*)socket->GetClientID();
+			FILE* proxy = nullptr;
 #ifdef WIN32
-		//system("RTSPProxyServerForClient.exe -d -c -%s");
-		proxy = _popen("RTSP.exe -d -c -%s", "r");
-		_pclose(proxy);		
+			//system("RTSPProxyServerForClient.exe -d -c -%s");
+			proxy = _popen("RTSP.exe -d -c -%s", "r");
+			_pclose(proxy);
 #else
-		int status;
-		pid_t pid;
+			int status;
+			pid_t pid;
 
-		pid = fork();
-		std::string outRTSP;
-		/* Handeling Chile Process */
-		if (pid == 0) {
-			char* execv_str[] = { "./RTSP", ID };
-			if (execv("./RTSP", execv_str) < 0) {
+			pid = fork();
+			std::string outRTSP;
+			/* Handeling Chile Process */
+			if (pid == 0) {
+				char* execv_str[] = { "./RTSP", ID };
+				if (execv("./RTSP", execv_str) < 0) {
+					status = -1;
+					perror("ERROR\n");
+				}
+				else
+				{
+					std::getline(std::cin, outRTSP);
+					if (outRTSP.find("rtsp://"))
+					{
+						std::thread delay(WaitingDelay, socket);
+						delay.join();
+						//delay.detach();
+					}
+				}
+			}
+
+
+			/* Handeling Chile Process Failure */
+			else if (pid < 0) {
 				status = -1;
 				perror("ERROR\n");
 			}
-			else
-			{
-				std::getline(std::cin, outRTSP);
-				if (outRTSP.find("rtsp://"))
-				{
-					std::thread delay(WaitingDelay, socket);
-					delay.join();
-					//delay.detach();
-				}
-			}
-		}
-		
 
-		/* Handeling Chile Process Failure */
-		else if (pid < 0) {
-			status = -1;
-			perror("ERROR\n");
-		}
-		
 #endif
+		}
 	}
 	return 0;
 }
