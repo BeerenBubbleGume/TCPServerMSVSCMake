@@ -9,6 +9,7 @@
 #include <liveMedia.hh>
 #include <BasicUsageEnvironment.hh>
 #include <GroupsockHelper.hh>
+#include "../TCPServerMSVSCMake/src/serv/utils.hpp"
 #ifdef WIN32
 #include <WinSock2.h>
 #endif // WIN32

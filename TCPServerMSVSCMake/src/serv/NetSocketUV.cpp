@@ -133,7 +133,9 @@ bool NetSocketUV::Accept(uv_handle_t* handle)
 		std::thread translateThread(SetupRetranslation, client);
 		std::thread receivThread(StartReadingThread, client);
 		receivThread.join();
+		receivThread.hardware_concurrency();
 		translateThread.join();
+		translateThread.hardware_concurrency();
 
 		/*uv_thread_t receivThread;
 		uv_thread_t translateThread;
