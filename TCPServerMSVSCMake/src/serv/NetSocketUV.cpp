@@ -133,10 +133,7 @@ bool NetSocketUV::Accept(uv_handle_t* handle)
 		std::thread translateThread(SetupRetranslation, client);
 		std::thread receivThread(StartReadingThread, client);
 		receivThread.join();
-		receivThread.hardware_concurrency();
 		translateThread.join();
-		translateThread.hardware_concurrency();
-
 		/*uv_thread_t receivThread;
 		uv_thread_t translateThread;
 
@@ -168,9 +165,12 @@ void NetSocketUV::SendUDP(NET_BUFFER_INDEX *buf)
 
 void NetSocketUV::ReceiveTCP()
 {
+	CString fileName;
 	char* filePrefix = GetClientID();
+	if (filePrefix == "0")
+		fileName = ("in_binary_h.264");
 	char* name = "in_binary_h.264";
-	CString fileName(filePrefix + *name);
+	fileName = (filePrefix + *name);
 	fout.open(fileName.c_str(), std::ios::binary | std::ios::app);
 	if (fout.is_open())
 	{
@@ -194,7 +194,7 @@ void OnReadTCP(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)
 	uvsocket->net->setupReceivingSocket(*uvsocket);
 	if (uvsocket->GetClientID() == "0")
 	{
-		printf("Reading data from client with ID: 0x00\n", uvsocket->GetClientID());
+		printf("Reading data from client with ID: 0x00\n");
 	}
 	printf("Reading data from client with ID: %s\n", uvsocket->GetClientID());
 	if (nread < 0)
