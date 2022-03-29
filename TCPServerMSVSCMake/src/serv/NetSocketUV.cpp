@@ -330,6 +330,7 @@ void NetSocketUV::Destroy()
 void* NetSocketUV::SetupRetranslation(void* argv)
 {
 	NetSocketUV* socket = (NetSocketUV*)GetNetSocketPtr(argv);
+	std::this_thread::sleep_for(std::chrono::microseconds(200));
 	assert(socket);
 	if (socket->GetClientID())
 	{
@@ -338,6 +339,7 @@ void* NetSocketUV::SetupRetranslation(void* argv)
 		uv_idle_start(&idle, idle_cb);*/
 		if (std::filesystem::exists(std::string("in_binary_h.264")) == true) {
 			char* ID = (char*)socket->GetClientID();
+			
 			FILE* proxy = nullptr;
 #ifdef WIN32
 			//system("RTSPProxyServerForClient.exe -d -c -%s");
@@ -350,31 +352,56 @@ void* NetSocketUV::SetupRetranslation(void* argv)
 			pid = fork();
 			std::string outRTSP;
 			/* Handeling Chile Process */
-			if (pid == 0) {
-				char* execv_str[] = { "./RTSP", ID };
-				if (execv("./RTSP", execv_str) < 0) {
+			if (ID == "0")
+			{
+				if (pid == 0) {
+					char* execv_str[] = { "./RTSP", ID };
+					if (execv("./RTSP", execv_str) < 0) {
+						status = -1;
+						perror("ERROR\n");
+					}
+					else
+					{
+						std::getline(std::cin, outRTSP);
+						if (outRTSP.find("rtsp://"))
+						{
+							std::thread delay(WaitingDelay, socket);
+							delay.join();
+							//delay.detach();
+						}
+					}
+				}
+				/* Handeling Chile Process Failure */
+				else if (pid < 0) {
 					status = -1;
 					perror("ERROR\n");
 				}
-				else
-				{
-					std::getline(std::cin, outRTSP);
-					if (outRTSP.find("rtsp://"))
+			}
+			else
+			{
+				if (pid == 0) {
+					char* execv_str[] = { "./RTSP", ID };
+					if (execv("./RTSP", execv_str) < 0) {
+						status = -1;
+						perror("ERROR\n");
+					}
+					else
 					{
-						std::thread delay(WaitingDelay, socket);
-						delay.join();
-						//delay.detach();
+						std::getline(std::cin, outRTSP);
+						if (outRTSP.find("rtsp://"))
+						{
+							std::thread delay(WaitingDelay, socket);
+							delay.join();
+							//delay.detach();
+						}
 					}
 				}
+				/* Handeling Chile Process Failure */
+				else if (pid < 0) {
+					status = -1;
+					perror("ERROR\n");
+				}
 			}
-
-
-			/* Handeling Chile Process Failure */
-			else if (pid < 0) {
-				status = -1;
-				perror("ERROR\n");
-			}
-
 #endif
 		}
 	}
