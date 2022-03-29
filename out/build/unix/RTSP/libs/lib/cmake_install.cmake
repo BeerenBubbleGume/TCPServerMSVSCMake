@@ -1,4 +1,4 @@
-# Install script for directory: /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/RTSP/libs/lib
+# Install script for directory: /home/dkhaziev/Документы/GitHub/repo/BeerenBubbleGume/TCPServerMSVSCMake/RTSP/libs/lib
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

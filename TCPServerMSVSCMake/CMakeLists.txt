@@ -36,7 +36,7 @@ ELSE()
 								
 								)
 	target_link_libraries(TCPServerMSVSCMake
-								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libuv.a
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libuv_a.a
 								stdc++fs
 								pthread
 								-ldl

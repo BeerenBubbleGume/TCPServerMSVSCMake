@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include <iostream>
+#include <cstring>
 #include <assert.h>
 #include "utf.hpp"
 

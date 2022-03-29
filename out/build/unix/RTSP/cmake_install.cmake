@@ -1,4 +1,4 @@
-# Install script for directory: /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/RTSP
+# Install script for directory: /home/dkhaziev/Документы/GitHub/repo/BeerenBubbleGume/TCPServerMSVSCMake/RTSP
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -44,7 +44,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/RTSP/libs/cmake_install.cmake")
+  include("/home/dkhaziev/Документы/GitHub/repo/BeerenBubbleGume/TCPServerMSVSCMake/out/build/unix/RTSP/libs/cmake_install.cmake")
 
 endif()
 

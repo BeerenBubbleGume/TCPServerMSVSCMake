@@ -1,6 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/RTSP.dir/RTSP.cpp.o"
-  "CMakeFiles/RTSP.dir/RTSP.cpp.o.d"
+  "CMakeFiles/RTSP.dir/utf.cpp.o"
+  "CMakeFiles/RTSP.dir/utils.cpp.o"
   "RTSP"
   "RTSP.pdb"
 )
