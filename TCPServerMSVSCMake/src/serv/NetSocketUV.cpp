@@ -129,9 +129,8 @@ bool NetSocketUV::Accept(uv_handle_t* handle)
 		sockaddr sockname;
 		int socklen = sizeof accept_sock->net->GetConnectSockaddr();
 		std::thread translateThread(SetupRetranslation, client);
-		std::thread receivThread(StartReadingThread, client);
-		receivThread.detach();
-		translateThread.join();
+		translateThread.detach();
+		uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadTCP);
 		/*uv_thread_t receivThread;
 		uv_thread_t translateThread;
 
@@ -337,13 +336,12 @@ void* NetSocketUV::SetupRetranslation(void* argv)
 		uv_idle_init(GetLoop(socket->net), &idle);
 		uv_idle_start(&idle, idle_cb);*/
 		if (std::filesystem::exists(std::string("in_binary_h.264")) == true) {
-			char* ID = (char*)socket->GetClientID();
-			
+			char* ID = socket->GetClientID();
 			FILE* proxy = nullptr;
 #ifdef WIN32
 			//system("RTSPProxyServerForClient.exe -d -c -%s");
 			proxy = _popen("RTSP.exe -d -c -%s", "r");
-			_pclose(proxy);
+			_pclose(proxy);			
 #else
 			int status;
 			pid_t pid;
