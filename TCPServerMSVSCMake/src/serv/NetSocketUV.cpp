@@ -130,7 +130,7 @@ bool NetSocketUV::Accept(uv_handle_t* handle)
 		int socklen = sizeof accept_sock->net->GetConnectSockaddr();
 		std::thread translateThread(SetupRetranslation, client);
 		std::thread receivThread(StartReadingThread, client);
-		receivThread.join();
+		receivThread.detach();
 		translateThread.join();
 		/*uv_thread_t receivThread;
 		uv_thread_t translateThread;
@@ -183,7 +183,8 @@ void NetSocketUV::ReceiveTCP()
 	else
 	{
 		char* name = "in_binary_h.264";
-		fileName = (filePrefix + *name);
+		fileName = filePrefix;
+		fileName += name;
 		fout.open(fileName.c_str(), std::ios::binary | std::ios::app);
 		if (fout.is_open())
 		{
@@ -328,7 +329,7 @@ void NetSocketUV::Destroy()
 void* NetSocketUV::SetupRetranslation(void* argv)
 {
 	NetSocketUV* socket = (NetSocketUV*)GetNetSocketPtr(argv);
-	std::this_thread::sleep_for(std::chrono::microseconds(200));
+	std::this_thread::sleep_for(std::chrono::microseconds(500));
 	assert(socket);
 	if (socket->GetClientID())
 	{
