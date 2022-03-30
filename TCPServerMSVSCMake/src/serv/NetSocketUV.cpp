@@ -166,7 +166,7 @@ void NetSocketUV::ReceiveTCP()
 	char* filePrefix = GetClientID();
 	if ((fileName = filePrefix).Find('0'))
 	{
-		fileName = ("in_binary_h.264");
+		fileName = ("0in_binary_h.264");
 		fout.open(fileName.c_str(), std::ios::binary | std::ios::app);
 		if (fout.is_open())
 		{
@@ -335,7 +335,9 @@ void* NetSocketUV::SetupRetranslation(void* argv)
 		/*uv_idle_t idle;
 		uv_idle_init(GetLoop(socket->net), &idle);
 		uv_idle_start(&idle, idle_cb);*/
-		if (std::filesystem::exists(std::string("in_binary_h.264")) == true) {
+		std::string fileName(socket->GetClientID());
+		fileName += "in_binary_h.264";
+		if (std::filesystem::exists(fileName) == true) {
 			char* ID = socket->GetClientID();
 			FILE* proxy = nullptr;
 #ifdef WIN32

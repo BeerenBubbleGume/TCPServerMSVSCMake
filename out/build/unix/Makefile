@@ -129,19 +129,6 @@ TCPServerMSVSCMake/fast:
 	$(MAKE) $(MAKESILENT) -f TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/build.make TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/build
 .PHONY : TCPServerMSVSCMake/fast
 
-#=============================================================================
-# Target rules for targets named RTSP
-
-# Build rule for target.
-RTSP: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 RTSP
-.PHONY : RTSP
-
-# fast build rule for target.
-RTSP/fast:
-	$(MAKE) $(MAKESILENT) -f RTSP/CMakeFiles/RTSP.dir/build.make RTSP/CMakeFiles/RTSP.dir/build
-.PHONY : RTSP/fast
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -150,7 +137,6 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... RTSP"
 	@echo "... TCPServerMSVSCMake"
 .PHONY : help
 

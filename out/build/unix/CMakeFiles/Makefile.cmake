@@ -8,10 +8,6 @@ set(CMAKE_DEPENDS_GENERATOR "Unix Makefiles")
 set(CMAKE_MAKEFILE_DEPENDS
   "CMakeCache.txt"
   "../../../CMakeLists.txt"
-  "../../../RTSP/CMakeLists.txt"
-  "../../../RTSP/libs/CMakeLists.txt"
-  "../../../RTSP/libs/include/CMakeLists.txt"
-  "../../../RTSP/libs/lib/CMakeLists.txt"
   "../../../TCPServerMSVSCMake/CMakeLists.txt"
   "../../../TCPServerMSVSCMake/src/CMakeLists.txt"
   "../../../TCPServerMSVSCMake/src/serv/CMakeLists.txt"
@@ -49,14 +45,9 @@ set(CMAKE_MAKEFILE_PRODUCTS
   "TCPServerMSVSCMake/CMakeFiles/CMakeDirectoryInformation.cmake"
   "TCPServerMSVSCMake/src/CMakeFiles/CMakeDirectoryInformation.cmake"
   "TCPServerMSVSCMake/src/serv/CMakeFiles/CMakeDirectoryInformation.cmake"
-  "RTSP/CMakeFiles/CMakeDirectoryInformation.cmake"
-  "RTSP/libs/CMakeFiles/CMakeDirectoryInformation.cmake"
-  "RTSP/libs/lib/CMakeFiles/CMakeDirectoryInformation.cmake"
-  "RTSP/libs/include/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
   "TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/DependInfo.cmake"
-  "RTSP/CMakeFiles/RTSP.dir/DependInfo.cmake"
   )
