@@ -24,7 +24,7 @@ public:
 		unsigned reclamationSeconds = 65);
 	static	void	WhatchAndWait(void* server);
 	static	void 	anonceStream(RTSPServer* rtspServer, ServerMediaSession* sms, char const* streamName);
-	static	void	StartProxyServer(void* Data);
+	static	void	StartProxyServer(char* Data);
 	bool			StopProxyServer(void* clientData);
 	int				getSocket4()													{ return fServerSocketIPv4; }
 	int				getSocket6()													{ return fServerSocketIPv6; }

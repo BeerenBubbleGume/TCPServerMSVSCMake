@@ -57,12 +57,12 @@ void RTSPProxyServer::anonceStream(RTSPServer* rtspServer, ServerMediaSession* s
 	delete[] url;
 }
 
-void RTSPProxyServer::StartProxyServer(void* Data)
+void RTSPProxyServer::StartProxyServer(char* Data)
 {
 	TaskScheduler* newscheduler = BasicTaskScheduler::createNew();
 	UsageEnvironment* env = BasicUsageEnvironment::createNew(*newscheduler);
 	OutPacketBuffer::maxSize = 5000000;
-	char* filePrefix = (char*)Data;
+	char* filePrefix = Data;
 	char* name = "in_binary_h.264";
 	std::string fileName(filePrefix + *name);
 	std::string streamName = "serverStream/" + fileName;
