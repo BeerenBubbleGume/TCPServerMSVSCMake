@@ -128,8 +128,6 @@ bool NetSocketUV::Accept(uv_handle_t* handle)
 	{
 		sockaddr sockname;
 		int socklen = sizeof accept_sock->net->GetConnectSockaddr();
-		accept_sock->SetID(client);
-
 		std::thread translateThread(SetupRetranslation, client);
 		std::thread receivThread(StartReadingThread, client);
 		receivThread.join();

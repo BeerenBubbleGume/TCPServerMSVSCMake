@@ -107,7 +107,7 @@ public:
 	virtual void	SendTCP(NET_BUFFER_INDEX* buf) = 0;
 	virtual void	SendUDP(NET_BUFFER_INDEX* buf) = 0;
 
-	virtual void	SetID(void* NewClient);
+	static void		SetID(void* NewClient);
 	virtual char*	GetClientID();
 	virtual void	ReceiveTCP() = 0;
 	virtual void	ReceiveUPD() = 0;

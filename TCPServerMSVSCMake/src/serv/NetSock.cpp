@@ -6,7 +6,7 @@ Net::Net()
 {
 	bytes_read = 0;
 	udp_tcp = false;
-	ClientID = 1;
+	ClientID = 0;
 	clientCount = 0;
 	IDArray = nullptr;
 	addr = nullptr;
@@ -101,6 +101,7 @@ bool NetSocket::Create(int port, bool udp_tcp, bool listen)
 	this->port = port;
 	if (!udp_tcp)
 		this->addr = new Net_Address;
+	SetID(this);
 
 	return true;
 }
@@ -114,14 +115,15 @@ char* NetSocket::GetClientID()
 void NetSocket::SetID(void* NewClient)
 {
 	int counter = 0;
-	int ID = net->GetIDPath();
+	NetSocket* socket = (NetSocket*)NewClient;
+	int ID = socket->net->GetIDPath();
 	uint16_t* Array = new uint16_t[1000000];
 	if (NewClient)
 	{
 		counter++;
-		net->SetClientCount(counter);
+		socket->net->SetClientCount(counter);
 		Array[counter] = counter;
-		net->setIDArray(Array);
+		socket->net->setIDArray(Array);
 	}
 	else
 	{
