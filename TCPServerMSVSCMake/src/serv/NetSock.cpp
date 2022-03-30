@@ -6,7 +6,7 @@ Net::Net()
 {
 	bytes_read = 0;
 	udp_tcp = false;
-	ClientID = 0;
+	ClientID = 1;
 	clientCount = 0;
 	IDArray = nullptr;
 	addr = nullptr;
