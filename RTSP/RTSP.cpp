@@ -63,20 +63,38 @@ void RTSPProxyServer::StartProxyServer(char* Data)
 	UsageEnvironment* env = BasicUsageEnvironment::createNew(*newscheduler);
 	OutPacketBuffer::maxSize = 5000000;
 	char* filePrefix = Data;
-	char* name = "in_binary_h.264";
-	std::string fileName(filePrefix + *name);
-	std::string streamName = "serverStream/" + fileName;
+	if (filePrefix == "0")
+	{
+		char* name = "in_binary_h.264";
+		std::string fileName(name);
+		std::string streamName = "serverStream/" + fileName;
+		RTSPProxyServer* server = RTSPProxyServer::createNew(*env, 8554);
+		ServerMediaSession* sms = ServerMediaSession::createNew(*env, streamName.c_str());
 
-	RTSPProxyServer* server = RTSPProxyServer::createNew(*env, 8554);
-	ServerMediaSession* sms = ServerMediaSession::createNew(*env, streamName.c_str());
+		sms->addSubsession(H264VideoFileServerMediaSubsession::createNew(*env, fileName.c_str(), false));
+		server->addServerMediaSession(sms);
+		anonceStream(server, sms, "serverStream");
+		std::thread whatch(WhatchAndWait, server);
 
-	sms->addSubsession(H264VideoFileServerMediaSubsession::createNew(*env, fileName.c_str(), false));
-	server->addServerMediaSession(sms);
-	anonceStream(server, sms, "serverStream");
-	std::thread whatch(WhatchAndWait, server);
-	whatch.join();
-	env->taskScheduler().doEventLoop(&server->eventLoopWatchVariable);
+		whatch.join();
+		env->taskScheduler().doEventLoop(&server->eventLoopWatchVariable);
+	}
+	else
+	{
+		char* name = "in_binary_h.264";
+		std::string fileName(filePrefix);
+		fileName += name;
+		std::string streamName = "serverStream/" + fileName;
+		RTSPProxyServer* server = RTSPProxyServer::createNew(*env, 8554);
+		ServerMediaSession* sms = ServerMediaSession::createNew(*env, streamName.c_str());
 
+		sms->addSubsession(H264VideoFileServerMediaSubsession::createNew(*env, fileName.c_str(), false));
+		server->addServerMediaSession(sms);
+		anonceStream(server, sms, "serverStream");
+		std::thread whatch(WhatchAndWait, server);
+		whatch.join();
+		env->taskScheduler().doEventLoop(&server->eventLoopWatchVariable);
+	}
 	//return;
 }
 
