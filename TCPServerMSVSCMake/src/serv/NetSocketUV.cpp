@@ -164,8 +164,8 @@ void NetSocketUV::SendUDP(NET_BUFFER_INDEX *buf)
 void NetSocketUV::ReceiveTCP()
 {
 	CString fileName;
-	char* filePrefix = GetClientID();
-	if ((fileName = filePrefix).Find('0'))
+	unsigned int filePrefix = GetClientID();
+	if ((fileName + filePrefix).Find('0'))
 	{
 		fileName = ("0in_binary_h.264");
 		fout.open(fileName.c_str(), std::ios::binary | std::ios::app);
@@ -183,7 +183,7 @@ void NetSocketUV::ReceiveTCP()
 	else
 	{
 		char* name = "in_binary_h.264";
-		fileName = filePrefix;
+		fileName.IntToString(filePrefix);
 		fileName += name;
 		fout.open(fileName.c_str(), std::ios::binary | std::ios::app);
 		if (fout.is_open())
@@ -208,7 +208,7 @@ void OnReadTCP(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)
 {
 	NetSocketUV* uvsocket = (NetSocketUV*)GetNetSocketPtr(stream);
 	uvsocket->net->setupReceivingSocket(*uvsocket);
-	if (uvsocket->GetClientID() == "0")
+	if (uvsocket->GetClientID() == 0)
 	{
 		printf("Reading data from client with ID: 0x00\n");
 	}
