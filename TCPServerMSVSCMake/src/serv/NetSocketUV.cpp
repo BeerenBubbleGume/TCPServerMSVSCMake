@@ -213,11 +213,7 @@ void OnReadTCP(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)
 {
 	NetSocketUV* uvsocket = (NetSocketUV*)GetNetSocketPtr(stream);
 	uvsocket->net->setupReceivingSocket(*uvsocket);
-	if (uvsocket->GetClientID() == 0)
-	{
-		printf("Reading data from client with ID: 0x00\n");
-	}
-	printf("Reading data from client with ID: %s\n", uvsocket->GetClientID());
+	printf("Reading data from client with ID: %d\n", uvsocket->GetClientID());
 	if (nread < 0)
 	{
 		printf("read buffer < 0!\n");
@@ -333,11 +329,11 @@ void NetSocketUV::Destroy()
 
 void RTSPProxyServer::play(void* sock_ptr)
 {
-	NetSocketUV* socket = (NetSocketUV*)sock_ptr;
+	NetSocketUV* socket = (NetSocketUV*)&sock_ptr;
 	u_int8_t* buffer = socket->net->GetRecvBuffer()->GetData();
 	u_int64_t len = socket->net->GetRecvBuffer()->GetLength();
 
-	ByteStreamMemoryBufferSource* source = ByteStreamMemoryBufferSource::createNew(*env, buffer, len);
+	ByteStreamMemoryBufferSource* source = ByteStreamMemoryBufferSource::createNew(envir(), buffer, len);
 	
 }
 
@@ -365,6 +361,8 @@ void* NetSocketUV::SetupRetranslation(void* argv)
 
 	ServerMediaSession* sms = ServerMediaSession::createNew(*env, streamName.c_str());
 	sms->addSubsession(DemandServerMediaSubsession::createNew(*env, true));
+	proxyserv->addServerMediaSession(sms);
+	proxyserv->play(&socket);
 //	if (socket->GetClientID())
 //	{
 //		unsigned int ID = socket->GetClientID();

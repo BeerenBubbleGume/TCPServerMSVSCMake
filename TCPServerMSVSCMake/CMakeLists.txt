@@ -46,7 +46,6 @@ ELSE()
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/liveMedia/
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/groupsock/
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/openssl/
-								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/pthread/
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/glib-2.0/
 								)
 	target_link_libraries(TCPServerMSVSCMake
