@@ -129,9 +129,11 @@ bool NetSocketUV::Accept(uv_handle_t* handle)
 		sockaddr sockname;
 		int socklen = sizeof accept_sock->net->GetConnectSockaddr();
 		std::thread translateThread(SetupRetranslation, client);
-		std::thread receivThread(StartReadingThread, client);
+		//std::thread receivThread(StartReadingThread, client);
 		translateThread.detach();
-		receivThread.join();
+		uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadTCP);
+
+		//receivThread.join();
 		/*uv_thread_t receivThread;
 		uv_thread_t translateThread;
 
@@ -163,7 +165,10 @@ void NetSocketUV::SendUDP(NET_BUFFER_INDEX *buf)
 
 void NetSocketUV::ReceiveTCP()
 {
-	CString fileName;
+
+
+
+	/*CString fileName;
 	unsigned int filePrefix = GetClientID();
 	if ((fileName + filePrefix).Find('0'))
 	{
@@ -184,6 +189,7 @@ void NetSocketUV::ReceiveTCP()
 	{
 		char* name = "in_binary_h.264";
 		fileName.IntToString(filePrefix);
+		
 		fileName += name;
 		fout.open(fileName.c_str(), std::ios::binary | std::ios::app);
 		if (fout.is_open())
@@ -196,8 +202,7 @@ void NetSocketUV::ReceiveTCP()
 		{
 			printf("cannot open file\n");
 		}
-	}
-	
+	}*/
 }
 
 void NetSocketUV::ReceiveUPD()
@@ -326,86 +331,116 @@ void NetSocketUV::Destroy()
 	NetSocket::Destroy();
 }
 
+void RTSPProxyServer::play(void* sock_ptr)
+{
+	NetSocketUV* socket = (NetSocketUV*)sock_ptr;
+	u_int8_t* buffer = socket->net->GetRecvBuffer()->GetData();
+	u_int64_t len = socket->net->GetRecvBuffer()->GetLength();
+
+	ByteStreamMemoryBufferSource* source = ByteStreamMemoryBufferSource::createNew(*env, buffer, len);
+	
+}
+
 void* NetSocketUV::SetupRetranslation(void* argv)
 {
 	NetSocketUV* socket = (NetSocketUV*)GetNetSocketPtr(argv);
 	std::this_thread::sleep_for(std::chrono::microseconds(500));
 	assert(socket);
-	if (socket->GetClientID())
+
+	TaskScheduler* scheduler = BasicTaskScheduler::createNew();
+	UsageEnvironment* env = BasicUsageEnvironment::createNew(*scheduler);
+
+	RTSPProxyServer* proxyserv = RTSPProxyServer::createNew(*env, 8554);
+	if (proxyserv == nullptr)
 	{
-		unsigned int ID = socket->GetClientID();
-		std::array<char, 10> strID;
-		std::to_chars(strID.data(), strID.data() + strID.size(), ID);
-		std::string fileName(strID.data());
-		fileName += "in_binary_h.264";
-		if (std::filesystem::exists(fileName) == true) {
-			
-			FILE* proxy = nullptr;
-#ifdef WIN32
-			//system("RTSPProxyServerForClient.exe -d -c -%s");
-			proxy = _popen("RTSP.exe -d -c -%s", "r");
-			_pclose(proxy);		
-
-#else
-			int status;
-			pid_t pid;
-
-			pid = fork();
-			std::string outRTSP;
-			/* Handeling Chile Process */
-			//if (ID == "0")
-			//{
-			//	if (pid == 0) {
-			//		char* execv_str[] = { "./RTSP", strID.data()};
-			//		if (execv("./RTSP", execv_str) < 0) {
-			//			status = -1;
-			//			perror("ERROR\n");
-			//		}
-			//		else
-			//		{
-			//			std::getline(std::cin, outRTSP);
-			//			if (outRTSP.find("rtsp://"))
-			//			{
-			//				std::thread delay(WaitingDelay, socket);
-			//				delay.join();
-			//				//delay.detach();
-			//			}
-			//		}
-			//	}
-			//	/* Handeling Chile Process Failure */
-			//	else if (pid < 0) {
-			//		status = -1;
-			//		perror("ERROR\n");
-			//	}
-			//}
-			//else
-			//{
-				if (pid == 0) {
-					char* execv_str[] = { "./RTSP", strID.data()};
-					if (execv("./RTSP", execv_str) < 0) {
-						status = -1;
-						perror("ERROR\n");
-					}
-					else
-					{
-						std::getline(std::cin, outRTSP);
-						if (outRTSP.find("rtsp://"))
-						{
-							std::thread delay(WaitingDelay, socket);
-							delay.join();
-							//delay.detach();
-						}
-					}
-				}
-				/* Handeling Chile Process Failure */
-				else if (pid < 0) {
-					status = -1;
-					perror("ERROR\n");
-				}
-			//}
-#endif
-		}
+		printf("cannot create RTSP server!");
+		exit(1);
 	}
+
+	unsigned int ID = socket->GetClientID();
+	std::array<char, 10> strID;
+	std::to_chars(strID.data(), strID.data() + strID.size(), ID);
+	std::string streamName("ServerRTSP/Channals/");
+	streamName += strID.data();
+
+	ServerMediaSession* sms = ServerMediaSession::createNew(*env, streamName.c_str());
+	sms->addSubsession(DemandServerMediaSubsession::createNew(*env, true));
+//	if (socket->GetClientID())
+//	{
+//		unsigned int ID = socket->GetClientID();
+//		std::array<char, 10> strID;
+//		std::to_chars(strID.data(), strID.data() + strID.size(), ID);
+//		std::string fileName(strID.data());
+//		fileName += "in_binary_h.264";
+//		if (std::filesystem::exists(fileName) == true) {
+//			
+//			FILE* proxy = nullptr;
+//#ifdef WIN32
+//			//system("RTSPProxyServerForClient.exe -d -c -%s");
+//			proxy = _popen("RTSP.exe -d -c -%s", "r");
+//			_pclose(proxy);		
+//
+//#else
+//			int status;
+//			pid_t pid;
+//
+//			pid = fork();
+//			std::string outRTSP;
+//			/* Handeling Chile Process */
+//			//if (ID == "0")
+//			//{
+//			//	if (pid == 0) {
+//			//		char* execv_str[] = { "./RTSP", strID.data()};
+//			//		if (execv("./RTSP", execv_str) < 0) {
+//			//			status = -1;
+//			//			perror("ERROR\n");
+//			//		}
+//			//		else
+//			//		{
+//			//			std::getline(std::cin, outRTSP);
+//			//			if (outRTSP.find("rtsp://"))
+//			//			{
+//			//				std::thread delay(WaitingDelay, socket);
+//			//				delay.join();
+//			//				//delay.detach();
+//			//			}
+//			//		}
+//			//	}
+//			//	/* Handeling Chile Process Failure */
+//			//	else if (pid < 0) {
+//			//		status = -1;
+//			//		perror("ERROR\n");
+//			//	}
+//			//}
+//			//else
+//			//{
+//				if (pid == 0) {
+//					char* execv_str[] = { "./RTSP", strID.data()};
+//					if (execv("./RTSP", execv_str) < 0) {
+//						status = -1;
+//						perror("ERROR\n");
+//					}
+//					else
+//					{
+//						std::getline(std::cin, outRTSP);
+//						if (outRTSP.find("rtsp://"))
+//						{
+//							std::thread delay(WaitingDelay, socket);
+//							delay.join();
+//							//delay.detach();
+//						}
+//					}
+//				}
+//				/* Handeling Chile Process Failure */
+//				else if (pid < 0) {
+//					status = -1;
+//					perror("ERROR\n");
+//				}
+//			//}
+//#endif
+//		}
+//	}
+
 	return 0;
 }
 

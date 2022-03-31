@@ -16,6 +16,8 @@ add_executable (TCPServerMSVSCMake	"src/serv/NetSock.hpp"
 									"src/serv/NetSocketUV.cpp"
 									"TCPServerMSVSCMake.cpp"
 									"src/serv/utils.hpp"
+									"src/serv/RTSP.cpp"
+									"src/serv/RTSP.hpp"
 									"src/serv/utils.cpp"
 									"TCPServerMSVSCMake.hpp" 
 									"src/serv/includes.hpp"
@@ -25,7 +27,13 @@ add_executable (TCPServerMSVSCMake	"src/serv/NetSock.hpp"
 IF(WIN32)
 	target_include_directories(TCPServerMSVSCMake PUBLIC
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/
-								
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/BasicUsageEnvironment/
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/UsageEnvironment/
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/liveMedia/
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/groupsock/
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/openssl/
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/pthread/
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/glib-2.0/
 								)
 	target_link_libraries(TCPServerMSVSCMake 
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/uv.lib
@@ -33,10 +41,21 @@ IF(WIN32)
 ELSE()
 	target_include_directories(TCPServerMSVSCMake PUBLIC
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/
-								
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/BasicUsageEnvironment/
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/UsageEnvironment/
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/liveMedia/
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/groupsock/
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/openssl/
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/pthread/
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/glib-2.0/
 								)
 	target_link_libraries(TCPServerMSVSCMake
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libuv.a
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libBasicUsageEnvironment.a
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libUsageEnvironment.a
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libliveMedia.a
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libgroupsock.a
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libopenssl.a
 								stdc++fs
 								pthread
 								-ldl
