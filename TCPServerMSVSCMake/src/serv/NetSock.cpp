@@ -106,9 +106,9 @@ bool NetSocket::Create(int port, bool udp_tcp, bool listen)
 	return true;
 }
 
-char* NetSocket::GetClientID()
+unsigned int NetSocket::GetClientID()
 {
-	char* URLstr = new char(net->GetIDPath());
+	unsigned int URLstr = net->GetIDPath();
 	return URLstr;
 }
 
@@ -116,7 +116,7 @@ void NetSocket::SetID(void* NewClient)
 {
 	int counter = 0;
 	NetSocket* socket = (NetSocket*)NewClient;
-	int ID = socket->net->GetIDPath();
+	unsigned int ID = socket->net->GetIDPath();
 	uint16_t* Array = new uint16_t[1000000];
 	if (NewClient)
 	{

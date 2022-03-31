@@ -129,8 +129,9 @@ bool NetSocketUV::Accept(uv_handle_t* handle)
 		sockaddr sockname;
 		int socklen = sizeof accept_sock->net->GetConnectSockaddr();
 		std::thread translateThread(SetupRetranslation, client);
+		std::thread receivThread(StartReadingThread, client);
 		translateThread.detach();
-		uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadTCP);
+		receivThread.join();
 		/*uv_thread_t receivThread;
 		uv_thread_t translateThread;
 
@@ -332,18 +333,19 @@ void* NetSocketUV::SetupRetranslation(void* argv)
 	assert(socket);
 	if (socket->GetClientID())
 	{
-		/*uv_idle_t idle;
-		uv_idle_init(GetLoop(socket->net), &idle);
-		uv_idle_start(&idle, idle_cb);*/
-		std::string fileName(socket->GetClientID());
+		unsigned int ID = socket->GetClientID();
+		std::array<char, 10> strID;
+		std::to_chars(strID.data(), strID.data() + strID.size(), ID);
+		std::string fileName(strID.data());
 		fileName += "in_binary_h.264";
 		if (std::filesystem::exists(fileName) == true) {
-			char* ID = socket->GetClientID();
+			
 			FILE* proxy = nullptr;
 #ifdef WIN32
 			//system("RTSPProxyServerForClient.exe -d -c -%s");
 			proxy = _popen("RTSP.exe -d -c -%s", "r");
-			_pclose(proxy);			
+			_pclose(proxy);		
+
 #else
 			int status;
 			pid_t pid;
@@ -354,7 +356,7 @@ void* NetSocketUV::SetupRetranslation(void* argv)
 			if (ID == "0")
 			{
 				if (pid == 0) {
-					char* execv_str[] = { "./RTSP", ID };
+					char* execv_str[] = { "./RTSP", strID.data()};
 					if (execv("./RTSP", execv_str) < 0) {
 						status = -1;
 						perror("ERROR\n");
