@@ -353,8 +353,33 @@ void* NetSocketUV::SetupRetranslation(void* argv)
 			pid = fork();
 			std::string outRTSP;
 			/* Handeling Chile Process */
-			if (ID == "0")
-			{
+			//if (ID == "0")
+			//{
+			//	if (pid == 0) {
+			//		char* execv_str[] = { "./RTSP", strID.data()};
+			//		if (execv("./RTSP", execv_str) < 0) {
+			//			status = -1;
+			//			perror("ERROR\n");
+			//		}
+			//		else
+			//		{
+			//			std::getline(std::cin, outRTSP);
+			//			if (outRTSP.find("rtsp://"))
+			//			{
+			//				std::thread delay(WaitingDelay, socket);
+			//				delay.join();
+			//				//delay.detach();
+			//			}
+			//		}
+			//	}
+			//	/* Handeling Chile Process Failure */
+			//	else if (pid < 0) {
+			//		status = -1;
+			//		perror("ERROR\n");
+			//	}
+			//}
+			//else
+			//{
 				if (pid == 0) {
 					char* execv_str[] = { "./RTSP", strID.data()};
 					if (execv("./RTSP", execv_str) < 0) {
@@ -377,32 +402,7 @@ void* NetSocketUV::SetupRetranslation(void* argv)
 					status = -1;
 					perror("ERROR\n");
 				}
-			}
-			else
-			{
-				if (pid == 0) {
-					char* execv_str[] = { "./RTSP", strID.data()};
-					if (execv("./RTSP", execv_str) < 0) {
-						status = -1;
-						perror("ERROR\n");
-					}
-					else
-					{
-						std::getline(std::cin, outRTSP);
-						if (outRTSP.find("rtsp://"))
-						{
-							std::thread delay(WaitingDelay, socket);
-							delay.join();
-							//delay.detach();
-						}
-					}
-				}
-				/* Handeling Chile Process Failure */
-				else if (pid < 0) {
-					status = -1;
-					perror("ERROR\n");
-				}
-			}
+			//}
 #endif
 		}
 	}
