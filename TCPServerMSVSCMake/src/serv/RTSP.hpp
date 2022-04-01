@@ -83,3 +83,5 @@ private:
 	u_int64_t fBufferSize;
 	friend class RTSPProxyServer;
 };
+
+void proxyServerMediaSubsessionAfterPlaying(void* clientData);
