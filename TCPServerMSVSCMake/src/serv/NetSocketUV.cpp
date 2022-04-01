@@ -331,8 +331,8 @@ void NetSocketUV::Destroy()
 void RTSPProxyServer::play(void* sock_ptr)
 {
 	NetSocketUV* socket = (NetSocketUV*)&sock_ptr;
-	u_int8_t* buffer = socket->getNet()->GetRecvBuffer()->GetData();
-	u_int64_t len = socket->getNet()->GetRecvBuffer()->GetLength();
+	u_int8_t* buffer = socket->GetReceivingBuffer()->GetData();
+	u_int64_t len = socket->GetReceivingBuffer()->GetLength();
 
 	ByteStreamMemoryBufferSource* source = ByteStreamMemoryBufferSource::createNew(envir(), buffer, len);
 	
