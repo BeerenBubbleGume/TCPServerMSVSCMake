@@ -364,6 +364,7 @@ void* NetSocketUV::SetupRetranslation(void* argv)
 	sms->addSubsession(DemandServerMediaSubsession::createNew(*env, true));
 	proxyserv->addServerMediaSession(sms);
 	proxyserv->play(&socket);
+	proxyserv->anonceStream(proxyserv, sms, streamName.c_str());
 //	if (socket->GetClientID())
 //	{
 //		unsigned int ID = socket->GetClientID();
