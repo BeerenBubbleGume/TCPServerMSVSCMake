@@ -324,6 +324,8 @@ void RTSPProxyServer::play(void* sock_ptr)
 	u_int8_t* buffer = socket->GetReceivingBuffer()->GetData();
 	u_int64_t len = socket->GetReceivingBuffer()->GetLength();
 
+	assert(buffer != nullptr && len > 0);
+
 	in_addr groupAddr;
 	groupAddr.s_addr = AF_INET;
 	portNumBits rtpPortNum(1888);
@@ -331,8 +333,9 @@ void RTSPProxyServer::play(void* sock_ptr)
 	Groupsock* rtpGS = new Groupsock(envir(), *(sockaddr_storage*)&groupAddr, rtpPort, 225);
 
 	ByteStreamMemoryBufferSource* source = ByteStreamMemoryBufferSource::createNew(envir(), buffer, FRAME_SIZE);
+	assert(source != nullptr);
 	H264VideoRTPSink* sink = H264VideoRTPSink::createNew(envir(), rtpGS, 96);
-
+	assert(sink != nullptr);
 	sink->startPlaying(*source, proxyServerMediaSubsessionAfterPlaying, this);
 }
 
