@@ -45,6 +45,7 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/TCPServerMSVSCMake/cmake_install.cmake")
+  include("/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/RTSP/cmake_install.cmake")
 
 endif()
 

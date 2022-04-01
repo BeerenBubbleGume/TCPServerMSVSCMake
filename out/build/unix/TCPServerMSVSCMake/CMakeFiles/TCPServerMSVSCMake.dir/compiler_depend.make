@@ -239,6 +239,7 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.o: .
   /opt/rh/gcc-toolset-9/root/usr/include/c++/9/backward/auto_ptr.h \
   /opt/rh/gcc-toolset-9/root/usr/include/c++/9/pstl/glue_memory_defs.h \
   /opt/rh/gcc-toolset-9/root/usr/include/c++/9/pstl/execution_defs.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/charconv \
   /opt/rh/gcc-toolset-9/root/usr/include/c++/9/stdlib.h \
   /usr/include/sys/wait.h \
   /usr/include/signal.h \
@@ -574,6 +575,7 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.o: ../
   /opt/rh/gcc-toolset-9/root/usr/include/c++/9/backward/auto_ptr.h \
   /opt/rh/gcc-toolset-9/root/usr/include/c++/9/pstl/glue_memory_defs.h \
   /opt/rh/gcc-toolset-9/root/usr/include/c++/9/pstl/execution_defs.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/charconv \
   /opt/rh/gcc-toolset-9/root/usr/include/c++/9/stdlib.h \
   /usr/include/sys/wait.h \
   /usr/include/signal.h \
@@ -910,6 +912,7 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.o:
   /opt/rh/gcc-toolset-9/root/usr/include/c++/9/backward/auto_ptr.h \
   /opt/rh/gcc-toolset-9/root/usr/include/c++/9/pstl/glue_memory_defs.h \
   /opt/rh/gcc-toolset-9/root/usr/include/c++/9/pstl/execution_defs.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/charconv \
   /opt/rh/gcc-toolset-9/root/usr/include/c++/9/stdlib.h \
   /usr/include/sys/wait.h \
   /usr/include/signal.h \
@@ -1356,6 +1359,8 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 
 ../../../TCPServerMSVSCMake/src/serv/NetSock.cpp:
 
+../../../TCPServerMSVSCMake/src/serv/utf.hpp:
+
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/cxxabi_forced.h:
 
 /usr/include/bits/stdio.h:
@@ -1503,6 +1508,8 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 /opt/rh/gcc-toolset-9/root/usr/lib/gcc/x86_64-redhat-linux/9/include/stddef.h:
 
 /usr/include/bits/types/__FILE.h:
+
+/opt/rh/gcc-toolset-9/root/usr/include/c++/9/charconv:
 
 /usr/include/bits/types/wint_t.h:
 
@@ -2025,5 +2032,3 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 /usr/include/asm-generic/param.h:
 
 ../../../TCPServerMSVSCMake/libs/includes/uv/threadpool.h:
-
-../../../TCPServerMSVSCMake/src/serv/utf.hpp:
