@@ -165,8 +165,9 @@ void NetSocketUV::SendUDP(NET_BUFFER_INDEX *buf)
 
 void NetSocketUV::ReceiveTCP()
 {
-
-
+	NetBuffer* recv_buffer = net->GetRecvBuffer();
+	int received_bytes = recv_buffer->GetLength();
+	rbuff.Add(received_bytes, recv_buffer->GetData());
 
 	/*CString fileName;
 	unsigned int filePrefix = GetClientID();
@@ -212,17 +213,17 @@ void NetSocketUV::ReceiveUPD()
 void OnReadTCP(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)
 {
 	NetSocketUV* uvsocket = (NetSocketUV*)GetNetSocketPtr(stream);
-	uvsocket->net->setupReceivingSocket(*uvsocket);
+	uvsocket->getNet()->setupReceivingSocket(*uvsocket);
 	printf("Reading data from client with ID: %d\n", uvsocket->GetClientID());
 	if (nread < 0)
 	{
 		printf("read buffer < 0!\n");
-		uvsocket->net->OnLostConnection(uvsocket);
+		uvsocket->getNet()->OnLostConnection(uvsocket);
 		OnCloseSocket((uv_handle_t*)stream);
 	}
 	else
 	{
-		NetBuffer* recv_buff = uvsocket->net->GetRecvBuffer();
+		NetBuffer* recv_buff = uvsocket->getNet()->GetRecvBuffer();
 		assert(buf->base == (char*)recv_buff->GetData());
 		recv_buff->SetMaxSize(nread);
 		uvsocket->ReceiveTCP();
@@ -232,7 +233,7 @@ void OnReadTCP(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)
 void OnAllocBuffer(uv_handle_t *handle, size_t suggested_size, uv_buf_t *buf)
 {
 	NetSocketUV* net_sock = (NetSocketUV*)GetNetSocketPtr(handle);
-	NetBuffer* recv_buffer = net_sock->net->GetRecvBuffer();
+	NetBuffer* recv_buffer = net_sock->getNet()->GetRecvBuffer();
 
 	unsigned int max_length = recv_buffer->GetMaxSize();
 	if (max_length < suggested_size)
@@ -269,15 +270,15 @@ char address_converter[30];
 void OnReadUDP(uv_udp_t* handle, ssize_t nread, const uv_buf_t* buf, const struct sockaddr* addr, unsigned flags)
 {
 	NetSocket* socket = GetNetSocketPtr(handle);
-	NetBuffer* recv_buffer = socket->net->GetRecvBuffer();
+	NetBuffer* recv_buffer = socket->getNet()->GetRecvBuffer();
 	assert(buf->base == (char*)recv_buffer->GetData());
 	recv_buffer->SetLength(nread);
 
 	int r = uv_ip4_name((sockaddr_in*)addr, address_converter, sizeof(address_converter));
-	socket->net->addr->address = address_converter;
+	socket->getNet()->addr->address = address_converter;
 	unsigned char* port_ptr = (unsigned char*)&(((sockaddr_in*)addr)->sin_port);
-	socket->net->addr->port = port_ptr[1];
-	socket->net->addr->port += port_ptr[0] << 8;
+	socket->getNet()->addr->port = port_ptr[1];
+	socket->getNet()->addr->port += port_ptr[0] << 8;
 
 	socket->ReceiveUPD();
 }
@@ -330,8 +331,8 @@ void NetSocketUV::Destroy()
 void RTSPProxyServer::play(void* sock_ptr)
 {
 	NetSocketUV* socket = (NetSocketUV*)&sock_ptr;
-	u_int8_t* buffer = socket->net->GetRecvBuffer()->GetData();
-	u_int64_t len = socket->net->GetRecvBuffer()->GetLength();
+	u_int8_t* buffer = socket->getNet()->GetRecvBuffer()->GetData();
+	u_int64_t len = socket->getNet()->GetRecvBuffer()->GetLength();
 
 	ByteStreamMemoryBufferSource* source = ByteStreamMemoryBufferSource::createNew(envir(), buffer, len);
 	

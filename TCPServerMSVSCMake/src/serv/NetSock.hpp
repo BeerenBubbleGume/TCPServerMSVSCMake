@@ -113,9 +113,11 @@ public:
 	virtual void	ReceiveUPD() = 0;
 
 	void			SendMessenge(NET_BUFFER_INDEX* buf, Net_Address* addr = nullptr);
-
+	NetBuffer*		GetReceivingBuffer()												{ return &rbuff; }
 	bool			IsTCP()																{ return udp_tcp; }
 	Net*			getNet()															{ return net; }
+protected:
+	NetBuffer		rbuff;
 	bool			udp_tcp;
 	int				port;
 	Net_Address*	addr;

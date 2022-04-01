@@ -11,15 +11,15 @@
 			"cmake" : "C:/Program Files/Microsoft Visual Studio/2022/Professional/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/cmake.exe",
 			"cpack" : "C:/Program Files/Microsoft Visual Studio/2022/Professional/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/cpack.exe",
 			"ctest" : "C:/Program Files/Microsoft Visual Studio/2022/Professional/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
-			"root" : "C:/Program Files/Microsoft Visual Studio/2022/Professional/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.21"
+			"root" : "C:/Program Files/Microsoft Visual Studio/2022/Professional/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.22"
 		},
 		"version" : 
 		{
 			"isDirty" : false,
 			"major" : 3,
-			"minor" : 21,
-			"patch" : 21080301,
-			"string" : "3.21.21080301-MSVC_2",
+			"minor" : 22,
+			"patch" : 22022201,
+			"string" : "3.22.22022201-MSVC_2",
 			"suffix" : ""
 		}
 	},
@@ -35,7 +35,7 @@
 			}
 		},
 		{
-			"jsonFile" : "cache-v2-230fb5d3696970fb359c.json",
+			"jsonFile" : "cache-v2-9c9709fe852d2b2ea4db.json",
 			"kind" : "cache",
 			"version" : 
 			{
@@ -44,7 +44,7 @@
 			}
 		},
 		{
-			"jsonFile" : "cmakeFiles-v1-a846c59a7c183efe9c14.json",
+			"jsonFile" : "cmakeFiles-v1-ab04daad194804d99280.json",
 			"kind" : "cmakeFiles",
 			"version" : 
 			{
@@ -53,7 +53,7 @@
 			}
 		},
 		{
-			"jsonFile" : "toolchains-v1-233d3cfad692dc16f7de.json",
+			"jsonFile" : "toolchains-v1-eef96bcd41c889448d31.json",
 			"kind" : "toolchains",
 			"version" : 
 			{
@@ -90,7 +90,7 @@
 				"responses" : 
 				[
 					{
-						"jsonFile" : "cache-v2-230fb5d3696970fb359c.json",
+						"jsonFile" : "cache-v2-9c9709fe852d2b2ea4db.json",
 						"kind" : "cache",
 						"version" : 
 						{
@@ -99,7 +99,7 @@
 						}
 					},
 					{
-						"jsonFile" : "cmakeFiles-v1-a846c59a7c183efe9c14.json",
+						"jsonFile" : "cmakeFiles-v1-ab04daad194804d99280.json",
 						"kind" : "cmakeFiles",
 						"version" : 
 						{
@@ -117,7 +117,7 @@
 						}
 					},
 					{
-						"jsonFile" : "toolchains-v1-233d3cfad692dc16f7de.json",
+						"jsonFile" : "toolchains-v1-eef96bcd41c889448d31.json",
 						"kind" : "toolchains",
 						"version" : 
 						{

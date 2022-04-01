@@ -1,7 +1,0 @@
-# ninja log v5
-10	67	6703260524342405	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utf.cpp.obj	6cc66b09242e8241
-4	1532	6703364787049230	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.obj	a1fda56b977fd84f
-8	1533	6703364787078512	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.obj	1fddd80a689d5971
-1	1530	6703364787058986	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.obj	7a3655bb756223b0
-1	1454	6703395160402833	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.obj	23aa6f786193f65b
-1455	1642	6703395162042233	TCPServerMSVSCMake/TCPServerMSVSCMake.exe	ebebf3b45f7f9434
