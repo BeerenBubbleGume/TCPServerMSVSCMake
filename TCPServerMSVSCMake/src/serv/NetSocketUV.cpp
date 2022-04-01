@@ -311,7 +311,7 @@ void* NetSocketUV::SetupRetranslation(void* argv)
 			/* Handeling Chile Process */
 			
 			if (pid == 0) {
-				char* execv_str[] = { "./RTSP", fileName, NULL};
+				char* execv_str[] = { "./RTSP", fileName.c_str(), NULL};
 				if (execv("./RTSP", execv_str) < 0) {
 					status = -1;
 					perror("ERROR\n");
