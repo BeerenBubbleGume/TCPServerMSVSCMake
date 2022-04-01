@@ -440,6 +440,8 @@ void* NetSocketUV::SetupRetranslation(void* argv)
 //		}
 //	}
 
+	env->taskScheduler().doEventLoop();
+
 	return 0;
 }
 
