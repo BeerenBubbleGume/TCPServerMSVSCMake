@@ -1,10 +1,7 @@
-TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.o: \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/NetSocketUV.cpp \
+TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/RTSP.cpp.o: \
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/RTSP.cpp \
  /usr/include/stdc-predef.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/NetSocketUV.hpp \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/NetSock.hpp \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/utils.hpp \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/includes.hpp \
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/RTSP.hpp \
  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/iostream \
  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/x86_64-redhat-linux/bits/c++config.h \
  /usr/include/bits/wordsize.h \
@@ -140,144 +137,56 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.o:
  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/ostream.tcc \
  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/istream \
  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/istream.tcc \
- /opt/rh/gcc-toolset-9/root/usr/include/c++/9/fstream \
- /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/codecvt.h \
- /opt/rh/gcc-toolset-9/root/usr/include/c++/9/x86_64-redhat-linux/bits/basic_file.h \
- /opt/rh/gcc-toolset-9/root/usr/include/c++/9/x86_64-redhat-linux/bits/c++io.h \
- /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/fstream.tcc \
- /opt/rh/gcc-toolset-9/root/usr/include/c++/9/cassert \
- /usr/include/assert.h \
- /opt/rh/gcc-toolset-9/root/usr/include/c++/9/vector \
- /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/stl_construct.h \
- /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/stl_uninitialized.h \
- /opt/rh/gcc-toolset-9/root/usr/include/c++/9/utility \
- /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/stl_relops.h \
- /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/stl_vector.h \
- /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/stl_bvector.h \
- /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/vector.tcc \
- /opt/rh/gcc-toolset-9/root/usr/include/c++/9/cstring \
- /usr/include/string.h /usr/include/strings.h /usr/include/inttypes.h \
- /opt/rh/gcc-toolset-9/root/usr/include/c++/9/filesystem \
- /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/fs_fwd.h \
+ /opt/rh/gcc-toolset-9/root/usr/include/c++/9/thread \
  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/chrono \
  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/ratio \
  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/ctime \
  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/parse_numbers.h \
- /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/fs_path.h \
- /opt/rh/gcc-toolset-9/root/usr/include/c++/9/locale \
- /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/locale_facets_nonio.h \
- /opt/rh/gcc-toolset-9/root/usr/include/c++/9/x86_64-redhat-linux/bits/time_members.h \
- /opt/rh/gcc-toolset-9/root/usr/include/c++/9/x86_64-redhat-linux/bits/messages_members.h \
- /usr/include/libintl.h \
- /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/locale_facets_nonio.tcc \
- /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/locale_conv.h \
+ /opt/rh/gcc-toolset-9/root/usr/include/c++/9/memory \
+ /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/stl_construct.h \
+ /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/stl_uninitialized.h \
+ /opt/rh/gcc-toolset-9/root/usr/include/c++/9/utility \
+ /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/stl_relops.h \
+ /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/stl_tempbuf.h \
+ /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/stl_raw_storage_iter.h \
+ /opt/rh/gcc-toolset-9/root/usr/include/c++/9/ext/concurrence.h \
+ /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/uses_allocator.h \
  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/unique_ptr.h \
  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/tuple \
  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/array \
- /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/uses_allocator.h \
  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/invoke.h \
- /opt/rh/gcc-toolset-9/root/usr/include/c++/9/iomanip \
- /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/quoted_string.h \
- /opt/rh/gcc-toolset-9/root/usr/include/c++/9/sstream \
- /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/sstream.tcc \
- /opt/rh/gcc-toolset-9/root/usr/include/c++/9/codecvt \
- /opt/rh/gcc-toolset-9/root/usr/include/c++/9/ext/concurrence.h \
  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/shared_ptr.h \
  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/shared_ptr_base.h \
  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/allocated_ptr.h \
  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/refwrap.h \
  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/ext/aligned_buffer.h \
- /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/fs_dir.h \
- /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/fs_ops.h \
- /opt/rh/gcc-toolset-9/root/usr/include/c++/9/thread \
- /opt/rh/gcc-toolset-9/root/usr/include/c++/9/memory \
- /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/stl_tempbuf.h \
- /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/stl_raw_storage_iter.h \
  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/shared_ptr_atomic.h \
  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/atomic_base.h \
  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/atomic_lockfree_defines.h \
  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/backward/auto_ptr.h \
  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/pstl/glue_memory_defs.h \
  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/pstl/execution_defs.h \
- /opt/rh/gcc-toolset-9/root/usr/include/c++/9/charconv \
- /opt/rh/gcc-toolset-9/root/usr/include/c++/9/stdlib.h \
- /usr/include/sys/wait.h /usr/include/signal.h /usr/include/bits/signum.h \
- /usr/include/bits/signum-generic.h \
- /usr/include/bits/types/sig_atomic_t.h \
- /usr/include/bits/types/siginfo_t.h /usr/include/bits/types/__sigval_t.h \
- /usr/include/bits/siginfo-arch.h /usr/include/bits/siginfo-consts.h \
- /usr/include/bits/siginfo-consts-arch.h \
- /usr/include/bits/types/sigval_t.h /usr/include/bits/types/sigevent_t.h \
- /usr/include/bits/sigevent-consts.h /usr/include/bits/sigaction.h \
- /usr/include/bits/sigcontext.h /usr/include/bits/types/stack_t.h \
- /usr/include/sys/ucontext.h /usr/include/bits/sigstack.h \
- /usr/include/bits/ss_flags.h /usr/include/bits/types/struct_sigstack.h \
- /usr/include/bits/sigthread.h /usr/include/fcntl.h \
- /usr/include/bits/fcntl.h /usr/include/bits/fcntl-linux.h \
- /usr/include/bits/types/struct_iovec.h /usr/include/linux/falloc.h \
- /usr/include/bits/stat.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/err.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/e_os2.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/opensslconf.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/opensslv.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/ossl_typ.h \
- /opt/rh/gcc-toolset-9/root/usr/lib/gcc/x86_64-redhat-linux/9/include/limits.h \
- /opt/rh/gcc-toolset-9/root/usr/lib/gcc/x86_64-redhat-linux/9/include/syslimits.h \
- /usr/include/limits.h /usr/include/bits/posix1_lim.h \
- /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
- /usr/include/bits/posix2_lim.h /usr/include/bits/xopen_lim.h \
- /usr/include/bits/uio_lim.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/bio.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/crypto.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/safestack.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/stack.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/cryptoerr.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/symhacks.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/bioerr.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/lhash.h \
- /usr/include/sysexits.h /usr/include/unistd.h \
- /usr/include/bits/posix_opt.h /usr/include/bits/environments.h \
- /usr/include/bits/confname.h /usr/include/bits/getopt_posix.h \
- /usr/include/bits/getopt_core.h /usr/include/sys/socket.h \
- /usr/include/bits/socket.h /usr/include/bits/socket_type.h \
- /usr/include/bits/sockaddr.h /usr/include/asm/socket.h \
- /usr/include/asm-generic/socket.h /usr/include/asm/sockios.h \
- /usr/include/asm-generic/sockios.h \
- /usr/include/bits/types/struct_osockaddr.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/uv.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/uv/errno.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/uv/version.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/uv/unix.h \
- /usr/include/sys/stat.h /usr/include/bits/statx.h \
- /usr/include/linux/stat.h /usr/include/linux/types.h \
- /usr/include/asm/types.h /usr/include/asm-generic/types.h \
- /usr/include/asm-generic/int-ll64.h /usr/include/asm/bitsperlong.h \
- /usr/include/asm-generic/bitsperlong.h /usr/include/linux/posix_types.h \
- /usr/include/linux/stddef.h /usr/include/asm/posix_types.h \
- /usr/include/asm/posix_types_64.h /usr/include/asm-generic/posix_types.h \
- /usr/include/bits/statx-generic.h \
- /usr/include/bits/types/struct_statx_timestamp.h \
- /usr/include/bits/types/struct_statx.h /usr/include/dirent.h \
- /usr/include/bits/dirent.h /usr/include/netinet/in.h \
- /usr/include/bits/in.h /usr/include/netinet/tcp.h \
- /usr/include/arpa/inet.h /usr/include/netdb.h /usr/include/rpc/netdb.h \
- /usr/include/bits/netdb.h /usr/include/termios.h \
- /usr/include/bits/termios.h /usr/include/sys/ttydefaults.h \
- /usr/include/pwd.h /usr/include/semaphore.h \
- /usr/include/bits/semaphore.h /usr/include/sys/param.h \
- /usr/include/bits/param.h /usr/include/linux/param.h \
- /usr/include/asm/param.h /usr/include/asm-generic/param.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/uv/threadpool.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/uv/linux.h \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/utf.hpp \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/RTSP.hpp \
  /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/liveMedia.hh \
  /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/JPEG2000VideoRTPSource.hh \
  /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/MultiFramedRTPSource.hh \
  /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/RTPSource.hh \
  /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/FramedSource.hh \
  /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/groupsock/NetCommon.h \
- /usr/include/sys/time.h \
+ /usr/include/sys/socket.h /usr/include/bits/types/struct_iovec.h \
+ /usr/include/bits/socket.h /usr/include/bits/socket_type.h \
+ /usr/include/bits/sockaddr.h /usr/include/asm/socket.h \
+ /usr/include/asm-generic/socket.h /usr/include/asm/sockios.h \
+ /usr/include/asm-generic/sockios.h \
+ /usr/include/bits/types/struct_osockaddr.h /usr/include/sys/time.h \
+ /usr/include/netinet/in.h /usr/include/bits/in.h \
+ /usr/include/arpa/inet.h /usr/include/netdb.h /usr/include/rpc/netdb.h \
+ /usr/include/bits/types/sigevent_t.h \
+ /usr/include/bits/types/__sigval_t.h /usr/include/bits/netdb.h \
+ /usr/include/unistd.h /usr/include/bits/posix_opt.h \
+ /usr/include/bits/environments.h /usr/include/bits/confname.h \
+ /usr/include/bits/getopt_posix.h /usr/include/bits/getopt_core.h \
+ /usr/include/string.h /usr/include/strings.h \
+ /opt/rh/gcc-toolset-9/root/usr/include/c++/9/stdlib.h \
  /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/MediaSource.hh \
  /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/Media.hh \
  /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/liveMedia_version.hh \
@@ -289,8 +198,25 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.o:
  /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/RTPInterface.hh \
  /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/liveMedia/TLSState.hh \
  /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/ssl.h \
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/e_os2.h \
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/opensslconf.h \
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/opensslv.h \
  /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/comp.h \
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/crypto.h \
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/safestack.h \
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/stack.h \
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/ossl_typ.h \
+ /opt/rh/gcc-toolset-9/root/usr/lib/gcc/x86_64-redhat-linux/9/include/limits.h \
+ /opt/rh/gcc-toolset-9/root/usr/lib/gcc/x86_64-redhat-linux/9/include/syslimits.h \
+ /usr/include/limits.h /usr/include/bits/posix1_lim.h \
+ /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
+ /usr/include/bits/posix2_lim.h /usr/include/bits/xopen_lim.h \
+ /usr/include/bits/uio_lim.h \
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/cryptoerr.h \
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/symhacks.h \
  /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/comperr.h \
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/bio.h \
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/bioerr.h \
  /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/x509.h \
  /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/buffer.h \
  /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/buffererr.h \
@@ -314,6 +240,7 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.o:
  /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/sha.h \
  /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/x509err.h \
  /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/x509_vfy.h \
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/lhash.h \
  /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/pkcs7.h \
  /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/pkcs7err.h \
  /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/pem.h \
@@ -481,4 +408,77 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.o:
  /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/BasicUsageEnvironment/BasicUsageEnvironment0.hh \
  /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/BasicUsageEnvironment/BasicUsageEnvironment_version.hh \
  /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/BasicUsageEnvironment/DelayQueue.hh \
- /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/groupsock/GroupsockHelper.hh
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/groupsock/GroupsockHelper.hh \
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/utils.hpp \
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/includes.hpp \
+ /opt/rh/gcc-toolset-9/root/usr/include/c++/9/fstream \
+ /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/codecvt.h \
+ /opt/rh/gcc-toolset-9/root/usr/include/c++/9/x86_64-redhat-linux/bits/basic_file.h \
+ /opt/rh/gcc-toolset-9/root/usr/include/c++/9/x86_64-redhat-linux/bits/c++io.h \
+ /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/fstream.tcc \
+ /opt/rh/gcc-toolset-9/root/usr/include/c++/9/cassert \
+ /usr/include/assert.h \
+ /opt/rh/gcc-toolset-9/root/usr/include/c++/9/vector \
+ /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/stl_vector.h \
+ /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/stl_bvector.h \
+ /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/vector.tcc \
+ /opt/rh/gcc-toolset-9/root/usr/include/c++/9/cstring \
+ /usr/include/inttypes.h \
+ /opt/rh/gcc-toolset-9/root/usr/include/c++/9/filesystem \
+ /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/fs_fwd.h \
+ /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/fs_path.h \
+ /opt/rh/gcc-toolset-9/root/usr/include/c++/9/locale \
+ /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/locale_facets_nonio.h \
+ /opt/rh/gcc-toolset-9/root/usr/include/c++/9/x86_64-redhat-linux/bits/time_members.h \
+ /opt/rh/gcc-toolset-9/root/usr/include/c++/9/x86_64-redhat-linux/bits/messages_members.h \
+ /usr/include/libintl.h \
+ /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/locale_facets_nonio.tcc \
+ /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/locale_conv.h \
+ /opt/rh/gcc-toolset-9/root/usr/include/c++/9/iomanip \
+ /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/quoted_string.h \
+ /opt/rh/gcc-toolset-9/root/usr/include/c++/9/sstream \
+ /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/sstream.tcc \
+ /opt/rh/gcc-toolset-9/root/usr/include/c++/9/codecvt \
+ /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/fs_dir.h \
+ /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/fs_ops.h \
+ /opt/rh/gcc-toolset-9/root/usr/include/c++/9/charconv \
+ /usr/include/sys/wait.h /usr/include/signal.h /usr/include/bits/signum.h \
+ /usr/include/bits/signum-generic.h \
+ /usr/include/bits/types/sig_atomic_t.h \
+ /usr/include/bits/types/siginfo_t.h /usr/include/bits/siginfo-arch.h \
+ /usr/include/bits/siginfo-consts.h \
+ /usr/include/bits/siginfo-consts-arch.h \
+ /usr/include/bits/types/sigval_t.h /usr/include/bits/sigevent-consts.h \
+ /usr/include/bits/sigaction.h /usr/include/bits/sigcontext.h \
+ /usr/include/bits/types/stack_t.h /usr/include/sys/ucontext.h \
+ /usr/include/bits/sigstack.h /usr/include/bits/ss_flags.h \
+ /usr/include/bits/types/struct_sigstack.h /usr/include/bits/sigthread.h \
+ /usr/include/fcntl.h /usr/include/bits/fcntl.h \
+ /usr/include/bits/fcntl-linux.h /usr/include/linux/falloc.h \
+ /usr/include/bits/stat.h \
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/openssl/err.h \
+ /usr/include/sysexits.h \
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/uv.h \
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/uv/errno.h \
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/uv/version.h \
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/uv/unix.h \
+ /usr/include/sys/stat.h /usr/include/bits/statx.h \
+ /usr/include/linux/stat.h /usr/include/linux/types.h \
+ /usr/include/asm/types.h /usr/include/asm-generic/types.h \
+ /usr/include/asm-generic/int-ll64.h /usr/include/asm/bitsperlong.h \
+ /usr/include/asm-generic/bitsperlong.h /usr/include/linux/posix_types.h \
+ /usr/include/linux/stddef.h /usr/include/asm/posix_types.h \
+ /usr/include/asm/posix_types_64.h /usr/include/asm-generic/posix_types.h \
+ /usr/include/bits/statx-generic.h \
+ /usr/include/bits/types/struct_statx_timestamp.h \
+ /usr/include/bits/types/struct_statx.h /usr/include/dirent.h \
+ /usr/include/bits/dirent.h /usr/include/netinet/tcp.h \
+ /usr/include/termios.h /usr/include/bits/termios.h \
+ /usr/include/sys/ttydefaults.h /usr/include/pwd.h \
+ /usr/include/semaphore.h /usr/include/bits/semaphore.h \
+ /usr/include/sys/param.h /usr/include/bits/param.h \
+ /usr/include/linux/param.h /usr/include/asm/param.h \
+ /usr/include/asm-generic/param.h \
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/uv/threadpool.h \
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/uv/linux.h \
+ /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/src/serv/utf.hpp

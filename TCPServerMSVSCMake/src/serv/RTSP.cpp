@@ -206,11 +206,3 @@ DemandServerMediaSubsession::DemandServerMediaSubsession(/*Net* net, */UsageEnvi
 	fAreCurrentlyPlaying = false;
 	fReuseFirstSource = reuseFirstSource;
 }
-
-
-int main(int arc, char* argv[])
-{
-	RTSPProxyServer::StartProxyServer(argv[1]);
-
-	return 0;
-}

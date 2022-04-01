@@ -239,6 +239,7 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.o: .
   /opt/rh/gcc-toolset-9/root/usr/include/c++/9/backward/auto_ptr.h \
   /opt/rh/gcc-toolset-9/root/usr/include/c++/9/pstl/glue_memory_defs.h \
   /opt/rh/gcc-toolset-9/root/usr/include/c++/9/pstl/execution_defs.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/charconv \
   /opt/rh/gcc-toolset-9/root/usr/include/c++/9/stdlib.h \
   /usr/include/sys/wait.h \
   /usr/include/signal.h \
@@ -267,7 +268,28 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.o: .
   /usr/include/bits/types/struct_iovec.h \
   /usr/include/linux/falloc.h \
   /usr/include/bits/stat.h \
-  /usr/include/err.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/err.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/e_os2.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/opensslconf.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/opensslv.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/ossl_typ.h \
+  /opt/rh/gcc-toolset-9/root/usr/lib/gcc/x86_64-redhat-linux/9/include/limits.h \
+  /opt/rh/gcc-toolset-9/root/usr/lib/gcc/x86_64-redhat-linux/9/include/syslimits.h \
+  /usr/include/limits.h \
+  /usr/include/bits/posix1_lim.h \
+  /usr/include/bits/local_lim.h \
+  /usr/include/linux/limits.h \
+  /usr/include/bits/posix2_lim.h \
+  /usr/include/bits/xopen_lim.h \
+  /usr/include/bits/uio_lim.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/bio.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/crypto.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/safestack.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/stack.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/cryptoerr.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/symhacks.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/bioerr.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/lhash.h \
   /usr/include/sysexits.h \
   /usr/include/unistd.h \
   /usr/include/bits/posix_opt.h \
@@ -307,9 +329,6 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.o: .
   /usr/include/bits/types/struct_statx.h \
   /usr/include/dirent.h \
   /usr/include/bits/dirent.h \
-  /usr/include/bits/posix1_lim.h \
-  /usr/include/bits/local_lim.h \
-  /usr/include/linux/limits.h \
   /usr/include/netinet/in.h \
   /usr/include/bits/in.h \
   /usr/include/netinet/tcp.h \
@@ -324,19 +343,225 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.o: .
   /usr/include/semaphore.h \
   /usr/include/bits/semaphore.h \
   /usr/include/sys/param.h \
-  /opt/rh/gcc-toolset-9/root/usr/lib/gcc/x86_64-redhat-linux/9/include/limits.h \
-  /opt/rh/gcc-toolset-9/root/usr/lib/gcc/x86_64-redhat-linux/9/include/syslimits.h \
-  /usr/include/limits.h \
-  /usr/include/bits/posix2_lim.h \
-  /usr/include/bits/xopen_lim.h \
-  /usr/include/bits/uio_lim.h \
   /usr/include/bits/param.h \
   /usr/include/linux/param.h \
   /usr/include/asm/param.h \
   /usr/include/asm-generic/param.h \
   ../../../TCPServerMSVSCMake/libs/includes/uv/threadpool.h \
   ../../../TCPServerMSVSCMake/libs/includes/uv/linux.h \
-  ../../../TCPServerMSVSCMake/src/serv/utf.hpp
+  ../../../TCPServerMSVSCMake/src/serv/utf.hpp \
+  ../../../TCPServerMSVSCMake/src/serv/RTSP.hpp \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/liveMedia.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/JPEG2000VideoRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MultiFramedRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/RTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/FramedSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/groupsock/NetCommon.h \
+  /usr/include/sys/time.h \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MediaSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/Media.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/liveMedia_version.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/UsageEnvironment/HashTable.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/UsageEnvironment/Boolean.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/UsageEnvironment/UsageEnvironment.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/UsageEnvironment/UsageEnvironment_version.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/UsageEnvironment/strDup.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/RTPInterface.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/TLSState.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/ssl.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/comp.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/comperr.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/x509.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/buffer.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/buffererr.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/evp.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/evperr.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/objects.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/obj_mac.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/asn1.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/asn1err.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/bn.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/bnerr.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/objectserr.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/ec.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/ecerr.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/rsa.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/rsaerr.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/dsa.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/dh.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/dherr.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/dsaerr.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/sha.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/x509err.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/x509_vfy.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/pkcs7.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/pkcs7err.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/pem.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/pemerr.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/hmac.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/async.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/asyncerr.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/ct.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/cterr.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/sslerr.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/ssl2.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/ssl3.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/tls1.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/dtls1.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/srtp.h \
+  ../../../TCPServerMSVSCMake/libs/includes/groupsock/Groupsock.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/groupsock/groupsock_version.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/groupsock/NetInterface.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/groupsock/NetAddress.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/groupsock/GroupEId.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/SRTPCryptographicContext.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MIKEY.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/JPEG2000VideoRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/VideoRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MultiFramedRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/RTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MediaSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG1or2AudioRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/AudioRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MP3ADURTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG1or2VideoRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG4ESVideoRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/AMRAudioFileSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/FileSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H264VideoFileSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H264or5VideoFileSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H265VideoFileSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/OggFileSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/BasicUDPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/GSMAudioRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H263plusVideoRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H264VideoRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H264or5VideoRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/FramedFilter.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H265VideoRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/DVVideoRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/DVVideoRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/DVVideoStreamFramer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H264VideoStreamFramer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H264or5VideoStreamFramer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEGVideoStreamFramer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H265VideoStreamFramer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H264VideoStreamDiscreteFramer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H264or5VideoStreamDiscreteFramer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H265VideoStreamDiscreteFramer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/JPEGVideoRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/SimpleRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/uLawAudioFilter.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG2IndexFromTransportStream.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG2TransportStreamTrickModeFilter.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG2TransportStreamIndexFile.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/ByteStreamMultiFileSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/ByteStreamFileSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/FramedFileSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/ByteStreamMemoryBufferSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/BasicUDPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/SimpleRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG1or2AudioRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG4LATMAudioRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG4LATMAudioRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG4ESVideoRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG4GenericRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MP3ADURTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/QCELPAudioRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/AMRAudioRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/AMRAudioSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/JPEGVideoRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/JPEGVideoSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG1or2VideoRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/VorbisAudioRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/TheoraVideoRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/VP8VideoRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/VP9VideoRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/RawVideoRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG2TransportStreamFromPESSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG2TransportStreamMultiplexor.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG1or2Demux.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG1or2DemuxedElementaryStream.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG2TransportStreamFromESSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG2TransportStreamFramer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/ADTSAudioFileSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/ADTSAudioStreamDiscreteFramer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H261VideoRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H263plusVideoRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H264VideoRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H265VideoRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MP3FileSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MP3ADU.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MP3ADUinterleaving.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MP3Transcoder.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MP3ADUTranscoder.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG1or2AudioStreamFramer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H263plusVideoStreamFramer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/AC3AudioStreamFramer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/AC3AudioRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/AC3AudioRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/VorbisAudioRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/TheoraVideoRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/VP8VideoRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/VP9VideoRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG4GenericRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/RawVideoRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/RawVideoFrameParameters.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG1or2VideoStreamDiscreteFramer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG1or2VideoStreamFramer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG4VideoStreamDiscreteFramer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG4VideoStreamFramer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/DeviceSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/AudioInputDevice.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/WAVAudioFileSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/StreamReplicator.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/RTSPRegisterSender.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/RTSPClient.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MediaSession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/RTCP.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/DigestAuthentication.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/RTSPServer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/GenericMediaServer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/ServerMediaSession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/SIPClient.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/QuickTimeFileSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/QuickTimeGenericRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/AVIFileSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/PassiveServerMediaSubsession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG4VideoFileServerMediaSubsession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/FileServerMediaSubsession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/OnDemandServerMediaSubsession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H264VideoFileServerMediaSubsession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H265VideoFileServerMediaSubsession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/WAVAudioFileServerMediaSubsession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/AMRAudioFileServerMediaSubsession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/AMRAudioFileSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/AMRAudioRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/T140TextRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/TextRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MP3AudioFileServerMediaSubsession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG1or2VideoFileServerMediaSubsession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG1or2FileServerDemux.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG2TransportFileServerMediaSubsession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H263plusVideoFileServerMediaSubsession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/ADTSAudioFileServerMediaSubsession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/DVVideoFileServerMediaSubsession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/AC3AudioFileServerMediaSubsession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG2TransportUDPServerMediaSubsession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MatroskaFileServerDemux.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MatroskaFile.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/OggFileServerDemux.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/OggFile.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG2TransportStreamDemux.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/ProxyServerMediaSession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MediaTranscodingTable.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/HLSSegmenter.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG2TransportStreamAccumulator.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/BasicUsageEnvironment/BasicUsageEnvironment.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/BasicUsageEnvironment/BasicUsageEnvironment0.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/BasicUsageEnvironment/BasicUsageEnvironment_version.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/BasicUsageEnvironment/DelayQueue.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/groupsock/GroupsockHelper.hh
 
 TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.o: ../../../TCPServerMSVSCMake/src/serv/NetSock.cpp \
   /usr/include/stdc-predef.h \
@@ -574,6 +799,7 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.o: ../
   /opt/rh/gcc-toolset-9/root/usr/include/c++/9/backward/auto_ptr.h \
   /opt/rh/gcc-toolset-9/root/usr/include/c++/9/pstl/glue_memory_defs.h \
   /opt/rh/gcc-toolset-9/root/usr/include/c++/9/pstl/execution_defs.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/charconv \
   /opt/rh/gcc-toolset-9/root/usr/include/c++/9/stdlib.h \
   /usr/include/sys/wait.h \
   /usr/include/signal.h \
@@ -602,7 +828,28 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.o: ../
   /usr/include/bits/types/struct_iovec.h \
   /usr/include/linux/falloc.h \
   /usr/include/bits/stat.h \
-  /usr/include/err.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/err.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/e_os2.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/opensslconf.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/opensslv.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/ossl_typ.h \
+  /opt/rh/gcc-toolset-9/root/usr/lib/gcc/x86_64-redhat-linux/9/include/limits.h \
+  /opt/rh/gcc-toolset-9/root/usr/lib/gcc/x86_64-redhat-linux/9/include/syslimits.h \
+  /usr/include/limits.h \
+  /usr/include/bits/posix1_lim.h \
+  /usr/include/bits/local_lim.h \
+  /usr/include/linux/limits.h \
+  /usr/include/bits/posix2_lim.h \
+  /usr/include/bits/xopen_lim.h \
+  /usr/include/bits/uio_lim.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/bio.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/crypto.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/safestack.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/stack.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/cryptoerr.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/symhacks.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/bioerr.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/lhash.h \
   /usr/include/sysexits.h \
   /usr/include/unistd.h \
   /usr/include/bits/posix_opt.h \
@@ -642,9 +889,6 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.o: ../
   /usr/include/bits/types/struct_statx.h \
   /usr/include/dirent.h \
   /usr/include/bits/dirent.h \
-  /usr/include/bits/posix1_lim.h \
-  /usr/include/bits/local_lim.h \
-  /usr/include/linux/limits.h \
   /usr/include/netinet/in.h \
   /usr/include/bits/in.h \
   /usr/include/netinet/tcp.h \
@@ -659,12 +903,6 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.o: ../
   /usr/include/semaphore.h \
   /usr/include/bits/semaphore.h \
   /usr/include/sys/param.h \
-  /opt/rh/gcc-toolset-9/root/usr/lib/gcc/x86_64-redhat-linux/9/include/limits.h \
-  /opt/rh/gcc-toolset-9/root/usr/lib/gcc/x86_64-redhat-linux/9/include/syslimits.h \
-  /usr/include/limits.h \
-  /usr/include/bits/posix2_lim.h \
-  /usr/include/bits/xopen_lim.h \
-  /usr/include/bits/uio_lim.h \
   /usr/include/bits/param.h \
   /usr/include/linux/param.h \
   /usr/include/asm/param.h \
@@ -910,6 +1148,7 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.o:
   /opt/rh/gcc-toolset-9/root/usr/include/c++/9/backward/auto_ptr.h \
   /opt/rh/gcc-toolset-9/root/usr/include/c++/9/pstl/glue_memory_defs.h \
   /opt/rh/gcc-toolset-9/root/usr/include/c++/9/pstl/execution_defs.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/charconv \
   /opt/rh/gcc-toolset-9/root/usr/include/c++/9/stdlib.h \
   /usr/include/sys/wait.h \
   /usr/include/signal.h \
@@ -938,7 +1177,28 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.o:
   /usr/include/bits/types/struct_iovec.h \
   /usr/include/linux/falloc.h \
   /usr/include/bits/stat.h \
-  /usr/include/err.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/err.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/e_os2.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/opensslconf.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/opensslv.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/ossl_typ.h \
+  /opt/rh/gcc-toolset-9/root/usr/lib/gcc/x86_64-redhat-linux/9/include/limits.h \
+  /opt/rh/gcc-toolset-9/root/usr/lib/gcc/x86_64-redhat-linux/9/include/syslimits.h \
+  /usr/include/limits.h \
+  /usr/include/bits/posix1_lim.h \
+  /usr/include/bits/local_lim.h \
+  /usr/include/linux/limits.h \
+  /usr/include/bits/posix2_lim.h \
+  /usr/include/bits/xopen_lim.h \
+  /usr/include/bits/uio_lim.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/bio.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/crypto.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/safestack.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/stack.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/cryptoerr.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/symhacks.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/bioerr.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/lhash.h \
   /usr/include/sysexits.h \
   /usr/include/unistd.h \
   /usr/include/bits/posix_opt.h \
@@ -978,9 +1238,6 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.o:
   /usr/include/bits/types/struct_statx.h \
   /usr/include/dirent.h \
   /usr/include/bits/dirent.h \
-  /usr/include/bits/posix1_lim.h \
-  /usr/include/bits/local_lim.h \
-  /usr/include/linux/limits.h \
   /usr/include/netinet/in.h \
   /usr/include/bits/in.h \
   /usr/include/netinet/tcp.h \
@@ -995,12 +1252,777 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.o:
   /usr/include/semaphore.h \
   /usr/include/bits/semaphore.h \
   /usr/include/sys/param.h \
+  /usr/include/bits/param.h \
+  /usr/include/linux/param.h \
+  /usr/include/asm/param.h \
+  /usr/include/asm-generic/param.h \
+  ../../../TCPServerMSVSCMake/libs/includes/uv/threadpool.h \
+  ../../../TCPServerMSVSCMake/libs/includes/uv/linux.h \
+  ../../../TCPServerMSVSCMake/src/serv/utf.hpp \
+  ../../../TCPServerMSVSCMake/src/serv/RTSP.hpp \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/liveMedia.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/JPEG2000VideoRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MultiFramedRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/RTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/FramedSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/groupsock/NetCommon.h \
+  /usr/include/sys/time.h \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MediaSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/Media.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/liveMedia_version.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/UsageEnvironment/HashTable.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/UsageEnvironment/Boolean.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/UsageEnvironment/UsageEnvironment.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/UsageEnvironment/UsageEnvironment_version.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/UsageEnvironment/strDup.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/RTPInterface.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/TLSState.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/ssl.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/comp.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/comperr.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/x509.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/buffer.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/buffererr.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/evp.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/evperr.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/objects.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/obj_mac.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/asn1.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/asn1err.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/bn.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/bnerr.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/objectserr.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/ec.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/ecerr.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/rsa.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/rsaerr.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/dsa.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/dh.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/dherr.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/dsaerr.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/sha.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/x509err.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/x509_vfy.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/pkcs7.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/pkcs7err.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/pem.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/pemerr.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/hmac.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/async.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/asyncerr.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/ct.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/cterr.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/sslerr.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/ssl2.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/ssl3.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/tls1.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/dtls1.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/srtp.h \
+  ../../../TCPServerMSVSCMake/libs/includes/groupsock/Groupsock.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/groupsock/groupsock_version.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/groupsock/NetInterface.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/groupsock/NetAddress.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/groupsock/GroupEId.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/SRTPCryptographicContext.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MIKEY.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/JPEG2000VideoRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/VideoRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MultiFramedRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/RTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MediaSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG1or2AudioRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/AudioRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MP3ADURTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG1or2VideoRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG4ESVideoRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/AMRAudioFileSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/FileSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H264VideoFileSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H264or5VideoFileSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H265VideoFileSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/OggFileSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/BasicUDPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/GSMAudioRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H263plusVideoRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H264VideoRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H264or5VideoRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/FramedFilter.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H265VideoRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/DVVideoRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/DVVideoRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/DVVideoStreamFramer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H264VideoStreamFramer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H264or5VideoStreamFramer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEGVideoStreamFramer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H265VideoStreamFramer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H264VideoStreamDiscreteFramer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H264or5VideoStreamDiscreteFramer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H265VideoStreamDiscreteFramer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/JPEGVideoRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/SimpleRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/uLawAudioFilter.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG2IndexFromTransportStream.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG2TransportStreamTrickModeFilter.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG2TransportStreamIndexFile.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/ByteStreamMultiFileSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/ByteStreamFileSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/FramedFileSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/ByteStreamMemoryBufferSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/BasicUDPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/SimpleRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG1or2AudioRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG4LATMAudioRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG4LATMAudioRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG4ESVideoRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG4GenericRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MP3ADURTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/QCELPAudioRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/AMRAudioRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/AMRAudioSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/JPEGVideoRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/JPEGVideoSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG1or2VideoRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/VorbisAudioRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/TheoraVideoRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/VP8VideoRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/VP9VideoRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/RawVideoRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG2TransportStreamFromPESSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG2TransportStreamMultiplexor.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG1or2Demux.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG1or2DemuxedElementaryStream.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG2TransportStreamFromESSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG2TransportStreamFramer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/ADTSAudioFileSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/ADTSAudioStreamDiscreteFramer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H261VideoRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H263plusVideoRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H264VideoRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H265VideoRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MP3FileSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MP3ADU.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MP3ADUinterleaving.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MP3Transcoder.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MP3ADUTranscoder.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG1or2AudioStreamFramer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H263plusVideoStreamFramer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/AC3AudioStreamFramer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/AC3AudioRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/AC3AudioRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/VorbisAudioRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/TheoraVideoRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/VP8VideoRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/VP9VideoRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG4GenericRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/RawVideoRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/RawVideoFrameParameters.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG1or2VideoStreamDiscreteFramer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG1or2VideoStreamFramer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG4VideoStreamDiscreteFramer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG4VideoStreamFramer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/DeviceSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/AudioInputDevice.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/WAVAudioFileSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/StreamReplicator.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/RTSPRegisterSender.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/RTSPClient.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MediaSession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/RTCP.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/DigestAuthentication.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/RTSPServer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/GenericMediaServer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/ServerMediaSession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/SIPClient.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/QuickTimeFileSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/QuickTimeGenericRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/AVIFileSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/PassiveServerMediaSubsession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG4VideoFileServerMediaSubsession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/FileServerMediaSubsession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/OnDemandServerMediaSubsession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H264VideoFileServerMediaSubsession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H265VideoFileServerMediaSubsession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/WAVAudioFileServerMediaSubsession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/AMRAudioFileServerMediaSubsession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/AMRAudioFileSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/AMRAudioRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/T140TextRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/TextRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MP3AudioFileServerMediaSubsession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG1or2VideoFileServerMediaSubsession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG1or2FileServerDemux.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG2TransportFileServerMediaSubsession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H263plusVideoFileServerMediaSubsession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/ADTSAudioFileServerMediaSubsession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/DVVideoFileServerMediaSubsession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/AC3AudioFileServerMediaSubsession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG2TransportUDPServerMediaSubsession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MatroskaFileServerDemux.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MatroskaFile.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/OggFileServerDemux.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/OggFile.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG2TransportStreamDemux.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/ProxyServerMediaSession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MediaTranscodingTable.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/HLSSegmenter.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG2TransportStreamAccumulator.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/BasicUsageEnvironment/BasicUsageEnvironment.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/BasicUsageEnvironment/BasicUsageEnvironment0.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/BasicUsageEnvironment/BasicUsageEnvironment_version.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/BasicUsageEnvironment/DelayQueue.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/groupsock/GroupsockHelper.hh
+
+TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/RTSP.cpp.o: ../../../TCPServerMSVSCMake/src/serv/RTSP.cpp \
+  /usr/include/stdc-predef.h \
+  ../../../TCPServerMSVSCMake/src/serv/RTSP.hpp \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/iostream \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/x86_64-redhat-linux/bits/c++config.h \
+  /usr/include/bits/wordsize.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/x86_64-redhat-linux/bits/os_defines.h \
+  /usr/include/features.h \
+  /usr/include/sys/cdefs.h \
+  /usr/include/bits/long-double.h \
+  /usr/include/gnu/stubs.h \
+  /usr/include/gnu/stubs-64.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/x86_64-redhat-linux/bits/cpu_defines.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/pstl/pstl_config.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/ostream \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/ios \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/iosfwd \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/stringfwd.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/memoryfwd.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/postypes.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/cwchar \
+  /usr/include/wchar.h \
+  /usr/include/bits/libc-header-start.h \
+  /usr/include/bits/floatn.h \
+  /usr/include/bits/floatn-common.h \
+  /opt/rh/gcc-toolset-9/root/usr/lib/gcc/x86_64-redhat-linux/9/include/stddef.h \
+  /opt/rh/gcc-toolset-9/root/usr/lib/gcc/x86_64-redhat-linux/9/include/stdarg.h \
+  /usr/include/bits/wchar.h \
+  /usr/include/bits/types/wint_t.h \
+  /usr/include/bits/types/mbstate_t.h \
+  /usr/include/bits/types/__mbstate_t.h \
+  /usr/include/bits/types/__FILE.h \
+  /usr/include/bits/types/FILE.h \
+  /usr/include/bits/types/locale_t.h \
+  /usr/include/bits/types/__locale_t.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/exception \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/exception.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/exception_ptr.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/exception_defines.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/cxxabi_init_exception.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/typeinfo \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/hash_bytes.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/new \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/nested_exception.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/move.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/concept_check.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/type_traits \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/char_traits.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/stl_algobase.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/functexcept.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/cpp_type_traits.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/ext/type_traits.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/ext/numeric_traits.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/stl_pair.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/stl_iterator_base_types.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/stl_iterator_base_funcs.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/debug/assertions.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/stl_iterator.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/ptr_traits.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/debug/debug.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/predefined_ops.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/cstdint \
+  /opt/rh/gcc-toolset-9/root/usr/lib/gcc/x86_64-redhat-linux/9/include/stdint.h \
+  /usr/include/stdint.h \
+  /usr/include/bits/types.h \
+  /usr/include/bits/typesizes.h \
+  /usr/include/bits/stdint-intn.h \
+  /usr/include/bits/stdint-uintn.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/localefwd.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/x86_64-redhat-linux/bits/c++locale.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/clocale \
+  /usr/include/locale.h \
+  /usr/include/bits/locale.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/cctype \
+  /usr/include/ctype.h \
+  /usr/include/endian.h \
+  /usr/include/bits/endian.h \
+  /usr/include/bits/byteswap.h \
+  /usr/include/bits/uintn-identity.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/ios_base.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/ext/atomicity.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/x86_64-redhat-linux/bits/gthr.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/x86_64-redhat-linux/bits/gthr-default.h \
+  /usr/include/pthread.h \
+  /usr/include/sched.h \
+  /usr/include/bits/types/time_t.h \
+  /usr/include/bits/types/struct_timespec.h \
+  /usr/include/bits/sched.h \
+  /usr/include/bits/types/struct_sched_param.h \
+  /usr/include/bits/cpu-set.h \
+  /usr/include/time.h \
+  /usr/include/bits/time.h \
+  /usr/include/bits/timex.h \
+  /usr/include/bits/types/struct_timeval.h \
+  /usr/include/bits/types/clock_t.h \
+  /usr/include/bits/types/struct_tm.h \
+  /usr/include/bits/types/clockid_t.h \
+  /usr/include/bits/types/timer_t.h \
+  /usr/include/bits/types/struct_itimerspec.h \
+  /usr/include/bits/pthreadtypes.h \
+  /usr/include/bits/thread-shared-types.h \
+  /usr/include/bits/pthreadtypes-arch.h \
+  /usr/include/bits/setjmp.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/x86_64-redhat-linux/bits/atomic_word.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/locale_classes.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/string \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/allocator.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/x86_64-redhat-linux/bits/c++allocator.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/ext/new_allocator.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/ostream_insert.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/cxxabi_forced.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/stl_function.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/backward/binders.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/range_access.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/initializer_list \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/basic_string.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/ext/alloc_traits.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/alloc_traits.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/string_view \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/limits \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/functional_hash.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/string_view.tcc \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/ext/string_conversions.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/cstdlib \
+  /usr/include/stdlib.h \
+  /usr/include/bits/waitflags.h \
+  /usr/include/bits/waitstatus.h \
+  /usr/include/sys/types.h \
+  /usr/include/sys/select.h \
+  /usr/include/bits/select.h \
+  /usr/include/bits/types/sigset_t.h \
+  /usr/include/bits/types/__sigset_t.h \
+  /usr/include/alloca.h \
+  /usr/include/bits/stdlib-bsearch.h \
+  /usr/include/bits/stdlib-float.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/std_abs.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/cstdio \
+  /usr/include/stdio.h \
+  /usr/include/bits/types/__fpos_t.h \
+  /usr/include/bits/types/__fpos64_t.h \
+  /usr/include/bits/types/struct_FILE.h \
+  /usr/include/bits/types/cookie_io_functions_t.h \
+  /usr/include/bits/stdio_lim.h \
+  /usr/include/bits/sys_errlist.h \
+  /usr/include/bits/stdio.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/cerrno \
+  /usr/include/errno.h \
+  /usr/include/bits/errno.h \
+  /usr/include/linux/errno.h \
+  /usr/include/asm/errno.h \
+  /usr/include/asm-generic/errno.h \
+  /usr/include/asm-generic/errno-base.h \
+  /usr/include/bits/types/error_t.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/basic_string.tcc \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/locale_classes.tcc \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/system_error \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/x86_64-redhat-linux/bits/error_constants.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/stdexcept \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/streambuf \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/streambuf.tcc \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/basic_ios.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/locale_facets.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/cwctype \
+  /usr/include/wctype.h \
+  /usr/include/bits/wctype-wchar.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/x86_64-redhat-linux/bits/ctype_base.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/streambuf_iterator.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/x86_64-redhat-linux/bits/ctype_inline.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/locale_facets.tcc \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/basic_ios.tcc \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/ostream.tcc \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/istream \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/istream.tcc \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/thread \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/chrono \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/ratio \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/ctime \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/parse_numbers.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/memory \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/stl_construct.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/stl_uninitialized.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/utility \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/stl_relops.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/stl_tempbuf.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/stl_raw_storage_iter.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/ext/concurrence.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/uses_allocator.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/unique_ptr.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/tuple \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/array \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/invoke.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/shared_ptr.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/shared_ptr_base.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/allocated_ptr.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/refwrap.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/ext/aligned_buffer.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/shared_ptr_atomic.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/atomic_base.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/atomic_lockfree_defines.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/backward/auto_ptr.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/pstl/glue_memory_defs.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/pstl/execution_defs.h \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/liveMedia.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/JPEG2000VideoRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MultiFramedRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/RTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/FramedSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/groupsock/NetCommon.h \
+  /usr/include/sys/socket.h \
+  /usr/include/bits/types/struct_iovec.h \
+  /usr/include/bits/socket.h \
+  /usr/include/bits/socket_type.h \
+  /usr/include/bits/sockaddr.h \
+  /usr/include/asm/socket.h \
+  /usr/include/asm-generic/socket.h \
+  /usr/include/asm/sockios.h \
+  /usr/include/asm-generic/sockios.h \
+  /usr/include/bits/types/struct_osockaddr.h \
+  /usr/include/sys/time.h \
+  /usr/include/netinet/in.h \
+  /usr/include/bits/in.h \
+  /usr/include/arpa/inet.h \
+  /usr/include/netdb.h \
+  /usr/include/rpc/netdb.h \
+  /usr/include/bits/types/sigevent_t.h \
+  /usr/include/bits/types/__sigval_t.h \
+  /usr/include/bits/netdb.h \
+  /usr/include/unistd.h \
+  /usr/include/bits/posix_opt.h \
+  /usr/include/bits/environments.h \
+  /usr/include/bits/confname.h \
+  /usr/include/bits/getopt_posix.h \
+  /usr/include/bits/getopt_core.h \
+  /usr/include/string.h \
+  /usr/include/strings.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/stdlib.h \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MediaSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/Media.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/liveMedia_version.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/UsageEnvironment/HashTable.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/UsageEnvironment/Boolean.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/UsageEnvironment/UsageEnvironment.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/UsageEnvironment/UsageEnvironment_version.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/UsageEnvironment/strDup.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/RTPInterface.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/TLSState.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/ssl.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/e_os2.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/opensslconf.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/opensslv.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/comp.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/crypto.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/safestack.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/stack.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/ossl_typ.h \
   /opt/rh/gcc-toolset-9/root/usr/lib/gcc/x86_64-redhat-linux/9/include/limits.h \
   /opt/rh/gcc-toolset-9/root/usr/lib/gcc/x86_64-redhat-linux/9/include/syslimits.h \
   /usr/include/limits.h \
+  /usr/include/bits/posix1_lim.h \
+  /usr/include/bits/local_lim.h \
+  /usr/include/linux/limits.h \
   /usr/include/bits/posix2_lim.h \
   /usr/include/bits/xopen_lim.h \
   /usr/include/bits/uio_lim.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/cryptoerr.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/symhacks.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/comperr.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/bio.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/bioerr.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/x509.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/buffer.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/buffererr.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/evp.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/evperr.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/objects.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/obj_mac.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/asn1.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/asn1err.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/bn.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/bnerr.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/objectserr.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/ec.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/ecerr.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/rsa.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/rsaerr.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/dsa.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/dh.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/dherr.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/dsaerr.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/sha.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/x509err.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/x509_vfy.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/lhash.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/pkcs7.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/pkcs7err.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/pem.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/pemerr.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/hmac.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/async.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/asyncerr.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/ct.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/cterr.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/sslerr.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/ssl2.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/ssl3.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/tls1.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/dtls1.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/srtp.h \
+  ../../../TCPServerMSVSCMake/libs/includes/groupsock/Groupsock.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/groupsock/groupsock_version.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/groupsock/NetInterface.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/groupsock/NetAddress.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/groupsock/GroupEId.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/SRTPCryptographicContext.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MIKEY.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/JPEG2000VideoRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/VideoRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MultiFramedRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/RTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MediaSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG1or2AudioRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/AudioRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MP3ADURTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG1or2VideoRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG4ESVideoRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/AMRAudioFileSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/FileSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H264VideoFileSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H264or5VideoFileSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H265VideoFileSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/OggFileSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/BasicUDPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/GSMAudioRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H263plusVideoRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H264VideoRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H264or5VideoRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/FramedFilter.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H265VideoRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/DVVideoRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/DVVideoRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/DVVideoStreamFramer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H264VideoStreamFramer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H264or5VideoStreamFramer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEGVideoStreamFramer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H265VideoStreamFramer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H264VideoStreamDiscreteFramer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H264or5VideoStreamDiscreteFramer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H265VideoStreamDiscreteFramer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/JPEGVideoRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/SimpleRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/uLawAudioFilter.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG2IndexFromTransportStream.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG2TransportStreamTrickModeFilter.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG2TransportStreamIndexFile.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/ByteStreamMultiFileSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/ByteStreamFileSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/FramedFileSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/ByteStreamMemoryBufferSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/BasicUDPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/SimpleRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG1or2AudioRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG4LATMAudioRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG4LATMAudioRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG4ESVideoRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG4GenericRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MP3ADURTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/QCELPAudioRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/AMRAudioRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/AMRAudioSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/JPEGVideoRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/JPEGVideoSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG1or2VideoRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/VorbisAudioRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/TheoraVideoRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/VP8VideoRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/VP9VideoRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/RawVideoRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG2TransportStreamFromPESSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG2TransportStreamMultiplexor.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG1or2Demux.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG1or2DemuxedElementaryStream.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG2TransportStreamFromESSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG2TransportStreamFramer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/ADTSAudioFileSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/ADTSAudioStreamDiscreteFramer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H261VideoRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H263plusVideoRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H264VideoRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H265VideoRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MP3FileSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MP3ADU.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MP3ADUinterleaving.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MP3Transcoder.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MP3ADUTranscoder.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG1or2AudioStreamFramer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H263plusVideoStreamFramer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/AC3AudioStreamFramer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/AC3AudioRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/AC3AudioRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/VorbisAudioRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/TheoraVideoRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/VP8VideoRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/VP9VideoRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG4GenericRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/RawVideoRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/RawVideoFrameParameters.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG1or2VideoStreamDiscreteFramer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG1or2VideoStreamFramer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG4VideoStreamDiscreteFramer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG4VideoStreamFramer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/DeviceSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/AudioInputDevice.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/WAVAudioFileSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/StreamReplicator.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/RTSPRegisterSender.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/RTSPClient.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MediaSession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/RTCP.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/DigestAuthentication.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/RTSPServer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/GenericMediaServer.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/ServerMediaSession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/SIPClient.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/QuickTimeFileSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/QuickTimeGenericRTPSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/AVIFileSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/PassiveServerMediaSubsession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG4VideoFileServerMediaSubsession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/FileServerMediaSubsession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/OnDemandServerMediaSubsession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H264VideoFileServerMediaSubsession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H265VideoFileServerMediaSubsession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/WAVAudioFileServerMediaSubsession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/AMRAudioFileServerMediaSubsession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/AMRAudioFileSource.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/AMRAudioRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/T140TextRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/TextRTPSink.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MP3AudioFileServerMediaSubsession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG1or2VideoFileServerMediaSubsession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG1or2FileServerDemux.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG2TransportFileServerMediaSubsession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/H263plusVideoFileServerMediaSubsession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/ADTSAudioFileServerMediaSubsession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/DVVideoFileServerMediaSubsession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/AC3AudioFileServerMediaSubsession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG2TransportUDPServerMediaSubsession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MatroskaFileServerDemux.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MatroskaFile.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/OggFileServerDemux.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/OggFile.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG2TransportStreamDemux.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/ProxyServerMediaSession.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MediaTranscodingTable.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/HLSSegmenter.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG2TransportStreamAccumulator.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/BasicUsageEnvironment/BasicUsageEnvironment.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/BasicUsageEnvironment/BasicUsageEnvironment0.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/BasicUsageEnvironment/BasicUsageEnvironment_version.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/BasicUsageEnvironment/DelayQueue.hh \
+  ../../../TCPServerMSVSCMake/libs/includes/groupsock/GroupsockHelper.hh \
+  ../../../TCPServerMSVSCMake/src/serv/utils.hpp \
+  ../../../TCPServerMSVSCMake/src/serv/includes.hpp \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/fstream \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/codecvt.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/x86_64-redhat-linux/bits/basic_file.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/x86_64-redhat-linux/bits/c++io.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/fstream.tcc \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/cassert \
+  /usr/include/assert.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/vector \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/stl_vector.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/stl_bvector.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/vector.tcc \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/cstring \
+  /usr/include/inttypes.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/filesystem \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/fs_fwd.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/fs_path.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/locale \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/locale_facets_nonio.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/x86_64-redhat-linux/bits/time_members.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/x86_64-redhat-linux/bits/messages_members.h \
+  /usr/include/libintl.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/locale_facets_nonio.tcc \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/locale_conv.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/iomanip \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/quoted_string.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/sstream \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/sstream.tcc \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/codecvt \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/fs_dir.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/fs_ops.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/charconv \
+  /usr/include/sys/wait.h \
+  /usr/include/signal.h \
+  /usr/include/bits/signum.h \
+  /usr/include/bits/signum-generic.h \
+  /usr/include/bits/types/sig_atomic_t.h \
+  /usr/include/bits/types/siginfo_t.h \
+  /usr/include/bits/siginfo-arch.h \
+  /usr/include/bits/siginfo-consts.h \
+  /usr/include/bits/siginfo-consts-arch.h \
+  /usr/include/bits/types/sigval_t.h \
+  /usr/include/bits/sigevent-consts.h \
+  /usr/include/bits/sigaction.h \
+  /usr/include/bits/sigcontext.h \
+  /usr/include/bits/types/stack_t.h \
+  /usr/include/sys/ucontext.h \
+  /usr/include/bits/sigstack.h \
+  /usr/include/bits/ss_flags.h \
+  /usr/include/bits/types/struct_sigstack.h \
+  /usr/include/bits/sigthread.h \
+  /usr/include/fcntl.h \
+  /usr/include/bits/fcntl.h \
+  /usr/include/bits/fcntl-linux.h \
+  /usr/include/linux/falloc.h \
+  /usr/include/bits/stat.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/err.h \
+  /usr/include/sysexits.h \
+  ../../../TCPServerMSVSCMake/libs/includes/uv.h \
+  ../../../TCPServerMSVSCMake/libs/includes/uv/errno.h \
+  ../../../TCPServerMSVSCMake/libs/includes/uv/version.h \
+  ../../../TCPServerMSVSCMake/libs/includes/uv/unix.h \
+  /usr/include/sys/stat.h \
+  /usr/include/bits/statx.h \
+  /usr/include/linux/stat.h \
+  /usr/include/linux/types.h \
+  /usr/include/asm/types.h \
+  /usr/include/asm-generic/types.h \
+  /usr/include/asm-generic/int-ll64.h \
+  /usr/include/asm/bitsperlong.h \
+  /usr/include/asm-generic/bitsperlong.h \
+  /usr/include/linux/posix_types.h \
+  /usr/include/linux/stddef.h \
+  /usr/include/asm/posix_types.h \
+  /usr/include/asm/posix_types_64.h \
+  /usr/include/asm-generic/posix_types.h \
+  /usr/include/bits/statx-generic.h \
+  /usr/include/bits/types/struct_statx_timestamp.h \
+  /usr/include/bits/types/struct_statx.h \
+  /usr/include/dirent.h \
+  /usr/include/bits/dirent.h \
+  /usr/include/netinet/tcp.h \
+  /usr/include/termios.h \
+  /usr/include/bits/termios.h \
+  /usr/include/sys/ttydefaults.h \
+  /usr/include/pwd.h \
+  /usr/include/semaphore.h \
+  /usr/include/bits/semaphore.h \
+  /usr/include/sys/param.h \
   /usr/include/bits/param.h \
   /usr/include/linux/param.h \
   /usr/include/asm/param.h \
@@ -1248,6 +2270,7 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
   /opt/rh/gcc-toolset-9/root/usr/include/c++/9/backward/auto_ptr.h \
   /opt/rh/gcc-toolset-9/root/usr/include/c++/9/pstl/glue_memory_defs.h \
   /opt/rh/gcc-toolset-9/root/usr/include/c++/9/pstl/execution_defs.h \
+  /opt/rh/gcc-toolset-9/root/usr/include/c++/9/charconv \
   /opt/rh/gcc-toolset-9/root/usr/include/c++/9/stdlib.h \
   /usr/include/sys/wait.h \
   /usr/include/signal.h \
@@ -1276,7 +2299,28 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
   /usr/include/bits/types/struct_iovec.h \
   /usr/include/linux/falloc.h \
   /usr/include/bits/stat.h \
-  /usr/include/err.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/err.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/e_os2.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/opensslconf.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/opensslv.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/ossl_typ.h \
+  /opt/rh/gcc-toolset-9/root/usr/lib/gcc/x86_64-redhat-linux/9/include/limits.h \
+  /opt/rh/gcc-toolset-9/root/usr/lib/gcc/x86_64-redhat-linux/9/include/syslimits.h \
+  /usr/include/limits.h \
+  /usr/include/bits/posix1_lim.h \
+  /usr/include/bits/local_lim.h \
+  /usr/include/linux/limits.h \
+  /usr/include/bits/posix2_lim.h \
+  /usr/include/bits/xopen_lim.h \
+  /usr/include/bits/uio_lim.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/bio.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/crypto.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/safestack.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/stack.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/cryptoerr.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/symhacks.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/bioerr.h \
+  ../../../TCPServerMSVSCMake/libs/includes/openssl/lhash.h \
   /usr/include/sysexits.h \
   /usr/include/unistd.h \
   /usr/include/bits/posix_opt.h \
@@ -1316,9 +2360,6 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
   /usr/include/bits/types/struct_statx.h \
   /usr/include/dirent.h \
   /usr/include/bits/dirent.h \
-  /usr/include/bits/posix1_lim.h \
-  /usr/include/bits/local_lim.h \
-  /usr/include/linux/limits.h \
   /usr/include/netinet/in.h \
   /usr/include/bits/in.h \
   /usr/include/netinet/tcp.h \
@@ -1333,12 +2374,6 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
   /usr/include/semaphore.h \
   /usr/include/bits/semaphore.h \
   /usr/include/sys/param.h \
-  /opt/rh/gcc-toolset-9/root/usr/lib/gcc/x86_64-redhat-linux/9/include/limits.h \
-  /opt/rh/gcc-toolset-9/root/usr/lib/gcc/x86_64-redhat-linux/9/include/syslimits.h \
-  /usr/include/limits.h \
-  /usr/include/bits/posix2_lim.h \
-  /usr/include/bits/xopen_lim.h \
-  /usr/include/bits/uio_lim.h \
   /usr/include/bits/param.h \
   /usr/include/linux/param.h \
   /usr/include/asm/param.h \
@@ -1352,9 +2387,297 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 
 ../../../TCPServerMSVSCMake/src/serv/utf.cpp:
 
+../../../TCPServerMSVSCMake/src/serv/RTSP.cpp:
+
 ../../../TCPServerMSVSCMake/src/serv/NetSocketUV.cpp:
 
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG2TransportStreamAccumulator.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/MediaTranscodingTable.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG2TransportStreamDemux.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/OggFileServerDemux.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/MatroskaFile.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/DVVideoFileServerMediaSubsession.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG2TransportFileServerMediaSubsession.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG1or2FileServerDemux.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/MP3AudioFileServerMediaSubsession.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/BasicUsageEnvironment/BasicUsageEnvironment_version.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/AMRAudioFileSource.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/AMRAudioFileServerMediaSubsession.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/H265VideoFileServerMediaSubsession.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/H264VideoFileServerMediaSubsession.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/OnDemandServerMediaSubsession.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/AVIFileSink.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/QuickTimeGenericRTPSource.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/QuickTimeFileSink.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/SIPClient.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/ServerMediaSession.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/MediaSession.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/RTSPRegisterSender.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/DeviceSource.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG4VideoStreamDiscreteFramer.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG1or2VideoStreamFramer.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/groupsock/GroupsockHelper.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG1or2VideoStreamDiscreteFramer.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/RawVideoRTPSink.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/GenericMediaServer.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG4GenericRTPSink.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/VorbisAudioRTPSink.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/AC3AudioRTPSink.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/AC3AudioRTPSource.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/MP3ADUTranscoder.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/H265VideoRTPSource.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/H264VideoRTPSource.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/RTSPClient.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/ADTSAudioFileSource.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/H263plusVideoStreamFramer.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG2TransportStreamFramer.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG2TransportStreamFromPESSource.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/VorbisAudioRTPSource.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG1or2VideoRTPSource.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/BasicUsageEnvironment/BasicUsageEnvironment0.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG4VideoFileServerMediaSubsession.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG1or2Demux.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/JPEGVideoSource.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/JPEGVideoRTPSource.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/QCELPAudioRTPSource.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/RawVideoRTPSource.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG4GenericRTPSource.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG4ESVideoRTPSource.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG4LATMAudioRTPSink.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG1or2AudioRTPSource.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/BasicUDPSource.hh:
+
 ../../../TCPServerMSVSCMake/src/serv/NetSock.cpp:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/FramedFileSource.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/ByteStreamFileSource.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/ByteStreamMultiFileSource.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/uLawAudioFilter.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/SimpleRTPSink.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/RTSPServer.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/JPEGVideoRTPSink.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/H265VideoStreamDiscreteFramer.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/H265VideoStreamFramer.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEGVideoStreamFramer.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/MP3FileSource.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/H264or5VideoRTPSink.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/H264VideoRTPSink.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/GSMAudioRTPSink.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/BasicUDPSink.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/OggFileSink.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/FramedFilter.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG4ESVideoRTPSink.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG1or2VideoRTPSink.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG1or2AudioRTPSink.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/JPEG2000VideoRTPSink.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/BasicUsageEnvironment/BasicUsageEnvironment.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/SRTPCryptographicContext.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/groupsock/GroupEId.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/groupsock/groupsock_version.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/groupsock/Groupsock.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG2TransportStreamTrickModeFilter.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/openssl/srtp.h:
+
+../../../TCPServerMSVSCMake/libs/includes/openssl/dtls1.h:
+
+../../../TCPServerMSVSCMake/libs/includes/openssl/ssl2.h:
+
+../../../TCPServerMSVSCMake/libs/includes/openssl/sslerr.h:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/SimpleRTPSource.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/openssl/ct.h:
+
+../../../TCPServerMSVSCMake/libs/includes/openssl/asyncerr.h:
+
+../../../TCPServerMSVSCMake/libs/includes/openssl/pem.h:
+
+../../../TCPServerMSVSCMake/libs/includes/openssl/pkcs7err.h:
+
+../../../TCPServerMSVSCMake/libs/includes/openssl/pkcs7.h:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/WAVAudioFileSource.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/DVVideoRTPSource.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/openssl/x509_vfy.h:
+
+../../../TCPServerMSVSCMake/libs/includes/openssl/x509err.h:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/H263plusVideoRTPSource.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/openssl/sha.h:
+
+../../../TCPServerMSVSCMake/libs/includes/openssl/dsa.h:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/T140TextRTPSink.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/openssl/rsaerr.h:
+
+../../../TCPServerMSVSCMake/libs/includes/openssl/rsa.h:
+
+../../../TCPServerMSVSCMake/libs/includes/openssl/ec.h:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/VideoRTPSink.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/openssl/objectserr.h:
+
+../../../TCPServerMSVSCMake/libs/includes/openssl/bnerr.h:
+
+../../../TCPServerMSVSCMake/libs/includes/openssl/asn1err.h:
+
+../../../TCPServerMSVSCMake/libs/includes/openssl/obj_mac.h:
+
+../../../TCPServerMSVSCMake/libs/includes/openssl/objects.h:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/H264or5VideoStreamFramer.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/openssl/evp.h:
+
+../../../TCPServerMSVSCMake/libs/includes/openssl/buffererr.h:
+
+../../../TCPServerMSVSCMake/libs/includes/openssl/buffer.h:
+
+../../../TCPServerMSVSCMake/libs/includes/openssl/x509.h:
+
+../../../TCPServerMSVSCMake/libs/includes/openssl/comp.h:
+
+../../../TCPServerMSVSCMake/libs/includes/openssl/ssl.h:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/MP3ADURTPSink.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/TLSState.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/RTPInterface.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/openssl/dherr.h:
+
+../../../TCPServerMSVSCMake/libs/includes/UsageEnvironment/UsageEnvironment_version.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/UsageEnvironment/Boolean.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/liveMedia_version.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/groupsock/NetCommon.h:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/FramedSource.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/MultiFramedRTPSource.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG1or2VideoFileServerMediaSubsession.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/StreamReplicator.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG4LATMAudioRTPSource.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/JPEG2000VideoRTPSource.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/liveMedia.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/TextRTPSink.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/AC3AudioStreamFramer.hh:
+
+../../../TCPServerMSVSCMake/src/serv/utf.hpp:
+
+../../../TCPServerMSVSCMake/libs/includes/uv/linux.h:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/MediaSource.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/uv/threadpool.h:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/ByteStreamMemoryBufferSource.hh:
+
+/usr/include/asm-generic/param.h:
+
+/usr/include/asm/param.h:
+
+../../../TCPServerMSVSCMake/libs/includes/UsageEnvironment/HashTable.hh:
+
+/usr/include/semaphore.h:
+
+/usr/include/bits/termios.h:
 
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/cxxabi_forced.h:
 
@@ -1364,13 +2687,21 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/move.h:
 
+/usr/include/bits/semaphore.h:
+
+/usr/include/bits/types/error_t.h:
+
 /usr/include/netinet/in.h:
 
 /usr/include/linux/errno.h:
 
 /usr/include/bits/select.h:
 
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/Media.hh:
+
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/shared_ptr_atomic.h:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG2IndexFromTransportStream.hh:
 
 /usr/include/bits/stdio_lim.h:
 
@@ -1382,7 +2713,11 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 
 /usr/include/string.h:
 
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/WAVAudioFileServerMediaSubsession.hh:
+
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/iomanip:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/FileServerMediaSubsession.hh:
 
 /usr/include/bits/types/__fpos_t.h:
 
@@ -1392,13 +2727,17 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 
 /usr/include/stdio.h:
 
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/RTCP.hh:
+
 /usr/include/asm-generic/sockios.h:
+
+../../../TCPServerMSVSCMake/libs/includes/openssl/safestack.h:
 
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/std_abs.h:
 
 /usr/include/stdlib.h:
 
-/opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/stl_iterator.h:
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/H264VideoStreamDiscreteFramer.hh:
 
 /usr/include/bits/sigthread.h:
 
@@ -1410,6 +2749,8 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 
 /usr/include/bits/types/sigset_t.h:
 
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/AudioInputDevice.hh:
+
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/thread:
 
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/cstdlib:
@@ -1420,13 +2761,11 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/utility:
 
-/usr/include/bits/types/error_t.h:
-
-/usr/include/bits/semaphore.h:
-
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/string_view:
 
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/ext/alloc_traits.h:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG2TransportStreamFromESSource.hh:
 
 /usr/include/bits/stdlib-float.h:
 
@@ -1440,6 +2779,12 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/streambuf:
 
+../../../TCPServerMSVSCMake/src/serv/RTSP.hpp:
+
+../../../TCPServerMSVSCMake/libs/includes/openssl/bioerr.h:
+
+../../../TCPServerMSVSCMake/libs/includes/openssl/ssl3.h:
+
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/backward/binders.h:
 
 /usr/include/bits/types/struct_tm.h:
@@ -1448,17 +2793,29 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/allocator.h:
 
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/AMRAudioRTPSink.hh:
+
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/string:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/ADTSAudioFileServerMediaSubsession.hh:
 
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/locale_classes.h:
 
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/basic_string.tcc:
 
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/H264VideoStreamFramer.hh:
+
 /usr/include/bits/setjmp.h:
+
+/opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/stl_iterator.h:
+
+../../../TCPServerMSVSCMake/libs/includes/openssl/ossl_typ.h:
 
 /usr/include/sys/select.h:
 
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/typeinfo:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG4VideoStreamFramer.hh:
 
 /usr/include/bits/types/timer_t.h:
 
@@ -1467,6 +2824,8 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/pstl/pstl_config.h:
 
 /usr/include/bits/types/clock_t.h:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/H263plusVideoFileServerMediaSubsession.hh:
 
 /usr/include/bits/cpu-set.h:
 
@@ -1494,7 +2853,13 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/string_view.tcc:
 
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/VP9VideoRTPSink.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/MIKEY.hh:
+
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/cxxabi_init_exception.h:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/MP3ADURTPSource.hh:
 
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/ios_base.h:
 
@@ -1502,11 +2867,25 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 
 /opt/rh/gcc-toolset-9/root/usr/lib/gcc/x86_64-redhat-linux/9/include/stddef.h:
 
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/MatroskaFileServerDemux.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/TheoraVideoRTPSink.hh:
+
 /usr/include/bits/types/__FILE.h:
+
+/opt/rh/gcc-toolset-9/root/usr/include/c++/9/charconv:
 
 /usr/include/bits/types/wint_t.h:
 
 /usr/include/bits/siginfo-consts-arch.h:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/H265VideoFileSink.hh:
+
+/usr/include/bits/param.h:
+
+/usr/include/bits/floatn-common.h:
+
+/usr/include/bits/wchar.h:
 
 /usr/include/bits/siginfo-arch.h:
 
@@ -1516,6 +2895,8 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 
 /usr/include/netdb.h:
 
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/VP8VideoRTPSource.hh:
+
 /usr/include/bits/types/FILE.h:
 
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/tuple:
@@ -1524,17 +2905,23 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/vector:
 
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/DigestAuthentication.hh:
+
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/x86_64-redhat-linux/bits/atomic_word.h:
 
 /usr/include/asm-generic/errno-base.h:
 
 ../../../TCPServerMSVSCMake/TCPServerMSVSCMake.cpp:
 
-/usr/include/semaphore.h:
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/DVVideoStreamFramer.hh:
 
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/clocale:
 
 /opt/rh/gcc-toolset-9/root/usr/lib/gcc/x86_64-redhat-linux/9/include/stdarg.h:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/AMRAudioSource.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/MultiFramedRTPSink.hh:
 
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/iostream:
 
@@ -1544,17 +2931,29 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/ostream:
 
+../../../TCPServerMSVSCMake/libs/includes/openssl/dsaerr.h:
+
 /usr/include/bits/timex.h:
 
 /usr/include/bits/byteswap.h:
 
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/postypes.h:
 
+../../../TCPServerMSVSCMake/libs/includes/openssl/pemerr.h:
+
 /usr/include/linux/posix_types.h:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/PassiveServerMediaSubsession.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG2TransportStreamMultiplexor.hh:
 
 /usr/include/bits/sigstack.h:
 
 /usr/include/sys/types.h:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/MP3ADU.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/groupsock/NetInterface.hh:
 
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/allocated_ptr.h:
 
@@ -1565,8 +2964,6 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 /usr/include/bits/thread-shared-types.h:
 
 /usr/include/bits/long-double.h:
-
-/usr/include/bits/stat.h:
 
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/iosfwd:
 
@@ -1582,7 +2979,13 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 
 /usr/include/linux/falloc.h:
 
+../../../TCPServerMSVSCMake/libs/includes/openssl/opensslv.h:
+
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/new:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/MP3Transcoder.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/MediaSink.hh:
 
 /usr/include/gnu/stubs.h:
 
@@ -1590,9 +2993,15 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 
 /usr/include/bits/posix_opt.h:
 
+/usr/include/linux/param.h:
+
+../../../TCPServerMSVSCMake/libs/includes/uv/errno.h:
+
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/x86_64-redhat-linux/bits/os_defines.h:
 
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/ostream_insert.h:
+
+../../../TCPServerMSVSCMake/libs/includes/groupsock/NetAddress.hh:
 
 /usr/include/bits/waitstatus.h:
 
@@ -1604,13 +3013,13 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/uses_allocator.h:
 
-../../../TCPServerMSVSCMake/libs/includes/uv/linux.h:
-
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/debug/assertions.h:
 
 /usr/include/sched.h:
 
 /usr/include/sys/wait.h:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/TheoraVideoRTPSource.hh:
 
 /usr/include/bits/time.h:
 
@@ -1644,6 +3053,8 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 
 /usr/include/bits/sys_errlist.h:
 
+../../../TCPServerMSVSCMake/libs/includes/openssl/dh.h:
+
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/locale_classes.tcc:
 
 /usr/include/bits/pthreadtypes.h:
@@ -1652,15 +3063,13 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 
 /usr/include/linux/stddef.h:
 
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/AMRAudioRTPSource.hh:
+
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/debug/debug.h:
 
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/x86_64-redhat-linux/bits/c++config.h:
 
 /usr/include/bits/types/stack_t.h:
-
-/usr/include/bits/wchar.h:
-
-/usr/include/err.h:
 
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/hash_bytes.h:
 
@@ -1668,21 +3077,33 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 
 /usr/include/bits/signum.h:
 
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/AudioRTPSink.hh:
+
 /usr/include/endian.h:
 
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/concept_check.h:
+
+../../../TCPServerMSVSCMake/libs/includes/openssl/cterr.h:
 
 /usr/include/bits/in.h:
 
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/type_traits:
 
+../../../TCPServerMSVSCMake/libs/includes/openssl/e_os2.h:
+
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/x86_64-redhat-linux/bits/cpu_defines.h:
 
 /usr/include/bits/confname.h:
 
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/DVVideoRTPSink.hh:
+
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/functexcept.h:
 
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/RTPSink.hh:
+
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/refwrap.h:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/H264VideoFileSink.hh:
 
 /usr/include/bits/stdint-uintn.h:
 
@@ -1696,6 +3117,8 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 
 /usr/include/bits/types/struct_timeval.h:
 
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/ADTSAudioStreamDiscreteFramer.hh:
+
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/stl_pair.h:
 
 /opt/rh/gcc-toolset-9/root/usr/lib/gcc/x86_64-redhat-linux/9/include/stdint.h:
@@ -1704,9 +3127,15 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 
 /usr/include/bits/locale.h:
 
+/usr/include/sys/ttydefaults.h:
+
+/usr/include/bits/types/struct_statx_timestamp.h:
+
 /usr/include/bits/wordsize.h:
 
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/localefwd.h:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG2TransportUDPServerMediaSubsession.hh:
 
 /usr/include/sysexits.h:
 
@@ -1716,23 +3145,33 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 
 /usr/include/bits/typesizes.h:
 
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/H261VideoRTPSource.hh:
+
 /usr/include/bits/types/locale_t.h:
 
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/x86_64-redhat-linux/bits/c++allocator.h:
 
 /usr/include/locale.h:
 
+../../../TCPServerMSVSCMake/libs/includes/openssl/asn1.h:
+
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/cctype:
+
+/usr/include/sys/time.h:
 
 /usr/include/bits/types/struct_itimerspec.h:
 
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/stl_relops.h:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG1or2AudioStreamFramer.hh:
 
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/stl_raw_storage_iter.h:
 
 /usr/include/sys/ucontext.h:
 
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/stl_iterator_base_types.h:
+
+../../../TCPServerMSVSCMake/libs/includes/UsageEnvironment/strDup.hh:
 
 ../../../TCPServerMSVSCMake/TCPServerMSVSCMake.hpp:
 
@@ -1746,9 +3185,7 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/streambuf_iterator.h:
 
-/usr/include/bits/types/struct_statx_timestamp.h:
-
-/usr/include/sys/ttydefaults.h:
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/H263plusVideoRTPSink.hh:
 
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/fs_ops.h:
 
@@ -1766,23 +3203,35 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 
 ../../../TCPServerMSVSCMake/src/serv/NetSocketUV.hpp:
 
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/MP3ADUinterleaving.hh:
+
 ../../../TCPServerMSVSCMake/src/serv/NetSock.hpp:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG1or2DemuxedElementaryStream.hh:
 
 /usr/include/bits/endian.h:
 
 ../../../TCPServerMSVSCMake/src/serv/utils.hpp:
 
+../../../TCPServerMSVSCMake/libs/includes/openssl/tls1.h:
+
 ../../../TCPServerMSVSCMake/src/serv/includes.hpp:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/MPEG2TransportStreamIndexFile.hh:
 
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/codecvt.h:
 
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/x86_64-redhat-linux/bits/c++io.h:
+
+../../../TCPServerMSVSCMake/libs/includes/openssl/hmac.h:
 
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/fstream.tcc:
 
 /usr/include/bits/sched.h:
 
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/quoted_string.h:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/RawVideoFrameParameters.hh:
 
 /usr/include/assert.h:
 
@@ -1795,6 +3244,8 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/x86_64-redhat-linux/bits/basic_file.h:
 
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/vector.tcc:
+
+../../../TCPServerMSVSCMake/libs/includes/openssl/async.h:
 
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/limits:
 
@@ -1816,6 +3267,8 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/fs_path.h:
 
+../../../TCPServerMSVSCMake/libs/includes/BasicUsageEnvironment/DelayQueue.hh:
+
 /usr/include/bits/types/__fpos64_t.h:
 
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/locale:
@@ -1828,6 +3281,8 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/locale_facets_nonio.h:
 
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/FileSink.hh:
+
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/x86_64-redhat-linux/bits/time_members.h:
 
 /usr/include/bits/errno.h:
@@ -1838,6 +3293,8 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/x86_64-redhat-linux/bits/messages_members.h:
 
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/VP9VideoRTPSource.hh:
+
 /usr/include/libintl.h:
 
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/locale_conv.h:
@@ -1846,7 +3303,13 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/sstream:
 
+/usr/include/sys/param.h:
+
+/opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/sstream.tcc:
+
 /usr/include/bits/signum-generic.h:
+
+../../../TCPServerMSVSCMake/libs/includes/openssl/comperr.h:
 
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/basic_ios.h:
 
@@ -1866,15 +3329,29 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/fs_dir.h:
 
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/H264or5VideoFileSink.hh:
+
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/ext/aligned_buffer.h:
 
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/backward/auto_ptr.h:
 
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/AC3AudioFileServerMediaSubsession.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/AMRAudioFileSink.hh:
+
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/pstl/glue_memory_defs.h:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/OggFile.hh:
+
+../../../TCPServerMSVSCMake/libs/includes/openssl/err.h:
 
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/stdlib.h:
 
+../../../TCPServerMSVSCMake/libs/includes/openssl/evperr.h:
+
 /usr/include/bits/types/siginfo_t.h:
+
+../../../TCPServerMSVSCMake/libs/includes/openssl/crypto.h:
 
 /usr/include/bits/posix2_lim.h:
 
@@ -1882,13 +3359,19 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 
 /usr/include/bits/siginfo-consts.h:
 
-/usr/include/bits/types/sigval_t.h:
+../../../TCPServerMSVSCMake/libs/includes/UsageEnvironment/UsageEnvironment.hh:
 
-/usr/include/asm-generic/posix_types.h:
+/usr/include/bits/types/sigval_t.h:
 
 /usr/include/bits/posix1_lim.h:
 
+/usr/include/asm-generic/posix_types.h:
+
 /usr/include/bits/sigevent-consts.h:
+
+/usr/include/bits/stat.h:
+
+../../../TCPServerMSVSCMake/libs/includes/openssl/symhacks.h:
 
 /usr/include/bits/sigaction.h:
 
@@ -1912,6 +3395,8 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 
 /usr/include/arpa/inet.h:
 
+../../../TCPServerMSVSCMake/libs/includes/openssl/bn.h:
+
 /usr/include/fcntl.h:
 
 /usr/include/bits/fcntl.h:
@@ -1919,6 +3404,34 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/invoke.h:
 
 /usr/include/asm/types.h:
+
+../../../TCPServerMSVSCMake/libs/includes/openssl/opensslconf.h:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/ProxyServerMediaSession.hh:
+
+/opt/rh/gcc-toolset-9/root/usr/lib/gcc/x86_64-redhat-linux/9/include/limits.h:
+
+/opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/exception_ptr.h:
+
+/usr/include/linux/limits.h:
+
+/usr/include/gnu/stubs-64.h:
+
+/usr/include/bits/xopen_lim.h:
+
+/usr/include/bits/uio_lim.h:
+
+/usr/include/bits/environments.h:
+
+../../../TCPServerMSVSCMake/libs/includes/openssl/bio.h:
+
+../../../TCPServerMSVSCMake/libs/includes/openssl/stack.h:
+
+../../../TCPServerMSVSCMake/libs/includes/openssl/ecerr.h:
+
+../../../TCPServerMSVSCMake/libs/includes/openssl/cryptoerr.h:
+
+../../../TCPServerMSVSCMake/libs/includes/openssl/lhash.h:
 
 /usr/include/pwd.h:
 
@@ -1928,11 +3441,9 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 
 /usr/include/linux/types.h:
 
-/usr/include/bits/environments.h:
-
-/usr/include/bits/uio_lim.h:
-
 /usr/include/bits/getopt_core.h:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/H265VideoRTPSink.hh:
 
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/cpp_type_traits.h:
 
@@ -1948,6 +3459,8 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 
 /usr/include/bits/sockaddr.h:
 
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/VP8VideoRTPSink.hh:
+
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/array:
 
 /usr/include/asm/socket.h:
@@ -1961,6 +3474,8 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 /usr/include/sys/stat.h:
 
 /usr/include/bits/dirent.h:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/RTPSource.hh:
 
 /usr/include/bits/statx.h:
 
@@ -1978,7 +3493,11 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 
 /usr/include/asm-generic/bitsperlong.h:
 
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/H264or5VideoStreamDiscreteFramer.hh:
+
 /usr/include/asm/posix_types.h:
+
+../../../TCPServerMSVSCMake/libs/includes/liveMedia/HLSSegmenter.hh:
 
 /usr/include/asm/posix_types_64.h:
 
@@ -1986,44 +3505,12 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o: ../..
 
 /usr/include/bits/types/struct_statx.h:
 
-/opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/exception_ptr.h:
-
-/usr/include/linux/limits.h:
-
 /usr/include/netinet/tcp.h:
 
 /opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/stl_construct.h:
 
 /usr/include/rpc/netdb.h:
 
-/usr/include/bits/termios.h:
-
 /usr/include/bits/netdb.h:
 
 /usr/include/termios.h:
-
-/opt/rh/gcc-toolset-9/root/usr/include/c++/9/bits/sstream.tcc:
-
-/usr/include/sys/param.h:
-
-/opt/rh/gcc-toolset-9/root/usr/lib/gcc/x86_64-redhat-linux/9/include/limits.h:
-
-/usr/include/gnu/stubs-64.h:
-
-/usr/include/bits/xopen_lim.h:
-
-/usr/include/bits/floatn-common.h:
-
-/usr/include/bits/param.h:
-
-../../../TCPServerMSVSCMake/libs/includes/uv/errno.h:
-
-/usr/include/linux/param.h:
-
-/usr/include/asm/param.h:
-
-/usr/include/asm-generic/param.h:
-
-../../../TCPServerMSVSCMake/libs/includes/uv/threadpool.h:
-
-../../../TCPServerMSVSCMake/src/serv/utf.hpp:
