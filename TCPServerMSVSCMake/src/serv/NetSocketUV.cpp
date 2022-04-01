@@ -153,7 +153,6 @@ void NetSocketUV::SendUDP(NET_BUFFER_INDEX *buf)
 
 void NetSocketUV::ReceiveTCP()
 {
-	CString fileName;
 	unsigned int filePrefix = GetClientID();
 	std::array<char, 10> strID;
 	std::to_chars(strID.data(), strID.data() + strID.size(), filePrefix);
