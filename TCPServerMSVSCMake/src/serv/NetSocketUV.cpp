@@ -133,17 +133,6 @@ bool NetSocketUV::Accept(uv_handle_t* handle)
 		translateThread.detach();
 		uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadTCP);
 		//receivThread.join();
-		/*uv_thread_t receivThread;
-		uv_thread_t translateThread;
-
-		uv_thread_create(&receivThread, StartReadingThread, client);
-		uv_thread_create(&translateThread, SetupRetranslation, this);
-
-		uv_thread_join(&receivThread);
-		uv_thread_join(&translateThread);*/
-		
-		
-		//uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadTCP);
 	}
 	else
 	{
@@ -166,39 +155,20 @@ void NetSocketUV::ReceiveTCP()
 {
 	CString fileName;
 	unsigned int filePrefix = GetClientID();
-	if ((fileName + filePrefix).Find('0'))
+	char* name = "in_binary_h.264";
+	fileName.IntToString(filePrefix);
+	fileName += name;
+	fout.open(fileName.c_str(), std::ios::binary | std::ios::app);
+	if (fout.is_open())
 	{
-		fileName = ("0in_binary_h.264");
-		fout.open(fileName.c_str(), std::ios::binary | std::ios::app);
-		if (fout.is_open())
-		{
-			fout.write((char*)net->GetRecvBuffer()->GetData(), net->GetRecvBuffer()->GetLength());
-			printf("writed %d bytes in file %s\n", (int)net->GetRecvBuffer()->GetLength(), fileName.c_str());
-			fout.close();
-		}
-		else
-		{
-			printf("cannot open file\n");
-		}
+		fout.write((char*)net->GetRecvBuffer()->GetData(), net->GetRecvBuffer()->GetLength());
+		printf("writed %d bytes in file %s\n", (int)net->GetRecvBuffer()->GetLength(), fileName.c_str());
+		fout.close();
 	}
 	else
 	{
-		char* name = "in_binary_h.264";
-		fileName.IntToString(filePrefix);
-		fileName += name;
-		fout.open(fileName.c_str(), std::ios::binary | std::ios::app);
-		if (fout.is_open())
-		{
-			fout.write((char*)net->GetRecvBuffer()->GetData(), net->GetRecvBuffer()->GetLength());
-			printf("writed %d bytes in file %s\n", (int)net->GetRecvBuffer()->GetLength(), fileName.c_str());
-			fout.close();
-		}
-		else
-		{
-			printf("cannot open file\n");
-		}
+		printf("cannot open file\n");
 	}
-	
 }
 
 void NetSocketUV::ReceiveUPD()
@@ -209,11 +179,7 @@ void OnReadTCP(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)
 {
 	NetSocketUV* uvsocket = (NetSocketUV*)GetNetSocketPtr(stream);
 	uvsocket->net->setupReceivingSocket(*uvsocket);
-	if (uvsocket->GetClientID() == 0)
-	{
-		printf("Reading data from client with ID: 0x00\n");
-	}
-	printf("Reading data from client with ID: %s\n", uvsocket->GetClientID());
+	printf("Reading data from client with ID: %d\n", uvsocket->GetClientID());
 	if (nread < 0)
 	{
 		printf("read buffer < 0!\n");
@@ -282,17 +248,6 @@ void OnReadUDP(uv_udp_t* handle, ssize_t nread, const uv_buf_t* buf, const struc
 	socket->ReceiveUPD();
 }
 
-void idle_cb(uv_idle_t* idle)
-{
-#ifdef WIN32
-	Sleep(100);
-#else
-	sleep(0.1);
-#endif // WIN32
-
-	uv_idle_stop(idle);
-}
-
 void OnAccept(uv_stream_t* stream, int status)
 {
 	std::cout << "___ On Connect ___" << std::endl;
@@ -354,56 +309,29 @@ void* NetSocketUV::SetupRetranslation(void* argv)
 			pid = fork();
 			std::string outRTSP;
 			/* Handeling Chile Process */
-			//if (ID == "0")
-			//{
-			//	if (pid == 0) {
-			//		char* execv_str[] = { "./RTSP", strID.data()};
-			//		if (execv("./RTSP", execv_str) < 0) {
-			//			status = -1;
-			//			perror("ERROR\n");
-			//		}
-			//		else
-			//		{
-			//			std::getline(std::cin, outRTSP);
-			//			if (outRTSP.find("rtsp://"))
-			//			{
-			//				std::thread delay(WaitingDelay, socket);
-			//				delay.join();
-			//				//delay.detach();
-			//			}
-			//		}
-			//	}
-			//	/* Handeling Chile Process Failure */
-			//	else if (pid < 0) {
-			//		status = -1;
-			//		perror("ERROR\n");
-			//	}
-			//}
-			//else
-			//{
-				if (pid == 0) {
-					char* execv_str[] = { "./RTSP", strID.data()};
-					if (execv("./RTSP", execv_str) < 0) {
-						status = -1;
-						perror("ERROR\n");
-					}
-					else
-					{
-						std::getline(std::cin, outRTSP);
-						if (outRTSP.find("rtsp://"))
-						{
-							std::thread delay(WaitingDelay, socket);
-							delay.join();
-							//delay.detach();
-						}
-					}
-				}
-				/* Handeling Chile Process Failure */
-				else if (pid < 0) {
+			
+			if (pid == 0) {
+				char* execv_str[] = { "./RTSP", fileName, NULL};
+				if (execv("./RTSP", execv_str) < 0) {
 					status = -1;
 					perror("ERROR\n");
 				}
-			//}
+				else
+				{
+					std::getline(std::cin, outRTSP);
+					if (outRTSP.find("rtsp://"))
+					{
+						std::thread delay(WaitingDelay, socket);
+						//delay.join();
+						delay.detach();
+					}
+				}
+			}
+			/* Handeling Chile Process Failure */
+			else if (pid < 0) {
+				status = -1;
+				perror("ERROR\n");
+			}
 #endif
 		}
 	}
