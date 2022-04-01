@@ -1,5 +1,7 @@
 #include "NetSocketUV.hpp"
 
+#define FRAME_SIZE 150000
+
 using std::ofstream;
 ofstream fout;
 
@@ -168,7 +170,7 @@ void NetSocketUV::ReceiveTCP()
 	NetBuffer* recv_buffer = net->GetRecvBuffer();
 	int received_bytes = recv_buffer->GetLength();
 	rbuff.Add(received_bytes, recv_buffer->GetData());
-
+	
 	/*CString fileName;
 	unsigned int filePrefix = GetClientID();
 	if ((fileName + filePrefix).Find('0'))
@@ -265,7 +267,6 @@ void StartReadingThread(void* handle)
 	uv_read_start((uv_stream_t*)handle, OnAllocBuffer, OnReadTCP);
 }
 
-
 char address_converter[30];
 void OnReadUDP(uv_udp_t* handle, ssize_t nread, const uv_buf_t* buf, const struct sockaddr* addr, unsigned flags)
 {
@@ -281,17 +282,6 @@ void OnReadUDP(uv_udp_t* handle, ssize_t nread, const uv_buf_t* buf, const struc
 	socket->getNet()->addr->port += port_ptr[0] << 8;
 
 	socket->ReceiveUPD();
-}
-
-void idle_cb(uv_idle_t* idle)
-{
-#ifdef WIN32
-	Sleep(100);
-#else
-	sleep(0.1);
-#endif // WIN32
-
-	uv_idle_stop(idle);
 }
 
 void OnAccept(uv_stream_t* stream, int status)
@@ -340,7 +330,7 @@ void RTSPProxyServer::play(void* sock_ptr)
 	Port rtpPort(rtpPortNum);
 	Groupsock* rtpGS = new Groupsock(envir(), *(sockaddr_storage*)&groupAddr, rtpPort, 225);
 
-	ByteStreamMemoryBufferSource* source = ByteStreamMemoryBufferSource::createNew(envir(), buffer, len);
+	ByteStreamMemoryBufferSource* source = ByteStreamMemoryBufferSource::createNew(envir(), buffer, FRAME_SIZE);
 	H264VideoRTPSink* sink = H264VideoRTPSink::createNew(envir(), rtpGS, 96);
 
 	sink->startPlaying(*source, proxyServerMediaSubsessionAfterPlaying, this);

@@ -44,12 +44,9 @@ public:
 	void* sock;
 
 	virtual bool		Create(int port, bool udp_tcp, bool listen);
-
-	//bool SetConnectedSocketToReadMode(uv_stream_t* stream);
 	const char*			GetIP(Net_Address* addr, bool own_or_peer);
 	bool				Accept(uv_handle_t* handle);
 	void				SetID(void* NewClient)									{ NetSocket::SetID(NewClient); }
-	//virtual const char* GetClientID()											{ return NetSocket::GetClientID(); }
 	void				SendTCP(NET_BUFFER_INDEX* buf);
 	void				SendUDP(NET_BUFFER_INDEX* buf);
 	void				ReceiveTCP();
@@ -61,14 +58,6 @@ public:
 	int status;
 	static NetSocketUV* NewSocket(Net* net)										{ return new NetSocketUV(net); }
 	uv_loop_t*			loop;
-	FILE*				getFile()												{ return pout; }
-
-protected:
-	FILE* pout;
-	/*void pgm_save(unsigned char* buf, int wrap, int xsize, int ysize, char* filename);
-	void setupDecoder(void* Data);
-	void decode(AVCodecContext* dec_cont, AVFrame* frame, AVPacket* packet, const char* fileName);*/
-
 };
 
 #endif
@@ -82,18 +71,12 @@ public:
 						Server();
 	virtual				~Server();
 	int					connect(bool connection);
-	static void			StartTranslation();
 protected:
 
 	Net*				net;
 	NetSocketUV*		net_sockuv;
-		/*static void GenerateRTSPURL(void* Data) {
-			RTSPProxyServer::StartProxyServer(Data);
-			return;
-		}*/
 };
 #endif
-void					idle_cb					(uv_idle_t* idle);
 void					OnAccept				(uv_stream_t* stream, int status);
 void					OnAllocBuffer			(uv_handle_t* handle, size_t suggested_size, uv_buf_t* buf);
 void					OnReadTCP				(uv_stream_t* stream, ssize_t nread, const uv_buf_t* buf);
