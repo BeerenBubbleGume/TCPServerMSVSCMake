@@ -50,11 +50,13 @@ ELSE()
 								)
 	target_link_libraries(TCPServerMSVSCMake
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libuv.a
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libliveMedia.a
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libBasicUsageEnvironment.a
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libUsageEnvironment.a
-								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libliveMedia.a
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libgroupsock.a
-								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libopenssl.a
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libssl.a
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libcrypto.a
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libz.a
 								stdc++fs
 								pthread
 								-ldl
