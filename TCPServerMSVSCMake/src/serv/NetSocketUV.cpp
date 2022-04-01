@@ -336,8 +336,9 @@ void RTSPProxyServer::play(void* sock_ptr)
 
 	in_addr groupAddr;
 	groupAddr.s_addr = AF_INET;
-
-	Groupsock* rtpGS = new Groupsock(envir(), *(sockaddr_storage*)&groupAddr, 8554, 225);
+	portNumBits rtpPortNum(1888);
+	Port rtpPort(rtpPortNum);
+	Groupsock* rtpGS = new Groupsock(envir(), *(sockaddr_storage*)&groupAddr, rtpPort, 225);
 
 	ByteStreamMemoryBufferSource* source = ByteStreamMemoryBufferSource::createNew(envir(), buffer, len);
 	H264VideoRTPSink* sink = H264VideoRTPSink::createNew(envir(), rtpGS, 96);
@@ -368,7 +369,7 @@ void* NetSocketUV::SetupRetranslation(void* argv)
 	streamName += strID.data();
 
 	ServerMediaSession* sms = ServerMediaSession::createNew(*env, streamName.c_str());
-	sms->addSubsession(DemandServerMediaSubsession::createNew(*env, true));
+	sms->addSubsession(DemandServerMediaSubsession::createNew(*env, false));
 	proxyserv->addServerMediaSession(sms);
 	proxyserv->play(&socket);
 	proxyserv->anonceStream(proxyserv, sms, streamName.c_str());
