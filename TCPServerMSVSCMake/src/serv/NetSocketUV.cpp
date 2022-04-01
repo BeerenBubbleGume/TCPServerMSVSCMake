@@ -301,7 +301,7 @@ void* NetSocketUV::SetupRetranslation(void* argv)
 			//system("RTSPProxyServerForClient.exe -d -c -%s");
 			proxy = _popen("RTSP.exe -d -c -%s", "r");
 			_pclose(proxy);		
-
+			
 #else
 			int status;
 			pid_t pid;
@@ -311,7 +311,7 @@ void* NetSocketUV::SetupRetranslation(void* argv)
 			/* Handeling Chile Process */
 			
 			if (pid == 0) {
-				char* execv_str[] = { "./RTSP", (char)fileName.c_str(), NULL};
+				char* execv_str[] = { "./RTSP", (char*)fileName.c_str(), NULL};
 				if (execv("./RTSP", execv_str) < 0) {
 					status = -1;
 					perror("ERROR\n");
