@@ -8,7 +8,8 @@
 					"build" : ".",
 					"childIndexes" : 
 					[
-						1
+						1,
+						4
 					],
 					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
 					"minimumCMakeVersion" : 
@@ -34,7 +35,7 @@
 					"source" : "TCPServerMSVSCMake",
 					"targetIndexes" : 
 					[
-						0
+						1
 					]
 				},
 				{
@@ -62,12 +63,73 @@
 					"parentIndex" : 2,
 					"projectIndex" : 0,
 					"source" : "TCPServerMSVSCMake/src/serv"
+				},
+				{
+					"build" : "RTSP",
+					"childIndexes" : 
+					[
+						5
+					],
+					"jsonFile" : "directory-RTSP-Debug-836f9e4bd27cb72b376f.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "RTSP",
+					"targetIndexes" : 
+					[
+						0
+					]
+				},
+				{
+					"build" : "RTSP/libs",
+					"childIndexes" : 
+					[
+						6,
+						7
+					],
+					"jsonFile" : "directory-RTSP.libs-Debug-b406b9abee1433efa0ea.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"parentIndex" : 4,
+					"projectIndex" : 1,
+					"source" : "RTSP/libs"
+				},
+				{
+					"build" : "RTSP/libs/lib",
+					"jsonFile" : "directory-RTSP.libs.lib-Debug-1d25f1cc01f8f1aeee8e.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"parentIndex" : 5,
+					"projectIndex" : 1,
+					"source" : "RTSP/libs/lib"
+				},
+				{
+					"build" : "RTSP/libs/include",
+					"jsonFile" : "directory-RTSP.libs.include-Debug-6f00ab393e036108740f.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"parentIndex" : 5,
+					"projectIndex" : 1,
+					"source" : "RTSP/libs/include"
 				}
 			],
 			"name" : "Debug",
 			"projects" : 
 			[
 				{
+					"childIndexes" : 
+					[
+						1
+					],
 					"directoryIndexes" : 
 					[
 						0,
@@ -78,12 +140,34 @@
 					"name" : "TCPServerMSVSCMake",
 					"targetIndexes" : 
 					[
+						1
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						4,
+						5,
+						6,
+						7
+					],
+					"name" : "RTSP",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
 						0
 					]
 				}
 			],
 			"targets" : 
 			[
+				{
+					"directoryIndex" : 4,
+					"id" : "RTSP::@3b94aae68d1102a14b92",
+					"jsonFile" : "target-RTSP-Debug-3212dd381c6cf7ceff7a.json",
+					"name" : "RTSP",
+					"projectIndex" : 1
+				},
 				{
 					"directoryIndex" : 1,
 					"id" : "TCPServerMSVSCMake::@c1fa6790a5be207d0e6d",

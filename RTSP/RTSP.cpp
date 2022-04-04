@@ -1,8 +1,6 @@
 ﻿// RTSP.cpp: определяет точку входа для приложения.
 //
-
 #include "RTSP.hpp"
-
 #pragma comment(lib, "ws2_32.lib")
 
 void serverBYEHandler(void* instance, u_int8_t requestBytes)
@@ -66,13 +64,15 @@ void RTSPProxyServer::StartProxyServer(char* Data)
 	std::string fileName(Data);
 	fileName += name;
 	std::string streamName = "serverStream/" + fileName;
+	std::cout << fileName << std::endl;
 	RTSPProxyServer* server = RTSPProxyServer::createNew(*env, 8554);
 	ServerMediaSession* sms = ServerMediaSession::createNew(*env, streamName.c_str());
 	sms->addSubsession(H264VideoFileServerMediaSubsession::createNew(*env, fileName.c_str(), false));
 	server->addServerMediaSession(sms);
 	anonceStream(server, sms, "serverStream");
-	std::thread whatch(WhatchAndWait, server);
-	whatch.detach();
+	//std::thread whatch(WhatchAndWait, server);
+	//whatch.detach();
+	
 	env->taskScheduler().doEventLoop(&server->eventLoopWatchVariable);
 }
 

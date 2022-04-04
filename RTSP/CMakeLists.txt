@@ -23,7 +23,7 @@ IF(WIN32)
 								)
 	target_link_libraries(RTSP	PUBLIC
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libssl.lib
-								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/openssl.lib
+								#${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/openssl.lib
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/glib-2.0.lib
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libcrypto.lib
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/pthread.lib
