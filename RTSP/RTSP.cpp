@@ -62,40 +62,18 @@ void RTSPProxyServer::StartProxyServer(char* Data)
 	TaskScheduler* newscheduler = BasicTaskScheduler::createNew();
 	UsageEnvironment* env = BasicUsageEnvironment::createNew(*newscheduler);
 	OutPacketBuffer::maxSize = 5000000;
-	char* filePrefix = Data;
-	if (filePrefix == "0")
-	{
-		char* name = "in_binary_h.264";
-		std::string fileName(name);
-		std::string streamName = "serverStream/" + fileName;
-		RTSPProxyServer* server = RTSPProxyServer::createNew(*env, 8554);
-		ServerMediaSession* sms = ServerMediaSession::createNew(*env, streamName.c_str());
-
-		sms->addSubsession(H264VideoFileServerMediaSubsession::createNew(*env, fileName.c_str(), false));
-		server->addServerMediaSession(sms);
-		anonceStream(server, sms, "serverStream");
-		std::thread whatch(WhatchAndWait, server);
-
-		whatch.join();
-		env->taskScheduler().doEventLoop(&server->eventLoopWatchVariable);
-	}
-	else
-	{
-		char* name = "in_binary_h.264";
-		std::string fileName(filePrefix);
-		fileName += name;
-		std::string streamName = "serverStream/" + fileName;
-		RTSPProxyServer* server = RTSPProxyServer::createNew(*env, 8554);
-		ServerMediaSession* sms = ServerMediaSession::createNew(*env, streamName.c_str());
-
-		sms->addSubsession(H264VideoFileServerMediaSubsession::createNew(*env, fileName.c_str(), false));
-		server->addServerMediaSession(sms);
-		anonceStream(server, sms, "serverStream");
-		std::thread whatch(WhatchAndWait, server);
-		whatch.join();
-		env->taskScheduler().doEventLoop(&server->eventLoopWatchVariable);
-	}
-	//return;
+	char* name = "in_binary_h.264";
+	std::string fileName(filePrefix);
+	fileName += name;
+	std::string streamName = "serverStream/" + fileName;
+	RTSPProxyServer* server = RTSPProxyServer::createNew(*env, 8554);
+	ServerMediaSession* sms = ServerMediaSession::createNew(*env, streamName.c_str());
+	sms->addSubsession(H264VideoFileServerMediaSubsession::createNew(*env, fileName.c_str(), false));
+	server->addServerMediaSession(sms);
+	anonceStream(server, sms, "serverStream");
+	std::thread whatch(WhatchAndWait, server);
+	whatch.join();
+	env->taskScheduler().doEventLoop(&server->eventLoopWatchVariable);
 }
 
 bool RTSPProxyServer::StopProxyServer(void* clientData)
