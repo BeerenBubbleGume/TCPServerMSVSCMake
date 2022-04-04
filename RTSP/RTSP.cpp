@@ -210,6 +210,8 @@ DemandServerMediaSubsession::DemandServerMediaSubsession(/*Net* net, */UsageEnvi
 
 int main(int arc, char* argv[])
 {
+	std::cout << "ID: " << argv[1] << std::endl;
+
 	RTSPProxyServer::StartProxyServer(argv[1]);
 
 	return 0;
