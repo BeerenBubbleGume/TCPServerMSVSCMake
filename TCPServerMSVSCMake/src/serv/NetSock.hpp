@@ -77,10 +77,10 @@ public:
 	auto				GetIDArray()																	{ return IDArray; }
 	auto				GetConnectSockaddr()															{ return fConnectionSockaddr; }
 
-	virtual void		setIDPath(uint16_t ID)															{ ClientID = ID; }
-	virtual void		setIDArray(uint16_t* IDArray)													{ this->IDArray = IDArray; }
-	virtual unsigned	GetClientCount()																{ return clientCount; }
-	virtual void		SetClientCount(unsigned count)													{ clientCount = count; }
+	void				setIDPath(uint16_t ID)															{ ClientID = ID; }
+	void				setIDArray(uint16_t* IDArray)													{ this->IDArray = IDArray; }
+	unsigned			GetClientCount()																{ return clientCount; }
+	void				SetClientCount(unsigned count)													{ clientCount = count; }
 protected:
 	sockaddr			fConnectionSockaddr;
 	int					ClientID;
@@ -116,6 +116,8 @@ public:
 
 	bool			IsTCP()																{ return udp_tcp; }
 	Net*			getNet()															{ return net; }
+	Net_Address*	getAddr()															{ return addr; }
+protected:
 	bool			udp_tcp;
 	int				port;
 	Net_Address*	addr;
