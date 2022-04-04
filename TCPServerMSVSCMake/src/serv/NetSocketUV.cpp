@@ -129,7 +129,7 @@ bool NetSocketUV::Accept(uv_handle_t* handle)
 		sockaddr sockname;
 		int socklen = sizeof accept_sock->net->GetConnectSockaddr();
 		printf("Accepted client with ID:%d\n", accept_sock->GetClientID());
-		std::thread translateThread(SetupRetranslation, accept_sock);
+		std::thread translateThread(SetupRetranslation, client);
 		std::thread receivThread(StartReadingThread, client);
 		translateThread.detach();
 		//uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadTCP);
