@@ -63,7 +63,7 @@ void RTSPProxyServer::StartProxyServer(char* Data)
 	UsageEnvironment* env = BasicUsageEnvironment::createNew(*newscheduler);
 	OutPacketBuffer::maxSize = 5000000;
 	char* name = "in_binary_h.264";
-	std::string fileName(filePrefix);
+	std::string fileName(Data);
 	fileName += name;
 	std::string streamName = "serverStream/" + fileName;
 	RTSPProxyServer* server = RTSPProxyServer::createNew(*env, 8554);
@@ -72,7 +72,7 @@ void RTSPProxyServer::StartProxyServer(char* Data)
 	server->addServerMediaSession(sms);
 	anonceStream(server, sms, "serverStream");
 	std::thread whatch(WhatchAndWait, server);
-	whatch.join();
+	whatch.detach();
 	env->taskScheduler().doEventLoop(&server->eventLoopWatchVariable);
 }
 
