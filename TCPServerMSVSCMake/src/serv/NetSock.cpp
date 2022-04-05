@@ -32,6 +32,10 @@ bool Net::Create(bool internet)
 	return false;
 }
 
+void Net::Destroy()
+{
+}
+
 NetSocket::NetSocket(Net* net)
 {
 	this->net = net;
@@ -312,6 +316,11 @@ NET_BUFFER_INDEX::~NET_BUFFER_INDEX()
 
 NET_SOCKET_INFO::NET_SOCKET_INFO()
 {
+	ClientID = 0;
+	port = 0;
+	sessionID = 0;
+	time = 0;
+	udp_tcp = false;
 }
 
 NET_SOCKET_INFO::~NET_SOCKET_INFO()
@@ -320,10 +329,16 @@ NET_SOCKET_INFO::~NET_SOCKET_INFO()
 
 NET_SESSION_INFO::NET_SESSION_INFO(Net* net)
 {
+	a_client = nullptr;
+	c_client = 0;
+	fInfo = nullptr;
+	fInfoLength = 0;
+	net = nullptr;
 }
 
 NET_SESSION_INFO::~NET_SESSION_INFO()
 {
+	Clear();
 }
 
 void NET_SESSION_INFO::Clear()
@@ -473,6 +488,15 @@ void SocketList::Expand(int max_size)
 
 Server::Server()
 {
+	stop_time = 0;
+	stop_server = false;
+
+	max_client = 400;
+
+	c_migration_client = 0;
+	a_migration_client = NULL;
+
+	start_time = 0;
 }
 
 Server::~Server()
@@ -518,29 +542,56 @@ bool Server::Create(bool internet)
 
 NetSocket* Server::GetServerTCPSocket()
 {
-	return nullptr;
+	int max = sockets.GetMaxCount();
+	if (max > 0)
+		return sockets.Get(0);
+	return NULL;
 }
 
 NetSocket* Server::GetServerUDPSocket()
 {
-	return nullptr;
+	int max = sockets.GetMaxCount();
+	if (max > 1)
+		return sockets.Get(1);
+	return NULL;
 }
 
 void Server::Destroy()
 {
+	sockets.Clear();
+	Net::Destroy();
 }
 
 void Server::FillServerInfo(NET_SERVER_INFO& info)
 {
+	info.sessions = &sessions;
+	info.sockets = &sockets;
+
+	info.start_time = start_time;
+
+	info.k_accept = count_accept;
 }
 
 int Server::AddSessionInfo(NET_SESSION_INFO* session_info, NetSocket* socket)
 {
-	return 0;
+	NET_SERVER_SESSION* session_server = new NET_SERVER_SESSION(this);
+	((NET_SESSION_INFO&)*session_server) = *session_info;
+	int index = sessions.AddSession(session_server);
+	socket->session_id = index;
+	session_server->enabled = true;
+	session_server->c_client_id = 1;
+	session_server->a_client_id = new unsigned int[1];
+	session_server->a_client_id[0] = socket->GetClientID();
+	return index;
 }
 
 NET_SERVER_INFO::NET_SERVER_INFO()
 {
+	current_time = 0;
+	k_accept = 0;
+	sessions = nullptr;
+	start_time = 0;
+	version = 0;
 }
 
 void NET_SERVER_INFO::Clear()

@@ -12,7 +12,7 @@ class	Net;
 class	SocketList;
 class	NET_SESSION_INFO;
 class	NET_SERVER_SESSION;
-
+class	Server;
 
 #define SERVER_ID 0
 
@@ -72,6 +72,7 @@ public:
 	Net_Address*		addr;
 	virtual bool		Create(bool internet);
 	virtual bool		UpdateNet() = 0;
+	virtual void		Destroy();
 	virtual NetSocket*	NewSocket(Net* net) = 0;
 	NetBuffer*			GetRecvBuffer()																	{ return &recv_buf; }
 	void				OnLostConnection(void* sock);
@@ -160,6 +161,7 @@ protected:
 	Net_Address*	addr;
 	Net*			net;
 	int				session_id;
+	friend class	Server;
 };
 
 class NET_SERVER_SESSION : public NET_SESSION_INFO
@@ -175,6 +177,7 @@ public:
 	unsigned int*	GetClientArray()			{ return a_client_id; }
 	int				GetSessionIndex()			{ return session_index; }
 protected:
+	friend class	Server;
 	bool			enabled;
 	int				c_client_id;
 	unsigned int*	a_client_id;
@@ -208,7 +211,6 @@ struct NET_SERVER_INFO
 	unsigned int current_time;
 
 	int k_accept;
-	int k_hello;
 
 	SessionList* sessions;
 	SocketList* sockets;
@@ -253,12 +255,18 @@ public:
 
 	int					AddSessionInfo(NET_SESSION_INFO* session_info, NetSocket* socket);
 protected:
-
+	friend class		NetSocket;
+	friend class		NET_SERVER_SESSION;
 	SocketList			sockets;
-	NetSocket*			net_sock;
 	NET_SESSION_INFO*	info;
 	unsigned int*		a_migration_client;
 	int					c_migration_client;
+	int					start_time;
+	int					count_accept;
+	int					stop_time;
+	bool				stop_server;
+	int					max_client;
+	SessionList			sessions;
 };
 
 struct Send_Message
