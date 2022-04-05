@@ -27,15 +27,19 @@ Net::~Net()
 	}
 }
 
+bool Net::Create(bool internet)
+{
+	return false;
+}
+
 NetSocket::NetSocket(Net* net)
 {
 	this->net = net;
 	addr = nullptr;
 	ClientID = 0;
-	IDArray = nullptr;
 	port = 0;
 	udp_tcp = false;
-	
+	session_id = 0;
 }
 
 NET_BUFFER_INDEX* Net::PrepareMessage(unsigned int sender_id, size_t length, unsigned char* data)
@@ -98,17 +102,6 @@ bool NetSocket::Create(int port, bool udp_tcp, bool listen)
 unsigned int NetSocket::GetClientID()
 {
 	return ClientID;
-}
-
-void NetSocket::SetID(NetSocket* NewClient)
-{
-	unsigned int* va_clientID = new unsigned int[ClientID + 1];
-	for (int i = 0; i < ClientID; i++)
-		va_clientID[i] = IDArray[i];
-	delete[] IDArray;
-
-	IDArray[ClientID] = NewClient->ClientID;
-	ClientID++;
 }
 
 NetSocket* GetPtrSocket(void* ptr)
@@ -315,4 +308,272 @@ NET_BUFFER_INDEX::~NET_BUFFER_INDEX()
 {
 	if(index != 0)
 		index = 0;
+}
+
+NET_SOCKET_INFO::NET_SOCKET_INFO()
+{
+}
+
+NET_SOCKET_INFO::~NET_SOCKET_INFO()
+{
+}
+
+NET_SESSION_INFO::NET_SESSION_INFO(Net* net)
+{
+}
+
+NET_SESSION_INFO::~NET_SESSION_INFO()
+{
+}
+
+void NET_SESSION_INFO::Clear()
+{
+}
+
+bool NET_SESSION_INFO::operator==(const NET_SESSION_INFO& si)
+{
+	return false;
+}
+
+NET_SERVER_SESSION::NET_SERVER_SESSION(Net* net) : NET_SESSION_INFO(net)
+{
+	enabled = true;
+	c_client_id = 0;
+	a_client_id = nullptr;
+	session_index = -1;
+}
+
+NET_SERVER_SESSION::~NET_SERVER_SESSION()
+{
+	if (c_client_id)
+	{
+		assert(net->IsServer());
+		
+	}
+}
+
+void NET_SERVER_SESSION::AddClient(NetSocket* socket)
+{
+	unsigned int* va_clientID = new unsigned int[c_client_id + 1];
+	for (int i = 0; i < c_client_id; i++)
+		va_clientID[i] = a_client_id[i];
+	delete[] a_client_id;
+
+	a_client_id[c_client_id] = socket->GetClientID();
+	socket->SetSessionID(session_index);
+	c_client_id++;
+}
+
+SocketList::SocketList() : CArrayBase()
+{
+	c_socket = 10;
+	a_socket = (NetSocket**)malloc(c_socket * sizeof(NetSocket*));
+	for (int i = c_socket - 1; i >= 0; i--)
+	{
+		a_socket[i] = nullptr;
+		IncreaseDeleted(i, i);
+	}
+}
+
+SocketList::~SocketList()
+{
+	Clear();
+}
+
+void SocketList::Clear()
+{
+	for (int i = 0; i < c_socket; i++)
+	{
+		if (a_socket[i])
+		{
+			a_socket[i]->Destroy();
+			delete a_socket[i];
+			a_socket[i] = nullptr;
+		}
+	}
+	if (a_socket)
+	{
+		free(a_socket);
+		a_socket = nullptr;
+	}
+	c_socket = 0;
+	
+}
+
+NetSocket* SocketList::Get(int index)
+{
+	if (index >= 0 && index < c_socket)
+		return a_socket[index];
+	return nullptr;
+}
+
+int SocketList::AddSocket(NetSocket* client, unsigned int client_id)
+{
+	int index;
+	if (client_id != 0xfffffff)
+	{
+		index = FromDeletedToExisting(client_id);
+	}
+	else
+		index = FromDeletedToExisting();
+	if (index != -1)
+	{
+		int size = sizeof(NetSocket*);
+		int c_client2 = c_socket + c_socket / 4;
+		a_socket = (NetSocket**)realloc(a_socket, size * (c_client2));
+
+		for (int i = c_socket; i < c_client2; i++)
+			a_socket[i] = nullptr;
+
+		IncreaseDeleted(c_socket, c_client2 - 1);
+		index = FromDeletedToExisting();
+
+		c_socket = c_client2;
+	}
+	a_socket[index] = client;
+
+	return index;
+}
+
+bool SocketList::DeleteSocket(int index)
+{
+	if (index >= 0 && index < c_socket)
+	{
+		if (a_socket[index])
+		{
+			a_socket[index]->Destroy();
+			delete a_socket[index];
+			a_socket[index] = nullptr;
+			FromExistingToDeleted(index);
+
+			return true;
+		}
+	}
+	return false;
+}
+
+void SocketList::Expand(int max_size)
+{
+	if (c_socket < max_size)
+	{
+		int i;
+		NetSocket** va_socket = new NetSocket * [max_size];
+		for (i = 0; i < c_socket; i++)
+			va_socket[i] = a_socket[i];
+		for (i = c_socket; i < max_size; i++)
+			va_socket[i] = nullptr;
+
+		delete[] a_socket;
+		a_socket = va_socket;
+
+		c_socket = max_size;
+		IncreaseDeleted(c_socket, max_size - 1);
+	}
+}
+
+Server::Server()
+{
+}
+
+Server::~Server()
+{
+}
+
+void Server::ConnectSocket(NetSocket* socket, unsigned int player_id)
+{
+	int index = sockets.AddSocket(socket, player_id);
+	socket->SetClientID(index);
+}
+
+bool Server::Create(bool internet)
+{
+	if (Net::Create(internet))
+	{
+		NetSocket* socket = NewSocket(this);
+		bool is = socket->Create(1885, true, true);
+		if (is)
+		{
+			ConnectSocket(socket);
+			assert(socket->GetClientID() == SERVER_ID);
+
+			socket = NewSocket(this);
+			if (is)
+			{
+				ConnectSocket(socket);
+				int i;
+				a_migration_client = new unsigned int[c_migration_client];
+				info = new NET_SESSION_INFO(this);
+				unsigned int max_id = 0;
+				for (i = 0; i < c_migration_client; i++)
+				{
+					if (max_id < a_migration_client[i])
+						max_id = a_migration_client[i];
+				}
+				sockets.Expand(max_id + 1);
+			}
+		}
+	}
+	return false;
+}
+
+NetSocket* Server::GetServerTCPSocket()
+{
+	return nullptr;
+}
+
+NetSocket* Server::GetServerUDPSocket()
+{
+	return nullptr;
+}
+
+void Server::Destroy()
+{
+}
+
+void Server::FillServerInfo(NET_SERVER_INFO& info)
+{
+}
+
+int Server::AddSessionInfo(NET_SESSION_INFO* session_info, NetSocket* socket)
+{
+	return 0;
+}
+
+NET_SERVER_INFO::NET_SERVER_INFO()
+{
+}
+
+void NET_SERVER_INFO::Clear()
+{
+}
+
+SessionList::SessionList()
+{
+}
+
+SessionList::~SessionList()
+{
+}
+
+void SessionList::ReInit()
+{
+}
+
+void SessionList::Clear()
+{
+}
+
+NET_SERVER_SESSION* SessionList::Get(int index)
+{
+	return nullptr;
+}
+
+int SessionList::AddSession(NET_SERVER_SESSION* session)
+{
+	return 0;
+}
+
+bool SessionList::DeleteSession(int index)
+{
+	return false;
 }

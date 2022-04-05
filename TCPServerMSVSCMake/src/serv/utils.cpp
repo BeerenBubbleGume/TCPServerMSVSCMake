@@ -773,6 +773,23 @@ int CArrayBase::FromDeletedToExisting()
 	return index;
 }
 
+int CArrayBase::FromDeletedToExisting(int deleted_index)
+{
+	int index = -1;
+	for (int i = 0; i < k_deleted; i++)
+	{
+		if (m_deleted[i] == deleted_index)
+		{
+			m_deleted[i] = m_deleted[k_deleted - 1];
+			k_deleted--;
+			AddToExisting(deleted_index);
+			index = deleted_index;
+			break;
+		}
+	}
+	return index;
+}
+
 void CArrayBase::FromExistingToDeleted(int index)
 {
 	assert(max_indexed > index);

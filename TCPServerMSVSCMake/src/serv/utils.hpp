@@ -139,6 +139,7 @@ public:
 
 	void IncreaseDeleted(int from, int to);
 	int FromDeletedToExisting();
+	int FromDeletedToExisting(int deleted_index);
 	void FromExistingToDeleted(int index);
 	void AddToExisting(int index);
 	void AddToDeleted(int index);

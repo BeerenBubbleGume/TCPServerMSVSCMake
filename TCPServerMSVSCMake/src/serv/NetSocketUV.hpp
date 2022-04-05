@@ -61,26 +61,23 @@ public:
 	uv_loop_t*			loop;
 };
 
-#endif
-
-#ifndef SERVER_LIVE
-#define SERVER_LIVE
-
-class Server
+class ServerUV : Server
 {
 public:
-						Server();
-	virtual				~Server();
-	int					connect(bool connection);
-protected:
+	ServerUV();
+	virtual ~ServerUV();
 
-	Net*				net;
-	NetSocketUV*		net_sockuv;
-		/*static void GenerateRTSPURL(void* Data) {
-			RTSPProxyServer::StartProxyServer(Data);
-			return;
-		}*/
+	virtual void Destroy();
+	virtual void StopServer();
+
+	virtual NetSocket* NewSocket(Net* net);
+	virtual NET_BUFFER_INDEX* NewBuffer(int index);
+	virtual void StartUVServer(bool internet);
+	virtual bool UpdateNet();
+protected:
+	uv_loop_t loop;
 };
+
 #endif
 void					OnAccept				(uv_stream_t* stream, int status);
 void					OnAllocBuffer			(uv_handle_t* handle, size_t suggested_size, uv_buf_t* buf);

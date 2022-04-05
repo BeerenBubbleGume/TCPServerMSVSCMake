@@ -3,18 +3,10 @@
 
 #include "TCPServerMSVSCMake.hpp"
 
-int main() {
+int main() 
+{
+	ServerUV server;
+	server.StartUVServer(true);
 
-	std::cout << "Main:" << std::endl;
-	Server server;
-	
-	if(server.connect(true) == true)
-	{
-		return 0; 
-	}
-	else
-	{
-		std::cout << "Server was crashed!" << std::endl;
-		exit(1);
-	}
+	return 0;
 }

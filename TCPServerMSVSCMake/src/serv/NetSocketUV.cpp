@@ -123,7 +123,7 @@ bool NetSocketUV::Accept(uv_handle_t* handle)
 	NetSocketUV* accept_sock = NewSocket(net);
 	accept_sock->Create(0, true, false);
 	uv_tcp_t* client = GetPtrTCP(accept_sock->sock);
-	SetID(accept_sock);
+	
 	if (uv_accept((uv_stream_t*)handle, (uv_stream_t*)client) == 0)
 	{
 		sockaddr sockname;
@@ -356,37 +356,6 @@ void* NetSocketUV::WaitingDelay(void* delay)
 	}
 }
 
-Server::Server()
-{
-	net = new Net;
-	net_sockuv = new NetSocketUV(net);
-}
-
-Server::~Server()
-{
-	if (net)
-		delete net;
-	if (net_sockuv)
-		delete net_sockuv;
-}
-
-int Server::connect(bool connection)
-{
-	if (connection)
-	{
-		//udp_tcp = true;
-		std::cout << "==========Start server!==========" << std::endl;
-		//net_sockuv->GetIP(NULL, true);
-		if (net_sockuv->Create(1885, true, true) == true)
-			return 0;
-	}
-	else
-	{
-		fprintf(stderr, "Server is not connetcted!\n");
-		return 1;
-	}
-}
-
 uv_tcp_t *GetPtrTCP(void *ptr)
 {
 	return (uv_tcp_t*)(((char*)ptr) + sizeof(void*));
@@ -403,3 +372,60 @@ uv_loop_t *GetLoop(Net* net)
 	return (serv.loop);
 }
 
+unsigned int timer_count = 0;
+ServerUV* uv_server = NULL;
+ServerUV::ServerUV()
+{
+	timer_count = 0;
+	memset(&loop, 0, sizeof(loop));
+
+	int r = uv_loop_init(&loop);
+	assert(r == 0);
+	uv_server = this;
+}
+
+ServerUV::~ServerUV()
+{
+	Destroy();
+}
+
+void ServerUV::Destroy()
+{
+	Server::Destroy();
+	uv_server = NULL;
+
+	uv_run(&loop, UV_RUN_DEFAULT);
+	uv_loop_close(&loop);
+}
+
+void ServerUV::StopServer()
+{
+	uv_stop(&loop);
+}
+
+NetSocket* ServerUV::NewSocket(Net* net)
+{
+	return new NetSocketUV(net);
+}
+
+NET_BUFFER_INDEX* ServerUV::NewBuffer(int index)
+{
+	return new NetBufferUV(index);
+}
+
+void ServerUV::StartUVServer(bool internet)
+{
+	if (internet)
+	{
+		Net* net = nullptr;
+		bool res = ((NetSocketUV*)net)->Create(1885, true, true);
+	}
+}
+
+bool ServerUV::UpdateNet()
+{
+	uv_loop_t* loop = GetLoop(this);
+
+	uv_run(loop, UV_RUN_DEFAULT);
+	return false;
+}
