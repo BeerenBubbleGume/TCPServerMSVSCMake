@@ -73,20 +73,10 @@ public:
 	NET_BUFFER_INDEX*	PrepareMessage(unsigned int sender_id, size_t length, unsigned char* data);
 	NetSocket*			getReceivingSocket()															{ return receiving_socket; }
 	void				setupReceivingSocket(NetSocket& socket)											{ receiving_socket = &socket; }
-	int					GetIDPath()																		{ return ClientID; }
-	auto				GetIDArray()																	{ return IDArray; }
 	auto				GetConnectSockaddr()															{ return fConnectionSockaddr; }
-
-	void				setIDPath(uint16_t ID)															{ ClientID = ID; }
-	void				setIDArray(uint16_t* IDArray)													{ this->IDArray = IDArray; }
-	unsigned			GetClientCount()																{ return clientCount; }
-	void				SetClientCount(unsigned count)													{ clientCount = count; }
 protected:
 	sockaddr			fConnectionSockaddr;
-	int					ClientID;
-	int					bytes_read;
-	unsigned			clientCount;
-	uint16_t*			IDArray;
+	int					bytes_read;	
 	NetBuffer			recv_buf;
 	bool				udp_tcp;
 	NetSocket*			receiving_socket;
@@ -107,7 +97,7 @@ public:
 	virtual void	SendTCP(NET_BUFFER_INDEX* buf) = 0;
 	virtual void	SendUDP(NET_BUFFER_INDEX* buf) = 0;
 
-	static	void	SetID(void* NewClient);
+	void			SetID(NetSocket* NewClient);
 	unsigned int	GetClientID();
 	virtual void	ReceiveTCP() = 0;
 	virtual void	ReceiveUPD() = 0;
@@ -122,7 +112,8 @@ protected:
 	int				port;
 	Net_Address*	addr;
 	Net*			net;
-
+	int				ClientID;
+	unsigned int*	IDArray;
 };
 
 struct Send_Message

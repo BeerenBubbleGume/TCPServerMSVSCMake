@@ -50,7 +50,6 @@ public:
 	//bool SetConnectedSocketToReadMode(uv_stream_t* stream);
 	const char*			GetIP(Net_Address* addr, bool own_or_peer);
 	bool				Accept(uv_handle_t* handle);
-	void				SetID(void* NewClient)									{ NetSocket::SetID(NewClient); }
 	//virtual const char* GetClientID()											{ return NetSocket::GetClientID(); }
 	void				SendTCP(NET_BUFFER_INDEX* buf);
 	void				SendUDP(NET_BUFFER_INDEX* buf);

@@ -6,9 +6,6 @@ Net::Net()
 {
 	bytes_read = 0;
 	udp_tcp = false;
-	ClientID = 0;
-	clientCount = 0;
-	IDArray = nullptr;
 	addr = nullptr;
 	receiving_socket = nullptr;
 	sending_list.SetOwner(this);
@@ -18,8 +15,6 @@ Net::~Net()
 {
 	if (bytes_read != 0)
 		bytes_read = 0;
-	if (ClientID != 0)
-		ClientID = 0;
 	if (addr)
 	{
 		delete addr;
@@ -108,28 +103,18 @@ bool NetSocket::Create(int port, bool udp_tcp, bool listen)
 
 unsigned int NetSocket::GetClientID()
 {
-	unsigned int URLstr = net->GetIDPath();
-	return URLstr;
+	return ClientID;
 }
 
-void NetSocket::SetID(void* NewClient)
+void NetSocket::SetID(NetSocket* NewClient)
 {
-	int counter = 0;
-	NetSocket* socket = (NetSocket*)NewClient;
-	unsigned int ID = socket->net->GetIDPath();
-	uint16_t* Array = new uint16_t[1000000];
-	if (NewClient)
-	{
-		counter++;
-		socket->net->SetClientCount(counter);
-		Array[counter] = counter;
-		socket->net->setIDArray(Array);
-	}
-	else
-	{
-		fprintf(stderr, "New client is does not exist!");
-		exit(1);
-	}
+	unsigned int* va_clientID = new unsigned int[ClientID + 1];
+	for (int i = 0; i < ClientID; i++)
+		va_clientID[i] = IDArray[i];
+	delete[] IDArray;
+
+	IDArray[ClientID] = NewClient->ClientID;
+	ClientID++;
 }
 
 void NetSocket::SendMessenge(NET_BUFFER_INDEX* buf, Net_Address* addr)
