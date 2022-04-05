@@ -37,6 +37,8 @@ NetSocket::NetSocket(Net* net)
 {
 	this->net = net;
 	addr = nullptr;
+	ClientID = 0;
+	IDArray = nullptr;
 	port = 0;
 	udp_tcp = false;
 	
@@ -96,8 +98,6 @@ bool NetSocket::Create(int port, bool udp_tcp, bool listen)
 	this->port = port;
 	if (!udp_tcp)
 		this->addr = new Net_Address;
-	SetID(this);
-
 	return true;
 }
 

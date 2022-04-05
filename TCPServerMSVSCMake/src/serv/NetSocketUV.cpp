@@ -123,7 +123,7 @@ bool NetSocketUV::Accept(uv_handle_t* handle)
 	NetSocketUV* accept_sock = NewSocket(net);
 	accept_sock->Create(0, true, false);
 	uv_tcp_t* client = GetPtrTCP(accept_sock->sock);
-
+	SetID(accept_sock);
 	if (uv_accept((uv_stream_t*)handle, (uv_stream_t*)client) == 0)
 	{
 		sockaddr sockname;
@@ -159,7 +159,7 @@ void NetSocketUV::ReceiveTCP()
 	std::to_chars(strID.data(), strID.data() + strID.size(), filePrefix);
 	std::string fileName(strID.data());
 	fileName += "in_binary_h.264";
-	fout.open(fileName.c_str(), std::ios::binary | std::ios::app);
+	fout.open(fileName.c_str(), std::ios::in | std::ios::binary | std::ios::app);
 	if (fout.is_open())
 	{
 		fout.write((char*)net->GetRecvBuffer()->GetData(), net->GetRecvBuffer()->GetLength());
