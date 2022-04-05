@@ -68,7 +68,6 @@ public:
 	NetBuffer*			GetRecvBuffer()																	{ return &recv_buf; }
 	void				OnLostConnection(void* sock);
 	bool				IsServer()																		{ return true; }
-	void				ReciveMessege();
 	NET_BUFFER_LIST*	GetSendList()																	{ return &sending_list; }
 	NET_BUFFER_INDEX*	PrepareMessage(unsigned int sender_id, size_t length, unsigned char* data);
 	NetSocket*			getReceivingSocket()															{ return receiving_socket; }
@@ -101,8 +100,6 @@ public:
 	unsigned int	GetClientID();
 	virtual void	ReceiveTCP() = 0;
 	virtual void	ReceiveUPD() = 0;
-
-	void			SendMessenge(NET_BUFFER_INDEX* buf, Net_Address* addr = nullptr);
 
 	bool			IsTCP()																{ return udp_tcp; }
 	Net*			getNet()															{ return net; }

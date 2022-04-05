@@ -27,12 +27,6 @@ Net::~Net()
 	}
 }
 
-void Net::ReciveMessege()
-{
-	//std::vector<unsigned char> data = recv_buf.GetData().data();
-	
-}
-
 NetSocket::NetSocket(Net* net)
 {
 	this->net = net;
@@ -115,25 +109,6 @@ void NetSocket::SetID(NetSocket* NewClient)
 
 	IDArray[ClientID] = NewClient->ClientID;
 	ClientID++;
-}
-
-void NetSocket::SendMessenge(NET_BUFFER_INDEX* buf, Net_Address* addr)
-{
-	if (buf)
-	{
-		// ������ �������
-
-		if (IsTCP())
-		{
-			SendTCP(buf);
-		}
-		else
-		{
-			if (addr)
-				*(this->addr) = *addr;
-			SendUDP(buf);
-		}
-	}
 }
 
 NetSocket* GetPtrSocket(void* ptr)
