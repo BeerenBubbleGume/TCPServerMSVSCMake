@@ -318,6 +318,7 @@ void* NetSocketUV::SetupRetranslation(void* argv)
 				}
 				else
 				{
+					printf("Start translation success!\n");
 					std::getline(std::cin, outRTSP);
 					if (outRTSP.find("rtsp://"))
 					{
