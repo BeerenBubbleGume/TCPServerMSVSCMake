@@ -754,6 +754,30 @@ CArrayBase::~CArrayBase()
 	}
 }
 
+void CArrayBase::ClearExistingAndDeleted()
+{
+	max_existing = k_existing = 0;
+	if (m_existing)
+	{
+		delete[]m_existing;
+		m_existing = NULL;
+	}
+
+	max_deleted = k_deleted = 0;
+	if (m_deleted)
+	{
+		delete[]m_deleted;
+		m_deleted = NULL;
+	}
+
+	max_indexed = 0;
+	if (m_indexed)
+	{
+		delete[]m_indexed;
+		m_indexed = 0;
+	}
+}
+
 void CArrayBase::IncreaseDeleted(int from, int to)
 {
 	int count = to - from + 1;

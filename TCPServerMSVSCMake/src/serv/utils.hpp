@@ -138,6 +138,7 @@ public:
 	virtual ~CArrayBase();
 
 	void IncreaseDeleted(int from, int to);
+	void ClearExistingAndDeleted();
 	int FromDeletedToExisting();
 	int FromDeletedToExisting(int deleted_index);
 	void FromExistingToDeleted(int index);

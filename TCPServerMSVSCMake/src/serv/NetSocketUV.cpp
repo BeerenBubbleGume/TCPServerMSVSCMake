@@ -417,8 +417,7 @@ void ServerUV::StartUVServer(bool internet)
 {
 	if (internet)
 	{
-		Net* net = nullptr;
-		bool res = ((NetSocketUV*)net)->Create(1885, true, true);
+		bool res = Create(true);
 		if (res)
 		{
 			printf("Success create server!");

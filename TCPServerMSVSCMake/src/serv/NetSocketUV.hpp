@@ -76,6 +76,7 @@ public:
 	virtual bool UpdateNet();
 protected:
 	uv_loop_t loop;
+	virtual Net* NewNet()														{ return NULL; }
 };
 
 #endif

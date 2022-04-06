@@ -71,7 +71,7 @@ public:
 
 	Net_Address*		addr;
 	virtual bool		Create(bool internet);
-	virtual bool		UpdateNet() = 0;
+	//virtual bool		UpdateNet() = 0;
 	virtual void		Destroy();
 	virtual NetSocket*	NewSocket(Net* net) = 0;
 	NetBuffer*			GetRecvBuffer()																	{ return &recv_buf; }
@@ -125,13 +125,13 @@ public:
 	}
 
 protected:
-	CString ip;
-	CString name;
-	NetSocket** a_client;
-	Net* net;
-	unsigned int c_client;
-	int fInfoLength;
-	char* fInfo;
+	CString			ip;
+	CString			name;
+	NetSocket**		a_client;
+	Net*			net;
+	unsigned int	c_client;
+	int				fInfoLength;
+	char*			fInfo;
 };
 
 class NetSocket : public NET_SOCKET_INFO
@@ -249,7 +249,7 @@ public:
 	NetSocket*			GetServerUDPSocket();
 	
 	virtual void		StopServer() = 0;
-	virtual void		OnUpdate() { UpdateNet(); }
+	virtual bool		UpdateNet() = 0;
 	virtual void		Destroy();
 	void				FillServerInfo(NET_SERVER_INFO& info);
 
@@ -267,6 +267,7 @@ protected:
 	bool				stop_server;
 	int					max_client;
 	SessionList			sessions;
+	//Net*				net;
 };
 
 struct Send_Message

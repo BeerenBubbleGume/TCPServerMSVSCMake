@@ -1,6 +1,7 @@
 ﻿#include "NetSock.hpp"
 
 int SERVER_DEFAULT_PORT = 8000;
+int PORT_SERVER_TCP = 8080;
 
 Net::Net()
 {
@@ -29,7 +30,7 @@ Net::~Net()
 
 bool Net::Create(bool internet)
 {
-	return false;
+	return true;
 }
 
 void Net::Destroy()
@@ -317,8 +318,8 @@ NET_BUFFER_INDEX::~NET_BUFFER_INDEX()
 NET_SOCKET_INFO::NET_SOCKET_INFO()
 {
 	ClientID = 0;
-	port = 0;
-	sessionID = 0;
+	port = -1;
+	sessionID = -1;
 	time = 0;
 	udp_tcp = false;
 }
@@ -330,10 +331,10 @@ NET_SOCKET_INFO::~NET_SOCKET_INFO()
 NET_SESSION_INFO::NET_SESSION_INFO(Net* net)
 {
 	a_client = nullptr;
+	this->net = net;
 	c_client = 0;
 	fInfo = nullptr;
 	fInfoLength = 0;
-	net = nullptr;
 }
 
 NET_SESSION_INFO::~NET_SESSION_INFO()
@@ -343,6 +344,26 @@ NET_SESSION_INFO::~NET_SESSION_INFO()
 
 void NET_SESSION_INFO::Clear()
 {
+	for (int i = 0; i < c_client; i++)
+	{
+		delete a_client[i];
+		a_client[i] = NULL;
+	}
+
+	if (a_client)
+	{
+		//delete []m_player;
+		free(a_client);
+		a_client = NULL;
+	}
+
+	if (fInfo)
+	{
+		//delete []info;
+		free(fInfo);
+		fInfo = NULL;
+		fInfoLength = 0;
+	}
 }
 
 bool NET_SESSION_INFO::operator==(const NET_SESSION_INFO& si)
@@ -431,7 +452,7 @@ int SocketList::AddSocket(NetSocket* client, unsigned int client_id)
 	}
 	else
 		index = FromDeletedToExisting();
-	if (index != -1)
+	if (index == -1)
 	{
 		int size = sizeof(NetSocket*);
 		int c_client2 = c_socket + c_socket / 4;
@@ -486,7 +507,7 @@ void SocketList::Expand(int max_size)
 	}
 }
 
-Server::Server()
+Server::Server() : Net()
 {
 	stop_time = 0;
 	stop_server = false;
@@ -495,12 +516,27 @@ Server::Server()
 
 	c_migration_client = 0;
 	a_migration_client = NULL;
-
+	info = nullptr;
+	count_accept = 0;
 	start_time = 0;
 }
 
 Server::~Server()
 {
+	Destroy();
+
+	if (a_migration_client)
+	{
+		delete[]a_migration_client;
+		a_migration_client = NULL;
+	}
+	c_migration_client = 0;
+
+	if (info)
+	{
+		delete info;
+		info = NULL;
+	}
 }
 
 void Server::ConnectSocket(NetSocket* socket, unsigned int player_id)
@@ -514,11 +550,11 @@ bool Server::Create(bool internet)
 	if (Net::Create(internet))
 	{
 		NetSocket* socket = NewSocket(this);
-		bool is = socket->Create(1885, true, true);
+		bool is = socket->Create(PORT_SERVER_TCP, true, true);
 		if (is)
 		{
 			ConnectSocket(socket);
-			assert(socket->GetClientID() == SERVER_ID);
+			//assert(socket->GetClientID() == SERVER_ID);
 
 			socket = NewSocket(this);
 			if (is)
@@ -534,6 +570,8 @@ bool Server::Create(bool internet)
 						max_id = a_migration_client[i];
 				}
 				sockets.Expand(max_id + 1);
+
+				return true;
 			}
 		}
 	}
@@ -600,31 +638,88 @@ void NET_SERVER_INFO::Clear()
 
 SessionList::SessionList()
 {
+	k_session = 0;
+	m_session = NULL;
+	ReInit();
 }
 
 SessionList::~SessionList()
 {
+	Clear();
 }
 
 void SessionList::ReInit()
 {
+	Clear();
+	k_session = 10;
+	m_session = (NET_SERVER_SESSION**)malloc(k_session * sizeof(NET_SERVER_SESSION*));
+	for (int i = k_session - 1; i >= 0; i--)
+	{
+		m_session[i] = nullptr;
+		IncreaseDeleted(i, i);
+	}
 }
 
 void SessionList::Clear()
 {
+	for (int i = 0; i < k_session; i++)
+	{
+		if (m_session[i])
+		{
+			delete m_session[i];
+			m_session[i] = nullptr;
+		}
+	}
+	if (m_session)
+	{
+		free(m_session);
+		m_session = nullptr;
+	}
+	k_session = 0;
+	ClearExistingAndDeleted();
 }
 
 NET_SERVER_SESSION* SessionList::Get(int index)
 {
+	if (index >= 0 && index < k_session)
+		return m_session[index];
 	return nullptr;
 }
 
 int SessionList::AddSession(NET_SERVER_SESSION* session)
 {
-	return 0;
+	int index = FromDeletedToExisting();
+	if (index == -1)
+	{
+		int size = sizeof(NET_SERVER_SESSION*);
+		int k_session2 = k_session + k_session / 4;
+		m_session = (NET_SERVER_SESSION**)realloc(m_session, size * (k_session2));
+		for (int i = k_session; i < k_session2; i++)
+			m_session[i] = nullptr;
+		IncreaseDeleted(k_session, k_session2 - 1);
+		index = FromDeletedToExisting();
+
+		k_session = k_session2;
+	}
+
+	m_session[index] = session;
+	
+
+	return index;
 }
 
 bool SessionList::DeleteSession(int index)
 {
+	if (index >= 0 && index < k_session)
+	{
+		if (m_session[index])
+		{
+			delete m_session[index];
+			m_session[index] = NULL;
+			FromExistingToDeleted(index);
+
+			return true;
+		}
+	}
 	return false;
 }
