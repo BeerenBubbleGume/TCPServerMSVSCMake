@@ -128,6 +128,10 @@ bool NetSocketUV::Accept(uv_handle_t* handle)
 		sockaddr sockname;
 		int socklen = sizeof accept_sock->net->GetConnectSockaddr();
 		printf("Accepted client with ID:%d\n", accept_sock->GetClientID());
+
+		int* MAX_SIZE = new int[800000];
+		uv_recv_buffer_size((uv_handle_t*)client, MAX_SIZE);
+
 		std::thread translateThread(SetupRetranslation, client);
 		std::thread receivThread(StartReadingThread, client);
 		translateThread.detach();
@@ -199,12 +203,11 @@ void OnAllocBuffer(uv_handle_t *handle, size_t suggested_size, uv_buf_t *buf)
 {
 	NetSocketUV* net_sock = (NetSocketUV*)GetNetSocketPtr(handle);
 	NetBuffer* recv_buffer = net_sock->getNet()->GetRecvBuffer();
-	
-	//uv_recv_buffer_size(handle, );
-	//unsigned int max_length = recv_buffer->GetMaxSize();
-	//if (max_length < suggested_size)
-	recv_buffer->SetMaxSize(800000);
-	buf->len = 800000;
+
+	unsigned int max_length = recv_buffer->GetMaxSize();
+	if (max_length < suggested_size)
+		recv_buffer->SetMaxSize(suggested_size);
+	buf->len = suggested_size;
 	buf->base = (char*)recv_buffer->GetData();
 }
 
