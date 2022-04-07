@@ -188,9 +188,22 @@ DemandServerMediaSubsession::DemandServerMediaSubsession(/*Net* net, */UsageEnvi
 
 int main(int arc, char* argv[])
 {
-	std::cout << "ID: " << argv[1] << std::endl;
+	TaskScheduler* newscheduler = BasicTaskScheduler::createNew();
+	UsageEnvironment* env = BasicUsageEnvironment::createNew(*newscheduler);
+	OutPacketBuffer::maxSize = 5000000;
+	char* name = "in_binary_h.264";
+	std::string fileName(argv[1]);
+	fileName += name;
+	std::string streamName = "serverStream/" + fileName;
+	std::cout << fileName << std::endl;
+	RTSPProxyServer* server = RTSPProxyServer::createNew(*env, 8554);
+	ServerMediaSession* sms = ServerMediaSession::createNew(*env, streamName.c_str());
+	sms->addSubsession(H264VideoFileServerMediaSubsession::createNew(*env, fileName.c_str(), false));
+	server->addServerMediaSession(sms);
+	anonceStream(server, sms, "serverStream");
+	//std::thread whatch(WhatchAndWait, server);
+	//whatch.detach();
 
-	RTSPProxyServer::StartProxyServer(argv[1]);
-
+	env->taskScheduler().doEventLoop(&server->eventLoopWatchVariable);
 	return 0;
 }

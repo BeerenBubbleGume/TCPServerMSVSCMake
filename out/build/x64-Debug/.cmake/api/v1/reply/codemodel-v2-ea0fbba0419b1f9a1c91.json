@@ -10,6 +10,7 @@
 					[
 						1
 					],
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.8"
@@ -23,6 +24,7 @@
 					[
 						2
 					],
+					"jsonFile" : "directory-TCPServerMSVSCMake-Debug-228b41e02a9087bc3a27.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.8"
@@ -41,6 +43,7 @@
 					[
 						3
 					],
+					"jsonFile" : "directory-TCPServerMSVSCMake.src-Debug-5071dd96f08e1fb82e59.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.8"
@@ -51,6 +54,7 @@
 				},
 				{
 					"build" : "TCPServerMSVSCMake/src/serv",
+					"jsonFile" : "directory-TCPServerMSVSCMake.src.serv-Debug-1c35ab510e39265c3f90.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.8"
@@ -83,7 +87,7 @@
 				{
 					"directoryIndex" : 1,
 					"id" : "TCPServerMSVSCMake::@c1fa6790a5be207d0e6d",
-					"jsonFile" : "target-TCPServerMSVSCMake-Debug-f999230dddcafa4ca709.json",
+					"jsonFile" : "target-TCPServerMSVSCMake-Debug-4f84f1a1a9d16e8c4438.json",
 					"name" : "TCPServerMSVSCMake",
 					"projectIndex" : 0
 				}
@@ -93,12 +97,12 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "A:/Cpp repos/TCPServerMSVSCMake/out/build/x64-Debug",
-		"source" : "A:/Cpp repos/TCPServerMSVSCMake"
+		"build" : "C:/Users/Operator/source/repos/TCPServerMSVSCMake/out/build/x64-Debug",
+		"source" : "C:/Users/Operator/source/repos/TCPServerMSVSCMake"
 	},
 	"version" : 
 	{
 		"major" : 2,
-		"minor" : 2
+		"minor" : 3
 	}
 }
