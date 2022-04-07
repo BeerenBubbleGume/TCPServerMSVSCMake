@@ -104,11 +104,6 @@ bool NetSocket::Create(int port, bool udp_tcp, bool listen)
 	return true;
 }
 
-unsigned int NetSocket::GetClientID()
-{
-	return ClientID;
-}
-
 NetSocket* GetPtrSocket(void* ptr)
 {
 	return *((NetSocket**)ptr);
@@ -402,7 +397,7 @@ void NET_SERVER_SESSION::AddClient(NetSocket* socket)
 
 SocketList::SocketList() : CArrayBase()
 {
-	c_socket = 10;
+	c_socket = 10000;
 	a_socket = (NetSocket**)malloc(c_socket * sizeof(NetSocket*));
 	for (int i = c_socket - 1; i >= 0; i--)
 	{
@@ -446,7 +441,7 @@ NetSocket* SocketList::Get(int index)
 int SocketList::AddSocket(NetSocket* client, unsigned int client_id)
 {
 	int index;
-	if (client_id != 0xfffffff)
+	if (client_id != 0xffffffff)
 	{
 		index = FromDeletedToExisting(client_id);
 	}
@@ -539,9 +534,9 @@ Server::~Server()
 	}
 }
 
-void Server::ConnectSocket(NetSocket* socket, unsigned int player_id)
+void Server::ConnectSocket(NetSocket* socket, unsigned int client_id)
 {
-	int index = sockets.AddSocket(socket, player_id);
+	int index = sockets.AddSocket(socket, client_id);
 	socket->SetClientID(index);
 }
 
@@ -554,7 +549,7 @@ bool Server::Create(bool internet)
 		if (is)
 		{
 			ConnectSocket(socket);
-			//assert(socket->GetClientID() == SERVER_ID);
+			assert(socket->GetClientID() == SERVER_ID);
 
 			socket = NewSocket(this);
 			if (is)
@@ -628,12 +623,36 @@ NET_SERVER_INFO::NET_SERVER_INFO()
 	current_time = 0;
 	k_accept = 0;
 	sessions = nullptr;
+	sockets = nullptr;
 	start_time = 0;
 	version = 0;
 }
 
 void NET_SERVER_INFO::Clear()
 {
+	if (!server_version.IsEmpty())
+	{
+		server_version.Delete(server_version.GetLength());
+	}
+	current_time = 0;
+	k_accept = 0;
+	if (sessions)
+	{
+		free(sessions);
+		sessions = nullptr;
+	}
+	if (sockets)
+	{
+		free(sockets);
+		sockets = nullptr;
+	}
+	version = 0;
+	start_time = 0;
+}
+
+NET_SERVER_INFO::~NET_SERVER_INFO()
+{
+	Clear();
 }
 
 SessionList::SessionList()
@@ -651,7 +670,7 @@ SessionList::~SessionList()
 void SessionList::ReInit()
 {
 	Clear();
-	k_session = 10;
+	k_session = 100;
 	m_session = (NET_SERVER_SESSION**)malloc(k_session * sizeof(NET_SERVER_SESSION*));
 	for (int i = k_session - 1; i >= 0; i--)
 	{

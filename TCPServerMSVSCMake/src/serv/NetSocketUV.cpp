@@ -117,22 +117,21 @@ const char* NetSocketUV::GetIP(Net_Address* addr, bool own_or_peer)
 		return nullptr;
 }
 
-bool NetSocketUV::Accept(uv_handle_t* handle)
+bool NetSocketUV::Accept()
 {
 	NetSocketUV* accept_sock = NewSocket(net);
 	accept_sock->Create(0, true, false);
 	uv_tcp_t* client = GetPtrTCP(accept_sock->sock);
-	
-	if (uv_accept((uv_stream_t*)handle, (uv_stream_t*)client) == 0)
-	{
-		sockaddr sockname;
-		int socklen = sizeof accept_sock->net->GetConnectSockaddr();
+	uv_tcp_t* host = GetPtrTCP(sock);
+	if (uv_accept((uv_stream_t*)host, (uv_stream_t*)client) == 0)
+	{	
 		printf("Accepted client with ID:%d\n", accept_sock->GetClientID());
 		std::thread translateThread(SetupRetranslation, client);
-		std::thread receivThread(StartReadingThread, client);
+		//std::thread receivThread(StartReadingThread, client);
 		translateThread.detach();
-		//uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadTCP);
-		receivThread.join();
+		uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadTCP);
+		//receivThread.join();
+		
 	}
 	else
 	{
@@ -140,15 +139,6 @@ bool NetSocketUV::Accept(uv_handle_t* handle)
 		return false;
 	}
 	return false;
-}
-
-void NetSocketUV::SendTCP(NET_BUFFER_INDEX *buf)
-{
-	
-}
-
-void NetSocketUV::SendUDP(NET_BUFFER_INDEX *buf)
-{
 }
 
 void NetSocketUV::ReceiveTCP()
@@ -257,8 +247,7 @@ void OnAccept(uv_stream_t* stream, int status)
 		return;
 	}
 	NetSocketUV* net_sock = (NetSocketUV*)GetNetSocketPtr(stream);
-	net_sock->Accept((uv_handle_t*)stream);
-
+	net_sock->Accept();
 }
 
 void NetSocketUV::Destroy()
@@ -322,7 +311,7 @@ void* NetSocketUV::SetupRetranslation(void* argv)
 					std::getline(std::cin, outRTSP);
 					if (outRTSP.find("rtsp://"))
 					{
-						std::thread delay(WaitingDelay, socket);
+						std::thread delay(WaitingDelay, &socket);
 						//delay.join();
 						delay.detach();
 					}
@@ -420,7 +409,7 @@ void ServerUV::StartUVServer(bool internet)
 		bool res = Create(true);
 		if (res)
 		{
-			printf("Success create server!");
+			printf("Success create server!\n");
 			UpdateNet();
 		}
 	}

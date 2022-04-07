@@ -7,9 +7,10 @@ struct	Net_Address;
 struct	NET_BUFFER_INDEX;
 struct	NET_BUFFER_LIST;
 struct	MEM_DATA;
+struct	SessionList;
+class	SocketList;
 class	NetSocket;
 class	Net;
-class	SocketList;
 class	NET_SESSION_INFO;
 class	NET_SERVER_SESSION;
 class	Server;
@@ -62,6 +63,67 @@ struct NET_BUFFER_LIST : public CArrayBase
 	NET_BUFFER_INDEX*	Get(int index)																	{ return m_buffer[index]; }
 };
 
+class NET_SESSION_INFO
+{
+public:
+	NET_SESSION_INFO(Net* net);
+	~NET_SESSION_INFO();
+
+	void Clear();
+
+	bool operator==(const NET_SESSION_INFO& si);
+	bool operator!=(const NET_SESSION_INFO& si)
+	{
+		return !(*this == si);
+	}
+
+protected:
+	CString			ip;
+	CString			name;
+	NetSocket** a_client;
+	Net* net;
+	unsigned int	c_client;
+	int				fInfoLength;
+	char* fInfo;
+};
+
+class NET_SERVER_SESSION : public NET_SESSION_INFO
+{
+public:
+	NET_SERVER_SESSION(Net* net);
+	virtual ~NET_SERVER_SESSION();
+
+	virtual void	AddClient(NetSocket* socket);
+
+	bool			isEnabled() { return enabled; }
+	int				GetClientCount() { return c_client_id; }
+	unsigned int* GetClientArray() { return a_client_id; }
+	int				GetSessionIndex() { return session_index; }
+protected:
+	friend class	Server;
+	bool			enabled;
+	int				c_client_id;
+	unsigned int* a_client_id;
+	int				session_index;
+};
+
+struct SessionList : public CArrayBase
+{
+	int k_session;
+	NET_SERVER_SESSION** m_session;
+
+public:
+	SessionList();
+	virtual ~SessionList();
+
+	void ReInit();
+
+	void Clear();
+	NET_SERVER_SESSION* Get(int index);
+	int AddSession(NET_SERVER_SESSION* session);
+	bool DeleteSession(int index);
+};
+
 class Net
 {
 public:
@@ -82,13 +144,18 @@ public:
 	NetSocket*			getReceivingSocket()															{ return receiving_socket; }
 	void				setupReceivingSocket(NetSocket& socket)											{ receiving_socket = &socket; }
 	auto				GetConnectSockaddr()															{ return fConnectionSockaddr; }
+	SessionList&		GetSession()																	{ return sessions; }
+
+
 protected:
 	sockaddr			fConnectionSockaddr;
 	int					bytes_read;	
-	NetBuffer			recv_buf;
 	bool				udp_tcp;
+
 	NetSocket*			receiving_socket;
 	NET_BUFFER_LIST		sending_list;
+	NetBuffer			recv_buf;
+	SessionList			sessions;
 };
 
 struct NET_SOCKET_INFO
@@ -110,30 +177,6 @@ protected:
 	int				sessionID;
 };
 
-class NET_SESSION_INFO
-{
-public:
-	NET_SESSION_INFO(Net* net);
-	~NET_SESSION_INFO();
-
-	void Clear();
-
-	bool operator==(const NET_SESSION_INFO& si);
-	bool operator!=(const NET_SESSION_INFO& si)
-	{
-		return !(*this == si);
-	}
-
-protected:
-	CString			ip;
-	CString			name;
-	NetSocket**		a_client;
-	Net*			net;
-	unsigned int	c_client;
-	int				fInfoLength;
-	char*			fInfo;
-};
-
 class NetSocket : public NET_SOCKET_INFO
 {
 public:
@@ -145,10 +188,7 @@ public:
 
 	virtual bool	Create(int port, bool udp_tcp, bool listen);
 
-	virtual void	SendTCP(NET_BUFFER_INDEX* buf) = 0;
-	virtual void	SendUDP(NET_BUFFER_INDEX* buf) = 0;
-
-	unsigned int	GetClientID();
+	//unsigned int	GetClientID();
 	virtual void	ReceiveTCP() = 0;
 	virtual void	ReceiveUPD() = 0;
 
@@ -164,75 +204,40 @@ protected:
 	friend class	Server;
 };
 
-class NET_SERVER_SESSION : public NET_SESSION_INFO
-{
-public:
-	NET_SERVER_SESSION(Net* net);
-	virtual ~NET_SERVER_SESSION();
-
-	virtual void	AddClient(NetSocket* socket);
-	
-	bool			isEnabled()					{ return enabled; }
-	int				GetClientCount()			{ return c_client_id; }
-	unsigned int*	GetClientArray()			{ return a_client_id; }
-	int				GetSessionIndex()			{ return session_index; }
-protected:
-	friend class	Server;
-	bool			enabled;
-	int				c_client_id;
-	unsigned int*	a_client_id;
-	int				session_index;
-};
-
-struct SessionList : public CArrayBase
-{
-	int k_session;					
-	NET_SERVER_SESSION** m_session;
-
-public:
-	SessionList();
-	virtual ~SessionList();
-
-	void ReInit();
-
-	void Clear();
-	NET_SERVER_SESSION* Get(int index);
-	int AddSession(NET_SERVER_SESSION* session);
-	bool DeleteSession(int index);
-};
 
 struct NET_SERVER_INFO
 {
-	unsigned int version;
+	unsigned int	version;
 
-	CString server_version;
+	CString			server_version;
 
-	unsigned int start_time;
-	unsigned int current_time;
+	unsigned int	start_time;
+	unsigned int	current_time;
 
-	int k_accept;
+	int				k_accept;
 
-	SessionList* sessions;
-	SocketList* sockets;
+	SessionList*	sessions;
+	SocketList*		sockets;
 
 	NET_SERVER_INFO();
-	void Clear();
+	void			Clear();
+	virtual			~NET_SERVER_INFO();
 };
 
 class SocketList : public CArrayBase
 {
-	int c_socket;
-	NetSocket** a_socket;
+	int				c_socket;
+	NetSocket**		a_socket;
 
 public:
 	SocketList();
-	virtual ~SocketList();
-	void Clear();
-	NetSocket* Get(int index);
-	int GetMaxCount() { return c_socket; }
-	int AddSocket(NetSocket* client, unsigned int client_id = 0xfffffff);
-	bool DeleteSocket(int index);
-	void Expand(int max_size);
+	virtual			~SocketList();
+	void			Clear();
+	NetSocket*		Get(int index);
+	int				GetMaxCount() { return c_socket; }
+	int				AddSocket(NetSocket* client, unsigned int client_id = 0xfffffff);
+	bool			DeleteSocket(int index);
+	void			Expand(int max_size);
 };
 
 
@@ -241,13 +246,13 @@ class Server : public Net
 public:
 	Server();
 	virtual				~Server();
-	void				ConnectSocket(NetSocket* socket, unsigned int player_id = 0xffffffff);
+	void				ConnectSocket(NetSocket* socket, unsigned int client_id = 0xffffffff);
 	virtual bool		Create(bool internet);
-	virtual bool		IsServer() { return true; }
+	virtual bool		IsServer()																{ return true; }
 	
 	NetSocket*			GetServerTCPSocket();
 	NetSocket*			GetServerUDPSocket();
-	
+
 	virtual void		StopServer() = 0;
 	virtual bool		UpdateNet() = 0;
 	virtual void		Destroy();
@@ -266,7 +271,6 @@ protected:
 	int					stop_time;
 	bool				stop_server;
 	int					max_client;
-	SessionList			sessions;
 	//Net*				net;
 };
 

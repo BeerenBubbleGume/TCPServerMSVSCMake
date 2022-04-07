@@ -121,29 +121,30 @@ public:
 class CArrayBase
 {
 protected:
-	int max_existing;
-	int k_existing;
-	int* m_existing;
+	int		max_existing;
+	int		k_existing;
+	int*	m_existing;
 
-	int max_deleted;
-	int k_deleted;
-	int* m_deleted;
+	int		max_deleted;
+	int		k_deleted;
+	int*	m_deleted;
 
-	int max_indexed;
-	int* m_indexed;
+	int		max_indexed;
+	int*	m_indexed;
 
 public:
 
 	CArrayBase();
 	virtual ~CArrayBase();
 
-	void IncreaseDeleted(int from, int to);
-	void ClearExistingAndDeleted();
-	int FromDeletedToExisting();
-	int FromDeletedToExisting(int deleted_index);
-	void FromExistingToDeleted(int index);
-	void AddToExisting(int index);
-	void AddToDeleted(int index);
+	void	IncreaseDeleted(int from, int to);
+	void	ClearExistingAndDeleted();
+	int		FromDeletedToExisting();
+	int		FromDeletedToExisting(int deleted_index);
+	void	FromExistingToDeleted(int index);
+	void	AddToExisting(int index);
+	void	AddToDeleted(int index);
+	int		GetIndex(int index) { return m_existing[index]; }
 };
 
 class CStreamFile
