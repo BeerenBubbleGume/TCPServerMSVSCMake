@@ -200,7 +200,7 @@ int main(int arc, char* argv[])
 	ServerMediaSession* sms = ServerMediaSession::createNew(*env, streamName.c_str());
 	sms->addSubsession(H264VideoFileServerMediaSubsession::createNew(*env, fileName.c_str(), false));
 	server->addServerMediaSession(sms);
-	anonceStream(server, sms, "serverStream");
+	RTSPProxyServer::anonceStream(server, sms, "serverStream");
 	//std::thread whatch(WhatchAndWait, server);
 	//whatch.detach();
 
