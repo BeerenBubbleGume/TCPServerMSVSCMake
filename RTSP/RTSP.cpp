@@ -3,11 +3,6 @@
 #include "RTSP.hpp"
 #pragma comment(lib, "ws2_32.lib")
 
-void serverBYEHandler(void* instance, u_int8_t requestBytes)
-{
-	RTCPInstance* rtcp = (RTCPInstance*)instance;
-}
-
 void proxyServerMediaSubsessionAfterPlaying(void* clientData)
 {
 	RTSPProxyServer* server = (RTSPProxyServer*)clientData;
@@ -76,11 +71,6 @@ void RTSPProxyServer::StartProxyServer(char* Data)
 	env->taskScheduler().doEventLoop(&server->eventLoopWatchVariable);
 }
 
-bool RTSPProxyServer::StopProxyServer(void* clientData)
-{
-	return false;
-}
-
 RTSPProxyServer::~RTSPProxyServer()
 {
 }
@@ -141,7 +131,6 @@ FramedSource* DemandServerMediaSubsession::createNewStreamSource(unsigned client
 	if (fileSource == NULL) return NULL;
 	fBufferSize = fileSource->fileSize();
 
-	// Create a framer for the Video Elementary Stream:
 	return H264VideoStreamFramer::createNew(envir(), fileSource);
 }
 
@@ -166,15 +155,7 @@ void DemandServerMediaSubsession::pause()
 	fAreCurrentlyPlaying = False;
 }
 
-void DemandServerMediaSubsession::subsessionByeHandler(void* clientData)
-{
-}
-
-void DemandServerMediaSubsession::subsessionByeHandler()
-{
-}
-
-DemandServerMediaSubsession::DemandServerMediaSubsession(/*Net* net, */UsageEnvironment& env, Boolean reuseFirstSource) : OnDemandServerMediaSubsession(env, reuseFirstSource)/*, net(net)*/
+DemandServerMediaSubsession::DemandServerMediaSubsession(UsageEnvironment& env, Boolean reuseFirstSource) : OnDemandServerMediaSubsession(env, reuseFirstSource)
 {
 	fBufferSize = 100000000;
 	fBuffer = new u_int8_t[fBufferSize];
