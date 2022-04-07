@@ -204,6 +204,6 @@ int main(int arc, char* argv[])
 	//std::thread whatch(WhatchAndWait, server);
 	//whatch.detach();
 
-	env->taskScheduler().doEventLoop(&server->eventLoopWatchVariable);
+	env->taskScheduler().doEventLoop();
 	return 0;
 }
