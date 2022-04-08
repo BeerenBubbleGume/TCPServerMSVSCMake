@@ -264,6 +264,7 @@ protected:
 	friend class		NET_SERVER_SESSION;
 	SocketList			sockets;
 	NET_SESSION_INFO*	info;
+	CArrayPtr			sockets_nohello;
 	unsigned int*		a_migration_client;
 	int					c_migration_client;
 	int					start_time;

@@ -379,7 +379,20 @@ NET_SERVER_SESSION::~NET_SERVER_SESSION()
 	if (c_client_id)
 	{
 		assert(net->IsServer());
-		
+		Server* net_server = (Server*)net;
+		for (int i = 0; i < c_client_id; i++)
+		{
+			NetSocket* socket = net_server->sockets.Get(a_client_id[i]);
+			socket->SetSessionID(-1);
+			net_server->sockets.DeleteSocket(a_client_id[i]);
+		}
+
+		if (a_client_id)
+		{
+			delete[]a_client_id;
+			a_client_id = NULL;
+		}
+		c_client_id = 0;
 	}
 }
 

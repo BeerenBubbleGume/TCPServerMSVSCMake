@@ -121,76 +121,99 @@ public:
 class CArrayBase
 {
 protected:
-	int		max_existing;
-	int		k_existing;
-	int*	m_existing;
+	int				max_existing;
+	int				k_existing;
+	int*			m_existing;
 
-	int		max_deleted;
-	int		k_deleted;
-	int*	m_deleted;
+	int				max_deleted;
+	int				k_deleted;
+	int*			m_deleted;
 
-	int		max_indexed;
-	int*	m_indexed;
+	int				max_indexed;
+	int*			m_indexed;
 
 public:
 
 	CArrayBase();
-	virtual ~CArrayBase();
+	virtual			~CArrayBase();
 
-	void	IncreaseDeleted(int from, int to);
-	void	ClearExistingAndDeleted();
-	int		FromDeletedToExisting();
-	int		FromDeletedToExisting(int deleted_index);
-	void	FromExistingToDeleted(int index);
-	void	AddToExisting(int index);
-	void	AddToDeleted(int index);
-	int		GetIndex(int index) { return m_existing[index]; }
+	void			IncreaseDeleted(int from, int to);
+	void			ClearExistingAndDeleted();
+	int				FromDeletedToExisting();
+	int				FromDeletedToExisting(int deleted_index);
+	void			FromExistingToDeleted(int index);
+	void			AddToExisting(int index);
+	void			AddToDeleted(int index);
+	int				GetIndex(int index) { return m_existing[index]; }
+};	
+
+class CArrayPtr : public CArrayBase
+{
+protected:
+	int				k_ptr;
+	void**			m_ptr;
+
+public:
+	CArrayPtr();
+	virtual			~CArrayPtr();
+
+	void			Clear();
+	void*			Get(int index);
+	int				Add(void* data);
+
+	bool			Delete(int index);
+	int				FindIndex(void* ptr);
+
+	virtual void	SaveToFile(FILE* file);
+	virtual void	LoadFromFile(FILE* file);
 };
 
 class CStreamFile
 {
 protected:
 
-	int mode;
-	FILE* stream;
+	int				mode;
+	FILE*			stream;
 
-	unsigned int bytes;
+	unsigned int	bytes;
 
-	CString name;
+	CString			name;
 
-	FILE* fopen_file(const char* name, const char* mode);
-	const unsigned short* utf8to16(const unsigned char* str_utf8);
+	FILE*			fopen_file(const char* name, const char* mode);
+	const unsigned short* 
+					utf8to16(const unsigned char* str_utf8);
 
 
 public:
-	virtual void Close();
-	bool Open(const char* fileName, int mode);
+	virtual void	Close();
+	bool			Open(const char* fileName, int mode);
 	
 	CStreamFile();
-	virtual ~CStreamFile();
+	virtual			~CStreamFile();
 	
 
-	virtual unsigned int GetLength();
+	virtual unsigned int 
+					GetLength();	
+	virtual unsigned int 
+					GetPosition();
 
-	
-	virtual unsigned int GetPosition();
+	virtual void	SetPosition(unsigned int pos);
+	void			Seek(unsigned int pos) { SetPosition(pos); }
 
-	virtual void SetPosition(unsigned int pos);
-	void Seek(unsigned int pos) { SetPosition(pos); }
+	virtual unsigned int 
+					Write(void* m_data, unsigned int k_data);
+	virtual unsigned int 
+					Read(void* m_data, unsigned int k_data);
 
-	virtual unsigned int Write(void* m_data, unsigned int k_data);
-	virtual unsigned int Read(void* m_data, unsigned int k_data);
+	virtual void	ChangeMode(int mode);
 
-	
-	virtual void ChangeMode(int mode);
+	bool			IsStoring();
+	bool			IsLoading();
 
-	bool IsStoring();
-	bool IsLoading();
+	const char*		GetName() { return name.c_str(); }
 
-	const char* GetName() { return name.c_str(); }
-
-	void SetMode(int mode);
-	int GetMode() { return mode; }
+	void			SetMode(int mode);
+	int				GetMode() { return mode; }
 
 
 	void operator<<(bool& value);

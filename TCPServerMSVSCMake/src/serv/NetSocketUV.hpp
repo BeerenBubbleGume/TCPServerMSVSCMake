@@ -43,7 +43,6 @@ public:
 						NetSocketUV(Net* net);
 	virtual				~NetSocketUV();
 
-	void* sock;
 	virtual bool		Create(int port, bool udp_tcp, bool listen);
 	const char*			GetIP(Net_Address* addr, bool own_or_peer);
 	bool				Accept();
@@ -54,8 +53,13 @@ public:
 
 	static void*		SetupRetranslation(void* argv);
 	static void*		WaitingDelay(void* delay);
-	int status;
+
 	static NetSocketUV* NewSocket(Net* net)										{ return new NetSocketUV(net); }
+	uv_loop_t*			getSockLoop()											{ return loop; }
+protected:
+	friend class ServerUV;
+	void* sock;
+	int status;
 	uv_loop_t*			loop;
 };
 
@@ -75,6 +79,7 @@ public:
 protected:
 	uv_loop_t loop;
 	virtual Net* NewNet()														{ return NULL; }
+	friend class NetSocketUV;
 };
 
 #endif

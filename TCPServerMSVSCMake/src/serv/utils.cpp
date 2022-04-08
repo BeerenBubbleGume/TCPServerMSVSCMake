@@ -1309,3 +1309,100 @@ void CStreamFile::operator>>(CPoint& value)
 	Read(v, 4);
 	INVERT_BYTES(value.y);
 }
+
+CArrayPtr::CArrayPtr()
+{
+	k_ptr = 0;
+	m_ptr = nullptr;
+}
+
+CArrayPtr::~CArrayPtr()
+{
+}
+
+void CArrayPtr::Clear()
+{
+	if (m_ptr)
+	{
+		free(m_ptr);
+		m_ptr = NULL;
+	}
+
+	k_ptr = 0;
+
+	ClearExistingAndDeleted();
+}
+
+void* CArrayPtr::Get(int index)
+{
+	if (index >= 0 && index < k_ptr)
+		return m_ptr[index];
+	return nullptr;
+}
+
+int CArrayPtr::Add(void* data)
+{
+	int index = FromDeletedToExisting();
+
+	if (index == -1)
+	{
+		int size = sizeof(void*);
+		int step = k_ptr / 4;
+		if (step < 4)
+			step = 4;
+		int k_ptr2 = k_ptr + step;
+		m_ptr = (void**)realloc(m_ptr, size * (k_ptr2));
+
+		for (int i = k_ptr; i < k_ptr2; i++)
+			m_ptr[i] = NULL;
+
+		IncreaseDeleted(k_ptr, k_ptr2 - 1);
+		index = FromDeletedToExisting();
+
+		k_ptr = k_ptr2;
+	}
+
+	m_ptr[index] = data;
+
+	return index;
+}
+
+bool CArrayPtr::Delete(int index)
+{
+	if (index >= 0 && index < k_ptr)
+	{
+		if (m_ptr[index])
+		{
+			m_ptr[index] = NULL;
+			FromExistingToDeleted(index);
+
+			return true;
+		}
+	}
+	return false;
+}
+
+int CArrayPtr::FindIndex(void* ptr)
+{
+	int index = -1;
+
+	for (int i = 0; i < k_existing; i++)
+	{
+		int ind = m_existing[i];
+		if (m_ptr[ind] == ptr)
+		{
+			index = ind;
+			break;
+		}
+	}
+
+	return index;
+}
+
+void CArrayPtr::SaveToFile(FILE* file)
+{
+}
+
+void CArrayPtr::LoadFromFile(FILE* file)
+{
+}
