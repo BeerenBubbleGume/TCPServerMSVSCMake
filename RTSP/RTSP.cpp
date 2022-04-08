@@ -179,7 +179,7 @@ int main(int arc, char* argv[])
 	std::cout << fileName << std::endl;
 	RTSPProxyServer* server = RTSPProxyServer::createNew(*env, 8554);
 	ServerMediaSession* sms = ServerMediaSession::createNew(*env, streamName.c_str());
-	sms->addSubsession(H264VideoFileServerMediaSubsession::createNew(*env, fileName.c_str(), false));
+	sms->addSubsession(H264VideoFileServerMediaSubsession::createNew(*env, fileName.c_str(), true));
 	server->addServerMediaSession(sms);
 	RTSPProxyServer::anonceStream(server, sms, "serverStream");
 	//std::thread whatch(WhatchAndWait, server);
