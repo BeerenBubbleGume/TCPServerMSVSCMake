@@ -274,11 +274,6 @@ void* NetSocketUV::SetupRetranslation(void* argv)
 	assert(socket);
 	if (socket->GetClientID())
 	{
-		/*unsigned int ID = socket->GetClientID();
-		std::array<char, 10> strID;
-		std::to_chars(strID.data(), strID.data() + strID.size(), ID);
-		std::string fileName(strID.data());
-		fileName += "in_binary_h.264";*/
 		int filePrefix = socket->GetClientID();
 		if (filePrefix == 12499)
 			filePrefix = 0;
