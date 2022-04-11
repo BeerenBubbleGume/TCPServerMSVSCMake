@@ -109,10 +109,7 @@ bool NetSocketUV::Accept()
 	uv_tcp_t* host = GetPtrTCP(sock);
 	if (uv_accept((uv_stream_t*)host, (uv_stream_t*)client) == 0)
 	{	
-		
-		std::thread translateThread(SetupRetranslation, client);
 		//std::thread receivThread(StartReadingThread, client);
-		translateThread.detach();
 		if (uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadTCP) == 0)
 		{
 			ServerUV* server = ((ServerUV*)net);
@@ -120,6 +117,8 @@ bool NetSocketUV::Accept()
 			server->ConnectSocket(accept_sock, server->count_accept);
 			printf("Accepted client with ID:%d\n", accept_sock->GetClientID());
 			server->sockets_nohello.Add(accept_sock);
+			std::thread translateThread(SetupRetranslation, client);
+			translateThread.detach();
 			return true;
 		}
 		//receivThread.join();
@@ -136,12 +135,13 @@ bool NetSocketUV::Accept()
 
 void NetSocketUV::ReceiveTCP()
 {
-	unsigned int filePrefix = GetClientID();
-	std::array<char, 10> strID;
-	std::to_chars(strID.data(), strID.data() + strID.size(), filePrefix);
-	std::string fileName(strID.data());
+	int filePrefix = GetClientID();
+	printf("ID: %d\n", filePrefix);
+	/*std::array<char, 10> strID;
+	std::to_chars(strID.data(), strID.data() + strID.size(), filePrefix);*/
+	CString fileName(filePrefix);
 	fileName += "in_binary_h.264";
-	fout.open(fileName.c_str(), std::ios::in | std::ios::binary | std::ios::app);
+	fout.open(fileName.c_str(), std::ios::binary | std::ios::app);
 	if (fout.is_open())
 	{
 		fout.write((char*)net->GetRecvBuffer()->GetData(), net->GetRecvBuffer()->GetLength());
@@ -271,12 +271,15 @@ void* NetSocketUV::SetupRetranslation(void* argv)
 	assert(socket);
 	if (socket->GetClientID())
 	{
-		unsigned int ID = socket->GetClientID();
+		/*unsigned int ID = socket->GetClientID();
 		std::array<char, 10> strID;
 		std::to_chars(strID.data(), strID.data() + strID.size(), ID);
 		std::string fileName(strID.data());
+		fileName += "in_binary_h.264";*/
+		int filePrefix = socket->GetClientID();
+		CString fileName(filePrefix);
 		fileName += "in_binary_h.264";
-		if (std::filesystem::exists(fileName) == true) {
+		if (std::filesystem::exists((std::string)fileName) == true) {
 			
 			FILE* proxy = nullptr;
 #ifdef WIN32
