@@ -277,6 +277,8 @@ void* NetSocketUV::SetupRetranslation(void* argv)
 		std::string fileName(strID.data());
 		fileName += "in_binary_h.264";*/
 		int filePrefix = socket->GetClientID();
+		if (filePrefix == 12499)
+			filePrefix = 0;
 		CString fileName(filePrefix);
 		fileName += "in_binary_h.264";
 		if (std::filesystem::exists((std::string)fileName) == true) {
