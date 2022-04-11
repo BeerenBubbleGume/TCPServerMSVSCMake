@@ -172,9 +172,9 @@ int main(int arc, char* argv[])
 	TaskScheduler* newscheduler = BasicTaskScheduler::createNew();
 	UsageEnvironment* env = BasicUsageEnvironment::createNew(*newscheduler);
 	OutPacketBuffer::maxSize = 5000000;
-	char* name = "in_binary_h.264";
+	//char* name = "in_binary_h.264";
 	std::string fileName(argv[1]);
-	fileName += name;
+	//fileName += name;
 	std::string streamName = "serverStream/" + fileName;
 	std::cout << fileName << std::endl;
 	RTSPProxyServer* server = RTSPProxyServer::createNew(*env, 8554);
