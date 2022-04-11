@@ -133,6 +133,18 @@
 		},
 		{
 			"path" : "TCPServerMSVSCMake/src/serv/CMakeLists.txt"
+		},
+		{
+			"path" : "RTSP/CMakeLists.txt"
+		},
+		{
+			"path" : "RTSP/libs/CMakeLists.txt"
+		},
+		{
+			"path" : "RTSP/libs/lib/CMakeLists.txt"
+		},
+		{
+			"path" : "RTSP/libs/include/CMakeLists.txt"
 		}
 	],
 	"kind" : "cmakeFiles",

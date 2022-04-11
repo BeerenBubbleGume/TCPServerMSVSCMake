@@ -14,12 +14,14 @@
 		"commands" : 
 		[
 			"add_executable",
+			"install",
 			"target_link_libraries",
 			"target_include_directories"
 		],
 		"files" : 
 		[
-			"TCPServerMSVSCMake/CMakeLists.txt"
+			"TCPServerMSVSCMake/CMakeLists.txt",
+			"CMakeLists.txt"
 		],
 		"nodes" : 
 		[
@@ -33,13 +35,22 @@
 				"parent" : 0
 			},
 			{
+				"file" : 1
+			},
+			{
 				"command" : 1,
+				"file" : 1,
+				"line" : 14,
+				"parent" : 2
+			},
+			{
+				"command" : 2,
 				"file" : 0,
 				"line" : 30,
 				"parent" : 0
 			},
 			{
-				"command" : 2,
+				"command" : 3,
 				"file" : 0,
 				"line" : 26,
 				"parent" : 0
@@ -61,7 +72,7 @@
 			"includes" : 
 			[
 				{
-					"backtrace" : 3,
+					"backtrace" : 5,
 					"path" : "C:/Users/Operator/source/repos/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes"
 				}
 			],
@@ -85,6 +96,20 @@
 		}
 	],
 	"id" : "TCPServerMSVSCMake::@c1fa6790a5be207d0e6d",
+	"install" : 
+	{
+		"destinations" : 
+		[
+			{
+				"backtrace" : 3,
+				"path" : "C:/Users/Operator/source/repos/TCPServerMSVSCMake/Debug/bin"
+			}
+		],
+		"prefix" : 
+		{
+			"path" : "C:/Users/Operator/Source/Repos/TCPServerMSVSCMake/out/install/x64-Debug"
+		}
+	},
 	"link" : 
 	{
 		"commandFragments" : 
@@ -98,7 +123,7 @@
 				"role" : "flags"
 			},
 			{
-				"backtrace" : 2,
+				"backtrace" : 4,
 				"fragment" : "..\\..\\..\\TCPServerMSVSCMake\\libs\\lib\\uv.lib",
 				"role" : "libraries"
 			},

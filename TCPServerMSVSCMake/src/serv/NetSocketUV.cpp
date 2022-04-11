@@ -43,7 +43,8 @@ bool NetSocketUV::Create(int port, bool udp_tcp, bool listen)
 			int l = uv_listen((uv_stream_t*)tcp, 10240, OnAccept);
 			if (l != 0)
 				return false;
-		}																   
+		}		
+		return true;
 	}
 	else
 	{
@@ -64,8 +65,9 @@ bool NetSocketUV::Create(int port, bool udp_tcp, bool listen)
 			assert(r == 0);
 		}
 		((UDP_SOCKET*)sock)->net_socket = this;
+		return true;
 	}
-	return true;
+	return false;
 }
 
 const char* NetSocketUV::GetIP(Net_Address* addr, bool own_or_peer)
@@ -310,6 +312,7 @@ void* NetSocketUV::SetupRetranslation(void* argv)
 					std::getline(std::cin, outRTSP);
 					if (outRTSP.find("rtsp://"))
 					{
+						delete fileName;
 						std::thread delay(WaitingDelay, &socket);
 						//delay.join();
 						delay.detach();

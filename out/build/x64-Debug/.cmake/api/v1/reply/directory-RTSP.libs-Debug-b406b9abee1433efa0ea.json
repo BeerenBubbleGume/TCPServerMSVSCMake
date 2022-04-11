@@ -8,7 +8,7 @@
 	"installers" : [],
 	"paths" : 
 	{
-		"build" : ".",
-		"source" : "."
+		"build" : "RTSP/libs",
+		"source" : "RTSP/libs"
 	}
 }
