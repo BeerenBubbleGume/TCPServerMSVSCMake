@@ -311,7 +311,6 @@ void* NetSocketUV::SetupRetranslation(void* argv)
 					std::getline(std::cin, outRTSP);
 					if (outRTSP.find("rtsp://"))
 					{
-						delete fileName;
 						std::thread delay(WaitingDelay, &socket);
 						delay.join();
 						//delay.detach();
