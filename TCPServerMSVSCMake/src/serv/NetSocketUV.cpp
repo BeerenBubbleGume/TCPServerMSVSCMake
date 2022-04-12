@@ -311,7 +311,7 @@ void* NetSocketUV::SetupRetranslation(void* argv)
 						std::thread delay(WaitingDelay, &socket);
 						delay.join();
 						//delay.detach();
-						kill(pid);
+						kill(pid, 0);
 					}
 				}
 			}
