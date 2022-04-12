@@ -188,7 +188,6 @@ public:
 
 	virtual bool		Create(int port, bool udp_tcp, bool listen);
 	virtual void		ReceiveTCP() = 0;
-	virtual void		ReceiveUPD() = 0;
 
 	int					GetSessionID()														{ return sessionID; }
 	bool				IsTCP()																{ return udp_tcp; }

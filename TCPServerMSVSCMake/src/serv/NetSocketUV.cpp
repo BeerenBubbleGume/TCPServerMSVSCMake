@@ -46,27 +46,6 @@ bool NetSocketUV::Create(int port, bool udp_tcp, bool listen)
 		}		
 		return true;
 	}
-	else
-	{
-		sock = malloc(sizeof(UDP_SOCKET));
-		memset(sock, 0, sizeof(UDP_SOCKET));
-		int r = uv_udp_init(loop, GetPtrUDP(sock));
-		assert(r == 0);
-		struct sockaddr_in broadcast_addr;
-		uv_ip4_addr(addr->address, addr->port, &broadcast_addr);
-		r = uv_udp_bind(GetPtrUDP(sock), (const struct sockaddr*)&broadcast_addr, 0);
-		assert(r == 0);
-		r = uv_udp_set_broadcast(GetPtrUDP(sock), 1);
-		assert(r == 0);
-
-		if (listen)
-		{
-			r = uv_udp_recv_start(GetPtrUDP(sock), OnAllocBuffer, OnReadUDP);
-			assert(r == 0);
-		}
-		((UDP_SOCKET*)sock)->net_socket = this;
-		return true;
-	}
 	return false;
 }
 
@@ -151,17 +130,13 @@ void NetSocketUV::ReceiveTCP()
 		fout.write((char*)net->GetRecvBuffer()->GetData(), net->GetRecvBuffer()->GetLength());
 		printf("writed %d bytes in file %s\n", (int)net->GetRecvBuffer()->GetLength(), fileName.c_str());
 		fout.close();
-		
+		  
 	}
 	else
 	{
 		printf("cannot open file\n");
 	}
 	
-}
-
-void NetSocketUV::ReceiveUPD()
-{
 }
 
 void OnReadTCP(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)
@@ -220,23 +195,6 @@ void StartReadingThread(void* handle)
 }
 
 
-char address_converter[30];
-void OnReadUDP(uv_udp_t* handle, ssize_t nread, const uv_buf_t* buf, const struct sockaddr* addr, unsigned flags)
-{
-	NetSocket* socket = GetNetSocketPtr(handle);
-	NetBuffer* recv_buffer = socket->getNet()->GetRecvBuffer();
-	assert(buf->base == (char*)recv_buffer->GetData());
-	recv_buffer->SetLength(nread);
-
-	int r = uv_ip4_name((sockaddr_in*)addr, address_converter, sizeof(address_converter));
-	socket->getNet()->addr->address = address_converter;
-	unsigned char* port_ptr = (unsigned char*)&(((sockaddr_in*)addr)->sin_port);
-	socket->getNet()->addr->port = port_ptr[1];
-	socket->getNet()->addr->port += port_ptr[0] << 8;
-
-	socket->ReceiveUPD();
-}
-
 void OnAccept(uv_stream_t* stream, int status)
 {
 	std::cout << "___ On Connect ___" << std::endl;
@@ -257,13 +215,6 @@ void NetSocketUV::Destroy()
 		{
 			uv_close((uv_handle_t *)GetPtrTCP(sock), OnCloseSocket);
 			((TCP_SOCKET *)sock)->net_socket = nullptr;
-		}
-		else
-		{
-			int r = uv_read_stop((uv_stream_t *)GetPtrUDP(sock));
-			assert(r == 0);
-			uv_close((uv_handle_t *)sock, OnCloseSocket);
-			((UDP_SOCKET *)sock)->net_socket = NULL;
 		}
 		sock = NULL;
 	}

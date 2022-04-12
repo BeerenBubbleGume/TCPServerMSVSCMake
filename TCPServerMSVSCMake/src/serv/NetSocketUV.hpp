@@ -16,9 +16,6 @@ struct TCP_SOCKET : public NET_SOCKET_PTR, uv_tcp_t
 {
 	uv_stream_t* handle;
 };
-struct UDP_SOCKET : public NET_SOCKET_PTR, uv_udp_t
-{
-};
 
 struct NetBufferUV : public NET_BUFFER_INDEX
 {
@@ -33,7 +30,6 @@ struct NetBufferUV : public NET_BUFFER_INDEX
 	}
 
 	uv_write_t*					GetPtrWrite()											{ return (uv_write_t*)sender_object; }
-	uv_udp_send_t*				GetPtrSend()											{ return (uv_udp_send_t*)sender_object; };
 };
 
 class NetSocketUV : public NetSocket
@@ -48,7 +44,6 @@ public:
 	bool						Accept();
 
 	void						ReceiveTCP();
-	void						ReceiveUPD();
 	void						Destroy();
 
 	static void*				SetupRetranslation(void* argv);
@@ -86,10 +81,8 @@ protected:
 void							OnAccept				(uv_stream_t* stream, int status);
 void							OnAllocBuffer			(uv_handle_t* handle, size_t suggested_size, uv_buf_t* buf);
 void							OnReadTCP				(uv_stream_t* stream, ssize_t nread, const uv_buf_t* buf);
-void							OnReadUDP				(uv_udp_t* handle, ssize_t nread, const uv_buf_t* buf, const struct sockaddr* addr, unsigned flags);
 void							OnCloseSocket			(uv_handle_t* handle);
 void							OnWrite					(uv_write_t* req, int status);
 void							StartReadingThread		(void* handle);
 uv_tcp_t*						GetPtrTCP				(void* ptr);
-uv_udp_t*						GetPtrUDP				(void* ptr);
 uv_loop_t*						GetLoop					(Net* net);
