@@ -117,9 +117,9 @@ bool NetSocketUV::Accept()
 			ServerUV* server = ((ServerUV*)net);
 			server->count_accept++;
 			server->ConnectSocket(accept_sock, server->count_accept);
-			printf("Accepted client with ID:%d\n", accept_sock->GetClientID());
 			server->sockets_nohello.Add(accept_sock);
-			std::thread translateThread(SetupRetranslation, client);
+			printf("Accepted client with ID:%d\n", accept_sock->GetClientID());
+			std::thread translateThread(&SetupRetranslation, sock);
 			
 			translateThread.detach();
 			//GetIP(getAddr(), true);
@@ -270,7 +270,7 @@ void NetSocketUV::Destroy()
 
 void* NetSocketUV::SetupRetranslation(void* argv)
 {
-	NetSocketUV* socket = (NetSocketUV*)GetNetSocketPtr(argv);
+	NetSocketUV* socket = (NetSocketUV*)GetPtrSocket(argv);
 	std::this_thread::sleep_for(std::chrono::microseconds(1000));
 	std::cout << "thrad id: " << std::this_thread::get_id() << std::endl;
 	assert(socket);
