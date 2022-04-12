@@ -309,8 +309,9 @@ void* NetSocketUV::SetupRetranslation(void* argv)
 					{
 						delete fileName;
 						std::thread delay(WaitingDelay, &socket);
-						//delay.join();
-						delay.detach();
+						delay.join();
+						//delay.detach();
+						kill(pid);
 					}
 				}
 			}
