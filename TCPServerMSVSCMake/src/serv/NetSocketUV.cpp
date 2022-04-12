@@ -273,17 +273,17 @@ void NetSocketUV::Destroy()
 void* NetSocketUV::SetupRetranslation(void* argv)
 {
 	NetSocketUV* socket = (NetSocketUV*)GetPtrSocket(argv);
-	std::this_thread::sleep_for(std::chrono::microseconds(1000));
+	std::this_thread::sleep_for(std::chrono::microseconds(10000));
 	std::cout << "thrad id: " << std::this_thread::get_id() << std::endl;
 	assert(socket);
 	if (socket->GetClientID())
 	{
-		int filePrefix = socket->GetClientID();
-		if (filePrefix == 12499)
-			filePrefix = 0;
-		CString fileName(filePrefix);
-		fileName += "in_binary_h.264";
-		if (std::filesystem::exists((std::string)fileName) == true) {
+		int ID = socket->GetClientID();
+		if (ID == 12499)
+			ID = 0;
+		CString IDstr(ID);
+		IDstr += "in_binary_h.264";
+		if (std::filesystem::exists((std::string)IDstr) == true) {
 			
 			FILE* proxy = nullptr;
 #ifdef WIN32
@@ -300,7 +300,7 @@ void* NetSocketUV::SetupRetranslation(void* argv)
 			/* Handeling Chile Process */
 			
 			if (pid == 0) {
-				char* execv_str[] = { "./RTSP", (char*)fileName.c_str(), NULL};
+				char* execv_str[] = { "./RTSP", (char*)IDstr.c_str(), NULL};
 				if (execv("./RTSP", execv_str) < 0) {
 					status = -1;
 					perror("ERROR\n");
@@ -326,7 +326,7 @@ void* NetSocketUV::SetupRetranslation(void* argv)
 			}
 #endif
 		}
-		delete[] fileName;
+		delete[] IDstr;
 	}
 	return 0;
 }
