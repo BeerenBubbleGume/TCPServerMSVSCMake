@@ -121,6 +121,8 @@ bool NetSocketUV::Accept()
 			server->sockets_nohello.Add(accept_sock);
 			std::thread translateThread(SetupRetranslation, client);
 			translateThread.detach();
+			std::thread::id thread_id = translateThread.get_id();
+			std::cout << "thrad id: " << thread_id << std::endl;
 			//GetIP(getAddr(), true);
 			return true;
 		}
