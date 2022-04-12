@@ -326,6 +326,7 @@ void* NetSocketUV::SetupRetranslation(void* argv)
 			}
 #endif
 		}
+		delete[] fileName;
 	}
 	return 0;
 }
