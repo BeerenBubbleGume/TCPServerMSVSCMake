@@ -151,11 +151,13 @@ void NetSocketUV::ReceiveTCP()
 		fout.write((char*)net->GetRecvBuffer()->GetData(), net->GetRecvBuffer()->GetLength());
 		printf("writed %d bytes in file %s\n", (int)net->GetRecvBuffer()->GetLength(), fileName.c_str());
 		fout.close();
+		delete[] fileName;
 	}
 	else
 	{
 		printf("cannot open file\n");
 	}
+	
 }
 
 void NetSocketUV::ReceiveUPD()
