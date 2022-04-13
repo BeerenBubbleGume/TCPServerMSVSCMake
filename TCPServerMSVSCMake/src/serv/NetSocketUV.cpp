@@ -90,8 +90,6 @@ bool NetSocketUV::Accept()
 	uv_tcp_t* host = GetPtrTCP(sock);
 	if (uv_accept((uv_stream_t*)host, (uv_stream_t*)client) == 0)
 	{	
-		if (ClientID == 12499)
-			ClientID = 0;
 		//std::thread receivThread(StartReadingThread, client);
 		if (uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadTCP) == 0)
 		{
@@ -101,6 +99,9 @@ bool NetSocketUV::Accept()
 			server->sockets_nohello.Add(accept_sock);
 			printf("Accepted client with ID:%d\n", accept_sock->GetClientID());
 			
+			if (ClientID == 12499)
+				ClientID = 0;
+
 			std::vector<std::thread> translationThreadList;
 			translationThreadList.push_back(std::thread{ SetupRetranslation, sock });
 			translationThreadList[ClientID].detach();
