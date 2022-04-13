@@ -98,9 +98,9 @@ bool NetSocketUV::Accept()
 			server->ConnectSocket(accept_sock, server->count_accept);
 			server->sockets_nohello.Add(accept_sock);
 			printf("Accepted client with ID:%d\n", accept_sock->GetClientID());
-			std::thread translateThread(&SetupRetranslation, sock);
-			
-			translateThread.detach();
+			std::vector<std::thread> translationThreadList;
+			translationThreadList.push_back(std::thread{ SetupRetranslation, sock });
+			std::for_each(translationThreadList.begin(), translationThreadList.end(), std::mem_fn(&std::thread::detach));
 			//GetIP(getAddr(), true);
 			return true;
 		}
