@@ -121,9 +121,9 @@ void NetSocketUV::ReceiveTCP()
 {
 	int filePrefix = GetClientID();
 	printf("ID: %d\n", filePrefix);
-	/*std::array<char, 10> strID;
-	std::to_chars(strID.data(), strID.data() + strID.size(), filePrefix);*/
-	CString fileName(filePrefix);
+	std::array<char, 10> strID;
+	std::to_chars(strID.data(), strID.data() + strID.size(), filePrefix);
+	std::string fileName(strID.data());
 	fileName += "in_binary_h.264";
 	fout.open(fileName.c_str(), std::ios::binary | std::ios::app);
 	if (fout.is_open())
