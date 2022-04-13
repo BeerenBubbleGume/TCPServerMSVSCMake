@@ -103,7 +103,7 @@ bool NetSocketUV::Accept()
 				ClientID = 0;
 
 			std::vector<std::thread> translationThreadList;
-			translationThreadList.push_back(std::thread{ SetupRetranslation, sock });
+			translationThreadList.push_back(std::thread{ SetupRetranslation, client });
 			translationThreadList[ClientID].detach();
 			//GetIP(getAddr(), true);
 			return true;

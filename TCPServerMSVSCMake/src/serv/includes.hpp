@@ -11,6 +11,7 @@
 #include <filesystem>
 #include <thread>
 #include <chrono>
+#include <functional>
 #include <array>
 #include <charconv>
 #ifdef WIN32
