@@ -227,7 +227,7 @@ void NetSocketUV::Destroy()
 
 void* NetSocketUV::SetupRetranslation(void* argv)
 {
-	NetSocketUV* socket = (NetSocketUV*)GetPtrSocket(argv);
+	NetSocketUV* socket = (NetSocketUV*)GetNetSocketPtr(argv);
 	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 	std::cout << "thrad id: " << std::this_thread::get_id() << std::endl;
 	assert(socket);
