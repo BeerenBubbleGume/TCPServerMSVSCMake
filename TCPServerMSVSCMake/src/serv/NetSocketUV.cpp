@@ -234,8 +234,8 @@ void* NetSocketUV::SetupRetranslation(void* argv)
 	if (socket->GetClientID())
 	{
 		int ID = socket->GetClientID();
-		if (ID == 12499)
-			ID = 0;
+		/*if (ID == 12499)
+			ID = 0;*/
 		/*CString IDstr(ID);
 		IDstr += "in_binary_h.264";*/
 		std::array<char, 10> strID;
@@ -271,8 +271,8 @@ void* NetSocketUV::SetupRetranslation(void* argv)
 					{
 						std::thread delay(WaitingDelay, &socket);
 						delay.join();
-						//delay.detach();
-						kill(pid, 0);
+						delay.detach();
+						//kill(pid, 0);
 					}
 				}
 			}
