@@ -228,7 +228,7 @@ void NetSocketUV::Destroy()
 void* NetSocketUV::SetupRetranslation(void* argv)
 {
 	NetSocketUV* socket = (NetSocketUV*)GetPtrSocket(argv);
-	std::this_thread::sleep_for(std::chrono::microseconds(10000));
+	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 	std::cout << "thrad id: " << std::this_thread::get_id() << std::endl;
 	assert(socket);
 	if (socket->GetClientID())
@@ -236,8 +236,11 @@ void* NetSocketUV::SetupRetranslation(void* argv)
 		int ID = socket->GetClientID();
 		if (ID == 12499)
 			ID = 0;
-		CString IDstr(ID);
-		IDstr += "in_binary_h.264";
+		/*CString IDstr(ID);
+		IDstr += "in_binary_h.264";*/
+		std::array<char, 10> strID;
+		std::to_chars(strID.data(), strID.data() + strID.size(), ID);
+		std::string IDstr(strID.data());
 		if (std::filesystem::exists((std::string)IDstr) == true) {
 			
 			FILE* proxy = nullptr;
@@ -280,7 +283,6 @@ void* NetSocketUV::SetupRetranslation(void* argv)
 			}
 #endif
 		}
-		delete[] IDstr;
 	}
 	return 0;
 }
