@@ -30,7 +30,7 @@ IF(WIN32)
 	target_link_libraries(TCPServerMSVSCMake 
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/uv.lib
 								)
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} WIN32 _WIN32")
+	#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} WIN32 _WIN32")
 ELSE()
 	target_include_directories(TCPServerMSVSCMake PUBLIC
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/

@@ -1,8 +1,8 @@
-# Install script for directory: C:/Users/Operator/source/repos/TCPServerMSVSCMake
+# Install script for directory: A:/Cpp repos/TCPServerMSVSCMake
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Users/Operator/Source/Repos/TCPServerMSVSCMake/out/install/x64-Debug")
+  set(CMAKE_INSTALL_PREFIX "A:/Cpp repos/TCPServerMSVSCMake/out/install/x64-Debug")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -34,32 +34,19 @@ endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "C:/Users/Operator/source/repos/TCPServerMSVSCMake/Debug/bin/TCPServerMSVSCMake.exe")
+   "A:/Cpp repos/TCPServerMSVSCMake/Debug/bin/TCPServerMSVSCMake.exe")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-  file(INSTALL DESTINATION "C:/Users/Operator/source/repos/TCPServerMSVSCMake/Debug/bin" TYPE EXECUTABLE FILES "C:/Users/Operator/source/repos/TCPServerMSVSCMake/out/build/x64-Debug/TCPServerMSVSCMake/TCPServerMSVSCMake.exe")
-endif()
-
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "C:/Users/Operator/source/repos/TCPServerMSVSCMake/Debug/bin/RTSP.exe")
-  if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
-    message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
-  endif()
-  if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
-    message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
-  endif()
-  file(INSTALL DESTINATION "C:/Users/Operator/source/repos/TCPServerMSVSCMake/Debug/bin" TYPE EXECUTABLE FILES "C:/Users/Operator/source/repos/TCPServerMSVSCMake/out/build/x64-Debug/RTSP/RTSP.exe")
+file(INSTALL DESTINATION "A:/Cpp repos/TCPServerMSVSCMake/Debug/bin" TYPE EXECUTABLE FILES "A:/Cpp repos/TCPServerMSVSCMake/out/build/x64-Debug/TCPServerMSVSCMake/TCPServerMSVSCMake.exe")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("C:/Users/Operator/source/repos/TCPServerMSVSCMake/out/build/x64-Debug/TCPServerMSVSCMake/cmake_install.cmake")
-  include("C:/Users/Operator/source/repos/TCPServerMSVSCMake/out/build/x64-Debug/RTSP/cmake_install.cmake")
+  include("A:/Cpp repos/TCPServerMSVSCMake/out/build/x64-Debug/TCPServerMSVSCMake/cmake_install.cmake")
 
 endif()
 
@@ -71,5 +58,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/Operator/source/repos/TCPServerMSVSCMake/out/build/x64-Debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "A:/Cpp repos/TCPServerMSVSCMake/out/build/x64-Debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

@@ -1,10 +1,13 @@
 # ninja log v5
-7	66	6710083690045611	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utf.cpp.obj	a5ca8737816047a0
-1	1667	6715387925805596	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.obj	4d751276a6ffc9c0
-5	536	6714583674401131	RTSP/CMakeFiles/RTSP.dir/utf.cpp.obj	54ed3ef5774b3f36
-9	1670	6715387925825116	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.obj	edf3efe771423d3d
-4	1673	6715387925922712	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.obj	c875802523bffebd
-12	1696	6715387926215504	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.obj	1a34ea91ef42b80
-1	339	6715389368430108	TCPServerMSVSCMake/TCPServerMSVSCMake.exe	cf82be31f6880c65
-10	854	6714583677622513	RTSP/CMakeFiles/RTSP.dir/utils.cpp.obj	3705f9c6bb49a0b
-8	1407	6714583683143036	RTSP/CMakeFiles/RTSP.dir/RTSP.cpp.obj	dac6117f53bae890
+23	506	6716313011421112	RTSP/CMakeFiles/RTSP.dir/utf.cpp.obj	dc74ac87e270fbf9
+20	3712	6716313043650883	RTSP/CMakeFiles/RTSP.dir/RTSP.cpp.obj	859d548a97599751
+3	1386	6716313535368903	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.obj	9af0754d8c2fe572
+16	1043	6716313016881117	RTSP/CMakeFiles/RTSP.dir/utils.cpp.obj	d87b403ea450a0ca
+8	280	6716313524298923	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utf.cpp.obj	76f3f7ebe430f362
+11	1396	6716313535488921	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.obj	ef979021552ebe4a
+6	1402	6716313535518919	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.obj	f3c889aff825adb1
+14	1563	6716313537178904	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.obj	c14815cb525afffc
+1	790	6716313821471805	TCPServerMSVSCMake/TCPServerMSVSCMake.exe	d5c9b149ef6044cf
+3	2142	6717217017119295	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.obj	f3c889aff825adb1
+10	2166	6717217017379278	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.obj	c14815cb525afffc
+2166	3244	6717217025389290	TCPServerMSVSCMake/TCPServerMSVSCMake.exe	d5c9b149ef6044cf

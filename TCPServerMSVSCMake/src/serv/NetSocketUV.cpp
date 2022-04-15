@@ -98,13 +98,11 @@ bool NetSocketUV::Accept()
 			server->ConnectSocket(accept_sock, server->count_accept);
 			server->sockets_nohello.Add(accept_sock);
 			printf("Accepted client with ID:%d\n", accept_sock->GetClientID());
-			
-			if (ClientID == 12499)
-				ClientID = 0;
+			SetupRetranslation(*accept_sock, server->count_accept);
 
-			std::vector<std::thread> translationThreadList;
+			/*std::vector<std::thread> translationThreadList;
 			translationThreadList.push_back(std::thread{ SetupRetranslation, client });
-			translationThreadList[ClientID].detach();
+			translationThreadList[ClientID].detach();*/
 			//GetIP(getAddr(), true);
 			return true;
 		}
@@ -225,21 +223,20 @@ void NetSocketUV::Destroy()
 	NetSocket::Destroy();
 }
 
-void* NetSocketUV::SetupRetranslation(void* argv)
+void* NetSocketUV::SetupRetranslation(NetSocketUV& socket, unsigned int clientID)
 {
-	NetSocketUV* socket = (NetSocketUV*)GetNetSocketPtr(argv);
+	NetSocketUV* client = (NetSocketUV*)&socket;
 	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 	std::cout << "thrad id: " << std::this_thread::get_id() << std::endl;
-	assert(socket);
-	if (socket->GetClientID())
+	assert(client);
+	if (clientID >= 0)
 	{
-		int ID = socket->GetClientID();
 		/*if (ID == 12499)
 			ID = 0;*/
 		/*CString IDstr(ID);
 		IDstr += "in_binary_h.264";*/
 		std::array<char, 10> strID;
-		std::to_chars(strID.data(), strID.data() + strID.size(), ID);
+		std::to_chars(strID.data(), strID.data() + strID.size(), clientID);
 		std::string IDstr(strID.data());
 		if (std::filesystem::exists((std::string)IDstr) == true) {
 			

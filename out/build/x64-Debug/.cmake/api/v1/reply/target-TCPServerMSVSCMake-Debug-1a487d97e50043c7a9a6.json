@@ -73,7 +73,7 @@
 			[
 				{
 					"backtrace" : 5,
-					"path" : "C:/Users/Operator/source/repos/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes"
+					"path" : "A:/Cpp repos/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes"
 				}
 			],
 			"language" : "CXX",
@@ -102,12 +102,12 @@
 		[
 			{
 				"backtrace" : 3,
-				"path" : "C:/Users/Operator/source/repos/TCPServerMSVSCMake/Debug/bin"
+				"path" : "A:/Cpp repos/TCPServerMSVSCMake/Debug/bin"
 			}
 		],
 		"prefix" : 
 		{
-			"path" : "C:/Users/Operator/Source/Repos/TCPServerMSVSCMake/out/install/x64-Debug"
+			"path" : "A:/Cpp repos/TCPServerMSVSCMake/out/install/x64-Debug"
 		}
 	},
 	"link" : 
@@ -124,7 +124,7 @@
 			},
 			{
 				"backtrace" : 4,
-				"fragment" : "..\\..\\..\\TCPServerMSVSCMake\\libs\\lib\\uv.lib",
+				"fragment" : "..\\..\\..\\..\\TCPServerMSVSCMake\\libs\\lib\\uv.lib",
 				"role" : "libraries"
 			},
 			{
