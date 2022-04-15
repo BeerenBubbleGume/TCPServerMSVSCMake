@@ -280,6 +280,11 @@ void* NetSocketUV::SetupRetranslation(NetSocketUV& socket, unsigned int clientID
 			}
 #endif
 		}
+		else
+		{
+			printf("Cannot find client's file with ID: %d!", clientID);
+			exit(1);
+		}
 	}
 	return 0;
 }
