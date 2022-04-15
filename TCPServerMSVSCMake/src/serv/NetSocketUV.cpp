@@ -98,11 +98,10 @@ bool NetSocketUV::Accept()
 			server->ConnectSocket(accept_sock, server->count_accept);
 			server->sockets_nohello.Add(accept_sock);
 			printf("Accepted client with ID:%d\n", accept_sock->GetClientID());
-			SetupRetranslation(*accept_sock, server->count_accept);
-
-			/*std::vector<std::thread> translationThreadList;
-			translationThreadList.push_back(std::thread{ SetupRetranslation, client });
-			translationThreadList[ClientID].detach();*/
+			
+			std::vector<std::thread> translationThreadList;
+			translationThreadList.push_back(std::thread{ SetupRetranslation, *accept_sock, accept_sock->GetClientID()});
+			translationThreadList[ClientID].detach();
 			//GetIP(getAddr(), true);
 			return true;
 		}
@@ -226,7 +225,7 @@ void NetSocketUV::Destroy()
 void* NetSocketUV::SetupRetranslation(NetSocketUV& socket, unsigned int clientID)
 {
 	NetSocketUV* client = (NetSocketUV*)&socket;
-	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+	std::this_thread::sleep_for(std::chrono::milliseconds(10000));
 	std::cout << "thrad id: " << std::this_thread::get_id() << std::endl;
 	assert(client);
 	if (clientID >= 0)
