@@ -220,7 +220,7 @@ void NetSocketUV::Destroy()
 	NetSocket::Destroy();
 }
 
-void NetSocketUV::SetupRetranslation(NetSocketUV* socket, unsigned int clientID)
+void /*NetSocketUV::*/SetupRetranslation(NetSocketUV* socket, unsigned int clientID)
 {
 	NetSocketUV* client = (NetSocketUV*)&socket;
 	std::this_thread::sleep_for(std::chrono::milliseconds(1000));

@@ -46,7 +46,7 @@ public:
 	void						ReceiveTCP();
 	void						Destroy();
 
-	virtual void				SetupRetranslation(NetSocketUV* socket, unsigned int clientID);
+	//virtual void				SetupRetranslation(NetSocketUV* socket, unsigned int clientID);
 	static void*				WaitingDelay(void* delay);
 
 	static NetSocketUV*			NewSocket(Net* net)										{ return new NetSocketUV(net); }
@@ -86,3 +86,4 @@ void							OnWrite					(uv_write_t* req, int status);
 void							StartReadingThread		(void* handle);
 uv_tcp_t*						GetPtrTCP				(void* ptr);
 uv_loop_t*						GetLoop					(Net* net);
+void							SetupRetranslation(NetSocketUV* socket, unsigned int clientID);
