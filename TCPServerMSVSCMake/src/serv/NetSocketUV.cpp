@@ -101,12 +101,14 @@ bool NetSocketUV::Accept()
 			//GetIP(getAddr(), true);
 			return true;
 		}
-		std::vector<std::thread> translationThreadList;
+		/*std::vector<std::thread> translationThreadList;
 		translationThreadList.push_back(std::thread{ SetupRetranslation, *accept_sock, ClientID });
-		translationThreadList[ClientID].detach();
+		translationThreadList[ClientID].detach();*/
 		//receivThread.join();
 		else
 			return false;
+		std::thread TranslateThread(SetupRetranslation, accept_sock, ClientID);
+		TranslateThread.detach();
 	}
 	else
 	{
