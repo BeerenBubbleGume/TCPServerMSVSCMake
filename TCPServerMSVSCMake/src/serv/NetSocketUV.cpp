@@ -237,7 +237,7 @@ void /*NetSocketUV::*/SetupRetranslation(NetSocketUV* socket, unsigned int clien
 		std::array<char, 10> strID;
 		std::to_chars(strID.data(), strID.data() + strID.size(), clientID);
 		std::string IDstr(strID.data());
-		
+		IDstr += "in_binary_h.264";
 		if (std::filesystem::exists((std::string)IDstr) == true) {
 			
 			printf("Client file reading %s", IDstr.c_str());
