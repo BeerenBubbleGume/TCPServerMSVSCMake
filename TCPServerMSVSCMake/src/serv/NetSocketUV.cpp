@@ -96,7 +96,7 @@ bool NetSocketUV::Accept()
 		server->count_accept++;
 		server->ConnectSocket(accept_sock, server->count_accept);
 		server->sockets_nohello.Add(accept_sock);
-		printf("Accepted client with ID:%d\n", accept_sock->GetClientID());
+		printf("Accepted client with ID:%d\n", ClientID);
 		//GetIP(getAddr(), true);
 		//return true;
 		std::thread TranslationThread(SetupRetranslation, accept_sock, ClientID);
@@ -117,7 +117,7 @@ bool NetSocketUV::Accept()
 
 void NetSocketUV::ReceiveTCP()
 {
-	int filePrefix = GetClientID();
+	int filePrefix = ClientID;
 	printf("ID: %d\n", filePrefix);
 	std::array<char, 10> strID;
 	std::to_chars(strID.data(), strID.data() + strID.size(), filePrefix);
