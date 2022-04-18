@@ -46,7 +46,7 @@ public:
 	void						ReceiveTCP();
 	void						Destroy();
 
-	static void					SetupRetranslation(NetSocketUV* socket, unsigned int clientID);
+	virtual void				SetupRetranslation(NetSocket* socket, unsigned int clientID);
 	static void*				WaitingDelay(void* delay);
 
 	static NetSocketUV*			NewSocket(Net* net)										{ return new NetSocketUV(net); }
