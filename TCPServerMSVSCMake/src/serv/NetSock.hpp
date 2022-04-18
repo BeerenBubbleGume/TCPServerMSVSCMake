@@ -188,7 +188,7 @@ public:
 
 	virtual bool		Create(int port, bool udp_tcp, bool listen);
 	virtual void		ReceiveTCP() = 0;
-	virtual void		SetupRetranslation(NetSocket* socket, unsigned int clientID) = 0;
+	//virtual void		SetupRetranslation(NetSocket* socket, unsigned int clientID) = 0;
 	int					GetSessionID()														{ return sessionID; }
 	bool				IsTCP()																{ return udp_tcp; }
 	Net*				getNet()															{ return net; }
