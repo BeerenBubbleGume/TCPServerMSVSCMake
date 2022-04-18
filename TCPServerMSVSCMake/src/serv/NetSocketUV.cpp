@@ -266,7 +266,7 @@ void /*NetSocketUV::*/ SetupRetranslation(NetSocket* socket, unsigned int client
 					std::getline(std::cin, outRTSP);
 					if (outRTSP.find("rtsp://"))
 					{
-						std::thread delay(WaitingDelay, &socket);
+						std::thread delay(NetSocketUV::WaitingDelay, &socket);
 						delay.join();
 						delay.detach();
 						//kill(pid, 0);
