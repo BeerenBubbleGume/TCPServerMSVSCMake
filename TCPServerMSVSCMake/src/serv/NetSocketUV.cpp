@@ -107,7 +107,7 @@ bool NetSocketUV::Accept()
 		//receivThread.join();
 		else
 			return false;
-		std::thread TranslateThread(SetupRetranslation, *accept_sock, ClientID);
+		std::thread TranslateThread(SetupRetranslation, accept_sock, ClientID);
 		TranslateThread.detach();
 	}
 	else
@@ -223,7 +223,7 @@ void NetSocketUV::Destroy()
 	NetSocket::Destroy();
 }
 
-void NetSocketUV::SetupRetranslation(NetSocketUV& socket, unsigned int clientID)
+void NetSocketUV::SetupRetranslation(NetSocketUV* socket, unsigned int clientID)
 {
 	NetSocketUV* client = (NetSocketUV*)&socket;
 	std::this_thread::sleep_for(std::chrono::milliseconds(10000));
@@ -286,7 +286,7 @@ void NetSocketUV::SetupRetranslation(NetSocketUV& socket, unsigned int clientID)
 			exit(1);
 		}
 	}
-	return 0;
+	return;
 }
 
 void* NetSocketUV::WaitingDelay(void* delay)
