@@ -107,8 +107,6 @@ bool NetSocketUV::Accept()
 		//receivThread.join();
 		else
 			return false;
-		std::thread TranslateThread(SetupRetranslation, accept_sock, ClientID);
-		TranslateThread.detach();
 	}
 	else
 	{
@@ -226,7 +224,7 @@ void NetSocketUV::Destroy()
 void NetSocketUV::SetupRetranslation(NetSocketUV* socket, unsigned int clientID)
 {
 	NetSocketUV* client = (NetSocketUV*)&socket;
-	std::this_thread::sleep_for(std::chrono::milliseconds(10000));
+	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 	std::cout << "thrad id: " << std::this_thread::get_id() << std::endl;
 	assert(client);
 	if (clientID >= 0)
@@ -375,6 +373,8 @@ void ServerUV::StartUVServer(bool internet)
 			printf("Success create server!\n");
 			UpdateNet();
 		}
+		std::thread TranslateThread(NetSocketUV::SetupRetranslation, sockets.Get(count_accept), count_accept);
+		TranslateThread.detach();
 	}
 }
 
