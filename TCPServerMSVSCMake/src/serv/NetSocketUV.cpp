@@ -238,8 +238,10 @@ void NetSocketUV::SetupRetranslation(NetSocketUV* socket, unsigned int clientID)
 		std::array<char, 10> strID;
 		std::to_chars(strID.data(), strID.data() + strID.size(), clientID);
 		std::string IDstr(strID.data());
+		
 		if (std::filesystem::exists((std::string)IDstr) == true) {
 			
+			printf("Client file reading %s", IDstr.c_str());
 			FILE* proxy = nullptr;
 #ifdef WIN32
 			//system("RTSPProxyServerForClient.exe -d -c -%s");
