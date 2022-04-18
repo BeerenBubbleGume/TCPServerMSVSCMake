@@ -91,7 +91,7 @@ bool NetSocketUV::Accept()
 	if (uv_accept((uv_stream_t*)host, (uv_stream_t*)client) == 0)
 	{	
 		//std::thread receivThread(StartReadingThread, client);
-		uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadTCP)
+		uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadTCP);
 		ServerUV* server = ((ServerUV*)net);
 		server->count_accept++;
 		server->ConnectSocket(accept_sock, server->count_accept);
