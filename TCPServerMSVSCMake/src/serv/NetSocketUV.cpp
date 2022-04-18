@@ -118,6 +118,8 @@ bool NetSocketUV::Accept()
 void NetSocketUV::ReceiveTCP()
 {
 	int filePrefix = ClientID;
+	if (filePrefix == 12499)
+		filePrefix = 0;
 	printf("ID: %d\n", filePrefix);
 	std::array<char, 10> strID;
 	std::to_chars(strID.data(), strID.data() + strID.size(), filePrefix);
