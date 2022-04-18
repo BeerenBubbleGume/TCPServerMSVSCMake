@@ -91,19 +91,18 @@ bool NetSocketUV::Accept()
 	if (uv_accept((uv_stream_t*)host, (uv_stream_t*)client) == 0)
 	{	
 		//std::thread receivThread(StartReadingThread, client);
-		if (uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadTCP) == 0)
-		{
-			ServerUV* server = ((ServerUV*)net);
-			server->count_accept++;
-			server->ConnectSocket(accept_sock, server->count_accept);
-			server->sockets_nohello.Add(accept_sock);
-			printf("Accepted client with ID:%d\n", accept_sock->GetClientID());
-			//GetIP(getAddr(), true);
-			return true;
-		}
-		/*std::vector<std::thread> translationThreadList;
+		uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadTCP)
+		ServerUV* server = ((ServerUV*)net);
+		server->count_accept++;
+		server->ConnectSocket(accept_sock, server->count_accept);
+		server->sockets_nohello.Add(accept_sock);
+		printf("Accepted client with ID:%d\n", accept_sock->GetClientID());
+		//GetIP(getAddr(), true);
+		//return true;
+		
+		std::vector<std::thread> translationThreadList;
 		translationThreadList.push_back(std::thread{ SetupRetranslation, *accept_sock, ClientID });
-		translationThreadList[ClientID].detach();*/
+		translationThreadList[ClientID].detach();
 		//receivThread.join();
 		else
 			return false;
@@ -221,7 +220,7 @@ void NetSocketUV::Destroy()
 	NetSocket::Destroy();
 }
 
-void /*NetSocketUV::*/ SetupRetranslation(NetSocket* socket, unsigned int clientID)
+void NetSocketUV::SetupRetranslation(NetSocketUV* socket, unsigned int clientID)
 {
 	NetSocketUV* client = (NetSocketUV*)&socket;
 	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
@@ -266,7 +265,7 @@ void /*NetSocketUV::*/ SetupRetranslation(NetSocket* socket, unsigned int client
 					std::getline(std::cin, outRTSP);
 					if (outRTSP.find("rtsp://"))
 					{
-						std::thread delay(NetSocketUV::WaitingDelay, &socket);
+						std::thread delay(WaitingDelay, &socket);
 						delay.join();
 						delay.detach();
 						//kill(pid, 0);
@@ -373,8 +372,6 @@ void ServerUV::StartUVServer(bool internet)
 			printf("Success create server!\n");
 			UpdateNet();
 		}
-		std::thread TranslateThread(SetupRetranslation, sockets.Get(count_accept), count_accept);
-		TranslateThread.detach();
 	}
 }
 
