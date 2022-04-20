@@ -637,7 +637,7 @@ void Server::FillServerInfo(NET_SERVER_INFO& info)
 	info.k_accept = count_accept;
 }
 
-void Server::OnLostConnetction(NetSocket* socket)
+void Server::OnLostConnection(NetSocket* socket)
 {
 	unsigned int index = socket->GetClientID();
 

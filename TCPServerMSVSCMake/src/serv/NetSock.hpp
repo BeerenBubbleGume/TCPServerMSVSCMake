@@ -139,7 +139,7 @@ public:
 	virtual void		Destroy();
 	virtual NetSocket*	NewSocket(Net* net) = 0;
 	NetBuffer*			GetRecvBuffer()																	{ return &recv_buf; }
-	void	void		OnLostConnection(NetSocket* sock) = 0;
+	virtual void		OnLostConnection(NetSocket* socket) = 0;
 	bool				IsServer()																		{ return true; }
 	NET_BUFFER_LIST*	GetSendList()																	{ return &sending_list; }
 	NET_BUFFER_INDEX*	PrepareMessage(unsigned int sender_id, int type, size_t length, unsigned char* data);
@@ -258,7 +258,7 @@ public:
 	virtual bool		UpdateNet() = 0;
 	virtual void		Destroy();
 	void				FillServerInfo(NET_SERVER_INFO& info);
-	virtual void		OnLostConnetction(NetSocket* socket);
+	virtual void		OnLostConnection(NetSocket* socket);
 	int					AddSessionInfo(NET_SESSION_INFO* session_info, NetSocket* socket);
 protected:
 	friend class		NetSocket;
