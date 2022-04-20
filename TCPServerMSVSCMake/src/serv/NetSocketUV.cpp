@@ -246,13 +246,14 @@ void /*NetSocketUV::*/SetupRetranslation(NetSocketUV* socket, unsigned int clien
 			ID = 0;*/
 		/*CString IDstr(ID);
 		IDstr += "in_binary_h.264";*/
-		std::array<char, 10> strID;
-		std::to_chars(strID.data(), strID.data() + strID.size(), clientID);
-		std::string IDstr(strID.data());
+		/*std::vector<char> strID;
+		std::to_chars(strID.data(), strID.data() + strID.size(), clientID);*/
+
+		std::string IDstr((char*)clientID);
 		IDstr += "in_binary_h.264";
 		if (std::filesystem::exists((std::string)IDstr) == true) {
 			
-			printf("Client file reading %s", IDstr.c_str());
+			printf("Client file reading %s\n", IDstr.c_str());
 			FILE* proxy = nullptr;
 #ifdef WIN32
 			//system("RTSPProxyServerForClient.exe -d -c -%s");

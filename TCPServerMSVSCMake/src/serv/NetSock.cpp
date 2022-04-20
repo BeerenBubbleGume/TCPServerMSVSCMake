@@ -739,7 +739,7 @@ SessionList::~SessionList()
 void SessionList::ReInit()
 {
 	Clear();
-	k_session = 100;
+	k_session = 10000;
 	m_session = (NET_SERVER_SESSION**)malloc(k_session * sizeof(NET_SERVER_SESSION*));
 	for (int i = k_session - 1; i >= 0; i--)
 	{
