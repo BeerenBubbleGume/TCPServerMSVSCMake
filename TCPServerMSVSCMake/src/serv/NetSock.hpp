@@ -191,7 +191,7 @@ public:
 	virtual bool		Create(int port, bool udp_tcp, bool listen);
 	virtual void		ReceiveTCP() = 0;
 	virtual void		SendTCP(NET_BUFFER_INDEX* buf) = 0;
-	virtual void		SendMessage(NET_BUFFER_INDEX* buf, Net_Address* addr);
+	virtual void		SendMessage(NET_BUFFER_INDEX* buf, Net_Address* addr = nullptr);
 	//virtual void		SetupRetranslation(NetSocket* socket, unsigned int clientID) = 0;
 	int					GetSessionID()														{ return sessionID; }
 	bool				IsTCP()																{ return udp_tcp; }
