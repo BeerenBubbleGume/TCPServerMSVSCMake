@@ -1,0 +1,19 @@
+﻿-- logger module started --
+main: Запуск vlc с интерфейсом по умолчанию. Используйте 'cvlc' для запуска vlc без интерфейса.
+h26x error: this doesn't look like a h264 ES stream, continuing anyway
+-- logger module stopped --
+﻿-- logger module started --
+main: Запуск vlc с интерфейсом по умолчанию. Используйте 'cvlc' для запуска vlc без интерфейса.
+h26x error: this doesn't look like a h264 ES stream, continuing anyway
+h26x error: this doesn't look like a h264 ES stream, continuing anyway
+h26x error: this doesn't look like a h264 ES stream, continuing anyway
+h26x error: this doesn't look like a h264 ES stream, continuing anyway
+h26x error: this doesn't look like a h264 ES stream, continuing anyway
+h26x error: this doesn't look like a h264 ES stream, continuing anyway
+h26x error: this doesn't look like a h264 ES stream, continuing anyway
+h26x error: this doesn't look like a h264 ES stream, continuing anyway
+-- logger module stopped --
+﻿-- logger module started --
+main: Запуск vlc с интерфейсом по умолчанию. Используйте 'cvlc' для запуска vlc без интерфейса.
+h26x error: this doesn't look like a h264 ES stream, continuing anyway
+-- logger module stopped --

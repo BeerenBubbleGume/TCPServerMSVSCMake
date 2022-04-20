@@ -131,10 +131,6 @@ NetSocket* GetNetSocketPtr(void* uv_socket)
 	return GetPtrSocket(((char*)uv_socket) - sizeof(void*));
 }
 
-void Net::OnLostConnection(void* socket)
-{	
-}
-
 NetBuffer::NetBuffer()
 {
 	owner =nullptr;

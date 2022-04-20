@@ -142,11 +142,11 @@ void NetSocketUV::ReceiveTCP()
 
 void NetSocketUV::SendTCP(NET_BUFFER_INDEX* buf)
 {
-	if (buf->length > 0)
+	if (buf->GetLength() > 0)
 	{
 		uv_buf_t buffer;
-		buffer.len = buf->length;
-		buffer.base = (char*)buf->data;
+		buffer.len = buf->GetLength();
+		buffer.base = (char*)buf->GetData();
 		int r = uv_write(((NetBufferUV*)buf)->GetPtrWrite(), (uv_stream_t*)GetPtrTCP(sock), &buffer, 1, OnWrite);
 		assert(r == 0);
 	}

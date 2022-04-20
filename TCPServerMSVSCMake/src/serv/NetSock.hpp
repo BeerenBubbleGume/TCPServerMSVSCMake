@@ -40,7 +40,7 @@ public:
 	unsigned			GetMaxSize()																{ return max_length; }
 
 protected:
-
+	friend class 		NetSocket;
 	int					position;
 	unsigned char*		DataBuff;
 	unsigned			buff_length;
@@ -74,10 +74,10 @@ public:
 	void Clear();
 
 	//bool operator==(const NET_SESSION_INFO& si);
-	bool operator!=(const NET_SESSION_INFO& si)
-	{
-		return !(*this == si);
-	}
+	// bool operator!=(const NET_SESSION_INFO& si)
+	// {
+	// 	return !(*this == si);
+	// }
 
 protected:
 	CString				ip;
@@ -203,6 +203,7 @@ protected:
 	Net*				net;
 	int					session_id;
 	friend class		Server;
+	friend class 		NetBuffer;
 };
 
 

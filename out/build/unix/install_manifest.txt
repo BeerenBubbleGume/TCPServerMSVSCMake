@@ -1,0 +1,2 @@
+/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/Debug/bin/TCPServerMSVSCMake
+/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/Debug/bin/RTSP
