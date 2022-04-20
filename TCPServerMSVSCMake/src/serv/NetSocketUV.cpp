@@ -100,11 +100,9 @@ bool NetSocketUV::Accept()
 		//GetIP(getAddr(), true);
 		//return true;
 		std::thread *ret = new std::thread;
-		for (int i = 0; i <= ClientID; i++)
-		{
-			ret[i] = std::thread(SetupRetranslation, accept_sock, ClientID);
-			ret[i].detach();
-		}
+		ret[ClientID] = std::thread(SetupRetranslation, accept_sock, ClientID);
+		ret[ClientID].detach();
+		ret[ClientID].~thread();
 		/*std::thread TranslationThread(SetupRetranslation, accept_sock, ClientID);
 		TranslationThread.detach();*/
 		/*std::vector<std::thread> translationThreadList;
@@ -254,11 +252,11 @@ void /*NetSocketUV::*/SetupRetranslation(NetSocketUV* socket, unsigned int clien
 		IDstr += "in_binary_h.264";*/
 		/*std::vector<char> strID;
 		std::to_chars(strID.data(), strID.data() + strID.size(), clientID);*/
-		CString IDStr;
+		std::string IDStr;
 		if(clientID == 0)
-			IDStr = '0';
+			IDStr = "0";
 		else
-			IDStr = (int)clientID;
+			IDStr = (char*)clientID;
 		IDStr += "in_binary_h.264";
 		if (std::filesystem::exists((std::string)IDStr) == true) {
 			
@@ -276,10 +274,11 @@ void /*NetSocketUV::*/SetupRetranslation(NetSocketUV* socket, unsigned int clien
 			pid = fork();
 			std::string outRTSP;
 			/* Handeling Chile Process */
-			
+			std::cout << pid << std::endl;
 			if (pid == 0) {
-				char* execv_str[] = { "./RTSP", (char*)IDStr.c_str(), NULL};
-				if (execv("./RTSP", execv_str) < 0) {
+				//char* execv_str[] = { "./RTSP", (char*)IDStr.c_str(), NULL};
+				
+				if (execl("./RTSP", "./RTSP", IDStr.c_str(), NULL) < 0) {
 					status = -1;
 					perror("ERROR\n");
 				}

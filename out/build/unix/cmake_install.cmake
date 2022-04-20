@@ -66,9 +66,34 @@ file(INSTALL DESTINATION "/home/dkhaziev/Документы/GitHub/TCPServerMSVS
   endif()
 endif()
 
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  if(EXISTS "$ENV{DESTDIR}/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/Debug/bin/RTSP" AND
+     NOT IS_SYMLINK "$ENV{DESTDIR}/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/Debug/bin/RTSP")
+    file(RPATH_CHECK
+         FILE "$ENV{DESTDIR}/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/Debug/bin/RTSP"
+         RPATH "")
+  endif()
+  list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
+   "/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/Debug/bin/RTSP")
+  if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
+    message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
+  endif()
+  if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
+    message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
+  endif()
+file(INSTALL DESTINATION "/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/Debug/bin" TYPE EXECUTABLE FILES "/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/RTSP/RTSP")
+  if(EXISTS "$ENV{DESTDIR}/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/Debug/bin/RTSP" AND
+     NOT IS_SYMLINK "$ENV{DESTDIR}/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/Debug/bin/RTSP")
+    if(CMAKE_INSTALL_DO_STRIP)
+      execute_process(COMMAND "/opt/rh/gcc-toolset-9/root/usr/bin/strip" "$ENV{DESTDIR}/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/Debug/bin/RTSP")
+    endif()
+  endif()
+endif()
+
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/TCPServerMSVSCMake/cmake_install.cmake")
+  include("/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/RTSP/cmake_install.cmake")
 
 endif()
 

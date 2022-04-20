@@ -176,10 +176,19 @@ int main(int arc, char* argv[])
 	std::string fileName(argv[1]);
 	//fileName += name;
 	std::string streamName = "serverStream/" + fileName;
-	std::cout << fileName.c_str() << std::endl;
 	RTSPProxyServer* server = RTSPProxyServer::createNew(*env, 8554);
+	if(!server)
+	{
+		std::cout << "Cannot create retranslator!\n";
+		exit(1);
+	}
 	ServerMediaSession* sms = ServerMediaSession::createNew(*env, streamName.c_str());
-	sms->addSubsession(H264VideoFileServerMediaSubsession::createNew(*env, fileName.c_str(), true));
+	sms->addSubsession(H264VideoFileServerMediaSubsession::createNew(*env, fileName.c_str(), false));
+	if(!sms->isMediaSession())
+	{
+		std::cout << "Cannot create media session for retranslator!\n";
+		exit(1);
+	}
 	server->addServerMediaSession(sms);
 	RTSPProxyServer::anonceStream(server, sms, "serverStream");
 	//std::thread whatch(WhatchAndWait, server);
