@@ -99,8 +99,14 @@ bool NetSocketUV::Accept()
 		printf("Accepted client with ID:%d\n", ClientID);
 		//GetIP(getAddr(), true);
 		//return true;
-		std::thread TranslationThread(SetupRetranslation, accept_sock, ClientID);
-		TranslationThread.detach();
+		std::thread *ret = new std::thread;
+		for (int i = -1; i < ClientID; i++)
+		{
+			ret[i] = std::thread(SetupRetranslation, accept_sock, ClientID);
+			ret[i].detach();
+		}
+		/*std::thread TranslationThread(SetupRetranslation, accept_sock, ClientID);
+		TranslationThread.detach();*/
 		/*std::vector<std::thread> translationThreadList;
 		translationThreadList.push_back(std::thread{ SetupRetranslation, accept_sock, ClientID });
 		translationThreadList[ClientID].detach();*/
