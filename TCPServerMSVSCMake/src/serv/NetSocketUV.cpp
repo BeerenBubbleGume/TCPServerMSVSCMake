@@ -249,7 +249,7 @@ void /*NetSocketUV::*/SetupRetranslation(NetSocketUV* socket, unsigned int clien
 		/*std::vector<char> strID;
 		std::to_chars(strID.data(), strID.data() + strID.size(), clientID);*/
 
-		std::string IDstr((char*)clientID);
+		CString IDstr(clientID);
 		IDstr += "in_binary_h.264";
 		if (std::filesystem::exists((std::string)IDstr) == true) {
 			
