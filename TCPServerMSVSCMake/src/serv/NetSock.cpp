@@ -520,7 +520,7 @@ Server::Server() : Net()
 	stop_time = 0;
 	stop_server = false;
 
-	max_client = 400;
+	max_client = 40000;
 
 	c_migration_client = 0;
 	a_migration_client = NULL;
@@ -550,6 +550,7 @@ Server::~Server()
 void Server::ConnectSocket(NetSocket* socket, unsigned int client_id)
 {
 	int index = sockets.AddSocket(socket, client_id);
+	
 	socket->SetClientID(index);
 }
 
@@ -562,12 +563,13 @@ bool Server::Create(bool internet)
 		if (is)
 		{
 			ConnectSocket(socket);
-			assert(socket->GetClientID() == SERVER_ID);
+			assert(socket->ClientID == SERVER_ID);
 
 			socket = NewSocket(this);
 			if (is)
 			{
 				ConnectSocket(socket);
+				assert(socket->ClientID == SEERVER_ID + 1);
 				int i;
 				a_migration_client = new unsigned int[c_migration_client];
 				info = new NET_SESSION_INFO(this);
