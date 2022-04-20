@@ -44,6 +44,7 @@ public:
 	bool						Accept();
 
 	void						ReceiveTCP();
+	virtual void				SendTCP(NET_BUFFER_INDEX* buf);
 	void						Destroy();
 
 	//virtual void				SetupRetranslation(NetSocketUV* socket, unsigned int clientID);

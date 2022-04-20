@@ -16,6 +16,8 @@ class	NET_SERVER_SESSION;
 class	Server;
 
 #define SERVER_ID 0
+#define MESSAGE_TYPE_HELLO 0
+#define MESSAGE_TYPE_LOST_CONNECTION 1
 
 struct NetBuffer
 {
@@ -71,7 +73,7 @@ public:
 
 	void Clear();
 
-	bool operator==(const NET_SESSION_INFO& si);
+	//bool operator==(const NET_SESSION_INFO& si);
 	bool operator!=(const NET_SESSION_INFO& si)
 	{
 		return !(*this == si);
@@ -137,10 +139,10 @@ public:
 	virtual void		Destroy();
 	virtual NetSocket*	NewSocket(Net* net) = 0;
 	NetBuffer*			GetRecvBuffer()																	{ return &recv_buf; }
-	void				OnLostConnection(void* sock);
+	void	void		OnLostConnection(NetSocket* sock) = 0;
 	bool				IsServer()																		{ return true; }
 	NET_BUFFER_LIST*	GetSendList()																	{ return &sending_list; }
-	NET_BUFFER_INDEX*	PrepareMessage(unsigned int sender_id, size_t length, unsigned char* data);
+	NET_BUFFER_INDEX*	PrepareMessage(unsigned int sender_id, int type, size_t length, unsigned char* data);
 	NetSocket*			getReceivingSocket()															{ return receiving_socket; }
 	void				setupReceivingSocket(NetSocket& socket)											{ receiving_socket = &socket; }
 	auto				GetConnectSockaddr()															{ return fConnectionSockaddr; }
@@ -188,6 +190,8 @@ public:
 
 	virtual bool		Create(int port, bool udp_tcp, bool listen);
 	virtual void		ReceiveTCP() = 0;
+	virtual void		SendTCP(NET_BUFFER_INDEX* buf) = 0;
+	virtual void		SendMessage(NET_BUFFER_INDEX* buf, Net_Address* addr);
 	//virtual void		SetupRetranslation(NetSocket* socket, unsigned int clientID) = 0;
 	int					GetSessionID()														{ return sessionID; }
 	bool				IsTCP()																{ return udp_tcp; }
@@ -254,7 +258,7 @@ public:
 	virtual bool		UpdateNet() = 0;
 	virtual void		Destroy();
 	void				FillServerInfo(NET_SERVER_INFO& info);
-
+	virtual void		OnLostConnetction(NetSocket* socket);
 	int					AddSessionInfo(NET_SESSION_INFO* session_info, NetSocket* socket);
 protected:
 	friend class		NetSocket;

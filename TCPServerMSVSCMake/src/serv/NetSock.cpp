@@ -47,7 +47,7 @@ NetSocket::NetSocket(Net* net)
 	session_id = 0;
 }
 
-NET_BUFFER_INDEX* Net::PrepareMessage(unsigned int sender_id, size_t length, unsigned char* data)
+NET_BUFFER_INDEX* Net::PrepareMessage(unsigned int sender_id, int type, size_t length, unsigned char* data)
 {
 	int struct_size = sizeof (Send_Message);
 	size_t len = struct_size + length;
@@ -57,11 +57,17 @@ NET_BUFFER_INDEX* Net::PrepareMessage(unsigned int sender_id, size_t length, uns
 	MEM_DATA buf;
 	buf.data = data;
 	buf.length = len;
+	
 	int index = list->AddBuffer(buf);
 	NET_BUFFER_INDEX* bi = list->Get(index);
 	
 	unsigned char* buf_data = bi->GetData();
-	
+	Send_Message* sm = (Send_Message*)buf_data;
+	sm->len = len;
+	sm->sender = sender_id;
+	sm->type = type;
+
+
 	if (length)
 	{
 		memcpy(&(buf_data[struct_size]), data, length);
@@ -102,6 +108,17 @@ bool NetSocket::Create(int port, bool udp_tcp, bool listen)
 	if (!udp_tcp)
 		this->addr = new Net_Address;
 	return true;
+}
+
+void NetSocket::SendMessage(NET_BUFFER_INDEX* buf, Net_Address* addr)
+{
+	if (buf)
+	{
+		if (IsTCP())
+		{
+			SendTCP(buf);
+		}
+	}
 }
 
 NetSocket* GetPtrSocket(void* ptr)
@@ -361,10 +378,10 @@ void NET_SESSION_INFO::Clear()
 	}
 }
 
-bool NET_SESSION_INFO::operator==(const NET_SESSION_INFO& si)
-{
-	return false;
-}
+//bool NET_SESSION_INFO::operator==(const NET_SESSION_INFO& si)
+//{
+//	return false;
+//}
 
 NET_SERVER_SESSION::NET_SERVER_SESSION(Net* net) : NET_SESSION_INFO(net)
 {
@@ -618,6 +635,47 @@ void Server::FillServerInfo(NET_SERVER_INFO& info)
 	info.start_time = start_time;
 
 	info.k_accept = count_accept;
+}
+
+void Server::OnLostConnetction(NetSocket* socket)
+{
+	unsigned int index = socket->GetClientID();
+
+	if (socket->session_id != -1)
+	{
+		NET_SERVER_SESSION* ss = sessions.Get(socket->session_id);
+		assert(ss);
+
+		bool is_host = (ss->a_client_id[0] == index);
+		if (is_host)
+		{
+			ss->enabled = false;
+		}
+
+		for (int i = 0; i < ss->c_client_id; i++)
+		{
+			unsigned int player_id = ss->a_client_id[i];
+			if (player_id != index)
+			{
+				NetSocket* socket_receiver = sockets.Get(player_id);
+				NET_BUFFER_INDEX* result = PrepareMessage(SERVER_ID, MESSAGE_TYPE_LOST_CONNECTION, 4, (unsigned char*)&index);
+				socket_receiver->SendMessage(result);
+			}
+		}
+	}
+
+	if (index || sockets.Get(0) == socket)
+		sockets.DeleteSocket(index);
+	else
+	{
+		int index_nohello = sockets_nohello.FindIndex(socket);
+		if (index_nohello != -1)
+		{
+			sockets_nohello.Delete(index_nohello);
+			socket->Destroy();
+			delete socket;
+		}
+	}
 }
 
 int Server::AddSessionInfo(NET_SESSION_INFO* session_info, NetSocket* socket)

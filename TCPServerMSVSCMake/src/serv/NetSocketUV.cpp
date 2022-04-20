@@ -99,7 +99,7 @@ bool NetSocketUV::Accept()
 		printf("Accepted client with ID:%d\n", ClientID);
 		//GetIP(getAddr(), true);
 		//return true;
-		std::thread TranslationThread(SetupRetranslation, accept_sock, server->count_accept);
+		std::thread TranslationThread(SetupRetranslation, accept_sock, ClientID);
 		TranslationThread.detach();
 		/*std::vector<std::thread> translationThreadList;
 		translationThreadList.push_back(std::thread{ SetupRetranslation, accept_sock, ClientID });
@@ -140,19 +140,31 @@ void NetSocketUV::ReceiveTCP()
 	
 }
 
+void NetSocketUV::SendTCP(NET_BUFFER_INDEX* buf)
+{
+	if (buf->length > 0)
+	{
+		uv_buf_t buffer;
+		buffer.len = buf->length;
+		buffer.base = (char*)buf->data;
+		int r = uv_write(((NetBufferUV*)buf)->GetPtrWrite(), (uv_stream_t*)GetPtrTCP(sock), &buffer, 1, OnWrite);
+		assert(r == 0);
+	}
+}
+
 void OnReadTCP(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)
 {
 	NetSocketUV* uvsocket = (NetSocketUV*)GetNetSocketPtr(stream);
 	uvsocket->getNet()->setupReceivingSocket(*uvsocket);
-	printf("Reading data from client with ID: %d\n", uvsocket->GetClientID());
 	if (nread < 0)
 	{
-		printf("read buffer < 0!\n");
+		printf("Client disconnected!\n");
 		uvsocket->getNet()->OnLostConnection(uvsocket);
-		OnCloseSocket((uv_handle_t*)stream);
+		//OnCloseSocket((uv_handle_t*)stream);
 	}
 	else
 	{
+		printf("Reading data from client with ID: %d\n", uvsocket->GetClientID());
 		NetBuffer* recv_buff = uvsocket->getNet()->GetRecvBuffer();
 		assert(buf->base == (char*)recv_buff->GetData());
 		recv_buff->SetMaxSize(nread);
