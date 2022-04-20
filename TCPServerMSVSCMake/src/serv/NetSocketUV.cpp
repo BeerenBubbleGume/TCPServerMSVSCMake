@@ -100,7 +100,7 @@ bool NetSocketUV::Accept()
 		//GetIP(getAddr(), true);
 		//return true;
 		std::thread *ret = new std::thread;
-		for (int i = -1; i < ClientID; i++)
+		for (int i = 0; i <= ClientID; i++)
 		{
 			ret[i] = std::thread(SetupRetranslation, accept_sock, ClientID);
 			ret[i].detach();
