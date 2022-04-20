@@ -248,12 +248,15 @@ void /*NetSocketUV::*/SetupRetranslation(NetSocketUV* socket, unsigned int clien
 		IDstr += "in_binary_h.264";*/
 		/*std::vector<char> strID;
 		std::to_chars(strID.data(), strID.data() + strID.size(), clientID);*/
-
-		CString IDstr(clientID);
-		IDstr += "in_binary_h.264";
-		if (std::filesystem::exists((std::string)IDstr) == true) {
+		CString IDStr;
+		if(clientID == 0)
+			IDStr = '0';
+		else
+			IDStr = (int)clientID;
+		IDStr += "in_binary_h.264";
+		if (std::filesystem::exists((std::string)IDStr) == true) {
 			
-			printf("Client file reading %s\n", IDstr.c_str());
+			printf("Client file reading %s\n", IDStr.c_str());
 			FILE* proxy = nullptr;
 #ifdef WIN32
 			//system("RTSPProxyServerForClient.exe -d -c -%s");
@@ -269,7 +272,7 @@ void /*NetSocketUV::*/SetupRetranslation(NetSocketUV* socket, unsigned int clien
 			/* Handeling Chile Process */
 			
 			if (pid == 0) {
-				char* execv_str[] = { "./RTSP", (char*)IDstr.c_str(), NULL};
+				char* execv_str[] = { "./RTSP", (char*)IDStr.c_str(), NULL};
 				if (execv("./RTSP", execv_str) < 0) {
 					status = -1;
 					perror("ERROR\n");
@@ -296,7 +299,7 @@ void /*NetSocketUV::*/SetupRetranslation(NetSocketUV* socket, unsigned int clien
 		}
 		else
 		{
-			printf("Cannot find client's file with ID: %s!", IDstr.c_str());
+			printf("Cannot find client's file with ID: %s!", IDStr.c_str());
 			exit(1);
 		}
 	}
