@@ -241,7 +241,7 @@ void NetSocketUV::Destroy()
 void /*NetSocketUV::*/SetupRetranslation(NetSocketUV* socket, unsigned int clientID)
 {
 	NetSocketUV* client = (NetSocketUV*)&socket;
-	std::this_thread::sleep_for(std::chrono::milliseconds(100));
+	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 	std::cout << "thrad id: " << std::this_thread::get_id() << std::endl;
 	assert(client);
 	if (clientID >= 0)
