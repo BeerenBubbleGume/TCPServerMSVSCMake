@@ -603,7 +603,7 @@ bool Server::Create(bool internet)
 
 NetSocket* Server::GetServerTCPSocket()
 {
-	int max = sockets.GetMaxCount();
+	int max = sockets.GetMaxCount();   
 	if (max > 0)
 		return sockets.Get(0);
 	return NULL;
