@@ -182,9 +182,9 @@ void OnAllocBuffer(uv_handle_t *handle, size_t suggested_size, uv_buf_t *buf)
 	NetBuffer* recv_buffer = net_sock->getNet()->GetRecvBuffer();
 
 	unsigned int max_length = recv_buffer->GetMaxSize();
-	if (max_length < 800000)
-		recv_buffer->SetMaxSize(800000);
-	buf->len = 800000;
+	if (max_length < suggested_size)
+		recv_buffer->SetMaxSize(suggested_size);
+	buf->len = suggested_size;
 	buf->base = (char*)recv_buffer->GetData();
 }
 
