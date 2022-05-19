@@ -47,7 +47,7 @@ NetSocket::NetSocket(Net* net)
 	session_id = 0;
 }
 
-NET_BUFFER_INDEX* Net::PrepareMessage(unsigned int sender_id, int type, size_t length, unsigned char* data)
+NET_BUFFER_INDEX* Net::PrepareMessage(unsigned int sender_id, MESSAGE_TYPE type, size_t length, unsigned char* data)
 {
 	int struct_size = sizeof (Send_Message);
 	size_t len = struct_size + length;

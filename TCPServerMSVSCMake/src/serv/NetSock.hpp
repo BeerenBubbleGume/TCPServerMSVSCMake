@@ -152,7 +152,7 @@ public:
 	virtual void		OnLostConnection(NetSocket* socket) = 0;
 	bool				IsServer()																		{ return true; }
 	NET_BUFFER_LIST*	GetSendList()																	{ return &sending_list; }
-	NET_BUFFER_INDEX*	PrepareMessage(unsigned int sender_id, int type, size_t length, unsigned char* data);
+	NET_BUFFER_INDEX*	PrepareMessage(unsigned int sender_id, MESSAGE_TYPE type, size_t length, unsigned char* data);
 	NetSocket*			getReceivingSocket()															{ return receiving_socket; }
 	void				setupReceivingSocket(NetSocket& socket)											{ receiving_socket = &socket; }
 	auto				GetConnectSockaddr()															{ return fConnectionSockaddr; }
