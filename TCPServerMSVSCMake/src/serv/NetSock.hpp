@@ -158,7 +158,7 @@ public:
 	auto				GetConnectSockaddr()															{ return fConnectionSockaddr; }
 	SessionList&		GetSession()																	{ return sessions; }
 
-	virtual void		ReceiveMessage(MESSAGE_TYPE type, unsigned sender, unsigned length, void* data) = 0;
+	virtual void		ReceiveMessage(MESSAGE_TYPE type, unsigned sender, unsigned length, unsigned char* data) = 0;
 
 protected:
 	sockaddr			fConnectionSockaddr;
@@ -277,7 +277,7 @@ public:
 	virtual void		OnLostConnection(NetSocket* socket);
 	int					AddSessionInfo(NET_SESSION_INFO* session_info, NetSocket* socket);
 
-	void				ReceiveMessage(MESSAGE_TYPE type, unsigned sender, unsigned length, void* data);
+	void				ReceiveMessage(MESSAGE_TYPE type, unsigned sender, unsigned length, unsigned char* data);
 
 protected:
 	friend class		NetSocket;

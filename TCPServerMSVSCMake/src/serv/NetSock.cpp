@@ -747,7 +747,7 @@ int Server::AddSessionInfo(NET_SESSION_INFO* session_info, NetSocket* socket)
 	return index;
 }
 
-void Server::ReceiveMessage(MESSAGE_TYPE type, unsigned sender, unsigned length, void* data)
+void Server::ReceiveMessage(MESSAGE_TYPE type, unsigned sender, unsigned length, unsigned char* data)
 {
 	switch (type)
 	{
