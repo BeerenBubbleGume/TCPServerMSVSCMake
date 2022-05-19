@@ -192,31 +192,16 @@ NetBuffer::~NetBuffer()
 
 int NetBuffer::HasMessage(NetSocket* sockt)
 {
-	int struct_size = sizeof(SEND_MESSAGE);
-
-	unsigned char* guid_char = (unsigned char*)&(socket->net->guid);
-	int guid_len = sizeof(GUID_GAME);
-	int len = length - position;
-	if (len < guid_len)
-		guid_len = len;
-	// ��������� �� ������� � ��������� ������� GUID_GAME
-	for (int i = 0; i < guid_len; i++)
-	{
-		if (data[position + i] != guid_char[i])
-		{
-			// ��������� ����������, ��� ��� ������ �������� ���������
-			socket->Error();
-			return -1;
-		}
-	}
-
+	int struct_size = sizeof(Send_Message);
+	int len = buff_length - position;
+	
 	int s = position + struct_size;
-	if (s <= length)
+	if (s <= buff_length)
 	{
 		// �� ������� ����, ������� ���� ���������
-		SEND_MESSAGE* sm = (SEND_MESSAGE*)&(data[position]);
-		s += sm->length;
-		if (s <= length)
+		Send_Message* sm = (Send_Message*)&(DataBuff[position]);
+		s += sm->len;
+		if (s <= buff_length)
 		{
 			// ������� ������ ���������
 			return s;
