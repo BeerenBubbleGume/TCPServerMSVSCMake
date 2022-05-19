@@ -141,7 +141,7 @@ void NetSocketUV::ReceiveTCP()
 	{
 		printf("cannot open file\n");
 	}
-	ReceiveMessage();
+	ReceiveMessages();
 	
 }
 
