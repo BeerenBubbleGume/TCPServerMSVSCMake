@@ -718,7 +718,7 @@ void Server::ReceiveMessage(MESSAGE_TYPE type, unsigned sender, unsigned length,
 			NET_BUFFER_INDEX* result = PrepareMessage(SENDER_ID, MESSAGE_TYPE_ENUM_SESSION, buf.length, buf.data);
 			if (sender)
 			{
-				sockets.Get(sender)->SendMessageW(result, NULL);
+				sockets.Get(sender)->SendMessage(result, NULL);
 			}
 		}
 	}

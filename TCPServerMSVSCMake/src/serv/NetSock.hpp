@@ -89,6 +89,7 @@ public:
 	// }
 
 protected:
+	friend class		Server;
 	CString				ip;
 	CString				name;
 	NetSocket**			a_client;
