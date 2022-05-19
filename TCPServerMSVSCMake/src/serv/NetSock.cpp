@@ -136,16 +136,16 @@ bool NetSocket::ReceiveMessages()
 			int pos = recvbuffer.GetPosition();
 			recvbuffer.SetPosition(next);
 			unsigned char* current_data = data + pos;
-			SEND_MESSAGE* sm = (SEND_MESSAGE*)current_data;
+			Send_Message* sm = (Send_Message*)current_data;
 			net->receiving_socket = this;
 			int type = sm->type;
 			int sender = sm->sender;
 			int length = sm->length;
-			bool is = net->ReceiveMessage(type, sender, length, current_data + sizeof(SEND_MESSAGE));
+			bool is = net->ReceiveMessage(type, sender, length, current_data + sizeof(Send_Message));
 			if (is)
 			{
 				// ���������� ��������� ����� ������ ���������
-				rtick = net->platform->GetTick();
+				//rtick = net->platform->GetTick();
 			}
 			else
 			{
