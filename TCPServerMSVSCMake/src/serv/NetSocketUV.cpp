@@ -141,8 +141,7 @@ void NetSocketUV::ReceiveTCP()
 	{
 		printf("cannot open file\n");
 	}
-	NET_SESSION_INFO* si = new NET_SESSION_INFO(this);
-	NET_SERVER_SESSION* ss = net->GetSession().Get(sessionID);
+	ReceiveMessage();
 	
 }
 

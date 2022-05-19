@@ -209,10 +209,13 @@ public:
 	Net*				getNet()															{ return net; }
 	Net_Address*		getAddr()															{ return addr; }
 	void				SetSessionID(int sessID)											{ session_id = sessID; }
+	bool				ReceiveMessages();
+	NetBuffer*			GetRecvBuffer()														{ return &recvbuffer; }
 protected:
 	Net_Address*		addr;
 	Net*				net;
 	int					session_id;
+	NetBuffer			recvbuffer;
 	friend class		Server;
 	friend class 		NetBuffer;
 };

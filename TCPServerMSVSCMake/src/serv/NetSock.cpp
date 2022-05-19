@@ -121,6 +121,51 @@ void NetSocket::SendMessage(NET_BUFFER_INDEX* buf, Net_Address* addr)
 	}
 }
 
+bool NetSocket::ReceiveMessages()
+{
+	bool result = false;
+	int next = recvbuffer.HasMessage(this);
+	if (next != -1)
+	{
+		result = true;
+		unsigned int clientID = this->ClientID;
+		Net* net = this->net;
+		unsigned char* data = recvbuffer.GetData();
+		do
+		{
+			int pos = recvbuffer.GetPosition();
+			recvbuffer.SetPosition(next);
+			unsigned char* current_data = data + pos;
+			SEND_MESSAGE* sm = (SEND_MESSAGE*)current_data;
+			net->receiving_socket = this;
+			int type = sm->type;
+			int sender = sm->sender;
+			int length = sm->length;
+			bool is = net->ReceiveMessage(type, sender, length, current_data + sizeof(SEND_MESSAGE));
+			if (is)
+			{
+				// ���������� ��������� ����� ������ ���������
+				rtick = net->platform->GetTick();
+			}
+			else
+			{
+				// ����� ��������� ��-�� ����������� ���������
+				return result;
+			}
+			next = recvbuffer.HasMessage(this);
+		} while (next != -1);
+		int pos = recvbuffer.GetPosition();
+		int len = recvbuffer.GetLength();
+		if (pos == len)
+		{
+			// � ������ ��� ����������, ���� ������� �� ������
+			recvbuffer.SetPosition(0);
+			recvbuffer.SetLength(0);
+		}
+	}
+	return result;
+}
+
 NetSocket* GetPtrSocket(void* ptr)
 {
 	return *((NetSocket**)ptr);
@@ -147,7 +192,37 @@ NetBuffer::~NetBuffer()
 
 int NetBuffer::HasMessage(NetSocket* sockt)
 {
-	return 0;
+	int struct_size = sizeof(SEND_MESSAGE);
+
+	unsigned char* guid_char = (unsigned char*)&(socket->net->guid);
+	int guid_len = sizeof(GUID_GAME);
+	int len = length - position;
+	if (len < guid_len)
+		guid_len = len;
+	// ��������� �� ������� � ��������� ������� GUID_GAME
+	for (int i = 0; i < guid_len; i++)
+	{
+		if (data[position + i] != guid_char[i])
+		{
+			// ��������� ����������, ��� ��� ������ �������� ���������
+			socket->Error();
+			return -1;
+		}
+	}
+
+	int s = position + struct_size;
+	if (s <= length)
+	{
+		// �� ������� ����, ������� ���� ���������
+		SEND_MESSAGE* sm = (SEND_MESSAGE*)&(data[position]);
+		s += sm->length;
+		if (s <= length)
+		{
+			// ������� ������ ���������
+			return s;
+		}
+	}
+	return -1;
 }
 
 void NetBuffer::SetMaxSize(size_t size)
