@@ -145,6 +145,7 @@ public:
 	void			AddToExisting(int index);
 	void			AddToDeleted(int index);
 	int				GetIndex(int index) { return m_existing[index]; }
+	int				GetIndexCount()		{ return k_existing; }
 };	
 
 class CArrayPtr : public CArrayBase

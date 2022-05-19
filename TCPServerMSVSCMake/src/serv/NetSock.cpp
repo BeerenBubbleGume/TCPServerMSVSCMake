@@ -687,6 +687,71 @@ int Server::AddSessionInfo(NET_SESSION_INFO* session_info, NetSocket* socket)
 	return index;
 }
 
+void Server::ReceiveMessage(MESSAGE_TYPE type, unsigned sender, unsigned length, void* data)
+{
+	switch (type)
+	{
+	case MESSAGE_TYPE_HELLO:
+		break;
+	case MESSAGE_TYPE_LOST_CONNECTION:
+		break;
+	case MESSAGE_TYPE_ENUM_SESSION:
+	{	
+		int c_session_info = sessions.GetIndexCount();
+		if (c_session_info)
+		{
+			CString ip;
+			int c_session_info = sessions.GetIndexCount();
+			int i = 0, count_session_info = 0, count_session_info_enabled = 0;
+			do
+			{
+				int index = sessions.GetIndex(i);
+				NET_SERVER_SESSION* ss = sessions.Get(index);
+				if (ss->enabled)
+				{
+					count_session_info_enabled++;
+				}
+				count_session_info++;
+				i++;
+			} while (i < c_session_info);
+			MEM_DATA buf;
+			NET_BUFFER_INDEX* result = PrepareMessage(SENDER_ID, MESSAGE_TYPE_ENUM_SESSION, buf.length, buf.data);
+			if (sender)
+			{
+				sockets.Get(sender)->SendMessageW(result, NULL);
+			}
+		}
+	}
+	break;
+	case MESSAGE_TYPE_STOP_SERVER:
+		break;
+	case MESSEGE_TYPE_SESSION_INFO:
+	{
+		NET_SESSION_INFO* si = new NET_SESSION_INFO(this);
+		NetSocket* socket = sockets.Get(sender);
+		if (socket->sessionID != -1)
+		{
+			NET_SERVER_SESSION* session_server = sessions.Get(socket->sessionID);
+		}
+		else
+		{
+			if (socket->sessionID == -1)
+				int index = AddSessionInfo(si, socket);
+			else
+			{
+				NET_SERVER_SESSION* session_server = sessions.Get(socket->sessionID);
+				si->ip = session_server->ip;
+				((NET_SESSION_INFO&)*session_server) = *si;
+			}
+		}
+		delete si;
+	}
+		break;
+	default:
+		break;
+	}
+}
+
 NET_SERVER_INFO::NET_SERVER_INFO()
 {
 	current_time = 0;

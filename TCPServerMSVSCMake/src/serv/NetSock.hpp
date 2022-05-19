@@ -16,8 +16,17 @@ class	NET_SERVER_SESSION;
 class	Server;
 
 #define SERVER_ID 0
-#define MESSAGE_TYPE_HELLO 0
-#define MESSAGE_TYPE_LOST_CONNECTION 1
+//#define MESSAGE_TYPE_HELLO 0
+//#define MESSAGE_TYPE_LOST_CONNECTION 1
+
+enum MESSAGE_TYPE
+{
+	MESSAGE_TYPE_HELLO,
+	MESSAGE_TYPE_LOST_CONNECTION,
+	MESSAGE_TYPE_ENUM_SESSION,
+	MESSAGE_TYPE_STOP_SERVER,
+	MESSEGE_TYPE_SESSION_INFO
+};
 
 struct NetBuffer
 {
@@ -148,6 +157,7 @@ public:
 	auto				GetConnectSockaddr()															{ return fConnectionSockaddr; }
 	SessionList&		GetSession()																	{ return sessions; }
 
+	virtual void		ReceiveMessage(MESSAGE_TYPE type, unsigned sender, unsigned length, void* data) = 0;
 
 protected:
 	sockaddr			fConnectionSockaddr;
@@ -261,6 +271,9 @@ public:
 	void				FillServerInfo(NET_SERVER_INFO& info);
 	virtual void		OnLostConnection(NetSocket* socket);
 	int					AddSessionInfo(NET_SESSION_INFO* session_info, NetSocket* socket);
+
+	void				ReceiveMessage(MESSAGE_TYPE type, unsigned sender, unsigned length, void* data);
+
 protected:
 	friend class		NetSocket;
 	friend class		NET_SERVER_SESSION;
