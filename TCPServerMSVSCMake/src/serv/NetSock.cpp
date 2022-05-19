@@ -138,9 +138,9 @@ bool NetSocket::ReceiveMessages()
 			unsigned char* current_data = data + pos;
 			Send_Message* sm = (Send_Message*)current_data;
 			net->receiving_socket = this;
-			int type = sm->type;
+			MESSAGE_TYPE type = sm->type;
 			int sender = sm->sender;
-			int length = sm->length;
+			int length = sm->len;
 			bool is = net->ReceiveMessage(type, sender, length, current_data + sizeof(Send_Message));
 			if (is)
 			{

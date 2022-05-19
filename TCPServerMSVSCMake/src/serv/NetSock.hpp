@@ -169,6 +169,7 @@ protected:
 	NET_BUFFER_LIST		sending_list;
 	NetBuffer			recv_buf;
 	SessionList			sessions;
+	friend class		NetSocket;
 };
 
 struct NET_SOCKET_INFO
@@ -297,7 +298,7 @@ protected:
 struct Send_Message
 {
 	unsigned int		sender;
-	int					type;
+	MESSAGE_TYPE		type;
 	int					len;
 };
 
