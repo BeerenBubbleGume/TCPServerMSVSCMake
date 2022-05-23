@@ -85,7 +85,7 @@ bool NetSocketUV::GetIP(Net_Address* addr, bool own_or_peer)
 		printf("Current Host Name: %s\n", host);
 		printf("Host IP: %s\n", IP);
 
-		freeaddrinfo(info);
+		//freeaddrinfo(info);
 		return true;
 	}
 	else
