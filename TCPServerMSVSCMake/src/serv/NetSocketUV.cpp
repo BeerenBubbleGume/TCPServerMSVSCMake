@@ -35,7 +35,7 @@ bool NetSocketUV::Create(int port, bool udp_tcp, bool listen)
 		if (listen)
 		{
 			sockaddr_in* sock_addres = new sockaddr_in;
-			GetIP(addr, true);
+			//GetIP(addr, true);
 			int i = uv_ip4_addr("0.0.0.0", port, sock_addres);
 			assert(i == 0);
 			int b = uv_tcp_bind(tcp, (sockaddr*)sock_addres, 0);
