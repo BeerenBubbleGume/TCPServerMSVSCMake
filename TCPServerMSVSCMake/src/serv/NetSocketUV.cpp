@@ -55,26 +55,35 @@ bool NetSocketUV::GetIP(Net_Address* addr, bool own_or_peer)
 	{
 		std::cout << "Set IP to socket!" << std::endl;
 		udp_tcp = true;
-		struct addrinfo hints, *info, *p;
-		int gai_result;
+		//struct addrinfo hints, *info, *p;
+		//int gai_result;
 
-		char hostname[1024];
-		hostname[1023] = '\0';
-		gethostname(hostname, 1023);
+		//char hostname[1024];
+		//hostname[1023] = '\0';
+		//gethostname(hostname, 1023);
 
-		memset(&hints, 0, sizeof hints);
-		hints.ai_family = AF_UNSPEC; /*either IPV4 or IPV6*/
-		hints.ai_socktype = SOCK_STREAM;
-		hints.ai_flags = AI_CANONNAME;
-		if ((gai_result = getaddrinfo(hostname, "https", &hints, &info)) != 0) {
-			fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(gai_result));
-			exit(1);
-		}
+		//memset(&hints, 0, sizeof hints);
+		//hints.ai_family = AF_UNSPEC; /*either IPV4 or IPV6*/
+		//hints.ai_socktype = SOCK_STREAM;
+		//hints.ai_flags = AI_CANONNAME;
+		//if ((gai_result = getaddrinfo(hostname, "https", &hints, &info)) != 0) {
+		//	fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(gai_result));
+		//	exit(1);
+		//}
 
-		for (p = info; p != NULL; p = p->ai_next) {
-			printf("hostname: %s\n", p->ai_canonname);
-		}
+		//for (p = info; p != NULL; p = p->ai_next) {
+		//	printf("hostname: %s\n", p->ai_canonname);
+		//}
 		
+		char host[256];
+		char* IP;
+		struct hostent* host_entry;
+		int hostname;
+		hostname = gethostname(host, sizeof(host)); //find the host name
+		host_entry = gethostbyname(host); //find host information
+		IP = inet_ntoa(*((struct in_addr*)host_entry->h_addr_list[0])); //Convert into IP string
+		printf("Current Host Name: %s\n", host);
+		printf("Host IP: %s\n", IP);
 
 		freeaddrinfo(info);
 		return true;
