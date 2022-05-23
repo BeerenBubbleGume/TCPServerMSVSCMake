@@ -40,7 +40,7 @@ public:
 	virtual						~NetSocketUV();
 
 	virtual bool				Create(int port, bool udp_tcp, bool listen);
-	const char*					GetIP(Net_Address* addr, bool own_or_peer);
+	virtual bool				GetIP(Net_Address* addr, bool own_or_peer);
 	bool						Accept();
 
 	void						ReceiveTCP();

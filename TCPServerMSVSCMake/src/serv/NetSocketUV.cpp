@@ -35,7 +35,7 @@ bool NetSocketUV::Create(int port, bool udp_tcp, bool listen)
 		if (listen)
 		{
 			sockaddr_in* sock_addres = new sockaddr_in;
-			//GetIP(addr, true);
+			GetIP(addr, true);
 			int i = uv_ip4_addr("0.0.0.0", port, sock_addres);
 			assert(i == 0);
 			int b = uv_tcp_bind(tcp, (sockaddr*)sock_addres, 0);
@@ -49,7 +49,7 @@ bool NetSocketUV::Create(int port, bool udp_tcp, bool listen)
 	return false;
 }
 
-const char* NetSocketUV::GetIP(Net_Address* addr, bool own_or_peer)
+bool NetSocketUV::GetIP(Net_Address* addr, bool own_or_peer)
 {
 	if (own_or_peer)
 	{
@@ -66,7 +66,7 @@ const char* NetSocketUV::GetIP(Net_Address* addr, bool own_or_peer)
 		hints.ai_family = AF_UNSPEC; /*either IPV4 or IPV6*/
 		hints.ai_socktype = SOCK_STREAM;
 		hints.ai_flags = AI_CANONNAME;
-		if ((gai_result = getaddrinfo(hostname, "rtsp", &hints, &info)) != 0) {
+		if ((gai_result = getaddrinfo(hostname, "https", &hints, &info)) != 0) {
 			fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(gai_result));
 			exit(1);
 		}
@@ -77,9 +77,10 @@ const char* NetSocketUV::GetIP(Net_Address* addr, bool own_or_peer)
 		
 
 		freeaddrinfo(info);
+		return true;
 	}
 	else
-		return nullptr;
+		return false;
 }
 
 bool NetSocketUV::Accept()
