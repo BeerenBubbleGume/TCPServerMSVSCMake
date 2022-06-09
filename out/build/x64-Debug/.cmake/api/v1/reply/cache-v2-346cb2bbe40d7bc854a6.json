@@ -663,7 +663,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "4"
+			"value" : "8"
 		},
 		{
 			"name" : "CMAKE_PLATFORM_INFO_INITIALIZED",

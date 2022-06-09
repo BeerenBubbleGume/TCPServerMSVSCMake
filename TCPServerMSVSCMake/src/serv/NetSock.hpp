@@ -212,6 +212,8 @@ public:
 	void				SetSessionID(int sessID)											{ session_id = sessID; }
 	bool				ReceiveMessages();
 	NetBuffer*			GetRecvBuffer()														{ return &recvbuffer; }
+	virtual bool		GetIP(CString& addr, bool own_or_peer);
+
 protected:
 	Net_Address*		addr;
 	Net*				net;
@@ -319,8 +321,8 @@ protected:
 
 struct Net_Address
 {
-	CString address;
-	int port;
+	CString				ip;
+	int					port;
 
 	void				FromStringIP(const char* ip);
 	void				Serialize(CString* stream);

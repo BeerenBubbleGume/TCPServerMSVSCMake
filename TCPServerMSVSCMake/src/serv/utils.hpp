@@ -169,22 +169,84 @@ public:
 	virtual void	LoadFromFile(FILE* file);
 };
 
-class CStreamFile
+class CStream
 {
 protected:
 
-	int				mode;
+	int mode; // read/write/add
+
+	unsigned int bytes;	
+
+	CString name;
+
+public:
+
+	CStream();
+
+	virtual ~CStream();
+
+	virtual void Close() = 0;
+	virtual unsigned int GetLength() = 0;	
+	virtual unsigned int GetPosition() = 0;
+	
+	virtual void SetPosition(unsigned int pos) = 0;
+	void Seek(unsigned int pos) { SetPosition(pos); }
+
+	virtual void ChangeMode(int mode) = 0;
+
+	bool IsStoring();
+	bool IsLoading();
+
+	const char* GetName() { return name.c_str(); }
+
+	// ����� ������
+	void SetMode(int mode);
+	int GetMode() { return mode; }
+
+	virtual unsigned int
+		Write(void* m_data, unsigned int k_data) = 0;
+	virtual unsigned int
+		Read(void* m_data, unsigned int k_data) = 0;
+
+	void operator<<(bool& value);
+	void operator<<(char& value);
+	void operator<<(unsigned char& value);
+	void operator<<(CString& value);
+
+	void operator<<(int& value);
+	void operator<<(short& value);
+	void operator<<(unsigned short& value);
+	void operator<<(float& value);
+	void operator<<(double& value);
+	void operator<<(unsigned int& value);
+	void operator<<(CSize& value);
+	void operator<<(CPoint& value);
+
+
+	void operator>>(bool& value);
+	void operator>>(char& value);
+	void operator>>(unsigned char& value);
+	void operator>>(CString& value);
+
+	void operator>>(int& value);
+	void operator>>(short& value);
+	void operator>>(unsigned short& value);
+	void operator>>(float& value);
+	void operator>>(double& value);
+	void operator>>(unsigned int& value);
+	void operator>>(CSize& value);
+	void operator>>(CPoint& value);
+};
+
+class CStreamFile : public CStream
+{
+protected:
 	FILE*			stream;
 
 	unsigned int	bytes;
-
-	CString			name;
-
 	FILE*			fopen_file(const char* name, const char* mode);
 	const unsigned short* 
 					utf8to16(const unsigned char* str_utf8);
-
-
 public:
 	virtual void	Close();
 	bool			Open(const char* fileName, int mode);
@@ -199,7 +261,6 @@ public:
 					GetPosition();
 
 	virtual void	SetPosition(unsigned int pos);
-	void			Seek(unsigned int pos) { SetPosition(pos); }
 
 	virtual unsigned int 
 					Write(void* m_data, unsigned int k_data);
@@ -208,43 +269,6 @@ public:
 
 	virtual void	ChangeMode(int mode);
 
-	bool			IsStoring();
-	bool			IsLoading();
-
-	const char*		GetName() { return name.c_str(); }
-
-	void			SetMode(int mode);
-	int				GetMode() { return mode; }
-
-
-	void operator<<(bool& value);
-	void operator<<(char& value);
-	void operator<<(unsigned char& value);
-	void operator<<(CString& value);
-	
-	void operator<<(int& value);
-	void operator<<(short& value);
-	void operator<<(unsigned short& value);
-	void operator<<(float& value);
-	void operator<<(double& value);
-	void operator<<(unsigned int& value);
-	void operator<<(CSize& value);
-	void operator<<(CPoint& value);
-
-	
-	void operator>>(bool& value);
-	void operator>>(char& value);
-	void operator>>(unsigned char& value);
-	void operator>>(CString& value);
-
-	void operator>>(int& value);
-	void operator>>(short& value);
-	void operator>>(unsigned short& value);
-	void operator>>(float& value);
-	void operator>>(double& value);
-	void operator>>(unsigned int& value);
-	void operator>>(CSize& value);
-	void operator>>(CPoint& value);
 };
 
 struct CSize

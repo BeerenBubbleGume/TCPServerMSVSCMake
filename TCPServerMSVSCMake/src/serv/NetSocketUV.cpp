@@ -35,7 +35,6 @@ bool NetSocketUV::Create(int port, bool udp_tcp, bool listen)
 		if (listen)
 		{
 			sockaddr_in* sock_addres = new sockaddr_in;
-			GetIP(addr, true);
 			int i = uv_ip4_addr("0.0.0.0", port, sock_addres);
 			assert(i == 0);
 			int b = uv_tcp_bind(tcp, (sockaddr*)sock_addres, 0);
@@ -49,47 +48,42 @@ bool NetSocketUV::Create(int port, bool udp_tcp, bool listen)
 	return false;
 }
 
-bool NetSocketUV::GetIP(Net_Address* addr, bool own_or_peer)
+char address_converter[30];
+
+bool NetSocketUV::GetIP(CString& addr, bool own_or_peer)
 {
-	if (own_or_peer)
+	if (NetSocket::GetIP(addr, own_or_peer))
 	{
-		std::cout << "Set IP to socket!" << std::endl;
-		udp_tcp = true;
-		//struct addrinfo hints, *info, *p;
-		//int gai_result;
+		uv_tcp_t* socket = GetPtrTCP(sock);
+		sockaddr sockName;
+		memset(&sockName, -1, sizeof(sockName));
+		int nameLen = sizeof(sockName);
+		int r;
 
-		//char hostname[1024];
-		//hostname[1023] = '\0';
-		//gethostname(hostname, 1023);
+		if (own_or_peer)
+			r = uv_tcp_getpeername(socket, &sockName, &nameLen);
+		else
+			r = uv_tcp_getsockname(socket, &sockName, &nameLen);
 
-		//memset(&hints, 0, sizeof hints);
-		//hints.ai_family = AF_UNSPEC; /*either IPV4 or IPV6*/
-		//hints.ai_socktype = SOCK_STREAM;
-		//hints.ai_flags = AI_CANONNAME;
-		//if ((gai_result = getaddrinfo(hostname, "https", &hints, &info)) != 0) {
-		//	fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(gai_result));
-		//	exit(1);
-		//}
+		if (r == 0)
+		{
+			r = uv_ip4_name((sockaddr_in*)&sockName, address_converter, sizeof(address_converter));
+			if (r == 0)
+			{
+				addr = address_converter;
+				unsigned char* port_ptr = (unsigned char*)&(((sockaddr_in*)&sockName)->sin_port);
+				int port = port_ptr[1];
+				port += port_ptr[0] << 8;
+				addr += ':';
+				CString d;
+				d.IntToString(port);
+				addr += d;
+			}
+		}
 
-		//for (p = info; p != NULL; p = p->ai_next) {
-		//	printf("hostname: %s\n", p->ai_canonname);
-		//}
-		
-		char host[256];
-		char* IP;
-		struct hostent* host_entry;
-		int hostname;
-		hostname = gethostname(host, sizeof(host)); //find the host name
-		host_entry = gethostbyname(host); //find host information
-		IP = inet_ntoa(*((struct in_addr*)host_entry->h_addr_list[0])); //Convert into IP string
-		printf("Current Host Name: %s\n", host);
-		printf("Host IP: %s\n", IP);
-
-		//freeaddrinfo(info);
 		return true;
 	}
-	else
-		return false;
+	return false;
 }
 
 bool NetSocketUV::Accept()
@@ -100,19 +94,25 @@ bool NetSocketUV::Accept()
 	uv_tcp_t* host = GetPtrTCP(sock);
 	if (uv_accept((uv_stream_t*)host, (uv_stream_t*)client) == 0)
 	{	
-		//std::thread receivThread(StartReadingThread, client);
-		uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadTCP);
-		ServerUV* server = ((ServerUV*)net);
-		server->count_accept++;
-		server->ConnectSocket(accept_sock, server->count_accept);
-		server->sockets_nohello.Add(accept_sock);
-		printf("Accepted client with ID:%d\n", ClientID);
-		//GetIP(getAddr(), true);
-		//return true;
-		std::thread *ret = new std::thread;
-		ret[ClientID] = std::thread(SetupRetranslation, accept_sock, ClientID);
-		ret[ClientID].detach();
-		ret[ClientID].~thread();
+		if (uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadTCP) == 0)
+		{
+			GetIP(addr->ip, true);
+			
+			ServerUV* server = ((ServerUV*)net);
+			server->count_accept++;
+			server->ConnectSocket(accept_sock, server->count_accept);
+			server->sockets_nohello.Add(accept_sock);
+			
+			printf("Accepted client with ID:%d\n", ClientID);
+			std::thread* ret = new std::thread;
+			ret[ClientID] = std::thread(SetupRetranslation, accept_sock, ClientID);
+			ret[ClientID].detach();
+			ret[ClientID].~thread();
+			
+			return true;
+		}
+		else
+			return false;
 		/*std::thread TranslationThread(SetupRetranslation, accept_sock, ClientID);
 		TranslationThread.detach();*/
 		/*std::vector<std::thread> translationThreadList;

@@ -267,15 +267,15 @@ void NetBuffer::Delete(int length)
 void Net_Address::FromStringIP(const char* ip)
 {
 	port = 0;
-	address = ip;
-	int pos = address.Find(":");
+	this->ip = ip;
+	int pos = this->ip.Find(":");
 	if (pos != -1)
 	{
 		// ������� ����
-		int len = address.GetLength();
-		CString port_str = address.Right(len - pos - 1);
+		int len = this->ip.GetLength();
+		CString port_str = this->ip.Right(len - pos - 1);
 		port = port_str.StringToInt();
-		address = address.Left(pos);
+		this->ip = this->ip.Left(pos);
 	}
 	else
 		port = SERVER_DEFAULT_PORT;

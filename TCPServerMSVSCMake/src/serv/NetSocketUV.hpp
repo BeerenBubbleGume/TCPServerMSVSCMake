@@ -40,7 +40,7 @@ public:
 	virtual						~NetSocketUV();
 
 	virtual bool				Create(int port, bool udp_tcp, bool listen);
-	virtual bool				GetIP(Net_Address* addr, bool own_or_peer);
+	virtual bool				GetIP(CString& addr, bool own_or_peer);
 	bool						Accept();
 
 	void						ReceiveTCP();
@@ -57,6 +57,7 @@ protected:
 	void*						sock;
 	int							status;
 	uv_loop_t*					loop;
+
 };
 
 class ServerUV : public Server

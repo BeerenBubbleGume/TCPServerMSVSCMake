@@ -1092,25 +1092,25 @@ void CStreamFile::SetMode(int mode)
 		ChangeMode(mode);
 }
 
-void CStreamFile::operator<<(bool& value)
+void CStream::operator<<(bool& value)
 {
 	char* v = (char*)value;
 	Write(v, 1);
 }
 
-void CStreamFile::operator<<(char& value)
+void CStream::operator<<(char& value)
 {
 	char* v = (char*)value;
 	Write(v, 1);
 }
 
-void CStreamFile::operator<<(unsigned char& value)
+void CStream::operator<<(unsigned char& value)
 {
 	char* v = (char*)&value;
 	Write(v, 1);
 }
 
-void CStreamFile::operator<<(CString& value)
+void CStream::operator<<(CString& value)
 {
 	int len = value.GetLength();
 	if (len >= 0xff)
@@ -1133,7 +1133,7 @@ void CStreamFile::operator<<(CString& value)
 	}
 }
 
-void CStreamFile::operator<<(int& value)
+void CStream::operator<<(int& value)
 {
 	int v2 = value;
 	INVERT_BYTES(2);
@@ -1141,7 +1141,7 @@ void CStreamFile::operator<<(int& value)
 	Write(v, 2);
 }
 
-void CStreamFile::operator<<(short& value)
+void CStream::operator<<(short& value)
 {
 	short v2 = value;
 	INVERT_BYTES(v2);
@@ -1149,7 +1149,7 @@ void CStreamFile::operator<<(short& value)
 	Write(v, 2);
 }
 
-void CStreamFile::operator<<(unsigned short& value)
+void CStream::operator<<(unsigned short& value)
 {
 	short v2 = value;
 	INVERT_BYTES(v2);
@@ -1157,7 +1157,7 @@ void CStreamFile::operator<<(unsigned short& value)
 	Write(v, 2);
 }
 
-void CStreamFile::operator<<(float& value)
+void CStream::operator<<(float& value)
 {
 	float v2 = value;
 	INVERT_BYTES(v2);
@@ -1165,7 +1165,7 @@ void CStreamFile::operator<<(float& value)
 	Write(v, 4);
 }
 
-void CStreamFile::operator<<(double& value)
+void CStream::operator<<(double& value)
 {
 	double v2 = value;
 	INVERT_BYTES(v2);
@@ -1173,7 +1173,7 @@ void CStreamFile::operator<<(double& value)
 	Write(v, 8);
 }
 
-void CStreamFile::operator<<(unsigned int& value)
+void CStream::operator<<(unsigned int& value)
 {
 	unsigned int v2 = value;
 	INVERT_BYTES(v2);
@@ -1181,7 +1181,7 @@ void CStreamFile::operator<<(unsigned int& value)
 	Write(v, 4);
 }
 
-void CStreamFile::operator<<(CSize& value)
+void CStream::operator<<(CSize& value)
 {
 	int v2 = value.cx;
 	INVERT_BYTES(v2);
@@ -1194,7 +1194,7 @@ void CStreamFile::operator<<(CSize& value)
 	Write(v, 4);
 }
 
-void CStreamFile::operator<<(CPoint& value)
+void CStream::operator<<(CPoint& value)
 {
 	int v2 = value.x;
 	INVERT_BYTES(v2);
@@ -1207,23 +1207,23 @@ void CStreamFile::operator<<(CPoint& value)
 	Write(v, 4);
 }
 
-void CStreamFile::operator>>(bool& value)
+void CStream::operator>>(bool& value)
 {
 	char* v = (char*)(&value);
 	Read(v, 1);
 }
 
-void CStreamFile::operator>>(char& value)
+void CStream::operator>>(char& value)
 {
 }
 
-void CStreamFile::operator>>(unsigned char& value)
+void CStream::operator>>(unsigned char& value)
 {
 	char* v = (char*)(&value);
 	Read(v, 1);
 }
 
-void CStreamFile::operator>>(CString& value)
+void CStream::operator>>(CString& value)
 {
 	int len;
 	unsigned char vlen;
@@ -1248,49 +1248,49 @@ void CStreamFile::operator>>(CString& value)
 		value = "";
 }
 
-void CStreamFile::operator>>(int& value)
+void CStream::operator>>(int& value)
 {
 	char* v = (char*)(&value);
 	Read(v, 4);
 	INVERT_BYTES(value);
 }
 
-void CStreamFile::operator>>(short& value)
+void CStream::operator>>(short& value)
 {
 	char* v = (char*)(&value);
 	Read(v, 2);
 	INVERT_BYTES(value);
 }
 
-void CStreamFile::operator>>(unsigned short& value)
+void CStream::operator>>(unsigned short& value)
 {
 	char* v = (char*)(&value);
 	Read(v, 2);
 	INVERT_BYTES(value);
 }
 
-void CStreamFile::operator>>(float& value)
+void CStream::operator>>(float& value)
 {
 	char* v = (char*)(&value);
 	Read(v, 4);
 	INVERT_BYTES(value);
 }
 
-void CStreamFile::operator>>(double& value)
+void CStream::operator>>(double& value)
 {
 	char* v = (char*)(&value);
 	Read(v, 8);
 	INVERT_BYTES(value);
 }
 
-void CStreamFile::operator>>(unsigned int& value)
+void CStream::operator>>(unsigned int& value)
 {
 	char* v = (char*)(&value);
 	Read(v, 4);
 	INVERT_BYTES(value);
 }
 
-void CStreamFile::operator>>(CSize& value)
+void CStream::operator>>(CSize& value)
 {
 	char* v = (char*)(&value.cx);
 	Read(v, 4);
@@ -1300,7 +1300,7 @@ void CStreamFile::operator>>(CSize& value)
 	INVERT_BYTES(value.cy);
 }
 
-void CStreamFile::operator>>(CPoint& value)
+void CStream::operator>>(CPoint& value)
 {
 	char* v = (char*)(&value.x);
 	Read(v, 4);
