@@ -1076,17 +1076,17 @@ void CStreamFile::ChangeMode(int mode)
 	stream = fopen_file(name, smode.c_str());
 }
 
-bool CStreamFile::IsStoring()
+bool CStream::IsStoring()
 {
 	return (mode != STREAM_READ);
 }
 
-bool CStreamFile::IsLoading()
+bool CStream::IsLoading()
 {
 	return (mode == STREAM_READ);
 }
 
-void CStreamFile::SetMode(int mode)
+void CStream::SetMode(int mode)
 {
 	if (mode != this->mode && mode >= STREAM_READ && mode <= STREAM_ADD)
 		ChangeMode(mode);
@@ -1405,4 +1405,16 @@ void CArrayPtr::SaveToFile(FILE* file)
 
 void CArrayPtr::LoadFromFile(FILE* file)
 {
+}
+
+CStream::CStream()
+{
+	bytes = 0;
+	mode = STREAM_READ;
+	name = "";
+}
+
+CStream::~CStream()
+{
+
 }

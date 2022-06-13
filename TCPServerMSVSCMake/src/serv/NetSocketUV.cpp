@@ -10,7 +10,6 @@ NetSocketUV::NetSocketUV(Net* net) : NetSocket(net)
 	loop = uv_default_loop();
 }
 
-
 NetSocketUV::~NetSocketUV()
 {
 	status = 0;
@@ -43,6 +42,31 @@ bool NetSocketUV::Create(int port, bool udp_tcp, bool listen)
 			if (l != 0)
 				return false;
 		}		
+		return true;
+	}
+	else
+	{
+		sock = malloc(sizeof(UDP_SOCKET));
+		memset(sock, 0, sizeof(UDP_SOCKET));
+		uv_udp_t* udp = GetPtrUDP(sock);
+		int r = uv_udp_init(loop, udp);
+		assert(r == 0);
+
+		struct sockaddr_in broadcast_addr;
+		uv_ip4_addr("0.0.0.0", port, &broadcast_addr);
+		r = uv_udp_bind(udp, (const struct sockaddr*)&broadcast_addr, 0);
+		assert(r == 0);
+
+		r = uv_udp_set_broadcast(udp, 1);
+		assert(r == 0);
+
+		if (listen)
+		{
+			r = uv_udp_recv_start(udp, OnAllocBuffer, OnReadUDP);
+			assert(r == 0);
+		}
+
+		((UDP_SOCKET*)sock)->net_socket = this;
 		return true;
 	}
 	return false;
@@ -78,6 +102,8 @@ bool NetSocketUV::GetIP(CString& addr, bool own_or_peer)
 				CString d;
 				d.IntToString(port);
 				addr += d;
+				IParr[ClientID] = &addr;
+				
 			}
 		}
 
@@ -155,6 +181,16 @@ void NetSocketUV::ReceiveTCP()
 	
 }
 
+void NetSocketUV::ReceiveUPD()
+{
+	NetBuffer* recv_buffer = net->GetRecvBuffer();
+	int received_bytes = recv_buffer->GetLength();
+	recvbuffer.Add(received_bytes, recv_buffer->GetData());
+
+	if (net->IsServer())
+		ReceiveMessages();
+}
+
 void NetSocketUV::SendTCP(NET_BUFFER_INDEX* buf)
 {
 	if (buf->GetLength() > 0)
@@ -165,6 +201,22 @@ void NetSocketUV::SendTCP(NET_BUFFER_INDEX* buf)
 		int r = uv_write(((NetBufferUV*)buf)->GetPtrWrite(), (uv_stream_t*)GetPtrTCP(sock), &buffer, 1, OnWrite);
 		assert(r == 0);
 	}
+}
+
+void OnReadUDP(uv_udp_t* handle, ssize_t nread, const uv_buf_t* buf, const sockaddr* addr, unsigned flags)
+{
+	NetSocket* socket = GetNetSocketPtr(handle);
+	NetBuffer* recv_buffer = socket->getNet()->GetRecvBuffer();
+	assert(buf->base == (char*)recv_buffer->GetData());
+	recv_buffer->SetLength(nread);
+
+	int r = uv_ip4_name((sockaddr_in*)addr, address_converter, sizeof(address_converter));
+	socket->getNet()->addr->ip = address_converter;
+	unsigned char* port_ptr = (unsigned char*)&(((sockaddr_in*)addr)->sin_port);
+	socket->getNet()->addr->port = port_ptr[1];
+	socket->getNet()->addr->port += port_ptr[0] << 8;
+
+	socket->ReceiveUPD();
 }
 
 void OnReadTCP(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)
@@ -400,7 +452,7 @@ void ServerUV::StartUVServer(bool internet)
 {
 	if (internet)
 	{
-		bool res = Create(true);
+		bool res = Create(false);
 		if (res)
 		{
 			printf("Success create server!\n");

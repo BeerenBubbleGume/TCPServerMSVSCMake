@@ -18,6 +18,7 @@
 #include <WinSock2.h>
 #include <WS2tcpip.h>
 #include <process.h>
+#include <sys/utime.h>
 #pragma comment(lib, "ws2_32.lib")
 #else
 #include <stdio.h>
@@ -27,6 +28,7 @@
 #include <err.h>
 #include <sysexits.h>
 #include <errno.h>
+#include <sys/time.h>
 #include <unistd.h>
 #include <pthread.h>
 #include <sys/socket.h>

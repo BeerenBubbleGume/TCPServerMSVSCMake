@@ -170,6 +170,7 @@ protected:
 	NetBuffer			recv_buf;
 	SessionList			sessions;
 	friend class		NetSocket;
+	timeval				tv;
 };
 
 struct NET_SOCKET_INFO
@@ -202,6 +203,7 @@ public:
 
 	virtual bool		Create(int port, bool udp_tcp, bool listen);
 	virtual void		ReceiveTCP() = 0;
+	virtual void		ReceiveUPD() = 0;
 	virtual void		SendTCP(NET_BUFFER_INDEX* buf) = 0;
 	virtual void		SendMessage(NET_BUFFER_INDEX* buf, Net_Address* addr = nullptr);
 	//virtual void		SetupRetranslation(NetSocket* socket, unsigned int clientID) = 0;
@@ -216,11 +218,14 @@ public:
 
 protected:
 	Net_Address*		addr;
+	CString**			IParr;
 	Net*				net;
 	int					session_id;
 	NetBuffer			recvbuffer;
 	friend class		Server;
 	friend class 		NetBuffer;
+
+	virtual bool		assertIP(CString& addr);
 };
 
 

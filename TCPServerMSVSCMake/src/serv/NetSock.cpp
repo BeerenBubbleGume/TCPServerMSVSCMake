@@ -45,6 +45,9 @@ NetSocket::NetSocket(Net* net)
 	port = 0;
 	udp_tcp = false;
 	session_id = 0;
+	IParr = nullptr;
+
+	IParr = (CString**)malloc(sizeof(CString*) * 100);
 }
 
 NET_BUFFER_INDEX* Net::PrepareMessage(unsigned int sender_id, MESSAGE_TYPE type, size_t length, unsigned char* data)
@@ -164,6 +167,35 @@ bool NetSocket::ReceiveMessages()
 		}
 	}
 	return result;
+}
+
+bool NetSocket::GetIP(CString& addr, bool own_or_peer)
+{
+	addr = "";
+	return true;
+}
+
+bool NetSocket::assertIP(CString& addr)
+{
+	CString** va_addr = new CString*[ClientID + 1];
+	for (int i = 0; i < ClientID + 1; ++i)
+		va_addr[i] = new CString[100];
+
+	for (int i = 0; i < ClientID; ++i)
+		va_addr[i] = IParr[i];
+	delete[] IParr;
+
+	for (int i = 0; i < sizeof va_addr; ++i)
+	{
+		for (int j = 0; j < sizeof va_addr; ++j)
+		{
+			if (va_addr[i][j] == va_addr[i + 1][j + 1] || va_addr[i][j] == va_addr[i - 1][j - 1])
+				return true;
+			else
+				return false;
+		}
+	}
+	return false;
 }
 
 NetSocket* GetPtrSocket(void* ptr)
@@ -632,7 +664,7 @@ bool Server::Create(bool internet)
 	if (Net::Create(internet))
 	{
 		NetSocket* socket = NewSocket(this);
-		bool is = socket->Create(PORT_SERVER_TCP, true, true);
+		bool is = socket->Create(PORT_SERVER_TCP, internet, true);
 		if (is)
 		{
 			ConnectSocket(socket);
@@ -784,7 +816,27 @@ bool Server::ReceiveMessage(MESSAGE_TYPE type, unsigned sender, unsigned length,
 	}
 	break;
 	case MESSAGE_TYPE_STOP_SERVER:
-		break;
+	//{
+	//	unsigned int time = gettimeofday(tv, nullptr);
+	//	if (stop_time && stop_time <= time)
+	//	{
+	//		unsigned int dtime = time - stop_time;
+	//		if (dtime >= 1500) // ��������� ���������� ����� ������� �������
+	//		{
+	//			if (!stop_server)
+	//			{
+	//				stop_server = true;
+	//				StopServer();
+	//			}
+	//		}
+	//	}
+	//	else
+	//	{
+	//		stop_time = time;
+	//		stop_server = false;
+	//	}
+	//}
+	break;
 	case MESSEGE_TYPE_SESSION_INFO:
 	{
 		NET_SESSION_INFO* si = new NET_SESSION_INFO(this);
@@ -810,6 +862,7 @@ bool Server::ReceiveMessage(MESSAGE_TYPE type, unsigned sender, unsigned length,
 	default:
 		break;
 	}
+	return true;
 }
 
 NET_SERVER_INFO::NET_SERVER_INFO()

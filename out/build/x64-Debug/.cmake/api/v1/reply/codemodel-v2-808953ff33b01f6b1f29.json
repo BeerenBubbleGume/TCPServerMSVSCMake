@@ -8,8 +8,7 @@
 					"build" : ".",
 					"childIndexes" : 
 					[
-						1,
-						4
+						1
 					],
 					"hasInstallRule" : true,
 					"minimumCMakeVersion" : 
@@ -34,7 +33,7 @@
 					"source" : "TCPServerMSVSCMake",
 					"targetIndexes" : 
 					[
-						1
+						0
 					]
 				},
 				{
@@ -60,69 +59,12 @@
 					"parentIndex" : 2,
 					"projectIndex" : 0,
 					"source" : "TCPServerMSVSCMake/src/serv"
-				},
-				{
-					"build" : "RTSP",
-					"childIndexes" : 
-					[
-						5
-					],
-					"minimumCMakeVersion" : 
-					{
-						"string" : "3.8"
-					},
-					"parentIndex" : 0,
-					"projectIndex" : 1,
-					"source" : "RTSP",
-					"targetIndexes" : 
-					[
-						0
-					]
-				},
-				{
-					"build" : "RTSP/libs",
-					"childIndexes" : 
-					[
-						6,
-						7
-					],
-					"minimumCMakeVersion" : 
-					{
-						"string" : "3.8"
-					},
-					"parentIndex" : 4,
-					"projectIndex" : 1,
-					"source" : "RTSP/libs"
-				},
-				{
-					"build" : "RTSP/libs/lib",
-					"minimumCMakeVersion" : 
-					{
-						"string" : "3.8"
-					},
-					"parentIndex" : 5,
-					"projectIndex" : 1,
-					"source" : "RTSP/libs/lib"
-				},
-				{
-					"build" : "RTSP/libs/include",
-					"minimumCMakeVersion" : 
-					{
-						"string" : "3.8"
-					},
-					"parentIndex" : 5,
-					"projectIndex" : 1,
-					"source" : "RTSP/libs/include"
 				}
 			],
 			"name" : "Debug",
 			"projects" : 
 			[
 				{
-					"childIndexes" : 
-					[
-						1
-					],
 					"directoryIndexes" : 
 					[
 						0,
@@ -133,34 +75,12 @@
 					"name" : "TCPServerMSVSCMake",
 					"targetIndexes" : 
 					[
-						1
-					]
-				},
-				{
-					"directoryIndexes" : 
-					[
-						4,
-						5,
-						6,
-						7
-					],
-					"name" : "RTSP",
-					"parentIndex" : 0,
-					"targetIndexes" : 
-					[
 						0
 					]
 				}
 			],
 			"targets" : 
 			[
-				{
-					"directoryIndex" : 4,
-					"id" : "RTSP::@3b94aae68d1102a14b92",
-					"jsonFile" : "target-RTSP-Debug-2249de5a17e7fd46adbd.json",
-					"name" : "RTSP",
-					"projectIndex" : 1
-				},
 				{
 					"directoryIndex" : 1,
 					"id" : "TCPServerMSVSCMake::@c1fa6790a5be207d0e6d",
