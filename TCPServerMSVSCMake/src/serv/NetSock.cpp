@@ -591,11 +591,11 @@ void NET_SERVER_SESSION::Serialize(CStream& stream)
 	{
 		stream >> enabled;
 		//stream>>time;
-		int vk_player_id = c_client_id;
+		int vc_client_id = c_client_id;
 		stream >> c_client_id;
-		if (vk_player_id != c_client_id)
+		if (vc_client_id != c_client_id)
 		{
-			if (a_player_id)
+			if (a_client_id)
 			{
 				delete[]a_client_id;
 				a_client_id = NULL;
