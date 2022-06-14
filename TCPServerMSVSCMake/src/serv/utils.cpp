@@ -867,6 +867,68 @@ void CArrayBase::AddToExisting(int index)
 	k_existing++;
 }
 
+void CArrayBase::Serialize(CStream& stream)
+{
+	//int i;
+	if (stream.IsStoring())
+	{
+		stream << max_existing;
+		stream << k_existing;
+		if (k_existing)
+			stream.Write(m_existing, k_existing * sizeof(int));
+		//for (i=0;i<k_existing;i++)
+		//	stream<<m_existing[i];
+
+		stream << max_deleted;
+		stream << k_deleted;
+		if (k_deleted)
+			stream.Write(m_deleted, k_deleted * sizeof(int));
+		//for (i=0;i<k_deleted;i++)
+		//	stream<<m_deleted[i];
+
+		stream << max_indexed;
+		if (max_indexed)
+			stream.Write(m_indexed, max_indexed * sizeof(int));
+		//for (i=0;i<max_indexed;i++)
+		//	stream<<m_indexed[i];
+	}
+	else
+	{
+		ClearExistingAndDeleted();
+
+		stream >> max_existing;
+		stream >> k_existing;
+		if (max_existing)
+		{
+			m_existing = new int[max_existing];
+			if (k_existing)
+				stream.Read(m_existing, k_existing * sizeof(int));
+			//for (i=0;i<k_existing;i++)
+			//	stream>>m_existing[i];
+		}
+
+		stream >> max_deleted;
+		stream >> k_deleted;
+		if (max_deleted)
+		{
+			m_deleted = new int[max_deleted];
+			if (k_deleted)
+				stream.Read(m_deleted, k_deleted * sizeof(int));
+			//for (i=0;i<k_deleted;i++)
+			//	stream>>m_deleted[i];
+		}
+
+		stream >> max_indexed;
+		if (max_indexed)
+		{
+			m_indexed = new int[max_indexed];
+			stream.Read(m_indexed, max_indexed * sizeof(int));
+			//for (i=0;i<max_indexed;i++)
+			//	stream>>m_indexed[i];
+		}
+	}
+}
+
 void CArrayBase::AddToDeleted(int index)
 {
 	if (max_indexed > index)

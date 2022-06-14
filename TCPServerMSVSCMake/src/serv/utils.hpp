@@ -137,6 +137,7 @@ public:
 	CArrayBase();
 	virtual			~CArrayBase();
 
+	void			Serialize(CStream& stream);
 	void			IncreaseDeleted(int from, int to);
 	void			ClearExistingAndDeleted();
 	int				FromDeletedToExisting();

@@ -313,8 +313,18 @@ void Net_Address::FromStringIP(const char* ip)
 		port = SERVER_DEFAULT_PORT;
 }
 
-void Net_Address::Serialize(CString* stream)
+void Net_Address::Serialize(CStream& stream)
 {
+	if (stream.IsStoring())
+	{
+		stream << address;
+		stream << port;
+	}
+	else
+	{
+		stream >> address;
+		stream >> port;
+	}
 }
 
 NET_BUFFER_LIST::NET_BUFFER_LIST() : CArrayBase()
@@ -428,6 +438,34 @@ NET_SOCKET_INFO::~NET_SOCKET_INFO()
 {
 }
 
+void NET_SOCKET_INFO::Serialize(CStream& stream)
+{
+	if (stream.IsStoring())
+	{
+		stream << version;
+
+		stream << player_id;
+		stream << session_id;
+		stream << port;
+		stream << udp_tcp;
+		stream << is_admin;
+		stream << time;
+		stream << name;
+		stream << ip;
+	}
+	else
+	{
+		stream >> version;
+
+		stream >> ClientID;
+		stream >> sessionID;
+		stream >> port;
+		stream >> udp_tcp;
+		stream >> time;
+		stream >> ip;
+	}
+}
+
 NET_SESSION_INFO::NET_SESSION_INFO(Net* net)
 {
 	a_client = nullptr;
@@ -513,6 +551,42 @@ void NET_SERVER_SESSION::AddClient(NetSocket* socket)
 	c_client_id++;
 }
 
+void NET_SERVER_SESSION::Serialize(CStream& stream)
+{
+	if (stream.IsStoring())
+	{
+		stream << enabled;
+		//stream<<time;
+		stream << c_client_id;
+		for (int i = 0; i < c_client_id; i++)
+			stream << c_client_id[i];
+		stream << session_index;
+	}
+	else
+	{
+		stream >> enabled;
+		//stream>>time;
+		int vk_player_id = c_client_id;
+		stream >> c_client_id;
+		if (vk_player_id != c_client_id)
+		{
+			if (m_player_id)
+			{
+				delete[]a_client_id;
+				a_client_id = NULL;
+			}
+			if (c_client_id)
+				a_client_id = new unsigned int[c_client_id];
+		}
+
+		for (int i = 0; i < k_player_id; i++)
+			stream >> a_client_id[i];
+		stream >> session_index;
+	}
+
+	NET_SESSION_INFO::Serialize(stream);
+}
+
 SocketList::SocketList() : CArrayBase()
 {
 	c_socket = 10000;
@@ -554,6 +628,56 @@ NetSocket* SocketList::Get(int index)
 	if (index >= 0 && index < c_socket)
 		return a_socket[index];
 	return nullptr;
+}
+
+void SocketList::Serialize(CStream& stream, Net* net)
+{
+	if (stream.IsStoring())
+	{
+		CArrayBase::Serialize(stream);
+
+		stream << c_socket;
+		for (int i = 0; i < c_socket; i++)
+		{
+			if (a_socket[i])
+			{
+				bool is = true;
+				stream << is;
+				a_socket[i]->Serialize(stream);
+			}
+			else
+			{
+				bool is = false;
+				stream << is;
+			}
+		}
+	}
+	else
+	{
+		Clear();
+
+		CArrayBase::Serialize(stream);
+
+		stream >> c_socket;
+		if (c_socket)
+		{
+			a_socket = (NetSocket**)malloc(c_socket * sizeof(NetSocket*));
+			//m_socket=new GNetSocket*[k_socket];
+			for (int i = 0; i < c_socket; i++)
+			{
+				bool is;
+				stream >> is;
+
+				if (is)
+				{
+					a_socket[i] = net->NewSocket(net);
+					a_socket[i]->Serialize(stream);
+				}
+				else
+					a_socket[i] = NULL;
+			}
+		}
+	}
 }
 
 int SocketList::AddSocket(NetSocket* client, unsigned int client_id)
@@ -897,6 +1021,43 @@ void NET_SERVER_INFO::Clear()
 	start_time = 0;
 }
 
+void NET_SERVER_INFO::Serialize(CStream& stream, Net* net)
+{
+	if (stream.IsStoring())
+	{
+		stream << version;
+
+		stream << server_version;
+
+		stream << start_time;
+		stream << current_time;
+		stream << k_accept;
+		stream << k_hello;
+
+		sessions->Serialize(stream, net);
+		sockets->Serialize(stream, net);
+	}
+	else
+	{
+		Clear();
+
+		stream >> version;
+
+		stream >> server_version;
+
+		stream >> start_time;
+		stream >> current_time;
+		stream >> k_accept;
+		stream >> k_hello;
+
+		sessions = new SessionList();
+		sessions->Serialize(stream, net);
+
+		sockets = new SocketList();
+		sockets->Serialize(stream, net);
+	}
+}
+
 NET_SERVER_INFO::~NET_SERVER_INFO()
 {
 	Clear();
@@ -923,6 +1084,56 @@ void SessionList::ReInit()
 	{
 		m_session[i] = nullptr;
 		IncreaseDeleted(i, i);
+	}
+}
+
+void SessionList::Serialize(CStream& stream, Net* net)
+{
+	if (stream.IsStoring())
+	{
+		CArrayBase::Serialize(stream);
+
+		stream << k_session;
+		for (int i = 0; i < k_session; i++)
+		{
+			if (m_session[i])
+			{
+				bool is = true;
+				stream << is;
+				m_session[i]->Serialize(stream);
+			}
+			else
+			{
+				bool is = false;
+				stream << is;
+			}
+		}
+	}
+	else
+	{
+		Clear();
+
+		CArrayBase::Serialize(stream);
+
+		stream >> k_session;
+		if (k_session)
+		{
+			//m_session=new NET_SESSION_SERVER*[k_session];
+			m_session = (NET_SERVER_SESSION**)malloc(k_session * sizeof(NET_SERVER_SESSION*));
+			for (int i = 0; i < k_session; i++)
+			{
+				bool is;
+				stream >> is;
+
+				if (is)
+				{
+					m_session[i] = new NET_SERVER_SESSION(net);
+					m_session[i]->Serialize(stream);
+				}
+				else
+					m_session[i] = NULL;
+			}
+		}
 	}
 }
 

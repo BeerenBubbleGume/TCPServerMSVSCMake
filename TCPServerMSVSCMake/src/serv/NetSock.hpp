@@ -111,6 +111,7 @@ public:
 	int					GetClientCount() { return c_client_id; }
 	unsigned int*		GetClientArray() { return a_client_id; }
 	int					GetSessionIndex() { return session_index; }
+	void				Serialize(CStream& stream);
 protected:
 	friend class		Server;
 	bool				enabled;
@@ -129,7 +130,7 @@ public:
 	virtual ~SessionList();
 
 	void ReInit();
-
+	void Serialize(CStream& stream, Net* net);
 	void Clear();
 	NET_SERVER_SESSION* Get(int index);
 	int					AddSession(NET_SERVER_SESSION* session);
@@ -183,7 +184,7 @@ struct NET_SOCKET_INFO
 
 	void				SetTime(unsigned int time)				{ this->time = time; }
 	unsigned int		GetTime()								{ return time; }
-
+	void				Serialize(CStream& stream);
 protected:
 	unsigned int		ClientID;
 	bool				udp_tcp;
@@ -245,6 +246,7 @@ struct NET_SERVER_INFO
 
 	NET_SERVER_INFO();
 	void				Clear();
+	void				Serialize(CStream& stream, Net* net);
 	virtual				~NET_SERVER_INFO();
 };
 
@@ -258,6 +260,7 @@ public:
 	virtual				~SocketList();
 	void				Clear();
 	NetSocket*			Get(int index);
+	void				Serialize(CStream& stream, Net* net);
 	int					GetMaxCount() { return c_socket; }
 	int					AddSocket(NetSocket* client, unsigned int client_id = 0xffffffff);
 	bool				DeleteSocket(int index);
