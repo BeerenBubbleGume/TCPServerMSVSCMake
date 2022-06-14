@@ -2,8 +2,9 @@
 #include "includes.hpp"
 #include "utf.hpp"
 
-struct CPoint;
-struct CSize;
+struct	CPoint;
+struct	CSize;
+class	CStream;
 
 enum STREAM_MODE{STREAM_READ, STREAM_WRITE, STREAM_ADD, STREAM_MAX, STREAM_ERROR = -2};
 
