@@ -462,7 +462,7 @@ void ServerUV::StartUVServer(bool internet)
 		bool res = Create(udp_tcp);
 		if (res)
 		{
-			printf("Success create server with protoclo: %s!\n", ptrProto.c_str());
+			printf("Success create server with protoclo: %s!\n", &ptrProto.c_str());
 			UpdateNet();
 		}
 	}
