@@ -404,7 +404,7 @@ uv_udp_t *GetPtrUDP(void *ptr)
 uv_loop_t *GetLoop(Net* net)
 {
 	ServerUV* serv = (ServerUV*)net;
-	return (serv->loop);
+	return &(serv->loop);
 }
 
 unsigned int timer_count = 0;
