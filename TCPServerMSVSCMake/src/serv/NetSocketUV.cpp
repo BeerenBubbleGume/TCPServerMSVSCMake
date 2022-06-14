@@ -453,7 +453,14 @@ void ServerUV::StartUVServer(bool internet)
 {
 	if (internet)
 	{
-		bool res = Create(true);
+		printf("What a protocol should been used: UDP or TCP?\n");
+		std::string ptrProto;
+		scanf("%s", ptrProto);
+		if (ptrProto.find("UDP") != -1)
+			udp_tcp = false;
+		else
+			udp_tcp = true;
+		bool res = Create(udp_tcp);
 		if (res)
 		{
 			printf("Success create server!\n");
