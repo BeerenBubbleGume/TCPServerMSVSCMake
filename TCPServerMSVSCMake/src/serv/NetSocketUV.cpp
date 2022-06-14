@@ -6,8 +6,7 @@ ofstream fout;
 NetSocketUV::NetSocketUV(Net* net) : NetSocket(net)
 {
 	sock = NULL;
-	status = errno;	
-	loop = uv_default_loop();
+	status = errno;
 }
 
 NetSocketUV::~NetSocketUV()
@@ -18,7 +17,7 @@ NetSocketUV::~NetSocketUV()
 bool NetSocketUV::Create(int port, bool udp_tcp, bool listen)
 {	
 	NetSocket::Create(port, udp_tcp, listen);
-	uv_loop_t* sloop = GetLoop(net);	
+	uv_loop_t* loop = GetLoop(net);	
 	if (udp_tcp)
 	{
 		sock = new TCP_SOCKET;
@@ -404,8 +403,8 @@ uv_udp_t *GetPtrUDP(void *ptr)
 
 uv_loop_t *GetLoop(Net* net)
 {
-	NetSocketUV serv = (NetSocketUV)net;
-	return (serv.getSockLoop());
+	ServerUV* serv = (ServerUV*)net;
+	return (serv->loop);
 }
 
 unsigned int timer_count = 0;

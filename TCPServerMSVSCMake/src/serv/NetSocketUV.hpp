@@ -60,8 +60,6 @@ protected:
 	friend class				ServerUV;
 	void*						sock;
 	int							status;
-	uv_loop_t*					loop;
-
 };
 
 class ServerUV : public Server
@@ -77,8 +75,9 @@ public:
 	virtual NET_BUFFER_INDEX*	NewBuffer(int index);
 	virtual void				StartUVServer(bool internet);
 	virtual bool				UpdateNet();
-protected:
 	uv_loop_t					loop;
+protected:
+	
 	virtual Net*				NewNet()														{ return NULL; }
 	friend class				NetSocketUV;
 };
