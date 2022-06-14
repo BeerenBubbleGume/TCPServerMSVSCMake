@@ -820,6 +820,12 @@ bool Server::Create(bool internet)
 			assert(socket->ClientID == SERVER_ID);
 
 			socket = NewSocket(this);
+			if (internet)
+			{
+				is = socket->Create(8080, true, true);
+			}
+			else
+				is = socket->Create(8080, false, true);
 			if (is)
 			{
 				ConnectSocket(socket);
