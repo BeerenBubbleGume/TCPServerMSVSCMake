@@ -122,7 +122,7 @@ bool NetSocketUV::Accept()
 	{	
 		if (uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadTCP) == 0)
 		{
-			GetIP(addr->ip, true);
+			//GetIP(addr->ip, true);
 			
 			ServerUV* server = ((ServerUV*)net);
 			server->count_accept++;
