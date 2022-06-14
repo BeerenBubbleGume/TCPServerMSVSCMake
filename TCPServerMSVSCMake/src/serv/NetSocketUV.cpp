@@ -46,7 +46,7 @@ bool NetSocketUV::Create(int port, bool udp_tcp, bool listen)
 	}
 	else
 	{
-		sock = malloc(sizeof(UDP_SOCKET));
+		sock = new UDP_SOCKET;
 		memset(sock, 0, sizeof(UDP_SOCKET));
 		uv_udp_t* udp = GetPtrUDP(sock);
 		int r = uv_udp_init(loop, udp);
@@ -206,6 +206,7 @@ void NetSocketUV::SendTCP(NET_BUFFER_INDEX* buf)
 void OnReadUDP(uv_udp_t* handle, ssize_t nread, const uv_buf_t* buf, const sockaddr* addr, unsigned flags)
 {
 	NetSocket* socket = GetNetSocketPtr(handle);
+	printf("received %d bytes from client with ID: %u", nread, socket->GetClientID());
 	NetBuffer* recv_buffer = socket->getNet()->GetRecvBuffer();
 	assert(buf->base == (char*)recv_buffer->GetData());
 	recv_buffer->SetLength(nread);
