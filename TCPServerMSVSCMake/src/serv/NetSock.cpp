@@ -317,12 +317,12 @@ void Net_Address::Serialize(CStream& stream)
 {
 	if (stream.IsStoring())
 	{
-		stream << address;
+		stream << ip;
 		stream << port;
 	}
 	else
 	{
-		stream >> address;
+		stream >> ip;
 		stream >> port;
 	}
 }
