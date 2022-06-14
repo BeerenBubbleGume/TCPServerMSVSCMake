@@ -2,6 +2,8 @@
 
 int SERVER_DEFAULT_PORT = 8000;
 int PORT_SERVER_TCP = 8080;
+#define SERVER_UDP_PORT 4452
+#define SERVER_TCP_PORT 7789
 
 Net::Net()
 {
@@ -822,10 +824,10 @@ bool Server::Create(bool internet)
 			socket = NewSocket(this);
 			if (internet)
 			{
-				is = socket->Create(8080, true, true);
+				is = socket->Create(SERVER_TCP_PORT, true, true);
 			}
 			else
-				is = socket->Create(8080, false, true);
+				is = socket->Create(SERVER_UDP_PORT, false, true);
 			if (is)
 			{
 				ConnectSocket(socket);
