@@ -81,7 +81,7 @@ public:
 	~NET_SESSION_INFO();
 
 	void Clear();
-
+	void Serialize(CStream& stream);
 	//bool operator==(const NET_SESSION_INFO& si);
 	// bool operator!=(const NET_SESSION_INFO& si)
 	// {
@@ -334,7 +334,7 @@ struct Net_Address
 	int					port;
 
 	void				FromStringIP(const char* ip);
-	void				Serialize(CString* stream);
+	void				Serialize(CString& stream);
 };
 
 struct MEM_DATA

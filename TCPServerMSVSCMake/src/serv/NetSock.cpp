@@ -498,6 +498,36 @@ void NET_SESSION_INFO::Clear()
 	}
 }
 
+void NET_SESSION_INFO::Serialize(CStream& stream)
+{
+	if (stream.IsStoring())
+	{
+		stream << ip;
+		stream << name;
+		stream << c_client;
+		for (int i = 0; i < c_client; i++)
+			a_client[i]->Serialize(stream);
+		stream << fInfoLength;
+		if (fInfoLength > 0)
+			stream.Write(fInfo, fInfoLength);
+	}
+	else
+	{
+		Clear();
+		stream >> ip;
+		stream >> name;
+		stream >> c_client;
+		
+		stream >> fInfoLength;
+		if (fInfoLength > 0)
+		{
+			//info=new char[length_info];
+			fInfo = (char*)malloc(fInfoLength);
+			stream.Read(fInfo, fInfoLength);
+		}
+	}
+}
+
 //bool NET_SESSION_INFO::operator==(const NET_SESSION_INFO& si)
 //{
 //	return false;
