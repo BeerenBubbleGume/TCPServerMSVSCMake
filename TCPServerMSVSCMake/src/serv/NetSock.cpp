@@ -442,21 +442,15 @@ void NET_SOCKET_INFO::Serialize(CStream& stream)
 {
 	if (stream.IsStoring())
 	{
-		stream << version;
-
-		stream << player_id;
-		stream << session_id;
+		stream << ClientID;
+		stream << sessionID;
 		stream << port;
 		stream << udp_tcp;
-		stream << is_admin;
 		stream << time;
-		stream << name;
 		stream << ip;
 	}
 	else
 	{
-		stream >> version;
-
 		stream >> ClientID;
 		stream >> sessionID;
 		stream >> port;
@@ -559,7 +553,7 @@ void NET_SERVER_SESSION::Serialize(CStream& stream)
 		//stream<<time;
 		stream << c_client_id;
 		for (int i = 0; i < c_client_id; i++)
-			stream << c_client_id[i];
+			stream << a_client_id[i];
 		stream << session_index;
 	}
 	else
@@ -570,7 +564,7 @@ void NET_SERVER_SESSION::Serialize(CStream& stream)
 		stream >> c_client_id;
 		if (vk_player_id != c_client_id)
 		{
-			if (m_player_id)
+			if (a_player_id)
 			{
 				delete[]a_client_id;
 				a_client_id = NULL;
@@ -579,7 +573,7 @@ void NET_SERVER_SESSION::Serialize(CStream& stream)
 				a_client_id = new unsigned int[c_client_id];
 		}
 
-		for (int i = 0; i < k_player_id; i++)
+		for (int i = 0; i < c_player_id; i++)
 			stream >> a_client_id[i];
 		stream >> session_index;
 	}
@@ -1032,7 +1026,6 @@ void NET_SERVER_INFO::Serialize(CStream& stream, Net* net)
 		stream << start_time;
 		stream << current_time;
 		stream << k_accept;
-		stream << k_hello;
 
 		sessions->Serialize(stream, net);
 		sockets->Serialize(stream, net);
@@ -1048,7 +1041,6 @@ void NET_SERVER_INFO::Serialize(CStream& stream, Net* net)
 		stream >> start_time;
 		stream >> current_time;
 		stream >> k_accept;
-		stream >> k_hello;
 
 		sessions = new SessionList();
 		sessions->Serialize(stream, net);

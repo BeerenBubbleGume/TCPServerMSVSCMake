@@ -191,6 +191,7 @@ protected:
 	int					port;
 	unsigned int		time;
 	int					sessionID;
+	CString				ip;
 };
 
 class NetSocket : public NET_SOCKET_INFO
