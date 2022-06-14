@@ -453,7 +453,7 @@ void ServerUV::StartUVServer(bool internet)
 {
 	if (internet)
 	{
-		bool res = Create(false);
+		bool res = Create(true);
 		if (res)
 		{
 			printf("Success create server!\n");
