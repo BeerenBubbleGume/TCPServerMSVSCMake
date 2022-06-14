@@ -327,6 +327,7 @@ void Net_Address::Serialize(CStream& stream)
 	}
 }
 
+
 NET_BUFFER_LIST::NET_BUFFER_LIST() : CArrayBase()
 {
 	net = nullptr;
@@ -603,7 +604,7 @@ void NET_SERVER_SESSION::Serialize(CStream& stream)
 				a_client_id = new unsigned int[c_client_id];
 		}
 
-		for (int i = 0; i < c_player_id; i++)
+		for (int i = 0; i < c_client_id; i++)
 			stream >> a_client_id[i];
 		stream >> session_index;
 	}

@@ -334,7 +334,7 @@ struct Net_Address
 	int					port;
 
 	void				FromStringIP(const char* ip);
-	void				Serialize(CString& stream);
+	void				Serialize(CStream& stream);
 };
 
 struct MEM_DATA
