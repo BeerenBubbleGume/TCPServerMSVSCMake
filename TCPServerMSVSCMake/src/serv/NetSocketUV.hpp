@@ -55,7 +55,7 @@ public:
 	static void*				WaitingDelay(void* delay);
 
 	static NetSocketUV*			NewSocket(Net* net)										{ return new NetSocketUV(net); }
-	uv_loop_t*					getSockLoop()											{ return loop; }
+	
 protected:
 	friend class				ServerUV;
 	void*						sock;
