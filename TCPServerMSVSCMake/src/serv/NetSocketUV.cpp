@@ -129,19 +129,20 @@ bool NetSocketUV::Accept()
 			server->sockets_nohello.Add(accept_sock);
 			
 			printf("Accepted client with ID:%d\n", ClientID);
-			std::thread* ret = new std::thread;
+			/*std::thread* ret = new std::thread;
 			ret[ClientID] = std::thread(SetupRetranslation, accept_sock, ClientID);
-			ret[ClientID].detach();
+			ret[ClientID].detach();*/
 			
+			std::vector<std::thread> translationThreadList;
+			translationThreadList.push_back(std::thread{ SetupRetranslation, accept_sock, ClientID });
+			translationThreadList[ClientID].detach();
+
 			return true;
 		}
 		else
 			return false;
 		/*std::thread TranslationThread(SetupRetranslation, accept_sock, ClientID);
 		TranslationThread.detach();*/
-		/*std::vector<std::thread> translationThreadList;
-		translationThreadList.push_back(std::thread{ SetupRetranslation, accept_sock, ClientID });
-		translationThreadList[ClientID].detach();*/
 		//receivThread.join();
 		
 	}
