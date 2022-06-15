@@ -457,7 +457,7 @@ void ServerUV::StartUVServer(bool internet)
 		std::string proto;
 		scanf("%s", str);
 		proto = str;
-		if (proto.find("UDP") == 0)
+		if (proto.find("UDP") != -1)
 			udp_tcp = false;
 		else
 			udp_tcp = true;
