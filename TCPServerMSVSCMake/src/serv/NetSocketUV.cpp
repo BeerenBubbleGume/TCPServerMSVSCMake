@@ -454,10 +454,10 @@ void ServerUV::StartUVServer(bool internet)
 	{
 		printf("What a protocol should been used: UDP or TCP?\n");
 		char* str = new char[4];
-		CString proto;
+		std::string proto;
 		scanf("%s", str);
 		proto = str;
-		if (proto.Find("UDP") != -1)
+		if (proto.find("UDP") != -1)
 			udp_tcp = false;
 		else
 			udp_tcp = true;
