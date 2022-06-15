@@ -137,8 +137,8 @@ bool NetSocketUV::Accept()
 			translationThreadList.push_back(std::thread{ SetupRetranslation, accept_sock, ClientID });
 			translationThreadList[ClientID].detach();*/
 
-			std::thread ret(SetupRetranslation, accept_sock, ClientID);
-			ret.detach();
+			/*std::thread ret(SetupRetranslation, accept_sock, ClientID);
+			ret.detach();*/
 
 			return true;
 		}
