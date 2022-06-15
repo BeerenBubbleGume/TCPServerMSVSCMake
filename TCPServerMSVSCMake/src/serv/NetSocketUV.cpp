@@ -318,9 +318,9 @@ void /*NetSocketUV::*/SetupRetranslation(NetSocketUV* socket, unsigned int clien
 		IDstr += "in_binary_h.264";*/
 		/*std::vector<char> strID;
 		std::to_chars(strID.data(), strID.data() + strID.size(), clientID);*/
-		std::string IDStr;
+		CString IDStr;
 		if(clientID == 0)
-			IDStr = "0";
+			IDStr.IntToString(0);
 		else
 			IDStr = (char*)clientID;
 		IDStr += "in_binary_h.264";
