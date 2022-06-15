@@ -9,7 +9,7 @@ project ("TCPServerMSVSCMake")
 
 # Включите подпроекты.
 add_subdirectory ("TCPServerMSVSCMake")
-#add_subdirectory("RTSP")
+add_subdirectory("RTSP")
 
-install(TARGETS TCPServerMSVSCMake #RTSP
+install(TARGETS TCPServerMSVSCMake RTSP
 		DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/Debug/bin)
