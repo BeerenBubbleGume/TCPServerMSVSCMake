@@ -160,13 +160,11 @@ bool NetSocketUV::Accept()
 void NetSocketUV::ReceiveTCP()
 {
 	int filePrefix = ClientID;
-	if (filePrefix == 12499)
-		filePrefix = 0;
 	printf("ID: %d\n", filePrefix);
 	std::array<char, 10> strID;
 	std::to_chars(strID.data(), strID.data() + strID.size(), filePrefix);
 	std::string fileName(strID.data());
-	fileName += "in_binary_h.264";
+	fileName += "in_binary.h264";
 	fout.open(fileName.c_str(), std::ios::binary | std::ios::app);
 	if (fout.is_open())
 	{
@@ -323,7 +321,7 @@ void /*NetSocketUV::*/SetupRetranslation(NetSocketUV* socket, unsigned int clien
 			IDStr.IntToString(0);
 		else
 			IDStr = (char*)clientID;
-		IDStr += "in_binary_h.264";
+		IDStr += "in_binary.h264";
 		if (std::filesystem::exists((std::string)IDStr) == true) {
 			
 			printf("Client file reading %s\n", IDStr.c_str());
