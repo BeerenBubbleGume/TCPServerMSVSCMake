@@ -453,7 +453,7 @@ void ServerUV::StartUVServer(bool internet)
 	if (internet)
 	{
 		printf("What a protocol should been used: UDP or TCP?\n");
-		char str = new char[4];
+		char* str = new char[4];
 		CString proto;
 		scanf("%s", str);
 		proto = str;
