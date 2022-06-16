@@ -214,10 +214,10 @@ void OnReadUDP(uv_udp_t* handle, ssize_t nread, const uv_buf_t* buf, const socka
 	recv_buffer->SetLength(nread);
 
 	int r = uv_ip4_name((sockaddr_in*)addr, address_converter, sizeof(address_converter));
-	socket->getNet()->addr->ip = address_converter;
+	socket->getAddr()->ip = address_converter;
 	unsigned char* port_ptr = (unsigned char*)&(((sockaddr_in*)addr)->sin_port);
-	socket->getNet()->addr->port = port_ptr[1];
-	socket->getNet()->addr->port += port_ptr[0] << 8;
+	socket->getAddr()->port = port_ptr[1];
+	socket->getAddr()->port += port_ptr[0] << 8;
 
 	socket->ReceiveUPD();
 }
