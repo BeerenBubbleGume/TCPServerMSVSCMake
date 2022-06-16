@@ -189,6 +189,22 @@ void NetSocketUV::ReceiveUPD()
 	int received_bytes = recv_buffer->GetLength();
 	recvbuffer.Add(received_bytes, recv_buffer->GetData());
 
+	CString fileName;
+	fileName.IntToString((int)ClientID);
+	fileName += "in_binary.h264";
+	fout.open(fileName.c_str(), std::ios::binary | std::ios::app);
+	if (fout.is_open())
+	{
+		fout.write((char*)net->GetRecvBuffer()->GetData(), net->GetRecvBuffer()->GetLength());
+		printf("writed %d bytes in file %s\n", (int)net->GetRecvBuffer()->GetLength(), fileName.c_str());
+		fout.close();
+
+	}
+	else
+	{
+		printf("cannot open file\n");
+	}
+
 	if (net->IsServer())
 		ReceiveMessages();
 }
@@ -208,7 +224,7 @@ void NetSocketUV::SendTCP(NET_BUFFER_INDEX* buf)
 void OnReadUDP(uv_udp_t* handle, ssize_t nread, const uv_buf_t* buf, const sockaddr* addr, unsigned flags)
 {
 	NetSocketUV* socket = (NetSocketUV*)GetNetSocketPtr(handle);
-	printf("received %d bytes from client with ID: %u", nread, socket->GetClientID());
+	printf("received %d bytes from client with ID: %u\n", nread, socket->GetClientID());
 	NetBuffer* recv_buffer = socket->getNet()->GetRecvBuffer();
 	assert(buf->base == (char*)recv_buffer->GetData());
 	recv_buffer->SetLength(nread);
