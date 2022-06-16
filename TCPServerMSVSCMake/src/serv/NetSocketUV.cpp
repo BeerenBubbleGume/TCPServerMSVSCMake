@@ -207,7 +207,7 @@ void NetSocketUV::SendTCP(NET_BUFFER_INDEX* buf)
 
 void OnReadUDP(uv_udp_t* handle, ssize_t nread, const uv_buf_t* buf, const sockaddr* addr, unsigned flags)
 {
-	NetSocket* socket = GetNetSocketPtr(handle);
+	NetSocketUV* socket = (NetSocketUV*)GetNetSocketPtr(handle);
 	printf("received %d bytes from client with ID: %u", nread, socket->GetClientID());
 	NetBuffer* recv_buffer = socket->getNet()->GetRecvBuffer();
 	assert(buf->base == (char*)recv_buffer->GetData());
