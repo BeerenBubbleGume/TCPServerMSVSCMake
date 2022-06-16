@@ -15,6 +15,8 @@ add_executable (TCPServerMSVSCMake	"src/serv/NetSock.hpp"
 									"src/serv/NetSocketUV.hpp"
 									"src/serv/NetSocketUV.cpp"
 									"TCPServerMSVSCMake.cpp"
+									"src/serv/FF_encoder.cpp"
+									"src/serv/FF_encoder.hpp"
 									"src/serv/utils.hpp"
 									"src/serv/utils.cpp"
 									"TCPServerMSVSCMake.hpp" 
@@ -38,6 +40,19 @@ ELSE()
 								)
 	target_link_libraries(TCPServerMSVSCMake
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libuv.a
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libavcodec.a
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libavdevice.a
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libavfilter.a
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libavutil.a
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libpostproc.a
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libswresample.a
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libswscale.a
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libyasm.a
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/liblzma.a
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libopus.a
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libz.a
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libx264.a
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libx265.a
 								stdc++fs
 								pthread
 								-ldl

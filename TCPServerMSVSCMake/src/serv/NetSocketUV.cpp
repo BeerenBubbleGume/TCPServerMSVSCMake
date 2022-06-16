@@ -56,7 +56,7 @@ bool NetSocketUV::Create(int port, bool udp_tcp, bool listen)
 		r = uv_udp_bind(udp, (const struct sockaddr*)&broadcast_addr, 0);
 		assert(r == 0);
 
-		r = uv_udp_set_broadcast(udp, 0);
+		r = uv_udp_set_broadcast(udp, 1);
 		assert(r == 0);
 
 		if (listen)
