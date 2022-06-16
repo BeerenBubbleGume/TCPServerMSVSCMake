@@ -214,7 +214,7 @@ void OnReadUDP(uv_udp_t* handle, ssize_t nread, const uv_buf_t* buf, const socka
 	recv_buffer->SetLength(nread);
 
 	size_t addrSize = sizeof addr;
-	int r = uv_ip4_name((sockaddr_in*)addr, address_converter, addrSize);
+	int r = uv_ip4_name((sockaddr_in*)&addr, address_converter, addrSize);
 	socket->getAddr()->ip = address_converter;
 	unsigned char* port_ptr = (unsigned char*)&(((sockaddr_in*)addr)->sin_port);
 	socket->getAddr()->port = port_ptr[1];
