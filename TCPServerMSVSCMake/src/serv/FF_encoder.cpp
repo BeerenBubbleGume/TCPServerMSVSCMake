@@ -101,7 +101,7 @@ void FF_encoder::ReadIncommigDataBuff()
         }
         for (int y = 0; y < fContext->height / 2; y++)
         {
-            for (int x 0; x < fContext->width / 2; x++)
+            for (int x = 0; x < fContext->width / 2; x++)
             {
                 fFrame->data[1][y * fFrame->linesize[1] + x] = 128 + y + i * 2;
                 fFrame->data[2][y * fFrame->linesize[2] + x] = 64 + x + i * 5;
