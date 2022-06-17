@@ -56,7 +56,7 @@ void FF_encoder::ReadIncommigDataBuff()
     if (fCodec->id == AV_CODEC_ID_H264)
         av_opt_set(fContext->priv_data, "preset", "slow", 0);
 
-    int ret = avcodec_open2(fCodecContext, fCodec, nullptr);
+    int ret = avcodec_open2(fContext, fCodec, nullptr);
     if (ret < 0)
     {
         fprintf(stderr, "Could not open codec: %s\n", av_err2str(ret));
@@ -101,7 +101,7 @@ void FF_encoder::ReadIncommigDataBuff()
         }
         for (int y = 0; y < fContext->height / 2; y++)
         {
-            for (int x = x < fContext->width / 2; x++)
+            for (int x 0; x < fContext->width / 2; x++)
             {
                 fFrame->data[1][y * fFrame->linesize[1] + x] = 128 + y + i * 2;
                 fFrame->data[2][y * fFrame->linesize[2] + x] = 64 + x + i * 5;
@@ -113,7 +113,7 @@ void FF_encoder::ReadIncommigDataBuff()
     encode(fContext, nullptr, fPacket, fFile);
 
     if (fCodec->id == AV_CODEC_ID_MPEG1VIDEO || fCodec->id == AV_CODEC_ID_MPEG2VIDEO)
-        fwrite(encode, 1, sizeof(encode), fFile);
+        fwrite(encode, 1, sizeof(&encode), fFile);
     fclose(fFile);
 }
 
