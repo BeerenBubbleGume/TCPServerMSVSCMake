@@ -23,7 +23,7 @@ void FF_encoder::encode(AVCodecContext* enc_ctx, AVFrame* frame, AVPacket* pkt, 
         }
 
         printf("Write packet %3"PRId64" (size=%5d)\n", pkt->pts, pkt->size);
-        fwrite(pkt->data, 1, pkt->size, outfile);
+        fwrite(pkt->data, 1, pkt->size, outFile);
         av_packet_unref(pkt);
     }
 }
@@ -64,7 +64,7 @@ fFileName(outFileName), fCodecName(codecName)
     }
 
     fPacket = av_packet_alloc();
-    if (!fPackte)
+    if (!fPacket)
     {
         fprintf(stderr, "Could not allocate packet\n");
         exit(1);

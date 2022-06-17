@@ -24,7 +24,7 @@ protected:
 	AVFrame* fFrame;
 	AVPacket* fPacket;
 	FILE* fFile;
-	AVCodec* fCodec;
+	const AVCodec* fCodec;
 
 	unsigned char* fData;
 	unsigned fDataSize;
