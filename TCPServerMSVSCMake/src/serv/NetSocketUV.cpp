@@ -167,7 +167,11 @@ void NetSocketUV::ReceiveTCP()
 	CString fileName;
 	fileName.IntToString(ClientID);
 	fileName += "in_binary.h264";
-	fout.open(fileName.c_str(), std::ios::binary | std::ios::app);
+	
+	FF_encoder* encoder = FF_encoder::createNew(net->GetRecvBuffer()->GetData(), net->GetRecvBuffer()->GetLength(), fileName, "H264");
+	encoder->ReadIncommigDataBuff();
+	
+	/*fout.open(fileName.c_str(), std::ios::binary | std::ios::app);
 	if (fout.is_open())
 	{
 		fout.write((char*)net->GetRecvBuffer()->GetData(), net->GetRecvBuffer()->GetLength());
@@ -178,7 +182,7 @@ void NetSocketUV::ReceiveTCP()
 	else
 	{
 		printf("cannot open file\n");
-	}
+	}*/
 	ReceiveMessages();
 	
 }
