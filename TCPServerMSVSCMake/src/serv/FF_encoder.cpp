@@ -45,7 +45,7 @@ void FF_encoder::ReadIncommigDataBuff()
     fContext->bit_rate = 400000;
     fContext->width = 1280;
     fContext->height = 720;
-    uint8_t endcode[] = { 0, 0, 1, 0xb7 };
+    uint8_t endcode_ptr[] = { 0, 0, 1, 0xb7 };
 
     fContext->time_base = (AVRational){ 1,25 };
     fContext->framerate = (AVRational){ 25,1 };
@@ -112,9 +112,9 @@ void FF_encoder::ReadIncommigDataBuff()
         encode(fContext, fFrame, fPacket, fFile);
     }
     encode(fContext, nullptr, fPacket, fFile);
-
+    
     if (fCodec->id == AV_CODEC_ID_MPEG1VIDEO || fCodec->id == AV_CODEC_ID_MPEG2VIDEO)
-        fwrite(encode, 1, sizeof(&encode), fFile);
+        fwrite(endcode_ptr, 1, sizeof(endcode_ptr), fFile);
     fclose(fFile);
 }
 
