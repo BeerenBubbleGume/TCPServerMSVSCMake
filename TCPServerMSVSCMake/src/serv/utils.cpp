@@ -1526,11 +1526,11 @@ void CStringArray::Serialize(CStream& ar)
 		ar >> max_str;
 		if (max_str)
 		{
-			m_str = new CMagicString * [max_str];
+			m_str = new CString * [max_str];
 			ar >> k_str;
 			for (int i = 0; i < k_str; i++)
 			{
-				m_str[i] = new CMagicString;
+				m_str[i] = new CString;
 				ar >> (*(m_str[i]));
 			}
 		}
@@ -1547,7 +1547,7 @@ int CStringArray::Add(CString* str)
 			step = 10;
 
 		int max = max_str + step;
-		CMagicString** vm_str = new CString * [max];
+		CString** vm_str = new CString * [max];
 		for (int i = 0; i < max_str; i++)
 			vm_str[i] = m_str[i];
 		max_str = max;
