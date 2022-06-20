@@ -43,8 +43,8 @@ void FF_encoder::Clear()
 void FF_encoder::ReadIncommigDataBuff()
 {
     fContext->bit_rate = 400000;
-    fContext->width = 1280;
-    fContext->height = 720;
+    fContext->width = 352;
+    fContext->height = 288;
     uint8_t endcode_ptr[] = { 0, 0, 1, 0xb7 };
 
     fContext->time_base = (AVRational){ 1,25 };
