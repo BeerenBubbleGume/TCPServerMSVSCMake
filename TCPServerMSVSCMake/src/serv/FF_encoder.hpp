@@ -1,5 +1,6 @@
 #pragma once
 #include "includes.hpp"
+#include "NetSock.hpp"
 extern "C" {
 #include <libavcodec/avcodec.h>
 #include <libavformat/avformat.h>
@@ -16,6 +17,7 @@ public:
 	static FF_encoder* createNew(unsigned char* inBuff, unsigned inBufferSize, const char* outFileName, const char* codecName);
 	void Clear();
 	void ReadIncommigDataBuff();
+	void SendRTP(NET_BUFFER_INDEX* buf);
 protected:
 	FF_encoder(unsigned char* inBuff, unsigned inBuferSize, const char* outFileName, const char* codecName);
 	~FF_encoder();

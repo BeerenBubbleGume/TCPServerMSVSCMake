@@ -82,6 +82,7 @@ bool NetSocketUV::GetIP(CString& addr, bool own_or_peer)
 		memset(&sockName, -1, sizeof(sockName));
 		int nameLen = sizeof(sockName);
 		int r;
+		CStringArray str_arr;
 
 		if (own_or_peer)
 			r = uv_tcp_getpeername(socket, &sockName, &nameLen);
@@ -101,8 +102,8 @@ bool NetSocketUV::GetIP(CString& addr, bool own_or_peer)
 				CString d;
 				d.IntToString(port);
 				addr += d;
-				IParr[ClientID] = &addr;
-				
+				IParr->Add(d);
+				assertIP(d);
 			}
 		}
 

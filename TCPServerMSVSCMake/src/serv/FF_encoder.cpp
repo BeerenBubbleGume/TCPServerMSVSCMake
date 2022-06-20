@@ -118,6 +118,10 @@ void FF_encoder::ReadIncommigDataBuff()
     fclose(fFile);
 }
 
+void FF_encoder::SendRTP(NET_BUFFER_INDEX* buf)
+{
+}
+
 FF_encoder::FF_encoder(unsigned char* inBuff, unsigned inBuferSize, const char* outFileName, const char* codecName): fData(inBuff), fDataSize(inBuferSize), 
 fFileName(outFileName), fCodecName(codecName)
 {

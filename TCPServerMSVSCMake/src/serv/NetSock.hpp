@@ -220,14 +220,14 @@ public:
 
 protected:
 	Net_Address*		addr;
-	CString**			IParr;
+	CStringArray*		IParr;
 	Net*				net;
 	int					session_id;
 	NetBuffer			recvbuffer;
 	friend class		Server;
 	friend class 		NetBuffer;
 
-	virtual bool		assertIP(CString& addr);
+	virtual bool		assertIP(CStringArray& addr);
 };
 
 

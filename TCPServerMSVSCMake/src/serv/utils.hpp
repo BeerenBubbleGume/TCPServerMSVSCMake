@@ -119,6 +119,31 @@ public:
 	bool IsVariableName();
 };
 
+class CStringArray
+{
+protected:
+	int k_str;
+	int max_str;
+	CString** m_str;
+
+public:
+	CStringArray();
+	virtual ~CStringArray();
+
+	void Clear();
+
+	void Serialize(CStream& ar);
+
+	int Add(CString* str);
+
+	CString* Get(int index);
+
+	int GetCount() { return k_str; }
+
+	// ����� ������ �� ��������� �������� ������ �� �������� � ����������
+	void FromString(const char* str);
+};
+
 class CArrayBase
 {
 protected:

@@ -1480,3 +1480,121 @@ CStream::~CStream()
 {
 
 }
+
+CStringArray::CStringArray()
+{
+	k_str = 0;
+	max_str = 0;
+	m_str = NULL;
+}
+
+CStringArray::~CStringArray()
+{
+	Clear();
+}
+
+void CStringArray::Clear()
+{
+	for (int i = 0; i < k_str; i++)
+	{
+		delete m_str[i];
+		m_str[i] = NULL;
+	}
+
+	if (m_str)
+	{
+		delete[]m_str;
+		m_str = NULL;
+	}
+
+	k_str = max_str = 0;
+}
+
+void CStringArray::Serialize(CStream& ar)
+{
+	if (ar.IsStoring())
+	{
+		ar << max_str;
+		ar << k_str;
+		for (int i = 0; i < k_str; i++)
+			ar << (*(m_str[i]));
+	}
+	else
+	{
+		Clear();
+
+		ar >> max_str;
+		if (max_str)
+		{
+			m_str = new CMagicString * [max_str];
+			ar >> k_str;
+			for (int i = 0; i < k_str; i++)
+			{
+				m_str[i] = new CMagicString;
+				ar >> (*(m_str[i]));
+			}
+		}
+	}
+}
+
+int CStringArray::Add(CString* str)
+{
+	if (k_str == max_str)
+	{
+		// ���������� ���������� ���������� �������
+		int step = max_str / 4;
+		if (step < 10)
+			step = 10;
+
+		int max = max_str + step;
+		CMagicString** vm_str = new CString * [max];
+		for (int i = 0; i < max_str; i++)
+			vm_str[i] = m_str[i];
+		max_str = max;
+		if (m_str)
+			delete[]m_str;
+		m_str = vm_str;
+	}
+
+	m_str[k_str] = new CString;
+	*(m_str[k_str]) = *str;
+	k_str++;
+	return k_str - 1;
+}
+
+CString* CStringArray::Get(int index)
+{
+	if (index >= 0 && index < k_str)
+		return m_str[index];
+	return nullptr;
+}
+
+void CStringArray::FromString(const char* str)
+{
+	Clear();
+
+	CString from = str;
+	from.Trim();
+
+	if (!from.IsEmpty())
+	{
+		CString ss;
+		int len = from.GetLength();
+		for (int i = 0; i < len; i++)
+		{
+			char s = from[i];
+			if (s == ' ' || s == '\t')
+			{
+				if (!ss.IsEmpty())
+				{
+					Add(&ss);
+					ss = "";
+				}
+			}
+			else
+				ss += s;
+		}
+		if (!ss.IsEmpty())
+			Add(&ss);
+	}
+}

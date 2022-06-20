@@ -49,7 +49,7 @@ NetSocket::NetSocket(Net* net)
 	session_id = 0;
 	IParr = nullptr;
 
-	IParr = (CString**)malloc(sizeof(CString*) * 100);
+	IParr = new CStringArray[100];
 }
 
 NET_BUFFER_INDEX* Net::PrepareMessage(unsigned int sender_id, MESSAGE_TYPE type, size_t length, unsigned char* data)
@@ -177,11 +177,11 @@ bool NetSocket::GetIP(CString& addr, bool own_or_peer)
 	return true;
 }
 
-bool NetSocket::assertIP(CString& addr)
+bool NetSocket::assertIP(CStringArray& addr)
 {
-	CString** va_addr = new CString*[ClientID + 1];
+	CStringArray* va_addr = new CStringArray[addr.GetCount()];
 	for (int i = 0; i < ClientID + 1; ++i)
-		va_addr[i] = new CString[100];
+		va_addr[i] = new CStringArray;
 
 	for (int i = 0; i < ClientID; ++i)
 		va_addr[i] = IParr[i];
