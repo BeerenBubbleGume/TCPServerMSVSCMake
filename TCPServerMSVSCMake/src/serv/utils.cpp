@@ -1484,7 +1484,7 @@ CStream::~CStream()
 CStringArray::CStringArray()
 {
 	k_str = 0;
-	max_str = 0;
+	max_str = 100;
 	m_str = NULL;
 }
 
