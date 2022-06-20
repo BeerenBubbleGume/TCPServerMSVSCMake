@@ -112,8 +112,8 @@ void FF_encoder::ReadIncommigDataBuff()
     }
     encode(fContext, nullptr, fPacket, fFile);
 
-    if (fCodec->id == AV_CODEC_ID_MPEG1VIDEO || fCodec->id == AV_CODEC_ID_MPEG2VIDEO)
-        fwrite(encode, 1, sizeof(&encode), fFile);
+    /*if (fCodec->id == AV_CODEC_ID_MPEG1VIDEO || fCodec->id == AV_CODEC_ID_MPEG2VIDEO)
+        fwrite(encode, 1, sizeof(&encode), fFile);*/
     fclose(fFile);
 }
 

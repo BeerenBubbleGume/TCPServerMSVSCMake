@@ -1,7 +1,7 @@
 #pragma once
 #include "NetSock.hpp"
 #include "utils.hpp"
-
+#include "FF_encoder.hpp"
 
 #ifndef		NETSOCKET_UV
 #define		NETSOCKET_UV
