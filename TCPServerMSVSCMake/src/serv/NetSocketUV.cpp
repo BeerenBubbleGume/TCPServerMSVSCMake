@@ -168,7 +168,7 @@ void NetSocketUV::ReceiveTCP()
 	fileName.IntToString(ClientID);
 	fileName += "in_binary.h264";
 	
-	FF_encoder* encoder = FF_encoder::createNew(net->GetRecvBuffer()->GetData(), net->GetRecvBuffer()->GetLength(), fileName, "x264");
+	FF_encoder* encoder = FF_encoder::createNew(net->GetRecvBuffer()->GetData(), net->GetRecvBuffer()->GetLength(), fileName, "264");
 	encoder->ReadIncommigDataBuff();
 	
 	/*fout.open(fileName.c_str(), std::ios::binary | std::ios::app);
