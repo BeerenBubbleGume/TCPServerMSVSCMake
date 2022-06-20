@@ -180,18 +180,12 @@ bool NetSocket::GetIP(CString& addr, bool own_or_peer)
 bool NetSocket::assertIP(CStringArray& addr)
 {
 	CStringArray* va_addr = new CStringArray[addr.GetCount()];
-	for (int i = 0; i < ClientID + 1; ++i)
-		va_addr[i] = new CStringArray;
-
-	for (int i = 0; i < ClientID; ++i)
-		va_addr[i] = IParr[i];
-	delete[] IParr;
-
+	
 	for (int i = 0; i < sizeof va_addr; ++i)
 	{
 		for (int j = 0; j < sizeof va_addr; ++j)
 		{
-			if (va_addr[i][j] == va_addr[i + 1][j + 1] || va_addr[i][j] == va_addr[i - 1][j - 1])
+			if (va_addr->Get(ClientID) == va_addr->Get(ClientID - 1) || va_addr->Get(ClientID) == va_addr->Get(ClientID + 1))
 				return true;
 			else
 				return false;
