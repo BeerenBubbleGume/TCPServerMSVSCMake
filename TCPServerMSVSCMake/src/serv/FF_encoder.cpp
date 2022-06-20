@@ -64,7 +64,7 @@ void FF_encoder::ReadIncommigDataBuff()
         exit(1);
     }
     
-    fFile = fopen(fFileName, "wb");
+    fFile = fopen(fFileName, "wb+");
     if (!fFile)
     {
         fprintf(stderr, "Could not open %s\n", fFileName);
