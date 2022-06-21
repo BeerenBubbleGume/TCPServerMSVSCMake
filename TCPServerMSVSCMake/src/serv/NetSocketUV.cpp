@@ -131,7 +131,9 @@ bool NetSocketUV::Accept()
 			}
 			else
 			{
-
+				ServerUV* server = ((ServerUV*)net);
+				server->ConnectSocket(accept_sock, server->count_accept);
+				server->sockets_nohello.Add(accept_sock);
 			}
 			printf("Accepted client with ID:%d\n", ClientID);
 			/*std::thread* ret = new std::thread;
