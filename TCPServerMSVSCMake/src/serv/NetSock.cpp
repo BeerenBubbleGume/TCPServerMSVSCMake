@@ -1088,7 +1088,7 @@ NET_SERVER_INFO::~NET_SERVER_INFO()
 	Clear();
 }
 
-SessionList::SessionList()
+SessionList::SessionList() : CArrayBase()
 {
 	k_session = 0;
 	m_session = NULL;
