@@ -272,7 +272,7 @@ public:
 
 
 protected:
-	bool GetSymbols(CMagicString& name, int& first, int& middle, int& last);
+	bool GetSymbols(CString& name, int& first, int& middle, int& last);
 };
 
 class CArrayBase
