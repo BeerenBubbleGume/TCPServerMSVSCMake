@@ -25,7 +25,8 @@ enum MESSAGE_TYPE
 	MESSAGE_TYPE_LOST_CONNECTION,
 	MESSAGE_TYPE_ENUM_SESSION,
 	MESSAGE_TYPE_STOP_SERVER,
-	MESSEGE_TYPE_SESSION_INFO
+	MESSEGE_TYPE_SESSION_INFO,
+	MESSAGE_TYPE_MIGRATION_OK
 };
 
 struct NetBuffer
@@ -172,6 +173,12 @@ protected:
 	SessionList			sessions;
 	friend class		NetSocket;
 	timeval				tv;
+
+	CMemWriter* wr1;
+	CMemWriter* wr2;
+	CMemReader* rd1;
+	CMemReader* rd2;
+
 };
 
 struct NET_SOCKET_INFO
@@ -224,6 +231,7 @@ protected:
 	Net*				net;
 	int					session_id;
 	NetBuffer			recvbuffer;
+	CString				name;
 	friend class		Server;
 	friend class 		NetBuffer;
 
@@ -289,13 +297,14 @@ public:
 	int					AddSessionInfo(NET_SESSION_INFO* session_info, NetSocket* socket);
 
 	bool				ReceiveMessage(MESSAGE_TYPE type, unsigned sender, unsigned length, unsigned char* data);
-
+	bool				IsMigration()															{ return (c_migration_client != 0); }
 protected:
 	friend class		NetSocket;
 	friend class		NET_SERVER_SESSION;
 	SocketList			sockets;
 	NET_SESSION_INFO*	info;
 	CArrayPtr			sockets_nohello;
+	CStringTable		names;
 	unsigned int*		a_migration_client;
 	int					c_migration_client;
 	int					start_time;
@@ -303,7 +312,17 @@ protected:
 	int					stop_time;
 	bool				stop_server;
 	int					max_client;
-	
+	bool				migration_ok;
+
+	void SendMigration(unsigned int receiver, CString* name, CString* license);
+
+};
+
+struct NET_STATISTICS
+{
+	CStringTable clients;
+	CStringTable bans;
+	CStringTable errors;
 };
 
 struct Send_Message
@@ -335,23 +354,5 @@ struct Net_Address
 
 	void				FromStringIP(const char* ip);
 	void				Serialize(CStream& stream);
-};
-
-struct MEM_DATA
-{
-	unsigned char* data;
-	int length;
-
-	bool operator==(const MEM_DATA& d)
-	{
-		if (length == d.length)
-		{
-			for (int i = 0; i < length; i++)
-				if (data[i] != d.data[i])
-					return false;
-			return true;
-		}
-		return false;
-	}
 };
 

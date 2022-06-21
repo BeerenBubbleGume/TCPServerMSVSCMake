@@ -7,6 +7,12 @@ int PORT_SERVER_TCP = 8080;
 
 Net::Net()
 {
+	wr1 = new CMemWriter;
+	wr2 = new CMemWriter;
+	rd1 = new CMemReader;
+	rd2 = new CMemReader;
+
+
 	bytes_read = 0;
 	udp_tcp = false;
 	addr = nullptr;
@@ -935,7 +941,153 @@ bool Server::ReceiveMessage(MESSAGE_TYPE type, unsigned sender, unsigned length,
 	switch (type)
 	{
 	case MESSAGE_TYPE_HELLO:
-		break;
+
+	{
+		int index_nohello = sockets_nohello.FindIndex(receiving_socket);
+		if (index_nohello != -1)
+			sockets_nohello.Delete(index_nohello);
+
+		rd1->Start(data);
+		int vlen = length;
+		if (vlen > 4)
+		{
+			int version;
+			(*rd1) >> version;
+			vlen -= 4;
+			if (!version)
+			{
+				int client_version;
+				CString name;
+				int license_type;
+				CString license;
+
+				bool is = false;
+				if (vlen > 4)
+				{
+					(*rd1) >> client_version;
+					vlen -= 4;
+
+					int crypt_rnd = 0;
+					unsigned char slen;
+					if (vlen > 1)
+					{
+						(*rd1) >> slen;
+						int name_len = slen;
+						vlen -= 1;
+						if (vlen > name_len)
+						{
+							name.SetLength(name_len);
+							rd1->Read((void*)name.c_str(), name_len);
+							vlen -= name_len;
+							if (vlen > 4)
+							{
+
+								(*rd1) >> license_type;
+								vlen -= 4;
+								if (vlen > 1)
+								{
+									(*rd1) >> slen;
+									name_len = slen;
+									vlen -= 1;
+									if (vlen == name_len)
+									{
+										license.SetLength(name_len);
+										rd1->Read((void*)license.c_str(), name_len);
+
+
+										is = true;
+									}
+								}
+							}
+						}
+					}
+				}
+
+				if (is)
+				{
+					if (IsMigration())
+					{
+						if (sender && (!migration_ok))
+						{
+							bool is = false;
+							bool is_host = (a_migration_client[c_migration_client - 1] == sender);
+							bool has_session = (sessions.GetIndexCount() > 0);
+							if (is_host)
+							{
+								if (!has_session)
+								{
+									receiving_socket->name = name;
+									ConnectSocket(receiving_socket, sender);
+									AddSessionInfo(info, receiving_socket);
+									delete migration_session;
+									migration_session = NULL;
+
+									IsAllPlayersMigrated(&name, &license);
+									is = true;
+								}
+							}
+							else
+							{
+								if (has_session)
+								{
+									NetSocket* migration_player = sockets.Get(sender);
+									if (!migration_player)
+									{
+										receiving_socket->name = name;
+										ConnectSocket(receiving_socket, sender);
+										int index = sessions.GetIndex(0);
+										NET_SERVER_SESSION* ss = sessions.Get(index);
+										ss->AddClient(receiving_socket);
+
+										IsAllClientsMigrated(&name, &license);
+										is = true;
+									}
+								}
+							}
+
+							if (!is)
+							{
+								unsigned int current_time = platform->GetTick();
+								unsigned int dtime = current_time - start_time;
+								if (dtime > 7000)
+								{
+									for (int i = 0; i < c_migration_client; i++)
+									{
+										NetSocket* socket = sockets.Get(a_migration_client[i]);
+										if (socket)
+										{
+											for (int j = 0; j < c_migration_client; j++)
+											{
+												if (!sockets.Get(a_migration_client[j]))
+												{
+													NET_BUFFER_INDEX* result2 = PrepareMessage(SERVER_ID, MESSAGE_TYPE_LOST_CONNECTION, 4, (unsigned char*)&(a_migration_client[i]));
+													socket->SendMessage(result2);
+												}
+											}
+											SendMigration(m_migration_player[i], &name, &license);
+										}
+									}
+									migration_ok = true;
+								}
+							}
+						}
+					}
+					else
+					{
+						MEM_DATA buf;
+						wr1->Finish(buf);
+						if (SendHelloReply(receiving_socket, buf, name, license_type, license))
+						{
+							return true;
+						}
+						return false;
+					}
+				}
+			}
+		}
+	}
+	break;
+
 	case MESSAGE_TYPE_LOST_CONNECTION:
 		break;
 	case MESSAGE_TYPE_ENUM_SESSION:
@@ -1014,6 +1166,17 @@ bool Server::ReceiveMessage(MESSAGE_TYPE type, unsigned sender, unsigned length,
 		break;
 	}
 	return true;
+}
+
+void Server::SendMigration(unsigned int receiver, CString* name, CString* license)
+{
+	wr1->Start();
+
+	MEM_DATA buf;
+	wr1->Finish(buf);
+	NET_BUFFER_INDEX* result = PrepareMessage(SERVER_ID, MESSAGE_TYPE_MIGRATION_OK, buf.length, buf.data);
+	NetSocket* socket = sockets.Get(receiver);
+	socket->SendMessage(result);
 }
 
 NET_SERVER_INFO::NET_SERVER_INFO()

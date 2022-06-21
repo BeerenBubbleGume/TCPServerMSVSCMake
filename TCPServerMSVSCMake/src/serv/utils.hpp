@@ -8,6 +8,24 @@ class	CStream;
 
 enum STREAM_MODE{STREAM_READ, STREAM_WRITE, STREAM_ADD, STREAM_MAX, STREAM_ERROR = -2};
 
+struct MEM_DATA
+{
+	unsigned char* data;
+	int length;
+
+	bool operator==(const MEM_DATA& d)
+	{
+		if (length == d.length)
+		{
+			for (int i = 0; i < length; i++)
+				if (data[i] != d.data[i])
+					return false;
+			return true;
+		}
+		return false;
+	}
+};
+
 class CString
 {
 protected:
@@ -142,6 +160,117 @@ public:
 
 	// ����� ������ �� ��������� �������� ������ �� �������� � ����������
 	void FromString(const char* str);
+};
+
+class CStringData : public CString
+{
+protected:
+	MEM_DATA data;
+	int index;
+
+public:
+	CStringData();
+	virtual ~CStringData();
+
+	MEM_DATA* GetData() { return &data; }
+	void SetData(int length, unsigned char* data);
+
+	void SetIndex(int index) { this->index = index; }
+	int GetIndex() { return index; }
+
+	void Serialize(CMagicStream& stream);
+};
+
+class CStringDataArray
+{
+protected:
+	int k_str;
+	int max_str;
+	CStringData** m_str;
+
+public:
+	CStringDataArray();
+	virtual ~CStringDataArray();
+
+	void Clear();
+
+	void Serialize(CStream& ar);
+
+	int Add(CString* str, MEM_DATA* data = NULL);
+	int Delete(int index);
+
+	CStringData* Get(int index);
+
+	int GetCount() { return k_str; }
+};
+
+struct __STRING_TABLE_3
+{
+	int k_data;
+	CStringDataArray** m_data;
+
+	__STRING_TABLE_3();
+	~__STRING_TABLE_3();
+
+	void Clear();
+
+	void SetLength(int len);
+};
+
+struct __STRING_TABLE_2
+{
+	int k_data;
+	__STRING_TABLE_3** m_data;
+
+	__STRING_TABLE_2();
+	~__STRING_TABLE_2();
+
+	void Clear();
+
+	void SetLength(int len);
+};
+
+struct __STRING_TABLE_1
+{
+	int k_data;
+	__STRING_TABLE_2** m_data;
+
+	__STRING_TABLE_1();
+	~__STRING_TABLE_1();
+
+	void Clear();
+
+	void SetLength(int len);
+};
+
+class CStringTable
+{
+	__STRING_TABLE_1 table;
+
+	int max_ptr;
+	int k_ptr;
+	CStringData** m_ptr;
+
+public:
+	CStringTable();
+	virtual ~CStringTable();
+
+	void Clear();
+
+	CStringData* Find(CString& name);
+
+	bool Add(CString& name, MEM_DATA* data = NULL);
+
+	bool Delete(CString& name);
+
+	void Serialize(CStream& stream, bool count_yes = true);
+
+	int GetCount() { return k_ptr; }
+	CStringData* Get(int index) { return m_ptr[index]; }
+
+
+protected:
+	bool GetSymbols(CMagicString& name, int& first, int& middle, int& last);
 };
 
 class CArrayBase
@@ -296,6 +425,89 @@ public:
 
 	virtual void	ChangeMode(int mode);
 
+};
+
+class CStreamMemory : public CStream
+{
+protected:
+	char* buffer;
+	unsigned int position;
+	unsigned int length;
+	unsigned int max_length;
+	bool is_created_buffer;
+
+public:
+	CStreamMemory();
+	virtual ~CStreamMemory();
+
+	bool Open(const char* buffer, unsigned int length, int mode);
+
+	virtual void Close();
+
+	virtual unsigned int GetLength();
+
+	virtual unsigned int GetPosition();
+	virtual void SetPosition(unsigned int pos);
+
+	virtual unsigned int Write(void* m_data, unsigned int k_data);
+	virtual unsigned int Read(void* m_data, unsigned int k_data);
+
+	virtual void ChangeMode(int mode);
+
+	char* GetBuffer() { return buffer; }
+};
+
+class CMemReader : public CStreamMemory
+{
+public:
+	CMemReader() : CStreamMemory()
+	{
+		Open((const char*)0x1, 1, STREAM_READ);
+	}
+
+	void Start(void* ptr)
+	{
+		buffer = (char*)ptr;
+		length = 10000000;
+		max_length = 10000000;
+		position = 0;
+	}
+
+	void Finish(MEM_DATA& buf)
+	{
+		buf.data = (unsigned char*)GetBuffer();
+		buf.length = GetPosition();
+	}
+};
+
+class CMemWriter : public CStreamMemory
+{
+public:
+	CMemWriter() : CStreamMemory()
+	{
+		Open(NULL, 0, STREAM_WRITE);
+	}
+
+	void Start()
+	{
+		position = 0;
+	}
+
+	void Finish(MEM_DATA& buf)
+	{
+		buf.data = (unsigned char*)GetBuffer();
+		buf.length = GetPosition();
+	}
+
+	void SetPositionIndirect(unsigned int position)
+	{
+		this->position = position;
+	}
+
+	void SetLengthIndirect(unsigned int length)
+	{
+		this->length = length;
+	}
 };
 
 struct CSize

@@ -1598,3 +1598,179 @@ void CStringArray::FromString(const char* str)
 			Add(&ss);
 	}
 }
+
+CStreamMemory::CStreamMemory()
+{
+}
+
+CStreamMemory::~CStreamMemory()
+{
+}
+
+bool CStreamMemory::Open(const char* buffer, unsigned int length, int mode)
+{
+	return false;
+}
+
+void CStreamMemory::Close()
+{
+}
+
+unsigned int CStreamMemory::GetLength()
+{
+	return 0;
+}
+
+unsigned int CStreamMemory::GetPosition()
+{
+	return 0;
+}
+
+void CStreamMemory::SetPosition(unsigned int pos)
+{
+}
+
+unsigned int CStreamMemory::Write(void* m_data, unsigned int k_data)
+{
+	return 0;
+}
+
+unsigned int CStreamMemory::Read(void* m_data, unsigned int k_data)
+{
+	return 0;
+}
+
+void CStreamMemory::ChangeMode(int mode)
+{
+}
+
+CStringData::CStringData()
+{
+}
+
+CStringData::~CStringData()
+{
+}
+
+void CStringData::SetData(int length, unsigned char* data)
+{
+}
+
+void CStringData::Serialize(CMagicStream& stream)
+{
+}
+
+CStringDataArray::CStringDataArray()
+{
+}
+
+CStringDataArray::~CStringDataArray()
+{
+}
+
+void CStringDataArray::Clear()
+{
+}
+
+void CStringDataArray::Serialize(CStream& ar)
+{
+}
+
+int CStringDataArray::Add(CString* str, MEM_DATA* data)
+{
+	return 0;
+}
+
+int CStringDataArray::Delete(int index)
+{
+	return 0;
+}
+
+CStringData* CStringDataArray::Get(int index)
+{
+	return nullptr;
+}
+
+__STRING_TABLE_3::__STRING_TABLE_3()
+{
+}
+
+__STRING_TABLE_3::~__STRING_TABLE_3()
+{
+}
+
+void __STRING_TABLE_3::Clear()
+{
+}
+
+void __STRING_TABLE_3::SetLength(int len)
+{
+}
+
+__STRING_TABLE_2::__STRING_TABLE_2()
+{
+}
+
+__STRING_TABLE_2::~__STRING_TABLE_2()
+{
+}
+
+void __STRING_TABLE_2::Clear()
+{
+}
+
+void __STRING_TABLE_2::SetLength(int len)
+{
+}
+
+__STRING_TABLE_1::__STRING_TABLE_1()
+{
+}
+
+__STRING_TABLE_1::~__STRING_TABLE_1()
+{
+}
+
+void __STRING_TABLE_1::Clear()
+{
+}
+
+void __STRING_TABLE_1::SetLength(int len)
+{
+}
+
+CStringTable::CStringTable()
+{
+}
+
+CStringTable::~CStringTable()
+{
+}
+
+void CStringTable::Clear()
+{
+}
+
+CStringData* CStringTable::Find(CString& name)
+{
+	return nullptr;
+}
+
+bool CStringTable::Add(CString& name, MEM_DATA* data)
+{
+	return false;
+}
+
+bool CStringTable::Delete(CString& name)
+{
+	return false;
+}
+
+void CStringTable::Serialize(CStream& stream, bool count_yes)
+{
+}
+
+bool CStringTable::GetSymbols(CMagicString& name, int& first, int& middle, int& last)
+{
+	return false;
+}
