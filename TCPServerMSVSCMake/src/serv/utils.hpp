@@ -2,6 +2,8 @@
 #include "includes.hpp"
 #include "utf.hpp"
 
+#define STREAM_MEMORY_START_SIZE 4096
+
 struct	CPoint;
 struct	CSize;
 class	CStream;
@@ -178,7 +180,7 @@ public:
 	void SetIndex(int index) { this->index = index; }
 	int GetIndex() { return index; }
 
-	void Serialize(CMagicStream& stream);
+	void Serialize(CStream& stream);
 };
 
 class CStringDataArray

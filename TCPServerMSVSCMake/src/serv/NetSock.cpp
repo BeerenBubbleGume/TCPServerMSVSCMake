@@ -1022,7 +1022,7 @@ bool Server::ReceiveMessage(MESSAGE_TYPE type, unsigned sender, unsigned length,
 									delete migration_session;
 									migration_session = NULL;
 
-									IsAllPlayersMigrated(&name, &license);
+									IsAllClientsMigrated(&name, &license);
 									is = true;
 								}
 							}
@@ -1047,7 +1047,7 @@ bool Server::ReceiveMessage(MESSAGE_TYPE type, unsigned sender, unsigned length,
 
 							if (!is)
 							{
-								unsigned int current_time = platform->GetTick();
+								unsigned int current_time = gettimeofday(tv, nullptr);
 								unsigned int dtime = current_time - start_time;
 								if (dtime > 7000)
 								{
@@ -1064,7 +1064,7 @@ bool Server::ReceiveMessage(MESSAGE_TYPE type, unsigned sender, unsigned length,
 													socket->SendMessage(result2);
 												}
 											}
-											SendMigration(m_migration_player[i], &name, &license);
+											SendMigration(a_migration_client[i], &name, &license);
 										}
 									}
 									migration_ok = true;
@@ -1177,6 +1177,71 @@ void Server::SendMigration(unsigned int receiver, CString* name, CString* licens
 	NET_BUFFER_INDEX* result = PrepareMessage(SERVER_ID, MESSAGE_TYPE_MIGRATION_OK, buf.length, buf.data);
 	NetSocket* socket = sockets.Get(receiver);
 	socket->SendMessage(result);
+}
+
+bool Server::IsAllClientsMigrated(CString* name, CString* license)
+{
+	bool is = true;
+	for (int i = 0; i < c_migration_client; i++)
+	{
+		if (!sockets.Get(a_migration_client[i]))
+		{
+			is = false;
+			break;
+		}
+	}
+
+	if (is)
+	{
+		for (int i = 0; i < c_migration_client; i++)
+		{
+			SendMigration(a_migration_client[i], name, license);
+		}
+		migration_ok = true;
+	}
+	return is;
+}
+
+bool Server::SendHelloReply(NetSocket* socket, MEM_DATA& buf, const char* name, int type_license, const char* license)
+{
+	bool is_ok = false;
+	if (buf.length)
+	{
+		NET_BUFFER_INDEX* result = PrepareMessage(SERVER_ID, MESSAGE_TYPE_HELLO_REPLY, buf.length, buf.data);
+		socket->SendMessage(result);
+		if (socket->ClientID)
+		{
+			CString lic = license;
+			if (statistics[type_license].clients.Add(lic))
+			{
+				MEM_DATA data_player_id;
+				data_player_id.length = sizeof(socket->ClientID);
+				data_player_id.data = (unsigned char*)&(socket->ClientID);
+				CString sname = name;
+				names.Add(sname, &data_player_id);
+
+				socket->type_license = type_license;
+				socket->license = statistics[type_license].clients.Find(lic);
+				is_ok = true;
+			}
+		}
+	}
+
+	if (!is_ok)
+	{
+		socket->Destroy();
+		delete socket;
+		socket = NULL;
+
+		if (!internet)
+		{
+			if (sockets.GetIndexCount() == 2)
+			{
+				StopServer();
+			}
+		}
+	}
+	return is_ok;
 }
 
 NET_SERVER_INFO::NET_SERVER_INFO()

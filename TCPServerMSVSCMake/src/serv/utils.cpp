@@ -1601,176 +1601,721 @@ void CStringArray::FromString(const char* str)
 
 CStreamMemory::CStreamMemory()
 {
+	buffer = nullptr;
+	position = 0;
+	length = 0;
+	max_length = 0;
+	is_created_buffer = false;
 }
 
 CStreamMemory::~CStreamMemory()
 {
+	if (buffer)
+	{
+		if (is_created_buffer)
+			free(buffer);
+		buffer = NULL;
+		position = 0;
+		length = 0;
+		max_length = 0;
+	}
 }
 
 bool CStreamMemory::Open(const char* buffer, unsigned int length, int mode)
 {
-	return false;
+	Close();
+
+	if (mode == STREAM_ADD && ((!buffer) || len <= 0))
+		mode = STREAM_WRITE;
+
+	this->mode = mode;
+
+	switch (mode)
+	{
+	case STREAM_READ:
+		this->buffer = (char*)buffer;
+		length = len;
+		max_length = len;
+		is_created_buffer = false;
+		break;
+
+	case STREAM_WRITE:
+		if (buffer || len > 0)
+			return false;
+		max_length = STREAM_MEMORY_START_SIZE;
+		this->buffer = (char*)malloc(max_length);
+		is_created_buffer = true;
+		break;
+
+	case STREAM_ADD:
+		if ((!buffer) || len <= 0)
+		{
+			// ������� �������� ������
+			max_length = STREAM_MEMORY_START_SIZE;
+			this->buffer = (char*)malloc(max_length);
+		}
+		else
+		{
+			// �������� ������ � ����� �����
+			max_length = STREAM_MEMORY_START_SIZE + len;
+			this->buffer = (char*)malloc(max_length);
+			for (unsigned int i = 0; i < len; i++)
+				this->buffer[i] = buffer[i];
+			length = len;
+			position = len;
+		}
+		is_created_buffer = true;
+		break;
+
+	default:
+		return false;
+	}
+
+	return true;
 }
 
 void CStreamMemory::Close()
 {
+	if (buffer)
+	{
+		if (is_created_buffer)
+			free(buffer);
+		buffer = NULL;
+		position = 0;
+		length = 0;
+
+		max_length = STREAM_MEMORY_START_SIZE;
+		buffer = (char*)malloc(max_length);
+		is_created_buffer = true;
+	}
 }
 
 unsigned int CStreamMemory::GetLength()
 {
+	if (buffer)
+		return length;
 	return 0;
 }
 
 unsigned int CStreamMemory::GetPosition()
 {
+	if (buffer)
+		return position;
 	return 0;
 }
 
 void CStreamMemory::SetPosition(unsigned int pos)
 {
+	if (buffer && IsLoading())
+	{
+		if (length && pos > length)
+			pos = length;
+		position = pos;
+	}
 }
 
 unsigned int CStreamMemory::Write(void* m_data, unsigned int k_data)
 {
-	return 0;
+	bytes = 0;
+	if (buffer && IsStoring())
+	{
+		unsigned int new_position = position + k_data;
+		if (new_position > max_length)
+		{
+			// ��������� ������
+			max_length = new_position + new_position / 4;
+			buffer = (char*)realloc(buffer, max_length);
+		}
+
+		char* d = (char*)m_data;
+
+		for (unsigned int i = 0; i < k_data; i++)
+		{
+			buffer[position] = d[i];
+			position++;
+		}
+
+		if (position > length)
+			length = position;
+	}
+
+	return bytes;
 }
 
 unsigned int CStreamMemory::Read(void* m_data, unsigned int k_data)
 {
-	return 0;
+	bytes = 0;
+	if (buffer && IsLoading())
+	{
+		unsigned int new_position = position + k_data;
+		bytes = k_data;
+		if (length && new_position > length)
+			bytes = length - position;
+
+		char* d = (char*)m_data;
+
+		for (unsigned int i = 0; i < bytes; i++)
+		{
+			d[i] = buffer[position];
+			position++;
+		}
+	}
+
+	return bytes;
 }
 
 void CStreamMemory::ChangeMode(int mode)
 {
+	switch (mode)
+	{
+	case STREAM_READ:
+		position = 0;
+		break;
+
+	case STREAM_WRITE:
+		Close();
+		max_length = STREAM_MEMORY_START_SIZE;
+		buffer = (char*)malloc(max_length);
+		is_created_buffer = true;
+		break;
+
+	case STREAM_ADD:
+		position = length;
+		break;
+	}
+
+	this->mode = mode;
 }
 
 CStringData::CStringData()
 {
+	data.length = 0;
+	data.data = NULL;
+	index = -1;
 }
 
 CStringData::~CStringData()
 {
+	if (data.data)
+	{
+		delete[]data.data;
+		data.data = NULL;
+		data.length = 0;
+	}
 }
 
 void CStringData::SetData(int length, unsigned char* data)
 {
+	if (this->data.length != length)
+	{
+		if (this->data.data)
+		{
+			delete[]this->data.data;
+			this->data.data = NULL;
+			this->data.length = 0;
+		}
+
+		if (length)
+		{
+			this->data.length = length;
+			this->data.data = new unsigned char[length];
+		}
+	}
+	memcpy(this->data.data, data, length);
 }
 
-void CStringData::Serialize(CMagicStream& stream)
+void CStringData::Serialize(CStream& stream)
 {
+	CString* ms = this;
+	if (stream.IsStoring())
+	{
+		stream << *ms;
+		stream << data.length;
+		if (data.length > 0)
+			stream.Write(data.data, data.length);
+	}
+	else
+	{
+		if (data.data)
+		{
+			delete[]data.data;
+			data.data = NULL;
+			data.length = 0;
+		}
+
+		stream >> *ms;
+
+		stream >> data.length;
+		if (data.length > 0)
+		{
+			data.data = new unsigned char[data.length];
+			stream.Read(data.data, data.length);
+		}
+	}
 }
 
 CStringDataArray::CStringDataArray()
 {
+	k_str = 0;
+	max_str = 0;
+	m_str = nullptr;
 }
 
 CStringDataArray::~CStringDataArray()
 {
+	Clear();
 }
 
 void CStringDataArray::Clear()
 {
+	for (int i = 0; i < k_str; i++)
+	{
+		delete m_str[i];
+		m_str[i] = NULL;
+	}
+
+	if (m_str)
+	{
+		delete[]m_str;
+		m_str = NULL;
+	}
+
+	k_str = max_str = 0;
 }
 
 void CStringDataArray::Serialize(CStream& ar)
 {
+	if (ar.IsStoring())
+	{
+		ar << max_str;
+		ar << k_str;
+		for (int i = 0; i < k_str; i++)
+			m_str[i]->Serialize(ar);
+	}
+	else
+	{
+		Clear();
+
+		ar >> max_str;
+		if (max_str)
+		{
+			m_str = new CStringData * [max_str];
+			ar >> k_str;
+			for (int i = 0; i < k_str; i++)
+			{
+				m_str[i] = new CStringData;
+				m_str[i]->Serialize(ar);
+			}
+		}
+	}
 }
 
 int CStringDataArray::Add(CString* str, MEM_DATA* data)
 {
-	return 0;
+	if(k_str == max_str)
+	{
+		// ���������� ���������� ���������� �������
+		int step = max_str / 4;
+		if (step < 10)
+			step = 10;
+
+		int max = max_str + step;
+		CStringData** vm_str = new CStringData * [max];
+		for (int i = 0; i < max_str; i++)
+			vm_str[i] = m_str[i];
+		max_str = max;
+		if (m_str)
+			delete[]m_str;
+		m_str = vm_str;
+	}
+
+	CStringData* md = new CStringData;
+	m_str[k_str] = md;
+
+	CString* vmd = md;
+
+	*vmd = *str;
+	if (data)
+		md->SetData(data->length, data->data);
+
+	k_str++;
+	return k_str - 1;
 }
 
 int CStringDataArray::Delete(int index)
 {
-	return 0;
+	if (index >= 0 && index < k_str)
+	{
+		int index_fast = m_str[index]->GetIndex();
+
+		delete m_str[index];
+
+		for (int i = index + 1; i < k_str; i++)
+			m_str[i - 1] = m_str[i];
+
+		k_str--;
+		m_str[k_str] = NULL;
+
+		return index_fast;
+	}
+	return -1;
 }
 
 CStringData* CStringDataArray::Get(int index)
 {
+	if (index >= 0 && index < k_str)
+		return m_str[index];
 	return nullptr;
 }
 
 __STRING_TABLE_3::__STRING_TABLE_3()
 {
+	k_data = 0;
+	m_data = nullptr;
 }
 
 __STRING_TABLE_3::~__STRING_TABLE_3()
 {
+	Clear();
 }
 
 void __STRING_TABLE_3::Clear()
 {
+	for (int i = 0; i < k_data; i++)
+	{
+		if (m_data[i])
+		{
+			delete m_data[i];
+			m_data[i] = NULL;
+		}
+	}
+
+	if (m_data)
+	{
+		delete[]m_data;
+		m_data = NULL;
+		k_data = 0;
+	}
 }
 
 void __STRING_TABLE_3::SetLength(int len)
 {
+	if (k_data < len)
+	{
+		CStringDataArray** vm_data = new CStringDataArray * [len];
+		for (int i = 0; i < k_data; i++)
+			vm_data[i] = m_data[i];
+		for (int i = k_data; i < len; i++)
+			vm_data[i] = NULL;
+		delete[]m_data;
+		m_data = vm_data;
+		k_data = len;
+	}
 }
 
 __STRING_TABLE_2::__STRING_TABLE_2()
 {
+	k_data = 0;
+	m_data = nullptr;
 }
 
 __STRING_TABLE_2::~__STRING_TABLE_2()
 {
+	Clear();
 }
 
 void __STRING_TABLE_2::Clear()
 {
+	for (int i = 0; i < k_data; i++)
+	{
+		if (m_data[i])
+		{
+			delete m_data[i];
+			m_data[i] = NULL;
+		}
+	}
+
+	if (m_data)
+	{
+		delete[]m_data;
+		m_data = NULL;
+		k_data = 0;
+	}
 }
 
 void __STRING_TABLE_2::SetLength(int len)
 {
+	if (k_data < len)
+	{
+		__STRING_TABLE_3** vm_data = new __STRING_TABLE_3 * [len];
+		for (int i = 0; i < k_data; i++)
+			vm_data[i] = m_data[i];
+		for (int i = k_data; i < len; i++)
+			vm_data[i] = NULL;
+		delete[]m_data;
+		m_data = vm_data;
+		k_data = len;
+	}
 }
 
 __STRING_TABLE_1::__STRING_TABLE_1()
 {
+	k_data = 0;
+	m_data = NULL;
 }
 
 __STRING_TABLE_1::~__STRING_TABLE_1()
 {
+	Clear();
 }
 
 void __STRING_TABLE_1::Clear()
 {
+	for (int i = 0; i < k_data; i++)
+	{
+		if (m_data[i])
+		{
+			delete m_data[i];
+			m_data[i] = NULL;
+		}
+	}
+
+	if (m_data)
+	{
+		delete[]m_data;
+		m_data = NULL;
+		k_data = 0;
+	}
 }
 
 void __STRING_TABLE_1::SetLength(int len)
 {
+	if (k_data < len)
+	{
+		__STRING_TABLE_2** vm_data = new __STRING_TABLE_2 * [len];
+		for (int i = 0; i < k_data; i++)
+			vm_data[i] = m_data[i];
+		for (int i = k_data; i < len; i++)
+			vm_data[i] = NULL;
+		delete[]m_data;
+		m_data = vm_data;
+		k_data = len;
+	}
 }
 
 CStringTable::CStringTable()
 {
+	max_ptr = 0;
+	k_ptr = 0;
+	m_ptr = NULL;
 }
 
 CStringTable::~CStringTable()
 {
+	Clear();
 }
 
 void CStringTable::Clear()
 {
+	table.Clear();
+	if (m_ptr)
+	{
+		delete[]m_ptr;
+		m_ptr = NULL;
+	}
+	max_ptr = 0;
+	k_ptr = 0;
 }
 
 CStringData* CStringTable::Find(CString& name)
 {
+	int first, middle, last;
+	if (GetSymbols(name, first, middle, last))
+	{
+		if (table.k_data > first)
+		{
+			__STRING_TABLE_2* table2 = table.m_data[first];
+			if (table2)
+			{
+				if (table2->k_data > last)
+				{
+					__STRING_TABLE_3* table3 = table2->m_data[last];
+					if (table3)
+					{
+						if (table3->k_data > middle)
+						{
+							CStringDataArray* str_array = table3->m_data[middle];
+							if (str_array)
+							{
+								int k = str_array->GetCount();
+								for (int i = 0; i < k; i++)
+								{
+									CStringData* str = str_array->Get(i);
+									if (name == *str)
+										return str;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 	return nullptr;
 }
 
 bool CStringTable::Add(CString& name, MEM_DATA* data)
 {
+	if (!Find(name))
+	{
+		int first, middle, last;
+		if (GetSymbols(name, first, middle, last))
+		{
+			if (table.k_data <= first)
+				table.SetLength(first + 1);
+			__STRING_TABLE_2* table2 = table.m_data[first];
+			if (!table2)
+			{
+				table.m_data[first] = new __STRING_TABLE_2;
+				table2 = table.m_data[first];
+			}
+			if (table2->k_data <= last)
+				table2->SetLength(last + 1);
+			__STRING_TABLE_3* table3 = table2->m_data[last];
+			if (!table3)
+			{
+				table2->m_data[last] = new __STRING_TABLE_3;
+				table3 = table2->m_data[last];
+			}
+			if (table3->k_data <= middle)
+				table3->SetLength(middle + 1);
+			CStringDataArray* str_array = table3->m_data[middle];
+			if (!str_array)
+			{
+				str_array = new CMagicStringDataArray;
+				table3->m_data[middle] = str_array;
+			}
+			int k = str_array->GetCount();
+			for (int i = 0; i < k; i++)
+			{
+				CString* str = str_array->Get(i);
+				if (name == *str)
+				{
+					return false;
+				}
+			}
+			int index = str_array->Add(&name, data);
+			CStringData* added_str = str_array->Get(index);
+
+			if (max_ptr == k_ptr)
+			{
+				int step = max_ptr / 4;
+				if (step < 4)
+					step = 4;
+				max_ptr += step;
+				CStringData** vm_ptr = new CStringData * [max_ptr];
+				if (m_ptr)
+				{
+					for (int i = 0; i < k_ptr; i++)
+						vm_ptr[i] = m_ptr[i];
+
+					delete[]m_ptr;
+				}
+				m_ptr = vm_ptr;
+			}
+			m_ptr[k_ptr] = added_str;
+			added_str->SetIndex(k_ptr);
+			k_ptr++;
+			return true;
+		}
+	}
 	return false;
 }
 
 bool CStringTable::Delete(CString& name)
 {
+	if (Find(name))
+	{
+		int first, middle, last;
+		if (GetSymbols(name, first, middle, last))
+		{
+			__STRING_TABLE_2* table2 = table.m_data[first];
+			__STRING_TABLE_3* table3 = table2->m_data[last];
+			CStringDataArray* str_array = table3->m_data[middle];
+			int k = str_array->GetCount();
+			for (int i = 0; i < k; i++)
+			{
+				CStringData* str = str_array->Get(i);
+				if (name == *str)
+				{
+					int index = str_array->Delete(i);
+					k_ptr--;
+					if (index != k_ptr)
+					{
+						m_ptr[index] = m_ptr[k_ptr];
+						m_ptr[index]->SetIndex(index);
+					}
+					break;
+				}
+			}
+		}
+
+		return true;
+	}
 	return false;
 }
 
 void CStringTable::Serialize(CStream& stream, bool count_yes)
 {
+	if (stream.IsStoring())
+	{
+		if (count_yes)
+			stream << k_ptr;
+		for (int i = 0; i < k_ptr; i++)
+			m_ptr[i]->Serialize(stream);
+	}
+	else
+	{
+		Clear();
+
+		CStringData d;
+		if (count_yes)
+		{
+			stream >> k_ptr;
+			for (int i = 0; i < k_ptr; i++)
+			{
+				d.Serialize(stream);
+				Add(d, d.GetData());
+			}
+		}
+		else
+		{
+			// ���������� ������ ����� �� �����
+			unsigned int length = stream.GetLength();
+			unsigned int pos = 0;
+			while (pos < length)
+			{
+				d.Serialize(stream);
+				Add(d, d.GetData());
+				pos = stream.GetPosition();
+			}
+		}
+	}
 }
 
-bool CStringTable::GetSymbols(CMagicString& name, int& first, int& middle, int& last)
+bool CStringTable::GetSymbols(CString& name, int& first, int& middle, int& last)
 {
+	int len = name.GetLength();
+	if (len > 0)
+	{
+		unsigned char v = name[0];
+		first = v;
+		v = name[len / 2];
+		middle = v;
+		v = name[len - 1];
+		last = v;
+		return true;
+	}
+	first = middle = last = -1;
 	return false;
 }

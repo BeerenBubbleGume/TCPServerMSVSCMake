@@ -26,7 +26,8 @@ enum MESSAGE_TYPE
 	MESSAGE_TYPE_ENUM_SESSION,
 	MESSAGE_TYPE_STOP_SERVER,
 	MESSEGE_TYPE_SESSION_INFO,
-	MESSAGE_TYPE_MIGRATION_OK
+	MESSAGE_TYPE_MIGRATION_OK,
+	MESSAGE_TYPE_HELLO_REPLY
 };
 
 struct NetBuffer
@@ -303,6 +304,7 @@ protected:
 	friend class		NET_SERVER_SESSION;
 	SocketList			sockets;
 	NET_SESSION_INFO*	info;
+	NET_STATISTICS*		statistics;
 	CArrayPtr			sockets_nohello;
 	CStringTable		names;
 	unsigned int*		a_migration_client;
@@ -314,7 +316,9 @@ protected:
 	int					max_client;
 	bool				migration_ok;
 
-	void SendMigration(unsigned int receiver, CString* name, CString* license);
+	void				SendMigration(unsigned int receiver, CString* name, CString* license);
+	bool				IsAllClientsMigrated(CString* name, CString* license);
+	bool				SendHelloReply(NetSocket* socket, MEM_DATA& buf, const char* name, int type_license, const char* license);
 
 };
 
