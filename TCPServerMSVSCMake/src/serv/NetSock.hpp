@@ -237,7 +237,8 @@ protected:
 	CString				name;
 	friend class		Server;
 	friend class 		NetBuffer;
-
+	int					type_license;
+	CString*			license;
 	virtual bool		assertIP(CStringArray& addr);
 };
 

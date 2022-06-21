@@ -53,7 +53,9 @@ NetSocket::NetSocket(Net* net)
 	port = 0;
 	udp_tcp = false;
 	session_id = 0;
-	IParr = nullptr;
+
+	type_license = -1;
+	license = NULL;
 
 	IParr = new CStringArray[100];
 }
