@@ -191,13 +191,10 @@ bool NetSocket::assertIP(CStringArray& addr)
 	
 	for (int i = 0; i < sizeof va_addr; ++i)
 	{
-		for (int j = 0; j < sizeof va_addr; ++j)
-		{
-			if (va_addr->Get(ClientID) == va_addr->Get(ClientID - 1) || va_addr->Get(ClientID) == va_addr->Get(ClientID + 1))
-				return true;
-			else
-				return false;
-		}
+		if (va_addr[i].Get(ClientID) == va_addr[i].Get(ClientID - 1) || va_addr[i].Get(ClientID) == va_addr[i].Get(ClientID + 1))
+			return true;
+		else
+			return false;
 	}
 	return false;
 }
