@@ -1021,8 +1021,8 @@ bool Server::ReceiveMessage(MESSAGE_TYPE type, unsigned sender, unsigned length,
 									receiving_socket->name = name;
 									ConnectSocket(receiving_socket, sender);
 									AddSessionInfo(info, receiving_socket);
-									delete migration_session;
-									migration_session = NULL;
+									delete info;
+									info = NULL;
 
 									IsAllClientsMigrated(&name, &license);
 									is = true;
