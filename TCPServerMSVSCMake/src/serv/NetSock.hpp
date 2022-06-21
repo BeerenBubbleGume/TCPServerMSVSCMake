@@ -11,9 +11,11 @@ struct	SessionList;
 class	SocketList;
 class	NetSocket;
 class	Net;
+struct	NET_STATISTICS;
 class	NET_SESSION_INFO;
 class	NET_SERVER_SESSION;
 class	Server;
+
 
 #define SERVER_ID 0
 //#define MESSAGE_TYPE_HELLO 0

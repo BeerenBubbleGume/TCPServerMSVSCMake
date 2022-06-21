@@ -1047,7 +1047,7 @@ bool Server::ReceiveMessage(MESSAGE_TYPE type, unsigned sender, unsigned length,
 
 							if (!is)
 							{
-								unsigned int current_time = gettimeofday(tv, nullptr);
+								unsigned int current_time = gettimeofday(&tv, nullptr);
 								unsigned int dtime = current_time - start_time;
 								if (dtime > 7000)
 								{
