@@ -187,9 +187,9 @@ bool NetSocket::GetIP(CString& addr, bool own_or_peer)
 
 bool NetSocket::assertIP(CStringArray& addr)
 {
-	CStringArray* va_addr = new CStringArray[addr.GetCount()];
+	CStringArray* va_addr = new CStringArray[ClientID];
 	
-	for (int i = 0; i < sizeof va_addr; ++i)
+	for (int i = 0; i < ClientID; ++i)
 	{
 		if (va_addr[i].Get(ClientID) == va_addr[i].Get(ClientID - 1) || va_addr[i].Get(ClientID) == va_addr[i].Get(ClientID + 1))
 			return true;
