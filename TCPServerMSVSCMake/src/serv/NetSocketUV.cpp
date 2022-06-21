@@ -173,7 +173,7 @@ void NetSocketUV::ReceiveTCP()
 	std::string fileName(strID.data());*/
 	CString fileName;
 	fileName.IntToString(ClientID);
-	fileName += "in_binary.h264";
+	fileName += "in_binary.raw";
 	
 	/*FF_encoder* encoder = FF_encoder::createNew(net->GetRecvBuffer()->GetData(), net->GetRecvBuffer()->GetLength(), fileName, "libx264");
 	encoder->ReadIncommigDataBuff();*/
@@ -202,7 +202,7 @@ void NetSocketUV::ReceiveUPD()
 
 	CString fileName;
 	fileName.IntToString((int)ClientID);
-	fileName += "in_binary.h264";
+	fileName += "in_binary.raw";
 	
 	fout.open(fileName.c_str(), std::ios::binary | std::ios::app);
 	if (fout.is_open())
