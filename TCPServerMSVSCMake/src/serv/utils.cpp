@@ -1625,7 +1625,7 @@ bool CStreamMemory::Open(const char* buffer, unsigned int length, int mode)
 {
 	Close();
 
-	if (mode == STREAM_ADD && ((!buffer) || len <= 0))
+	if (mode == STREAM_ADD && ((!buffer) || length <= 0))
 		mode = STREAM_WRITE;
 
 	this->mode = mode;
@@ -1634,13 +1634,13 @@ bool CStreamMemory::Open(const char* buffer, unsigned int length, int mode)
 	{
 	case STREAM_READ:
 		this->buffer = (char*)buffer;
-		length = len;
-		max_length = len;
+		length = length;
+		max_length = length;
 		is_created_buffer = false;
 		break;
 
 	case STREAM_WRITE:
-		if (buffer || len > 0)
+		if (buffer || length > 0)
 			return false;
 		max_length = STREAM_MEMORY_START_SIZE;
 		this->buffer = (char*)malloc(max_length);
@@ -1648,7 +1648,7 @@ bool CStreamMemory::Open(const char* buffer, unsigned int length, int mode)
 		break;
 
 	case STREAM_ADD:
-		if ((!buffer) || len <= 0)
+		if ((!buffer) || length <= 0)
 		{
 			// ������� �������� ������
 			max_length = STREAM_MEMORY_START_SIZE;
@@ -1657,12 +1657,12 @@ bool CStreamMemory::Open(const char* buffer, unsigned int length, int mode)
 		else
 		{
 			// �������� ������ � ����� �����
-			max_length = STREAM_MEMORY_START_SIZE + len;
+			max_length = STREAM_MEMORY_START_SIZE + length;
 			this->buffer = (char*)malloc(max_length);
-			for (unsigned int i = 0; i < len; i++)
+			for (unsigned int i = 0; i < length; i++)
 				this->buffer[i] = buffer[i];
-			length = len;
-			position = len;
+			length = length;
+			position = length;
 		}
 		is_created_buffer = true;
 		break;
@@ -2192,7 +2192,7 @@ bool CStringTable::Add(CString& name, MEM_DATA* data)
 			CStringDataArray* str_array = table3->m_data[middle];
 			if (!str_array)
 			{
-				str_array = new CMagicStringDataArray;
+				str_array = new CStringDataArray;
 				table3->m_data[middle] = str_array;
 			}
 			int k = str_array->GetCount();
