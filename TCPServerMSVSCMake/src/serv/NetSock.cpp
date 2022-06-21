@@ -1235,7 +1235,7 @@ bool Server::SendHelloReply(NetSocket* socket, MEM_DATA& buf, const char* name, 
 		delete socket;
 		socket = NULL;
 
-		if (!internet)
+		if (!udp_tcp)
 		{
 			if (sockets.GetIndexCount() == 2)
 			{
