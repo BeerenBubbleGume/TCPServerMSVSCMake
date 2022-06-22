@@ -121,7 +121,7 @@ bool NetSocketUV::Accept()
 	{	
 		if (uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadTCP) == 0)
 		{
-			GetIP(accept_sock->ip, true);
+			GetIP(accept_sock->ip, Peer);
 			if (!assertIP(*IParr))
 			{
 				ServerUV* server = ((ServerUV*)net);

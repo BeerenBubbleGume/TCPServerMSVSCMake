@@ -18,8 +18,8 @@ class	Server;
 
 
 #define SERVER_ID 0
-//#define MESSAGE_TYPE_HELLO 0
-//#define MESSAGE_TYPE_LOST_CONNECTION 1
+#define Owner false
+#define Peer true
 
 enum MESSAGE_TYPE
 {
