@@ -52,7 +52,7 @@ void FF_encoder::ReadIncommigDataBuff()
 
     fContext->gop_size = 10;
     fContext->max_b_frames = 1;
-    fContext->pix_fmt = AV_PIX_FMT_YUV420P12LE;
+    fContext->pix_fmt = AV_PIX_FMT_YUV410P;
 
     if (fCodec->id == AV_CODEC_ID_H264)
         av_opt_set(fContext->priv_data, "preset", "slow", 0);
