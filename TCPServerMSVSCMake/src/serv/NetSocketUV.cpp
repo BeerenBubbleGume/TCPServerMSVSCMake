@@ -11,6 +11,7 @@ NetSocketUV::NetSocketUV(Net* net) : NetSocket(net)
 
 NetSocketUV::~NetSocketUV()
 {
+	Destroy();
 	status = 0;
 }
 
@@ -71,7 +72,7 @@ bool NetSocketUV::Create(int port, bool udp_tcp, bool listen)
 	return false;
 }
 
-char address_converter[17];
+char address_converter[30];
 
 bool NetSocketUV::GetIP(CString& addr, bool own_or_peer)
 {
@@ -113,7 +114,7 @@ bool NetSocketUV::GetIP(CString& addr, bool own_or_peer)
 
 bool NetSocketUV::Accept()
 {
-	NetSocketUV* accept_sock = NewSocket(net);
+	NetSocketUV* accept_sock = (NetSocketUV*)net->NewSocket(net);
 	accept_sock->Create(0, true, false);
 	uv_tcp_t* client = GetPtrTCP(accept_sock->sock);
 	uv_tcp_t* host = GetPtrTCP(sock);

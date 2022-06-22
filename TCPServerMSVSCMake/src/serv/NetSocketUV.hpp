@@ -53,8 +53,6 @@ public:
 
 	//virtual void				SetupRetranslation(NetSocketUV* socket, unsigned int clientID);
 	static void*				WaitingDelay(void* delay);
-
-	static NetSocketUV*			NewSocket(Net* net)										{ return new NetSocketUV(net); }
 	
 protected:
 	friend class				ServerUV;
