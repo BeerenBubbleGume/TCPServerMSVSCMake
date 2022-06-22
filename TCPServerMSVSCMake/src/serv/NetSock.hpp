@@ -164,6 +164,10 @@ public:
 	SessionList&		GetSession()																	{ return sessions; }
 
 	virtual bool		ReceiveMessage(MESSAGE_TYPE type, unsigned sender, unsigned length, unsigned char* data) = 0;
+	CMemWriter*			getWR1() { return wr1; }
+	CMemWriter*			getWR2() { return wr2; }
+	CMemReader*			getRD1() { return rd1; }
+	CMemReader*			getRD2() { return rd2; }
 
 protected:
 	sockaddr			fConnectionSockaddr;

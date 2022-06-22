@@ -124,7 +124,7 @@ bool NetSocketUV::Accept()
 			GetIP(accept_sock->ip, Peer);
 			if (!assertIP(*IParr))
 			{
-				net->wr1->Start();
+				net->getWR1()->Start();
 				ServerUV* server = ((ServerUV*)net);
 				server->count_accept++;
 				server->ConnectSocket(accept_sock, server->count_accept);
@@ -132,7 +132,7 @@ bool NetSocketUV::Accept()
 				ClientID++;
 				
 				MEM_DATA buf;
-				net->wr1->Finish(buf);
+				net->getWR1()->Finish(buf);
 				NET_BUFFER_INDEX* res = net->PrepareMessage(ClientID, MESSAGE_TYPE_HELLO, buf.length, buf.data);
 				SendMessage(res);
 			}
