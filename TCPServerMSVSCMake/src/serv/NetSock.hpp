@@ -235,6 +235,7 @@ protected:
 	int					session_id;
 	NetBuffer			recvbuffer;
 	CString				name;
+	friend class		Net;
 	friend class		Server;
 	friend class 		NetBuffer;
 	int					type_license;
