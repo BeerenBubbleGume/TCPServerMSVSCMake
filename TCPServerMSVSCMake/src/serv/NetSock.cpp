@@ -530,10 +530,10 @@ void NET_SESSION_INFO::Serialize(CStream& stream)
 	}
 }
 
-//bool NET_SESSION_INFO::operator==(const NET_SESSION_INFO& si)
-//{
-//	return false;
-//}
+bool NET_SESSION_INFO::operator==(const NET_SESSION_INFO& si)
+{
+	return false;
+}
 
 NET_SERVER_SESSION::NET_SERVER_SESSION(Net* net) : NET_SESSION_INFO(net)
 {
@@ -1252,7 +1252,7 @@ NET_SERVER_INFO::NET_SERVER_INFO()
 	version = 0;
 
 	sockets = new SocketList;
-	sessions = new NET_SESSION_INFO;
+	sessions = new SessionList;
 }
 
 void NET_SERVER_INFO::Clear()

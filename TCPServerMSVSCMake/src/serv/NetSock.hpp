@@ -86,11 +86,11 @@ public:
 
 	void Clear();
 	void Serialize(CStream& stream);
-	//bool operator==(const NET_SESSION_INFO& si);
-	// bool operator!=(const NET_SESSION_INFO& si)
-	// {
-	// 	return !(*this == si);
-	// }
+	bool operator==(const NET_SESSION_INFO& si);
+	 bool operator!=(const NET_SESSION_INFO& si)
+	 {
+	 	return !(*this == si);
+	 }
 
 protected:
 	friend class		Server;
