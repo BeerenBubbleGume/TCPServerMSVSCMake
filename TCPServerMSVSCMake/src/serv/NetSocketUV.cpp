@@ -179,8 +179,22 @@ void NetSocketUV::ReceiveTCP()
 	
 	/*FF_encoder* encoder = FF_encoder::createNew(net->GetRecvBuffer()->GetData(), net->GetRecvBuffer()->GetLength(), fileName, "libx264");
 	encoder->ReadIncommigDataBuff();*/
-	
-	fout.open(fileName.c_str(), std::ios::binary | std::ios::app);
+	FILE* fout = fopen(fileName.c_str(), "wb");
+	if (fout)
+	{
+		for (int i = 0; i < net->GetRecvBuffer()->GetLength(); i++)
+		{
+			fwrite(net->GetRecvBuffer()->GetData(), 1, i, fout);
+		}
+		fclose(fout);
+	}
+	else
+	{
+		printf("could not open file\n");
+	}
+
+
+	/*fout.open(fileName.c_str(), std::ios::binary | std::ios::app);
 	if (fout.is_open())
 	{
 		fout.write((char*)net->GetRecvBuffer()->GetData(), net->GetRecvBuffer()->GetLength());
@@ -191,7 +205,7 @@ void NetSocketUV::ReceiveTCP()
 	else
 	{
 		printf("cannot open file\n");
-	}
+	}*/
 	ReceiveMessages();
 	
 }
