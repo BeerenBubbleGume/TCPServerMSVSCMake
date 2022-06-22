@@ -132,7 +132,7 @@ bool NetSocketUV::Accept()
 				
 				MEM_DATA buf;
 				net->getWR1()->Finish(buf);
-				net->ReceiveMessage(MESSAGE_TYPE_HELLO, accept_sock->GetClientID(), buf.length, buf.length);
+				net->ReceiveMessage(MESSAGE_TYPE_HELLO, accept_sock->GetClientID(), buf.length, buf.data);
 			}
 			else
 			{
