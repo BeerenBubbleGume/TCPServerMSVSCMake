@@ -141,25 +141,11 @@ bool NetSocketUV::Accept()
 				server->sockets_nohello.Add(accept_sock);
 			}*/
 			printf("Accepted client with ID:%u\n", accept_sock->ClientID);
-			/*std::thread* ret = new std::thread;
-			ret[ClientID] = std::thread(SetupRetranslation, accept_sock, ClientID);
-			ret[ClientID].detach();*/
-			
-			/*std::vector<std::thread> translationThreadList;
-			translationThreadList.push_back(std::thread{ SetupRetranslation, accept_sock, ClientID });
-			translationThreadList[ClientID].detach();*/
-
-			/*std::thread ret(SetupRetranslation, accept_sock, ClientID);
-			ret.detach();*/
 
 			return true;
 		}
 		else
-			return false;
-		/*std::thread TranslationThread(SetupRetranslation, accept_sock, ClientID);
-		TranslationThread.detach();*/
-		//receivThread.join();
-		
+			return false;		
 	}
 	else
 	{
@@ -179,33 +165,18 @@ void NetSocketUV::ReceiveTCP()
 	
 	/*FF_encoder* encoder = FF_encoder::createNew(net->GetRecvBuffer()->GetData(), net->GetRecvBuffer()->GetLength(), fileName, "libx264");
 	encoder->ReadIncommigDataBuff();*/
-	FILE* fout = fopen(fileName.c_str(), "wb+");
-	if (fout)
-	{
-		for (int i = 0; i < net->GetRecvBuffer()->GetLength(); i++)
-		{
-			fwrite(net->GetRecvBuffer()->GetData(), 1, i, fout);
-			fclose(fout);
-		}
-	}
-	else
-	{
-		printf("could not open file\n");
-	}
 
-
-	/*fout.open(fileName.c_str(), std::ios::binary | std::ios::app);
+	fout.open(fileName.c_str(), std::ios::binary | std::ios::app);
 	if (fout.is_open())
 	{
 		fout.write((char*)net->GetRecvBuffer()->GetData(), net->GetRecvBuffer()->GetLength());
 		printf("writed %d bytes in file %s\n", (int)net->GetRecvBuffer()->GetLength(), fileName.c_str());
 		fout.close();
-		  
 	}
 	else
 	{
 		printf("cannot open file\n");
-	}*/
+	}
 	ReceiveMessages();
 	
 }
