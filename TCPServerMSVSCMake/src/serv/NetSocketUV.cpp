@@ -124,11 +124,17 @@ bool NetSocketUV::Accept()
 			GetIP(accept_sock->ip, Peer);
 			if (!assertIP(*IParr))
 			{
+				net->wr1->Start();
 				ServerUV* server = ((ServerUV*)net);
 				server->count_accept++;
 				server->ConnectSocket(accept_sock, server->count_accept);
 				server->sockets_nohello.Add(accept_sock);
 				ClientID++;
+				
+				MEM_DATA buf;
+				net->wr1->Finish(buf);
+				NET_BUFFER_INDEX* res = net->PrepareMessage(ClientID, MESSAGE_TYPE_HELLO, buf.length, buf.data);
+				SendMessage(res);
 			}
 			else
 			{
@@ -259,6 +265,7 @@ void OnReadTCP(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)
 	if (nread < 0)
 	{
 		printf("Client disconnected!\n");
+		assert(uvsocket->GetSessionID() > 0);
 		uvsocket->getNet()->OnLostConnection(uvsocket);
 		//OnCloseSocket((uv_handle_t*)stream);
 	}
