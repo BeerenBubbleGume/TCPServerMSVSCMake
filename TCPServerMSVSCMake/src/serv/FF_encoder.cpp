@@ -43,16 +43,16 @@ void FF_encoder::Clear()
 void FF_encoder::ReadIncommigDataBuff()
 {
     fContext->bit_rate = 400000;
-    fContext->width = 352;
-    fContext->height = 288;
-    uint8_t endcode_ptr[] = { 0, 0, 1, 0xb7 };
+    fContext->width = 2560;
+    fContext->height = 1440;
+    uint8_t endcode_ptr[] = { 0, 0, 9, 0xF0 };
 
-    fContext->time_base = (AVRational){ 1,25 };
-    fContext->framerate = (AVRational){ 25,1 };
+    fContext->time_base = (AVRational){ 1,20 };
+    fContext->framerate = (AVRational){ 20,1 };
 
     fContext->gop_size = 10;
     fContext->max_b_frames = 1;
-    fContext->pix_fmt = AV_PIX_FMT_YUV420P;
+    fContext->pix_fmt = AV_PIX_FMT_YUV420P12LE;
 
     if (fCodec->id == AV_CODEC_ID_H264)
         av_opt_set(fContext->priv_data, "preset", "slow", 0);
@@ -89,7 +89,7 @@ void FF_encoder::ReadIncommigDataBuff()
         exit(1);
     }
 
-    for (int i = 0; i < 25; ++i)
+    for (int i = 0; i < 20; ++i)
     {
         fflush(stdout);
         ret = av_frame_make_writable(fFrame);
