@@ -129,11 +129,10 @@ bool NetSocketUV::Accept()
 				server->count_accept++;
 				server->ConnectSocket(accept_sock, server->count_accept);
 				server->sockets_nohello.Add(accept_sock);
-				ClientID++;
 				
 				MEM_DATA buf;
 				net->getWR1()->Finish(buf);
-				NET_BUFFER_INDEX* res = net->PrepareMessage(ClientID, MESSAGE_TYPE_HELLO, buf.length, buf.data);
+				NET_BUFFER_INDEX* res = net->PrepareMessage(accept_sock->ClientID, MESSAGE_TYPE_HELLO, buf.length, buf.data);
 				SendMessage(res);
 			}
 			else
@@ -142,7 +141,7 @@ bool NetSocketUV::Accept()
 				server->ConnectSocket(accept_sock, server->count_accept);
 				server->sockets_nohello.Add(accept_sock);
 			}
-			printf("Accepted client with ID:%u\n", ClientID);
+			printf("Accepted client with ID:%u\n", accept_sock->ClientID);
 			/*std::thread* ret = new std::thread;
 			ret[ClientID] = std::thread(SetupRetranslation, accept_sock, ClientID);
 			ret[ClientID].detach();*/
