@@ -134,6 +134,7 @@ bool NetSocketUV::Accept()
 				net->getWR1()->Finish(buf);
 				NET_BUFFER_INDEX* res = net->PrepareMessage(accept_sock->ClientID, MESSAGE_TYPE_HELLO, buf.length, buf.data);
 				SendMessage(res);
+				ReceiveMessages();
 			}
 			else
 			{
@@ -174,9 +175,6 @@ void NetSocketUV::ReceiveTCP()
 {
 	int filePrefix = (int)ClientID;
 	printf("ID: %d\n", filePrefix);
-	/*std::array<char, 10> strID;
-	std::to_chars(strID.data(), strID.data() + strID.size(), filePrefix);
-	std::string fileName(strID.data());*/
 	CString fileName;
 	fileName.IntToString(filePrefix);
 	fileName += "in_binary.264";
