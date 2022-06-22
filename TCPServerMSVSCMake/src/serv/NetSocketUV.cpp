@@ -166,7 +166,7 @@ bool NetSocketUV::Accept()
 
 void NetSocketUV::ReceiveTCP()
 {
-	int filePrefix = ClientID;
+	int filePrefix = (int)ClientID;
 	printf("ID: %d\n", filePrefix);
 	/*std::array<char, 10> strID;
 	std::to_chars(strID.data(), strID.data() + strID.size(), filePrefix);
@@ -175,10 +175,10 @@ void NetSocketUV::ReceiveTCP()
 	fileName.IntToString(ClientID);
 	fileName += "in_binary.264";
 	
-	/*FF_encoder* encoder = FF_encoder::createNew(net->GetRecvBuffer()->GetData(), net->GetRecvBuffer()->GetLength(), fileName, "libx264");
-	encoder->ReadIncommigDataBuff();*/
+	FF_encoder* encoder = FF_encoder::createNew(net->GetRecvBuffer()->GetData(), net->GetRecvBuffer()->GetLength(), fileName, "libx264");
+	encoder->ReadIncommigDataBuff();
 	
-	fout.open(fileName.c_str(), std::ios::binary | std::ios::app);
+	/*fout.open(fileName.c_str(), std::ios::binary | std::ios::app);
 	if (fout.is_open())
 	{
 		fout.write((char*)net->GetRecvBuffer()->GetData(), net->GetRecvBuffer()->GetLength());
@@ -189,7 +189,7 @@ void NetSocketUV::ReceiveTCP()
 	else
 	{
 		printf("cannot open file\n");
-	}
+	}*/
 	ReceiveMessages();
 	
 }
