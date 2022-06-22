@@ -136,7 +136,7 @@ bool NetSocketUV::Accept()
 				server->ConnectSocket(accept_sock, server->count_accept);
 				server->sockets_nohello.Add(accept_sock);
 			}
-			printf("Accepted client with ID:%d\n", ClientID);
+			printf("Accepted client with ID:%u\n", ClientID);
 			/*std::thread* ret = new std::thread;
 			ret[ClientID] = std::thread(SetupRetranslation, accept_sock, ClientID);
 			ret[ClientID].detach();*/
@@ -173,7 +173,7 @@ void NetSocketUV::ReceiveTCP()
 	std::to_chars(strID.data(), strID.data() + strID.size(), filePrefix);
 	std::string fileName(strID.data());*/
 	CString fileName;
-	fileName.IntToString(ClientID);
+	fileName.IntToString(filePrefix);
 	fileName += "in_binary.264";
 	
 	/*FF_encoder* encoder = FF_encoder::createNew(net->GetRecvBuffer()->GetData(), net->GetRecvBuffer()->GetLength(), fileName, "libx264");
@@ -237,7 +237,7 @@ void NetSocketUV::SendTCP(NET_BUFFER_INDEX* buf)
 void OnReadUDP(uv_udp_t* handle, ssize_t nread, const uv_buf_t* buf, const sockaddr* addr, unsigned flags)
 {
 	NetSocketUV* socket = (NetSocketUV*)GetNetSocketPtr(handle);
-	printf("received %d bytes from client with ID: %u\n", nread, socket->GetClientID());
+	printf("received %d bytes from client with ID: %d\n", nread, (int)socket->GetClientID());
 	NetBuffer* recv_buffer = socket->getNet()->GetRecvBuffer();
 	assert(buf->base == (char*)recv_buffer->GetData());
 	recv_buffer->SetLength(nread);
@@ -264,7 +264,7 @@ void OnReadTCP(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)
 	}
 	else
 	{
-		printf("Reading data from client with ID: %d\n", uvsocket->GetClientID());
+		printf("Reading data from client with ID: %u\n", uvsocket->GetClientID());
 		NetBuffer* recv_buff = uvsocket->getNet()->GetRecvBuffer();
 		assert(buf->base == (char*)recv_buff->GetData());
 		recv_buff->SetMaxSize(nread);
