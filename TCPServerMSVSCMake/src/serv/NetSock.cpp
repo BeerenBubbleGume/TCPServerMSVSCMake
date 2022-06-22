@@ -1247,10 +1247,12 @@ NET_SERVER_INFO::NET_SERVER_INFO()
 {
 	current_time = 0;
 	k_accept = 0;
-	sessions = nullptr;
-	sockets = nullptr;
+	
 	start_time = 0;
 	version = 0;
+
+	sockets = new SocketList;
+	sessions = new NET_SESSION_INFO;
 }
 
 void NET_SERVER_INFO::Clear()
