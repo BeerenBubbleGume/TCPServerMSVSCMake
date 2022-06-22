@@ -123,8 +123,8 @@ bool NetSocketUV::Accept()
 		if (uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadTCP) == 0)
 		{
 			GetIP(accept_sock->ip, Peer);
-			if (!assertIP(*IParr))
-			{
+			/*if (!assertIP(*IParr))
+			{*/
 				net->getWR1()->Start();
 				ServerUV* server = ((ServerUV*)net);
 				server->count_accept++;
@@ -133,13 +133,13 @@ bool NetSocketUV::Accept()
 				MEM_DATA buf;
 				net->getWR1()->Finish(buf);
 				net->ReceiveMessage(MESSAGE_TYPE_HELLO, accept_sock->GetClientID(), buf.length, buf.data);
-			}
+			/*}
 			else
 			{
 				ServerUV* server = ((ServerUV*)net);
 				server->ConnectSocket(accept_sock, server->count_accept);
 				server->sockets_nohello.Add(accept_sock);
-			}
+			}*/
 			printf("Accepted client with ID:%u\n", accept_sock->ClientID);
 			/*std::thread* ret = new std::thread;
 			ret[ClientID] = std::thread(SetupRetranslation, accept_sock, ClientID);
