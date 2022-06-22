@@ -42,6 +42,17 @@ void FF_encoder::Clear()
 
 void FF_encoder::ReadIncommigDataBuff()
 {
+    fContext->bit_rate = 400000;
+    fContext->width = 2560;
+    fContext->height = 1440;
+    uint8_t endcode_ptr[] = { 0, 0, 9, 0xF0 };
+
+    fContext->time_base = (AVRational){ 1,20 };
+    fContext->framerate = (AVRational){ 20,1 };
+
+    fContext->gop_size = 10;
+    fContext->max_b_frames = 1;
+    fContext->pix_fmt = AV_PIX_FMT_YUV410P;
 
     if (fCodec->id == AV_CODEC_ID_H264)
         av_opt_set(fContext->priv_data, "preset", "slow", 0);
@@ -53,7 +64,7 @@ void FF_encoder::ReadIncommigDataBuff()
         exit(1);
     }
     
-    fFile = fopen(fFileName, "wb");
+    fFile = fopen(fFileName, "wb+");
     if (!fFile)
     {
         fprintf(stderr, "Could not open %s\n", fFileName);
@@ -101,9 +112,9 @@ void FF_encoder::ReadIncommigDataBuff()
         encode(fContext, fFrame, fPacket, fFile);
     }
     encode(fContext, nullptr, fPacket, fFile);
-    /*
+    
     if (fCodec->id == AV_CODEC_ID_MPEG1VIDEO || fCodec->id == AV_CODEC_ID_MPEG2VIDEO)
-        fwrite(endcode_ptr, 1, sizeof(endcode_ptr), fFile);*/
+        fwrite(endcode_ptr, 1, sizeof(endcode_ptr), fFile);
     fclose(fFile);
 }
 

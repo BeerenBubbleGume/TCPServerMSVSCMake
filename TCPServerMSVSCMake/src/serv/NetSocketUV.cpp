@@ -179,14 +179,14 @@ void NetSocketUV::ReceiveTCP()
 	
 	/*FF_encoder* encoder = FF_encoder::createNew(net->GetRecvBuffer()->GetData(), net->GetRecvBuffer()->GetLength(), fileName, "libx264");
 	encoder->ReadIncommigDataBuff();*/
-	FILE* fout = fopen(fileName.c_str(), "wb");
+	FILE* fout = fopen(fileName.c_str(), "wb+");
 	if (fout)
 	{
 		for (int i = 0; i < net->GetRecvBuffer()->GetLength(); i++)
 		{
 			fwrite(net->GetRecvBuffer()->GetData(), 1, i, fout);
+			fclose(fout);
 		}
-		fclose(fout);
 	}
 	else
 	{
