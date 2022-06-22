@@ -256,7 +256,6 @@ void OnReadUDP(uv_udp_t* handle, ssize_t nread, const uv_buf_t* buf, const socka
 void OnReadTCP(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)
 {
 	NetSocketUV* uvsocket = (NetSocketUV*)GetNetSocketPtr(stream);
-	uvsocket->getNet()->setupReceivingSocket(*uvsocket);
 	if (nread < 0)
 	{
 		printf("Client disconnected!\n");
