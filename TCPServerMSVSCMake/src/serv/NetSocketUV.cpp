@@ -128,7 +128,6 @@ bool NetSocketUV::Accept()
 				net->getWR1()->Start();
 				ServerUV* server = ((ServerUV*)net);
 				server->count_accept++;
-				server->ConnectSocket(accept_sock, server->count_accept);
 				server->sockets_nohello.Add(accept_sock);
 				
 				MEM_DATA buf;
