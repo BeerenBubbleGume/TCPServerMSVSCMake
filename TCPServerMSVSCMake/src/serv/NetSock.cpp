@@ -198,7 +198,7 @@ bool NetSocket::assertIP(CString** addr)
 
 	for (int i = 0; i < ClientID; i++)
 	{
-		if ((strcmp(va_str[i]->c_str(), va_str[i + 1]->c_str() == 0)) || (strcmp(va_str[i]->c_str(), va_str[i + 1]->c_str()) == 0))
+		if ((strcmp(va_str[i]->c_str(), va_str[i + 1]->c_str()) == 0) || (strcmp(va_str[i]->c_str(), va_str[i + 1]->c_str()) == 0))
 			return true;
 		else
 			return false;
