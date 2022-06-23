@@ -162,6 +162,7 @@ public:
 
 	// ����� ������ �� ��������� �������� ������ �� �������� � ����������
 	void FromString(const char* str);
+	void IncrementStr() { k_str++; }
 };
 
 class CStringData : public CString
