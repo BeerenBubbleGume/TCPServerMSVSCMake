@@ -134,7 +134,7 @@ bool NetSocketUV::Accept()
 			{
 				NET_SESSION_INFO* ss = new NET_SESSION_INFO(net);
 				assert(ss);
-				ss->Serialize(net->getWR1());
+				ss->Serialize(*(net->getWR1()));
 				server->AddSessionInfo(ss);
 			}
 			
