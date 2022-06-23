@@ -104,6 +104,7 @@ bool NetSocketUV::GetIP(CString& addr, bool own_or_peer)
 				d.IntToString(port);
 				addr += d;
 				IParr->Add(&d);
+				printf("NetSocketUV::GetIP(): IP:\t%s\n", addr.c_str());
 			}
 		}
 
