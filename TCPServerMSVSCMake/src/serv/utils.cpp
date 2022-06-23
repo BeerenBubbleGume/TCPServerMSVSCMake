@@ -1599,7 +1599,7 @@ void CStringArray::FromString(const char* str)
 	}
 }
 
-CStreamMemory::CStreamMemory()
+CStreamMemory::CStreamMemory() : CStream()
 {
 	buffer = nullptr;
 	position = 0;
