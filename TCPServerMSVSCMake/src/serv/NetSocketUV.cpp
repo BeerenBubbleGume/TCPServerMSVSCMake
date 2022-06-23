@@ -134,7 +134,7 @@ bool NetSocketUV::Accept()
 				net->getWR1()->Finish(buf);
 				printf("Accepted client with ID:%u\nIP:\t%s\n", accept_sock->ClientID, accept_sock->ip.c_str());
 				NET_BUFFER_INDEX* result = accept_sock->net->PrepareMessage(accept_sock->ClientID, MESSAGE_TYPE_HELLO, buf.length, buf.data);
-				SendMessage(result);
+				server->ReceiveMessage(MESSAGE_TYPE_HELLO, accept_sock->ClientID, buf.length, buf.data);
 			/*}
 			else
 			{
