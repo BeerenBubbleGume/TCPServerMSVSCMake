@@ -133,6 +133,9 @@ bool NetSocketUV::Accept()
 				int sessID = accept_sock->sessionID++;
 				(*wr1) << sessID;
 				server->sockets_nohello.Add(accept_sock);
+				NET_SESSION_INFO* ss = new NET_SESSION_INFO(net);
+				assert(ss);
+				server->AddSessionInfo(ss, accept_sock);
 			}
 			else
 			{
