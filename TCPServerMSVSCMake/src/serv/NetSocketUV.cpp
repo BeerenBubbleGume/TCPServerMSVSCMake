@@ -74,7 +74,7 @@ bool NetSocketUV::Create(int port, bool udp_tcp, bool listen)
 
 char address_converter[30];
 
-bool NetSocketUV::GetIP(CString& addr, bool own_or_peer, CStringArray* toStore)
+bool NetSocketUV::GetIP(CString& addr, bool own_or_peer, CStringArray& toStore)
 {
 	if (NetSocket::GetIP(addr, own_or_peer, toStore))
 	{
@@ -102,7 +102,7 @@ bool NetSocketUV::GetIP(CString& addr, bool own_or_peer, CStringArray* toStore)
 				CString d;
 				d.IntToString(port);
 				addr += d;
-				toStore->Add(&d);
+				toStore.FromString(addr.c_str());
 			}
 		}
 		else
