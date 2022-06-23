@@ -217,7 +217,11 @@ void NetSocketUV::SendTCP(NET_BUFFER_INDEX* buf)
 		buffer.len = buf->GetLength();
 		buffer.base = (char*)buf->GetData();
 		int r = uv_write(((NetBufferUV*)buf)->GetPtrWrite(), (uv_stream_t*)GetPtrTCP(sock), &buffer, 1, OnWrite);
-		assert(r == 0);
+		if (r != 0)
+		{
+			printf("send error!\t%s", uv_strerror(r));
+			exit(1);
+		}
 	}
 }
 
