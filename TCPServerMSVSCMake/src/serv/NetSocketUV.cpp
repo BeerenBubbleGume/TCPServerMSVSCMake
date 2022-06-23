@@ -136,7 +136,7 @@ bool NetSocketUV::Accept()
 				assert(ss);
 				ss->Serialize(*(net->getWR1()));
 				server->AddSessionInfo(ss, accept_sock);
-				server->ConnectSocket(accept_sock, server->count_accept)
+				server->ConnectSocket(accept_sock, server->count_accept);
 			}
 			printf("Accepted client with ID:%u\nIP:\t%s\nSessionID:\t%u\n", accept_sock->ClientID, accept_sock->ip.c_str(), accept_sock->sessionID);
 			
