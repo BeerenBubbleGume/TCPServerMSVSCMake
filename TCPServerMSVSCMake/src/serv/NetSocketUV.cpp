@@ -132,6 +132,7 @@ bool NetSocketUV::Accept()
 				net->getWR1()->operator<<(accept_sock->ip);
 				MEM_DATA buf;
 				net->getWR1()->Finish(buf);
+				printf("Accepted client with ID:%u\nIP:\t%s\n", accept_sock->ClientID, accept_sock->ip.c_str());
 				NET_BUFFER_INDEX* result = net->PrepareMessage(accept_sock->ClientID, MESSAGE_TYPE_HELLO, buf.length, buf.data);
 				SendMessage(result);
 			/*}
@@ -141,8 +142,6 @@ bool NetSocketUV::Accept()
 				server->ConnectSocket(accept_sock, server->count_accept);
 				server->sockets_nohello.Add(accept_sock);
 			}*/
-			printf("Accepted client with ID:%u\n", accept_sock->ClientID);
-
 			return true;
 		}
 		else
@@ -219,7 +218,7 @@ void NetSocketUV::SendTCP(NET_BUFFER_INDEX* buf)
 		int r = uv_write(((NetBufferUV*)buf)->GetPtrWrite(), (uv_stream_t*)GetPtrTCP(sock), &buffer, 1, OnWrite);
 		if (r != 0)
 		{
-			printf("send error!\t%s", uv_strerror(r));
+			printf("send error!\t%s\n", uv_strerror(r));
 			exit(1);
 		}
 	}
