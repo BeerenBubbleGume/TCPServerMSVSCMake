@@ -102,7 +102,6 @@ bool NetSocketUV::GetIP(CString& addr, bool own_or_peer)
 				CString d;
 				d.IntToString(port);
 				addr += d;
-				printf("NetSocketUV::GetIP(): IP:\t%s\n", addr.c_str());
 			}
 		}
 		else
@@ -134,8 +133,8 @@ bool NetSocketUV::Accept()
 				MEM_DATA buf;
 				net->getWR1()->Finish(buf);
 				printf("Accepted client with ID:%u\nIP:\t%s\n", accept_sock->ClientID, accept_sock->ip.c_str());
-				NET_BUFFER_INDEX* result = net->PrepareMessage(accept_sock->ClientID, MESSAGE_TYPE_HELLO, buf.length, buf.data);
-				SendMessage(result);
+				NET_BUFFER_INDEX* result = accept_sock->net->PrepareMessage(accept_sock->ClientID, MESSAGE_TYPE_HELLO, buf.length, buf.data);
+				accept_sock->SendMessage(result);
 			/*}
 			else
 			{
