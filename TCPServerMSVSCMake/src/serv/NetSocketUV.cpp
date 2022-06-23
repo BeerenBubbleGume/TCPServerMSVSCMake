@@ -111,8 +111,6 @@ bool NetSocketUV::GetIP(CString& addr, bool own_or_peer)
 		{
 			printf("NetSocketUV::GetIP() error:\t%s\n", uv_strerror(r));
 		}
-
-		return true;
 	}
 	return false;
 }
@@ -121,13 +119,13 @@ bool NetSocketUV::Accept()
 {
 	NetSocketUV* accept_sock = (NetSocketUV*)net->NewSocket(net);
 	accept_sock->Create(0, true, false);
-	uv_tcp_t* client = GetPtrTCP(accept_sock->sock);
 	uv_tcp_t* host = GetPtrTCP(sock);
+	uv_tcp_t* client = GetPtrTCP(accept_sock->sock);
 	if (uv_accept((uv_stream_t*)host, (uv_stream_t*)client) == 0)
 	{	
 		if (uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadTCP) == 0)
 		{
-			GetIP(accept_sock->ip, Peer);
+			accept_sock->GetIP(accept_sock->ip, Peer);
 			/*if (!assertIP(*IParr))
 			{*/
 				net->getWR1()->Start();
