@@ -102,7 +102,6 @@ bool NetSocketUV::GetIP(CString& addr, bool own_or_peer)
 				CString d;
 				d.IntToString(port);
 				addr += d;
-				IParr.Add(&addr);
 			}
 		}
 		else
@@ -126,7 +125,6 @@ bool NetSocketUV::Accept()
 			accept_sock->GetIP(accept_sock->ip, Peer);
 			/*if (!assertIP(*IParr))
 			{*/
-			accept_sock->assertIP(IParr);
 			net->getWR1()->Start();
 			ServerUV* server = ((ServerUV*)net);
 			server->count_accept++;
