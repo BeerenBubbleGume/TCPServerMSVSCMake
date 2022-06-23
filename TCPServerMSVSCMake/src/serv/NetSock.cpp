@@ -183,7 +183,17 @@ bool NetSocket::GetIP(CString& addr, bool own_or_peer, CStringArray& toStore)
 
 bool NetSocket::assertIP(CStringArray& addr)
 {
-	CStringArray* va_addr = new CStringArray[ClientID];
+	CStringArray va_str = addr;
+	
+	for (int i = 0; i < va_str.GetCount(); i++)
+	{
+		if ((va_str.Get(i) == va_str.Get(i - 1)) || (va_str.Get(i) == va_str.Get(i + 1)))
+			return true;
+		else
+			return false;
+	}
+
+	/*CStringArray* va_addr = addr;
 	
 	for (int i = 0; i < ClientID; i++)
 	{
@@ -192,7 +202,7 @@ bool NetSocket::assertIP(CStringArray& addr)
 		else
 			return false;
 	}
-	return false;
+	return false;*/
 }
 
 NetSocket* GetPtrSocket(void* ptr)
