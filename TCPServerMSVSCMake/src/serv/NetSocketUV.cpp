@@ -131,6 +131,7 @@ bool NetSocketUV::Accept()
 				server->sockets_nohello.Add(accept_sock);
 				
 				MEM_DATA buf;
+				net->getWR1()->operator<<((char*)accept_sock);
 				net->getWR1()->Finish(buf);
 				net->ReceiveMessage(MESSAGE_TYPE_HELLO, accept_sock->GetClientID(), buf.length, buf.data);
 			/*}
