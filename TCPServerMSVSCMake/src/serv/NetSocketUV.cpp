@@ -178,7 +178,6 @@ bool NetSocketUV::Accept()
 void NetSocketUV::ReceiveTCP()
 {
 	int filePrefix = (int)ClientID;
-	printf("ID: %d\n", filePrefix);
 	CString fileName;
 	fileName.IntToString(filePrefix);
 	fileName += "in_binary.264";
@@ -190,7 +189,7 @@ void NetSocketUV::ReceiveTCP()
 	if (fout.is_open())
 	{
 		fout.write((char*)net->GetRecvBuffer()->GetData(), net->GetRecvBuffer()->GetLength());
-		printf("writed %d bytes in file %s\n", (int)net->GetRecvBuffer()->GetLength(), fileName.c_str());
+		//printf("writed %d bytes in file %s\n", (int)net->GetRecvBuffer()->GetLength(), fileName.c_str());
 		fout.close();
 	}
 	else
