@@ -231,7 +231,7 @@ public:
 	void				SetSessionID(int sessID)											{ sessionID = sessID; }
 	bool				ReceiveMessages();
 	NetBuffer*			GetRecvBuffer()														{ return &recvbuffer; }
-	virtual bool		GetIP(CString& addr, bool own_or_peer);
+	virtual bool		GetIP(CString& addr, bool own_or_peer, CStringArray* toStore);
 
 protected:
 	Net_Address*		addr;

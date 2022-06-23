@@ -74,7 +74,7 @@ bool NetSocketUV::Create(int port, bool udp_tcp, bool listen)
 
 char address_converter[30];
 
-bool NetSocketUV::GetIP(CString& addr, bool own_or_peer)
+bool NetSocketUV::GetIP(CString& addr, bool own_or_peer, CStringArray* toStore)
 {
 	if (NetSocket::GetIP(addr, own_or_peer))
 	{
@@ -102,6 +102,7 @@ bool NetSocketUV::GetIP(CString& addr, bool own_or_peer)
 				CString d;
 				d.IntToString(port);
 				addr += d;
+				toStore->Add(d);
 			}
 		}
 		else
@@ -122,7 +123,9 @@ bool NetSocketUV::Accept()
 	{	
 		if (uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadTCP) == 0)
 		{
-			accept_sock->GetIP(accept_sock->ip, Peer);
+			accept_sock->GetIP(accept_sock->ip, Peer, &IParr);
+			if (assertIP(IParr))
+				printf("assertIP(%p) return true", &IParr);
 			ServerUV* server = ((ServerUV*)net);
 			net->getWR1()->Start();
 			server->count_accept++;
