@@ -140,7 +140,8 @@ bool NetSocketUV::Accept()
 			if (assertIP(IParr))
 			{
 				printf("assertIP(%p) return true\n", &IParr);
-				(*wr1) << &accept_sock->sessionID++;
+				int sessID = accept_sock->sessionID++;
+				(*wr1) << sessID;
 			}
 			else
 			{
