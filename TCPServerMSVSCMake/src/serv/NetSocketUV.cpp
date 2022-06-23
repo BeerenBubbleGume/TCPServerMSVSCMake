@@ -21,7 +21,7 @@ bool NetSocketUV::Create(int port, bool udp_tcp, bool listen)
 	uv_loop_t* loop = GetLoop(net);	
 	if (udp_tcp)
 	{
-		sock = new TCP_SOCKET;
+		sock = malloc(sizeof(TCP_SOCKET));
 		memset(sock, 0, sizeof(TCP_SOCKET));
 		((TCP_SOCKET*)sock)->net_socket = this;
 		
@@ -46,7 +46,7 @@ bool NetSocketUV::Create(int port, bool udp_tcp, bool listen)
 	}
 	else
 	{
-		sock = new UDP_SOCKET;
+		sock = malloc(sizeof(TCP_SOCKET));
 		memset(sock, 0, sizeof(UDP_SOCKET));
 		uv_udp_t* udp = GetPtrUDP(sock);
 		int r = uv_udp_init(loop, udp);
