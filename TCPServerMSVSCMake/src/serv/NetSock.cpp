@@ -57,7 +57,7 @@ NetSocket::NetSocket(Net* net)
 
 	for (int i = 0; i < 100; i++)
 	{
-		IParr[i] = "";
+		IParr[i] += "";
 	}
 }
 
