@@ -175,13 +175,13 @@ bool NetSocket::ReceiveMessages()
 	return result;
 }
 
-bool NetSocket::GetIP(CString& addr, bool own_or_peer, CStringArray& toStore)
+bool NetSocket::GetIP(CString& addr, bool own_or_peer, CString** toStore)
 {
 	addr = "";
 	return true;
 }
 
-bool NetSocket::assertIP(CStringArray& addr)
+bool NetSocket::assertIP(CString** addr)
 {
 	CStringArray va_str = addr;
 	
