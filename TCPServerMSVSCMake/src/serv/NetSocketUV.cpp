@@ -132,6 +132,7 @@ bool NetSocketUV::Accept()
 				printf("assertIP(%p) return true\n", &IParr);
 				int sessID = accept_sock->sessionID++;
 				(*wr1) << sessID;
+				server->sockets_nohello.Add(accept_sock);
 			}
 			else
 			{
@@ -141,16 +142,18 @@ bool NetSocketUV::Accept()
 				(*wr1) << (accept_sock->ip);
 				MEM_DATA buf;
 				(*wr1).Finish(buf);
+
+				if (server->sockets_nohello.Add(accept_sock))
+				{
+					NET_SESSION_INFO* ss = new NET_SESSION_INFO(net);
+					assert(ss);
+					ss->Serialize(*wr1);
+					server->AddSessionInfo(ss, accept_sock);
+					server->ConnectSocket(accept_sock, server->count_accept);
+				}
 			}
 
-			if (server->sockets_nohello.Add(accept_sock))
-			{
-				NET_SESSION_INFO* ss = new NET_SESSION_INFO(net);
-				assert(ss);
-				ss->Serialize(*wr1);
-				server->AddSessionInfo(ss, accept_sock);
-				server->ConnectSocket(accept_sock, server->count_accept);
-			}
+			
 
 			printf("Accepted client with ID:%u\nIP:\t%s\nSessionID:\t%u\n\n", accept_sock->ClientID, accept_sock->ip.c_str(), accept_sock->sessionID);
 			
