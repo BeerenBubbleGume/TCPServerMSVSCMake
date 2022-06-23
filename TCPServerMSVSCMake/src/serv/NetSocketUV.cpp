@@ -149,16 +149,17 @@ bool NetSocketUV::Accept()
 				net->getWR1()->operator<<(accept_sock->ip);
 				MEM_DATA buf;
 				net->getWR1()->Finish(buf);
-
-				if (server->sockets_nohello.Add(accept_sock))
-				{
-					NET_SESSION_INFO* ss = new NET_SESSION_INFO(net);
-					assert(ss);
-					ss->Serialize(*(net->getWR1()));
-					server->AddSessionInfo(ss, accept_sock);
-					server->ConnectSocket(accept_sock, server->count_accept);
-				}
 			}
+
+			if (server->sockets_nohello.Add(accept_sock))
+			{
+				NET_SESSION_INFO* ss = new NET_SESSION_INFO(net);
+				assert(ss);
+				ss->Serialize(*(net->getWR1()));
+				server->AddSessionInfo(ss, accept_sock);
+				server->ConnectSocket(accept_sock, server->count_accept);
+			}
+
 			printf("Accepted client with ID:%u\nIP:\t%s\nSessionID:\t%u\n", accept_sock->ClientID, accept_sock->ip.c_str(), accept_sock->sessionID);
 			
 			return true;
