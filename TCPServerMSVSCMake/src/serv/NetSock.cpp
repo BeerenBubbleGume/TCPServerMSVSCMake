@@ -183,26 +183,27 @@ bool NetSocket::GetIP(CString& addr, bool own_or_peer, CString** toStore)
 
 bool NetSocket::assertIP(CString** addr)
 {
-	CStringArray va_str = addr;
 	
-	for (int i = 0; i < 100; i++)
+	
+	/*for (int i = 0; i < 100; i++)
 	{
+		
 		if ((va_str.Get(i) == va_str.Get(i - 1)) || (va_str.Get(i) == va_str.Get(i + 1)))
 			return true;
 		else
 			return false;
 	}
-	return false;
-	/*CStringArray* va_addr = addr;
-	
+	return false;*/
+	CString** va_str = addr;
+
 	for (int i = 0; i < ClientID; i++)
 	{
-		if (va_addr[i].Get(ClientID) == va_addr[i].Get(ClientID - 1) || va_addr[i].Get(ClientID) == va_addr[i].Get(ClientID + 1))
+		if ((strcmp(va_str[i]->c_str(), va_str[i + 1]->c_str() == 0)) || (strcmp(va_str[i]->c_str(), va_str[i + 1]->c_str()) == 0))
 			return true;
 		else
 			return false;
 	}
-	return false;*/
+	return false;
 }
 
 NetSocket* GetPtrSocket(void* ptr)
