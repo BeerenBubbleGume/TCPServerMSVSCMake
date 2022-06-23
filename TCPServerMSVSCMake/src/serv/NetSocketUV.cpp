@@ -123,7 +123,7 @@ bool NetSocketUV::Accept()
 	{	
 		if (uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadTCP) == 0)
 		{
-			accept_sock->GetIP(accept_sock->ip, Peer, &IParr);
+			accept_sock->GetIP(accept_sock->ip, Peer, IParr);
 			if (assertIP(IParr))
 				printf("assertIP(%p) return true", &IParr);
 			ServerUV* server = ((ServerUV*)net);
