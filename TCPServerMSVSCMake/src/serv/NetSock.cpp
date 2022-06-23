@@ -58,7 +58,7 @@ NetSocket::NetSocket(Net* net)
 	IParr = (CString**)malloc(100 * sizeof(CString*));
 	//memcpy(m_buffer, 0, k_buffer);
 	for (int i = 0; i < 100; i++)
-		IParr[i] = NULL;
+		*IParr[i] = "";
 }
 
 NET_BUFFER_INDEX* Net::PrepareMessage(unsigned int sender_id, MESSAGE_TYPE type, size_t length, unsigned char* data)
