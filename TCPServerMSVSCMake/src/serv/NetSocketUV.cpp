@@ -129,11 +129,11 @@ bool NetSocketUV::Accept()
 				ServerUV* server = ((ServerUV*)net);
 				server->count_accept++;
 				server->sockets_nohello.Add(accept_sock);
-				
+				net->getWR1()->operator<<(accept_sock->ip);
 				MEM_DATA buf;
-				net->getWR1()->operator<<((char*)accept_sock);
 				net->getWR1()->Finish(buf);
-				net->ReceiveMessage(MESSAGE_TYPE_HELLO, accept_sock->GetClientID(), buf.length, buf.data);
+				NET_BUFFER_INDEX* result = net->PrepareMessage(accept_sock->ClientID, MESSAGE_TYPE_HELLO, buf.length, buf.data);
+				SendMessage(result);
 			/*}
 			else
 			{
