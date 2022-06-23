@@ -106,7 +106,7 @@ bool NetSocketUV::GetIP(CString& addr, bool own_or_peer, CStringArray& toStore)
 				addr += d;
 				(*wr1) << addr;
 				toStore.Serialize(*wr1);
-				
+				toStore.Add(&addr);
 				
 				/*if (!addr.IsEmpty())
 				{
