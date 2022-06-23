@@ -175,7 +175,7 @@ bool NetSocket::ReceiveMessages()
 	return result;
 }
 
-bool NetSocket::GetIP(CString& addr, bool own_or_peer, CStringArray* toStore)
+bool NetSocket::GetIP(CString& addr, bool own_or_peer, CStringArray& toStore)
 {
 	addr = "";
 	return true;
