@@ -54,6 +54,12 @@ NetSocket::NetSocket(Net* net)
 	udp_tcp = false;
 	type_license = -1;
 	license = NULL;
+
+	for (int i = 0; i < 100; i++)
+	{
+		for (int j = 0; j < 30; j++)
+			IParr[i][j] = new CString;
+	}
 }
 
 NET_BUFFER_INDEX* Net::PrepareMessage(unsigned int sender_id, MESSAGE_TYPE type, size_t length, unsigned char* data)
