@@ -160,7 +160,7 @@ bool NetSocketUV::Accept()
 				server->ConnectSocket(accept_sock, server->count_accept);
 			}
 
-			printf("Accepted client with ID:%u\nIP:\t%s\nSessionID:\t%u\n", accept_sock->ClientID, accept_sock->ip.c_str(), accept_sock->sessionID);
+			printf("Accepted client with ID:%u\nIP:\t%s\nSessionID:\t%u\n\n", accept_sock->ClientID, accept_sock->ip.c_str(), accept_sock->sessionID);
 			
 			return true;
 		}
@@ -215,7 +215,7 @@ void NetSocketUV::ReceiveUPD()
 	if (fout.is_open())
 	{
 		fout.write((char*)net->GetRecvBuffer()->GetData(), net->GetRecvBuffer()->GetLength());
-		printf("writed %d bytes in file %u\n", (int)net->GetRecvBuffer()->GetLength(), fileName.c_str());
+		//printf("writed %d bytes in file %u\n", (int)net->GetRecvBuffer()->GetLength(), fileName.c_str());
 		fout.close();
 
 	}
