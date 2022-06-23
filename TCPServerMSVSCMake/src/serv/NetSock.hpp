@@ -206,6 +206,7 @@ protected:
 	unsigned int		time;
 	int					sessionID;
 	CString				ip;
+	CStringArray		IParr;
 };
 
 class NetSocket : public NET_SOCKET_INFO
@@ -227,16 +228,14 @@ public:
 	bool				IsTCP()																{ return udp_tcp; }
 	Net*				getNet()															{ return net; }
 	Net_Address*		getAddr()															{ return addr; }
-	void				SetSessionID(int sessID)											{ session_id = sessID; }
+	void				SetSessionID(int sessID)											{ sessionID = sessID; }
 	bool				ReceiveMessages();
 	NetBuffer*			GetRecvBuffer()														{ return &recvbuffer; }
 	virtual bool		GetIP(CString& addr, bool own_or_peer);
 
 protected:
 	Net_Address*		addr;
-	CStringArray*		IParr;
 	Net*				net;
-	int					session_id;
 	NetBuffer			recvbuffer;
 	CString				name;
 	friend class		Net;

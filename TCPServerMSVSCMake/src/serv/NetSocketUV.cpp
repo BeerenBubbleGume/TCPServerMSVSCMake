@@ -102,6 +102,7 @@ bool NetSocketUV::GetIP(CString& addr, bool own_or_peer)
 				CString d;
 				d.IntToString(port);
 				addr += d;
+				IParr.Add(addr);
 			}
 		}
 		else
@@ -125,15 +126,16 @@ bool NetSocketUV::Accept()
 			accept_sock->GetIP(accept_sock->ip, Peer);
 			/*if (!assertIP(*IParr))
 			{*/
+			accept_sock->assertIP(IParr);
 				net->getWR1()->Start();
 				ServerUV* server = ((ServerUV*)net);
 				server->count_accept++;
 				server->sockets_nohello.Add(accept_sock);
-				net->getWR1()->operator<<(accept_sock->ip);
+				server->sessions.Serialize(net->getWR1());
 				MEM_DATA buf;
+				
 				net->getWR1()->Finish(buf);
 				printf("Accepted client with ID:%u\nIP:\t%s\n", accept_sock->ClientID, accept_sock->ip.c_str());
-				NET_BUFFER_INDEX* result = accept_sock->net->PrepareMessage(accept_sock->ClientID, MESSAGE_TYPE_HELLO, buf.length, buf.data);
 				server->ReceiveMessage(MESSAGE_TYPE_HELLO, accept_sock->ClientID, buf.length, buf.data);
 			/*}
 			else
