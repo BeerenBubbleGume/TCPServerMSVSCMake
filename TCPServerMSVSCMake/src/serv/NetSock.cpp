@@ -885,9 +885,9 @@ void Server::OnLostConnection(NetSocket* socket)
 {
 	unsigned int index = socket->GetClientID();
 
-	if (socket->session_id != -1)
+	if (socket->sessionID != -1)
 	{
-		NET_SERVER_SESSION* ss = sessions.Get(socket->session_id);
+		NET_SERVER_SESSION* ss = sessions.Get(socket->sessionID);
 		assert(ss);
 
 		bool is_host = (ss->a_client_id[0] == index);
@@ -927,7 +927,7 @@ int Server::AddSessionInfo(NET_SESSION_INFO* session_info, NetSocket* socket)
 	NET_SERVER_SESSION* session_server = new NET_SERVER_SESSION(this);
 	((NET_SESSION_INFO&)*session_server) = *session_info;
 	int index = sessions.AddSession(session_server);
-	socket->session_id = index;
+	socket->sessionID = index;
 	session_server->enabled = true;
 	session_server->c_client_id = 1;
 	session_server->a_client_id = new unsigned int[1];
