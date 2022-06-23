@@ -52,12 +52,8 @@ NetSocket::NetSocket(Net* net)
 	ClientID = 0;
 	port = 0;
 	udp_tcp = false;
-	session_id = 0;
-
 	type_license = -1;
 	license = NULL;
-
-	IParr = new CStringArray[100];
 }
 
 NET_BUFFER_INDEX* Net::PrepareMessage(unsigned int sender_id, MESSAGE_TYPE type, size_t length, unsigned char* data)
