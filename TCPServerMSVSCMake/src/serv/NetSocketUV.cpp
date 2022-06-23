@@ -107,8 +107,9 @@ bool NetSocketUV::GetIP(CString& addr, bool own_or_peer, CStringArray& toStore)
 				if (!addr.IsEmpty())
 				{
 					va_str.Clear();
-					va_str.Add(&addr)
+					va_str.Add(&addr);
 				}
+				IParr = va_str;
 				
 			}
 		}
