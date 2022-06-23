@@ -273,7 +273,7 @@ void OnReadTCP(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)
 	}
 	else
 	{
-		printf("Reading data from client with ID: %u\n", uvsocket->GetClientID());
+		//printf("Reading data from client with ID: %u\n", uvsocket->GetClientID());
 		NetBuffer* recv_buff = uvsocket->getNet()->GetRecvBuffer();
 		assert(buf->base == (char*)recv_buff->GetData());
 		recv_buff->SetMaxSize(nread);
