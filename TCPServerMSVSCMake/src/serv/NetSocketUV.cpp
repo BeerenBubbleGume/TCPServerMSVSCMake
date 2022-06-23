@@ -94,8 +94,6 @@ bool NetSocketUV::GetIP(CString& addr, bool own_or_peer, CStringArray& toStore)
 			r = uv_ip4_name((sockaddr_in*)&sockName, address_converter, sizeof(address_converter));
 			if (r == 0)
 			{
-				CMemWriter* wr1 = net->getWR1();
-				(*wr1).Start();
 				addr = address_converter;
 				unsigned char* port_ptr = (unsigned char*)&(((sockaddr_in*)&sockName)->sin_port);
 				int port = port_ptr[1];
@@ -104,15 +102,7 @@ bool NetSocketUV::GetIP(CString& addr, bool own_or_peer, CStringArray& toStore)
 				CString d;
 				d.IntToString(port);
 				addr += d;
-				int k_str = 100;
-				(*wr1) << k_str;
-				(*wr1) << addr;
-				toStore.Serialize(*wr1);
 				
-				if (!addr.IsEmpty())
-				{
-					toStore.Add(&addr);
-				}
 				
 			}
 		}

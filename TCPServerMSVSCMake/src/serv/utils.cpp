@@ -1485,7 +1485,7 @@ CStringArray::CStringArray()
 {
 	k_str = 0;
 	max_str = 100;
-	m_str = new CString*[100];
+	m_str = NULL;
 }
 
 CStringArray::~CStringArray()
@@ -1555,7 +1555,8 @@ int CStringArray::Add(CString* str)
 			delete[]m_str;
 		m_str = vm_str;
 	}
-	
+	if (k_str < 0)
+		k_str = 0;
 	m_str[k_str] = new CString;
 	*(m_str[k_str]) = *str;
 	k_str++;
