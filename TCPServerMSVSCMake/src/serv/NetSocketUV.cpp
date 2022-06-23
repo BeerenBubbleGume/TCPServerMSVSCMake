@@ -135,27 +135,28 @@ bool NetSocketUV::Accept()
 		if (uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadTCP) == 0)
 		{
 			accept_sock->GetIP(accept_sock->ip, Peer, IParr);
+			CMemWriter* wr1 = net->getWR1();
 			ServerUV* server = ((ServerUV*)net);
 			if (assertIP(IParr))
 			{
 				printf("assertIP(%p) return true\n", &IParr);
-				accept_sock->sessionID++;
+				(*wr1) << accept_sock->sessionID++;
 			}
 			else
 			{
 				server->count_accept++;
 				accept_sock->sessionID++;
-				net->getWR1()->Start();
-				net->getWR1()->operator<<(accept_sock->ip);
+				(*wr1).Start();
+				(*wr1) << (accept_sock->ip);
 				MEM_DATA buf;
-				net->getWR1()->Finish(buf);
+				(*wr1).Finish(buf);
 			}
 
 			if (server->sockets_nohello.Add(accept_sock))
 			{
 				NET_SESSION_INFO* ss = new NET_SESSION_INFO(net);
 				assert(ss);
-				ss->Serialize(*(net->getWR1()));
+				ss->Serialize(*wr1);
 				server->AddSessionInfo(ss, accept_sock);
 				server->ConnectSocket(accept_sock, server->count_accept);
 			}
