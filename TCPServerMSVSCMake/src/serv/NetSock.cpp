@@ -57,8 +57,7 @@ NetSocket::NetSocket(Net* net)
 
 	for (int i = 0; i < 100; i++)
 	{
-		for (int j = 0; j < 30; j++)
-			IParr[i][j] = new CString;
+		IParr[i] = new CString;
 	}
 }
 
