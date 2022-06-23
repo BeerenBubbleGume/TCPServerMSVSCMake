@@ -74,11 +74,11 @@ bool NetSocketUV::Create(int port, bool udp_tcp, bool listen)
 
 char address_converter[30];
 
-bool NetSocketUV::GetIP(CString& addr, bool own_or_peer, CString** toStore)
+bool NetSocketUV::GetIP(CString& addr, bool own_or_peer, CStringArray& toStore)
 {
 	if (NetSocket::GetIP(addr, own_or_peer, toStore))
 	{
-		CString** va_str = toStore;
+		CStringArray va_str = toStore;
 		uv_tcp_t* socket = GetPtrTCP(sock);
 		sockaddr sockName;
 		memset(&sockName, -1, sizeof(sockName));
@@ -106,9 +106,10 @@ bool NetSocketUV::GetIP(CString& addr, bool own_or_peer, CString** toStore)
 				
 				if (!addr.IsEmpty())
 				{
-					*(va_str[ClientID]) += *addr;
+					va_str.Clear();
+					va_str.Add(&addr)
 				}
-				toStore = va_str;
+				
 			}
 		}
 		else

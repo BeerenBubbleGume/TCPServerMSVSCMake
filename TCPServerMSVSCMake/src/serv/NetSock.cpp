@@ -54,10 +54,6 @@ NetSocket::NetSocket(Net* net)
 	udp_tcp = false;
 	type_license = -1;
 	license = NULL;
-
-	IParr = (CString**)malloc(100 * sizeof(CString*));
-	memcpy(IParr, 0, 100);
-	
 }
 
 NET_BUFFER_INDEX* Net::PrepareMessage(unsigned int sender_id, MESSAGE_TYPE type, size_t length, unsigned char* data)
@@ -179,35 +175,34 @@ bool NetSocket::ReceiveMessages()
 	return result;
 }
 
-bool NetSocket::GetIP(CString& addr, bool own_or_peer, CString** toStore)
+bool NetSocket::GetIP(CString& addr, bool own_or_peer, CStringArray& toStore)
 {
 	addr = "";
 	return true;
 }
 
-bool NetSocket::assertIP(CString** addr)
+bool NetSocket::assertIP(CStringArray& addr)
 {
+	CStringArray va_str = addr;
 	
-	
-	/*for (int i = 0; i < 100; i++)
+	for (int i = 0; i < va_str.GetCount(); i++)
 	{
-		
 		if ((va_str.Get(i) == va_str.Get(i - 1)) || (va_str.Get(i) == va_str.Get(i + 1)))
 			return true;
 		else
 			return false;
 	}
-	return false;*/
-	CString** va_str = addr;
 
+	/*CStringArray* va_addr = addr;
+	
 	for (int i = 0; i < ClientID; i++)
 	{
-		if ((strcmp(va_str[i]->c_str(), va_str[i + 1]->c_str()) == 0) || (strcmp(va_str[i]->c_str(), va_str[i + 1]->c_str()) == 0))
+		if (va_addr[i].Get(ClientID) == va_addr[i].Get(ClientID - 1) || va_addr[i].Get(ClientID) == va_addr[i].Get(ClientID + 1))
 			return true;
 		else
 			return false;
 	}
-	return false;
+	return false;*/
 }
 
 NetSocket* GetPtrSocket(void* ptr)
@@ -912,9 +907,9 @@ void Server::OnLostConnection(NetSocket* socket)
 			unsigned int player_id = ss->a_client_id[i];
 			if (player_id != index)
 			{
-				//NetSocket* socket_receiver = sockets.Get(player_id);
-				//NET_BUFFER_INDEX* result = PrepareMessage(SERVER_ID, MESSAGE_TYPE_LOST_CONNECTION, 4, (unsigned char*)&index);
-				//socket_receiver->SendMessage(result);
+				NetSocket* socket_receiver = sockets.Get(player_id);
+				NET_BUFFER_INDEX* result = PrepareMessage(SERVER_ID, MESSAGE_TYPE_LOST_CONNECTION, 4, (unsigned char*)&index);
+				socket_receiver->SendMessage(result);
 			}
 		}
 	}
