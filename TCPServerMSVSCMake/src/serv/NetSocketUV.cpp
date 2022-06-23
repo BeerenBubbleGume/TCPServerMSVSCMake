@@ -106,10 +106,10 @@ bool NetSocketUV::GetIP(CString& addr, bool own_or_peer)
 				IParr->Add(&d);
 				printf("NetSocketUV::GetIP(): IP:\t%s\n", addr.c_str());
 			}
-			else
-			{
-				printf("NetSocketUV::GetIP() error:\t%s\n", uv_strerror(r));
-			}
+		}
+		else
+		{
+			printf("NetSocketUV::GetIP() error:\t%s\n", uv_strerror(r));
 		}
 
 		return true;
