@@ -185,14 +185,14 @@ bool NetSocket::assertIP(CStringArray& addr)
 {
 	CStringArray va_str = addr;
 	
-	for (int i = 0; i < va_str.GetCount(); i++)
+	for (int i = 0; i < 100; i++)
 	{
 		if ((va_str.Get(i) == va_str.Get(i - 1)) || (va_str.Get(i) == va_str.Get(i + 1)))
 			return true;
 		else
 			return false;
 	}
-
+	return false;
 	/*CStringArray* va_addr = addr;
 	
 	for (int i = 0; i < ClientID; i++)
