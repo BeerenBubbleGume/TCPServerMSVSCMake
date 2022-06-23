@@ -907,9 +907,9 @@ void Server::OnLostConnection(NetSocket* socket)
 			unsigned int player_id = ss->a_client_id[i];
 			if (player_id != index)
 			{
-				NetSocket* socket_receiver = sockets.Get(player_id);
-				NET_BUFFER_INDEX* result = PrepareMessage(SERVER_ID, MESSAGE_TYPE_LOST_CONNECTION, 4, (unsigned char*)&index);
-				socket_receiver->SendMessage(result);
+				//NetSocket* socket_receiver = sockets.Get(player_id);
+				//NET_BUFFER_INDEX* result = PrepareMessage(SERVER_ID, MESSAGE_TYPE_LOST_CONNECTION, 4, (unsigned char*)&index);
+				//socket_receiver->SendMessage(result);
 			}
 		}
 	}
