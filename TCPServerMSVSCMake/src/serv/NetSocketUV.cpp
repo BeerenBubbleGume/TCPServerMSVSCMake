@@ -136,19 +136,10 @@ bool NetSocketUV::Accept()
 				assert(ss);
 				ss->Serialize(*(net->getWR1()));
 				server->AddSessionInfo(ss, accept_sock);
+				server->ConnectSocket(accept_sock, server->count_accept)
 			}
-			
-			/*MEM_DATA buf;	
-			net->getWR1()->Finish(buf);*/
 			printf("Accepted client with ID:%u\nIP:\t%s\nSessionID:\t%u\n", accept_sock->ClientID, accept_sock->ip.c_str(), accept_sock->sessionID);
-			//server->ReceiveMessage(MESSAGE_TYPE_HELLO, accept_sock->ClientID, buf.length, buf.data);
-			/*}
-			else
-			{
-				ServerUV* server = ((ServerUV*)net);
-				server->ConnectSocket(accept_sock, server->count_accept);
-				server->sockets_nohello.Add(accept_sock);
-			}*/
+			
 			return true;
 		}
 		else
