@@ -1497,7 +1497,7 @@ void CStringArray::Clear()
 {
 	for (int i = 0; i < k_str; i++)
 	{
-		delete m_str[i];
+		delete[] m_str[i];
 		m_str[i] = NULL;
 	}
 
