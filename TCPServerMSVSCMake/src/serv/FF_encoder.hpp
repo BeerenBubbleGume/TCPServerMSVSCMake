@@ -9,6 +9,7 @@ extern "C" {
 #include <libavutil/imgutils.h>
 #include <libavutil/opt.h>
 }
+
 class FF_encoder
 {
 public:

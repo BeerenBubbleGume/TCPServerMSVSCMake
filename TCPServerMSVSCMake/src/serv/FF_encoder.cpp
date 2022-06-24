@@ -44,6 +44,9 @@ void FF_encoder::ReadIncommigDataBuff()
 
 void FF_encoder::SendRTP(AVIOContext* client, const char* in_uri)
 {
+
+    std::this_thread::sleep_for(std::chrono::microseconds(500));
+
     AVIOContext* input = nullptr;
     int ret, n, reply_code;
     uint8_t* resource = nullptr;
