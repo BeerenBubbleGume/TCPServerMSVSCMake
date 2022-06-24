@@ -127,7 +127,7 @@ void FF_encoder::SendRTP()
     while (ret = avio_handshake(finContext) > 0)
     {
         av_opt_get(finContext, "resource", AV_OPT_SEARCH_CHILDREN, &resource);
-        if (resource && strlen(resource))
+        if (resource && strlen((const char*)resource))
             break;
         av_freep(&resource);
     }
