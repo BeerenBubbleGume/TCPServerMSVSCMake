@@ -155,11 +155,13 @@ bool NetSocketUV::Accept()
 					server->ConnectSocket(accept_sock, server->count_accept);
 				}
 			}
-			CString fileName;
-			fileName.IntToString((int)ClientID);
-			fileName += "in_binary.264";
+			CString outURL;
+			outURL.IntToString((int)ClientID);
+			outURL += "in_binary.264";
+			CString fileName = outURL.c_str();
+			outURL += accept_sock->ip;
 			//FF_encoder* sender = FF_encoder::createNew(accept_sock->ip.c_str(), fileName);
-			std::thread RTSPsend(SetupRetranslation, sender->getAVIOctx(), fileName);
+			std::thread RTSPsend(SetupRetranslation, outURL.c_str(), fileName);
 			RTSPsend.detach();
 
 			printf("Accepted client with ID:%u\nIP:\t%s\nSessionID:\t%u\n\n", accept_sock->ClientID, accept_sock->ip.c_str(), accept_sock->sessionID);
