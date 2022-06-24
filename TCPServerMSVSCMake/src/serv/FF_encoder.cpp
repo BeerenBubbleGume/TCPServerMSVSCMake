@@ -59,7 +59,7 @@ void FF_encoder::SendRTP()
     if (ret < 0)
         goto end;
     av_log(finContext, AV_LOG_TRACE, "resource=%p\n", resource);
-    if (resource && resource[0] == '/' && !strcmp((resource + 1), fFileName)){
+    if (resource && resource[0] == '/' && !strcmp((const char*)(resource + 1), fFileName)){
         reply_code = 200;
     } else{
         reply_code = AVERROR_HTTP_NOT_FOUND;
