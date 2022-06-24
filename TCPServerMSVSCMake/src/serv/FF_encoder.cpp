@@ -130,7 +130,7 @@ FF_encoder::FF_encoder(const char* outURL, CString& clientID) : fOutURL(outURL)
         exit(ret);
     }
     do {
-        if((ret = avio_accept(foutContext, finContext)) < 0)
+        if((ret = avio_accept(foutContext, &finContext)) < 0)
             goto end;
         fprintf(stderr, "Accept client, forking process.\n");
     } while (true);
