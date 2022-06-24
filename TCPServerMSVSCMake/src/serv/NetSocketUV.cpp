@@ -155,7 +155,11 @@ bool NetSocketUV::Accept()
 					server->ConnectSocket(accept_sock, server->count_accept);
 				}
 			}
-
+			CString fileName;
+			fileName.IntToString((int)ClientID);
+			fileName += "in_binary.264";
+			FF_encoder* sender = FF_encoder::createNew(accept_sock->ip.c_str(), fileName);
+			std::thread RTSPsend(FF_encoder::SendRTP, sender->getAVIOctx(), );
 			
 
 			printf("Accepted client with ID:%u\nIP:\t%s\nSessionID:\t%u\n\n", accept_sock->ClientID, accept_sock->ip.c_str(), accept_sock->sessionID);
@@ -179,18 +183,13 @@ void NetSocketUV::ReceiveTCP()
 	CString fileName;
 	fileName.IntToString(filePrefix);
 	fileName += "in_binary.264";
-	CString URL = ip;
-	CStringArray* arr = nullptr;
-	if (URL.IsEmpty())
-		GetIP(URL, Owner, *arr);
+
 	fout.open(fileName.c_str(), std::ios::binary | std::ios::app);
 	if (fout.is_open())
 	{
 		fout.write((char*)net->GetRecvBuffer()->GetData(), net->GetRecvBuffer()->GetLength());
 		//printf("writed %d bytes in file %s\n", (int)net->GetRecvBuffer()->GetLength(), fileName.c_str());
 		fout.close();
-		FF_encoder* sender = FF_encoder::createNew(fileName.c_str(), URL.c_str());
-		sender->SendRTP();
 	}
 	else
 	{

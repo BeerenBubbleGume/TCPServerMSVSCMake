@@ -28,9 +28,9 @@ void FF_encoder::encode(AVCodecContext* enc_ctx, AVFrame* frame, AVPacket* pkt, 
     }
 }
 
-FF_encoder* FF_encoder::createNew(const char* inFileName, const char* outURL)
+FF_encoder* FF_encoder::createNew(const char* outURL, CString& fileName)
 {
-	return new FF_encoder(inFileName, outURL);
+	return new FF_encoder(outURL, fileName);
 }
 
 void FF_encoder::Clear()
@@ -42,15 +42,15 @@ void FF_encoder::ReadIncommigDataBuff()
     
 }
 
-void FF_encoder::SendRTP()
+void FF_encoder::SendRTP(AVIOContext* client, const char* in_uri)
 {
     AVIOContext* input = nullptr;
     int ret, n, reply_code;
     uint8_t* resource = nullptr;
     uint8_t buf[1024];
-    while (ret = avio_handshake(finContext) > 0)
+    while (ret = avio_handshake(client) > 0)
     {
-        av_opt_get(finContext, "resource", AV_OPT_SEARCH_CHILDREN, &resource);
+        av_opt_get(client, "resource", AV_OPT_SEARCH_CHILDREN, &resource);
         if (resource && strlen((const char*)resource))
             break;
         av_freep(&resource);
@@ -58,8 +58,8 @@ void FF_encoder::SendRTP()
 
     if (ret < 0)
         goto end;
-    av_log(finContext, AV_LOG_TRACE, "resource=%p\n", resource);
-    if (resource && resource[0] == '/' && !strcmp((const char*)(resource + 1), fFileName)){
+    av_log(client, AV_LOG_TRACE, "resource=%p\n", resource);
+    if (resource && resource[0] == '/' && !strcmp((const char*)(resource + 1), in_uri)){
         reply_code = 200;
     } else{
         reply_code = AVERROR_HTTP_NOT_FOUND;
@@ -69,9 +69,9 @@ void FF_encoder::SendRTP()
         goto end;
 
     fprintf(stderr, "Opening input file.\n");
-    if ((ret = avio_open2(&input, fFileName, AVIO_FLAG_READ, nullptr, nullptr)) < 0)
+    if ((ret = avio_open2(&input, in_uri, AVIO_FLAG_READ, nullptr, nullptr)) < 0)
     {
-        av_log(input, AV_LOG_ERROR, "Failed to open input: %s: %s.\n", fFileName, av_err2str(ret));
+        av_log(input, AV_LOG_ERROR, "Failed to open input: %s: %s.\n", in_uri, av_err2str(ret));
         goto end;
     }
     do
@@ -84,21 +84,21 @@ void FF_encoder::SendRTP()
             av_log(input, AV_LOG_ERROR, "Error reading from input: %s.\n", av_err2str(n));
             break;
         }
-        avio_write(foutContext, buf, n);
-        avio_flush(foutContext);
+        avio_write(client, buf, n);
+        avio_flush(client);
     } while (true);
 
 end:
     fprintf(stderr, "Flushing client\n");
-    avio_flush(foutContext);
+    avio_flush(client);
     fprintf(stderr, "Closing client\n");
-    avio_close(foutContext);
+    avio_close(client);
     fprintf(stderr, "Closing input\n");
     avio_close(input);
     av_freep(&resource);
 }
 
-FF_encoder::FF_encoder(const char* inFileName, const char* outURL) : fFileName(inFileName), fOutURL(outURL)
+FF_encoder::FF_encoder(const char* outURL, CString& clientID) : fOutURL(outURL)
 {
     finContext = nullptr;
     fOptions = nullptr;
@@ -106,6 +106,12 @@ FF_encoder::FF_encoder(const char* inFileName, const char* outURL) : fFileName(i
     fFile = nullptr;
     fFrame = nullptr;
     fPacket = nullptr;
+
+    CString fileName;
+    fileName += clientID;
+    fileName += "in_binary.264";
+    fFileName = fileName.c_str();
+
     av_log_set_level(AV_LOG_TRACE);
 
     avformat_network_init();
@@ -120,6 +126,12 @@ FF_encoder::FF_encoder(const char* inFileName, const char* outURL) : fFileName(i
         fprintf(stderr, "Failed to open server: %s\n", av_err2str(ret));
         exit(ret);
     }
+    do {
+        if((ret = avio_accept(foutContext, finContext)) < 0)
+            goto end;
+        fprintf(stderr, "Accept client, forking process.\n");
+    } while (true);
+end:
 
 } 
 

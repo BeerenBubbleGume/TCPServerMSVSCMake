@@ -14,12 +14,13 @@ class FF_encoder
 public:
 
 	static void encode(AVCodecContext* enc_ctx, AVFrame* frame, AVPacket* pkt, FILE* outFile);
-	static FF_encoder* createNew(const char* inFileName, const char* outURL);
+	static FF_encoder* createNew(const char* outURL, CString& fileName);
 	void Clear();
 	void ReadIncommigDataBuff();
-	void SendRTP();
+	static void SendRTP(AVIOContext* client, const char* in_uri);
+	AVIOContext* getAVIOctx() { return finContext; }
 protected:
-	FF_encoder(const char* inFileName, const char* outURL);
+	FF_encoder(const char* outURL, CString& clientID);
 	~FF_encoder();
 
 	AVIOContext* finContext;
