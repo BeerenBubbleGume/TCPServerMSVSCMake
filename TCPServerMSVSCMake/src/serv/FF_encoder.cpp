@@ -135,8 +135,12 @@ FF_encoder::FF_encoder(const char* outURL, CString& clientID) : fOutURL(outURL)
         fprintf(stderr, "Accept client, forking process.\n");
     } while (true);
 end:
-
-} 
+    avio_close(foutContext);
+    if (ret < 0 && ret != AVERROR_EOF) {
+        fprintf(stderr, "Some errors occurred: %s\n", av_err2str(ret));
+        exit(1);
+    }
+}
 
 FF_encoder::~FF_encoder()
 {
