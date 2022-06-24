@@ -28,9 +28,9 @@ void FF_encoder::encode(AVCodecContext* enc_ctx, AVFrame* frame, AVPacket* pkt, 
     }
 }
 
-FF_encoder* FF_encoder::createNew(unsigned char* inBuff, unsigned inBufferSize, const char* outFileName, const char* codecName)
+FF_encoder* FF_encoder::createNew(const char* inFileName, const char* outURL)
 {
-	return new FF_encoder(inBuff, inBufferSize, outFileName, codecName);
+	return new FF_encoder(inFileName, outURL);
 }
 
 void FF_encoder::Clear()
@@ -118,38 +118,86 @@ void FF_encoder::ReadIncommigDataBuff()
     fclose(fFile);
 }
 
-void FF_encoder::SendRTP(NET_BUFFER_INDEX* buf)
+void FF_encoder::SendRTP()
 {
+    AVIOContext* input = nullptr;
+    int ret, n, reply_code;
+    uint8_t* resource = nullptr;
+    uint8_t* buf[1024];
+    while (ret = avio_handshake(finContext) > 0)
+    {
+        av_opt_get(finContext, "resource", AV_OPT_SEARCH_CHILDREN, &resource);
+        if (resource && strlen(resource))
+            break;
+        av_freep(&resource);
+    }
+
+    if (ret < 0)
+        goto end;
+    av_log(finContext, AV_LOG_TRACE, "resource=%p\n", resource);
+    if (resource && resource[0] == "/" && !strcmp(resource + 1, fFileName)){
+        reply_code = 200;
+    } else{
+        reply_code = AVERROR_HTTP_NOT_FOUND;
+    }
+
+    if (reply_code != 200)
+        goto end;
+
+    fprintf(stderr, "Opening input file.\n");
+    if ((ret = avio_open2(&input, fFileName, AVIO_FLAG_READ, nullptr, nullptr)) < 0)
+    {
+        av_log(input, AV_LOG_ERROR, "Failed to open input: %s: %s.\n", fFileName, av_err2str(ret));
+        goto end;
+    }
+    do
+    {
+        n = avio_read(input, buf, sizeof(buf));
+        if (n < 0)
+        {
+            if (n == AVERROR_EOF)
+                break;
+            av_log(input, AV_LOG_ERROR, "Error reading from input: %s.\n", av_err2str(n));
+            break;
+        }
+        avio_write(foutContext, buf, n);
+        avio_flush(foutContext);
+    } while (true);
+
+end:
+    fprintf(stderr, "Flushing client\n");
+    avio_flush(foutContext);
+    fprintf(stderr, "Closing client\n");
+    avio_close(foutContext);
+    fprintf(stderr, "Closing input\n");
+    avio_close(input);
+    av_freep(&resource);
 }
 
-FF_encoder::FF_encoder(unsigned char* inBuff, unsigned inBuferSize, const char* outFileName, const char* codecName): fData(inBuff), fDataSize(inBuferSize), 
-fFileName(outFileName), fCodecName(codecName)
+FF_encoder::FF_encoder(const char* inFileName, const char* outURL) : fFileName(inFileName), fOutURL(outURL)
 {
     fContext = nullptr;
+    fOptions = nullptr;
+    foutContext = nullptr;
     fFile = nullptr;
     fFrame = nullptr;
     fPacket = nullptr;
-    fCodec = avcodec_find_encoder_by_name(fCodecName);
-    if (!fCodec)
+    av_log_set_level(AV_LOG_TRACE);
+
+    avformat_network_init();
+    int ret;
+    if ((ret = av_dict_set(&fOptions, "listen", "2", 0)) < 0)
     {
-        fprintf(stderr, "Codec '%s' not found\n", fCodecName);
-        exit(1);
+        fprintf(stderr, "Failed to set listen mode for server: %s\n", av_err2str(ret));
+        exit(ret);
+    }
+    if ((ret = avio_open2(&foutContext, fOutURL, AVIO_FLAG_WRITE, nullptr, &fOptions)) < 0)
+    {
+        fprintf(stderr, "Failed to open server: %s\n", av_err2str(ret));
+        exit(ret);
     }
 
-    fContext = avcodec_alloc_context3(fCodec);
-    if (!fContext)
-    {
-        fprintf(stderr, "Could not allocate video codec context\n");
-        exit(1);
-    }
-
-    fPacket = av_packet_alloc();
-    if (!fPacket)
-    {
-        fprintf(stderr, "Could not allocate packet\n");
-        exit(1);
-    }
-}
+} 
 
 FF_encoder::~FF_encoder()
 {

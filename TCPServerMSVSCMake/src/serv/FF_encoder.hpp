@@ -14,15 +14,17 @@ class FF_encoder
 public:
 
 	static void encode(AVCodecContext* enc_ctx, AVFrame* frame, AVPacket* pkt, FILE* outFile);
-	static FF_encoder* createNew(unsigned char* inBuff, unsigned inBufferSize, const char* outFileName, const char* codecName);
+	static FF_encoder* createNew(const char* inFileName, const char* outURL);
 	void Clear();
 	void ReadIncommigDataBuff();
-	void SendRTP(NET_BUFFER_INDEX* buf);
+	void SendRTP();
 protected:
-	FF_encoder(unsigned char* inBuff, unsigned inBuferSize, const char* outFileName, const char* codecName);
+	FF_encoder(const char* inFileName, const char* outURL);
 	~FF_encoder();
 
-	AVCodecContext* fContext;
+	AVCodecContext* finContext;
+	AVCodecContext* foutContext;
+	AVDictionary* fOptions;
 	AVFrame* fFrame;
 	AVPacket* fPacket;
 	FILE* fFile;
@@ -31,6 +33,6 @@ protected:
 	unsigned char* fData;
 	unsigned fDataSize;
 
-	const char* fCodecName, *fFileName;
+	const char* fCodecName, *fFileName, *fOutURL;
 
 };
