@@ -35,9 +35,6 @@ FF_encoder* FF_encoder::createNew(const char* inFileName, const char* outURL)
 
 void FF_encoder::Clear()
 {
-    avcodec_free_context(&fContext);
-    av_frame_free(&fFrame);
-    av_packet_free(&fPacket);
 }
 
 void FF_encoder::ReadIncommigDataBuff()
