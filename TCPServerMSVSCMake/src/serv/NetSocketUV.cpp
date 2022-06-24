@@ -180,8 +180,9 @@ void NetSocketUV::ReceiveTCP()
 	fileName.IntToString(filePrefix);
 	fileName += "in_binary.264";
 	CString URL = ip;
+	CStringArray* arr = nullptr;
 	if (URL.IsEmpty())
-		GetIP(URL, Owner, NULL);
+		GetIP(URL, Owner, *arr);
 	fout.open(fileName.c_str(), std::ios::binary | std::ios::app);
 	if (fout.is_open())
 	{
