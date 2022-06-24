@@ -176,7 +176,7 @@ end:
 
 FF_encoder::FF_encoder(const char* inFileName, const char* outURL) : fFileName(inFileName), fOutURL(outURL)
 {
-    fContext = nullptr;
+    finContext = nullptr;
     fOptions = nullptr;
     foutContext = nullptr;
     fFile = nullptr;

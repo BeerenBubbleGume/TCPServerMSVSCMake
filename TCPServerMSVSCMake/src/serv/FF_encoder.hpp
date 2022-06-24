@@ -22,8 +22,8 @@ protected:
 	FF_encoder(const char* inFileName, const char* outURL);
 	~FF_encoder();
 
-	AVCodecContext* finContext;
-	AVCodecContext* foutContext;
+	AVIOContext* finContext;
+	AVIOContext* foutContext;
 	AVDictionary* fOptions;
 	AVFrame* fFrame;
 	AVPacket* fPacket;
