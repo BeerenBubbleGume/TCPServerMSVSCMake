@@ -42,6 +42,7 @@ ELSE()
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libuv.a
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libavcodec.a
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libavdevice.a
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libavformat.a
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libavfilter.a
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libavutil.a
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libpostproc.a
