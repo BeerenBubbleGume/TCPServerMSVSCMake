@@ -199,6 +199,7 @@ struct NET_SOCKET_INFO
 	void				SetTime(unsigned int time)				{ this->time = time; }
 	unsigned int		GetTime()								{ return time; }
 	void				Serialize(CStream& stream);
+	CString&			getSockIP() { return ip; }
 protected:
 	unsigned int		ClientID;
 	bool				udp_tcp;

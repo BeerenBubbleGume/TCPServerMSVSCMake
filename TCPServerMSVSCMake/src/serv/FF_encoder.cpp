@@ -44,9 +44,6 @@ void FF_encoder::ReadIncommigDataBuff()
 
 void FF_encoder::SendRTP(AVIOContext* client, const char* in_uri)
 {
-
-    std::this_thread::sleep_for(std::chrono::microseconds(500));
-
     AVIOContext* input = nullptr;
     int ret, n, reply_code;
     uint8_t* resource = nullptr;
@@ -110,9 +107,6 @@ FF_encoder::FF_encoder(const char* outURL, CString& clientID) : fOutURL(outURL)
     fFrame = nullptr;
     fPacket = nullptr;
 
-    CString fileName;
-    fileName += clientID;
-    fileName += "in_binary.264";
     fFileName = fileName.c_str();
 
     av_log_set_level(AV_LOG_TRACE);
