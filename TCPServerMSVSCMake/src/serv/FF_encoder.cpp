@@ -123,7 +123,7 @@ void FF_encoder::SendRTP()
     AVIOContext* input = nullptr;
     int ret, n, reply_code;
     uint8_t* resource = nullptr;
-    uint8_t* buf[1024];
+    uint8_t buf[1024];
     while (ret = avio_handshake(finContext) > 0)
     {
         av_opt_get(finContext, "resource", AV_OPT_SEARCH_CHILDREN, &resource);
