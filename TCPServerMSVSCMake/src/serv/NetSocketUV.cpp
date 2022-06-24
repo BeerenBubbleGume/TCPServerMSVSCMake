@@ -179,16 +179,17 @@ void NetSocketUV::ReceiveTCP()
 	CString fileName;
 	fileName.IntToString(filePrefix);
 	fileName += "in_binary.264";
-	
-	/*FF_encoder* encoder = FF_encoder::createNew(net->GetRecvBuffer()->GetData(), net->GetRecvBuffer()->GetLength(), fileName, "libx264");
-	encoder->ReadIncommigDataBuff();*/
-
+	CString URL = ip;
+	if (URL.IsEmpty())
+		GetIP(URL, Owner, NULL);
 	fout.open(fileName.c_str(), std::ios::binary | std::ios::app);
 	if (fout.is_open())
 	{
 		fout.write((char*)net->GetRecvBuffer()->GetData(), net->GetRecvBuffer()->GetLength());
 		//printf("writed %d bytes in file %s\n", (int)net->GetRecvBuffer()->GetLength(), fileName.c_str());
 		fout.close();
+		FF_encoder* sender = FF_encoder::createNew(fileName.c_str(), URL.c_str());
+		sender->SendRTP();
 	}
 	else
 	{
