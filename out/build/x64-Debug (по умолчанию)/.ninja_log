@@ -1,0 +1,5 @@
+# ninja log v5
+19	536	677842039	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utf.cpp.obj	746e3eeb97bfb676
+29	2243	677842041	RTSP/CMakeFiles/RTSP.dir/RTSP.cpp.obj	52b7d00169c1ff0b
+10	2619	677842041	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.obj	8103dd0bdc5fdead
+14	2651	677842041	TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.obj	be01633fd6f7e4a1
