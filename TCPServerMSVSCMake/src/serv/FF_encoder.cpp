@@ -122,14 +122,14 @@ FF_encoder::FF_encoder(const char* outURL, CString& FileName) : fOutURL(outURL)
     }
 
     fserver = avio_alloc_context(avio_ctx_buffer, avio_ctx_buffer_size,
-        0, &bdn nullptr, NULL, NULL);
+        0, &bd, nullptr, NULL, NULL);
 
     if (!fserver) {
         ret = AVERROR(ENOMEM);
         goto end;
     }
 
-    fmt_ctx->pb = avio_ctx;
+    fmt_ctx->pb = fserver;
 
     ret = avformat_open_input(&fmt_ctx, fFileName, NULL, NULL);
     if (ret < 0) {
