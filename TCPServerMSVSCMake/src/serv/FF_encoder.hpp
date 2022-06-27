@@ -21,7 +21,7 @@ public:
 	static void SendRTP(AVIOContext* client, const char* in_uri);
 	AVIOContext* getAVIOctx() { return finContext; }
 protected:
-	FF_encoder(const char* outURL, CString& clientID);
+	FF_encoder(const char* outURL, CString& FileName);
 	~FF_encoder();
 
 	AVIOContext* finContext;
