@@ -120,7 +120,7 @@ FF_encoder::FF_encoder(const char* outURL, CString& FileName)  : fOutURL(outURL)
         int len = outURI.GetLength();
         outURI.Delete(len - pos - 1);
         int port = 8554;
-        outURI += port;
+        outURI.IntToString(port);
         printf("Play this stream using URL: %s", outURI.c_str());
     }
 
