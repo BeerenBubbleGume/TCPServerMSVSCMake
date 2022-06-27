@@ -528,9 +528,3 @@ struct CPoint
 	CPoint() { x = y = 0; }
 	CPoint(int x, int y) { this->x = x; this->y = y; }
 };
-
-
-
-
-
-
