@@ -156,7 +156,7 @@ bool NetSocketUV::Accept()
 				}
 			}
 			CString outURL;
-			outURL.IntToString((int)ClientID);
+			outURL.IntToString((int)accept_sock->ClientID);
 			outURL += "in_binary.264";
 			CString fileName = outURL;
 			outURL += accept_sock->ip;
