@@ -101,34 +101,67 @@ end:
 FF_encoder::FF_encoder(const char* outURL, CString& FileName) : fOutURL(outURL)
 {
     finContext = nullptr;
+    fmt_ctx = nullptr;
     fOptions = nullptr;
-    foutContext = nullptr;
+    fserver = nullptr;
     fFile = nullptr;
     fFrame = nullptr;
     fPacket = nullptr;
 
+    uint8_t* buffer = NULL, * avio_ctx_buffer = NULL;
+    size_t buffer_size, avio_ctx_buffer_size = 4096;
+    struct buffer_data bd = { 0 };
+    int ret;
+
     fFileName = FileName.c_str();
     av_log_set_level(AV_LOG_TRACE);
 
-    avformat_network_init();
+    if (!(fmt_ctx = avformat_alloc_context())) {
+        ret = AVERROR(ENOMEM);
+        goto end;
+    }
+
+    fserver = avio_alloc_context(avio_ctx_buffer, avio_ctx_buffer_size,
+        0, &bdn nullptr, NULL, NULL);
+
+    if (!fserver) {
+        ret = AVERROR(ENOMEM);
+        goto end;
+    }
+
+    fmt_ctx->pb = avio_ctx;
+
+    ret = avformat_open_input(&fmt_ctx, fFileName, NULL, NULL);
+    if (ret < 0) {
+        fprintf(stderr, "Could not open input\n");
+        goto end;
+    }
+
+    ret = avformat_find_stream_info(fmt_ctx, NULL);
+    if (ret < 0) {
+        fprintf(stderr, "Could not find stream information\n");
+        goto end;
+    }
+    av_dump_format(fmt_ctx, 0, fFileName, 0);
+   /* avformat_network_init();
     int ret;
     if ((ret = av_dict_set(&fOptions, "listen", "2", 0)) < 0)
     {
         fprintf(stderr, "Failed to set listen mode for server: %s\n", av_err2str(ret));
         exit(ret);
     }
-    if ((ret = avio_open2(&foutContext, fOutURL, AVIO_FLAG_WRITE, nullptr, &fOptions)) < 0)
+    if ((ret = avio_open2(&fserver, fOutURL, AVIO_FLAG_WRITE, nullptr, &fOptions)) < 0)
     {
         fprintf(stderr, "Failed to open server: %s\n", av_err2str(ret));
         exit(ret);
     }
     do {
-        if((ret = avio_accept(foutContext, &finContext)) < 0)
+        if((ret = avio_accept(fserver, &finContext)) < 0)
             goto end;
         fprintf(stderr, "Accept client, forking process.\n");
-    } while (true);
+    } while (true);*/
 end:
-    avio_close(foutContext);
+    avio_close(fserver);
     if (ret < 0 && ret != AVERROR_EOF) {
         fprintf(stderr, "Some errors occurred: %s\n", av_err2str(ret));
         exit(1);
