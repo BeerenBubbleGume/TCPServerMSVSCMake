@@ -106,7 +106,6 @@ end:
 FF_encoder::FF_encoder(const char* outURL, CString& FileName) : fOutURL(outURL)
 {
     finContext = nullptr;
-    fmt_ctx = nullptr;
     fOptions = nullptr;
     fserver = nullptr;
     fFile = nullptr;
@@ -121,11 +120,6 @@ FF_encoder::FF_encoder(const char* outURL, CString& FileName) : fOutURL(outURL)
     fFileName = FileName.c_str();
     av_log_set_level(AV_LOG_TRACE);
 
-    if (!(fmt_ctx = avformat_alloc_context())) {
-        ret = AVERROR(ENOMEM);
-        goto end;
-    }
-    
     avformat_network_init();
     if ((ret = av_dict_set(&fOptions, "listen", "2", 0)) < 0)
     {
