@@ -19,7 +19,7 @@ public:
 	static FF_encoder* createNew(const char* outURL, CString& fileName);
 	void Clear();
 	void ReadIncommigDataBuff();
-	static void SendRTP(AVIOContext* client, const char* in_uri);
+	void SendRTP(AVIOContext* client, const char* in_uri);
 	AVIOContext* getAVIOctx() { return fClient; }
 protected:
 	FF_encoder(const char* outURL, CString& FileName);

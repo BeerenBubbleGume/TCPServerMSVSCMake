@@ -74,7 +74,7 @@ void FF_encoder::SendRTP(AVIOContext* client, const char* in_uri)
         goto end;
 
     fprintf(stderr, "Opening input file.\n");
-    if ((ret = avio_open2(&input, in_uri, AVIO_FLAG_READ, nullptr, nullptr)) < 0)
+    if ((ret = avio_open2(&input, in_uri, AVIO_FLAG_WRITE, nullptr, nullptr)) < 0)
     {
         av_log(input, AV_LOG_ERROR, "Failed to open input: %s: %s.\n", in_uri, av_err2str(ret));
         goto end;
@@ -138,7 +138,7 @@ FF_encoder::FF_encoder(const char* outURL, CString& FileName)  : fOutURL(outURL)
         exit(ret);
     }
 
-    if ((ret = avio_open2(&fserver, outURI.c_str(), AVIO_FLAG_WRITE, nullptr, &fOptions)) < 0)
+    if ((ret = avio_open2(&fserver, fFileName, AVIO_FLAG_READ, nullptr, &fOptions)) < 0)
     {
         fprintf(stderr, "Failed to open server: %s\n", av_err2str(ret));
         exit(ret);

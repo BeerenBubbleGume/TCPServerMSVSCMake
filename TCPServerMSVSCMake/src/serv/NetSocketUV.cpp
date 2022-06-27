@@ -203,7 +203,7 @@ void NetSocketUV::ReceiveTCP()
 	ReceiveMessages();
 	printf("outURL: %s\n", outURL.c_str());
 	FF_encoder* sender = FF_encoder::createNew(outURL.c_str(), fileName);
-	sender->SendRTP(sender->getAVIOctx(), fileName.c_str());
+	sender->SendRTP(sender->getAVIOctx(), outURL.c_str());
 	
 }
 
