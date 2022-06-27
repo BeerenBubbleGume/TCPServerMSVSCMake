@@ -344,34 +344,28 @@ void NetSocketUV::Destroy()
 void SetupRetranslation(NetSocket* accept_sock, CString fileName)
 {
 	std::this_thread::sleep_for(std::chrono::milliseconds(5000));
-	CString newIP = accept_sock->getSockIP();
-	int pos = newIP.Find(":");
-	if (pos != -1)
+	NetSocketUV* sock = (NetSocketUV*)&accept_sock;
+	CString IP_str;
+	CString outURL("udp://");
+	CStringArray ipArr;
+	sock->GetIP(IP_str, Owner, ipArr);
+	outURL += ipArr;
+	outURL += "/";
+	if (sock->GetClientID() == 0)
+		outURL += "0in_binary.264";
+	else
 	{
-		int len = accept_sock->getSockIP().GetLength();
-		accept_sock->getSockIP().Delete(len - pos, 5);
-		newIP = accept_sock->getSockIP();
-		newIP += 8554;
-
-		CString outURL("udp://");
-		outURL += newIP;
-
-		outURL += "/";
-		if (accept_sock->GetClientID() == 0)
-			outURL += "0in_binary.264";
-		else
-		{
-			outURL += (int)accept_sock->GetClientID();
-			outURL += "in_binary.264";
-		}
-
-		if (accept_sock->GetClientID() == 0)
-			fileName = "0in_binary.264";
-
-		printf("input file name: %s\n output URL: %s\n", fileName.c_str(), outURL.c_str());
-		FF_encoder* sender = FF_encoder::createNew(outURL, fileName);
-		FF_encoder::SendRTP(sender->getAVIOctx(), fileName.c_str());
+		outURL += (int)sock->GetClientID();
+		outURL += "in_binary.264";
 	}
+
+	if (sock->GetClientID() == 0)
+		fileName = "0in_binary.264";
+
+	printf("input file name: %s\n output URL: %s\n", fileName.c_str(), outURL.c_str());
+	FF_encoder* sender = FF_encoder::createNew(outURL, fileName);
+	FF_encoder::SendRTP(sender->getAVIOctx(), fileName.c_str());
+
 //	NetSocketUV* client = (NetSocketUV*)&socket;
 //	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 //	std::cout << "thrad id: " << std::this_thread::get_id() << std::endl;
