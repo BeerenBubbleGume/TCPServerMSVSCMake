@@ -192,15 +192,15 @@ void NetSocketUV::ReceiveTCP()
 		fout.write((char*)net->GetRecvBuffer()->GetData(), net->GetRecvBuffer()->GetLength());
 		//printf("writed %d bytes in file %s\n", (int)net->GetRecvBuffer()->GetLength(), fileName.c_str());
 		fout.close();
-
-		FF_encoder* sender = FF_encoder::createNew(outURL.c_str(), fileName);
-		sender->SendRTP(sender->getAVIOctx(), fileName.c_str());
 	}
 	else
 	{
 		printf("cannot open file\n");
 	}
 	ReceiveMessages();
+
+	FF_encoder* sender = FF_encoder::createNew(outURL.c_str(), fileName);
+	sender->SendRTP(sender->getAVIOctx(), fileName.c_str());
 	
 }
 
