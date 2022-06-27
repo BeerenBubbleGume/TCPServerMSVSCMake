@@ -347,7 +347,7 @@ void NetSocketUV::Destroy()
 void SetupRetranslation(NetSocket* accept_sock, const char* outURL, CString fileName)
 {
 	std::this_thread::sleep_for(std::chrono::microseconds(5000));
-	printf("input file name: %s\n", fileName.c_str());
+	printf("input file name: %s\n output URL: %s", fileName.c_str(), outURL);
 	FF_encoder* sender = FF_encoder::createNew(outURL, fileName);
 	FF_encoder::SendRTP(sender->getAVIOctx(), fileName.c_str());
 
