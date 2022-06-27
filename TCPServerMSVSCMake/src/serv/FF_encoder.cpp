@@ -124,6 +124,8 @@ FF_encoder::FF_encoder(const char* outURL, CString& FileName)  : fOutURL(outURL)
         outURI += port_str;
         printf("Play this stream using URL: %s", outURI.c_str());
     }
+    outURI += "/";
+    outURI += FileName;
 
     fFileName = FileName.c_str();
     av_log_set_level(AV_LOG_TRACE);
