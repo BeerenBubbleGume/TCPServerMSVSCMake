@@ -346,7 +346,7 @@ void SetupRetranslation(NetSocket* accept_sock, CString fileName)
 	std::this_thread::sleep_for(std::chrono::microseconds(5000));
 
 	CString outURL("rtsp://");
-	outURL += accept_sock->ip;
+	outURL += accept_sock->getSockIP();
 	outURL += "/";
 	outURL += (int)accept_sock->GetClientID();
 	outURL += "in_binary.264";
