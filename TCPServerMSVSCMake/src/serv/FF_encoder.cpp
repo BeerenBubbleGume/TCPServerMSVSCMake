@@ -119,7 +119,7 @@ FF_encoder::FF_encoder(const char* outURL, CString& FileName) : fOutURL(outURL)
 
     fFileName = FileName.c_str();
     av_log_set_level(AV_LOG_TRACE);
-
+    
     avformat_network_init();
     if ((ret = av_dict_set(&fOptions, "listen", "2", 0)) < 0)
     {
@@ -129,13 +129,14 @@ FF_encoder::FF_encoder(const char* outURL, CString& FileName) : fOutURL(outURL)
     if ((ret = avio_open2(&fserver, fOutURL, AVIO_FLAG_WRITE, nullptr, &fOptions)) < 0)
     {
         fprintf(stderr, "Failed to open server: %s\n", av_err2str(ret));
-        exit(ret);
+        goto end;
+        //exit(ret);
     }
-    do {
+   /* do {
         if((ret = avio_accept(fserver, &finContext)) < 0)
             goto end;
         fprintf(stderr, "Accept client, forking process.\n");
-    } while (true);
+    } while (true);*/
 
 /*fserver = avio_alloc_context(avio_ctx_buffer, avio_ctx_buffer_size,
         0, &bd, nullptr, NULL, NULL);
