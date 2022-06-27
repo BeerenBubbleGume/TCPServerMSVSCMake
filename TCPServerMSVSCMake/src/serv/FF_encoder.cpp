@@ -108,7 +108,6 @@ FF_encoder::FF_encoder(const char* outURL, CString& FileName) : fOutURL(outURL)
     fPacket = nullptr;
 
     fFileName = FileName.c_str();
-    printf("fileName: %s\n", fFileName);
     av_log_set_level(AV_LOG_TRACE);
 
     avformat_network_init();
@@ -118,7 +117,7 @@ FF_encoder::FF_encoder(const char* outURL, CString& FileName) : fOutURL(outURL)
         fprintf(stderr, "Failed to set listen mode for server: %s\n", av_err2str(ret));
         exit(ret);
     }
-    if ((ret = avio_open2(&foutContext, fFileName, AVIO_FLAG_READ_WRITE, nullptr, &fOptions)) < 0)
+    if ((ret = avio_open2(&foutContext, fOutURL, AVIO_FLAG_WRITE, nullptr, &fOptions)) < 0)
     {
         fprintf(stderr, "Failed to open server: %s\n", av_err2str(ret));
         exit(ret);
