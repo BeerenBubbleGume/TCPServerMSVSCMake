@@ -105,7 +105,7 @@ end:
 
 FF_encoder::FF_encoder(const char* outURL, CString& FileName) /* : fOutURL(outURL)*/
 {
-    outURL = "udp://192.168.0.85:8554/0in_binary.264";
+    fOutURL = "udp://192.168.0.85:8554/0in_binary.264";
     fClient = nullptr;
     fOptions = nullptr;
     fserver = nullptr;
