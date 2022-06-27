@@ -133,11 +133,9 @@ FF_encoder::FF_encoder(const char* outURL, CString& FileName) /* : fOutURL(outUR
         fprintf(stderr, "Failed to open server: %s\n", av_err2str(ret));
         exit(ret);
     }
-    do {
-        if((ret = avio_accept(fserver, &fClient)) < 0)
-            goto end;
-        fprintf(stderr, "Accept client, forking process.\n");
-    } while (true);
+    if((ret = avio_accept(fserver, &fClient)) < 0)
+        goto end;
+    fprintf(stderr, "Accept client, forking process.\n");
 
 /*fserver = avio_alloc_context(avio_ctx_buffer, avio_ctx_buffer_size,
         0, &bd, nullptr, NULL, NULL);
