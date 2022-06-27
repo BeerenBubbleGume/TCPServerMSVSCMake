@@ -107,7 +107,7 @@ FF_encoder::FF_encoder(const char* outURL, CString& clientID) : fOutURL(outURL)
     fFrame = nullptr;
     fPacket = nullptr;
 
-    fFileName = fileName.c_str();
+    fFileName = clientID.c_str();
 
     av_log_set_level(AV_LOG_TRACE);
 

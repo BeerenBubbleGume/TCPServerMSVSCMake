@@ -158,7 +158,7 @@ bool NetSocketUV::Accept()
 			CString outURL;
 			outURL.IntToString((int)ClientID);
 			outURL += "in_binary.264";
-			CString fileName = outURL.c_str();
+			CString fileName = outURL;
 			outURL += accept_sock->ip;
 			const char* outURL_ptr = outURL.c_str();
 			//FF_encoder* sender = FF_encoder::createNew(accept_sock->ip.c_str(), fileName);
