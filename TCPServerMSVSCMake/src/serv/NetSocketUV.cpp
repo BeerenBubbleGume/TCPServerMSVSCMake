@@ -345,20 +345,22 @@ void SetupRetranslation(NetSocketUV* accept_sock, CString fileName)
 {
 	//std::this_thread::sleep_for(std::chrono::milliseconds(5000));
 	//NetSocketUV* sock = (NetSocketUV*)&accept_sock;
+	NetSocketUV* sock = (NetSocketUV*)accept_sock->getNet()->NewSocket(accept_sock->getNet());
+	sock->Create(0, true, false);
 	CString IP_str;
 	CString outURL("udp://");
-	accept_sock->GetIP(IP_str, Owner);
-	outURL += accept_sock->getSockIP();
+	sock->GetIP(IP_str, Owner);
+	outURL += sock->getSockIP();
 	outURL += "/";
-	if (accept_sock->GetClientID() == 0)
+	if (sock->GetClientID() == 0)
 		outURL += "0in_binary.264";
 	else
 	{
-		outURL += (int)accept_sock->GetClientID();
+		outURL += (int)sock->GetClientID();
 		outURL += "in_binary.264";
 	}
 
-	if (accept_sock->GetClientID() == 0)
+	if (sock->GetClientID() == 0)
 		fileName = "0in_binary.264";
 
 	printf("input file name: %s\n output URL: %s\n", fileName.c_str(), outURL.c_str());
