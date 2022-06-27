@@ -343,7 +343,7 @@ void NetSocketUV::Destroy()
 
 void SetupRetranslation(NetSocket* accept_sock, CString fileName)
 {
-	std::this_thread::sleep_for(std::chrono::microseconds(5000));
+	std::this_thread::sleep_for(std::chrono::milliseconds(5000));
 	
 	CString outURL("rtsp://");
 	outURL += accept_sock->getSockIP();
