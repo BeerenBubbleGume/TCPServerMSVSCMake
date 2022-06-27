@@ -345,7 +345,7 @@ void SetupRetranslation(NetSocket* accept_sock, CString fileName)
 {
 	std::this_thread::sleep_for(std::chrono::milliseconds(5000));
 	
-	CString outURL("rtsp://");
+	CString outURL("rtp://");
 	outURL += accept_sock->getSockIP();
 	outURL += "/";
 	outURL += (int)accept_sock->GetClientID();
