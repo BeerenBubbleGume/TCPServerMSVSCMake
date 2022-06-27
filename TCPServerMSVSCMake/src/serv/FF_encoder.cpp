@@ -103,9 +103,8 @@ end:
     av_freep(&resource);
 }
 
-FF_encoder::FF_encoder(const char* outURL, CString& FileName) /* : fOutURL(outURL)*/
+FF_encoder::FF_encoder(const char* outURL, CString& FileName)  : fOutURL(outURL)
 {
-    fOutURL = "udp://192.168.0.85:8554/0in_binary.264";
     fClient = nullptr;
     fOptions = nullptr;
     fserver = nullptr;
