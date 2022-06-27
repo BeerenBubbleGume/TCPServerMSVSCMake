@@ -24,7 +24,7 @@ public:
 protected:
 	FF_encoder(const char* outURL, CString& FileName);
 	~FF_encoder();
-	AVIOContext* finContext;
+	AVIOContext* fClient;
 	AVIOContext* fserver;
 	AVDictionary* fOptions;
 	AVFrame* fFrame;

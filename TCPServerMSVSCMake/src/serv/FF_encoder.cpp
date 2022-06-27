@@ -105,7 +105,7 @@ end:
 
 FF_encoder::FF_encoder(const char* outURL, CString& FileName) : fOutURL(outURL)
 {
-    finContext = nullptr;
+    fClient = nullptr;
     fOptions = nullptr;
     fserver = nullptr;
     fFile = nullptr;
@@ -132,7 +132,7 @@ FF_encoder::FF_encoder(const char* outURL, CString& FileName) : fOutURL(outURL)
         exit(ret);
     }
     do {
-        if((ret = avio_accept(fserver, &finContext)) < 0)
+        if((ret = avio_accept(fserver, &fClient)) < 0)
             goto end;
         fprintf(stderr, "Accept client, forking process.\n");
     } while (true);

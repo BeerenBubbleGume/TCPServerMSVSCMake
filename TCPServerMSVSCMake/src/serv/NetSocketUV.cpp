@@ -348,8 +348,13 @@ void SetupRetranslation(NetSocket* accept_sock, CString fileName)
 	CString outURL("udp://");
 	outURL += accept_sock->getSockIP();
 	outURL += "/";
-	outURL += (int)accept_sock->GetClientID();
-	outURL += "in_binary.264";
+	if (accept_sock->GetClientID() == 0)
+		outURL += "0in_binary.264";
+	else
+	{
+		outURL += (int)accept_sock->GetClientID();
+		outURL += "in_binary.264";
+	}
 
 	if (accept_sock->GetClientID() == 0)
 		fileName = "0in_binary.264";
