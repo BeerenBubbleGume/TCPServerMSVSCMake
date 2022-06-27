@@ -347,8 +347,7 @@ void SetupRetranslation(NetSocket* accept_sock, CString fileName)
 	NetSocketUV* sock = (NetSocketUV*)&accept_sock;
 	CString IP_str;
 	CString outURL("udp://");
-	CStringArray ipArr;
-	sock->GetIP(IP_str, Owner, ipArr);
+	sock->GetIP(IP_str, Owner);
 	outURL += outURL;
 	outURL += "/";
 	if (sock->GetClientID() == 0)
