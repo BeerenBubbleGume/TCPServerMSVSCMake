@@ -118,7 +118,7 @@ FF_encoder::FF_encoder(const char* outURL, CString& FileName)  : fOutURL(outURL)
     if (pos != -1)
     {
         int len = outURI.GetLength();
-        outURI.Delete(len - pos - 1, 12);
+        outURI.Delete(len - pos, 17);
         CString port_str;
         port_str.IntToString(8554);
         outURI += port_str;
