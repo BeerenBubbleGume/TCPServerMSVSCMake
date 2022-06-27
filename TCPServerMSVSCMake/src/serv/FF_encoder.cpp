@@ -108,7 +108,7 @@ FF_encoder::FF_encoder(const char* outURL, CString& FileName) : fOutURL(outURL)
     fPacket = nullptr;
 
     fFileName = FileName.c_str();
-
+    printf("fileName: %s\n", fFileName);
     av_log_set_level(AV_LOG_TRACE);
 
     avformat_network_init();
