@@ -198,7 +198,7 @@ void NetSocketUV::ReceiveTCP()
 		printf("cannot open file\n");
 	}
 	ReceiveMessages();
-
+	printf("outURL: %s\n", outURL.c_str());
 	FF_encoder* sender = FF_encoder::createNew(outURL.c_str(), fileName);
 	sender->SendRTP(sender->getAVIOctx(), fileName.c_str());
 	
