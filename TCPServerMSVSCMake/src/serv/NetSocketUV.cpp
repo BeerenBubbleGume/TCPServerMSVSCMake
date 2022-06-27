@@ -156,10 +156,11 @@ bool NetSocketUV::Accept()
 				}
 			}
 			CString outURL("rtsp://");
-			outURL += accept_sock->ClientID;
+			outURL += accept_sock->ip;
+			outURL += "/";
+			outURL += (int)accept_sock->ClientID;
 			outURL += "in_binary.264";
 			CString fileName = outURL;
-			outURL += accept_sock->ip;
 			const char* outURL_ptr = outURL.c_str();
 			//FF_encoder* sender = FF_encoder::createNew(accept_sock->ip.c_str(), fileName);
 			std::thread RTSPsend(SetupRetranslation, accept_sock, outURL_ptr, fileName);
