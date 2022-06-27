@@ -127,7 +127,6 @@ FF_encoder::FF_encoder(const char* outURL, CString& FileName) : fOutURL(outURL)
     }
     
     avformat_network_init();
-    int ret;
     if ((ret = av_dict_set(&fOptions, "listen", "2", 0)) < 0)
     {
         fprintf(stderr, "Failed to set listen mode for server: %s\n", av_err2str(ret));
