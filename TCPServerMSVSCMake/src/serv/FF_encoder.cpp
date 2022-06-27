@@ -126,7 +126,7 @@ FF_encoder::FF_encoder(const char* outURL, CString& FileName) : fOutURL(outURL)
         fprintf(stderr, "Failed to set listen mode for server: %s\n", av_err2str(ret));
         exit(ret);
     }
-    if ((ret = avio_open2(&fserver, fFileName, AVIO_FLAG_WRITE, nullptr, &fOptions)) < 0)
+    if ((ret = avio_open2(&fserver, fOutURL, AVIO_FLAG_WRITE, nullptr, &fOptions)) < 0)
     {
         fprintf(stderr, "Failed to open server: %s\n", av_err2str(ret));
         exit(ret);
