@@ -111,11 +111,18 @@ FF_encoder::FF_encoder(const char* outURL, CString& FileName)  : fOutURL(outURL)
     fFile = nullptr;
     fFrame = nullptr;
     fPacket = nullptr;
-
-    uint8_t* buffer = NULL, * avio_ctx_buffer = NULL;
-    size_t buffer_size, avio_ctx_buffer_size = 4096;
-    struct buffer_data bd = { 0 };
     int ret;
+
+    CString outURI(fOutURL);
+    int pos = outURI.Find(":", 7);
+    if (pos != -1)
+    {
+        int len = outURI.GetLength();
+        outURI.Delete(len - pos - 1, 5);
+        int port = 8554;
+        outURI += port;
+        printf("Play this stream using URL: %s", outURI.c_str());
+    }
 
     fFileName = FileName.c_str();
     av_log_set_level(AV_LOG_TRACE);
@@ -127,7 +134,7 @@ FF_encoder::FF_encoder(const char* outURL, CString& FileName)  : fOutURL(outURL)
         exit(ret);
     }
 
-    if ((ret = avio_open2(&fserver, fOutURL, AVIO_FLAG_WRITE, nullptr, &fOptions)) < 0)
+    if ((ret = avio_open2(&fserver, outURI.c_str(), AVIO_FLAG_WRITE, nullptr, &fOptions)) < 0)
     {
         fprintf(stderr, "Failed to open server: %s\n", av_err2str(ret));
         exit(ret);
