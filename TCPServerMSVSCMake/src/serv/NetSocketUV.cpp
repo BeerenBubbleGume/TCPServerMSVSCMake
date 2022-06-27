@@ -124,12 +124,12 @@ bool NetSocketUV::Accept()
 	{	
 		if (uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadTCP) == 0)
 		{
-			accept_sock->GetIP(accept_sock->ip, Peer, IParr);
+			accept_sock->GetIP(accept_sock->ip, Peer);
 			CMemWriter* wr1 = net->getWR1();
 			ServerUV* server = ((ServerUV*)net);
 			if (assertIP(IParr))
 			{
-				printf("assertIP(%p) return true\n", &IParr);
+				printf("assertIP(%p) return true\n");
 				int sessID = accept_sock->sessionID++;
 				(*wr1) << sessID;
 				server->sockets_nohello.Add(accept_sock);
