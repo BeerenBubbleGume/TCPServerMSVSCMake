@@ -349,7 +349,7 @@ void SetupRetranslation(NetSocket* accept_sock, CString fileName)
 	if (pos != -1)
 	{
 		int len = accept_sock->getSockIP().GetLength();
-		accept_sock->getSockIP().Delete(accept_sock->getSockIP().Right(len - pos - 1), 5);
+		accept_sock->getSockIP().Delete(pos, 5);
 		newIP = accept_sock->getSockIP();
 		newIP += 8554;
 
