@@ -81,7 +81,7 @@ void FF_encoder::SendRTP(AVIOContext* client, const char* in_uri)
     }
     do
     {
-        n = avio_read(input, buf, sizeof(buf));
+        n = avio_read(client, buf, sizeof(buf));
         if (n < 0)
         {
             if (n == AVERROR_EOF)
@@ -89,8 +89,8 @@ void FF_encoder::SendRTP(AVIOContext* client, const char* in_uri)
             av_log(input, AV_LOG_ERROR, "Error reading from input: %s.\n", av_err2str(n));
             break;
         }
-        avio_write(client, buf, n);
-        avio_flush(client);
+        avio_write(input, buf, n);
+        avio_flush(input);
     } while (true);
 
 end:
@@ -138,14 +138,18 @@ FF_encoder::FF_encoder(const char* outURL, CString& FileName)  : fOutURL(outURL)
         exit(ret);
     }
 
-    if ((ret = avio_open2(&fserver, fFileName, AVIO_FLAG_READ, nullptr, &fOptions)) < 0)
+    /*if ((ret = avio_open2(&fserver, fFileName, AVIO_FLAG_READ, nullptr, &fOptions)) < 0)
     {
         fprintf(stderr, "Failed to open server: %s\n", av_err2str(ret));
         exit(ret);
-    }
-    if((ret = avio_accept(fserver, &fClient)) < 0)
+    }*/
+    AVFormatContext* formatContext = avformat_alloc_context();;
+    
+    if ((ret = avformat_open_input(&formatContext, fFileName, NULL, &fOptions)) < 0) {
         goto end;
-    fprintf(stderr, "Accept client, forking process.\n");
+    }
+
+    // Do something with the file
 
 /*fserver = avio_alloc_context(avio_ctx_buffer, avio_ctx_buffer_size,
         0, &bd, nullptr, NULL, NULL);
@@ -171,6 +175,7 @@ FF_encoder::FF_encoder(const char* outURL, CString& FileName)  : fOutURL(outURL)
     av_dump_format(fmt_ctx, 0, fFileName, 0);*/
 
 end:
+    avformat_close_input(&formatContext);
     avio_close(fserver);
     if (ret < 0 && ret != AVERROR_EOF) {
         fprintf(stderr, "Some errors occurred: %s\n", av_err2str(ret));
