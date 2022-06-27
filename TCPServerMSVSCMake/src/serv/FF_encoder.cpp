@@ -125,8 +125,26 @@ FF_encoder::FF_encoder(const char* outURL, CString& FileName) : fOutURL(outURL)
         ret = AVERROR(ENOMEM);
         goto end;
     }
+    
+    avformat_network_init();
+    int ret;
+    if ((ret = av_dict_set(&fOptions, "listen", "2", 0)) < 0)
+    {
+        fprintf(stderr, "Failed to set listen mode for server: %s\n", av_err2str(ret));
+        exit(ret);
+    }
+    if ((ret = avio_open2(&fserver, fFileName, AVIO_FLAG_WRITE, nullptr, &fOptions)) < 0)
+    {
+        fprintf(stderr, "Failed to open server: %s\n", av_err2str(ret));
+        exit(ret);
+    }
+    do {
+        if((ret = avio_accept(fserver, &finContext)) < 0)
+            goto end;
+        fprintf(stderr, "Accept client, forking process.\n");
+    } while (true);
 
-    fserver = avio_alloc_context(avio_ctx_buffer, avio_ctx_buffer_size,
+/*fserver = avio_alloc_context(avio_ctx_buffer, avio_ctx_buffer_size,
         0, &bd, nullptr, NULL, NULL);
 
     if (!fserver) {
@@ -147,24 +165,8 @@ FF_encoder::FF_encoder(const char* outURL, CString& FileName) : fOutURL(outURL)
         fprintf(stderr, "Could not find stream information\n");
         goto end;
     }
-    av_dump_format(fmt_ctx, 0, fFileName, 0);
-   /* avformat_network_init();
-    int ret;
-    if ((ret = av_dict_set(&fOptions, "listen", "2", 0)) < 0)
-    {
-        fprintf(stderr, "Failed to set listen mode for server: %s\n", av_err2str(ret));
-        exit(ret);
-    }
-    if ((ret = avio_open2(&fserver, fOutURL, AVIO_FLAG_WRITE, nullptr, &fOptions)) < 0)
-    {
-        fprintf(stderr, "Failed to open server: %s\n", av_err2str(ret));
-        exit(ret);
-    }
-    do {
-        if((ret = avio_accept(fserver, &finContext)) < 0)
-            goto end;
-        fprintf(stderr, "Accept client, forking process.\n");
-    } while (true);*/
+    av_dump_format(fmt_ctx, 0, fFileName, 0);*/
+
 end:
     avio_close(fserver);
     if (ret < 0 && ret != AVERROR_EOF) {
