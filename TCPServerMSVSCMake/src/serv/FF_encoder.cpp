@@ -1,5 +1,10 @@
 #include "FF_encoder.hpp"
 
+struct buffer_data {
+    uint8_t* ptr;
+    size_t size; ///< size left in the buffer
+};
+
 void FF_encoder::encode(AVCodecContext* enc_ctx, AVFrame* frame, AVPacket* pkt, FILE* outFile)
 {
     int ret;
