@@ -156,7 +156,7 @@ bool NetSocketUV::Accept()
 				}
 			}
 			CString outURL("rtsp://");
-			outURL.IntToString((int)accept_sock->ClientID);
+			outURL += accept_sock->ClientID;
 			outURL += "in_binary.264";
 			CString fileName = outURL;
 			outURL += accept_sock->ip;
