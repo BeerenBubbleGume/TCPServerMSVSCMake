@@ -349,7 +349,7 @@ void SetupRetranslation(NetSocket* accept_sock, CString fileName)
 	CString outURL("udp://");
 	CStringArray ipArr;
 	sock->GetIP(IP_str, Owner, ipArr);
-	outURL += ipArr;
+	outURL += outURL;
 	outURL += "/";
 	if (sock->GetClientID() == 0)
 		outURL += "0in_binary.264";
