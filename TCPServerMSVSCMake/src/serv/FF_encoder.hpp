@@ -26,6 +26,7 @@ protected:
 	~FF_encoder();
 	AVIOContext* fClient;
 	AVIOContext* fserver;
+	AVFormatContext* fInContext;
 	AVDictionary* fOptions;
 	AVFrame* fFrame;
 	AVPacket* fPacket;

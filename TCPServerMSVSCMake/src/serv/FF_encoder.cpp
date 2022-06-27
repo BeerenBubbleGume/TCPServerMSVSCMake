@@ -103,9 +103,11 @@ end:
     av_freep(&resource);
 }
 
-FF_encoder::FF_encoder(const char* outURL, CString& FileName) : fOutURL(outURL)
+FF_encoder::FF_encoder(const char* outURL, CString& FileName) /* : fOutURL(outURL)*/
 {
+    outURL = "udp://192.168.0.85:8554/0in_binary.264";
     fClient = nullptr;
+    fInContext = avformat_alloc_context();;
     fOptions = nullptr;
     fserver = nullptr;
     fFile = nullptr;
@@ -119,13 +121,14 @@ FF_encoder::FF_encoder(const char* outURL, CString& FileName) : fOutURL(outURL)
 
     fFileName = FileName.c_str();
     av_log_set_level(AV_LOG_TRACE);
-    
+
     avformat_network_init();
     if ((ret = av_dict_set(&fOptions, "listen", "2", 0)) < 0)
     {
         fprintf(stderr, "Failed to set listen mode for server: %s\n", av_err2str(ret));
         exit(ret);
     }
+
     if ((ret = avio_open2(&fserver, fOutURL, AVIO_FLAG_WRITE, nullptr, &fOptions)) < 0)
     {
         fprintf(stderr, "Failed to open server: %s\n", av_err2str(ret));
