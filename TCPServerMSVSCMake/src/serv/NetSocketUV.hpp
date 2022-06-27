@@ -43,7 +43,7 @@ public:
 	virtual						~NetSocketUV();
 
 	virtual bool				Create(int port, bool udp_tcp, bool listen);
-	virtual bool				GetIP(CString& addr, bool own_or_peer, CStringArray& toStore);
+	virtual bool				GetIP(CString& addr, bool own_or_peer);
 	bool						Accept();
 
 	void						ReceiveTCP();

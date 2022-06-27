@@ -74,9 +74,9 @@ bool NetSocketUV::Create(int port, bool udp_tcp, bool listen)
 
 char address_converter[30];
 
-bool NetSocketUV::GetIP(CString& addr, bool own_or_peer, CStringArray& toStore)
+bool NetSocketUV::GetIP(CString& addr, bool own_or_peer)
 {
-	if (NetSocket::GetIP(addr, own_or_peer, toStore))
+	if (NetSocket::GetIP(addr, own_or_peer))
 	{
 		uv_tcp_t* socket = GetPtrTCP(sock);
 		sockaddr sockName;

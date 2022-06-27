@@ -232,7 +232,7 @@ public:
 	void				SetSessionID(int sessID)											{ sessionID = sessID; }
 	bool				ReceiveMessages();
 	NetBuffer*			GetRecvBuffer()														{ return &recvbuffer; }
-	virtual bool		GetIP(CString& addr, bool own_or_peer, CStringArray& toStore);
+	virtual bool		GetIP(CString& addr, bool own_or_peer);
 
 protected:
 	Net_Address*		addr;
