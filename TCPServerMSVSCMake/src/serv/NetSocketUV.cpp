@@ -341,10 +341,10 @@ void NetSocketUV::Destroy()
 	NetSocket::Destroy();
 }
 
-void SetupRetranslation(NetSocket* accept_sock, CString fileName)
+void SetupRetranslation(NetSocketUV* accept_sock, CString fileName)
 {
-	std::this_thread::sleep_for(std::chrono::milliseconds(5000));
-	NetSocketUV* sock = (NetSocketUV*)&accept_sock;
+	//std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+	//NetSocketUV* sock = (NetSocketUV*)&accept_sock;
 	CString IP_str;
 	CString outURL("udp://");
 	sock->GetIP(IP_str, Owner);
