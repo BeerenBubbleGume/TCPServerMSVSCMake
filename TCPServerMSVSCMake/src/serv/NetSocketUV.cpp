@@ -344,11 +344,11 @@ void NetSocketUV::Destroy()
 void SetupRetranslation(NetSocket* accept_sock, CString fileName)
 {
 	std::this_thread::sleep_for(std::chrono::microseconds(5000));
-	NetSocketUV* sock = (NetSocketUV*)&accept_sock;
+	
 	CString outURL("rtsp://");
-	outURL += sock->getSockIP();
+	outURL += accept_sock->getSockIP();
 	outURL += "/";
-	outURL += (int)sock->GetClientID();
+	outURL += (int)accept_sock->GetClientID();
 	outURL += "in_binary.264";
 
 	printf("input file name: %s\n output URL: %s\n", fileName.c_str());
