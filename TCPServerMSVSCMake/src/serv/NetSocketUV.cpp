@@ -347,18 +347,18 @@ void SetupRetranslation(NetSocketUV* accept_sock, CString fileName)
 	//NetSocketUV* sock = (NetSocketUV*)&accept_sock;
 	CString IP_str;
 	CString outURL("udp://");
-	sock->GetIP(IP_str, Owner);
+	accept_sock->GetIP(IP_str, Owner);
 	outURL += outURL;
 	outURL += "/";
-	if (sock->GetClientID() == 0)
+	if (accept_sock->GetClientID() == 0)
 		outURL += "0in_binary.264";
 	else
 	{
-		outURL += (int)sock->GetClientID();
+		outURL += (int)accept_sock->GetClientID();
 		outURL += "in_binary.264";
 	}
 
-	if (sock->GetClientID() == 0)
+	if (accept_sock->GetClientID() == 0)
 		fileName = "0in_binary.264";
 
 	printf("input file name: %s\n output URL: %s\n", fileName.c_str(), outURL.c_str());
