@@ -62,6 +62,8 @@ ELSE()
 								pthread
 								bz2
 								c
+								rt
+								va
 								-ldl
 								)
 ENDIF()
