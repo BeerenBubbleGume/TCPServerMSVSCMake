@@ -61,6 +61,7 @@ ELSE()
 								stdc++fs
 								pthread
 								bz2
+								gc
 								-ldl
 								)
 ENDIF()
