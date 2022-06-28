@@ -1,5 +1,8 @@
 ﻿#include "NetSock.hpp"
 
+int SERVER_DEFAULT_PORT = 8000;
+int PORT_SERVER_TCP = 8080;
+
 Net::Net()
 {
 	wr1 = new CMemWriter;

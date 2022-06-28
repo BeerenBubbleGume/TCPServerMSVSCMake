@@ -23,8 +23,6 @@ class	Server;
 #define SERVER_RTSP_PORT 8554
 #define Owner false
 #define Peer true
-int SERVER_DEFAULT_PORT = 8000;
-int PORT_SERVER_TCP = 8080;
 
 enum MESSAGE_TYPE
 {
