@@ -18,8 +18,13 @@ class	Server;
 
 
 #define SERVER_ID 0
+#define SERVER_UDP_PORT 47780
+#define SERVER_TCP_PORT 47789
+#define SERVER_RTSP_PORT 8554
 #define Owner false
 #define Peer true
+int SERVER_DEFAULT_PORT = 8000;
+int PORT_SERVER_TCP = 8080;
 
 enum MESSAGE_TYPE
 {

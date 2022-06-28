@@ -125,6 +125,14 @@ build TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\TCPServerMSVSCMake.cp
   TARGET_COMPILE_PDB = TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\
   TARGET_PDB = TCPServerMSVSCMake\TCPServerMSVSCMake.pdb
 
+build TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv\FF_encoder.cpp.obj: CXX_COMPILER__TCPServerMSVSCMake_Debug ..\..\..\TCPServerMSVSCMake\src\serv\FF_encoder.cpp || cmake_object_order_depends_target_TCPServerMSVSCMake
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc -lstdc++fs -std=c++17 -gstabs+ -gstabs -D _DEBUG -O /MDd /Zi /Ob0 /Od /RTC1 -std:c++17
+  INCLUDES = -I..\..\..\TCPServerMSVSCMake\libs\includes
+  OBJECT_DIR = TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir
+  OBJECT_FILE_DIR = TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv
+  TARGET_COMPILE_PDB = TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\
+  TARGET_PDB = TCPServerMSVSCMake\TCPServerMSVSCMake.pdb
+
 build TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv\utils.cpp.obj: CXX_COMPILER__TCPServerMSVSCMake_Debug ..\..\..\TCPServerMSVSCMake\src\serv\utils.cpp || cmake_object_order_depends_target_TCPServerMSVSCMake
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc -lstdc++fs -std=c++17 -gstabs+ -gstabs -D _DEBUG -O /MDd /Zi /Ob0 /Od /RTC1 -std:c++17
   INCLUDES = -I..\..\..\TCPServerMSVSCMake\libs\includes
@@ -149,7 +157,7 @@ build TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv\utf.cpp.obj:
 #############################################
 # Link the executable TCPServerMSVSCMake\TCPServerMSVSCMake.exe
 
-build TCPServerMSVSCMake\TCPServerMSVSCMake.exe: CXX_EXECUTABLE_LINKER__TCPServerMSVSCMake_Debug TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv\NetSock.cpp.obj TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv\NetSocketUV.cpp.obj TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\TCPServerMSVSCMake.cpp.obj TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv\utils.cpp.obj TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv\utf.cpp.obj | ..\..\..\TCPServerMSVSCMake\libs\lib\uv.lib
+build TCPServerMSVSCMake\TCPServerMSVSCMake.exe: CXX_EXECUTABLE_LINKER__TCPServerMSVSCMake_Debug TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv\NetSock.cpp.obj TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv\NetSocketUV.cpp.obj TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\TCPServerMSVSCMake.cpp.obj TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv\FF_encoder.cpp.obj TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv\utils.cpp.obj TCPServerMSVSCMake\CMakeFiles\TCPServerMSVSCMake.dir\src\serv\utf.cpp.obj | ..\..\..\TCPServerMSVSCMake\libs\lib\uv.lib
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc -lstdc++fs -std=c++17 -gstabs+ -gstabs -D _DEBUG -O /MDd /Zi /Ob0 /Od /RTC1
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
   LINK_LIBRARIES = ..\..\..\TCPServerMSVSCMake\libs\lib\uv.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
@@ -331,7 +339,280 @@ build TCPServerMSVSCMake\src\serv\rebuild_cache: phony TCPServerMSVSCMake\src\se
 build TCPServerMSVSCMake\src\serv\list_install_components: phony
 
 # =============================================================================
+# Write statements declared in CMakeLists.txt:
+# A:/Cpp repos/TCPServerMSVSCMake/CMakeLists.txt
+# =============================================================================
+
+
+#############################################
+# Utility command for install/local
+
+build RTSP\CMakeFiles\install\local.util: CUSTOM_COMMAND RTSP\all
+  COMMAND = cmd.exe /C "cd /D "A:\Cpp repos\TCPServerMSVSCMake\out\build\x64-Debug\RTSP" && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
+  DESC = Installing only the local directory...
+  pool = console
+  restat = 1
+
+build RTSP\install\local: phony RTSP\CMakeFiles\install\local.util
+
+
+#############################################
+# Utility command for install
+
+build RTSP\CMakeFiles\install.util: CUSTOM_COMMAND RTSP\all
+  COMMAND = cmd.exe /C "cd /D "A:\Cpp repos\TCPServerMSVSCMake\out\build\x64-Debug\RTSP" && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P cmake_install.cmake"
+  DESC = Install the project...
+  pool = console
+  restat = 1
+
+build RTSP\install: phony RTSP\CMakeFiles\install.util
+
+
+#############################################
+# Utility command for edit_cache
+
+build RTSP\CMakeFiles\edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D "A:\Cpp repos\TCPServerMSVSCMake\out\build\x64-Debug\RTSP" && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  DESC = No interactive CMake dialog available...
+  restat = 1
+
+build RTSP\edit_cache: phony RTSP\CMakeFiles\edit_cache.util
+
+# =============================================================================
+# Object build statements for EXECUTABLE target RTSP
+
+
+#############################################
+# Order-only phony target for RTSP
+
+build cmake_object_order_depends_target_RTSP: phony || RTSP\CMakeFiles\RTSP.dir
+
+build RTSP\CMakeFiles\RTSP.dir\RTSP.cpp.obj: CXX_COMPILER__RTSP_Debug ..\..\..\RTSP\RTSP.cpp || cmake_object_order_depends_target_RTSP
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc -gstabs+ -gstabs -D _DEBUG -O /MDd /Zi /Ob0 /Od /RTC1 -std:c++17
+  INCLUDES = -I..\..\..\RTSP\libs\include\openssl -I..\..\..\RTSP\libs\include\glib-2.0 -I..\..\..\RTSP\libs\include\zlib.h -I..\..\..\RTSP\libs\include -I..\..\..\RTSP\libs\include\BasicUsageEnvironment -I..\..\..\RTSP\libs\include\liveMedia -I..\..\..\RTSP\libs\include\groupsock -I..\..\..\RTSP\libs\include\UsageEnvironment
+  OBJECT_DIR = RTSP\CMakeFiles\RTSP.dir
+  OBJECT_FILE_DIR = RTSP\CMakeFiles\RTSP.dir
+  TARGET_COMPILE_PDB = RTSP\CMakeFiles\RTSP.dir\
+  TARGET_PDB = RTSP\RTSP.pdb
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target RTSP
+
+
+#############################################
+# Link the executable RTSP\RTSP.exe
+
+build RTSP\RTSP.exe: CXX_EXECUTABLE_LINKER__RTSP_Debug RTSP\CMakeFiles\RTSP.dir\RTSP.cpp.obj | ..\..\..\RTSP\libs\lib\libssl.lib ..\..\..\RTSP\libs\lib\glib-2.0.lib ..\..\..\RTSP\libs\lib\libcrypto.lib ..\..\..\RTSP\libs\lib\pthread.lib ..\..\..\RTSP\libs\lib\liveMedia.lib ..\..\..\RTSP\libs\lib\BasicUsageEnvironment.lib ..\..\..\RTSP\libs\lib\UsageEnvironment.lib ..\..\..\RTSP\libs\lib\groupsock.lib
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc -gstabs+ -gstabs -D _DEBUG -O /MDd /Zi /Ob0 /Od /RTC1
+  LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
+  LINK_LIBRARIES = ..\..\..\RTSP\libs\lib\libssl.lib  ..\..\..\RTSP\libs\lib\glib-2.0.lib  ..\..\..\RTSP\libs\lib\libcrypto.lib  ..\..\..\RTSP\libs\lib\pthread.lib  ..\..\..\RTSP\libs\lib\liveMedia.lib  ..\..\..\RTSP\libs\lib\BasicUsageEnvironment.lib  ..\..\..\RTSP\libs\lib\UsageEnvironment.lib  ..\..\..\RTSP\libs\lib\groupsock.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
+  OBJECT_DIR = RTSP\CMakeFiles\RTSP.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_COMPILE_PDB = RTSP\CMakeFiles\RTSP.dir\
+  TARGET_FILE = RTSP\RTSP.exe
+  TARGET_IMPLIB = RTSP\RTSP.lib
+  TARGET_PDB = RTSP\RTSP.pdb
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build RTSP\CMakeFiles\rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D "A:\Cpp repos\TCPServerMSVSCMake\out\build\x64-Debug\RTSP" && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" --regenerate-during-build -S"A:\Cpp repos\TCPServerMSVSCMake" -B"A:\Cpp repos\TCPServerMSVSCMake\out\build\x64-Debug""
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build RTSP\rebuild_cache: phony RTSP\CMakeFiles\rebuild_cache.util
+
+
+#############################################
+# Utility command for list_install_components
+
+build RTSP\list_install_components: phony
+
+# =============================================================================
+# Write statements declared in CMakeLists.txt:
+# A:/Cpp repos/TCPServerMSVSCMake/RTSP/CMakeLists.txt
+# =============================================================================
+
+
+#############################################
+# Utility command for install/local
+
+build RTSP\libs\CMakeFiles\install\local.util: CUSTOM_COMMAND RTSP\libs\all
+  COMMAND = cmd.exe /C "cd /D "A:\Cpp repos\TCPServerMSVSCMake\out\build\x64-Debug\RTSP\libs" && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
+  DESC = Installing only the local directory...
+  pool = console
+  restat = 1
+
+build RTSP\libs\install\local: phony RTSP\libs\CMakeFiles\install\local.util
+
+
+#############################################
+# Utility command for install
+
+build RTSP\libs\CMakeFiles\install.util: CUSTOM_COMMAND RTSP\libs\all
+  COMMAND = cmd.exe /C "cd /D "A:\Cpp repos\TCPServerMSVSCMake\out\build\x64-Debug\RTSP\libs" && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P cmake_install.cmake"
+  DESC = Install the project...
+  pool = console
+  restat = 1
+
+build RTSP\libs\install: phony RTSP\libs\CMakeFiles\install.util
+
+
+#############################################
+# Utility command for edit_cache
+
+build RTSP\libs\CMakeFiles\edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D "A:\Cpp repos\TCPServerMSVSCMake\out\build\x64-Debug\RTSP\libs" && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  DESC = No interactive CMake dialog available...
+  restat = 1
+
+build RTSP\libs\edit_cache: phony RTSP\libs\CMakeFiles\edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build RTSP\libs\CMakeFiles\rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D "A:\Cpp repos\TCPServerMSVSCMake\out\build\x64-Debug\RTSP\libs" && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" --regenerate-during-build -S"A:\Cpp repos\TCPServerMSVSCMake" -B"A:\Cpp repos\TCPServerMSVSCMake\out\build\x64-Debug""
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build RTSP\libs\rebuild_cache: phony RTSP\libs\CMakeFiles\rebuild_cache.util
+
+
+#############################################
+# Utility command for list_install_components
+
+build RTSP\libs\list_install_components: phony
+
+# =============================================================================
+# Write statements declared in CMakeLists.txt:
+# A:/Cpp repos/TCPServerMSVSCMake/RTSP/libs/CMakeLists.txt
+# =============================================================================
+
+
+#############################################
+# Utility command for install/local
+
+build RTSP\libs\lib\CMakeFiles\install\local.util: CUSTOM_COMMAND RTSP\libs\lib\all
+  COMMAND = cmd.exe /C "cd /D "A:\Cpp repos\TCPServerMSVSCMake\out\build\x64-Debug\RTSP\libs\lib" && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
+  DESC = Installing only the local directory...
+  pool = console
+  restat = 1
+
+build RTSP\libs\lib\install\local: phony RTSP\libs\lib\CMakeFiles\install\local.util
+
+
+#############################################
+# Utility command for install
+
+build RTSP\libs\lib\CMakeFiles\install.util: CUSTOM_COMMAND RTSP\libs\lib\all
+  COMMAND = cmd.exe /C "cd /D "A:\Cpp repos\TCPServerMSVSCMake\out\build\x64-Debug\RTSP\libs\lib" && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P cmake_install.cmake"
+  DESC = Install the project...
+  pool = console
+  restat = 1
+
+build RTSP\libs\lib\install: phony RTSP\libs\lib\CMakeFiles\install.util
+
+
+#############################################
+# Utility command for edit_cache
+
+build RTSP\libs\lib\CMakeFiles\edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D "A:\Cpp repos\TCPServerMSVSCMake\out\build\x64-Debug\RTSP\libs\lib" && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  DESC = No interactive CMake dialog available...
+  restat = 1
+
+build RTSP\libs\lib\edit_cache: phony RTSP\libs\lib\CMakeFiles\edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build RTSP\libs\lib\CMakeFiles\rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D "A:\Cpp repos\TCPServerMSVSCMake\out\build\x64-Debug\RTSP\libs\lib" && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" --regenerate-during-build -S"A:\Cpp repos\TCPServerMSVSCMake" -B"A:\Cpp repos\TCPServerMSVSCMake\out\build\x64-Debug""
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build RTSP\libs\lib\rebuild_cache: phony RTSP\libs\lib\CMakeFiles\rebuild_cache.util
+
+
+#############################################
+# Utility command for list_install_components
+
+build RTSP\libs\lib\list_install_components: phony
+
+# =============================================================================
+# Write statements declared in CMakeLists.txt:
+# A:/Cpp repos/TCPServerMSVSCMake/RTSP/libs/CMakeLists.txt
+# =============================================================================
+
+
+#############################################
+# Utility command for install/local
+
+build RTSP\libs\include\CMakeFiles\install\local.util: CUSTOM_COMMAND RTSP\libs\include\all
+  COMMAND = cmd.exe /C "cd /D "A:\Cpp repos\TCPServerMSVSCMake\out\build\x64-Debug\RTSP\libs\include" && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
+  DESC = Installing only the local directory...
+  pool = console
+  restat = 1
+
+build RTSP\libs\include\install\local: phony RTSP\libs\include\CMakeFiles\install\local.util
+
+
+#############################################
+# Utility command for install
+
+build RTSP\libs\include\CMakeFiles\install.util: CUSTOM_COMMAND RTSP\libs\include\all
+  COMMAND = cmd.exe /C "cd /D "A:\Cpp repos\TCPServerMSVSCMake\out\build\x64-Debug\RTSP\libs\include" && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P cmake_install.cmake"
+  DESC = Install the project...
+  pool = console
+  restat = 1
+
+build RTSP\libs\include\install: phony RTSP\libs\include\CMakeFiles\install.util
+
+
+#############################################
+# Utility command for edit_cache
+
+build RTSP\libs\include\CMakeFiles\edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D "A:\Cpp repos\TCPServerMSVSCMake\out\build\x64-Debug\RTSP\libs\include" && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  DESC = No interactive CMake dialog available...
+  restat = 1
+
+build RTSP\libs\include\edit_cache: phony RTSP\libs\include\CMakeFiles\edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build RTSP\libs\include\CMakeFiles\rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D "A:\Cpp repos\TCPServerMSVSCMake\out\build\x64-Debug\RTSP\libs\include" && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" --regenerate-during-build -S"A:\Cpp repos\TCPServerMSVSCMake" -B"A:\Cpp repos\TCPServerMSVSCMake\out\build\x64-Debug""
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build RTSP\libs\include\rebuild_cache: phony RTSP\libs\include\CMakeFiles\rebuild_cache.util
+
+
+#############################################
+# Utility command for list_install_components
+
+build RTSP\libs\include\list_install_components: phony
+
+# =============================================================================
 # Target aliases.
+
+build RTSP: phony RTSP\RTSP.exe
+
+build RTSP.exe: phony RTSP\RTSP.exe
 
 build TCPServerMSVSCMake: phony TCPServerMSVSCMake\TCPServerMSVSCMake.exe
 
@@ -345,7 +626,35 @@ build TCPServerMSVSCMake.exe: phony TCPServerMSVSCMake\TCPServerMSVSCMake.exe
 #############################################
 # Folder: A:/Cpp repos/TCPServerMSVSCMake/out/build/x64-Debug
 
-build all: phony TCPServerMSVSCMake\all
+build all: phony TCPServerMSVSCMake\all RTSP\all
+
+# =============================================================================
+
+#############################################
+# Folder: A:/Cpp repos/TCPServerMSVSCMake/out/build/x64-Debug/RTSP
+
+build RTSP\all: phony RTSP\RTSP.exe RTSP\libs\all
+
+# =============================================================================
+
+#############################################
+# Folder: A:/Cpp repos/TCPServerMSVSCMake/out/build/x64-Debug/RTSP/libs
+
+build RTSP\libs\all: phony RTSP\libs\lib\all RTSP\libs\include\all
+
+# =============================================================================
+
+#############################################
+# Folder: A:/Cpp repos/TCPServerMSVSCMake/out/build/x64-Debug/RTSP/libs/include
+
+build RTSP\libs\include\all: phony
+
+# =============================================================================
+
+#############################################
+# Folder: A:/Cpp repos/TCPServerMSVSCMake/out/build/x64-Debug/RTSP/libs/lib
+
+build RTSP\libs\lib\all: phony
 
 # =============================================================================
 
@@ -375,14 +684,14 @@ build TCPServerMSVSCMake\src\serv\all: phony
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | ..\..\..\CMakeLists.txt ..\..\..\TCPServerMSVSCMake\CMakeLists.txt ..\..\..\TCPServerMSVSCMake\src\CMakeLists.txt ..\..\..\TCPServerMSVSCMake\src\serv\CMakeLists.txt C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeCInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeCXXInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeCommonLanguageInclude.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeGenericSystem.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeInitializeConfigs.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeLanguageInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeRCInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeSystemSpecificInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeSystemSpecificInitialize.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Compiler\CMakeCommonCompilerMacros.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Compiler\MSVC-C.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Compiler\MSVC-CXX.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Platform\Windows-MSVC-C.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Platform\Windows-MSVC-CXX.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Platform\Windows-MSVC.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Platform\Windows.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Platform\WindowsPaths.cmake CMakeCache.txt CMakeFiles\3.20.21032501-MSVC_2\CMakeCCompiler.cmake CMakeFiles\3.20.21032501-MSVC_2\CMakeCXXCompiler.cmake CMakeFiles\3.20.21032501-MSVC_2\CMakeRCCompiler.cmake CMakeFiles\3.20.21032501-MSVC_2\CMakeSystem.cmake
+build build.ninja: RERUN_CMAKE | ..\..\..\CMakeLists.txt ..\..\..\RTSP\CMakeLists.txt ..\..\..\RTSP\libs\CMakeLists.txt ..\..\..\RTSP\libs\include\CMakeLists.txt ..\..\..\RTSP\libs\lib\CMakeLists.txt ..\..\..\TCPServerMSVSCMake\CMakeLists.txt ..\..\..\TCPServerMSVSCMake\src\CMakeLists.txt ..\..\..\TCPServerMSVSCMake\src\serv\CMakeLists.txt C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeCInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeCXXInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeCommonLanguageInclude.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeGenericSystem.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeInitializeConfigs.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeLanguageInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeRCInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeSystemSpecificInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeSystemSpecificInitialize.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Compiler\CMakeCommonCompilerMacros.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Compiler\MSVC-C.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Compiler\MSVC-CXX.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Platform\Windows-MSVC-C.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Platform\Windows-MSVC-CXX.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Platform\Windows-MSVC.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Platform\Windows.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Platform\WindowsPaths.cmake CMakeCache.txt CMakeFiles\3.20.21032501-MSVC_2\CMakeCCompiler.cmake CMakeFiles\3.20.21032501-MSVC_2\CMakeCXXCompiler.cmake CMakeFiles\3.20.21032501-MSVC_2\CMakeRCCompiler.cmake CMakeFiles\3.20.21032501-MSVC_2\CMakeSystem.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build ..\..\..\CMakeLists.txt ..\..\..\TCPServerMSVSCMake\CMakeLists.txt ..\..\..\TCPServerMSVSCMake\src\CMakeLists.txt ..\..\..\TCPServerMSVSCMake\src\serv\CMakeLists.txt C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeCInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeCXXInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeCommonLanguageInclude.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeGenericSystem.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeInitializeConfigs.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeLanguageInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeRCInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeSystemSpecificInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeSystemSpecificInitialize.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Compiler\CMakeCommonCompilerMacros.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Compiler\MSVC-C.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Compiler\MSVC-CXX.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Platform\Windows-MSVC-C.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Platform\Windows-MSVC-CXX.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Platform\Windows-MSVC.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Platform\Windows.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Platform\WindowsPaths.cmake CMakeCache.txt CMakeFiles\3.20.21032501-MSVC_2\CMakeCCompiler.cmake CMakeFiles\3.20.21032501-MSVC_2\CMakeCXXCompiler.cmake CMakeFiles\3.20.21032501-MSVC_2\CMakeRCCompiler.cmake CMakeFiles\3.20.21032501-MSVC_2\CMakeSystem.cmake: phony
+build ..\..\..\CMakeLists.txt ..\..\..\RTSP\CMakeLists.txt ..\..\..\RTSP\libs\CMakeLists.txt ..\..\..\RTSP\libs\include\CMakeLists.txt ..\..\..\RTSP\libs\lib\CMakeLists.txt ..\..\..\TCPServerMSVSCMake\CMakeLists.txt ..\..\..\TCPServerMSVSCMake\src\CMakeLists.txt ..\..\..\TCPServerMSVSCMake\src\serv\CMakeLists.txt C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeCInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeCXXInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeCommonLanguageInclude.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeGenericSystem.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeInitializeConfigs.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeLanguageInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeRCInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeSystemSpecificInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\CMakeSystemSpecificInitialize.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Compiler\CMakeCommonCompilerMacros.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Compiler\MSVC-C.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Compiler\MSVC-CXX.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Platform\Windows-MSVC-C.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Platform\Windows-MSVC-CXX.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Platform\Windows-MSVC.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Platform\Windows.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.20\Modules\Platform\WindowsPaths.cmake CMakeCache.txt CMakeFiles\3.20.21032501-MSVC_2\CMakeCCompiler.cmake CMakeFiles\3.20.21032501-MSVC_2\CMakeCXXCompiler.cmake CMakeFiles\3.20.21032501-MSVC_2\CMakeRCCompiler.cmake CMakeFiles\3.20.21032501-MSVC_2\CMakeSystem.cmake: phony
 
 
 #############################################

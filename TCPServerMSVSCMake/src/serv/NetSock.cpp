@@ -1,10 +1,5 @@
 ﻿#include "NetSock.hpp"
 
-int SERVER_DEFAULT_PORT = 8000;
-int PORT_SERVER_TCP = 8080;
-#define SERVER_UDP_PORT 47780
-#define SERVER_TCP_PORT 47789
-
 Net::Net()
 {
 	wr1 = new CMemWriter;
