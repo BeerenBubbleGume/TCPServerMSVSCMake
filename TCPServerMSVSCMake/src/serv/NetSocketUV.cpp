@@ -156,8 +156,13 @@ bool NetSocketUV::Accept()
 				}
 			}
 			CString fileName;
-			fileName += (int)accept_sock->ClientID;
-			fileName += "in_binary.264";
+			if(accept_sock->ClientID == 0)
+				fileName += "0in_binary.264";
+			else {
+				fileName += (int)accept_sock->ClientID;
+				fileName += "in_binary.264";
+			}
+			
 			//FF_encoder* sender = FF_encoder::createNew(accept_sock->ip.c_str(), fileName);
 			std::thread RTSPsend(SetupRetranslation, accept_sock, fileName);
 			RTSPsend.detach();
