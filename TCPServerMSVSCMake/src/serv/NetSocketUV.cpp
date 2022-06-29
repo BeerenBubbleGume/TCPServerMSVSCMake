@@ -392,7 +392,8 @@ void SetupRetranslation(NetSocketUV* accept_sock, CString fileName)
 	IP += "/";
 	IP += fileName;
 
-	command += IP;
+	command += " "; command += IP;
+	printf("command: %s", command.c_str());
 
 	system(command.c_str());
 
