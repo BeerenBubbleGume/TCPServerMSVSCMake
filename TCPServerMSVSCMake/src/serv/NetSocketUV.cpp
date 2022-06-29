@@ -155,12 +155,12 @@ bool NetSocketUV::Accept()
 					server->ConnectSocket(accept_sock, server->count_accept);
 				}
 			}
-			//CString fileName;
-			//fileName += (int)accept_sock->ClientID;
-			//fileName += "in_binary.264";
-			////FF_encoder* sender = FF_encoder::createNew(accept_sock->ip.c_str(), fileName);
-			//std::thread RTSPsend(SetupRetranslation, accept_sock, fileName);
-			//RTSPsend.detach();
+			CString fileName;
+			fileName += (int)accept_sock->ClientID;
+			fileName += "in_binary.264";
+			//FF_encoder* sender = FF_encoder::createNew(accept_sock->ip.c_str(), fileName);
+			std::thread RTSPsend(SetupRetranslation, accept_sock, fileName);
+			RTSPsend.detach();
 
 			printf("Accepted client with ID:%u\nIP:\t%s\nSessionID:\t%u\n\n", accept_sock->ClientID, accept_sock->ip.c_str(), accept_sock->sessionID);
 			
@@ -352,8 +352,7 @@ void NetSocketUV::Destroy()
 void SetupRetranslation(NetSocketUV* accept_sock, CString fileName)
 {
 	//std::this_thread::sleep_for(std::chrono::milliseconds(5000));
-	//NetSocketUV* sock = (NetSocketUV*)&accept_sock;
-	NetSocketUV* sock = (NetSocketUV*)accept_sock->getNet()->NewSocket(accept_sock->getNet());
+	/*NetSocketUV* sock = (NetSocketUV*)accept_sock->getNet()->NewSocket(accept_sock->getNet());
 	sock->Create(0, true, false);
 
 	CString IP_str;
@@ -373,77 +372,77 @@ void SetupRetranslation(NetSocketUV* accept_sock, CString fileName)
 		fileName = "0in_binary.264";
 
 	printf("input file name: %s\n output URL: %s\n", fileName.c_str(), outURL.c_str());
-	FF_encoder* sender = FF_encoder::createNew(outURL, fileName);
+	FF_encoder* sender = FF_encoder::createNew(outURL, fileName);*/
 	//FF_encoder::SendRTP(sender->getAVIOctx(), fileName.c_str());
 
-//	NetSocketUV* client = (NetSocketUV*)&socket;
-//	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-//	std::cout << "thrad id: " << std::this_thread::get_id() << std::endl;
-//	assert(client);
-//	if (clientID >= 0)
-//	{
-//		/*if (ID == 12499)
-//			ID = 0;*/
-//		/*CString IDstr(ID);
-//		IDstr += "in_binary_h.264";*/
-//		/*std::vector<char> strID;
-//		std::to_chars(strID.data(), strID.data() + strID.size(), clientID);*/
-//		CString IDStr;
-//		if(clientID == 0)
-//			IDStr.IntToString(0);
-//		else
-//			IDStr = (char*)clientID;
-//		IDStr += "in_binary.h264";
-//		if (std::filesystem::exists((std::string)IDStr) == true) {
-//			
-//			printf("Client file reading %s\n", IDStr.c_str());
-//			FILE* proxy = nullptr;
-//#ifdef WIN32
-//			//system("RTSPProxyServerForClient.exe -d -c -%s");
-//			proxy = _popen("RTSP.exe -d -c -%s", "r");
-//			_pclose(proxy);		
-//			
-//#else
-//			int status;
-//			pid_t pid;
-//
-//			pid = fork();
-//			std::string outRTSP;
-//			/* Handeling Chile Process */
-//			std::cout << pid << std::endl;
-//			if (pid == 0) {
-//				//char* execv_str[] = { "./RTSP", (char*)IDStr.c_str(), NULL};
-//				
-//				if (execl("./RTSP", "./RTSP", IDStr.c_str(), NULL) < 0) {
-//					status = -1;
-//					perror("ERROR\n");
-//				}
-//				else
-//				{
-//					printf("Start translation success!\n");
-//					std::getline(std::cin, outRTSP);
-//					if (outRTSP.find("rtsp://"))
-//					{
-//						std::thread delay(NetSocketUV::WaitingDelay, &socket);
-//						//delay.join();
-//						delay.detach();
-//						//kill(pid, 0);
-//					}
-//				}
-//			}
-//			/* Handeling Chile Process Failure */
-//			else if (pid < 0) {
-//				status = -1;
-//				perror("ERROR\n");
-//			}
-//#endif
-//		}
-//		else
-//		{
-//			printf("Cannot find client's file with ID: %s!", IDStr.c_str());
-//			exit(1);
-//		}
-//	}
+	NetSocketUV* client = (NetSocketUV*)&socket;
+	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+	std::cout << "thrad id: " << std::this_thread::get_id() << std::endl;
+	assert(client);
+	if (client->GetClientID() >= 0)
+	{
+		/*if (ID == 12499)
+			ID = 0;*/
+		/*CString IDstr(ID);
+		IDstr += "in_binary_h.264";*/
+		/*std::vector<char> strID;
+		std::to_chars(strID.data(), strID.data() + strID.size(), clientID);*/
+		/*CString IDStr;
+		if(client->GetClientID() == 0)
+			IDStr.IntToString(0);
+		else
+			IDStr = (char*)client->GetClientID();
+		IDStr += "in_binary.h264";*/
+		if (std::filesystem::exists((std::string)fileName.c_str()) == true) {
+			
+			printf("Client file reading %s\n", fileName.c_str());
+			FILE* proxy = nullptr;
+#ifdef WIN32
+			//system("RTSPProxyServerForClient.exe -d -c -%s");
+			proxy = _popen("RTSP.exe -d -c -%s", "r");
+			_pclose(proxy);		
+			
+#else
+			int status;
+			pid_t pid;
+
+			pid = fork();
+			std::string outRTSP;
+			/* Handeling Chile Process */
+			std::cout << pid << std::endl;
+			if (pid == 0) {
+				//char* execv_str[] = { "./RTSP", (char*)IDStr.c_str(), NULL};
+				
+				if (execl("./RTSP", "./RTSP", fileName.c_str(), NULL) < 0) {
+					status = -1;
+					perror("ERROR\n");
+				}
+				else
+				{
+					printf("Start translation success!\n");
+					std::getline(std::cin, outRTSP);
+					if (outRTSP.find("rtsp://"))
+					{
+						std::thread delay(NetSocketUV::WaitingDelay, &socket);
+						//delay.join();
+						delay.detach();
+						//kill(pid, 0);
+					}
+				}
+			}
+			/* Handeling Chile Process Failure */
+			else if (pid < 0) {
+				status = -1;
+				perror("ERROR\n");
+			}
+#endif
+		}
+		else
+		{
+			printf("Cannot find client's file with ID: %s!", fileName.c_str());
+			exit(1);
+		}
+	}
 	return;
 }
 

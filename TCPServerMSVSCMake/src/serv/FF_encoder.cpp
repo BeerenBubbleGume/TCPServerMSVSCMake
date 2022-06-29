@@ -143,11 +143,11 @@ FF_encoder::FF_encoder(const char* outURL, CString& FileName)  : fOutURL(outURL)
         fprintf(stderr, "Failed to open server: %s\n", av_err2str(ret));
         exit(ret);
     }*/
-    AVFormatContext* formatContext = avformat_alloc_context();;
+    /*AVFormatContext* formatContext = avformat_alloc_context();;
     
     if ((ret = avformat_open_input(&formatContext, fFileName, NULL, &fOptions)) < 0) {
         goto end;
-    }
+    }*/
 
     // Do something with the file
 
@@ -175,7 +175,7 @@ FF_encoder::FF_encoder(const char* outURL, CString& FileName)  : fOutURL(outURL)
     av_dump_format(fmt_ctx, 0, fFileName, 0);*/
 
 end:
-    avformat_close_input(&formatContext);
+    //avformat_close_input(&formatContext);
     avio_close(fserver);
     if (ret < 0 && ret != AVERROR_EOF) {
         fprintf(stderr, "Some errors occurred: %s\n", av_err2str(ret));
