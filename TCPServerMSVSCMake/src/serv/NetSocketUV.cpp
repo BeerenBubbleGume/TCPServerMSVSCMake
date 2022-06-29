@@ -184,20 +184,25 @@ bool NetSocketUV::Accept()
 
 void NetSocketUV::ReceiveTCP()
 {
+	NetBuffer* recv_buffer = net->GetRecvBuffer();
+	int received_bytes = recv_buffer->GetLength();
+	recvbuffer.Add(received_bytes, recv_buffer->GetData());
+
 	int filePrefix = (int)ClientID;
 	CString fileName;
-	fileName.IntToString(filePrefix);
-	fileName += "in_binary.264";
-	CString IP_str;
-	CString outURL("rtp://");
-	GetIP(IP_str, Owner);
-	outURL += ip;
-	outURL += "/";
-	outURL += fileName;
+	if (filePrefix == 0)
+		fileName = "0in_binary.264";
+	else
+	{
+		fileName.IntToString(filePrefix);
+		fileName += "in_binary.264";
+	}
+	ReceiveMessages();
+
 	fout.open(fileName.c_str(), std::ios::binary | std::ios::app);
 	if (fout.is_open())
 	{
-		fout.write((char*)net->GetRecvBuffer()->GetData(), net->GetRecvBuffer()->GetLength());
+		fout.write((char*)recvbuffer.GetData(), recvbuffer.GetLength());
 		//printf("writed %d bytes in file %s\n", (int)net->GetRecvBuffer()->GetLength(), fileName.c_str());
 		fout.close();
 	}
@@ -205,11 +210,6 @@ void NetSocketUV::ReceiveTCP()
 	{
 		printf("cannot open file\n");
 	}
-	ReceiveMessages();
-	printf("outURL: %s\n", outURL.c_str());
-	FF_encoder* sender = FF_encoder::createNew(outURL.c_str(), fileName);
-	sender->SendRTP(sender->getAVIOctx(), outURL.c_str());
-	
 }
 
 void NetSocketUV::ReceiveUPD()
@@ -218,10 +218,13 @@ void NetSocketUV::ReceiveUPD()
 	int received_bytes = recv_buffer->GetLength();
 	recvbuffer.Add(received_bytes, recv_buffer->GetData());
 
+	if (net->IsServer())
+		ReceiveMessages();
+
 	CString fileName;
 	fileName.IntToString((int)ClientID);
 	fileName += "in_binary.264";
-	
+
 	fout.open(fileName.c_str(), std::ios::binary | std::ios::app);
 	if (fout.is_open())
 	{
@@ -235,8 +238,6 @@ void NetSocketUV::ReceiveUPD()
 		printf("cannot open file\n");
 	}
 
-	if (net->IsServer())
-		ReceiveMessages();
 }
 
 void NetSocketUV::SendTCP(NET_BUFFER_INDEX* buf)
