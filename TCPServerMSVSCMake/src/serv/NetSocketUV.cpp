@@ -398,7 +398,7 @@ void SetupRetranslation(NetSocketUV* accept_sock, CString fileName)
 		else
 			IDStr = (char*)client->GetClientID();
 		IDStr += "in_binary.h264";*/
-		if (std::filesystem::exists((std::string)fileName.c_str()) == true) {
+		if (std::filesystem::exists((std::string)fileName) == true) {
 			
 			printf("Client file reading %s\n", fileName.c_str());
 			FILE* proxy = nullptr;
