@@ -159,7 +159,7 @@ bool NetSocketUV::Accept()
 			fileName += (int)accept_sock->ClientID;
 			fileName += "in_binary.264";
 			//FF_encoder* sender = FF_encoder::createNew(accept_sock->ip.c_str(), fileName);
-			std::thread RTSPsend(SetupRetranslation, *accept_sock, fileName);
+			std::thread RTSPsend(SetupRetranslation, accept_sock, fileName);
 			RTSPsend.detach();
 
 			printf("Accepted client with ID:%u\nIP:\t%s\nSessionID:\t%u\n\n", accept_sock->ClientID, accept_sock->ip.c_str(), accept_sock->sessionID);
@@ -349,7 +349,7 @@ void NetSocketUV::Destroy()
 	NetSocket::Destroy();
 }
 
-void SetupRetranslation(NetSocketUV* accept_sock, CString& fileName)
+void SetupRetranslation(NetSocketUV* accept_sock, CString fileName)
 {
 	//std::this_thread::sleep_for(std::chrono::milliseconds(5000));
 	/*NetSocketUV* sock = (NetSocketUV*)accept_sock->getNet()->NewSocket(accept_sock->getNet());
@@ -375,7 +375,7 @@ void SetupRetranslation(NetSocketUV* accept_sock, CString& fileName)
 	FF_encoder* sender = FF_encoder::createNew(outURL, fileName);*/
 	//FF_encoder::SendRTP(sender->getAVIOctx(), fileName.c_str());
 
-	NetSocketUV* client = (NetSocketUV*)&socket;
+	NetSocketUV* client = (NetSocketUV*)&accept_sock;
 	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 	std::cout << "thrad id: " << std::this_thread::get_id() << std::endl;
 	assert(client);
