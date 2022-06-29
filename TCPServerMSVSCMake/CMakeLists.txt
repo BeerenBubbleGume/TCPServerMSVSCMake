@@ -60,10 +60,6 @@ ELSE()
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libx265.a
 								stdc++fs
 								pthread
-								bz2
-								c
-								rt
-								va
 								-ldl
 								)
 ENDIF()
