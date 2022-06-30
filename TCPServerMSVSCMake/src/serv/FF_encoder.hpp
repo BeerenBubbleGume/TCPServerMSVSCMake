@@ -21,12 +21,17 @@ protected:
 	~FF_encoder();
 	const AVOutputFormat* ofmt;
 	AVFormatContext* ifmt_ctx, *ofmt_ctx;
-	AVPacket* fPacketkt;
+	AVPacket* fPacket;
 	FILE* fFile;
 	const AVCodec* fCodec;
 
 	unsigned char* fData;
 	unsigned fDataSize;
+
+	int ret, i;
+	int stream_index;
+	int* stream_mapping;
+	int stream_mapping_size;
 
 	const char* fCodecName, *fFileName, *fOutURL;
 
