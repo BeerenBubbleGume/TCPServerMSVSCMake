@@ -358,7 +358,7 @@ void NetSocketUV::Destroy()
 void SetupRetranslation(NetSocketUV* accept_sock, CString fileName)
 {
 	//std::this_thread::sleep_for(std::chrono::milliseconds(5000));
-	NetSocketUV* sock = (NetSocketUV*)accept_sock->getNet()->NewSocket(accept_sock->getNet());
+	NetSocketUV* sock = (NetSocketUV*)&accept_sock;
 	sock->Create(0, true, false);
 
 	CString IP_str;
