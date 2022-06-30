@@ -360,7 +360,7 @@ void SetupRetranslation(void* net, CString fileName)
 	//std::this_thread::sleep_for(std::chrono::milliseconds(5000));
 	ServerUV* serv = (ServerUV*)net;
 	NetSocketUV* sock = (NetSocketUV*)serv->NewSocket(serv);
-	sock->Create(8554, true, false);
+	sock->Create(0, true, false);
 	CString IP_str;
 	CString outURL("rtp://");
 	sock->GetIP(IP_str, Owner);
