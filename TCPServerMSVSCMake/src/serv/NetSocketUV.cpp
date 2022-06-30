@@ -361,7 +361,7 @@ void SetupRetranslation(NetSocketUV* accept_sock, CString fileName)
 	//NetSocketUV* sock = (NetSocketUV*)accept_sock;
 	
 	CString IP_str;
-	CString outURL("rtsp://");
+	CString outURL("rtp://");
 	accept_sock->GetIP(IP_str, Owner);
 	outURL += IP_str;
 	outURL += "/";
