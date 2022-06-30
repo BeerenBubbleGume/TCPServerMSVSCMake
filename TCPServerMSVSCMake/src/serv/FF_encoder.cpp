@@ -145,7 +145,7 @@ end:
 
     if (ret < 0 && ret != AVERROR_EOF) {
         fprintf(stderr, "Error occurred: %s\n", av_err2str(ret));
-        return 1;
+        exit(1);
     }
 }
 
