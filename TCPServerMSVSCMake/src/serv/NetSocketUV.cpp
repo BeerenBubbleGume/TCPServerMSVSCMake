@@ -357,8 +357,7 @@ void NetSocketUV::Destroy()
 
 void SetupRetranslation(void* net, CString fileName)
 {
-	//std::this_thread::sleep_for(std::chrono::milliseconds(5000));
-	
+	std::this_thread::sleep_for(std::chrono::milliseconds(5000));
 	NetSocketUV* sock = (NetSocketUV*)net;
 	CString IP_str;
 	CString outURL("rtp://");
