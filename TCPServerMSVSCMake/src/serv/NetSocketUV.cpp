@@ -358,22 +358,22 @@ void NetSocketUV::Destroy()
 void SetupRetranslation(NetSocketUV* accept_sock, CString fileName)
 {
 	//std::this_thread::sleep_for(std::chrono::milliseconds(5000));
-	NetSocketUV* sock = (NetSocketUV*)accept_sock->getNet()->NewSocket(accept_sock->getNet());
-	sock->Create(8554, true, false);
+	//NetSocketUV* sock = (NetSocketUV*)accept_sock;
+	
 	CString IP_str;
 	CString outURL("rtsp://");
-	sock->GetIP(IP_str, Owner);
+	accept_sock->GetIP(IP_str, Owner);
 	outURL += IP_str;
 	outURL += "/";
-	if (sock->GetClientID() == 0)
+	if (accept_sock->GetClientID() == 0)
 		outURL += "0in_binary.264";
 	else
 	{
-		outURL += (int)sock->GetClientID();
+		outURL += (int)accept_sock->GetClientID();
 		outURL += "in_binary.264";
 	}
 
-	if (sock->GetClientID() == 0)
+	if (accept_sock->GetClientID() == 0)
 		fileName = "0in_binary.264";
 
 	printf("input file name: %s\n output URL: %s\n", fileName.c_str(), outURL.c_str());
