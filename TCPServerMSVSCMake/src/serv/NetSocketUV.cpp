@@ -358,8 +358,8 @@ void NetSocketUV::Destroy()
 void SetupRetranslation(NetSocketUV* accept_sock, CString fileName)
 {
 	//std::this_thread::sleep_for(std::chrono::milliseconds(5000));
-	NetSocketUV* sock = (NetSocketUV*)&accept_sock;
-	
+	NetSocketUV* sock = (NetSocketUV*)&accept_sock->getNet()->NewSocket(accept_sock->getNet());
+	sock->Create(8554, true, false);
 	CString IP_str;
 	CString outURL("rtsp://");
 	sock->GetIP(IP_str, Owner);
