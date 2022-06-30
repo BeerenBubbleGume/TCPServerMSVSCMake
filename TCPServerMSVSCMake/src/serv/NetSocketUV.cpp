@@ -377,8 +377,10 @@ void SetupRetranslation(void* net, CString fileName)
 		fileName = "0in_binary.264";
 
 	printf("input file name: %s\n output URL: %s\n", fileName.c_str(), outURL.c_str());
-	FF_encoder* sender = FF_encoder::createNew(outURL.c_str(), fileName);
-	sender->SendRTP(sender->getAVIOctx(), fileName.c_str());
+	remuxing(fileName.c_str(), outURL.c_str());
+	
+	/*FF_encoder* sender = FF_encoder::createNew(outURL.c_str(), fileName);
+	sender->SendRTP(sender->getAVIOctx(), fileName.c_str());*/
 
 	//std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
