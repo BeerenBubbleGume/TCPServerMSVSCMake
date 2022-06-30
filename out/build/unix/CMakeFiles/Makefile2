@@ -54,10 +54,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake
+CMAKE_SOURCE_DIR = /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix
+CMAKE_BINARY_DIR = /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -196,14 +196,14 @@ TCPServerMSVSCMake/src/serv/clean:
 TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/all:
 	$(MAKE) $(MAKESILENT) -f TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/build.make TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/depend
 	$(MAKE) $(MAKESILENT) -f TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/build.make TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/CMakeFiles --progress-num=5,6,7,8,9,10 "Built target TCPServerMSVSCMake"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix/CMakeFiles --progress-num=3,4,5,6,7,8,9 "Built target TCPServerMSVSCMake"
 .PHONY : TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/all
 
 # Build rule for subdir invocation for target.
 TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/CMakeFiles 6
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix/CMakeFiles 7
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix/CMakeFiles 0
 .PHONY : TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/rule
 
 # Convenience name for target.
@@ -222,14 +222,14 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/clean:
 RTSP/CMakeFiles/RTSP.dir/all:
 	$(MAKE) $(MAKESILENT) -f RTSP/CMakeFiles/RTSP.dir/build.make RTSP/CMakeFiles/RTSP.dir/depend
 	$(MAKE) $(MAKESILENT) -f RTSP/CMakeFiles/RTSP.dir/build.make RTSP/CMakeFiles/RTSP.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/CMakeFiles --progress-num=1,2,3,4 "Built target RTSP"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix/CMakeFiles --progress-num=1,2 "Built target RTSP"
 .PHONY : RTSP/CMakeFiles/RTSP.dir/all
 
 # Build rule for subdir invocation for target.
 RTSP/CMakeFiles/RTSP.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/CMakeFiles 4
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix/CMakeFiles 2
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 RTSP/CMakeFiles/RTSP.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix/CMakeFiles 0
 .PHONY : RTSP/CMakeFiles/RTSP.dir/rule
 
 # Convenience name for target.

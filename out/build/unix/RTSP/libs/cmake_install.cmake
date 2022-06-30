@@ -1,4 +1,4 @@
-# Install script for directory: /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/RTSP/libs
+# Install script for directory: /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/RTSP/libs
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,13 +39,13 @@ endif()
 
 # Set default install directory permissions.
 if(NOT DEFINED CMAKE_OBJDUMP)
-  set(CMAKE_OBJDUMP "/opt/rh/gcc-toolset-9/root/usr/bin/objdump")
+  set(CMAKE_OBJDUMP "/usr/bin/objdump")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/RTSP/libs/lib/cmake_install.cmake")
-  include("/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/RTSP/libs/include/cmake_install.cmake")
+  include("/home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix/RTSP/libs/lib/cmake_install.cmake")
+  include("/home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix/RTSP/libs/include/cmake_install.cmake")
 
 endif()
 

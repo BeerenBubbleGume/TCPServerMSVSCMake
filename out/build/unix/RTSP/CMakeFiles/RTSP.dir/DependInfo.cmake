@@ -8,9 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/RTSP/RTSP.cpp" "RTSP/CMakeFiles/RTSP.dir/RTSP.cpp.o" "gcc" "RTSP/CMakeFiles/RTSP.dir/RTSP.cpp.o.d"
-  "/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/RTSP/utf.cpp" "RTSP/CMakeFiles/RTSP.dir/utf.cpp.o" "gcc" "RTSP/CMakeFiles/RTSP.dir/utf.cpp.o.d"
-  "/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/RTSP/utils.cpp" "RTSP/CMakeFiles/RTSP.dir/utils.cpp.o" "gcc" "RTSP/CMakeFiles/RTSP.dir/utils.cpp.o.d"
+  "/home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/RTSP/RTSP.cpp" "RTSP/CMakeFiles/RTSP.dir/RTSP.cpp.o" "gcc" "RTSP/CMakeFiles/RTSP.dir/RTSP.cpp.o.d"
   )
 
 # Targets to which this target links.

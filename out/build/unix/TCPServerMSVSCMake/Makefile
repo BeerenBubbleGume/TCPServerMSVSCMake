@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake
+CMAKE_SOURCE_DIR = /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix
+CMAKE_BINARY_DIR = /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -132,14 +132,14 @@ install/local/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix && $(CMAKE_COMMAND) -E cmake_progress_start /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/CMakeFiles /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/TCPServerMSVSCMake//CMakeFiles/progress.marks
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 TCPServerMSVSCMake/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/CMakeFiles 0
+	cd /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix && $(CMAKE_COMMAND) -E cmake_progress_start /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix/CMakeFiles /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix/TCPServerMSVSCMake//CMakeFiles/progress.marks
+	cd /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 TCPServerMSVSCMake/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 TCPServerMSVSCMake/clean
+	cd /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 TCPServerMSVSCMake/clean
 .PHONY : clean
 
 # The main clean target
@@ -148,22 +148,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 TCPServerMSVSCMake/preinstall
+	cd /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 TCPServerMSVSCMake/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 TCPServerMSVSCMake/preinstall
+	cd /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 TCPServerMSVSCMake/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/rule:
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/rule
+	cd /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/rule
 .PHONY : TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/rule
 
 # Convenience name for target.
@@ -172,7 +172,7 @@ TCPServerMSVSCMake: TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/rule
 
 # fast build rule for target.
 TCPServerMSVSCMake/fast:
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/build.make TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/build
+	cd /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/build.make TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/build
 .PHONY : TCPServerMSVSCMake/fast
 
 TCPServerMSVSCMake.o: TCPServerMSVSCMake.cpp.o
@@ -180,7 +180,7 @@ TCPServerMSVSCMake.o: TCPServerMSVSCMake.cpp.o
 
 # target to build an object file
 TCPServerMSVSCMake.cpp.o:
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/build.make TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.o
+	cd /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/build.make TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.o
 .PHONY : TCPServerMSVSCMake.cpp.o
 
 TCPServerMSVSCMake.i: TCPServerMSVSCMake.cpp.i
@@ -188,7 +188,7 @@ TCPServerMSVSCMake.i: TCPServerMSVSCMake.cpp.i
 
 # target to preprocess a source file
 TCPServerMSVSCMake.cpp.i:
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/build.make TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.i
+	cd /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/build.make TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.i
 .PHONY : TCPServerMSVSCMake.cpp.i
 
 TCPServerMSVSCMake.s: TCPServerMSVSCMake.cpp.s
@@ -196,15 +196,39 @@ TCPServerMSVSCMake.s: TCPServerMSVSCMake.cpp.s
 
 # target to generate assembly for a file
 TCPServerMSVSCMake.cpp.s:
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/build.make TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.s
+	cd /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/build.make TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.s
 .PHONY : TCPServerMSVSCMake.cpp.s
+
+src/serv/FF_encoder.o: src/serv/FF_encoder.cpp.o
+.PHONY : src/serv/FF_encoder.o
+
+# target to build an object file
+src/serv/FF_encoder.cpp.o:
+	cd /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/build.make TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/FF_encoder.cpp.o
+.PHONY : src/serv/FF_encoder.cpp.o
+
+src/serv/FF_encoder.i: src/serv/FF_encoder.cpp.i
+.PHONY : src/serv/FF_encoder.i
+
+# target to preprocess a source file
+src/serv/FF_encoder.cpp.i:
+	cd /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/build.make TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/FF_encoder.cpp.i
+.PHONY : src/serv/FF_encoder.cpp.i
+
+src/serv/FF_encoder.s: src/serv/FF_encoder.cpp.s
+.PHONY : src/serv/FF_encoder.s
+
+# target to generate assembly for a file
+src/serv/FF_encoder.cpp.s:
+	cd /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/build.make TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/FF_encoder.cpp.s
+.PHONY : src/serv/FF_encoder.cpp.s
 
 src/serv/NetSock.o: src/serv/NetSock.cpp.o
 .PHONY : src/serv/NetSock.o
 
 # target to build an object file
 src/serv/NetSock.cpp.o:
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/build.make TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.o
+	cd /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/build.make TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.o
 .PHONY : src/serv/NetSock.cpp.o
 
 src/serv/NetSock.i: src/serv/NetSock.cpp.i
@@ -212,7 +236,7 @@ src/serv/NetSock.i: src/serv/NetSock.cpp.i
 
 # target to preprocess a source file
 src/serv/NetSock.cpp.i:
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/build.make TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.i
+	cd /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/build.make TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.i
 .PHONY : src/serv/NetSock.cpp.i
 
 src/serv/NetSock.s: src/serv/NetSock.cpp.s
@@ -220,7 +244,7 @@ src/serv/NetSock.s: src/serv/NetSock.cpp.s
 
 # target to generate assembly for a file
 src/serv/NetSock.cpp.s:
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/build.make TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.s
+	cd /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/build.make TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSock.cpp.s
 .PHONY : src/serv/NetSock.cpp.s
 
 src/serv/NetSocketUV.o: src/serv/NetSocketUV.cpp.o
@@ -228,7 +252,7 @@ src/serv/NetSocketUV.o: src/serv/NetSocketUV.cpp.o
 
 # target to build an object file
 src/serv/NetSocketUV.cpp.o:
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/build.make TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.o
+	cd /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/build.make TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.o
 .PHONY : src/serv/NetSocketUV.cpp.o
 
 src/serv/NetSocketUV.i: src/serv/NetSocketUV.cpp.i
@@ -236,7 +260,7 @@ src/serv/NetSocketUV.i: src/serv/NetSocketUV.cpp.i
 
 # target to preprocess a source file
 src/serv/NetSocketUV.cpp.i:
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/build.make TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.i
+	cd /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/build.make TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.i
 .PHONY : src/serv/NetSocketUV.cpp.i
 
 src/serv/NetSocketUV.s: src/serv/NetSocketUV.cpp.s
@@ -244,7 +268,7 @@ src/serv/NetSocketUV.s: src/serv/NetSocketUV.cpp.s
 
 # target to generate assembly for a file
 src/serv/NetSocketUV.cpp.s:
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/build.make TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.s
+	cd /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/build.make TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.s
 .PHONY : src/serv/NetSocketUV.cpp.s
 
 src/serv/utf.o: src/serv/utf.cpp.o
@@ -252,7 +276,7 @@ src/serv/utf.o: src/serv/utf.cpp.o
 
 # target to build an object file
 src/serv/utf.cpp.o:
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/build.make TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utf.cpp.o
+	cd /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/build.make TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utf.cpp.o
 .PHONY : src/serv/utf.cpp.o
 
 src/serv/utf.i: src/serv/utf.cpp.i
@@ -260,7 +284,7 @@ src/serv/utf.i: src/serv/utf.cpp.i
 
 # target to preprocess a source file
 src/serv/utf.cpp.i:
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/build.make TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utf.cpp.i
+	cd /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/build.make TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utf.cpp.i
 .PHONY : src/serv/utf.cpp.i
 
 src/serv/utf.s: src/serv/utf.cpp.s
@@ -268,7 +292,7 @@ src/serv/utf.s: src/serv/utf.cpp.s
 
 # target to generate assembly for a file
 src/serv/utf.cpp.s:
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/build.make TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utf.cpp.s
+	cd /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/build.make TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utf.cpp.s
 .PHONY : src/serv/utf.cpp.s
 
 src/serv/utils.o: src/serv/utils.cpp.o
@@ -276,7 +300,7 @@ src/serv/utils.o: src/serv/utils.cpp.o
 
 # target to build an object file
 src/serv/utils.cpp.o:
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/build.make TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o
+	cd /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/build.make TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.o
 .PHONY : src/serv/utils.cpp.o
 
 src/serv/utils.i: src/serv/utils.cpp.i
@@ -284,7 +308,7 @@ src/serv/utils.i: src/serv/utils.cpp.i
 
 # target to preprocess a source file
 src/serv/utils.cpp.i:
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/build.make TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.i
+	cd /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/build.make TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.i
 .PHONY : src/serv/utils.cpp.i
 
 src/serv/utils.s: src/serv/utils.cpp.s
@@ -292,7 +316,7 @@ src/serv/utils.s: src/serv/utils.cpp.s
 
 # target to generate assembly for a file
 src/serv/utils.cpp.s:
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/build.make TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.s
+	cd /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/build.make TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/utils.cpp.s
 .PHONY : src/serv/utils.cpp.s
 
 # Help Target
@@ -311,6 +335,9 @@ help:
 	@echo "... TCPServerMSVSCMake.o"
 	@echo "... TCPServerMSVSCMake.i"
 	@echo "... TCPServerMSVSCMake.s"
+	@echo "... src/serv/FF_encoder.o"
+	@echo "... src/serv/FF_encoder.i"
+	@echo "... src/serv/FF_encoder.s"
 	@echo "... src/serv/NetSock.o"
 	@echo "... src/serv/NetSock.i"
 	@echo "... src/serv/NetSock.s"
@@ -334,6 +361,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

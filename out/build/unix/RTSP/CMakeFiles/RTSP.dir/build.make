@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake
+CMAKE_SOURCE_DIR = /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix
+CMAKE_BINARY_DIR = /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix
 
 # Include any dependencies generated for this target.
 include RTSP/CMakeFiles/RTSP.dir/depend.make
@@ -72,57 +72,25 @@ include RTSP/CMakeFiles/RTSP.dir/flags.make
 RTSP/CMakeFiles/RTSP.dir/RTSP.cpp.o: RTSP/CMakeFiles/RTSP.dir/flags.make
 RTSP/CMakeFiles/RTSP.dir/RTSP.cpp.o: ../../../RTSP/RTSP.cpp
 RTSP/CMakeFiles/RTSP.dir/RTSP.cpp.o: RTSP/CMakeFiles/RTSP.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object RTSP/CMakeFiles/RTSP.dir/RTSP.cpp.o"
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/RTSP && /opt/rh/gcc-toolset-9/root/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT RTSP/CMakeFiles/RTSP.dir/RTSP.cpp.o -MF CMakeFiles/RTSP.dir/RTSP.cpp.o.d -o CMakeFiles/RTSP.dir/RTSP.cpp.o -c /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/RTSP/RTSP.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object RTSP/CMakeFiles/RTSP.dir/RTSP.cpp.o"
+	cd /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix/RTSP && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT RTSP/CMakeFiles/RTSP.dir/RTSP.cpp.o -MF CMakeFiles/RTSP.dir/RTSP.cpp.o.d -o CMakeFiles/RTSP.dir/RTSP.cpp.o -c /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/RTSP/RTSP.cpp
 
 RTSP/CMakeFiles/RTSP.dir/RTSP.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/RTSP.dir/RTSP.cpp.i"
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/RTSP && /opt/rh/gcc-toolset-9/root/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/RTSP/RTSP.cpp > CMakeFiles/RTSP.dir/RTSP.cpp.i
+	cd /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix/RTSP && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/RTSP/RTSP.cpp > CMakeFiles/RTSP.dir/RTSP.cpp.i
 
 RTSP/CMakeFiles/RTSP.dir/RTSP.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/RTSP.dir/RTSP.cpp.s"
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/RTSP && /opt/rh/gcc-toolset-9/root/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/RTSP/RTSP.cpp -o CMakeFiles/RTSP.dir/RTSP.cpp.s
-
-RTSP/CMakeFiles/RTSP.dir/utils.cpp.o: RTSP/CMakeFiles/RTSP.dir/flags.make
-RTSP/CMakeFiles/RTSP.dir/utils.cpp.o: ../../../RTSP/utils.cpp
-RTSP/CMakeFiles/RTSP.dir/utils.cpp.o: RTSP/CMakeFiles/RTSP.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object RTSP/CMakeFiles/RTSP.dir/utils.cpp.o"
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/RTSP && /opt/rh/gcc-toolset-9/root/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT RTSP/CMakeFiles/RTSP.dir/utils.cpp.o -MF CMakeFiles/RTSP.dir/utils.cpp.o.d -o CMakeFiles/RTSP.dir/utils.cpp.o -c /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/RTSP/utils.cpp
-
-RTSP/CMakeFiles/RTSP.dir/utils.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/RTSP.dir/utils.cpp.i"
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/RTSP && /opt/rh/gcc-toolset-9/root/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/RTSP/utils.cpp > CMakeFiles/RTSP.dir/utils.cpp.i
-
-RTSP/CMakeFiles/RTSP.dir/utils.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/RTSP.dir/utils.cpp.s"
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/RTSP && /opt/rh/gcc-toolset-9/root/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/RTSP/utils.cpp -o CMakeFiles/RTSP.dir/utils.cpp.s
-
-RTSP/CMakeFiles/RTSP.dir/utf.cpp.o: RTSP/CMakeFiles/RTSP.dir/flags.make
-RTSP/CMakeFiles/RTSP.dir/utf.cpp.o: ../../../RTSP/utf.cpp
-RTSP/CMakeFiles/RTSP.dir/utf.cpp.o: RTSP/CMakeFiles/RTSP.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object RTSP/CMakeFiles/RTSP.dir/utf.cpp.o"
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/RTSP && /opt/rh/gcc-toolset-9/root/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT RTSP/CMakeFiles/RTSP.dir/utf.cpp.o -MF CMakeFiles/RTSP.dir/utf.cpp.o.d -o CMakeFiles/RTSP.dir/utf.cpp.o -c /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/RTSP/utf.cpp
-
-RTSP/CMakeFiles/RTSP.dir/utf.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/RTSP.dir/utf.cpp.i"
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/RTSP && /opt/rh/gcc-toolset-9/root/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/RTSP/utf.cpp > CMakeFiles/RTSP.dir/utf.cpp.i
-
-RTSP/CMakeFiles/RTSP.dir/utf.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/RTSP.dir/utf.cpp.s"
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/RTSP && /opt/rh/gcc-toolset-9/root/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/RTSP/utf.cpp -o CMakeFiles/RTSP.dir/utf.cpp.s
+	cd /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix/RTSP && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/RTSP/RTSP.cpp -o CMakeFiles/RTSP.dir/RTSP.cpp.s
 
 # Object files for target RTSP
 RTSP_OBJECTS = \
-"CMakeFiles/RTSP.dir/RTSP.cpp.o" \
-"CMakeFiles/RTSP.dir/utils.cpp.o" \
-"CMakeFiles/RTSP.dir/utf.cpp.o"
+"CMakeFiles/RTSP.dir/RTSP.cpp.o"
 
 # External object files for target RTSP
 RTSP_EXTERNAL_OBJECTS =
 
 RTSP/RTSP: RTSP/CMakeFiles/RTSP.dir/RTSP.cpp.o
-RTSP/RTSP: RTSP/CMakeFiles/RTSP.dir/utils.cpp.o
-RTSP/RTSP: RTSP/CMakeFiles/RTSP.dir/utf.cpp.o
 RTSP/RTSP: RTSP/CMakeFiles/RTSP.dir/build.make
 RTSP/RTSP: ../../../RTSP/libs/lib/libliveMedia.a
 RTSP/RTSP: ../../../RTSP/libs/lib/libBasicUsageEnvironment.a
@@ -132,18 +100,18 @@ RTSP/RTSP: ../../../RTSP/libs/lib/libssl.a
 RTSP/RTSP: ../../../RTSP/libs/lib/libcrypto.a
 RTSP/RTSP: ../../../RTSP/libs/lib/libz.a
 RTSP/RTSP: RTSP/CMakeFiles/RTSP.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable RTSP"
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/RTSP && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/RTSP.dir/link.txt --verbose=$(VERBOSE)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable RTSP"
+	cd /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix/RTSP && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/RTSP.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 RTSP/CMakeFiles/RTSP.dir/build: RTSP/RTSP
 .PHONY : RTSP/CMakeFiles/RTSP.dir/build
 
 RTSP/CMakeFiles/RTSP.dir/clean:
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/RTSP && $(CMAKE_COMMAND) -P CMakeFiles/RTSP.dir/cmake_clean.cmake
+	cd /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix/RTSP && $(CMAKE_COMMAND) -P CMakeFiles/RTSP.dir/cmake_clean.cmake
 .PHONY : RTSP/CMakeFiles/RTSP.dir/clean
 
 RTSP/CMakeFiles/RTSP.dir/depend:
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/RTSP /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/RTSP /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/RTSP/CMakeFiles/RTSP.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/RTSP /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix/RTSP /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix/RTSP/CMakeFiles/RTSP.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : RTSP/CMakeFiles/RTSP.dir/depend
 

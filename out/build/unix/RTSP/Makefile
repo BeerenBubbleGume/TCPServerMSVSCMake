@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake
+CMAKE_SOURCE_DIR = /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix
+CMAKE_BINARY_DIR = /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -132,14 +132,14 @@ install/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix && $(CMAKE_COMMAND) -E cmake_progress_start /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/CMakeFiles /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/RTSP//CMakeFiles/progress.marks
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 RTSP/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix/CMakeFiles 0
+	cd /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix && $(CMAKE_COMMAND) -E cmake_progress_start /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix/CMakeFiles /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix/RTSP//CMakeFiles/progress.marks
+	cd /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 RTSP/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 RTSP/clean
+	cd /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 RTSP/clean
 .PHONY : clean
 
 # The main clean target
@@ -148,22 +148,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 RTSP/preinstall
+	cd /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 RTSP/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 RTSP/preinstall
+	cd /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 RTSP/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 RTSP/CMakeFiles/RTSP.dir/rule:
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 RTSP/CMakeFiles/RTSP.dir/rule
+	cd /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 RTSP/CMakeFiles/RTSP.dir/rule
 .PHONY : RTSP/CMakeFiles/RTSP.dir/rule
 
 # Convenience name for target.
@@ -172,7 +172,7 @@ RTSP: RTSP/CMakeFiles/RTSP.dir/rule
 
 # fast build rule for target.
 RTSP/fast:
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f RTSP/CMakeFiles/RTSP.dir/build.make RTSP/CMakeFiles/RTSP.dir/build
+	cd /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f RTSP/CMakeFiles/RTSP.dir/build.make RTSP/CMakeFiles/RTSP.dir/build
 .PHONY : RTSP/fast
 
 RTSP.o: RTSP.cpp.o
@@ -180,7 +180,7 @@ RTSP.o: RTSP.cpp.o
 
 # target to build an object file
 RTSP.cpp.o:
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f RTSP/CMakeFiles/RTSP.dir/build.make RTSP/CMakeFiles/RTSP.dir/RTSP.cpp.o
+	cd /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f RTSP/CMakeFiles/RTSP.dir/build.make RTSP/CMakeFiles/RTSP.dir/RTSP.cpp.o
 .PHONY : RTSP.cpp.o
 
 RTSP.i: RTSP.cpp.i
@@ -188,7 +188,7 @@ RTSP.i: RTSP.cpp.i
 
 # target to preprocess a source file
 RTSP.cpp.i:
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f RTSP/CMakeFiles/RTSP.dir/build.make RTSP/CMakeFiles/RTSP.dir/RTSP.cpp.i
+	cd /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f RTSP/CMakeFiles/RTSP.dir/build.make RTSP/CMakeFiles/RTSP.dir/RTSP.cpp.i
 .PHONY : RTSP.cpp.i
 
 RTSP.s: RTSP.cpp.s
@@ -196,56 +196,8 @@ RTSP.s: RTSP.cpp.s
 
 # target to generate assembly for a file
 RTSP.cpp.s:
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f RTSP/CMakeFiles/RTSP.dir/build.make RTSP/CMakeFiles/RTSP.dir/RTSP.cpp.s
+	cd /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f RTSP/CMakeFiles/RTSP.dir/build.make RTSP/CMakeFiles/RTSP.dir/RTSP.cpp.s
 .PHONY : RTSP.cpp.s
-
-utf.o: utf.cpp.o
-.PHONY : utf.o
-
-# target to build an object file
-utf.cpp.o:
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f RTSP/CMakeFiles/RTSP.dir/build.make RTSP/CMakeFiles/RTSP.dir/utf.cpp.o
-.PHONY : utf.cpp.o
-
-utf.i: utf.cpp.i
-.PHONY : utf.i
-
-# target to preprocess a source file
-utf.cpp.i:
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f RTSP/CMakeFiles/RTSP.dir/build.make RTSP/CMakeFiles/RTSP.dir/utf.cpp.i
-.PHONY : utf.cpp.i
-
-utf.s: utf.cpp.s
-.PHONY : utf.s
-
-# target to generate assembly for a file
-utf.cpp.s:
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f RTSP/CMakeFiles/RTSP.dir/build.make RTSP/CMakeFiles/RTSP.dir/utf.cpp.s
-.PHONY : utf.cpp.s
-
-utils.o: utils.cpp.o
-.PHONY : utils.o
-
-# target to build an object file
-utils.cpp.o:
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f RTSP/CMakeFiles/RTSP.dir/build.make RTSP/CMakeFiles/RTSP.dir/utils.cpp.o
-.PHONY : utils.cpp.o
-
-utils.i: utils.cpp.i
-.PHONY : utils.i
-
-# target to preprocess a source file
-utils.cpp.i:
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f RTSP/CMakeFiles/RTSP.dir/build.make RTSP/CMakeFiles/RTSP.dir/utils.cpp.i
-.PHONY : utils.cpp.i
-
-utils.s: utils.cpp.s
-.PHONY : utils.s
-
-# target to generate assembly for a file
-utils.cpp.s:
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix && $(MAKE) $(MAKESILENT) -f RTSP/CMakeFiles/RTSP.dir/build.make RTSP/CMakeFiles/RTSP.dir/utils.cpp.s
-.PHONY : utils.cpp.s
 
 # Help Target
 help:
@@ -263,12 +215,6 @@ help:
 	@echo "... RTSP.o"
 	@echo "... RTSP.i"
 	@echo "... RTSP.s"
-	@echo "... utf.o"
-	@echo "... utf.i"
-	@echo "... utf.s"
-	@echo "... utils.o"
-	@echo "... utils.i"
-	@echo "... utils.s"
 .PHONY : help
 
 
@@ -280,6 +226,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/dkhaziev/Документы/GitHub/TCPServerMSVSCMake/out/build/unix && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/out/build/unix && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 
