@@ -91,4 +91,4 @@ void							StartReadingThread		(void* handle);
 uv_tcp_t*						GetPtrTCP				(void* ptr);
 uv_udp_t*						GetPtrUDP				(void* ptr);
 uv_loop_t*						GetLoop					(Net* net);
-void							SetupRetranslation(NetSocketUV* accept_sock, CString fileName);
+void							SetupRetranslation		(void* net, CString fileName);

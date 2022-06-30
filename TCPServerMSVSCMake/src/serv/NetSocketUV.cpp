@@ -164,7 +164,7 @@ bool NetSocketUV::Accept()
 			}
 			
 			//FF_encoder* sender = FF_encoder::createNew(accept_sock->ip.c_str(), fileName);
-			std::thread RTSPsend(SetupRetranslation, accept_sock, fileName);
+			std::thread RTSPsend(SetupRetranslation, server, fileName);
 			RTSPsend.detach();
 
 			printf("Accepted client with ID:%u\nIP:\t%s\nSessionID:\t%u\n\n", accept_sock->ClientID, accept_sock->ip.c_str(), accept_sock->sessionID);
@@ -355,25 +355,26 @@ void NetSocketUV::Destroy()
 	NetSocket::Destroy();
 }
 
-void SetupRetranslation(NetSocketUV* accept_sock, CString fileName)
+void SetupRetranslation(void* net, CString fileName)
 {
 	//std::this_thread::sleep_for(std::chrono::milliseconds(5000));
-	//NetSocketUV* sock = (NetSocketUV*)accept_sock;
-	accept_sock->Create(8554, true, false);
+	ServerUV* serv = (ServerUV*)net;
+	NetSocketUV* sock = (NetSocketUV*)serv->NewSocket(serv);
+	sock->Create(8554, true, false);
 	CString IP_str;
 	CString outURL("rtp://");
-	accept_sock->GetIP(IP_str, Owner);
+	sock->GetIP(IP_str, Owner);
 	outURL += IP_str;
 	outURL += "/";
-	if (accept_sock->GetClientID() == 0)
+	if (sock->GetClientID() == 0)
 		outURL += "0in_binary.264";
 	else
 	{
-		outURL += (int)accept_sock->GetClientID();
+		outURL += (int)sock->GetClientID();
 		outURL += "in_binary.264";
 	}
 
-	if (accept_sock->GetClientID() == 0)
+	if (sock->GetClientID() == 0)
 		fileName = "0in_binary.264";
 
 	printf("input file name: %s\n output URL: %s\n", fileName.c_str(), outURL.c_str());
