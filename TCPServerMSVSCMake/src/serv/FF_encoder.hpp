@@ -1,15 +1,16 @@
 #pragma once
 #include "includes.hpp"
 #include "NetSock.hpp"
+#ifdef __cplusplus
 extern "C" {
+#endif
 #include <libavcodec/avcodec.h>
 #include <libavformat/avformat.h>
-#include <libavformat/avio.h>
-#include <libavutil/avutil.h>
-#include <libavutil/imgutils.h>
-#include <libavutil/opt.h>
-#include <libavutil/file.h>
+#include <libavutil/timestamp.h>
+#ifdef __cplusplus
 }
+#endif // __cplusplus
+
 
 class FF_encoder
 {
