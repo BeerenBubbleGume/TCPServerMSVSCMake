@@ -11,7 +11,7 @@ extern "C" {
 #include <libavutil/file.h>
 }
 
-static int remuxing(const char* inFileName, const char* outURL);
+int remuxing(const char* inFileName, const char* outURL);
 
 class FF_encoder
 {
