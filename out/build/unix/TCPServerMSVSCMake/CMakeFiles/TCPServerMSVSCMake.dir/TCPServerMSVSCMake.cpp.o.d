@@ -295,8 +295,4 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/TCPServerMSVSCMake.cpp.o: \
  /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavformat/version_major.h \
  /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavformat/version.h \
  /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavformat/version_major.h \
- /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavformat/avio.h \
- /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/imgutils.h \
- /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/pixdesc.h \
- /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/opt.h \
- /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/file.h
+ /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/timestamp.h
