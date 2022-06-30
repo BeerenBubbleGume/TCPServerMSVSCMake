@@ -120,12 +120,12 @@ FF_encoder::FF_encoder(const char* outURL, CString& FileName) : fOutURL(outURL)
         }
         out_stream->codecpar->codec_tag = 0;
     }
-    av_dump_format(ofmt_ctx, 0, out_filename, 1);
+    av_dump_format(ofmt_ctx, 0, fOutURL, 1);
 
     if (!(ofmt->flags & AVFMT_NOFILE)) {
-        ret = avio_open(&ofmt_ctx->pb, out_filename, AVIO_FLAG_WRITE);
+        ret = avio_open(&ofmt_ctx->pb, fOutURL, AVIO_FLAG_WRITE);
         if (ret < 0) {
-            fprintf(stderr, "Could not open output file '%s'", out_filename);
+            fprintf(stderr, "Could not open output file '%s'", fOutURL);
             goto end;
         }
     }
@@ -165,6 +165,6 @@ FF_encoder::~FF_encoder()
 
     if (ret < 0 && ret != AVERROR_EOF) {
         fprintf(stderr, "Error occurred: %s\n", av_err2str(ret));
-        return 1;
+        exit(1);
     }
 }
