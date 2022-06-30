@@ -386,7 +386,7 @@ void SetupRetranslation(NetSocketUV* accept_sock, CString fileName)
 	CString command;
 	command += "ffmpeg -i ";
 	command += fileName;
-	CString IP;
+	CString IP("rtsp://");
 	accept_sock->GetIP(IP, Owner);
 	IP += "/";
 	IP += fileName;
