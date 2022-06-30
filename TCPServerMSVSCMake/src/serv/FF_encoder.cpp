@@ -1,16 +1,16 @@
 #include "FF_encoder.hpp"
 
-static void log_packet(const AVFormatContext* fmt_ctx, const AVPacket* pkt, const char* tag)
-{
-    AVRational* time_base = &fmt_ctx->streams[pkt->stream_index]->time_base;
-
-    printf("%s: pts:%s pts_time:%s dts:%s dts_time:%s duration:%s duration_time:%s stream_index:%d\n",
-        tag,
-        av_ts2str(pkt->pts), av_ts2timestr(pkt->pts, time_base),
-        av_ts2str(pkt->dts), av_ts2timestr(pkt->dts, time_base),
-        av_ts2str(pkt->duration), av_ts2timestr(pkt->duration, time_base),
-        pkt->stream_index);
-}
+//static void log_packet(const AVFormatContext* fmt_ctx, const AVPacket* pkt, const char* tag)
+//{
+//    AVRational* time_base = &fmt_ctx->streams[pkt->stream_index]->time_base;
+//
+//    printf("%s: pts:%s pts_time:%s dts:%s dts_time:%s duration:%s duration_time:%s stream_index:%d\n",
+//        tag,
+//        av_ts2str(pkt->pts), av_ts2timestr(pkt->pts, time_base),
+//        av_ts2str(pkt->dts), av_ts2timestr(pkt->dts, time_base),
+//        av_ts2str(pkt->duration), av_ts2timestr(pkt->duration, time_base),
+//        pkt->stream_index);
+//}
 
 void FF_encoder::encode(AVCodecContext* enc_ctx, AVFrame* frame, AVPacket* pkt, FILE* outFile)
 {
@@ -239,7 +239,7 @@ int remuxing(const char* inFileName, const char* outURL)
     }
 
     stream_mapping_size = ifmt_ctx->nb_streams;
-    stream_mapping = av_calloc(stream_mapping_size, sizeof(*stream_mapping));
+    stream_mapping = (int*)av_calloc(stream_mapping_size, sizeof(*stream_mapping));
     if (!stream_mapping) {
         ret = AVERROR(ENOMEM);
         goto end;
@@ -307,12 +307,12 @@ int remuxing(const char* inFileName, const char* outURL)
 
         pkt->stream_index = stream_mapping[pkt->stream_index];
         out_stream = ofmt_ctx->streams[pkt->stream_index];
-        log_packet(ifmt_ctx, pkt, "in");
+       // log_packet(ifmt_ctx, pkt, "in");
 
         /* copy packet */
         av_packet_rescale_ts(pkt, in_stream->time_base, out_stream->time_base);
         pkt->pos = -1;
-        log_packet(ofmt_ctx, pkt, "out");
+        //log_packet(ofmt_ctx, pkt, "out");
 
         ret = av_interleaved_write_frame(ofmt_ctx, pkt);
         /* pkt is now blank (av_interleaved_write_frame() takes ownership of
