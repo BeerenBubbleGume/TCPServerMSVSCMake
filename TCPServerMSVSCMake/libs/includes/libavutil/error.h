@@ -122,6 +122,7 @@ static char av_error[AV_ERROR_MAX_STRING_SIZE] = { 0 };
 #define av_err2str(errnum) \
     av_make_error_string(av_error, AV_ERROR_MAX_STRING_SIZE, errnum)
 
+
 /**
  * @}
  */
