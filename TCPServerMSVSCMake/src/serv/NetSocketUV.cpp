@@ -379,7 +379,7 @@ void SetupRetranslation(NetSocketUV* accept_sock, CString fileName)
 
 	printf("input file name: %s\n output URL: %s\n", fileName.c_str(), outURL.c_str());
 	FF_encoder* sender = FF_encoder::createNew(outURL, fileName);
-	FF_encoder::SendRTP(sender->getAVIOctx(), fileName.c_str());
+	FF_encoder::SendRTP(sender->getAVIOctx(), fileName);
 
 	//std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
