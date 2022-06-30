@@ -11,26 +11,17 @@ extern "C" {
 #include <libavutil/file.h>
 }
 
-int remuxing(const char* inFileName, const char* outURL);
-
 class FF_encoder
 {
 public:
-
-	static void encode(AVCodecContext* enc_ctx, AVFrame* frame, AVPacket* pkt, FILE* outFile);
 	static FF_encoder* createNew(const char* outURL, CString& fileName);
-	void Clear();
-	void ReadIncommigDataBuff();
-	void SendRTP(AVIOContext* client, const char* in_uri);
-	AVIOContext* getAVIOctx() { return fClient; }
+	void				Write();
 protected:
 	FF_encoder(const char* outURL, CString& FileName);
 	~FF_encoder();
-	AVIOContext* fClient;
-	AVIOContext* fserver;
-	AVDictionary* fOptions;
-	AVFrame* fFrame;
-	AVPacket* fPacket;
+	const AVOutputFormat* ofmt;
+	AVFormatContext* ifmt_ctx, *ofmt_ctx;
+	AVPacket* fPacketkt;
 	FILE* fFile;
 	const AVCodec* fCodec;
 
