@@ -359,7 +359,7 @@ void SetupRetranslation(NetSocketUV* accept_sock, CString fileName)
 {
 	//std::this_thread::sleep_for(std::chrono::milliseconds(5000));
 	//NetSocketUV* sock = (NetSocketUV*)accept_sock;
-	
+	accept_sock->Create(8554, true, true);
 	CString IP_str;
 	CString outURL("rtp://");
 	accept_sock->GetIP(IP_str, Owner);
