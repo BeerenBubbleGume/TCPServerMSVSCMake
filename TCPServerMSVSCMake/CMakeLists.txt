@@ -63,6 +63,7 @@ ELSE()
 								ao
 								va
 								rt
+								bz2
 								-ldl
 								)
 ENDIF()
