@@ -381,15 +381,13 @@ void SetupRetranslation(NetSocketUV* accept_sock, CString fileName)
 	FF_encoder* sender = FF_encoder::createNew(outURL, fileName);*/
 	//FF_encoder::SendRTP(sender->getAVIOctx(), fileName.c_str());
 
-	NetSocketUV* client = (NetSocketUV*)&accept_sock;
-	assert(client);
 	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
 	CString command;
 	command += "ffmpeg -i ";
 	command += fileName;
 	CString IP;
-	client->GetIP(IP, Owner);
+	accept_sock->GetIP(IP, Owner);
 	IP += "/";
 	IP += fileName;
 
