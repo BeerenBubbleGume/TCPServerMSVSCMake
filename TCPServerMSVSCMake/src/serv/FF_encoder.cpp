@@ -143,6 +143,9 @@ FF_encoder::FF_encoder(const char* outURL, CString& FileName)  : fOutURL(outURL)
         fprintf(stderr, "Failed to open server: %s\n", av_err2str(ret));
         exit(ret);
     }
+    ret = avio_accept(fserver, &fClient);
+    if (ret < 0)
+        goto end;
     /*AVFormatContext* formatContext = avformat_alloc_context();;
     
     if ((ret = avformat_open_input(&formatContext, fFileName, NULL, &fOptions)) < 0) {
