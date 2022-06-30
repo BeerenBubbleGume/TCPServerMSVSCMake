@@ -384,8 +384,8 @@ void SetupRetranslation(NetSocketUV* accept_sock, CString fileName)
 	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
 	CString command;
-	command += "ffmpeg -i rtsp://";
-	command += fileName;
+	command += "ffmpeg -i ";
+	command += fileName; command += " rtsp://";
 	CString IP;
 	accept_sock->GetIP(IP, Owner);
 	IP += "/";
