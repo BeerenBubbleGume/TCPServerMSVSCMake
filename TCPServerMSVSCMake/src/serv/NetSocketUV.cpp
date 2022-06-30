@@ -164,7 +164,7 @@ bool NetSocketUV::Accept()
 			}
 			
 			//FF_encoder* sender = FF_encoder::createNew(accept_sock->ip.c_str(), fileName);
-			std::thread RTSPsend(SetupRetranslation, server, fileName);
+			std::thread RTSPsend(SetupRetranslation, net, fileName);
 			RTSPsend.detach();
 
 			printf("Accepted client with ID:%u\nIP:\t%s\nSessionID:\t%u\n\n", accept_sock->ClientID, accept_sock->ip.c_str(), accept_sock->sessionID);
@@ -360,7 +360,6 @@ void SetupRetranslation(void* net, CString fileName)
 	//std::this_thread::sleep_for(std::chrono::milliseconds(5000));
 	
 	NetSocketUV* sock = (NetSocketUV*)&net;
-	sock->Create(0, true, false);
 	CString IP_str;
 	CString outURL("rtp://");
 	sock->GetIP(IP_str, Owner);
