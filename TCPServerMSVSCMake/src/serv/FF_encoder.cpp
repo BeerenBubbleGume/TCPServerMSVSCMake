@@ -151,20 +151,4 @@ end:
 
 FF_encoder::~FF_encoder()
 {
-    
-    av_packet_free(&fPacket);
-
-    avformat_close_input(&ifmt_ctx);
-
-    /* close output */
-    if (ofmt_ctx && !(ofmt->flags & AVFMT_NOFILE))
-        avio_closep(&ofmt_ctx->pb);
-    avformat_free_context(ofmt_ctx);
-
-    av_freep(&stream_mapping);
-
-    if (ret < 0 && ret != AVERROR_EOF) {
-        fprintf(stderr, "Error occurred: %s\n", av_err2str(ret));
-        exit(1);
-    }
 }
