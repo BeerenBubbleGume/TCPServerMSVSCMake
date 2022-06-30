@@ -74,7 +74,7 @@ void FF_encoder::SendRTP(AVIOContext* client, const char* in_uri)
         goto end;
 
     fprintf(stderr, "Opening input file.\n");
-    if ((ret = avio_open2(&input, in_uri, AVIO_FLAG_WRITE, nullptr, nullptr)) < 0)
+    if ((ret = avio_open2(&input, in_uri, AVIO_FLAG_READ, nullptr, nullptr)) < 0)
     {
         av_log(input, AV_LOG_ERROR, "Failed to open input: %s: %s.\n", in_uri, av_err2str(ret));
         goto end;
@@ -89,8 +89,8 @@ void FF_encoder::SendRTP(AVIOContext* client, const char* in_uri)
             av_log(input, AV_LOG_ERROR, "Error reading from input: %s.\n", av_err2str(n));
             break;
         }
-        avio_write(input, buf, n);
-        avio_flush(input);
+        avio_write(client, buf, n);
+        avio_flush(client);
     } while (true);
 
 end:
@@ -138,16 +138,16 @@ FF_encoder::FF_encoder(const char* outURL, CString& FileName)  : fOutURL(outURL)
         exit(ret);
     }
 
-    /*if ((ret = avio_open2(&fserver, fFileName, AVIO_FLAG_READ, nullptr, &fOptions)) < 0)
+    if ((ret = avio_open2(&fserver, fOutURL, AVIO_FLAG_WRITE, nullptr, &fOptions)) < 0)
     {
         fprintf(stderr, "Failed to open server: %s\n", av_err2str(ret));
         exit(ret);
-    }*/
-    AVFormatContext* formatContext = avformat_alloc_context();;
+    }
+    /*AVFormatContext* formatContext = avformat_alloc_context();;
     
     if ((ret = avformat_open_input(&formatContext, fFileName, NULL, &fOptions)) < 0) {
         goto end;
-    }
+    }*/
 
     // Do something with the file
 

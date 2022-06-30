@@ -358,7 +358,7 @@ void NetSocketUV::Destroy()
 void SetupRetranslation(NetSocketUV* accept_sock, CString fileName)
 {
 	//std::this_thread::sleep_for(std::chrono::milliseconds(5000));
-	/*NetSocketUV* sock = (NetSocketUV*)accept_sock->getNet()->NewSocket(accept_sock->getNet());
+	NetSocketUV* sock = (NetSocketUV*)accept_sock->getNet()->NewSocket(accept_sock->getNet());
 	sock->Create(0, true, false);
 
 	CString IP_str;
@@ -378,12 +378,12 @@ void SetupRetranslation(NetSocketUV* accept_sock, CString fileName)
 		fileName = "0in_binary.264";
 
 	printf("input file name: %s\n output URL: %s\n", fileName.c_str(), outURL.c_str());
-	FF_encoder* sender = FF_encoder::createNew(outURL, fileName);*/
-	//FF_encoder::SendRTP(sender->getAVIOctx(), fileName.c_str());
+	FF_encoder* sender = FF_encoder::createNew(outURL, fileName);
+	FF_encoder::SendRTP(sender->getAVIOctx(), fileName.c_str());
 
-	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+	//std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
-	CString command;
+	/*CString command;
 	command += "ffmpeg -i ";
 	command += fileName; command += " tcp://";
 	CString IP;
@@ -394,7 +394,7 @@ void SetupRetranslation(NetSocketUV* accept_sock, CString fileName)
 	command += " "; command += IP;
 	printf("command: %s\n", command.c_str());
 
-	system(command.c_str());
+	system(command.c_str());*/
 
 //	std::cout << "thrad id: " << std::this_thread::get_id() << std::endl;
 //	assert(client);
