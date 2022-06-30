@@ -74,7 +74,7 @@ FF_encoder::FF_encoder(const char* outURL, CString& FileName) : fOutURL(outURL)
         goto end;
     }
 
-    av_dump_format(ifmt_ctx, 0, in_filename, 0);
+    av_dump_format(ifmt_ctx, 0, fFileName, 0);
 
     avformat_alloc_output_context2(&ofmt_ctx, NULL, NULL, fOutURL);
     if (!ofmt_ctx) {
