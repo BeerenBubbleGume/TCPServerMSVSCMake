@@ -88,11 +88,11 @@ void FF_encoder::SetupInput(CString& fileName)
         goto end;
     }
 
-    ret = avformat_write_header(ofmt_ctx, nullptr);
+    /*ret = avformat_write_header(ofmt_ctx, nullptr);
     if (ret < 0) {
         fprintf(stderr, "Error occurred when opening output file\n");
         goto end;
-    }
+    }*/
 
 end:
     CloseInput();
