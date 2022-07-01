@@ -61,13 +61,13 @@ FF_encoder* FF_encoder::createNew(const char* outURL)
 	return new FF_encoder(outURL);
 }
 
-void FF_encoder::Write()
+void FF_encoder::Write(AVFormatContext* in, AVFormatContext* out)
 {
     options = NULL;
     av_dict_set(&options, "rtsp_transport", "tcp", 0);
 
-    avformat_alloc_output_context2(&ofmt_ctx, NULL, "rtsp", fOutURL);
-    if (!ofmt_ctx) {
+    avformat_alloc_output_context2(&out, NULL, "rtsp", fOutURL);
+    if (!out) {
         fprintf(stderr, "Could not create output context\n");
         ret = AVERROR_UNKNOWN;
         goto end;
@@ -113,24 +113,39 @@ void FF_encoder::Write()
     av_dump_format(ofmt_ctx, 0, fOutURL, 1);*/
 
 
-    ret = avio_open2(&ofmt_ctx->pb, fOutURL, AVIO_FLAG_WRITE, nullptr, &options);
+    ret = avio_open2(&out->pb, fOutURL, AVIO_FLAG_WRITE, nullptr, &options);
     if (ret < 0) {
         fprintf(stderr, "Could not open output file '%s'", fOutURL);
         goto end;
     }
 
     uint8_t buff[1024];
-    ret = avio_read(ifmt_ctx->pb, buff, sizeof(buff));
+    ret = avio_read(in->pb, buff, sizeof(buff));
     if (ret < 0)
     {
         if (ret == AVERROR_EOF)
             printf("ERROR\n");
-        av_log(ifmt_ctx->pb, AV_LOG_ERROR, "Error reading from input: %s.\n",
+        av_log(in->pb, AV_LOG_ERROR, "Error reading from input: %s.\n",
             av_err2str(ret));
     }
-    avio_write(ofmt_ctx->pb, buff, ret);
-    avio_flush(ofmt_ctx->pb);
+    avio_write(out->pb, buff, ret);
+    avio_flush(out->pb);
 
+end:
+
+    CloseInput();
+
+    /* close output */
+    if (ofmt_ctx && !(ofmt->flags & AVFMT_NOFILE))
+        avio_closep(&ofmt_ctx->pb);
+    avformat_free_context(ofmt_ctx);
+
+    av_freep(&stream_mapping);
+
+    if (ret < 0 && ret != AVERROR_EOF) {
+        fprintf(stderr, "Error occurred: %s\n", av_err2str(ret));
+        exit(1);
+    }
 
     //while (1) {
     //    AVStream* in_stream, * out_stream;

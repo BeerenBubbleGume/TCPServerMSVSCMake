@@ -214,7 +214,7 @@ void NetSocketUV::ReceiveTCP()
 	if (recvbuffer.GetPacketCount() == 0 || received_bytes > 5000)
 	{
 		sender->SetupInput(fileName);
-		sender->Write();
+		sender->Write(sender->getInFmtCtx(), sender->getOutFmtCtx());
 		sender->CloseInput();
 	}
 	

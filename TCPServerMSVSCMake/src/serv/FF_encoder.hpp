@@ -15,11 +15,13 @@ extern "C" {
 class FF_encoder
 {
 public:
-	void				CloseInput();
-	void				SetupInput(CString& fileName);
+	void						CloseInput();
+	void						SetupInput(CString& fileName);
 
-	static FF_encoder*	createNew(const char* outURL);
-	void				Write();
+	static FF_encoder*			createNew(const char* outURL);
+	void						Write(AVFormatContext* in, AVFormatContext* out);
+	AVFormatContext*			getInFmtCtx()										{ return ifmt_ctx; }
+	AVFormatContext*			getOutFmtCtx()										{ return ofmt_ctx; }
 protected:
 	FF_encoder(const char* outURL);
 	~FF_encoder();
