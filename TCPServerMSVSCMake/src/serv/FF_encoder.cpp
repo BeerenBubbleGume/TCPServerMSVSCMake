@@ -34,8 +34,7 @@ void FF_encoder::SetupInput(CString& fileName)
     av_dump_format(ifmt_ctx, 0, fFileName, 0);
    
     av_dict_set(&options, "rtsp_transport", "tcp", 0);
-    avformat_write_header(ofmt_ctx, &options);
-
+  
     avformat_alloc_output_context2(&ofmt_ctx, NULL, "rtsp", fOutURL);
     if (!ofmt_ctx) {
         fprintf(stderr, "Could not create output context\n");
