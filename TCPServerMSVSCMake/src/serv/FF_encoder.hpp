@@ -15,10 +15,10 @@ extern "C" {
 class FF_encoder
 {
 public:
-	static FF_encoder* createNew(const char* outURL, CString& fileName);
+	static FF_encoder* createNew(NetSocket* clientSock, const char* outURL, CString& fileName);
 	void				Write();
 protected:
-	FF_encoder(const char* outURL, CString& FileName);
+	FF_encoder(NetSocket* clientSock, const char* outURL, CString& FileName);
 	~FF_encoder();
 	const AVOutputFormat* ofmt;
 	AVFormatContext* ifmt_ctx, *ofmt_ctx;
