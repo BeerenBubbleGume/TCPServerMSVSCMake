@@ -117,41 +117,46 @@ FF_encoder* FF_encoder::createNew(const char* outURL)
 
 void FF_encoder::Write()
 {
-    while (1) {
-        AVStream* in_stream, * out_stream;
-
-        ret = av_read_frame(ifmt_ctx, fPacket);
-        if (ret < 0)
+    uint8_t* buff[1024];
+    ret = avio_read(ifmt_ctx->pb, buff, sizeof(buff));
+    if (ret < 0)
+    {
+        if (ret == AVERROR_EOF)
             break;
-
-        in_stream = ifmt_ctx->streams[fPacket->stream_index];
-        if (fPacket->stream_index >= stream_mapping_size ||
-            stream_mapping[fPacket->stream_index] < 0) {
-            av_packet_unref(fPacket);
-            continue;
-        }
-
-        fPacket->stream_index = stream_mapping[fPacket->stream_index];
-        out_stream = ofmt_ctx->streams[fPacket->stream_index];
-        // log_packet(ifmt_ctx, pkt, "in");
-
-         /* copy packet */
-        av_packet_rescale_ts(fPacket, in_stream->time_base, out_stream->time_base);
-        fPacket->pos = -1;
-        //log_packet(ofmt_ctx, pkt, "out");
-
-        ret = av_interleaved_write_frame(ofmt_ctx, fPacket);
-        /* pkt is now blank (av_interleaved_write_frame() takes ownership of
-         * its contents and resets pkt), so that no unreferencing is necessary.
-         * This would be different if one used av_write_frame(). */
-        if (ret < 0) {
-            fprintf(stderr, "Error muxing packet\n");
-            break;
-        }
+        av_log(ifmt_ctx->pb, AV_LOG_ERROR, "Error reading from input: %s.\n",
+            av_err2str(n));
     }
+    avio_write(ofmt_ctx->pb, buff, ret);
+    avio_flush(ofmt_ctx->pb);
 
-    av_write_trailer(ofmt_ctx);
-
+    //while (1) {
+    //    AVStream* in_stream, * out_stream;
+    //    ret = av_read_frame(ifmt_ctx, fPacket);
+    //    if (ret < 0)
+    //        break;
+    //    in_stream = ifmt_ctx->streams[fPacket->stream_index];
+    //    if (fPacket->stream_index >= stream_mapping_size ||
+    //        stream_mapping[fPacket->stream_index] < 0) {
+    //        av_packet_unref(fPacket);
+    //        continue;
+    //    }
+    //    fPacket->stream_index = stream_mapping[fPacket->stream_index];
+    //    out_stream = ofmt_ctx->streams[fPacket->stream_index];
+    //    // log_packet(ifmt_ctx, pkt, "in");
+    //     /* copy packet */
+    //    av_packet_rescale_ts(fPacket, in_stream->time_base, out_stream->time_base);
+    //    fPacket->pos = -1;
+    //    //log_packet(ofmt_ctx, pkt, "out");
+    //    ret = av_interleaved_write_frame(ofmt_ctx, fPacket);
+    //    /* pkt is now blank (av_interleaved_write_frame() takes ownership of
+    //     * its contents and resets pkt), so that no unreferencing is necessary.
+    //     * This would be different if one used av_write_frame(). */
+    //    if (ret < 0) {
+    //        fprintf(stderr, "Error muxing packet\n");
+    //        break;
+    //    }
+    //}
+    //av_write_trailer(ofmt_ctx);
 }
 
 FF_encoder::FF_encoder(const char* outURL) : fOutURL(outURL)
