@@ -1,7 +1,8 @@
 #include "FF_encoder.hpp"
 
-void FF_encoder::SetupInput()
+void FF_encoder::SetupInput(CString& fileName)
 {
+    fFileName = fileName.c_str();
     if ((ret = avformat_open_input(&ifmt_ctx, fFileName, 0, 0)) < 0)
     {
         fprintf(stderr, "Could not open input file '%s", fFileName);
@@ -88,9 +89,9 @@ end:
     }
 }
 
-FF_encoder* FF_encoder::createNew(const char* outURL, CString& fileName)
+FF_encoder* FF_encoder::createNew(const char* outURL)
 {
-	return new FF_encoder(outURL, fileName);
+	return new FF_encoder(outURL);
 }
 
 void FF_encoder::Write()
@@ -132,14 +133,12 @@ void FF_encoder::Write()
 
 }
 
-FF_encoder::FF_encoder(const char* outURL, CString& FileName) : fOutURL(outURL)
+FF_encoder::FF_encoder(const char* outURL) : fOutURL(outURL)
 {
     ofmt = nullptr;
     ifmt_ctx = nullptr;
     ofmt_ctx = nullptr;
     fPacket = nullptr;
-
-    fFileName = FileName.c_str();
     stream_index = 0;
     stream_mapping_size = 0;
     stream_mapping = nullptr;

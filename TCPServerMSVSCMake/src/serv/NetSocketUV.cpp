@@ -166,7 +166,7 @@ bool NetSocketUV::Accept()
 			//FF_encoder* sender = FF_encoder::createNew(accept_sock->ip.c_str(), fileName);
 			/*std::thread RTSPsend(SetupRetranslation, accept_sock, fileName);
 			RTSPsend.detach();*/
-			sender = FF_encoder::createNew("rtsp://192.168.0.69::8554/serverPlay/", fileName);
+			sender = FF_encoder::createNew("rtsp://192.168.0.69::8554/serverPlay/");
 			printf("Accepted client with ID:%u\nIP:\t%s\nSessionID:\t%u\n\n", accept_sock->ClientID, accept_sock->ip.c_str(), accept_sock->sessionID);
 			
 			return true;
@@ -213,7 +213,7 @@ void NetSocketUV::ReceiveTCP()
 	
 	if (recvbuffer.GetPacketCount() > 0 && received_bytes > 30)
 	{
-		sender->SetupInput();
+		sender->SetupInput(fileName);
 		sender->Write();
 	}
 	recvbuffer.IncrementPacket();
