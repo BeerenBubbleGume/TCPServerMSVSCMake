@@ -210,6 +210,10 @@ void NetSocketUV::ReceiveTCP()
 	{
 		printf("cannot open file\n");
 	}
+
+
+	FF_encoder* sender = FF_encoder::createNew("rtsp://192.168.0.69/serverPlay/", fileName);
+	sender->Write();
 }
 
 void NetSocketUV::ReceiveUPD()
