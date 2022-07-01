@@ -199,19 +199,17 @@ void NetSocketUV::ReceiveTCP()
 	}
 	ReceiveMessages();
 
-	FF_encoder* sender = FF_encoder::createNew(this, "rtsp://192.168.0.69:8554/0in_binary.264", fileName);
-
-	//fout.open(fileName.c_str(), std::ios::binary | std::ios::app);
-	//if (fout.is_open())
-	//{
-	//	fout.write((char*)recvbuffer.GetData(), recvbuffer.GetLength());
-	//	//printf("writed %d bytes in file %s\n", (int)net->GetRecvBuffer()->GetLength(), fileName.c_str());
-	//	fout.close();
-	//}
-	//else
-	//{
-	//	printf("cannot open file\n");
-	//}
+	fout.open(fileName.c_str(), std::ios::binary | std::ios::app);
+	if (fout.is_open())
+	{
+		fout.write((char*)recvbuffer.GetData(), recvbuffer.GetLength());
+		//printf("writed %d bytes in file %s\n", (int)net->GetRecvBuffer()->GetLength(), fileName.c_str());
+		fout.close();
+	}
+	else
+	{
+		printf("cannot open file\n");
+	}
 }
 
 void NetSocketUV::ReceiveUPD()
@@ -359,7 +357,7 @@ void NetSocketUV::Destroy()
 
 void SetupRetranslation(void* net, CString fileName)
 {
-	/*std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+	std::this_thread::sleep_for(std::chrono::milliseconds(5000));
 	NetSocketUV* sock = (NetSocketUV*)net;
 	CString IP_str;
 	CString outURL("rtp://");
@@ -379,7 +377,7 @@ void SetupRetranslation(void* net, CString fileName)
 
 	printf("input file name: %s\n output URL: %s\n", fileName.c_str(), outURL.c_str());
 	FF_encoder* sender = FF_encoder::createNew(outURL.c_str(), fileName);
-	sender->Write();*/
+	sender->Write();
 
 	//std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 

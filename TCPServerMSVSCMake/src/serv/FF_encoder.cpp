@@ -1,8 +1,8 @@
 #include "FF_encoder.hpp"
 
-FF_encoder* FF_encoder::createNew(NetSocket* clientSock, const char* outURL, CString& fileName)
+FF_encoder* FF_encoder::createNew(const char* outURL, CString& fileName)
 {
-	return new FF_encoder(clientSock, outURL, fileName);
+	return new FF_encoder(outURL, fileName);
 }
 
 void FF_encoder::Write()
@@ -44,7 +44,7 @@ void FF_encoder::Write()
 
 }
 
-FF_encoder::FF_encoder(NetSocket* clientSock, const char* outURL, CString& FileName) : fOutURL(outURL)
+FF_encoder::FF_encoder(const char* outURL, CString& FileName) : fOutURL(outURL)
 {
     ofmt = nullptr;
     ifmt_ctx = nullptr;
@@ -55,23 +55,26 @@ FF_encoder::FF_encoder(NetSocket* clientSock, const char* outURL, CString& FileN
     stream_index = 0;
     stream_mapping_size = 0;
     stream_mapping = nullptr;
-    uint8_t* inBuff = (uint8_t*)clientSock->GetRecvBuffer()->GetData();
-    int size = clientSock->GetRecvBuffer()->GetLength();
 
-
-    av_packet_from_data(fPacket, inBuff, size);
+    fPacket = av_packet_alloc();
     if (!fPacket)
     {
         fprintf(stderr, "Could not allocate AVPacket\n");
         exit(1);
     }
-    
-    ifmt_ctx = avformat_alloc_context();
-    if (!ifmt_ctx)
+
+    if ((ret = avformat_open_input(&ifmt_ctx, fFileName, 0, 0)) < 0)
     {
-        fprintf(stderr, "Could not allocate AVFormatContext.\n");
-        exit(1);
+        fprintf(stderr, "Could not open input file '%s", fFileName);
+        goto end;
     }
+
+    if ((ret = avformat_find_stream_info(ifmt_ctx, 0)) < 0) {
+        fprintf(stderr, "Failed to retrieve input stream information");
+        goto end;
+    }
+
+    av_dump_format(ifmt_ctx, 0, fFileName, 0);
 
     avformat_alloc_output_context2(&ofmt_ctx, NULL, NULL, fOutURL);
     if (!ofmt_ctx) {
