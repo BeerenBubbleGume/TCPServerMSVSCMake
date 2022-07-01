@@ -124,7 +124,7 @@ void FF_encoder::Write()
         if (ret == AVERROR_EOF)
             printf("ERROR\n");
         av_log(ifmt_ctx->pb, AV_LOG_ERROR, "Error reading from input: %s.\n",
-            av_err2str(n));
+            av_err2str(ret));
     }
     avio_write(ofmt_ctx->pb, buff, ret);
     avio_flush(ofmt_ctx->pb);
