@@ -82,7 +82,7 @@ void FF_encoder::SetupInput(CString& fileName)
     av_dump_format(ofmt_ctx, 0, fOutURL, 1);
 
     if (!(ofmt->flags & AVFMT_NOFILE)) {
-        ret = avio_open(&ofmt_ctx->pb, fOutURL, AVIO_FLAG_WRITE);
+        ret = avio_open2(&ofmt_ctx->pb, fOutURL, AVIO_FLAG_WRITE, nullptr, &options);
         if (ret < 0) {
             fprintf(stderr, "Could not open output file '%s'", fOutURL);
             goto end;
