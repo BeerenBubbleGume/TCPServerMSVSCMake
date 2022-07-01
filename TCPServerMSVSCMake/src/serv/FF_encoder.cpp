@@ -33,8 +33,8 @@ void FF_encoder::SetupInput(CString& fileName)
 
     av_dump_format(ifmt_ctx, 0, fFileName, 0);
    
-    /*av_dict_set(&options, "rtsp_transport", "tcp", 0);
-    avformat_write_header(ofmt_ctx, &options);*/
+    av_dict_set(&options, "rtsp_transport", "tcp", 0);
+    avformat_write_header(ofmt_ctx, &options);
 
     avformat_alloc_output_context2(&ofmt_ctx, NULL, "rtsp", fOutURL);
     if (!ofmt_ctx) {
@@ -89,7 +89,7 @@ void FF_encoder::SetupInput(CString& fileName)
             goto end;
         }
     }
-    ret = avformat_write_header(ofmt_ctx, NULL);
+    ret = avformat_write_header(ofmt_ctx, &options);
     if (ret < 0) {
         fprintf(stderr, "Error occurred when opening output file\n");
         goto end;
