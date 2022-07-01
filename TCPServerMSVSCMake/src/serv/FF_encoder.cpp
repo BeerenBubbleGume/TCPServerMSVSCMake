@@ -23,12 +23,12 @@ void FF_encoder::SetupInput(CString& fileName)
     if ((ret = avformat_open_input(&ifmt_ctx, fFileName, 0, 0)) < 0)
     {
         fprintf(stderr, "Could not open input file '%s", fFileName);
-        goto end;
+       /g//oto end;
     }
 
     if ((ret = avformat_find_stream_info(ifmt_ctx, 0)) < 0) {
         fprintf(stderr, "Failed to retrieve input stream information");
-        goto end;
+        //goto end;
     }
 
     av_dump_format(ifmt_ctx, 0, fFileName, 0);
