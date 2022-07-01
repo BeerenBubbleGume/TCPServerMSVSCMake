@@ -1,9 +1,25 @@
 #include "FF_encoder.hpp"
 
+void FF_encoder::CloseInput()
+{
+    av_packet_free(&fPacket);
+
+    avformat_close_input(&ifmt_ctx);
+}
+
 void FF_encoder::SetupInput(CString& fileName)
 {
     AVDictionary* options = NULL;
     fFileName = fileName.c_str();
+
+    fPacket = av_packet_alloc();
+    if (!fPacket)
+    {
+        fprintf(stderr, "Could not allocate AVPacket\n");
+        exit(1);
+    }
+
+
     if ((ret = avformat_open_input(&ifmt_ctx, fFileName, 0, 0)) < 0)
     {
         fprintf(stderr, "Could not open input file '%s", fFileName);
@@ -76,9 +92,7 @@ void FF_encoder::SetupInput(CString& fileName)
 
 
 end:
-    av_packet_free(&fPacket);
-
-    avformat_close_input(&ifmt_ctx);
+    CloseInput();
 
     /* close output */
     if (ofmt_ctx && !(ofmt->flags & AVFMT_NOFILE))
@@ -145,16 +159,7 @@ FF_encoder::FF_encoder(const char* outURL) : fOutURL(outURL)
     fPacket = nullptr;
     stream_index = 0;
     stream_mapping_size = 0;
-    stream_mapping = nullptr;
-
-    fPacket = av_packet_alloc();
-    if (!fPacket)
-    {
-        fprintf(stderr, "Could not allocate AVPacket\n");
-        exit(1);
-    }
-
-    
+    stream_mapping = nullptr;    
 }
 
 FF_encoder::~FF_encoder()

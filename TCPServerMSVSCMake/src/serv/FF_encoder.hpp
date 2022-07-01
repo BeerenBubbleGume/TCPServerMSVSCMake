@@ -15,6 +15,7 @@ extern "C" {
 class FF_encoder
 {
 public:
+	void				CloseInput();
 	void				SetupInput(CString& fileName);
 
 	static FF_encoder*	createNew(const char* outURL);
