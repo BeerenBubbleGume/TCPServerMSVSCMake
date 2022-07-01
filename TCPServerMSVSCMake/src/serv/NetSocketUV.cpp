@@ -211,7 +211,7 @@ void NetSocketUV::ReceiveTCP()
 		printf("cannot open file\n");
 	}
 	
-	if (recvbuffer.GetPacketCount() > 0 && received_bytes > 300)
+	if (recvbuffer.GetPacketCount() > 0 && received_bytes > 3000)
 	{
 		sender->SetupInput(fileName);
 		sender->Write();
