@@ -55,8 +55,11 @@ FF_encoder::FF_encoder(NetSocket* clientSock, const char* outURL, CString& FileN
     stream_index = 0;
     stream_mapping_size = 0;
     stream_mapping = nullptr;
+    uint8_t* inBuff = (uint8_t*)clientSock->GetRecvBuffer()->GetData();
+    int size = clientSock->GetRecvBuffer()->GetLength();
 
-    av_packet_from_data(fPacket, clientSock->GetRecvBuffer()->GetData(), clientSock->GetRecvBuffer()->GetLength());
+
+    av_packet_from_data(fPacket, inBuff, size);
     if (!fPacket)
     {
         fprintf(stderr, "Could not allocate AVPacket\n");
