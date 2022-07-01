@@ -117,12 +117,12 @@ FF_encoder* FF_encoder::createNew(const char* outURL)
 
 void FF_encoder::Write()
 {
-    uint8_t* buff[1024];
+    uint8_t buff[1024];
     ret = avio_read(ifmt_ctx->pb, buff, sizeof(buff));
     if (ret < 0)
     {
         if (ret == AVERROR_EOF)
-            break;
+            printf("ERROR\n");
         av_log(ifmt_ctx->pb, AV_LOG_ERROR, "Error reading from input: %s.\n",
             av_err2str(n));
     }
