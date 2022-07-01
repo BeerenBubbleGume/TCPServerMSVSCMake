@@ -53,8 +53,10 @@ public:
 
 	//virtual void				SetupRetranslation(NetSocketUV* socket, unsigned int clientID);
 	static void*				WaitingDelay(void* delay);
-	
+	FF_encoder*					GetSender()												{ return sender; }
+	void						SetFF_encoder(FF_encoder* encoder)						{ sender = encoder; }
 protected:
+	FF_encoder*					sender;
 	friend class				ServerUV;
 	void*						sock;
 	int							status;

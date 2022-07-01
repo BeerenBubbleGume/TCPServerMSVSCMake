@@ -42,7 +42,7 @@ public:
 	~NetBuffer();
 
 	NET_BUFFER_LIST*	owner;
-	auto				GetData()																	{ return DataBuff; }
+	auto				GetData()														{ return DataBuff; }
 	size_t				GetLength()																	{ return buff_length; }
 	void				SetLength(size_t length);
 	void				Add(int length, void* data);
@@ -54,10 +54,12 @@ public:
 	void				SetMaxSize(size_t size);
 	void				Clear();
 	unsigned			GetMaxSize()																{ return max_length; }
-
+	int					GetPacketCount()															{ return fPacketCount; }
+	void				IncrementPacket()															{ fPacketCount++; }
 protected:
 	friend class 		NetSocket;
 	int					position;
+	int					fPacketCount;
 	unsigned char*		DataBuff;
 	unsigned			buff_length;
 	unsigned			max_length;

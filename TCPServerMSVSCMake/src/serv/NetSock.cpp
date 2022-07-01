@@ -220,6 +220,7 @@ NetBuffer::NetBuffer()
 	buff_length = 0;
 	max_length = 0;
 	position = 0;
+	fPacketCount = 0;
 }
 
 NetBuffer::~NetBuffer()
