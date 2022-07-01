@@ -88,6 +88,18 @@ void FF_encoder::SetupInput(CString& fileName)
         goto end;
     }
 
+    uint8_t buff[1024];
+    ret = avio_read(ifmt_ctx->pb, buff, sizeof(buff));
+    if (ret < 0)
+    {
+        if (ret == AVERROR_EOF)
+            printf("ERROR\n");
+        av_log(ifmt_ctx->pb, AV_LOG_ERROR, "Error reading from input: %s.\n",
+            av_err2str(ret));
+    }
+    avio_write(ofmt_ctx->pb, buff, ret);
+    avio_flush(ofmt_ctx->pb);
+
     /*ret = avformat_write_header(ofmt_ctx, nullptr);
     if (ret < 0) {
         fprintf(stderr, "Error occurred when opening output file\n");
@@ -117,17 +129,7 @@ FF_encoder* FF_encoder::createNew(const char* outURL)
 
 void FF_encoder::Write()
 {
-    uint8_t buff[1024];
-    ret = avio_read(ifmt_ctx->pb, buff, sizeof(buff));
-    if (ret < 0)
-    {
-        if (ret == AVERROR_EOF)
-            printf("ERROR\n");
-        av_log(ifmt_ctx->pb, AV_LOG_ERROR, "Error reading from input: %s.\n",
-            av_err2str(ret));
-    }
-    avio_write(ofmt_ctx->pb, buff, ret);
-    avio_flush(ofmt_ctx->pb);
+    
 
     //while (1) {
     //    AVStream* in_stream, * out_stream;
