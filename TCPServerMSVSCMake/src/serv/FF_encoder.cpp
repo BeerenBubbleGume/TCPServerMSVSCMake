@@ -2,6 +2,7 @@
 
 void FF_encoder::SetupInput(CString& fileName)
 {
+    AVDictionary* options = NULL;
     fFileName = fileName.c_str();
     if ((ret = avformat_open_input(&ifmt_ctx, fFileName, 0, 0)) < 0)
     {
@@ -15,8 +16,7 @@ void FF_encoder::SetupInput(CString& fileName)
     }
 
     av_dump_format(ifmt_ctx, 0, fFileName, 0);
-    
-    AVDictionary* options = NULL;
+   
     av_dict_set(&options, "rtsp_transport", "tcp", 0);
     avformat_write_header(ofmt_ctx, &options);
 
