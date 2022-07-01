@@ -9,7 +9,7 @@ void FF_encoder::CloseInput()
 
 void FF_encoder::SetupInput(CString& fileName)
 {
-    AVDictionary* options = NULL;
+    
     fFileName = fileName.c_str();
 
     fPacket = av_packet_alloc();
@@ -33,16 +33,47 @@ void FF_encoder::SetupInput(CString& fileName)
 
     av_dump_format(ifmt_ctx, 0, fFileName, 0);
    
-    av_dict_set(&options, "rtp_transport", "tcp", 0);
-  
-    avformat_alloc_output_context2(&ofmt_ctx, NULL, "rtp", fOutURL);
+    
+    /*ret = avformat_write_header(ofmt_ctx, nullptr);
+    if (ret < 0) {
+        fprintf(stderr, "Error occurred when opening output file\n");
+        goto end;
+    }*/
+
+end:
+    CloseInput();
+
+    /* close output */
+    if (ofmt_ctx && !(ofmt->flags & AVFMT_NOFILE))
+        avio_closep(&ofmt_ctx->pb);
+    avformat_free_context(ofmt_ctx);
+
+    av_freep(&stream_mapping);
+
+    if (ret < 0 && ret != AVERROR_EOF) {
+        fprintf(stderr, "Error occurred: %s\n", av_err2str(ret));
+        exit(1);
+    }
+}
+
+FF_encoder* FF_encoder::createNew(const char* outURL)
+{
+	return new FF_encoder(outURL);
+}
+
+void FF_encoder::Write()
+{
+    options = NULL;
+    av_dict_set(&options, "rtsp_transport", "tcp", 0);
+
+    avformat_alloc_output_context2(&ofmt_ctx, NULL, "rtsp", fOutURL);
     if (!ofmt_ctx) {
         fprintf(stderr, "Could not create output context\n");
         ret = AVERROR_UNKNOWN;
         goto end;
     }
 
-    stream_mapping_size = ifmt_ctx->nb_streams;
+    /*stream_mapping_size = ifmt_ctx->nb_streams;
     stream_mapping = (int*)av_calloc(stream_mapping_size, sizeof(*stream_mapping));
     if (!stream_mapping) {
         ret = AVERROR(ENOMEM);
@@ -79,7 +110,7 @@ void FF_encoder::SetupInput(CString& fileName)
         }
         out_stream->codecpar->codec_tag = 0;
     }
-    av_dump_format(ofmt_ctx, 0, fOutURL, 1);
+    av_dump_format(ofmt_ctx, 0, fOutURL, 1);*/
 
 
     ret = avio_open2(&ofmt_ctx->pb, fOutURL, AVIO_FLAG_WRITE, nullptr, &options);
@@ -100,36 +131,6 @@ void FF_encoder::SetupInput(CString& fileName)
     avio_write(ofmt_ctx->pb, buff, ret);
     avio_flush(ofmt_ctx->pb);
 
-    /*ret = avformat_write_header(ofmt_ctx, nullptr);
-    if (ret < 0) {
-        fprintf(stderr, "Error occurred when opening output file\n");
-        goto end;
-    }*/
-
-end:
-    CloseInput();
-
-    /* close output */
-    if (ofmt_ctx && !(ofmt->flags & AVFMT_NOFILE))
-        avio_closep(&ofmt_ctx->pb);
-    avformat_free_context(ofmt_ctx);
-
-    av_freep(&stream_mapping);
-
-    if (ret < 0 && ret != AVERROR_EOF) {
-        fprintf(stderr, "Error occurred: %s\n", av_err2str(ret));
-        exit(1);
-    }
-}
-
-FF_encoder* FF_encoder::createNew(const char* outURL)
-{
-	return new FF_encoder(outURL);
-}
-
-void FF_encoder::Write()
-{
-    
 
     //while (1) {
     //    AVStream* in_stream, * out_stream;

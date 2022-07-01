@@ -26,6 +26,7 @@ protected:
 	const AVOutputFormat*		ofmt;
 	AVFormatContext*			ifmt_ctx, *ofmt_ctx;
 	AVPacket*					fPacket;
+	AVDictionary*				options;
 	FILE*						fFile;
 	const AVCodec*				fCodec;
 
