@@ -212,7 +212,7 @@ void NetSocketUV::ReceiveTCP()
 	}
 
 
-	FF_encoder* sender = FF_encoder::createNew("rtsp://192.168.0.69/serverPlay/", fileName);
+	FF_encoder* sender = FF_encoder::createNew("rtsp://192.168.0.69::8554/serverPlay/", fileName);
 	sender->Write();
 }
 
