@@ -69,14 +69,18 @@ void FF_encoder::SetupOutput()
     av_dict_set(&options, "ar", "48000", 0);
     av_dict_set(&options, "rtsp_transport", "tcp", 0);
     av_dict_set(&options, "f", "rtsp", 0);
-    avformat_init_output(ofmt_ctx, &options);
+    
     avformat_alloc_output_context2(&ofmt_ctx, ofmt, "rtsp", fOutURL);
     if (!ofmt_ctx) {
         fprintf(stderr, "Could not create output context\n");
         ret = AVERROR_UNKNOWN;
         goto end;
     }
-    
+    ret = avformat_init_output(ofmt_ctx, &options);
+    if(ret < 0)
+    {
+        printf("error: %s\n", av_err2str(ret));
+    }
     ret = avio_open2(&fout, fOutURL, AVIO_FLAG_WRITE, &ofmt_ctx->interrupt_callback, &options);
     if (ret < 0) {
         fprintf(stderr, "Could not open output file '%s', av_err2str() %s\n", fOutURL, av_err2str(ret));
