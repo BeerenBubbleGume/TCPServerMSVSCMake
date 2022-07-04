@@ -294,4 +294,22 @@ TCPServerMSVSCMake/CMakeFiles/TCPServerMSVSCMake.dir/src/serv/NetSocketUV.cpp.o:
  /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavformat/version_major.h \
  /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavformat/version.h \
  /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavformat/version_major.h \
- /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/timestamp.h
+ /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/timestamp.h \
+ /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavformat/rtsp.h \
+ /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavformat/avformat.h \
+ /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavformat/rtspcodes.h \
+ /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/common.h \
+ /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavformat/http.h \
+ /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavformat/url.h \
+ /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavformat/rtpdec.h \
+ /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavformat/rtp.h \
+ /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavformat/srtp.h \
+ /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavformat/network.h \
+ /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/config.h \
+ /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/error.h \
+ /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavformat/os_support.h \
+ /usr/include/poll.h /usr/include/sys/poll.h /usr/include/bits/poll.h \
+ /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavformat/httpauth.h \
+ /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavformat/internal.h \
+ /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavcodec/packet_internal.h \
+ /home/dkhaziev/Documents/GitHub/TCPServerMSVSCMake/TCPServerMSVSCMake/libs/includes/libavutil/opt.h
