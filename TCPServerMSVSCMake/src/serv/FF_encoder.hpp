@@ -19,7 +19,7 @@ public:
 	void						SetupInput(CString& fileName);
 	void						SetupOutput();
 	static FF_encoder*			createNew(const char* outURL);
-	void						Write(AVFormatContext* in, AVFormatContext* out);
+	void						Write(/*AVFormatContext* in, */AVFormatContext* out, NetSocket* sock);
 	AVFormatContext*			getInFmtCtx()										{ return ifmt_ctx; }
 	AVFormatContext*			getOutFmtCtx()										{ return ofmt_ctx; }
 protected:

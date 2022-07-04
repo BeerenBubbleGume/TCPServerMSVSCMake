@@ -81,7 +81,7 @@ FF_encoder* FF_encoder::createNew(const char* outURL)
 	return new FF_encoder(outURL);
 }
 
-void FF_encoder::Write(AVFormatContext* in, AVFormatContext* out)
+void FF_encoder::Write(/*AVFormatContext* in, */AVFormatContext* out, NetSocket* sock)
 {
     /*stream_mapping_size = ifmt_ctx->nb_streams;
     stream_mapping = (int*)av_calloc(stream_mapping_size, sizeof(*stream_mapping));
@@ -122,23 +122,23 @@ void FF_encoder::Write(AVFormatContext* in, AVFormatContext* out)
     }
     av_dump_format(ofmt_ctx, 0, fOutURL, 1);*/
 
-
-    uint8_t buff[1024];
-    ret = avio_read(in->pb, buff, sizeof(buff));
+    uint8_t* buff = sock->GetRecvBuffer()->GetData();
+    int size = sock->GetRecvBuffer()->GetLength();
+    /*ret = avio_read(in->pb, buff, sizeof(buff));
     if (ret < 0)
     {
         if (ret == AVERROR_EOF)
             printf("ERROR\n");
         av_log(in->pb, AV_LOG_ERROR, "Error reading from input: %s.\n",
             av_err2str(ret));
-    }
-    avio_write(out->pb, buff, ret);
+    }*/
+    avio_write(out->pb, buff, size);
     avio_flush(out->pb);
 
 end:
 
     CloseInput();
-    remove(fFileName);
+    //remove(fFileName);
    
 
     //while (1) {
