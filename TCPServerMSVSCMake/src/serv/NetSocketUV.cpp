@@ -157,10 +157,10 @@ bool NetSocketUV::Accept()
 			}
 			CString fileName;
 			if(accept_sock->ClientID == 0)
-				fileName += "0in_binary.ts";
+				fileName += "0in_binary.264";
 			else {
 				fileName += (int)accept_sock->ClientID;
-				fileName += "in_binary.ts";
+				fileName += "in_binary.264";
 			}
 			
 			//FF_encoder* sender = FF_encoder::createNew(accept_sock->ip.c_str(), fileName);
@@ -191,11 +191,11 @@ void NetSocketUV::ReceiveTCP()
 	int filePrefix = (int)ClientID;
 	CString fileName;
 	if (filePrefix == 0)
-		fileName = "0in_binary.ts";
+		fileName = "0in_binary.264";
 	else
 	{
 		fileName.IntToString(filePrefix);
-		fileName += "in_binary.ts";
+		fileName += "in_binary.264";
 	}
 	ReceiveMessages();
 
@@ -234,7 +234,7 @@ void NetSocketUV::ReceiveUPD()
 
 	CString fileName;
 	fileName.IntToString((int)ClientID);
-	fileName += "in_binary.ts";
+	fileName += "in_binary.264";
 
 	fout.open(fileName.c_str(), std::ios::binary | std::ios::app);
 	if (fout.is_open())
@@ -376,15 +376,15 @@ void SetupRetranslation(void* net, CString fileName)
 	outURL += IP_str;
 	outURL += "/";
 	if (sock->GetClientID() == 0)
-		outURL += "0in_binary.ts";
+		outURL += "0in_binary.264";
 	else
 	{
 		outURL += (int)sock->GetClientID();
-		outURL += "in_binary.ts";
+		outURL += "in_binary.264";
 	}
 
 	if (sock->GetClientID() == 0)
-		fileName = "0in_binary.ts";
+		fileName = "0in_binary.264";
 
 	printf("input file name: %s\n output URL: %s\n", fileName.c_str(), outURL.c_str());
 	/*FF_encoder* sender = FF_encoder::createNew(outURL.c_str(), fileName);
