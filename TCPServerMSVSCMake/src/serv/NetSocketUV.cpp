@@ -217,7 +217,7 @@ void NetSocketUV::ReceiveTCP()
 		printf("ERROR\n");
 	}
 	sender->setAVIOCtx(ctx);*/
-	sender->Write(ctx, this);
+	sender->Write(sender->getOutAVIOCtx(), this);
 	/*if (recvbuffer.GetPacketCount() > 0 && received_bytes > 5000)
 	{
 		sender->SetupInput(fileName);
