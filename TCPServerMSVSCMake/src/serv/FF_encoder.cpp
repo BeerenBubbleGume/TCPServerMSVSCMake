@@ -58,6 +58,15 @@ void FF_encoder::SetupInput(CString& fileName)
 void FF_encoder::SetupOutput()
 {
     options = NULL;
+    av_dict_set(&options, "pix_fmt", "yuv420p", 0);
+    av_dict_set(&options, "vcodec", "libx264", 0);
+    av_dict_set(&options, "r", "25", 0);
+    av_dict_set(&options, "threads", "0", 0);
+    av_dict_set(&options, "bufsize", "1024k", 0);
+    av_dict_set(&options, "preset", "veryfast", 0);
+    av_dict_set(&options, "profile:v", "baseline", 0);
+    av_dict_set(&options, "ac", "2", 0);
+    av_dict_set(&options, "ar", "48000", 0);
     av_dict_set(&options, "rtsp_transport", "tcp", 0);
 
     avformat_alloc_output_context2(&ofmt_ctx, NULL, "rtsp", fOutURL);
@@ -69,7 +78,7 @@ void FF_encoder::SetupOutput()
 
     ret = avio_open2(&ofmt_ctx->pb, fOutURL, AVIO_FLAG_WRITE, nullptr, &options);
     if (ret < 0) {
-        fprintf(stderr, "Could not open output file '%s', av_err2str() %s", fOutURL, av_err2str(ret));
+        fprintf(stderr, "Could not open output file '%s', av_err2str() %s\n", fOutURL, av_err2str(ret));
         goto end;
     }
     ret = avformat_write_header(ofmt_ctx, &options);
