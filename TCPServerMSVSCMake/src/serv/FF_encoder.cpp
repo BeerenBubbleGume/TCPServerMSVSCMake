@@ -72,6 +72,7 @@ void FF_encoder::SetupOutput()
         fprintf(stderr, "Could not open output file '%s'", fOutURL);
         goto end;
     }
+    avformat_write_header(ofmt_ctx, &options);
 end:
     CloseInput();
 }
