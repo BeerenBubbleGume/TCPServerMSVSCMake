@@ -393,7 +393,7 @@ void SetupRetranslation(void* net, CString fileName)
 	sender->SetupOutput();
 	while (true)
 	{
-		sender->Write(/*sender->getInFmtCtx(), */sender->getOutFmtCtx());
+		sender->Write(/*sender->getInFmtCtx(), */sender->getOutFmtCtx(), sock);
 		sender->CloseInput();
 		sender->SetupInput(fileName);
 	}
