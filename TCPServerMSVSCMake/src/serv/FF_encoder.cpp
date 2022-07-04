@@ -58,9 +58,9 @@ void FF_encoder::SetupInput(CString& fileName)
 void FF_encoder::SetupOutput()
 {
     options = NULL;
-    av_dict_set(&options, "rtp_transport", "tcp", 0);
+    av_dict_set(&options, "rtsp_transport", "tcp", 0);
 
-    avformat_alloc_output_context2(&ofmt_ctx, NULL, "rtp", fOutURL);
+    avformat_alloc_output_context2(&ofmt_ctx, NULL, "rtsp", fOutURL);
     if (!ofmt_ctx) {
         fprintf(stderr, "Could not create output context\n");
         ret = AVERROR_UNKNOWN;
@@ -72,7 +72,10 @@ void FF_encoder::SetupOutput()
         fprintf(stderr, "Could not open output file '%s'", fOutURL);
         goto end;
     }
-    avformat_write_header(ofmt_ctx, &options);
+    ret = avformat_write_header(ofmt_ctx, &options);
+    if (ret < 0) {
+        fprintf(stderr, "Error occurred when opening output file\n");
+    }
 end:
     CloseInput();
 }
