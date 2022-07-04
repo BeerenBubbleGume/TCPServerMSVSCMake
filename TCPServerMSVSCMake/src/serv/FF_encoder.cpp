@@ -119,21 +119,19 @@ void FF_encoder::SetupOutput()
     
     avformat_network_init();
     
+    ret = avformat_write_header(ofmt_ctx, &options);
+    if (ret < 0) {
+        fprintf(stderr, "Error occurred when opening output file, %s\n", av_err2str(ret));
+    }
+
     ret = avio_open2(&ofmt_ctx->pb, fOutURL, AVIO_FLAG_WRITE, &ofmt_ctx->interrupt_callback, &options);
     if (ret < 0) {
         fprintf(stderr, "Could not open output file '%s', av_err2str() %s\n", fOutURL, av_err2str(ret));
         //goto end;
     }
     fout = ofmt_ctx->pb;
-    ret = avformat_write_header(ofmt_ctx, &options);
-    if (ret < 0) {
-        fprintf(stderr, "Error occurred when opening output file, %s\n", av_err2str(ret));
-    }
-    ret = ff_rtsp_setup_output_streams(ofmt_ctx, fOutURL);
-    if (ret < 0)
-    {
-        printf("RTSP ERROR: %s", av_err2str(ret));
-    }
+    
+    
     av_dump_format(ofmt_ctx, 0, fOutURL, 1);
 
     //avio_accept(fout, &client);

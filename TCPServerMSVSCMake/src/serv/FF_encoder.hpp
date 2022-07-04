@@ -7,7 +7,6 @@ extern "C" {
 #include <libavcodec/avcodec.h>
 #include <libavformat/avformat.h>
 #include <libavutil/timestamp.h>
-#include <libavformat/rtsp.h>
 #ifdef __cplusplus
 }
 #endif // __cplusplus
