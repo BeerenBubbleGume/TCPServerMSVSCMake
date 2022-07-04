@@ -32,6 +32,7 @@ protected:
 	AVPacket*					fPacket;
 	AVDictionary*				options;
 	AVIOContext*				fout;
+	AVIOContext*				client;
 	FILE*						fFile;
 	const AVCodec*				fCodec;
 

@@ -58,8 +58,7 @@ void FF_encoder::SetupInput(CString& fileName)
 void FF_encoder::SetupOutput()
 {
     options = NULL;
-    AVIOContext* client;
-
+    
     ret = av_dict_set(&options, "rtsp_transport", "udp", 0);
     assert(ret >= 0);
     ret = av_dict_set(&options, "announce_port", "8554", 0);
@@ -120,12 +119,17 @@ void FF_encoder::SetupOutput()
         //goto end;
     }
     fout = ofmt_ctx->pb;
-    //assert(avio_accept(fout, &client) >= 0);
     ret = avformat_write_header(ofmt_ctx, &options);
     if (ret < 0) {
         fprintf(stderr, "Error occurred when opening output file, %s\n", av_err2str(ret));
     }
     av_dump_format(ofmt_ctx, 0, fOutURL, 1);
+
+    while (avio_accept(fout, &client) < 0)
+    {
+        printf("whaiting client\n");
+    }
+
 //end:
     //if (ofmt_ctx && !(ofmt->flags & AVFMT_NOFILE))
     //    avio_closep(&ofmt_ctx->pb);
@@ -184,7 +188,8 @@ void FF_encoder::Write(/*AVFormatContext* in, */AVIOContext* out, NetSocket* soc
         out_stream->codecpar->codec_tag = 0;
     }
     av_dump_format(ofmt_ctx, 0, fOutURL, 1);*/
-
+    avio_handshake(client);
+    
     uint8_t* buff = sock->GetRecvBuffer()->GetData();
     int size = sock->GetRecvBuffer()->GetLength();
     /*ret = avio_read(in->pb, buff, sizeof(buff));
@@ -195,8 +200,8 @@ void FF_encoder::Write(/*AVFormatContext* in, */AVIOContext* out, NetSocket* soc
         av_log(in->pb, AV_LOG_ERROR, "Error reading from input: %s.\n",
             av_err2str(ret));
     }*/
-    avio_write(out, buff, size);
-    avio_flush(out);
+    avio_write(client, buff, size);
+    avio_flush(client);
 
 end:
 
