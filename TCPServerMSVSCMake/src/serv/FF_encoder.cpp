@@ -69,7 +69,7 @@ void FF_encoder::SetupOutput()
     av_dict_set(&options, "ar", "48000", 0);
     av_dict_set(&options, "rtsp_transport", "tcp", 0);
     av_dict_set(&options, "f", "rtsp", 0);
-    
+    av_dict_set(&options, "f", "rtsp://host:port/serverPlay/", 0);
     avformat_alloc_output_context2(&ofmt_ctx, ofmt, "rtsp", fOutURL);
     if (!ofmt_ctx) {
         fprintf(stderr, "Could not create output context\n");
