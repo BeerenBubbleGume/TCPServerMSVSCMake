@@ -111,7 +111,8 @@ void FF_encoder::SetupOutput()
         ret = AVERROR_UNKNOWN;
         //goto end;
     }
-   
+    ofmt_ctx->flags = AVFMT_NOFILE;
+
     AVStream* video_track = avformat_new_stream(ofmt_ctx, nullptr);
     //AVStream* audio_track = avformat_new_stream(ofmt_ctx, NULL);
     //ofmt_ctx->oformat->video_codec = AV_CODEC_ID_H264;
