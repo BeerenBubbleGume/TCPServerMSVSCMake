@@ -166,7 +166,9 @@ bool NetSocketUV::Accept()
 			//FF_encoder* sender = FF_encoder::createNew(accept_sock->ip.c_str(), fileName);
 			/*std::thread RTSPsend(SetupRetranslation, accept_sock, fileName);
 			RTSPsend.detach();*/
-			accept_sock->sender = FF_encoder::createNew("udp://192.168.0.69:8554/serverPlay/");
+			CString ip("rtsp://");
+			ip += accept_sock->ip;
+			accept_sock->sender = FF_encoder::createNew(ip.c_str());
 			accept_sock->sender->SetupOutput();
 			printf("Accepted client with ID:%u\nIP:\t%s\nSessionID:\t%u\n\n", accept_sock->ClientID, accept_sock->ip.c_str(), accept_sock->sessionID);
 			
