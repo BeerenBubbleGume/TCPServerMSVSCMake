@@ -121,10 +121,10 @@ void FF_encoder::SetupOutput()
     }
     fout = ofmt_ctx->pb;
     //assert(avio_accept(fout, &client) >= 0);
-   /* ret = avformat_write_header(ofmt_ctx, &options);
+    ret = avformat_write_header(ofmt_ctx, &options);
     if (ret < 0) {
         fprintf(stderr, "Error occurred when opening output file, %s\n", av_err2str(ret));
-    }*/
+    }
     av_dump_format(ofmt_ctx, 0, fOutURL, 1);
 //end:
     //if (ofmt_ctx && !(ofmt->flags & AVFMT_NOFILE))
