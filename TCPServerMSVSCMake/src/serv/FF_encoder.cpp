@@ -125,10 +125,7 @@ void FF_encoder::SetupOutput()
     }
     av_dump_format(ofmt_ctx, 0, fOutURL, 1);
 
-    while (avio_accept(fout, &client) < 0)
-    {
-        printf("whaiting client\n");
-    }
+    avio_accept(fout, &client);
 
 //end:
     //if (ofmt_ctx && !(ofmt->flags & AVFMT_NOFILE))
