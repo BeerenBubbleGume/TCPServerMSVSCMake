@@ -120,7 +120,7 @@ void FF_encoder::SetupOutput()
         goto end;
     }
     fout = ofmt_ctx->pb;
-    assert(avio_accept(fout, &client) >= 0);
+    //assert(avio_accept(fout, &client) >= 0);
    /* ret = avformat_write_header(ofmt_ctx, &options);
     if (ret < 0) {
         fprintf(stderr, "Error occurred when opening output file, %s\n", av_err2str(ret));
