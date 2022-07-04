@@ -61,8 +61,8 @@ void FF_encoder::SetupOutput()
     
     ret = av_dict_set(&options, "rtsp_transport", "udp", 0);
     assert(ret >= 0);
-    /*ret = av_dict_set(&options, "announce_port", "8554", 0);
-    assert(ret >= 0);*/
+    ret = av_dict_set(&options, "announce_port", "8554", 0);
+    assert(ret >= 0);
     ret = av_dict_set(&options, "enable-protocol", "rtsp", 0);
     assert(ret >= 0);
     ret = av_dict_set(&options, "protocol_whitelist", "file,udp,tcp,rtp,rtsp", 0);
@@ -111,6 +111,11 @@ void FF_encoder::SetupOutput()
         ret = AVERROR_UNKNOWN;
         //goto end;
     }
+    ret =avformat_init_output(ofmt_ctx, &options);
+    if (ret < 0)
+    {
+        printf("ERROR avformat_init_output(%p, %p): %s.\n", ofmt_ctx, options, av_err2str(ret));
+    }
 
     AVStream* video_track = avformat_new_stream(ofmt_ctx, nullptr);
     //AVStream* audio_track = avformat_new_stream(ofmt_ctx, NULL);
@@ -119,7 +124,7 @@ void FF_encoder::SetupOutput()
     
     avformat_network_init();
     
-    ret = avio_open2(&ofmt_ctx->pb, fOutURL, AVIO_FLAG_WRITE, &ofmt_ctx->interrupt_callback, &options);
+    ret = avio_open2(&ofmt_ctx->pb, fOutURL, AVIO_FLAG_WRITE, nullptr, &options);
     if (ret < 0) {
         fprintf(stderr, "Could not open output file '%s', av_err2str() %s\n", fOutURL, av_err2str(ret));
         //goto end;
