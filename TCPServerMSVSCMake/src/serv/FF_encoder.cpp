@@ -111,12 +111,7 @@ void FF_encoder::SetupOutput()
         ret = AVERROR_UNKNOWN;
         //goto end;
     }
-    ret =avformat_init_output(ofmt_ctx, &options);
-    if (ret < 0)
-    {
-        printf("ERROR avformat_init_output(%p, %p): %s.\n", ofmt_ctx, options, av_err2str(ret));
-    }
-
+   
     AVStream* video_track = avformat_new_stream(ofmt_ctx, nullptr);
     //AVStream* audio_track = avformat_new_stream(ofmt_ctx, NULL);
     //ofmt_ctx->oformat->video_codec = AV_CODEC_ID_H264;
@@ -130,7 +125,12 @@ void FF_encoder::SetupOutput()
         //goto end;
     }
     
-    
+    ret = avformat_init_output(ofmt_ctx, &options);
+    if (ret < 0)
+    {
+        printf("ERROR avformat_init_output(%p, %p): %s.\n", ofmt_ctx, options, av_err2str(ret));
+    }
+
     ret = avformat_write_header(ofmt_ctx, &options);
     if (ret < 0) {
         fprintf(stderr, "Error occurred when opening output file, %s\n", av_err2str(ret));
