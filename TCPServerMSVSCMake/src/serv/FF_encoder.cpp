@@ -76,7 +76,7 @@ void FF_encoder::SetupOutput()
         ret = AVERROR_UNKNOWN;
         goto end;
     }
-
+    
     /*ret = avio_open2(&ofmt_ctx->pb, fOutURL, AVIO_FLAG_WRITE, nullptr, &options);
     if (ret < 0) {
         fprintf(stderr, "Could not open output file '%s', av_err2str() %s\n", fOutURL, av_err2str(ret));
@@ -95,7 +95,7 @@ FF_encoder* FF_encoder::createNew(const char* outURL)
 	return new FF_encoder(outURL);
 }
 
-void FF_encoder::Write(/*AVFormatContext* in, */AVFormatContext* out, NetSocket* sock)
+void FF_encoder::Write(/*AVFormatContext* in, */AVIOContext* out, NetSocket* sock)
 {
     /*stream_mapping_size = ifmt_ctx->nb_streams;
     stream_mapping = (int*)av_calloc(stream_mapping_size, sizeof(*stream_mapping));
@@ -146,8 +146,8 @@ void FF_encoder::Write(/*AVFormatContext* in, */AVFormatContext* out, NetSocket*
         av_log(in->pb, AV_LOG_ERROR, "Error reading from input: %s.\n",
             av_err2str(ret));
     }*/
-    avio_write(out->pb, buff, size);
-    avio_flush(out->pb);
+    avio_write(out, buff, size);
+    avio_flush(out);
 
 end:
 

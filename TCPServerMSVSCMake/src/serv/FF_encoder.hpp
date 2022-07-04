@@ -19,9 +19,11 @@ public:
 	void						SetupInput(CString& fileName);
 	void						SetupOutput();
 	static FF_encoder*			createNew(const char* outURL);
-	void						Write(/*AVFormatContext* in, */AVFormatContext* out, NetSocket* sock);
+	void						Write(/*AVFormatContext* in, */AVIOContext* out, NetSocket* sock);
 	AVFormatContext*			getInFmtCtx()										{ return ifmt_ctx; }
 	AVFormatContext*			getOutFmtCtx()										{ return ofmt_ctx; }
+	AVIOContext*				getOutAVIOCtx()										{ return fout; }
+	void						setAVIOCtx(AVIOContext* ctx)						{ fout = ctx; }
 protected:
 	FF_encoder(const char* outURL);
 	~FF_encoder();
@@ -29,6 +31,7 @@ protected:
 	AVFormatContext*			ifmt_ctx, *ofmt_ctx;
 	AVPacket*					fPacket;
 	AVDictionary*				options;
+	AVIOContext*				fout;
 	FILE*						fFile;
 	const AVCodec*				fCodec;
 

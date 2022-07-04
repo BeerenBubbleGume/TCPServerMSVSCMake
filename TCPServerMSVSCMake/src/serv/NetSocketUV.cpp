@@ -211,7 +211,12 @@ void NetSocketUV::ReceiveTCP()
 	{
 		printf("cannot open file\n");
 	}
-	sender->Write(sender->getOutFmtCtx(), this);
+	AVIOContext* ctx = avio_alloc_context(recvbuffer.GetData(), recvbuffer.GetLength(), 0, nullptr, nullptr, nullptr, nullptr);
+	if (!ctx)
+	{
+		printf("ERROR\n");
+	}
+	sender->Write(nullptr, this);
 	/*if (recvbuffer.GetPacketCount() > 0 && received_bytes > 5000)
 	{
 		sender->SetupInput(fileName);
