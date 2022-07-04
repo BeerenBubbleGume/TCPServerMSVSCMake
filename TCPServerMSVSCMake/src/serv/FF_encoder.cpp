@@ -110,14 +110,14 @@ void FF_encoder::SetupOutput()
     if (!ofmt_ctx) {
         fprintf(stderr, "Could not create output context\n");
         ret = AVERROR_UNKNOWN;
-        goto end;
+        //goto end;
     }
     avformat_network_init();
     
     ret = avio_open2(&ofmt_ctx->pb, fOutURL, AVIO_FLAG_WRITE, &ofmt_ctx->interrupt_callback, &options);
     if (ret < 0) {
         fprintf(stderr, "Could not open output file '%s', av_err2str() %s\n", fOutURL, av_err2str(ret));
-        goto end;
+        //goto end;
     }
     fout = ofmt_ctx->pb;
     //assert(avio_accept(fout, &client) >= 0);
@@ -126,16 +126,16 @@ void FF_encoder::SetupOutput()
         fprintf(stderr, "Error occurred when opening output file, %s\n", av_err2str(ret));
     }*/
 end:
-    if (ofmt_ctx && !(ofmt->flags & AVFMT_NOFILE))
-        avio_closep(&ofmt_ctx->pb);
-    avformat_free_context(ofmt_ctx);
+    //if (ofmt_ctx && !(ofmt->flags & AVFMT_NOFILE))
+    //    avio_closep(&ofmt_ctx->pb);
+    //avformat_free_context(ofmt_ctx);
 
-    //av_freep(&stream_mapping);
+    ////av_freep(&stream_mapping);
 
-    if (ret < 0 && ret != AVERROR_EOF) {
-        fprintf(stderr, "Error occurred: %s\n", av_err2str(ret));
-        exit(1);
-    }
+    //if (ret < 0 && ret != AVERROR_EOF) {
+    //    fprintf(stderr, "Error occurred: %s\n", av_err2str(ret));
+    //    exit(1);
+    //}
 }
 
 FF_encoder* FF_encoder::createNew(const char* outURL)
