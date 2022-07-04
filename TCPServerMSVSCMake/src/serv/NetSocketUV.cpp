@@ -394,7 +394,7 @@ void SetupRetranslation(void* net, CString fileName)
 	{
 		sender->Write(sender->getInFmtCtx(), sender->getOutFmtCtx());
 		sender->CloseInput();
-		sender->SetupInput();
+		sender->SetupInput(fileName);
 	}
 	//std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
