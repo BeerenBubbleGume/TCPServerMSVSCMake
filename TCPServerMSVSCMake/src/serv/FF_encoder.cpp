@@ -106,7 +106,7 @@ void FF_encoder::SetupOutput()
         fprintf(stderr, "Error occurred when opening output file, %s\n", av_err2str(ret));
     }*/
 end:
-    CloseInput();
+    FF_encoder::~FF_encoder();
 }
 
 FF_encoder* FF_encoder::createNew(const char* outURL)
