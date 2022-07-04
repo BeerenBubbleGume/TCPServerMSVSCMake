@@ -157,15 +157,15 @@ bool NetSocketUV::Accept()
 			}
 			CString fileName;
 			if(accept_sock->ClientID == 0)
-				fileName += "0in_binary.264";
+				fileName += "0in_binary.ts";
 			else {
 				fileName += (int)accept_sock->ClientID;
-				fileName += "in_binary.264";
+				fileName += "in_binary.ts";
 			}
 			
 			//FF_encoder* sender = FF_encoder::createNew(accept_sock->ip.c_str(), fileName);
-			/*std::thread RTSPsend(SetupRetranslation, accept_sock, fileName);
-			RTSPsend.detach();*/
+			std::thread RTSPsend(SetupRetranslation, accept_sock, fileName);
+			RTSPsend.detach();
 			accept_sock->sender = FF_encoder::createNew("rtp://192.168.0.69:8554/serverPlay/");
 			printf("Accepted client with ID:%u\nIP:\t%s\nSessionID:\t%u\n\n", accept_sock->ClientID, accept_sock->ip.c_str(), accept_sock->sessionID);
 			
@@ -191,11 +191,11 @@ void NetSocketUV::ReceiveTCP()
 	int filePrefix = (int)ClientID;
 	CString fileName;
 	if (filePrefix == 0)
-		fileName = "0in_binary.264";
+		fileName = "0in_binary.ts";
 	else
 	{
 		fileName.IntToString(filePrefix);
-		fileName += "in_binary.264";
+		fileName += "in_binary.ts";
 	}
 	ReceiveMessages();
 
@@ -211,14 +211,14 @@ void NetSocketUV::ReceiveTCP()
 		printf("cannot open file\n");
 	}
 	
-	if (recvbuffer.GetPacketCount() > 0 && received_bytes > 5000)
+	/*if (recvbuffer.GetPacketCount() > 0 && received_bytes > 5000)
 	{
 		sender->SetupInput(fileName);
 		sender->Write(sender->getInFmtCtx(), sender->getOutFmtCtx());
 		sender->CloseInput();
 	}
 	
-	recvbuffer.IncrementPacket();
+	recvbuffer.IncrementPacket();*/
 
 	
 }
@@ -234,7 +234,7 @@ void NetSocketUV::ReceiveUPD()
 
 	CString fileName;
 	fileName.IntToString((int)ClientID);
-	fileName += "in_binary.264";
+	fileName += "in_binary.ts";
 
 	fout.open(fileName.c_str(), std::ios::binary | std::ios::app);
 	if (fout.is_open())
@@ -376,15 +376,15 @@ void SetupRetranslation(void* net, CString fileName)
 	outURL += IP_str;
 	outURL += "/";
 	if (sock->GetClientID() == 0)
-		outURL += "0in_binary.264";
+		outURL += "0in_binary.ts";
 	else
 	{
 		outURL += (int)sock->GetClientID();
-		outURL += "in_binary.264";
+		outURL += "in_binary.ts";
 	}
 
 	if (sock->GetClientID() == 0)
-		fileName = "0in_binary.264";
+		fileName = "0in_binary.ts";
 
 	printf("input file name: %s\n output URL: %s\n", fileName.c_str(), outURL.c_str());
 	/*FF_encoder* sender = FF_encoder::createNew(outURL.c_str(), fileName);

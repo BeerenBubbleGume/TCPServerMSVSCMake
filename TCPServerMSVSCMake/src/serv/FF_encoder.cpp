@@ -134,18 +134,8 @@ void FF_encoder::Write(AVFormatContext* in, AVFormatContext* out)
 end:
 
     CloseInput();
-
-    /* close output */
-    if (ofmt_ctx && !(ofmt->flags & AVFMT_NOFILE))
-        avio_closep(&ofmt_ctx->pb);
-    avformat_free_context(ofmt_ctx);
-
-    av_freep(&stream_mapping);
-
-    if (ret < 0 && ret != AVERROR_EOF) {
-        fprintf(stderr, "Error occurred: %s\n", av_err2str(ret));
-        exit(1);
-    }
+    remove(fFileName);
+   
 
     //while (1) {
     //    AVStream* in_stream, * out_stream;
@@ -190,4 +180,15 @@ FF_encoder::FF_encoder(const char* outURL) : fOutURL(outURL)
 
 FF_encoder::~FF_encoder()
 {
+    /* close output */
+    if (ofmt_ctx && !(ofmt->flags & AVFMT_NOFILE))
+        avio_closep(&ofmt_ctx->pb);
+    avformat_free_context(ofmt_ctx);
+
+    av_freep(&stream_mapping);
+
+    if (ret < 0 && ret != AVERROR_EOF) {
+        fprintf(stderr, "Error occurred: %s\n", av_err2str(ret));
+        exit(1);
+    }
 }
