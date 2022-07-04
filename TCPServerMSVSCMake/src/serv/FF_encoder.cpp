@@ -129,6 +129,11 @@ void FF_encoder::SetupOutput()
     if (ret < 0) {
         fprintf(stderr, "Error occurred when opening output file, %s\n", av_err2str(ret));
     }
+    ret = ff_rtsp_setup_output_streams(ofmt_ctx, fOutURL);
+    if (ret < 0)
+    {
+        printf("RTSP ERROR: %s", av_err2str(ret));
+    }
     av_dump_format(ofmt_ctx, 0, fOutURL, 1);
 
     //avio_accept(fout, &client);
