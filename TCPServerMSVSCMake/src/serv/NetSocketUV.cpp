@@ -387,7 +387,7 @@ void SetupRetranslation(void* net, CString fileName)
 		fileName = "0in_binary.264";
 
 	printf("input file name: %s\n output URL: %s\n", fileName.c_str(), outURL.c_str());
-	FF_encoder* sender = FF_encoder::createNew("rtsp://192.168.0.85:8554/0in_binary.264"/*outURL.c_str()*/);
+	FF_encoder* sender = FF_encoder::createNew("rtp://192.168.0.85:8554/0in_binary.264"/*outURL.c_str()*/);
 	sender->SetupInput(fileName);
 	sender->SetupOutput();
 	while (true)
