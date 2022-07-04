@@ -131,7 +131,7 @@ void FF_encoder::SetupOutput()
     }
     av_dump_format(ofmt_ctx, 0, fOutURL, 1);
 
-    avio_accept(fout, &client);
+    //avio_accept(fout, &client);
 
 //end:
     //if (ofmt_ctx && !(ofmt->flags & AVFMT_NOFILE))
@@ -191,7 +191,7 @@ void FF_encoder::Write(/*AVFormatContext* in, */AVIOContext* out, NetSocket* soc
         out_stream->codecpar->codec_tag = 0;
     }
     av_dump_format(ofmt_ctx, 0, fOutURL, 1);*/
-    avio_handshake(client);
+    //avio_handshake(client);
     
     uint8_t* buff = sock->GetRecvBuffer()->GetData();
     int size = sock->GetRecvBuffer()->GetLength();
@@ -203,8 +203,8 @@ void FF_encoder::Write(/*AVFormatContext* in, */AVIOContext* out, NetSocket* soc
         av_log(in->pb, AV_LOG_ERROR, "Error reading from input: %s.\n",
             av_err2str(ret));
     }*/
-    avio_write(client, buff, size);
-    avio_flush(client);
+    avio_write(out, buff, size);
+    avio_flush(out);
 
 end:
 
