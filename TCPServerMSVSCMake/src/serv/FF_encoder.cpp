@@ -60,7 +60,27 @@ void FF_encoder::SetupOutput()
     options = NULL;
     AVIOContext* client;
 
-    ret = av_dict_set(&options, "pix_fmt", "yuv420p", 0);
+    ret = av_dict_set(&options, "rtsp_transport", "udp", 0);
+    assert(ret >= 0);
+    ret = av_dict_set(&options, "announce_port", "8554", 0);
+    assert(ret >= 0);
+    ret = av_dict_set(&options, "enable-protocol", "rtsp", 0);
+    assert(ret >= 0);
+    ret = av_dict_set(&options, "protocol_whitelist", "file,udp,tcp,rtp,rtsp", 0);
+    assert(ret >= 0);
+    ret = av_dict_set(&options, "enable-protocol", "rtp", 0);
+    assert(ret >= 0);
+    ret = av_dict_set(&options, "enable-protocol", "rtsp", 0);
+    assert(ret >= 0);
+    ret = av_dict_set(&options, "enable-protocol", "udp", 0);
+    assert(ret >= 0);
+    ret = av_dict_set(&options, "enable-muxer", "rtsp", 0);
+    assert(ret >= 0);
+    ret = av_dict_set(&options, "enable-muxer", "rtp", 0);
+    assert(ret >= 0);
+
+
+    /*ret = av_dict_set(&options, "pix_fmt", "yuv420p", 0);
     assert(ret >= 0);
     ret = av_dict_set(&options, "vcodec", "libx264", 0);
     assert(ret >= 0);
@@ -83,7 +103,7 @@ void FF_encoder::SetupOutput()
     ret = av_dict_set(&options, "f", "rtsp", 0);
     assert(ret >= 0);
     ret = av_dict_set(&options, "f", "rtsp://host:port/serverPlay/", 0);
-    assert(ret >= 0);
+    assert(ret >= 0);*/
 
 
     avformat_alloc_output_context2(&ofmt_ctx, nullptr, "rtsp", nullptr);
