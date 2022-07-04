@@ -33,11 +33,6 @@ void FF_encoder::SetupInput(CString& fileName)
 
     av_dump_format(ifmt_ctx, 0, fFileName, 0);
    
-    
-
-
-    
-
     /*ret = avformat_write_header(ofmt_ctx, nullptr);
     if (ret < 0) {
         fprintf(stderr, "Error occurred when opening output file\n");
