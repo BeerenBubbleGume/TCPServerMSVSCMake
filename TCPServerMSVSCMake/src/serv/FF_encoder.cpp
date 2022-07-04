@@ -61,8 +61,8 @@ void FF_encoder::SetupOutput()
     
     ret = av_dict_set(&options, "rtsp_transport", "udp", 0);
     assert(ret >= 0);
-    ret = av_dict_set(&options, "announce_port", "8554", 0);
-    assert(ret >= 0);
+    /*ret = av_dict_set(&options, "announce_port", "8554", 0);
+    assert(ret >= 0);*/
     ret = av_dict_set(&options, "enable-protocol", "rtsp", 0);
     assert(ret >= 0);
     ret = av_dict_set(&options, "protocol_whitelist", "file,udp,tcp,rtp,rtsp", 0);
