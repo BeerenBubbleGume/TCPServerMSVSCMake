@@ -86,7 +86,7 @@ void FF_encoder::SetupOutput()
     assert(ret >= 0);
 
 
-    avformat_alloc_output_context2(&ofmt_ctx, nullptr, "rtsp", fOutURL);
+    avformat_alloc_output_context2(&ofmt_ctx, nullptr, "rtsp", nullptr);
     if (!ofmt_ctx) {
         fprintf(stderr, "Could not create output context\n");
         ret = AVERROR_UNKNOWN;
