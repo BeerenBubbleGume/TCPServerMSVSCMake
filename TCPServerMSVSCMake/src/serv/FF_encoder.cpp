@@ -34,6 +34,10 @@ void FF_encoder::SetupInput(CString& fileName)
     av_dump_format(ifmt_ctx, 0, fFileName, 0);
    
     
+
+
+    
+
     /*ret = avformat_write_header(ofmt_ctx, nullptr);
     if (ret < 0) {
         fprintf(stderr, "Error occurred when opening output file\n");
@@ -56,12 +60,7 @@ void FF_encoder::SetupInput(CString& fileName)
 //    }
 }
 
-FF_encoder* FF_encoder::createNew(const char* outURL)
-{
-	return new FF_encoder(outURL);
-}
-
-void FF_encoder::Write(AVFormatContext* in, AVFormatContext* out)
+void FF_encoder::SetupOutput()
 {
     options = NULL;
     av_dict_set(&options, "rtsp_transport", "tcp", 0);
@@ -73,6 +72,22 @@ void FF_encoder::Write(AVFormatContext* in, AVFormatContext* out)
         goto end;
     }
 
+    ret = avio_open2(&out->pb, fOutURL, AVIO_FLAG_WRITE, nullptr, &options);
+    if (ret < 0) {
+        fprintf(stderr, "Could not open output file '%s'", fOutURL);
+        goto end;
+    }
+end:
+    CloseInput();
+}
+
+FF_encoder* FF_encoder::createNew(const char* outURL)
+{
+	return new FF_encoder(outURL);
+}
+
+void FF_encoder::Write(AVFormatContext* in, AVFormatContext* out)
+{
     /*stream_mapping_size = ifmt_ctx->nb_streams;
     stream_mapping = (int*)av_calloc(stream_mapping_size, sizeof(*stream_mapping));
     if (!stream_mapping) {
@@ -112,12 +127,6 @@ void FF_encoder::Write(AVFormatContext* in, AVFormatContext* out)
     }
     av_dump_format(ofmt_ctx, 0, fOutURL, 1);*/
 
-
-    ret = avio_open2(&out->pb, fOutURL, AVIO_FLAG_WRITE, nullptr, &options);
-    if (ret < 0) {
-        fprintf(stderr, "Could not open output file '%s'", fOutURL);
-        goto end;
-    }
 
     uint8_t buff[1024];
     ret = avio_read(in->pb, buff, sizeof(buff));

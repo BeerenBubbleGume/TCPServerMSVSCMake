@@ -17,7 +17,7 @@ class FF_encoder
 public:
 	void						CloseInput();
 	void						SetupInput(CString& fileName);
-
+	void						SetupOutput();
 	static FF_encoder*			createNew(const char* outURL);
 	void						Write(AVFormatContext* in, AVFormatContext* out);
 	AVFormatContext*			getInFmtCtx()										{ return ifmt_ctx; }

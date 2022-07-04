@@ -388,9 +388,12 @@ void SetupRetranslation(void* net, CString fileName)
 
 	printf("input file name: %s\n output URL: %s\n", fileName.c_str(), outURL.c_str());
 	FF_encoder* sender = FF_encoder::createNew("rtsp://192.168.0.85:8554/0in_binary.264"/*outURL.c_str()*/);
-	sender->SetupInput(fileName);
-	sender->Write(sender->getInFmtCtx(), sender->getOutFmtCtx());
-
+	sender->SetupOutput();
+	while (true)
+	{
+		sender->SetupInput(fileName);
+		sender->Write(sender->getInFmtCtx(), sender->getOutFmtCtx());
+	}
 	//std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
 	/*CString command;
