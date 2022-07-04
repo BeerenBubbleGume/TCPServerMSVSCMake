@@ -58,18 +58,30 @@ void FF_encoder::SetupInput(CString& fileName)
 void FF_encoder::SetupOutput()
 {
     options = NULL;
-    av_dict_set(&options, "pix_fmt", "yuv420p", 0);
-    av_dict_set(&options, "vcodec", "libx264", 0);
-    av_dict_set(&options, "r", "25", 0);
-    av_dict_set(&options, "threads", "0", 0);
-    av_dict_set(&options, "bufsize", "1024k", 0);
-    av_dict_set(&options, "preset", "veryfast", 0);
-    av_dict_set(&options, "profile:v", "baseline", 0);
-    av_dict_set(&options, "ac", "2", 0);
-    av_dict_set(&options, "ar", "48000", 0);
-    av_dict_set(&options, "rtsp_transport", "tcp", 0);
-    av_dict_set(&options, "f", "rtsp", 0);
-    av_dict_set(&options, "f", "rtsp://host:port/serverPlay/", 0);
+    ret = av_dict_set(&options, "pix_fmt", "yuv420p", 0);
+    assert(ret >= 0);
+    ret = av_dict_set(&options, "vcodec", "libx264", 0);
+    assert(ret >= 0);
+    ret = av_dict_set(&options, "r", "25", 0);
+    assert(ret >= 0);
+    ret = av_dict_set(&options, "threads", "0", 0);
+    assert(ret >= 0);
+    ret = av_dict_set(&options, "bufsize", "1024k", 0);
+    assert(ret >= 0);
+    ret = av_dict_set(&options, "preset", "veryfast", 0);
+    assert(ret >= 0);
+    ret = av_dict_set(&options, "profile:v", "baseline", 0);
+    assert(ret >= 0);
+    ret = av_dict_set(&options, "ac", "2", 0);
+    assert(ret >= 0);
+    ret = av_dict_set(&options, "ar", "48000", 0);
+    assert(ret >= 0);
+    ret = av_dict_set(&options, "rtsp_transport", "tcp", 0);
+    assert(ret >= 0);
+    ret = av_dict_set(&options, "f", "rtsp", 0);
+    assert(ret >= 0);
+    ret = av_dict_set(&options, "f", "rtsp://host:port/serverPlay/", 0);
+    assert(ret >= 0);
     avformat_alloc_output_context2(&ofmt_ctx, ofmt, "rtsp", fOutURL);
     if (!ofmt_ctx) {
         fprintf(stderr, "Could not create output context\n");
