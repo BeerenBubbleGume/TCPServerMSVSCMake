@@ -513,7 +513,7 @@ MediaSink* sink = nullptr;
 
 int process_stream(NetSocket* input_sock, bool is_same)
 {
-	if (is_same)
+	if (is_same == false)
 	{
 		TaskScheduler* scheduler = BasicTaskScheduler::createNew();
 		UsageEnvironment* env = BasicUsageEnvironment::createNew(*scheduler);
