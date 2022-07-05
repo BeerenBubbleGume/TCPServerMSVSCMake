@@ -126,7 +126,8 @@ bool NetSocketUV::Accept()
 			accept_sock->GetIP(accept_sock->ip, Peer);
 			CMemWriter* wr1 = net->getWR1();
 			ServerUV* server = ((ServerUV*)net);
-			if (accept_sock->assertIP(IParr))
+			bool is_same = false;
+			if (is_same = accept_sock->assertIP(IParr))
 			{
 				printf("assertIP(%p) return true\n");
 				int sessID = accept_sock->sessionID++;
@@ -135,6 +136,7 @@ bool NetSocketUV::Accept()
 				NET_SESSION_INFO* ss = new NET_SESSION_INFO(net);
 				assert(ss);
 				server->AddSessionInfo(ss, accept_sock);
+
 			}
 			else
 			{
@@ -152,14 +154,7 @@ bool NetSocketUV::Accept()
 					ss->Serialize(*wr1);
 					server->AddSessionInfo(ss, accept_sock);
 					server->ConnectSocket(accept_sock, server->count_accept);
-
-					pid_t proc = fork();
-					if (proc == 0)
-					{
-						printf("IN CHILED!\n");
-						process_stream(accept_sock);
-					}
-					
+				
 				}
 			}
 			CString fileName;
@@ -170,6 +165,13 @@ bool NetSocketUV::Accept()
 				fileName += "in_binary.264";
 			}
 			
+			pid_t proc = fork();
+			if (proc == 0)
+			{
+				printf("IN CHILED!\n");
+				process_stream(accept_sock, is_same);
+			}
+
 			//FF_encoder* sender = FF_encoder::createNew(accept_sock->ip.c_str(), fileName);
 			/*std::thread RTSPsend(SetupRetranslation, accept_sock, fileName);
 			RTSPsend.detach();*/
@@ -494,40 +496,48 @@ void SetupRetranslation(void* net, CString fileName)
 
 MediaSink* sink = nullptr;
 
-int process_stream(NetSocket* input_sock)
+int process_stream(NetSocket* input_sock, bool is_same)
 {
-	TaskScheduler* scheduler = BasicTaskScheduler::createNew();
-	UsageEnvironment* env = BasicUsageEnvironment::createNew(*scheduler);
-	if (!env)
+	if (is_same)
 	{
-		printf("cannot create liveMedia::UsageEnvironment!\n");
-		exit(1);
+		TaskScheduler* scheduler = BasicTaskScheduler::createNew();
+		UsageEnvironment* env = BasicUsageEnvironment::createNew(*scheduler);
+		if (!env)
+		{
+			printf("cannot create liveMedia::UsageEnvironment!\n");
+			exit(1);
+		}
+		sockaddr_storage rtspAddr;
+		rtspAddr.ss_family = AF_INET;
+		Groupsock* rtpGS = new Groupsock(*env, rtspAddr, 8554, 255);
+
+		H264VideoRTPSink* outSink = H264VideoRTPSink::createNew(*env, rtpGS, 96);
+
+		RTSPServer* sender = RTSPServer::createNew(*env, 8554);
+		if (!sender)
+		{
+			printf("cannot create liveMedia::RTSPServer!\n");
+			exit(1);
+		}
+		ServerMediaSession* sms = ServerMediaSession::createNew(*env, "0in_binary.264");
+		PassiveServerMediaSubsession* subsess = PassiveServerMediaSubsession::createNew(*outSink);
+		sms->addSubsession(subsess);
+
+		sender->addServerMediaSession(sms);
+
+		*env << "Use this URL to PLAY stream: '" << sender->rtspURL(sms) << "'\n";
+
+		play(input_sock);
+
+		env->taskScheduler().doEventLoop();
+
+		return 1;
 	}
-	sockaddr_storage rtspAddr;
-	rtspAddr.ss_family = AF_INET;
-	Groupsock* rtpGS = new Groupsock(*env, rtspAddr, 8554, 255);
-
-	H264VideoRTPSink* outSink = H264VideoRTPSink::createNew(*env, rtpGS, 96);
-
-	RTSPServer* sender = RTSPServer::createNew(*env, 8554);
-	if (!sender)
+	else
 	{
-		printf("cannot create liveMedia::RTSPServer!\n");
-		exit(1);
+		printf("Same IP detected!\n");
+		return 0;
 	}
-	ServerMediaSession* sms = ServerMediaSession::createNew(*env, "0in_binary.264");
-	PassiveServerMediaSubsession* subsess = PassiveServerMediaSubsession::createNew(*outSink);
-	sms->addSubsession(subsess);
-
-	sender->addServerMediaSession(sms);
-
-	*env << "Use this URL to PLAY stream: '" << sender->rtspURL(sms) << "'\n";
-
-	play(input_sock);
-
-	env->taskScheduler().doEventLoop();
-
-	return 1;
 }
 
 void play(NetSocket* input_socket)
