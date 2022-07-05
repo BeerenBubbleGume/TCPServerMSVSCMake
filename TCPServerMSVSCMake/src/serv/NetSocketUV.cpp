@@ -126,6 +126,7 @@ bool NetSocketUV::Accept()
 	{	
 		if (uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadTCP) == 0)
 		{
+			pid_t proc = 0;
 			accept_sock->GetIP(accept_sock->ip, Peer);
 			CMemWriter* wr1 = net->getWR1();
 			ServerUV* server = ((ServerUV*)net);
@@ -176,7 +177,7 @@ bool NetSocketUV::Accept()
 				fileName += "in_binary.264";
 			}
 			
-			pid_t proc = fork();
+			proc = fork();
 			if (proc == 0)
 			{
 				printf("IN CHILED!\n");
