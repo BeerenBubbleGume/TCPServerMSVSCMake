@@ -59,7 +59,7 @@ void FF_encoder::SetupOutput()
 {
     
     options = NULL;
-    ret = av_dict_set(&options, "rtsp_transport", "udp_multicast", 0);
+    ret = av_dict_set(&options, "rtsp_transport", "udp", 0);
     assert(ret >= 0);
     ret = av_dict_set(&options, "announce_addr", "0.0.0.0", 0);
     assert(ret >= 0);
