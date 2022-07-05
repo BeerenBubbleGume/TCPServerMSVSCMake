@@ -256,7 +256,7 @@ protected:
 	friend class 		NetBuffer;
 	int					type_license;
 	CString*			license;
-	virtual bool		assertIP(CStringArray& addr);
+	virtual bool		assertIP(CString** addr);
 };
 
 
