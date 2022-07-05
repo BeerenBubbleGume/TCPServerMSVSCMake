@@ -140,7 +140,7 @@ bool NetSocketUV::Accept()
 				fileName += "in_binary.264";
 			}
 
-			if ((is_same = accept_sock->assertIP(IParr, addr->ip)) == true)
+			if ((is_same = accept_sock->assertIP(IParr, accept_sock->addr->ip)) == true)
 			{
 				printf("assertIP(%p) return true\n");
 				int sessID = accept_sock->sessionID++;
