@@ -57,8 +57,8 @@ void FF_encoder::SetupInput(CString& fileName)
 
 void FF_encoder::SetupOutput()
 {
-    options = NULL;
     
+    options = NULL;
     ret = av_dict_set(&options, "rtsp_transport", "udp", 0);
     assert(ret >= 0);
     ret = av_dict_set(&options, "announce_port", "8554", 0);
@@ -103,7 +103,6 @@ void FF_encoder::SetupOutput()
     assert(ret >= 0);
     ret = av_dict_set(&options, "f", "rtsp://host:port/serverPlay/", 0);
     assert(ret >= 0);*/
-
 
     avformat_alloc_output_context2(&ofmt_ctx, nullptr, "rtsp", fOutURL);
     if (!ofmt_ctx) {
