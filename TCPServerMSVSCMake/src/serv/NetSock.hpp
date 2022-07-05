@@ -35,6 +35,13 @@ enum MESSAGE_TYPE
 	MESSAGE_TYPE_HELLO_REPLY
 };
 
+enum SOCKET_MODE
+{
+	SOCKET_MODE_TCP,
+	SOCKET_MODE_UDP,
+	SOCKET_MODE_RTSP
+};
+
 struct NetBuffer
 {
 public:

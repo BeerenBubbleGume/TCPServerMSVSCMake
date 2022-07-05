@@ -214,7 +214,6 @@ void NetSocketUV::ReceiveTCP()
 	if (fout.is_open())
 	{
 		fout.write((char*)recvbuffer.GetData(), recvbuffer.GetLength());
-		//printf("writed %d bytes in file %s\n", (int)net->GetRecvBuffer()->GetLength(), fileName.c_str());
 		fout.close();
 	}
 	else
@@ -495,19 +494,17 @@ void SetupRetranslation(void* net, CString fileName)
 	return;
 }
 
+MediaSink* sink = nullptr;
+
 int process_stream(UsageEnvironment& env, NetSocket* input_sock)
 {
 	sleep(2);
-	NetBuffer* rbuff = input_sock->GetRecvBuffer();
-	unsigned char* inData = rbuff->GetData();
-	unsigned inLen = rbuff->GetLength();
+	
 	sockaddr_storage rtspAddr;
 	rtspAddr.ss_family = AF_INET;
 	Groupsock* rtpGS = new Groupsock(env, rtspAddr, 8554, 255);
 
-	ByteStreamFileSource* inSource = ByteStreamFileSource::createNew(env, "0in_binary.264");
-		
-	MPEG4ESVideoRTPSink* outSink = MPEG4ESVideoRTPSink::createNew(env, rtpGS, 96);
+	H264VideoRTPSink* outSink = H264VideoRTPSink::createNew(env, rtpGS, 96);
 
 	RTSPServer* sender = RTSPServer::createNew(env, 8554);
 	ServerMediaSession* sms = ServerMediaSession::createNew(env, "0in_binary.264");
@@ -518,29 +515,32 @@ int process_stream(UsageEnvironment& env, NetSocket* input_sock)
 
 	env << "Use this URL to PLAY stream: '" << sender->rtspURL(sms) << "'\n";
 
-	outSink->startPlaying(*inSource, afterPlaying, subsess);
+	play(input_sock);
 
 	env.taskScheduler().doEventLoop();
 
 	return 1;
 }
 
+void play(NetSocket* input_socket)
+{
+	NetBuffer* rbuff = input_socket->GetRecvBuffer();
+	unsigned char* inData = rbuff->GetData();
+	unsigned inLen = rbuff->GetLength();
+
+	ByteStreamMemoryBufferSource* inSource = ByteStreamMemoryBufferSource::createNew(sink->envir(), inData, inLen, False);
+	if (!inSource)
+	{
+		printf("cannot create ByteStreamMemoryBufferSource!\n");
+		exit(1);
+	}
+	sink->startPlaying(*inSource, afterPlaying, input_socket)
+}
+
 void afterPlaying(void* clientData)
 {
-	ServerMediaSubsession* subsession = (ServerMediaSubsession*)clientData;
-	
-	Medium::close(subsession);
-	/*subsession->sink = nullptr;
-
-	MediaSession& sess = subsession->parentSession();
-	MediaSubsessionIterator itr(sess);
-
-	while ((subsession = itr.next()) != nullptr)
-	{
-		if (subsession->sink)
-			return;
-	}*/
-	//shutdownStream(rtspclient);
+	NetSocket* sock = (NetSocket*)clientData;
+	play(sock);
 }
 
 void* NetSocketUV::WaitingDelay(void* delay)
