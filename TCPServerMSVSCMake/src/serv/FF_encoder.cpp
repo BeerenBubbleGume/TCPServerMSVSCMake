@@ -63,7 +63,7 @@ void FF_encoder::SetupOutput()
     assert(ret >= 0);
     ret = av_dict_set(&options, "announce_addr", "0.0.0.0", 0);
     assert(ret >= 0);
-    ret = av_dict_set(&options, "ttl", "800", 0);
+    ret = av_dict_set(&options, "ttl", "255", 0);
     assert(ret >= 0);
     ret = av_dict_set(&options, "announce_port", "8554", 0);
     assert(ret >= 0);
