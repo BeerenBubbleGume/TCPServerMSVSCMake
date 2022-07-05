@@ -499,6 +499,11 @@ int process_stream(NetSocket* input_sock)
 {
 	TaskScheduler* scheduler = BasicTaskScheduler::createNew();
 	UsageEnvironment* env = BasicUsageEnvironment::createNew(*scheduler);
+	if (!env)
+	{
+		printf("cannot create liveMedia::UsageEnvironment!\n");
+		exit(1);
+	}
 	sockaddr_storage rtspAddr;
 	rtspAddr.ss_family = AF_INET;
 	Groupsock* rtpGS = new Groupsock(*env, rtspAddr, 8554, 255);
@@ -506,7 +511,11 @@ int process_stream(NetSocket* input_sock)
 	H264VideoRTPSink* outSink = H264VideoRTPSink::createNew(*env, rtpGS, 96);
 
 	RTSPServer* sender = RTSPServer::createNew(*env, 8554);
-	assert(sender);
+	if (!sender)
+	{
+		printf("cannot create liveMedia::RTSPServer!\n");
+		exit(1);
+	}
 	ServerMediaSession* sms = ServerMediaSession::createNew(*env, "0in_binary.264");
 	PassiveServerMediaSubsession* subsess = PassiveServerMediaSubsession::createNew(*outSink);
 	sms->addSubsession(subsess);
