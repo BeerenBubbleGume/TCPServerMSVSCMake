@@ -126,7 +126,7 @@ bool NetSocketUV::Accept()
 			accept_sock->GetIP(accept_sock->ip, Peer);
 			CMemWriter* wr1 = net->getWR1();
 			ServerUV* server = ((ServerUV*)net);
-			if (assertIP(IParr))
+			if (accept_sock->assertIP(IParr))
 			{
 				printf("assertIP(%p) return true\n");
 				int sessID = accept_sock->sessionID++;
@@ -153,14 +153,12 @@ bool NetSocketUV::Accept()
 					server->AddSessionInfo(ss, accept_sock);
 					server->ConnectSocket(accept_sock, server->count_accept);
 
-
-
-					/*pid_t proc = fork();
+					pid_t proc = fork();
 					if (proc == 0)
 					{
 						printf("IN CHILED!\n");
 						process_stream(accept_sock);
-					}*/
+					}
 					
 				}
 			}
