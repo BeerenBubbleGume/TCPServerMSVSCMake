@@ -45,9 +45,9 @@ ELSE()
 	target_link_libraries(TCPServerMSVSCMake
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libuv.a
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libBasicUsageEnvironment.a
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libUsageEnvironment.a
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libliveMedia.a
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libgroupsock.a
-								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libUsageEnvironment.a
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libavformat.a
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libavdevice.a
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libavcodec.a
@@ -70,6 +70,7 @@ ELSE()
 								pthread
 								rt
 								bz2
+								ssl
 								-ldl
 								)
 ENDIF()
