@@ -69,7 +69,7 @@ void FF_encoder::SetupOutput()
     assert(ret >= 0);
     ret = av_dict_set(&options, "enable-protocol", "rtsp", 0);
     assert(ret >= 0);
-    ret = av_dict_set(&options, "protocol_whitelist", "file,udp,tcp,rtp,rtsp", 0);
+    ret = av_dict_set(&options, "protocol_whitelist", "file,udp,rtp,rtsp", 0);
     assert(ret >= 0);
     ret = av_dict_set(&options, "enable-protocol", "rtp", 0);
     assert(ret >= 0);
@@ -123,7 +123,7 @@ void FF_encoder::SetupOutput()
     
     avformat_network_init();
     
-    ret = avio_open2(&ofmt_ctx->pb, fOutURL, AVIO_FLAG_WRITE, nullptr, &options);
+    ret = avio_open2(&ofmt_ctx->pb, fOutURL, AVIO_FLAG_WRITE, &ofmt_ctx->interrupt_callback, &options);
     if (ret < 0) {
         fprintf(stderr, "Could not open output file '%s', av_err2str() %s\n", fOutURL, av_err2str(ret));
         //goto end;
