@@ -95,6 +95,7 @@ bool NetSocketUV::GetIP(CString& addr, bool own_or_peer)
 			if (r == 0)
 			{
 				addr = address_converter;
+				IParr[ClientID] = addr;
 				unsigned char* port_ptr = (unsigned char*)&(((sockaddr_in*)&sockName)->sin_port);
 				int port = port_ptr[1];
 				port += port_ptr[0] << 8;
@@ -102,7 +103,7 @@ bool NetSocketUV::GetIP(CString& addr, bool own_or_peer)
 				CString d;
 				d.IntToString(port);
 				addr += d;
-				IParr[ClientID] = addr;
+				
 			}
 		}
 		else
