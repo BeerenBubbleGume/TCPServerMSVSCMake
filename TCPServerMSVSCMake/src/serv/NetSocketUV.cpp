@@ -103,7 +103,7 @@ bool NetSocketUV::GetIP(CString& addr, bool own_or_peer)
 				d.IntToString(port);
 				addr += d;
 				CStringArray array;
-				array.Add(addr);
+				array.Add(&addr);
 				IParr = array;
 			}
 		}
