@@ -169,7 +169,7 @@ bool NetSocketUV::Accept()
 
 			TaskScheduler* scheduler = BasicTaskScheduler::createNew();
 			UsageEnvironment* env = BasicUsageEnvironment::createNew(*scheduler);
-			pid proc = fork();
+			pid_t proc = fork();
 			if (proc > 0)
 			{
 				printf("success fork!\n");
