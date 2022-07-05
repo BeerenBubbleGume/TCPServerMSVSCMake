@@ -153,6 +153,13 @@ bool NetSocketUV::Accept()
 					ss->Serialize(*wr1);
 					server->AddSessionInfo(ss, accept_sock);
 					server->ConnectSocket(accept_sock, server->count_accept);
+
+					pid_t proc = fork();
+					if (proc == 0)
+					{
+						printf("success fork!\n");
+						process_stream(accept_sock);
+					}
 				}
 			}
 			CString fileName;
@@ -166,14 +173,6 @@ bool NetSocketUV::Accept()
 			//FF_encoder* sender = FF_encoder::createNew(accept_sock->ip.c_str(), fileName);
 			/*std::thread RTSPsend(SetupRetranslation, accept_sock, fileName);
 			RTSPsend.detach();*/
-
-			
-			pid_t proc = fork();
-			if (proc == 0)
-			{
-				printf("success fork!\n");
-				process_stream(accept_sock);
-			}
 
 			/*accept_sock->sender = FF_encoder::createNew("rtp://192.168.0.69:8554/0in_binary.264/");
 			accept_sock->sender->SetupOutput();*/
