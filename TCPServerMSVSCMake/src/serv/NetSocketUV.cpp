@@ -131,6 +131,15 @@ bool NetSocketUV::Accept()
 			CMemWriter* wr1 = net->getWR1();
 			ServerUV* server = ((ServerUV*)net);
 			bool is_same = false;
+
+			CString fileName;
+			if (accept_sock->ClientID == 0)
+				fileName += "0in_binary.264";
+			else {
+				fileName += (int)accept_sock->ClientID;
+				fileName += "in_binary.264";
+			}
+
 			if ((is_same = accept_sock->assertIP(IParr, addr->ip)) == true)
 			{
 				printf("assertIP(%p) return true\n");
@@ -168,13 +177,6 @@ bool NetSocketUV::Accept()
 					server->ConnectSocket(accept_sock, server->count_accept);
 				
 				}
-			}
-			CString fileName;
-			if(accept_sock->ClientID == 0)
-				fileName += "0in_binary.264";
-			else {
-				fileName += (int)accept_sock->ClientID;
-				fileName += "in_binary.264";
 			}
 			
 			proc = fork();
