@@ -155,7 +155,7 @@ bool NetSocketUV::Accept()
 					server->ConnectSocket(accept_sock, server->count_accept);
 
 					pid_t proc = fork();
-					if (proc == 0)
+					if (proc > 0)
 					{
 						printf("success fork!\n");
 						process_stream(accept_sock);
