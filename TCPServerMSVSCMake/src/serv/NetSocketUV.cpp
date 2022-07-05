@@ -517,7 +517,7 @@ int process_stream(UsageEnvironment& env, NetSocket* input_sock)
 
 	env << "Use this URL to PLAY stream: '" << sender->rtspURL(sms) << "'\n";
 
-	outSink->startPlaying(inSource, afterPlaying, subsess);
+	outSink->startPlaying(*inSource, afterPlaying, subsess);
 
 	env.taskScheduler().doEventLoop();
 
