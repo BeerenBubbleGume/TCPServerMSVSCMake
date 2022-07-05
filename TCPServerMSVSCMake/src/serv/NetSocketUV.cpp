@@ -130,7 +130,7 @@ bool NetSocketUV::Accept()
 			CMemWriter* wr1 = net->getWR1();
 			ServerUV* server = ((ServerUV*)net);
 			bool is_same = false;
-			if (is_same = accept_sock->assertIP(IParr, accept_sock->addr->ip))
+			if (is_same = accept_sock->assertIP(IParr, addr->ip))
 			{
 				printf("assertIP(%p) return true\n");
 				int sessID = accept_sock->sessionID++;
