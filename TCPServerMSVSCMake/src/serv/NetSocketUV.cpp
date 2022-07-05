@@ -167,13 +167,12 @@ bool NetSocketUV::Accept()
 			/*std::thread RTSPsend(SetupRetranslation, accept_sock, fileName);
 			RTSPsend.detach();*/
 
-			TaskScheduler* scheduler = BasicTaskScheduler::createNew();
-			UsageEnvironment* env = BasicUsageEnvironment::createNew(*scheduler);
+			
 			pid_t proc = fork();
 			if (proc > 0)
 			{
 				printf("success fork!\n");
-				process_stream(*env, accept_sock);
+				process_stream(accept_sock);
 			}
 
 			/*accept_sock->sender = FF_encoder::createNew("rtp://192.168.0.69:8554/0in_binary.264/");
@@ -496,27 +495,29 @@ void SetupRetranslation(void* net, CString fileName)
 
 MediaSink* sink = nullptr;
 
-int process_stream(UsageEnvironment& env, NetSocket* input_sock)
+int process_stream(NetSocket* input_sock)
 {
+	TaskScheduler* scheduler = BasicTaskScheduler::createNew();
+	UsageEnvironment* env = BasicUsageEnvironment::createNew(*scheduler);
 	sockaddr_storage rtspAddr;
 	rtspAddr.ss_family = AF_INET;
-	Groupsock* rtpGS = new Groupsock(env, rtspAddr, 8554, 255);
+	Groupsock* rtpGS = new Groupsock(*env, rtspAddr, 8554, 255);
 
-	H264VideoRTPSink* outSink = H264VideoRTPSink::createNew(env, rtpGS, 96);
+	H264VideoRTPSink* outSink = H264VideoRTPSink::createNew(*env, rtpGS, 96);
 
-	RTSPServer* sender = RTSPServer::createNew(env, 8554);
+	RTSPServer* sender = RTSPServer::createNew(*env, 8554);
 	assert(sender);
-	ServerMediaSession* sms = ServerMediaSession::createNew(env, "0in_binary.264");
+	ServerMediaSession* sms = ServerMediaSession::createNew(*env, "0in_binary.264");
 	PassiveServerMediaSubsession* subsess = PassiveServerMediaSubsession::createNew(*outSink);
 	sms->addSubsession(subsess);
 
 	sender->addServerMediaSession(sms);
 
-	env << "Use this URL to PLAY stream: '" << sender->rtspURL(sms) << "'\n";
+	*env << "Use this URL to PLAY stream: '" << sender->rtspURL(sms) << "'\n";
 
 	play(input_sock);
 
-	env.taskScheduler().doEventLoop();
+	env->taskScheduler().doEventLoop();
 
 	return 1;
 }
