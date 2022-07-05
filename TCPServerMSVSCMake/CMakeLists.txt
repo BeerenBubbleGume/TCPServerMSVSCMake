@@ -70,7 +70,7 @@ ELSE()
 								pthread
 								rt
 								bz2
-								openssl
+								ssl
 								-ldl
 								)
 ENDIF()
