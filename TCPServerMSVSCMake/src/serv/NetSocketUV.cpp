@@ -534,7 +534,7 @@ void play(NetSocket* input_socket)
 		printf("cannot create ByteStreamMemoryBufferSource!\n");
 		exit(1);
 	}
-	sink->startPlaying(*inSource, afterPlaying, input_socket)
+	sink->startPlaying(*inSource, afterPlaying, input_socket);
 }
 
 void afterPlaying(void* clientData)
