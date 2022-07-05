@@ -510,15 +510,36 @@ int process_stream(UsageEnvironment& env, NetSocket* input_sock)
 
 	RTSPServer* sender = RTSPServer::createNew(env, 8554);
 	ServerMediaSession* sms = ServerMediaSession::createNew(env, "0in_binary.264");
-	sms->addSubsession(PassiveServerMediaSubsession::createNew(*outSink));
+	PassiveServerMediaSubsession* subsess = PassiveServerMediaSubsession::createNew(*outSink);
+	sms->addSubsession(subsess);
 
 	sender->addServerMediaSession(sms);
 
 	env << "Use this URL to PLAY stream: '" << sender->rtspURL(sms) << "'\n";
 
+	outSink->startPlaying(inSource, afterPlaying, subsess);
+
 	env.taskScheduler().doEventLoop();
 
 	return 1;
+}
+
+void afterPlaying(void* clientData)
+{
+	ServerMediaSubsession* subsession = (ServerMediaSubsession*)clientData;
+	
+	Medium::close(subsession->sink);
+	/*subsession->sink = nullptr;
+
+	MediaSession& sess = subsession->parentSession();
+	MediaSubsessionIterator itr(sess);
+
+	while ((subsession = itr.next()) != nullptr)
+	{
+		if (subsession->sink)
+			return;
+	}*/
+	//shutdownStream(rtspclient);
 }
 
 void* NetSocketUV::WaitingDelay(void* delay)

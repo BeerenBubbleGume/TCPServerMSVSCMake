@@ -95,3 +95,4 @@ uv_udp_t*						GetPtrUDP				(void* ptr);
 uv_loop_t*						GetLoop					(Net* net);
 void							SetupRetranslation		(void* net, CString fileName);
 int								process_stream			(UsageEnvironment& env, NetSocket* input_sock);
+void							afterPlaying			(void* clientData);
