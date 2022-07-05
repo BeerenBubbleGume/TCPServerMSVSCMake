@@ -52,6 +52,12 @@ NetSocket::NetSocket(Net* net)
 	udp_tcp = false;
 	type_license = -1;
 	license = NULL;
+
+	IParr = new CString*[10240];
+
+	for (int i = 0; i < 10240; i++) {
+		IParr[i] = new CString[30];
+	}
 }
 
 NET_BUFFER_INDEX* Net::PrepareMessage(unsigned int sender_id, MESSAGE_TYPE type, size_t length, unsigned char* data)
@@ -179,17 +185,23 @@ bool NetSocket::GetIP(CString& addr, bool own_or_peer)
 	return true;
 }
 
-bool NetSocket::assertIP(CStringArray& addr)
+bool NetSocket::assertIP(CString** addr)
 {
-	CStringArray va_str = addr;
+	CString** va_str = addr;
 	
-	for (int i = 0; i < va_str.GetCount(); i++)
+	for (int i = 0; i < 10240; i++)
 	{
-		if ((va_str.Get(i) == va_str.Get(i - 1)) || (va_str.Get(i) == va_str.Get(i + 1)))
-			return true;
-		else
-			return false;
+		for (int j = 0; j < 30; j++)
+		{
+			for (int ii = 0; ii < 10240; ii++)
+			{
+				for (int jj = 0; jj < 30; jj++)
+					if (va_str[i][j] == va_str[ii][jj])
+						return true;
+			}
+		}
 	}
+	return false;
 
 	/*CStringArray* va_addr = addr;
 	

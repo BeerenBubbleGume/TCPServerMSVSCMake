@@ -219,7 +219,7 @@ protected:
 	unsigned int		time;
 	int					sessionID;
 	CString				ip;
-	CStringArray		IParr;
+	CString**			IParr;
 };
 
 class NetSocket : public NET_SOCKET_INFO
