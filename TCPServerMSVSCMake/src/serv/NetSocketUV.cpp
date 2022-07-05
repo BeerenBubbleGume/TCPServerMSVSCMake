@@ -102,8 +102,9 @@ bool NetSocketUV::GetIP(CString& addr, bool own_or_peer)
 				CString d;
 				d.IntToString(port);
 				addr += d;
-				
-				
+				CStringArray array;
+				array.Add(addr);
+				IParr = array;
 			}
 		}
 		else
@@ -154,12 +155,15 @@ bool NetSocketUV::Accept()
 					server->AddSessionInfo(ss, accept_sock);
 					server->ConnectSocket(accept_sock, server->count_accept);
 
-					pid_t proc = fork();
-					if (proc > 0)
+
+
+					/*pid_t proc = fork();
+					if (proc == 0)
 					{
-						printf("success fork!\n");
+						printf("IN CHILED!\n");
 						process_stream(accept_sock);
-					}
+					}*/
+					
 				}
 			}
 			CString fileName;
