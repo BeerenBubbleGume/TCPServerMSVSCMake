@@ -497,6 +497,7 @@ void SetupRetranslation(void* net, CString fileName)
 
 int process_stream(UsageEnvironment& env, NetSocket* input_sock)
 {
+	sleep(2);
 	NetBuffer* rbuff = input_sock->GetRecvBuffer();
 	unsigned char* inData = rbuff->GetData();
 	unsigned inLen = rbuff->GetLength();
