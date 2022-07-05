@@ -59,7 +59,7 @@ void FF_encoder::SetupOutput()
 {
     
     options = NULL;
-    ret = av_dict_set(&options, "rtsp_transport", "udp", 0);
+    ret = av_dict_set(&options, "rtsp_transport", "udp_multicast", 0);
     assert(ret >= 0);
     ret = av_dict_set(&options, "announce_addr", "0.0.0.0", 0);
     assert(ret >= 0);
@@ -107,8 +107,8 @@ void FF_encoder::SetupOutput()
     assert(ret >= 0);
     ret = av_dict_set(&options, "f", "rtsp://host:port/serverPlay/", 0);
     assert(ret >= 0);*/
-
-    avformat_alloc_output_context2(&ofmt_ctx, nullptr, "udp", fOutURL);
+    
+    avformat_alloc_output_context2(&ofmt_ctx, ofmt, "rtsp", fOutURL);
     if (!ofmt_ctx) {
         fprintf(stderr, "Could not create output context\n");
         ret = AVERROR_UNKNOWN;
