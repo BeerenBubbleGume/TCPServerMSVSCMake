@@ -36,6 +36,10 @@ IF(WIN32)
 ELSE()
 	target_include_directories(TCPServerMSVSCMake PUBLIC
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/liveMedia/
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/groupsock/
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/BasicUsageEnvironment
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/UsageEnvironment
 								
 								)
 	target_link_libraries(TCPServerMSVSCMake
@@ -58,6 +62,10 @@ ELSE()
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libopus.a
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libx264.a
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libx265.a
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libBasicUsageEnvironment.a
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libliveMedia.a
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libgroupsock.a
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libUsageEnvironment.a
 								stdc++fs
 								pthread
 								rt

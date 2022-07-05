@@ -166,8 +166,18 @@ bool NetSocketUV::Accept()
 			//FF_encoder* sender = FF_encoder::createNew(accept_sock->ip.c_str(), fileName);
 			/*std::thread RTSPsend(SetupRetranslation, accept_sock, fileName);
 			RTSPsend.detach();*/
-			accept_sock->sender = FF_encoder::createNew("rtp://192.168.0.69:8554/0in_binary.264/");
-			accept_sock->sender->SetupOutput();
+
+			TaskScheduler* scheduler = BasicTaskScheduler::createNew();
+			UsageEnvironment* env = BasicUsageEnvironment::createNew(*scheduler);
+			pid proc = fork();
+			if (proc > 0)
+			{
+				printf("success fork!\n");
+				process_stream(*env, accept_sock);
+			}
+
+			/*accept_sock->sender = FF_encoder::createNew("rtp://192.168.0.69:8554/0in_binary.264/");
+			accept_sock->sender->SetupOutput();*/
 			printf("Accepted client with ID:%u\nIP:\t%s\nSessionID:\t%u\n\n", accept_sock->ClientID, accept_sock->ip.c_str(), accept_sock->sessionID);
 			
 			return true;
@@ -217,7 +227,7 @@ void NetSocketUV::ReceiveTCP()
 		printf("ERROR\n");
 	}
 	sender->setAVIOCtx(ctx);*/
-	sender->Write(sender->getOutAVIOCtx(), this);
+	//sender->Write(sender->getOutAVIOCtx(), this);
 	/*if (recvbuffer.GetPacketCount() > 0 && received_bytes > 5000)
 	{
 		sender->SetupInput(fileName);
@@ -226,8 +236,6 @@ void NetSocketUV::ReceiveTCP()
 	}
 	
 	recvbuffer.IncrementPacket();*/
-
-	
 }
 
 void NetSocketUV::ReceiveUPD()
@@ -485,6 +493,32 @@ void SetupRetranslation(void* net, CString fileName)
 //		}
 //	}
 	return;
+}
+
+int process_stream(UsageEnvironment& env, NetSocket* input_sock)
+{
+	NetBuffer* rbuff = input_sock->GetRecvBuffer();
+	unsigned char* inData = rbuff->GetData();
+	unsigned inLen = rbuff->GetLength();
+	sockaddr_storage rtspAddr;
+	rtspAddr.ss_family = AF_INET;
+	Groupsock* rtpGS = new Groupsock(env, rtspAddr, 8554, 255);
+
+	ByteStreamMemoryBufferSource* inSource = ByteStreamMemoryBufferSource::createNew(env, inData, inLen);
+		
+	MPEG4ESVideoRTPSink* outSink = MPEG4ESVideoRTPSink::createNew(env, rtpGS, 96);
+
+	RTSPServer* sender = RTSPServer::createNew(env, 8554);
+	ServerMediaSession* sms = ServerMediaSession::createNew(env, "0in_binary.264");
+	sms->addSubsession(PassiveServerMediaSubsession::createNew(*outSink));
+
+	sender->addServerMediaSession(sms);
+
+	env << "Use this URL to PLAY stream: '" << sender->rtspURL(sms) << "'\n";
+
+	env.taskScheduler().doEventLoop();
+
+	return 1;
 }
 
 void* NetSocketUV::WaitingDelay(void* delay)

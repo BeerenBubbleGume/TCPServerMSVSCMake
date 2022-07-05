@@ -37,3 +37,5 @@
 #include <uv.h>
 #include "utf.hpp"
 
+#include <liveMedia.hh>
+#include <BasicUsageEnvironment.hh>
