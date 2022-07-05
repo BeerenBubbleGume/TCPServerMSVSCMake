@@ -219,7 +219,7 @@ protected:
 	unsigned int		time;
 	int					sessionID;
 	CString				ip;
-	CString**			IParr;
+	CString*			IParr;
 };
 
 class NetSocket : public NET_SOCKET_INFO
@@ -256,7 +256,7 @@ protected:
 	friend class 		NetBuffer;
 	int					type_license;
 	CString*			license;
-	virtual bool		assertIP(CString** addr);
+	virtual bool		assertIP(CString* addr, CString& assertedIP);
 };
 
 

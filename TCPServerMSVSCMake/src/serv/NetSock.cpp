@@ -185,13 +185,15 @@ bool NetSocket::GetIP(CString& addr, bool own_or_peer)
 	return true;
 }
 
-bool NetSocket::assertIP(CString** addr)
+bool NetSocket::assertIP(CString* addr, CString& assertedIP)
 {
-	CString** va_str = addr;
+	CString* va_str = addr;
 	
 	for (int i = 0; i < 10240; i++)
 	{
-		for (int j = 0; j < 30; j++)
+		if (va_str[i] == assertedIP)
+			return true;
+		/*for (int j = 0; j < 30; j++)
 		{
 			for (int ii = 0; ii < 10240; ii++)
 			{
@@ -199,7 +201,7 @@ bool NetSocket::assertIP(CString** addr)
 					if (va_str[i][j] == va_str[ii][jj])
 						return true;
 			}
-		}
+		}*/
 	}
 	return false;
 
