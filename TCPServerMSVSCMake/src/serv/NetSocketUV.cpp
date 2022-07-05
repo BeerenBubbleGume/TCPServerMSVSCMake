@@ -528,7 +528,7 @@ void afterPlaying(void* clientData)
 {
 	ServerMediaSubsession* subsession = (ServerMediaSubsession*)clientData;
 	
-	Medium::close(subsession->sink);
+	Medium::close(subsession);
 	/*subsession->sink = nullptr;
 
 	MediaSession& sess = subsession->parentSession();
