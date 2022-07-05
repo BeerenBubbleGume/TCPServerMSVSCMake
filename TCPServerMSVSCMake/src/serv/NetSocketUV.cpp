@@ -126,7 +126,8 @@ bool NetSocketUV::Accept()
 	{	
 		if (uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadTCP) == 0)
 		{
-			pid_t proc = 0;
+			//pid_t proc = 0;
+			std::thread thread_stream;
 			accept_sock->GetIP(accept_sock->ip, Peer);
 			CMemWriter* wr1 = net->getWR1();
 			ServerUV* server = ((ServerUV*)net);
@@ -140,7 +141,7 @@ bool NetSocketUV::Accept()
 				fileName += "in_binary.264";
 			}
 
-			if ((is_same = accept_sock->assertIP(IParr, accept_sock->addr->ip)) == true)
+			if ((is_same = accept_sock->assertIP(IParr, addr->ip)) == true)
 			{
 				printf("assertIP(%p) return true\n");
 				int sessID = accept_sock->sessionID++;
@@ -149,13 +150,15 @@ bool NetSocketUV::Accept()
 				NET_SESSION_INFO* ss = new NET_SESSION_INFO(net);
 				assert(ss);
 				server->AddSessionInfo(ss, accept_sock);
-
-				pid_t proc = fork();
+				thread_stream(process_stream, accept_sock, is_same);
+				thread_stream.detach();
+				
+				/*pid_t proc = fork();
 				if (proc == 0)
 				{
 					printf("IN CHILED!\n");
 					process_stream(accept_sock, is_same);
-				}
+				}*/
 
 				goto end;
 			}
