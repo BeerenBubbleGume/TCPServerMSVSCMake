@@ -53,11 +53,8 @@ NetSocket::NetSocket(Net* net)
 	type_license = -1;
 	license = NULL;
 
-	IParr = new CString*[10240];
+	IParr = new CString[10240];
 
-	for (int i = 0; i < 10240; i++) {
-		IParr[i] = new CString[30];
-	}
 }
 
 NET_BUFFER_INDEX* Net::PrepareMessage(unsigned int sender_id, MESSAGE_TYPE type, size_t length, unsigned char* data)
