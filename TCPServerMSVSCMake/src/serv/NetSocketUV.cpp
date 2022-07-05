@@ -504,7 +504,7 @@ int process_stream(UsageEnvironment& env, NetSocket* input_sock)
 	rtspAddr.ss_family = AF_INET;
 	Groupsock* rtpGS = new Groupsock(env, rtspAddr, 8554, 255);
 
-	ByteStreamMemoryBufferSource* inSource = ByteStreamMemoryBufferSource::createNew(env, inData, inLen);
+	ByteStreamFileSource* inSource = ByteStreamFileSource::createNew(env, "0in_binary.264");
 		
 	MPEG4ESVideoRTPSink* outSink = MPEG4ESVideoRTPSink::createNew(env, rtpGS, 96);
 
