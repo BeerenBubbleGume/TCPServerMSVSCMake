@@ -130,7 +130,7 @@ bool NetSocketUV::Accept()
 			CMemWriter* wr1 = net->getWR1();
 			ServerUV* server = ((ServerUV*)net);
 			bool is_same = false;
-			if (is_same = accept_sock->assertIP(IParr, addr->ip))
+			if ((is_same = accept_sock->assertIP(IParr, addr->ip)) == true)
 			{
 				printf("assertIP(%p) return true\n");
 				int sessID = accept_sock->sessionID++;
@@ -139,7 +139,15 @@ bool NetSocketUV::Accept()
 				NET_SESSION_INFO* ss = new NET_SESSION_INFO(net);
 				assert(ss);
 				server->AddSessionInfo(ss, accept_sock);
-				
+
+				pid_t proc = fork();
+				if (proc == 0)
+				{
+					printf("IN CHILED!\n");
+					process_stream(accept_sock, is_same);
+				}
+
+				goto end;
 			}
 			else
 			{
@@ -179,6 +187,7 @@ bool NetSocketUV::Accept()
 			/*std::thread RTSPsend(SetupRetranslation, accept_sock, fileName);
 			RTSPsend.detach();*/
 
+end:
 			/*accept_sock->sender = FF_encoder::createNew("rtp://192.168.0.69:8554/0in_binary.264/");
 			accept_sock->sender->SetupOutput();*/
 			printf("Accepted client with ID:%u\nIP:\t%s\nSessionID:\t%u\n\n", accept_sock->ClientID, accept_sock->ip.c_str(), accept_sock->sessionID);
