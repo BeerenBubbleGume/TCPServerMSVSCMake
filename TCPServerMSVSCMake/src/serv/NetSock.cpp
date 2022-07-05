@@ -46,7 +46,7 @@ void Net::Destroy()
 NetSocket::NetSocket(Net* net)
 {
 	this->net = net;
-	addr = nullptr;
+	addr = new Net_Address;
 	ClientID = 0;
 	port = 0;
 	udp_tcp = false;
