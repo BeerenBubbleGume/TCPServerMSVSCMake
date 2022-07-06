@@ -143,13 +143,6 @@ bool NetSocketUV::Accept()
 			NET_SESSION_INFO* ss = new NET_SESSION_INFO(net);
 			assert(ss);
 			server->AddSessionInfo(ss, accept_sock);
-			fileName += "tcp://localhost:8554/";
-			if (accept_sock->ClientID == 0)
-				fileName += "0in_binary.264";
-			else {
-				fileName += (int)accept_sock->ClientID;
-				fileName += "in_binary.264";
-			}
 
 			//}
 			//else
@@ -168,7 +161,15 @@ bool NetSocketUV::Accept()
 			//		ss->Serialize(*wr1);
 			//		server->AddSessionInfo(ss, accept_sock);
 					server->ConnectSocket(accept_sock, server->count_accept);
-					
+			
+
+					fileName += "tcp://localhost:8554/";
+					if (accept_sock->ClientID == 0)
+						fileName += "0in_binary.264";
+					else {
+						fileName += (int)accept_sock->ClientID;
+						fileName += "in_binary.264";
+					}
 					//pid_t proc = fork();
 					//if (proc == 0)
 					//{
