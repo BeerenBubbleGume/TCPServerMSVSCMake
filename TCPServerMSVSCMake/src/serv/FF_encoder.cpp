@@ -215,7 +215,7 @@ void FF_encoder::Write(/*AVFormatContext* in, */AVIOContext* out, NetSocket* soc
         av_log(in->pb, AV_LOG_ERROR, "Error reading from input: %s.\n",
             av_err2str(ret));
     }*/
-    avio_write(client, buff, size);
+    avio_write(out, buff, size);
     avio_flush(out);
 
 end:
