@@ -126,8 +126,7 @@ bool NetSocketUV::Accept()
 	{	
 		if (uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadTCP) == 0)
 		{
-			//pid_t proc = 0;
-			std::thread thread_stream;
+			pid_t proc = 0;
 			accept_sock->GetIP(accept_sock->ip, Peer);
 			CMemWriter* wr1 = net->getWR1();
 			ServerUV* server = ((ServerUV*)net);
@@ -150,17 +149,6 @@ bool NetSocketUV::Accept()
 				NET_SESSION_INFO* ss = new NET_SESSION_INFO(net);
 				assert(ss);
 				server->AddSessionInfo(ss, accept_sock);
-				thread_stream(process_stream, accept_sock, is_same);
-				thread_stream.detach();
-				
-				/*pid_t proc = fork();
-				if (proc == 0)
-				{
-					printf("IN CHILED!\n");
-					process_stream(accept_sock, is_same);
-				}*/
-
-				goto end;
 			}
 			else
 			{
@@ -179,14 +167,26 @@ bool NetSocketUV::Accept()
 					server->AddSessionInfo(ss, accept_sock);
 					server->ConnectSocket(accept_sock, server->count_accept);
 				
+					pid_t proc = fork();
+					if (proc == 0)
+					{
+						accept_sock->sender = FF_encoder::createNew("rtp://192.168.0.69:8554/0in_binary.264/");
+						accept_sock->sender->SetupOutput();
+						/*printf("IN CHILED!\n");
+						process_stream(accept_sock, is_same);*/
+					}
+
+					goto end;
 				}
 			}
 			
 			proc = fork();
 			if (proc == 0)
 			{
-				printf("IN CHILED!\n");
-				process_stream(accept_sock, is_same);
+				accept_sock->sender = FF_encoder::createNew("rtp://192.168.0.69:8554/0in_binary.264/");
+				accept_sock->sender->SetupOutput();
+				/*printf("IN CHILED!\n");
+				process_stream(accept_sock, is_same);*/
 			}
 
 			//FF_encoder* sender = FF_encoder::createNew(accept_sock->ip.c_str(), fileName);
@@ -194,8 +194,6 @@ bool NetSocketUV::Accept()
 			RTSPsend.detach();*/
 
 end:
-			/*accept_sock->sender = FF_encoder::createNew("rtp://192.168.0.69:8554/0in_binary.264/");
-			accept_sock->sender->SetupOutput();*/
 			printf("Accepted client with ID:%u\nIP:\t%s\nSessionID:\t%u\n\n", accept_sock->ClientID, accept_sock->ip.c_str(), accept_sock->sessionID);
 			
 			return true;
@@ -244,7 +242,7 @@ void NetSocketUV::ReceiveTCP()
 		printf("ERROR\n");
 	}
 	sender->setAVIOCtx(ctx);*/
-	//sender->Write(sender->getOutAVIOCtx(), this);
+	sender->Write(sender->getOutAVIOCtx(), this);
 	/*if (recvbuffer.GetPacketCount() > 0 && received_bytes > 5000)
 	{
 		sender->SetupInput(fileName);

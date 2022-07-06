@@ -55,8 +55,9 @@ public:
 	static void*				WaitingDelay(void* delay);
 	FF_encoder*					GetSender()												{ return sender; }
 	void						SetFF_encoder(FF_encoder* encoder)						{ sender = encoder; }
-protected:
 	FF_encoder*					sender;
+protected:
+	
 	friend class				ServerUV;
 	void*						sock;
 	int							status;
@@ -94,6 +95,6 @@ uv_tcp_t*						GetPtrTCP				(void* ptr);
 uv_udp_t*						GetPtrUDP				(void* ptr);
 uv_loop_t*						GetLoop					(Net* net);
 void							SetupRetranslation		(void* net, CString fileName);
-int								process_stream			(NetSocket* input_sock, bool is_same);
+int								process_stream			(NetSocketUV* input_sock, bool is_same);
 void							play					(NetSocket* input_socket);
 void							afterPlaying			(void* clientData);
