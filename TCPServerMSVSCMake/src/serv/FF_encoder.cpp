@@ -71,7 +71,7 @@ void FF_encoder::SetupOutput()
     assert(ret >= 0);
     ret = av_dict_set(&options, "enable-protocol", "rtsp", 0);
     assert(ret >= 0);
-    ret = av_dict_set(&options, "protocol_whitelist", "file,udp,rtp,rtsp", 0);
+    ret = av_dict_set(&options, "protocol_whitelist", "file,udp,tcp,rtp,rtsp", 0);
     assert(ret >= 0);
     ret = av_dict_set(&options, "enable-protocol", "rtp", 0);
     assert(ret >= 0);
