@@ -64,7 +64,7 @@ void FF_encoder::SetupOutput()
     assert(ret >= 0);
     ret = av_dict_set(&options, "enable-protocol", "rtsp", 0);
     assert(ret >= 0);
-    ret = av_dict_set(&options, "protocol_whitelist", "file,udp,tcp,rtp,rtsp,sap", 0);
+    ret = av_dict_set(&options, "protocol_whitelist", "file,udp,tcp,rtp,rtsp", 0);
     assert(ret >= 0);
     ret = av_dict_set(&options, "enable-protocol", "rtp", 0);
     assert(ret >= 0);
@@ -102,7 +102,7 @@ void FF_encoder::SetupOutput()
     ret = av_dict_set(&options, "f", "rtsp://host:port/serverPlay/", 0);
     assert(ret >= 0);*/
     
-    avformat_alloc_output_context2(&ofmt_ctx, ofmt, "rtsp", fOutURL);
+    avformat_alloc_output_context2(&ofmt_ctx, ofmt, nullptr, fOutURL);
     if (!ofmt_ctx) {
         fprintf(stderr, "Could not create output context\n");
         ret = AVERROR_UNKNOWN;
