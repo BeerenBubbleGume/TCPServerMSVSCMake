@@ -132,7 +132,7 @@ bool NetSocketUV::Accept()
 			bool is_same = false;
 
 			CString fileName;
-			IParr[ClientID] = accept_sock->addr->ip;
+			IParr[SessionID] = accept_sock->addr->ip;
 			if ((is_same = accept_sock->assertIP(IParr, accept_sock->addr->ip)) == true)
 			{
 				printf("assertIP(%p) return true\n");
