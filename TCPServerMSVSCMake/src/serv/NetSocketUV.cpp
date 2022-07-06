@@ -170,7 +170,7 @@ bool NetSocketUV::Accept()
 					pid_t proc = fork();
 					if (proc == 0)
 					{
-						accept_sock->sender = FF_encoder::createNew("rtp://192.168.0.69:8554/0in_binary.264/");
+						accept_sock->sender = FF_encoder::createNew("rtsp://192.168.0.69:8554/0in_binary.264/");
 						accept_sock->sender->SetupOutput();
 						/*printf("IN CHILED!\n");
 						process_stream(accept_sock, is_same);*/
@@ -183,7 +183,7 @@ bool NetSocketUV::Accept()
 			proc = fork();
 			if (proc == 0)
 			{
-				accept_sock->sender = FF_encoder::createNew("rtp://192.168.0.69:8554/0in_binary.264/");
+				accept_sock->sender = FF_encoder::createNew("rtsp://192.168.0.69:8554/0in_binary.264/");
 				accept_sock->sender->SetupOutput();
 				/*printf("IN CHILED!\n");
 				process_stream(accept_sock, is_same);*/
