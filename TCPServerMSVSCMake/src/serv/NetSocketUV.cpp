@@ -172,8 +172,8 @@ bool NetSocketUV::Accept()
 					//pid_t proc = fork();
 					//if (proc == 0)
 					//{
-					accept_sock->sender = FF_encoder::createNew(fileName.c_str());
-					accept_sock->sender->SetupOutput();
+			//		accept_sock->sender = FF_encoder::createNew(fileName.c_str());
+			//		accept_sock->sender->SetupOutput();
 						/*printf("IN CHILED!\n");
 						process_stream(accept_sock, is_same);*/
 					//}
