@@ -105,7 +105,7 @@ void FF_encoder::SetupOutput()
     if (!ofmt_ctx) {
         fprintf(stderr, "Could not create output context\n");
         ret = AVERROR_UNKNOWN;
-        //goto end;
+        goto end;
     }
     ofmt_ctx->flags = AVFMT_NOFILE;
 
@@ -115,7 +115,7 @@ void FF_encoder::SetupOutput()
     //ofmt_ctx->oformat->audio_codec = AV_CODEC_ID_OPUS;
     
     avformat_network_init();
-    
+    fout = ofmt_ctx->pb;
     ret = avio_open2(&ofmt_ctx->pb, fOutURL, AVIO_FLAG_WRITE, &ofmt_ctx->interrupt_callback, &options);
     if (ret < 0) {
         fprintf(stderr, "Could not open output file '%s', av_err2str() %s\n", fOutURL, av_err2str(ret));
@@ -132,7 +132,7 @@ void FF_encoder::SetupOutput()
     if (ret < 0) {
         fprintf(stderr, "Error occurred when opening output file, %s\n", av_err2str(ret));
     }
-    //fout = ofmt_ctx->pb;
+    
     
     av_dump_format(ofmt_ctx, 0, fOutURL, 1);
     
