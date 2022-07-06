@@ -61,14 +61,6 @@ void FF_encoder::SetupOutput()
     options = NULL;
     ret = av_dict_set(&options, "rtsp_transport", "udp", 0);
     assert(ret >= 0);
-    ret = av_dict_set(&options, "announce_addr", "0.0.0.0", 0);
-    assert(ret >= 0);
-    ret = av_dict_set(&options, "ttl", "255", 0);
-    assert(ret >= 0);
-    ret = av_dict_set(&options, "timeout", "50000000000", 0);
-    assert(ret >= 0);
-    ret = av_dict_set(&options, "announce_port", "8554", 0);
-    assert(ret >= 0);
     ret = av_dict_set(&options, "enable-protocol", "rtsp", 0);
     assert(ret >= 0);
     ret = av_dict_set(&options, "protocol_whitelist", "file,udp,tcp,rtp,rtsp,sap", 0);
@@ -77,15 +69,11 @@ void FF_encoder::SetupOutput()
     assert(ret >= 0);
     ret = av_dict_set(&options, "enable-protocol", "rtsp", 0);
     assert(ret >= 0);
-    ret = av_dict_set(&options, "enable-protocol", "sap", 0);
-    assert(ret >= 0);
     ret = av_dict_set(&options, "enable-protocol", "udp", 0);
     assert(ret >= 0);
     ret = av_dict_set(&options, "enable-muxer", "rtsp", 0);
     assert(ret >= 0);
     ret = av_dict_set(&options, "enable-muxer", "rtp", 0);
-    assert(ret >= 0);
-    ret = av_dict_set(&options, "enable-muxer", "sap", 0);
     assert(ret >= 0);
 
     /*ret = av_dict_set(&options, "pix_fmt", "yuv420p", 0);
