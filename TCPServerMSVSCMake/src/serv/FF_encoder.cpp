@@ -73,11 +73,13 @@ void FF_encoder::SetupOutput()
     assert(ret >= 0);
     ret = av_dict_set(&options, "enable-protocol", "rtsp", 0);
     assert(ret >= 0);
-    ret = av_dict_set(&options, "protocol_whitelist", "file,udp,tcp,rtp,rtsp", 0);
+    ret = av_dict_set(&options, "protocol_whitelist", "file,udp,tcp,rtp,rtsp,sap", 0);
     assert(ret >= 0);
     ret = av_dict_set(&options, "enable-protocol", "rtp", 0);
     assert(ret >= 0);
     ret = av_dict_set(&options, "enable-protocol", "rtsp", 0);
+    assert(ret >= 0);
+    ret = av_dict_set(&options, "enable-protocol", "sap", 0);
     assert(ret >= 0);
     ret = av_dict_set(&options, "enable-protocol", "udp", 0);
     assert(ret >= 0);
@@ -85,7 +87,8 @@ void FF_encoder::SetupOutput()
     assert(ret >= 0);
     ret = av_dict_set(&options, "enable-muxer", "rtp", 0);
     assert(ret >= 0);
-
+    ret = av_dict_set(&options, "enable-muxer", "sap", 0);
+    assert(ret >= 0);
 
     /*ret = av_dict_set(&options, "pix_fmt", "yuv420p", 0);
     assert(ret >= 0);
