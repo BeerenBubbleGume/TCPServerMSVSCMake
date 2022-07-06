@@ -60,6 +60,7 @@ void FF_encoder::SetupOutput()
     
     options = NULL;
     AVStream* video_track = nullptr;
+    AVStream* audio_track = nullptr;
     ret = av_dict_set(&options, "rtsp_transport", "tcp", 0);
     assert(ret >= 0);
     ret = av_dict_set(&options, "enable-protocol", "rtsp", 0);
@@ -102,15 +103,15 @@ void FF_encoder::SetupOutput()
     ret = av_dict_set(&options, "f", "rtsp://host:port/serverPlay/", 0);
     assert(ret >= 0);*/
     
-    avformat_alloc_output_context2(&ofmt_ctx, nullptr, nullptr, fOutURL);
+    avformat_alloc_output_context2(&ofmt_ctx, nullptr, "rtsp", fOutURL);
     if (!ofmt_ctx) {
         fprintf(stderr, "Could not create output context\n");
         ret = AVERROR_UNKNOWN;
         goto end;
     }
     //ofmt_ctx->flags = AVFMT_NOFILE;
-    video_track = avformat_new_stream(ofmt_ctx, nullptr);
-    //AVStream* audio_track = avformat_new_stream(ofmt_ctx, NULL);
+    video_track = avformat_new_stream(ofmt_ctx, avcodec_find_encoder(AV_CODEC_ID_H264));
+    audio_track = avformat_new_stream(ofmt_ctx, avcodec_find_encoder(AV_CODEC_ID_OPUS));
     //ofmt_ctx->oformat->video_codec = AV_CODEC_ID_H264;
     //ofmt_ctx->oformat->audio_codec = AV_CODEC_ID_OPUS;
     
