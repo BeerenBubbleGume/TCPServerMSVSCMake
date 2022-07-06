@@ -150,7 +150,7 @@ void FF_encoder::SetupOutput()
             accepted = true;
         }
     }*/
-
+    return;
 end:
     if (ofmt_ctx && !(ofmt->flags & AVFMT_NOFILE))
         avio_closep(&ofmt_ctx->pb);
