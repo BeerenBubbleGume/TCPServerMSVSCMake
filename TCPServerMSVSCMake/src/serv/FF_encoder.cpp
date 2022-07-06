@@ -65,8 +65,6 @@ void FF_encoder::SetupOutput()
     assert(ret >= 0);
     ret = av_dict_set(&options, "ttl", "255", 0);
     assert(ret >= 0);
-    ret = av_dict_set(&options, "listen", "2", 0);
-    assert(ret >= 0);
     ret = av_dict_set(&options, "timeout", "50000000000", 0);
     assert(ret >= 0);
     ret = av_dict_set(&options, "announce_port", "8554", 0);
