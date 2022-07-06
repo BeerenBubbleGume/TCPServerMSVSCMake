@@ -133,6 +133,7 @@ bool NetSocketUV::Accept()
 			bool is_same = false;
 
 			CString fileName;
+			fileName += "tcp://localhost:8554/";
 			if (accept_sock->ClientID == 0)
 				fileName += "0in_binary.264";
 			else {
@@ -170,7 +171,7 @@ bool NetSocketUV::Accept()
 					//pid_t proc = fork();
 					//if (proc == 0)
 					//{
-						accept_sock->sender = FF_encoder::createNew("sap://192.168.255.255:8554/0in_binary.264/");
+						accept_sock->sender = FF_encoder::createNew(fileName.c_str());
 						accept_sock->sender->SetupOutput();
 						/*printf("IN CHILED!\n");
 						process_stream(accept_sock, is_same);*/
@@ -183,7 +184,7 @@ bool NetSocketUV::Accept()
 			/*proc = fork();
 			if (proc == 0)
 			{*/
-				accept_sock->sender = FF_encoder::createNew("tcp://127.0.0.1:8554/0in_binary.264");
+				accept_sock->sender = FF_encoder::createNew(fileName.c_str());
 				accept_sock->sender->SetupOutput();
 				/*printf("IN CHILED!\n");
 				process_stream(accept_sock, is_same);*/
