@@ -111,7 +111,7 @@ void FF_encoder::SetupOutput()
 
     AVStream* video_track = avformat_new_stream(ofmt_ctx, nullptr);
     //AVStream* audio_track = avformat_new_stream(ofmt_ctx, NULL);
-    //ofmt_ctx->oformat->video_codec = AV_CODEC_ID_H264;
+    ofmt_ctx->oformat->video_codec = AV_CODEC_ID_H264;
     //ofmt_ctx->oformat->audio_codec = AV_CODEC_ID_OPUS;
     
     avformat_network_init();
@@ -121,8 +121,7 @@ void FF_encoder::SetupOutput()
         fprintf(stderr, "Could not open output file '%s', av_err2str() %s\n", fOutURL, av_err2str(ret));
         //goto end;
     }
-    ofmt_ctx->video_codec = avcodec_find_encoder_by_name("H264");
-    //ofmt_ctx->audio_codec = avcodec_find_encoder_by_name("AAC");
+    
     ret = avformat_init_output(ofmt_ctx, &options);
     if (ret < 0)
     {
