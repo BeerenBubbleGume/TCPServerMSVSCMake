@@ -136,6 +136,7 @@ void FF_encoder::SetupOutput()
     ret = avformat_write_header(ofmt_ctx, &options);
     if (ret < 0) {
         fprintf(stderr, "Error occurred when opening output file, %s\n", av_err2str(ret));
+        goto end;
     }
     //fout = ofmt_ctx->pb;
     
