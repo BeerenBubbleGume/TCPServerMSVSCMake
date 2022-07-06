@@ -260,6 +260,17 @@ end:
     //av_write_trailer(ofmt_ctx);
 }
 
+void FF_encoder::CloseOutput()
+{
+    avio_closep(&ofmt_ctx->pb);
+    avformat_free_context(ofmt_ctx);
+
+    if (ret < 0 && ret != AVERROR_EOF) {
+        fprintf(stderr, "Error occurred: %s\n", av_err2str(ret));
+        exit(1);
+    }
+}
+
 FF_encoder::FF_encoder(const char* outURL) : fOutURL(outURL)
 {
     accepted = false;
@@ -275,14 +286,15 @@ FF_encoder::FF_encoder(const char* outURL) : fOutURL(outURL)
 FF_encoder::~FF_encoder()
 {
     /* close output */
-    if (ofmt_ctx && !(ofmt->flags & AVFMT_NOFILE))
-        avio_closep(&ofmt_ctx->pb);
-    avformat_free_context(ofmt_ctx);
 
-    av_freep(&stream_mapping);
+    accepted = false;
+    ofmt = nullptr;
+    ifmt_ctx = nullptr;
+    ofmt_ctx = nullptr;
+    fPacket = nullptr;
+    stream_index = 0;
+    stream_mapping_size = 0;
+    stream_mapping = nullptr;
 
-    if (ret < 0 && ret != AVERROR_EOF) {
-        fprintf(stderr, "Error occurred: %s\n", av_err2str(ret));
-        exit(1);
-    }
+    
 }

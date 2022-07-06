@@ -324,6 +324,7 @@ void OnReadTCP(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)
 		printf("Client disconnected!\n");
 		uvsocket->getNet()->OnLostConnection(uvsocket);
 		//OnCloseSocket((uv_handle_t*)stream);
+		uvsocket->sender->CloseOutput();
 	}
 	else
 	{

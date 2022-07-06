@@ -24,6 +24,7 @@ public:
 	AVFormatContext*			getOutFmtCtx()										{ return ofmt_ctx; }
 	AVIOContext*				getOutAVIOCtx()										{ return ofmt_ctx->pb; }
 	void						setAVIOCtx(AVIOContext* ctx)						{ ofmt_ctx->pb = ctx; }
+	void						CloseOutput();
 	bool						accepted;
 protected:
 	FF_encoder(const char* outURL);
