@@ -127,46 +127,46 @@ bool NetSocketUV::Accept()
 		{
 			//pid_t proc = 0;
 			accept_sock->GetIP(accept_sock->ip, Peer);
-			CMemWriter* wr1 = net->getWR1();
+			//CMemWriter* wr1 = net->getWR1();
 			ServerUV* server = ((ServerUV*)net);
-			bool is_same = false;
+			//bool is_same = false;
 
 			CString fileName;
 			server->count_accept++;
-			IParr[server->count_accept] = accept_sock->addr->ip;
-			if ((is_same = accept_sock->assertIP(IParr, accept_sock->addr->ip)) == true)
-			{
-				printf("assertIP(%p) return true\n");
-				int sessID = accept_sock->sessionID++;
-				(*wr1) << sessID;
-				server->sockets_nohello.Add(accept_sock);
-				NET_SESSION_INFO* ss = new NET_SESSION_INFO(net);
-				assert(ss);
-				server->AddSessionInfo(ss, accept_sock);
-				fileName += "tcp://localhost:8554/";
-				if (accept_sock->ClientID == 0)
-					fileName += "0in_binary.264";
-				else {
-					fileName += (int)accept_sock->ClientID;
-					fileName += "in_binary.264";
-				}
-
+			//IParr[server->count_accept] = accept_sock->addr->ip;
+			//if ((is_same = accept_sock->assertIP(IParr, accept_sock->addr->ip)) == true)
+			//{
+			//	printf("assertIP(%p) return true\n");
+			//	int sessID = accept_sock->sessionID++;
+			//	(*wr1) << sessID;
+			server->sockets_nohello.Add(accept_sock);
+			NET_SESSION_INFO* ss = new NET_SESSION_INFO(net);
+			assert(ss);
+			server->AddSessionInfo(ss, accept_sock);
+			fileName += "tcp://localhost:8554/";
+			if (accept_sock->ClientID == 0)
+				fileName += "0in_binary.264";
+			else {
+				fileName += (int)accept_sock->ClientID;
+				fileName += "in_binary.264";
 			}
-			else
-			{
-				
-				accept_sock->sessionID++;
-				(*wr1).Start();
-				(*wr1) << (accept_sock->ip);
-				MEM_DATA buf;
-				(*wr1).Finish(buf);
 
-				if (server->sockets_nohello.Add(accept_sock))
-				{
-					NET_SESSION_INFO* ss = new NET_SESSION_INFO(net);
-					assert(ss);
-					ss->Serialize(*wr1);
-					server->AddSessionInfo(ss, accept_sock);
+			//}
+			//else
+			//{
+				
+			//	accept_sock->sessionID++;
+			//	(*wr1).Start();
+			//	(*wr1) << (accept_sock->ip);
+			//	MEM_DATA buf;
+			//	(*wr1).Finish(buf);
+
+			//	if (server->sockets_nohello.Add(accept_sock))
+			//	{
+			//		NET_SESSION_INFO* ss = new NET_SESSION_INFO(net);
+			//		assert(ss);
+			//		ss->Serialize(*wr1);
+			//		server->AddSessionInfo(ss, accept_sock);
 					server->ConnectSocket(accept_sock, server->count_accept);
 					
 					//pid_t proc = fork();
@@ -177,18 +177,18 @@ bool NetSocketUV::Accept()
 						/*printf("IN CHILED!\n");
 						process_stream(accept_sock, is_same);*/
 					//}
-					fileName += "tcp://localhost:8554/";
-					if (accept_sock->ClientID == 0)
-						fileName += "0in_binary.264";
-					else {
-						fileName += (int)accept_sock->ClientID;
-						fileName += "in_binary.264";
-					}
+			//		fileName += "tcp://localhost:8554/";
+			//		if (accept_sock->ClientID == 0)
+			//			fileName += "0in_binary.264";
+			//		else {
+			//			fileName += (int)accept_sock->ClientID;
+			//			fileName += "in_binary.264";
+			//		}
 
 
-					goto end;
-				}
-			}
+			//		goto end;
+			//	}
+			//}
 			
 			/*proc = fork();
 			if (proc == 0)
@@ -203,7 +203,7 @@ bool NetSocketUV::Accept()
 			/*std::thread RTSPsend(SetupRetranslation, accept_sock, fileName);
 			RTSPsend.detach();*/
 
-end:
+//end:
 			printf("Accepted client with ID:%u\nIP:\t%s\nSessionID:\t%u\n\n", ClientID, accept_sock->ip.c_str(), accept_sock->sessionID);
 			
 			return true;
