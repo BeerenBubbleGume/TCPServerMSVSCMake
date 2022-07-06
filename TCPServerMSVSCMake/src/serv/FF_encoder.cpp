@@ -136,14 +136,14 @@ void FF_encoder::SetupOutput()
     
     av_dump_format(ofmt_ctx, 0, fOutURL, 1);
     
-    while (!accepted)
+    /*while (!accepted)
     {
         if ((ret = avio_accept(ofmt_ctx->pb, &client)) >= 0)
         {
             avio_handshake(client);
             accepted = true;
         }
-    }
+    }*/
 
 end:
     if (ofmt_ctx && !(ofmt->flags & AVFMT_NOFILE))
