@@ -133,8 +133,8 @@ bool NetSocketUV::Accept()
 			bool is_same = false;
 
 			CString fileName;
-			
-			if ((is_same = accept_sock->assertIP(IParr, addr->ip)) == true)
+			IParr[ClientID] += accept_sock->addr->ip;
+			if ((is_same = accept_sock->assertIP(IParr, accept_sock->addr->ip)) == true)
 			{
 				printf("assertIP(%p) return true\n");
 				int sessID = accept_sock->sessionID++;
@@ -168,7 +168,7 @@ bool NetSocketUV::Accept()
 					ss->Serialize(*wr1);
 					server->AddSessionInfo(ss, accept_sock);
 					server->ConnectSocket(accept_sock, server->count_accept);
-				
+					
 					//pid_t proc = fork();
 					//if (proc == 0)
 					//{
