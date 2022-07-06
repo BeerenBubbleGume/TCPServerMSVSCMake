@@ -135,7 +135,8 @@ void FF_encoder::SetupOutput()
         fprintf(stderr, "Could not open output file '%s', av_err2str() %s\n", fOutURL, av_err2str(ret));
         //goto end;
     }
-    
+    ofmt_ctx->video_codec = avcodec_find_encoder_by_name("H264");
+    //ofmt_ctx->audio_codec = avcodec_find_encoder_by_name("AAC");
     ret = avformat_init_output(ofmt_ctx, &options);
     if (ret < 0)
     {
@@ -147,6 +148,7 @@ void FF_encoder::SetupOutput()
         fprintf(stderr, "Error occurred when opening output file, %s\n", av_err2str(ret));
     }
     fout = ofmt_ctx->pb;
+    
     av_dump_format(ofmt_ctx, 0, fOutURL, 1);
     
     //avio_accept(fout, &client);
