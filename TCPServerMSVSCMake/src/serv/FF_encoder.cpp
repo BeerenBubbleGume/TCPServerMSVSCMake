@@ -125,7 +125,7 @@ void FF_encoder::SetupOutput()
     
     avformat_network_init();
     
-    ret = avio_open2(&ofmt_ctx->pb, nullptr, AVIO_FLAG_WRITE, &ofmt_ctx->interrupt_callback, &options);
+    ret = avio_open2(&ofmt_ctx->pb, fOutURL, AVIO_FLAG_WRITE, &ofmt_ctx->interrupt_callback, &options);
     if (ret < 0) {
         fprintf(stderr, "Could not open output file '%s', av_err2str() %s\n", fOutURL, av_err2str(ret));
         //goto end;
