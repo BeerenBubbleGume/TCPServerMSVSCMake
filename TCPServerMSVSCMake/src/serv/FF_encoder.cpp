@@ -119,7 +119,7 @@ void FF_encoder::SetupOutput()
     ret = avio_open2(&ofmt_ctx->pb, fOutURL, AVIO_FLAG_WRITE, &ofmt_ctx->interrupt_callback, &options);
     if (ret < 0) {
         fprintf(stderr, "Could not open output file '%s', av_err2str() %s\n", fOutURL, av_err2str(ret));
-        //goto end;
+        goto end;
     }
     
     ret = avformat_init_output(ofmt_ctx, &options);
@@ -136,19 +136,26 @@ void FF_encoder::SetupOutput()
     
     av_dump_format(ofmt_ctx, 0, fOutURL, 1);
     
-    //avio_accept(fout, &client);
+    while (!FF_encoder::accepted)
+    {
+        if ((ret = avio_accept(fout, &client)) >= 0)
+        {
+            avio_handshake(client);
+            FF_encoder::accepted = true;
+        }
+    }
 
-//end:
-    //if (ofmt_ctx && !(ofmt->flags & AVFMT_NOFILE))
-    //    avio_closep(&ofmt_ctx->pb);
-    //avformat_free_context(ofmt_ctx);
+end:
+    if (ofmt_ctx && !(ofmt->flags & AVFMT_NOFILE))
+        avio_closep(&ofmt_ctx->pb);
+    avformat_free_context(ofmt_ctx);
 
-    ////av_freep(&stream_mapping);
+    av_freep(&stream_mapping);
 
-    //if (ret < 0 && ret != AVERROR_EOF) {
-    //    fprintf(stderr, "Error occurred: %s\n", av_err2str(ret));
-    //    exit(1);
-    //}
+    if (ret < 0 && ret != AVERROR_EOF) {
+        fprintf(stderr, "Error occurred: %s\n", av_err2str(ret));
+        exit(1);
+    }
 }
 
 FF_encoder* FF_encoder::createNew(const char* outURL)
@@ -208,7 +215,7 @@ void FF_encoder::Write(/*AVFormatContext* in, */AVIOContext* out, NetSocket* soc
         av_log(in->pb, AV_LOG_ERROR, "Error reading from input: %s.\n",
             av_err2str(ret));
     }*/
-    avio_write(out, buff, size);
+    avio_write(client, buff, size);
     avio_flush(out);
 
 end:
@@ -249,6 +256,7 @@ end:
 
 FF_encoder::FF_encoder(const char* outURL) : fOutURL(outURL)
 {
+    FF_encoder::accepted = false;
     ofmt = nullptr;
     ifmt_ctx = nullptr;
     ofmt_ctx = nullptr;
