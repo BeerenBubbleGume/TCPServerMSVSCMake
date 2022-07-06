@@ -77,6 +77,10 @@ void FF_encoder::SetupOutput()
     assert(ret >= 0);
     ret = av_dict_set(&options, "enable-muxer", "rtp", 0);
     assert(ret >= 0);
+    ret = av_dict_set(&options, "codec:v", "H264", 0);
+    assert(ret >= 0);
+    /*ret = av_dict_set(&options, "codec:a", "H264", 0);
+    assert(ret >= 0);*/
 
     /*ret = av_dict_set(&options, "pix_fmt", "yuv420p", 0);
     assert(ret >= 0);
