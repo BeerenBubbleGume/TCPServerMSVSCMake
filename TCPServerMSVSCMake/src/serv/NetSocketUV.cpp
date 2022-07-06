@@ -204,7 +204,7 @@ bool NetSocketUV::Accept()
 			RTSPsend.detach();*/
 
 //end:
-			printf("Accepted client with ID:%u\nIP:\t%s\nSessionID:\t%u\n\n", ClientID, accept_sock->ip.c_str(), accept_sock->sessionID);
+			printf("Accepted client with ID:%u\nIP:\t%s\nSessionID:\t%u\n\n", accept_sock->ClientID, accept_sock->ip.c_str(), accept_sock->sessionID);
 			
 			return true;
 		}
