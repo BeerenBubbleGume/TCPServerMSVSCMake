@@ -256,7 +256,7 @@ end:
 
 FF_encoder::FF_encoder(const char* outURL) : fOutURL(outURL)
 {
-    FF_encoder::accepted = false;
+    accepted = false;
     ofmt = nullptr;
     ifmt_ctx = nullptr;
     ofmt_ctx = nullptr;
