@@ -59,7 +59,7 @@ void FF_encoder::SetupOutput()
 {
     
     options = NULL;
-    //AVStream* video_track = nullptr;
+    AVStream* video_track = nullptr;
     //AVStream* audio_track = nullptr;
     ret = av_dict_set(&options, "rtsp_transport", "tcp", 0);
     assert(ret >= 0);
@@ -114,7 +114,7 @@ void FF_encoder::SetupOutput()
         goto end;
     }
     //ofmt_ctx->flags = AVFMT_NOFILE;
-    //video_track = avformat_new_stream(ofmt_ctx, avcodec_find_encoder(AV_CODEC_ID_H264));
+    video_track = avformat_new_stream(ofmt_ctx, nullptr);
     //audio_track = avformat_new_stream(ofmt_ctx, avcodec_find_encoder(AV_CODEC_ID_OPUS));
     //ofmt_ctx->oformat->video_codec = AV_CODEC_ID_H264;
     //ofmt_ctx->oformat->audio_codec = AV_CODEC_ID_OPUS;
