@@ -133,14 +133,7 @@ bool NetSocketUV::Accept()
 			bool is_same = false;
 
 			CString fileName;
-			fileName += "tcp://localhost:8554/";
-			if (accept_sock->ClientID == 0)
-				fileName += "0in_binary.264";
-			else {
-				fileName += (int)accept_sock->ClientID;
-				fileName += "in_binary.264";
-			}
-
+			
 			if ((is_same = accept_sock->assertIP(IParr, addr->ip)) == true)
 			{
 				printf("assertIP(%p) return true\n");
@@ -150,6 +143,14 @@ bool NetSocketUV::Accept()
 				NET_SESSION_INFO* ss = new NET_SESSION_INFO(net);
 				assert(ss);
 				server->AddSessionInfo(ss, accept_sock);
+				fileName += "tcp://localhost:8554/";
+				if (accept_sock->ClientID == 0)
+					fileName += "0in_binary.264";
+				else {
+					fileName += (int)accept_sock->ClientID;
+					fileName += "in_binary.264";
+				}
+
 			}
 			else
 			{
@@ -171,11 +172,19 @@ bool NetSocketUV::Accept()
 					//pid_t proc = fork();
 					//if (proc == 0)
 					//{
-						accept_sock->sender = FF_encoder::createNew(fileName.c_str());
-						accept_sock->sender->SetupOutput();
+					accept_sock->sender = FF_encoder::createNew(fileName.c_str());
+					accept_sock->sender->SetupOutput();
 						/*printf("IN CHILED!\n");
 						process_stream(accept_sock, is_same);*/
 					//}
+					fileName += "tcp://localhost:8554/";
+					if (accept_sock->ClientID == 0)
+						fileName += "0in_binary.264";
+					else {
+						fileName += (int)accept_sock->ClientID;
+						fileName += "in_binary.264";
+					}
+
 
 					goto end;
 				}
