@@ -22,7 +22,7 @@ public:
 	void						Write(/*AVFormatContext* in, */AVIOContext* out, NetSocket* sock);
 	AVFormatContext*			getInFmtCtx()										{ return ifmt_ctx; }
 	AVFormatContext*			getOutFmtCtx()										{ return ofmt_ctx; }
-	AVIOContext*				getOutAVIOCtx()										{ return fout; }
+	AVIOContext*				getOutAVIOCtx()										{ return ofmt_ctx->pb; }
 	void						setAVIOCtx(AVIOContext* ctx)						{ fout = ctx; }
 	bool						accepted;
 protected:
@@ -32,7 +32,7 @@ protected:
 	AVFormatContext*			ifmt_ctx, *ofmt_ctx;
 	AVPacket*					fPacket;
 	AVDictionary*				options;
-	AVIOContext*				fout;
+	//AVIOContext*				fout;
 	AVIOContext*				client;
 	FILE*						fFile;
 	const AVCodec*				fCodec;
