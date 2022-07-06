@@ -115,8 +115,7 @@ bool NetSocket::Create(int port, bool udp_tcp, bool listen)
 {
 	this->udp_tcp = udp_tcp;
 	this->port = port;
-	if (!udp_tcp)
-		this->addr = new Net_Address;
+	this->addr = new Net_Address;
 	return true;
 }
 
