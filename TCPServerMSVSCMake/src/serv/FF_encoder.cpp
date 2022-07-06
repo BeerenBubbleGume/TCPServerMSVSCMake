@@ -148,7 +148,7 @@ void FF_encoder::SetupOutput()
     }
     fout = ofmt_ctx->pb;
     av_dump_format(ofmt_ctx, 0, fOutURL, 1);
-
+    
     //avio_accept(fout, &client);
 
 //end:
