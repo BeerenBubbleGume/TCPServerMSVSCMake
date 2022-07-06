@@ -133,11 +133,11 @@ void FF_encoder::SetupOutput()
         printf("ERROR avformat_init_output(%p, %p): %s.\n", ofmt_ctx, options, av_err2str(ret));
     }*/
 
-    ret = avformat_write_header(ofmt_ctx, &options);
+    /*ret = avformat_write_header(ofmt_ctx, &options);
     if (ret < 0) {
         fprintf(stderr, "Error occurred when opening output file, %s\n", av_err2str(ret));
         goto end;
-    }
+    }*/
     //fout = ofmt_ctx->pb;
     
     av_dump_format(ofmt_ctx, 0, fOutURL, 1);
