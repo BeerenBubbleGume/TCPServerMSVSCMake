@@ -136,6 +136,15 @@ bool NetSocketUV::Accept()
 			server->count_accept++;
 			server->sockets_nohello.Add(accept_sock);
 
+			fileName += "tcp://localhost:8554/";
+			if (accept_sock->ClientID == 0)
+				fileName += "0in_binary.264";
+			else {
+				IDstr.IntToString(accept_sock->ClientID);
+				fileName += IDstr;
+				fileName += "in_binary.264";
+			}
+
 			accept_sock->sender = FF_encoder::createNew(fileName.c_str());
 			accept_sock->sender->SetupOutput();
 			
