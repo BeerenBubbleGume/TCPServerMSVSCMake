@@ -131,29 +131,41 @@ bool NetSocketUV::Accept()
 
 			CString fileName;
 			CString IDstr;
-			//IParr[accept_sock->ClientID + 1] += accept_sock->addr->ip;
-			assert(IParr[accept_sock->ClientID] == accept_sock->getSockIP());
-			server->count_accept++;
-			server->sockets_nohello.Add(accept_sock);
-			server->ConnectSocket(accept_sock, server->count_accept);
-			if (!accept_sock->sessionID)
+			IParr[accept_sock->ClientID + 1] += accept_sock->addr->ip;
+			if (assertIP(IParr, accept_sock->addr->ip))
 			{
-				NET_SERVER_SESSION* ss = new NET_SERVER_SESSION(server);
-				server->AddSessionInfo(ss, accept_sock);
+				server->count_accept++;
+				server->sockets_nohello.Add(accept_sock);
 			}
+			else
+			{
+				server->count_accept++;
+				server->sockets_nohello.Add(accept_sock);
+				server->ConnectSocket(accept_sock, server->count_accept);
+				if (!accept_sock->sessionID)
+				{
+					NET_SERVER_SESSION* ss = new NET_SERVER_SESSION(server);
+					server->AddSessionInfo(ss, accept_sock);
+				}
 
-			fileName += "tcp://localhost:8554/";
-			if (accept_sock->ClientID == 0)
-				fileName += "0in_binary.264";
-			else {
-				IDstr.IntToString(accept_sock->ClientID);
-				fileName += IDstr;
-				fileName += "in_binary.264";
+				
 			}
-
-			accept_sock->sender = FF_encoder::createNew(fileName.c_str());
-			accept_sock->sender->SetupOutput();
 			
+			if (!is_same)
+			{
+				fileName += "tcp://localhost:8554/";
+				if (accept_sock->ClientID == 0)
+					fileName += "0in_binary.264";
+				else {
+					IDstr.IntToString(accept_sock->ClientID);
+					fileName += IDstr;
+					fileName += "in_binary.264";
+				}
+
+				accept_sock->sender = FF_encoder::createNew(fileName.c_str());
+				accept_sock->sender->SetupOutput();
+			}
+
 			printf("Accepted client with ID:%u\nIP:\t%s\nSessionID:\t%u\n\n", accept_sock->ClientID, accept_sock->ip.c_str(), accept_sock->sessionID);
 			
 			return true;
