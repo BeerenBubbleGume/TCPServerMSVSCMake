@@ -128,21 +128,17 @@ bool NetSocketUV::Accept()
 			std::thread RTSPsend;
 			//pid_t proc = 0;
 			accept_sock->GetIP(accept_sock->ip, Peer);
-			CMemWriter* wr1 = net->getWR1();
 			ServerUV* server = ((ServerUV*)net);
 			bool is_same = false;
 
 			CString fileName;
 			CString IDstr;
 			server->count_accept++;
-			/*if (accept_sock->sessionID == -1)
-				accept_sock->sessionID++;
-			IParr[accept_sock->sessionID] += accept_sock->addr->ip;*/
+			IParr[accept_sock->sessionID + 1] += accept_sock->addr->ip;
 			if ((is_same = accept_sock->assertIP(IParr, accept_sock->addr->ip)) == true)
 			{
 				printf("assertIP(%p) return true\n");
 				int sessID = accept_sock->sessionID++;
-				(*wr1) << sessID;
 				server->sockets_nohello.Add(accept_sock);
 				NET_SESSION_INFO* ss = new NET_SESSION_INFO(net);
 				assert(ss);
@@ -168,16 +164,10 @@ bool NetSocketUV::Accept()
 			{
 				
 				accept_sock->sessionID++;
-				(*wr1).Start();
-				(*wr1) << (accept_sock->ip);
-				MEM_DATA buf;
-				(*wr1).Finish(buf);
-
 				if (server->sockets_nohello.Add(accept_sock))
 				{
 					NET_SESSION_INFO* ss = new NET_SESSION_INFO(net);
 					assert(ss);
-					ss->Serialize(*wr1);
 					server->AddSessionInfo(ss, accept_sock);
 					server->ConnectSocket(accept_sock, server->count_accept);
 
@@ -534,72 +524,72 @@ void SetupRetranslation(void* net, CString fileName)
 	return;
 }
 
-MediaSink* sink = nullptr;
+//MediaSink* sink = nullptr;
 
-int process_stream(NetSocket* input_sock, bool is_same)
-{
-	if (is_same == false)
-	{
-		TaskScheduler* scheduler = BasicTaskScheduler::createNew();
-		UsageEnvironment* env = BasicUsageEnvironment::createNew(*scheduler);
-		if (!env)
-		{
-			printf("cannot create liveMedia::UsageEnvironment!\n");
-			exit(1);
-		}
-		sockaddr_storage rtspAddr;
-		rtspAddr.ss_family = AF_INET;
-		Groupsock* rtpGS = new Groupsock(*env, rtspAddr, 8554, 255);
-
-		H264VideoRTPSink* outSink = H264VideoRTPSink::createNew(*env, rtpGS, 96);
-
-		RTSPServer* sender = RTSPServer::createNew(*env, 8554);
-		if (!sender)
-		{
-			printf("cannot create liveMedia::RTSPServer!\n");
-			exit(1);
-		}
-		ServerMediaSession* sms = ServerMediaSession::createNew(*env, "0in_binary.264");
-		PassiveServerMediaSubsession* subsess = PassiveServerMediaSubsession::createNew(*outSink);
-		sms->addSubsession(subsess);
-
-		sender->addServerMediaSession(sms);
-
-		*env << "Use this URL to PLAY stream: '" << sender->rtspURL(sms) << "'\n";
-
-		play(input_sock);
-
-		env->taskScheduler().doEventLoop();
-
-		return 1;
-	}
-	else
-	{
-		printf("Same IP detected!\n");
-		return 0;
-	}
-}
-
-void play(NetSocket* input_socket)
-{
-	NetBuffer* rbuff = input_socket->GetRecvBuffer();
-	unsigned char* inData = rbuff->GetData();
-	unsigned inLen = rbuff->GetLength();
-
-	ByteStreamMemoryBufferSource* inSource = ByteStreamMemoryBufferSource::createNew(sink->envir(), inData, inLen, False);
-	if (!inSource)
-	{
-		printf("cannot create ByteStreamMemoryBufferSource!\n");
-		exit(1);
-	}
-	sink->startPlaying(*inSource, afterPlaying, input_socket);
-}
-
-void afterPlaying(void* clientData)
-{
-	NetSocket* sock = (NetSocket*)clientData;
-	play(sock);
-}
+//int process_stream(NetSocket* input_sock, bool is_same)
+//{
+//	if (is_same == false)
+//	{
+//		TaskScheduler* scheduler = BasicTaskScheduler::createNew();
+//		UsageEnvironment* env = BasicUsageEnvironment::createNew(*scheduler);
+//		if (!env)
+//		{
+//			printf("cannot create liveMedia::UsageEnvironment!\n");
+//			exit(1);
+//		}
+//		sockaddr_storage rtspAddr;
+//		rtspAddr.ss_family = AF_INET;
+//		Groupsock* rtpGS = new Groupsock(*env, rtspAddr, 8554, 255);
+//
+//		H264VideoRTPSink* outSink = H264VideoRTPSink::createNew(*env, rtpGS, 96);
+//
+//		RTSPServer* sender = RTSPServer::createNew(*env, 8554);
+//		if (!sender)
+//		{
+//			printf("cannot create liveMedia::RTSPServer!\n");
+//			exit(1);
+//		}
+//		ServerMediaSession* sms = ServerMediaSession::createNew(*env, "0in_binary.264");
+//		PassiveServerMediaSubsession* subsess = PassiveServerMediaSubsession::createNew(*outSink);
+//		sms->addSubsession(subsess);
+//
+//		sender->addServerMediaSession(sms);
+//
+//		*env << "Use this URL to PLAY stream: '" << sender->rtspURL(sms) << "'\n";
+//
+//		play(input_sock);
+//
+//		env->taskScheduler().doEventLoop();
+//
+//		return 1;
+//	}
+//	else
+//	{
+//		printf("Same IP detected!\n");
+//		return 0;
+//	}
+//}
+//
+//void play(NetSocket* input_socket)
+//{
+//	NetBuffer* rbuff = input_socket->GetRecvBuffer();
+//	unsigned char* inData = rbuff->GetData();
+//	unsigned inLen = rbuff->GetLength();
+//
+//	ByteStreamMemoryBufferSource* inSource = ByteStreamMemoryBufferSource::createNew(sink->envir(), inData, inLen, False);
+//	if (!inSource)
+//	{
+//		printf("cannot create ByteStreamMemoryBufferSource!\n");
+//		exit(1);
+//	}
+//	sink->startPlaying(*inSource, afterPlaying, input_socket);
+//}
+//
+//void afterPlaying(void* clientData)
+//{
+//	NetSocket* sock = (NetSocket*)clientData;
+//	play(sock);
+//}
 
 void* NetSocketUV::WaitingDelay(void* delay)
 {
