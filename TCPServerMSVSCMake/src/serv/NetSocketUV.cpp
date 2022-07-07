@@ -158,7 +158,7 @@ bool NetSocketUV::Accept()
 				}
 
 				accept_sock->sender = FF_encoder::createNew(fileName.c_str());
-				RTSPsend(SetupRetranslation, accept_sock, fileName);
+				RTSPsend = (SetupRetranslation, accept_sock, fileName);
 				RTSPsend.detach();
 
 			}
@@ -189,7 +189,7 @@ bool NetSocketUV::Accept()
 					}
 
 					accept_sock->sender = FF_encoder::createNew(fileName.c_str());
-					std::thread RTSPsend(SetupRetranslation, accept_sock, fileName);
+					RTSPsend = (SetupRetranslation, accept_sock, fileName);
 					RTSPsend.detach();
 
 					//proc = fork();
@@ -205,7 +205,7 @@ bool NetSocketUV::Accept()
 			}
 
 			accept_sock->sender = FF_encoder::createNew(fileName.c_str());
-			RTSPsend(SetupRetranslation, accept_sock, fileName);
+			RTSPsend = (SetupRetranslation, accept_sock, fileName);
 			RTSPsend.detach();
 
 end:
