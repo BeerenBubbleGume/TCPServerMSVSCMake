@@ -829,7 +829,7 @@ bool Server::Create(bool internet)
 	if (Net::Create(internet))
 	{
 		NetSocket* socket = NewSocket(this);
-		bool is = socket->Create(PORT_SERVER_TCP, internet, true);
+		bool is = socket->Create(SERVER_TCP_PORT, internet, true);
 		if (is)
 		{
 			ConnectSocket(socket);
