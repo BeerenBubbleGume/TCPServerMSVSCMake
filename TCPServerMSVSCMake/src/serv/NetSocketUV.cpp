@@ -125,82 +125,20 @@ bool NetSocketUV::Accept()
 	{	
 		if (uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadTCP) == 0)
 		{
-			std::thread RTSPsend;
-			//pid_t proc = 0;
 			accept_sock->GetIP(accept_sock->ip, Peer);
 			ServerUV* server = ((ServerUV*)net);
 			bool is_same = false;
 
 			CString fileName;
 			CString IDstr;
+			//IParr[accept_sock->ClientID + 1] += accept_sock->addr->ip;
+			
 			server->count_accept++;
-			IParr[accept_sock->ClientID + 1] += accept_sock->addr->ip;
-			if ((is_same = accept_sock->assertIP(IParr, accept_sock->addr->ip)) == true)
-			{
-				printf("assertIP(%p) return true\n", IParr);
-				int sessID = accept_sock->sessionID++;
-				server->sockets_nohello.Add(accept_sock);
-				NET_SESSION_INFO* ss = new NET_SESSION_INFO(net);
-				assert(ss);
-				server->AddSessionInfo(ss, accept_sock);
+			server->sockets_nohello.Add(accept_sock);
 
-				fileName += "tcp://localhost:8554/";
-				if (accept_sock->ClientID == 0)
-					fileName += "0in_binary.264";
-				else {
-					IDstr.IntToString(accept_sock->ClientID);
-					fileName += IDstr;
-					fileName += "in_binary.264";
-				}
-				/*RTSPsend = (SetupRetranslation, accept_sock, fileName);
-				RTSPsend.detach();*/
-			}
-			else
-			{
-				
-				accept_sock->sessionID++;
-				if (server->sockets_nohello.Add(accept_sock))
-				{
-					NET_SESSION_INFO* ss = new NET_SESSION_INFO(net);
-					assert(ss);
-					server->AddSessionInfo(ss, accept_sock);
-					server->ConnectSocket(accept_sock, server->count_accept);
-
-					fileName += "tcp://localhost:8554/";
-					if (accept_sock->ClientID == 0)
-						fileName += "0in_binary.264";
-					else {
-						IDstr.IntToString(accept_sock->ClientID);
-						fileName += IDstr;
-						fileName += "in_binary.264";
-					}					
-					/*RTSPsend = (SetupRetranslation, accept_sock, fileName);
-					RTSPsend.detach();*/
-					//proc = fork();
-					//if (proc == 0)
-					//{
-					//accept_sock->sender = FF_encoder::createNew(fileName.c_str());
-					//accept_sock->sender->SetupOutput();
-					//	/*printf("IN CHILED!\n");
-					//	process_stream(accept_sock, is_same);*/
-					//}
-					goto end;
-				}
-			}
-
-			/*accept_sock->sender = FF_encoder::createNew(fileName.c_str());
-			accept_sock->sender->SetupOutput();*/
-
-			/*RTSPsend = (SetupRetranslation, accept_sock, fileName);
-			RTSPsend.detach();*/
-
-			if (!is_same)
-			{
-				accept_sock->sender = FF_encoder::createNew(fileName.c_str());
-				accept_sock->sender->SetupOutput();
-			}
-
-end:
+			accept_sock->sender = FF_encoder::createNew(fileName.c_str());
+			accept_sock->sender->SetupOutput();
+			
 			printf("Accepted client with ID:%u\nIP:\t%s\nSessionID:\t%u\n\n", accept_sock->ClientID, accept_sock->ip.c_str(), accept_sock->sessionID);
 			
 			return true;
