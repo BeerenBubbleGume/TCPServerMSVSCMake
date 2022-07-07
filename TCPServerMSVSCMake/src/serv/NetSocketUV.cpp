@@ -103,7 +103,7 @@ bool NetSocketUV::GetIP(CString& addr, bool own_or_peer)
 				CString d;
 				d.IntToString(port);
 				addr += d;
-				this->addr->ip = IParr[ClientID];
+				//this->addr->ip = IParr[ClientID];
 				
 			}
 		}
@@ -131,8 +131,8 @@ bool NetSocketUV::Accept()
 
 			CString fileName;
 			CString IDstr;
-			IParr[server->count_accept] = accept_sock->addr->ip;
-			if (assertIP(&IParr, accept_sock->addr->ip))
+			IParr[server->count_accept] = accept_sock->ip;
+			if (assertIP(&IParr, accept_sock->ip))
 			{
 				server->count_accept++;
 				server->sockets_nohello.Add(accept_sock);
