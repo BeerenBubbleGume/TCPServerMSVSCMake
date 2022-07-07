@@ -137,7 +137,7 @@ bool NetSocketUV::Accept()
 			server->count_accept++;
 			if (accept_sock->sessionID == -1)
 				accept_sock->sessionID++;
-			IParr[accept_sock->sessionID] += accept_sock->addr->ip;
+			//IParr[accept_sock->sessionID] += accept_sock->addr->ip;
 			if ((is_same = accept_sock->assertIP(IParr, accept_sock->addr->ip)) == true)
 			{
 				printf("assertIP(%p) return true\n");
@@ -158,8 +158,10 @@ bool NetSocketUV::Accept()
 				}
 
 				accept_sock->sender = FF_encoder::createNew(fileName.c_str());
-				RTSPsend = (SetupRetranslation, accept_sock, fileName);
-				RTSPsend.detach();
+				accept_sock->sender->SetupOutput();
+
+				/*RTSPsend = (SetupRetranslation, accept_sock, fileName);
+				RTSPsend.detach();*/
 
 			}
 			else
@@ -189,8 +191,10 @@ bool NetSocketUV::Accept()
 					}
 
 					accept_sock->sender = FF_encoder::createNew(fileName.c_str());
-					RTSPsend = (SetupRetranslation, accept_sock, fileName);
-					RTSPsend.detach();
+					accept_sock->sender->SetupOutput();
+					
+					/*RTSPsend = (SetupRetranslation, accept_sock, fileName);
+					RTSPsend.detach();*/
 
 					//proc = fork();
 					//if (proc == 0)
@@ -205,8 +209,10 @@ bool NetSocketUV::Accept()
 			}
 
 			accept_sock->sender = FF_encoder::createNew(fileName.c_str());
-			RTSPsend = (SetupRetranslation, accept_sock, fileName);
-			RTSPsend.detach();
+			accept_sock->sender->SetupOutput();
+
+			/*RTSPsend = (SetupRetranslation, accept_sock, fileName);
+			RTSPsend.detach();*/
 
 end:
 			printf("Accepted client with ID:%u\nIP:\t%s\nSessionID:\t%u\n\n", accept_sock->ClientID, accept_sock->ip.c_str(), accept_sock->sessionID);
