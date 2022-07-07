@@ -53,7 +53,7 @@ NetSocket::NetSocket(Net* net)
 	type_license = -1;
 	license = NULL;
 
-	IParr = new CString[10240];
+	//IParr = new CString[10240];
 
 }
 
@@ -181,9 +181,9 @@ bool NetSocket::GetIP(CString& addr, bool own_or_peer)
 	return true;
 }
 
-bool NetSocket::assertIP(CString* addr, CString& assertedIP)
+bool NetSocket::assertIP(CString* IParr, CString& assertedIP)
 {
-	CString* va_str = addr;
+	CString* va_str = IParr;
 	
 	for (int i = 0; i < 10240; i++)
 	{
