@@ -152,13 +152,8 @@ bool NetSocketUV::Accept()
 					fileName += IDstr;
 					fileName += "in_binary.264";
 				}
-
-				accept_sock->sender = FF_encoder::createNew(fileName.c_str());
-				accept_sock->sender->SetupOutput();
-
 				/*RTSPsend = (SetupRetranslation, accept_sock, fileName);
 				RTSPsend.detach();*/
-
 			}
 			else
 			{
@@ -178,14 +173,9 @@ bool NetSocketUV::Accept()
 						IDstr.IntToString(accept_sock->ClientID);
 						fileName += IDstr;
 						fileName += "in_binary.264";
-					}
-
-					accept_sock->sender = FF_encoder::createNew(fileName.c_str());
-					accept_sock->sender->SetupOutput();
-					
+					}					
 					/*RTSPsend = (SetupRetranslation, accept_sock, fileName);
 					RTSPsend.detach();*/
-
 					//proc = fork();
 					//if (proc == 0)
 					//{
@@ -203,6 +193,12 @@ bool NetSocketUV::Accept()
 
 			/*RTSPsend = (SetupRetranslation, accept_sock, fileName);
 			RTSPsend.detach();*/
+
+			if (!is_same)
+			{
+				accept_sock->sender = FF_encoder::createNew(fileName.c_str());
+				accept_sock->sender->SetupOutput();
+			}
 
 end:
 			printf("Accepted client with ID:%u\nIP:\t%s\nSessionID:\t%u\n\n", accept_sock->ClientID, accept_sock->ip.c_str(), accept_sock->sessionID);
