@@ -132,10 +132,15 @@ bool NetSocketUV::Accept()
 			CString fileName;
 			CString IDstr;
 			//IParr[accept_sock->ClientID + 1] += accept_sock->addr->ip;
-			
+			assert(IParr[accept_sock->ClientID] == accept_sock->getSockIP());
 			server->count_accept++;
 			server->sockets_nohello.Add(accept_sock);
 			server->ConnectSocket(accept_sock, server->count_accept);
+			if (!accept_sock->sessionID)
+			{
+				NET_SERVER_SESSION* ss = new NET_SERVER_SESSION(server);
+				server->AddSessionInfo(ss, accept_sock);
+			}
 
 			fileName += "tcp://localhost:8554/";
 			if (accept_sock->ClientID == 0)
