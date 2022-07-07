@@ -131,7 +131,7 @@ bool NetSocketUV::Accept()
 			CString fileName;
 			CString IDstr;
 			IParr[server->count_accept] = accept_sock->ip;
-			if (assertIP(IParr, accept_sock->ip))
+			if ((is_same = assertIP(IParr, accept_sock->ip)) == true)
 			{
 				server->count_accept++;
 				server->sockets_nohello.Add(accept_sock);
@@ -642,6 +642,13 @@ void ServerUV::StartUVServer(bool internet)
 		if (res)
 		{
 			printf("Success create server\n"/*, UDP is: %s", udp_tcp ? "true" : "false"*/);
+			NetSocketUV* rtsp_sock = (NetSocketUV*)NewSocket(this);
+			res = rtsp_sock->Create(8554, true, true);
+			if (res)
+			{
+				printf("Listen port 8554 to connections!\n");
+				ConnectSocket(rtsp_sock);
+			}
 			UpdateNet();
 		}
 	}

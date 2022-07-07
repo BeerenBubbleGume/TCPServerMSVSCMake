@@ -838,12 +838,12 @@ bool Server::Create(bool internet)
 			assert(socket->ClientID == SERVER_ID);
 
 			socket = NewSocket(this);
-			/*if (internet)
+			if (internet)
 			{
 				is = socket->Create(SERVER_TCP_PORT, true, true);
 			}
 			else
-				is = socket->Create(SERVER_UDP_PORT, false, true);*/
+				is = socket->Create(SERVER_UDP_PORT, false, true);
 			if (is)
 			{
 				ConnectSocket(socket);
