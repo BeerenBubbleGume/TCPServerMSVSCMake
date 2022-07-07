@@ -133,6 +133,8 @@ bool NetSocketUV::Accept()
 
 			CString fileName;
 			server->count_accept++;
+			if (accept_sock->sessionID == -1)
+				accept_sock->sessionID++;
 			IParr[accept_sock->sessionID] += accept_sock->addr->ip;
 			if ((is_same = accept_sock->assertIP(IParr, accept_sock->addr->ip)) == true)
 			{
