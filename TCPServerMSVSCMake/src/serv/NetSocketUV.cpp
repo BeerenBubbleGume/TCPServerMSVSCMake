@@ -127,7 +127,7 @@ bool NetSocketUV::Accept()
 		{
 			//pid_t proc = 0;
 			accept_sock->GetIP(accept_sock->ip, Peer);
-			//CMemWriter* wr1 = net->getWR1();
+			CMemWriter* wr1 = net->getWR1();
 			ServerUV* server = ((ServerUV*)net);
 			bool is_same = false;
 
@@ -138,7 +138,7 @@ bool NetSocketUV::Accept()
 			{
 				printf("assertIP(%p) return true\n");
 				int sessID = accept_sock->sessionID++;
-			//	(*wr1) << sessID;
+				(*wr1) << sessID;
 				server->sockets_nohello.Add(accept_sock);
 				NET_SESSION_INFO* ss = new NET_SESSION_INFO(net);
 				assert(ss);
