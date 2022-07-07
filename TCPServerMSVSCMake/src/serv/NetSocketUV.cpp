@@ -150,7 +150,7 @@ bool NetSocketUV::Accept()
 				if (accept_sock->ClientID == 0)
 					fileName += "0in_binary.264";
 				else {
-					fileName += (int)accept_sock->ClientID;
+					fileName.IntToString(accept_sock->ClientID);
 					fileName += "in_binary.264";
 				}
 
@@ -176,7 +176,7 @@ bool NetSocketUV::Accept()
 					if (accept_sock->ClientID == 0)
 						fileName += "0in_binary.264";
 					else {
-						fileName += (int)accept_sock->ClientID;
+						fileName.IntToString(accept_sock->ClientID);
 						fileName += "in_binary.264";
 					}
 
