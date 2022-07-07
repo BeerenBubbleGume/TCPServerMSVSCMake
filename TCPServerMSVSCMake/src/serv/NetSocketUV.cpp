@@ -135,6 +135,7 @@ bool NetSocketUV::Accept()
 			
 			server->count_accept++;
 			server->sockets_nohello.Add(accept_sock);
+			server->ConnectSocket(accept_sock, server->count_accept);
 
 			fileName += "tcp://localhost:8554/";
 			if (accept_sock->ClientID == 0)
