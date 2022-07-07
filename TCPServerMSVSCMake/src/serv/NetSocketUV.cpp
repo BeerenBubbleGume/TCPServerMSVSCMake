@@ -114,7 +114,7 @@ bool NetSocketUV::GetIP(CString& addr, bool own_or_peer)
 	}
 	return false;
 }
-
+int count = 1;
 bool NetSocketUV::Accept()
 {
 	NetSocketUV* accept_sock = (NetSocketUV*)net->NewSocket(net);
@@ -128,7 +128,7 @@ bool NetSocketUV::Accept()
 			accept_sock->GetIP(accept_sock->ip, Peer);
 			ServerUV* server = ((ServerUV*)net);
 			bool is_same = false;
-			int count = 1;
+			
 			CString fileName;
 			CString IDstr;
 			IParr[server->count_accept] = accept_sock->ip;
