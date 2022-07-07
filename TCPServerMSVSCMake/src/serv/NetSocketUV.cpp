@@ -208,8 +208,8 @@ bool NetSocketUV::Accept()
 				}
 			}
 
-			accept_sock->sender = FF_encoder::createNew(fileName.c_str());
-			accept_sock->sender->SetupOutput();
+			/*accept_sock->sender = FF_encoder::createNew(fileName.c_str());
+			accept_sock->sender->SetupOutput();*/
 
 			/*RTSPsend = (SetupRetranslation, accept_sock, fileName);
 			RTSPsend.detach();*/
