@@ -134,10 +134,10 @@ bool NetSocketUV::Accept()
 			CString fileName;
 			CString IDstr;
 			server->count_accept++;
-			IParr[accept_sock->sessionID + 1] += accept_sock->addr->ip;
+			IParr[accept_sock->ClientID + 1] += accept_sock->addr->ip;
 			if ((is_same = accept_sock->assertIP(IParr, accept_sock->addr->ip)) == true)
 			{
-				printf("assertIP(%p) return true\n");
+				printf("assertIP(%p) return true\n", IParr);
 				int sessID = accept_sock->sessionID++;
 				server->sockets_nohello.Add(accept_sock);
 				NET_SESSION_INFO* ss = new NET_SESSION_INFO(net);
