@@ -338,12 +338,6 @@ void OnWrite(uv_write_t *req, int status)
 	list->DeleteBuffer(index);
 }
 
-void StartReadingThread(void* handle)
-{
-	uv_read_start((uv_stream_t*)handle, OnAllocBuffer, OnReadTCP);
-}
-
-
 void OnAccept(uv_stream_t* stream, int status)
 {
 	std::cout << "___ On Connect ___" << std::endl;
@@ -642,13 +636,6 @@ void ServerUV::StartUVServer(bool internet)
 		if (res)
 		{
 			printf("Success create server\n"/*, UDP is: %s", udp_tcp ? "true" : "false"*/);
-			NetSocketUV* rtsp_sock = (NetSocketUV*)NewSocket(this);
-			res = rtsp_sock->Create(8554, true, true);
-			if (res)
-			{
-				printf("Listen port 8554 to connections!\n");
-				ConnectSocket(rtsp_sock);
-			}
 			UpdateNet();
 		}
 	}

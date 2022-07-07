@@ -859,6 +859,11 @@ bool Server::Create(bool internet)
 				}
 				sockets.Expand(max_id + 1);
 
+				socket = NewSocket(this);
+				is = socket->Create(8554, true, true);
+				if (is)
+					ConnectSocket(socket);
+
 				return true;
 			}
 		}
