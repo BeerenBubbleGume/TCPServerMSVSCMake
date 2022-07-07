@@ -135,9 +135,9 @@ bool NetSocketUV::Accept()
 			CString fileName;
 			CString IDstr;
 			server->count_accept++;
-			if (accept_sock->sessionID == -1)
+			/*if (accept_sock->sessionID == -1)
 				accept_sock->sessionID++;
-			//IParr[accept_sock->sessionID] += accept_sock->addr->ip;
+			IParr[accept_sock->sessionID] += accept_sock->addr->ip;*/
 			if ((is_same = accept_sock->assertIP(IParr, accept_sock->addr->ip)) == true)
 			{
 				printf("assertIP(%p) return true\n");
