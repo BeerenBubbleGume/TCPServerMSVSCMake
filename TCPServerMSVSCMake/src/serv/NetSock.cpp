@@ -185,8 +185,7 @@ bool NetSocket::assertIP(CString* IParr[10240], CString& assertedIP)
 {
 	CString* va_str = *IParr;
 	
-	if (va_str[0] == "")
-		return false;
+	assert(va_str[0]);
 
 	for (int i = 0; i < 10240; i++)
 	{
