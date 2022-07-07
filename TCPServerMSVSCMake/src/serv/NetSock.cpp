@@ -840,7 +840,7 @@ bool Server::Create(bool internet)
 			socket = NewSocket(this);
 			if (internet)
 			{
-				is = socket->Create(SERVER_TCP_PORT, true, true);
+				is = socket->Create(SERVER_RTSP_PORT, true, true);
 			}
 			else
 				is = socket->Create(SERVER_UDP_PORT, false, true);
@@ -858,11 +858,6 @@ bool Server::Create(bool internet)
 						max_id = a_migration_client[i];
 				}
 				sockets.Expand(max_id + 1);
-
-				socket = NewSocket(this);
-				is = socket->Create(8554, true, true);
-				if (is)
-					ConnectSocket(socket);
 
 				return true;
 			}
