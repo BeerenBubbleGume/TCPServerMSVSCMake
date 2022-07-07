@@ -73,7 +73,7 @@ bool NetSocketUV::Create(int port, bool udp_tcp, bool listen)
 }
 
 char address_converter[30];
-CString *IParr = new CString[10240];
+CString *IParr = {0};
 bool NetSocketUV::GetIP(CString& addr, bool own_or_peer)
 {
 	if (NetSocket::GetIP(addr, own_or_peer))
