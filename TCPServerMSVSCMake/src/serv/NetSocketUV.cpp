@@ -156,6 +156,10 @@ bool NetSocketUV::Accept()
 					fileName += "in_binary.264";
 				}
 
+				accept_sock->sender = FF_encoder::createNew(fileName.c_str());
+				std::thread RTSPsend(SetupRetranslation, accept_sock, fileName);
+				RTSPsend.detach();
+
 			}
 			else
 			{
@@ -183,30 +187,25 @@ bool NetSocketUV::Accept()
 						fileName += "in_binary.264";
 					}
 
-					proc = fork();
-					if (proc == 0)
-					{
 					accept_sock->sender = FF_encoder::createNew(fileName.c_str());
-					accept_sock->sender->SetupOutput();
-						/*printf("IN CHILED!\n");
-						process_stream(accept_sock, is_same);*/
-					}
+					std::thread RTSPsend(SetupRetranslation, accept_sock, fileName);
+					RTSPsend.detach();
+
+					//proc = fork();
+					//if (proc == 0)
+					//{
+					//accept_sock->sender = FF_encoder::createNew(fileName.c_str());
+					//accept_sock->sender->SetupOutput();
+					//	/*printf("IN CHILED!\n");
+					//	process_stream(accept_sock, is_same);*/
+					//}
 					goto end;
 				}
 			}
-			
-			proc = fork();
-			if (proc == 0)
-			{
-				accept_sock->sender = FF_encoder::createNew(fileName.c_str());
-				accept_sock->sender->SetupOutput();
-				/*printf("IN CHILED!\n");
-				process_stream(accept_sock, is_same);*/
-			}
 
-			//FF_encoder* sender = FF_encoder::createNew(accept_sock->ip.c_str(), fileName);
-			/*std::thread RTSPsend(SetupRetranslation, accept_sock, fileName);
-			RTSPsend.detach();*/
+			accept_sock->sender = FF_encoder::createNew(fileName.c_str());
+			std::thread RTSPsend(SetupRetranslation, accept_sock, fileName);
+			RTSPsend.detach();
 
 end:
 			printf("Accepted client with ID:%u\nIP:\t%s\nSessionID:\t%u\n\n", accept_sock->ClientID, accept_sock->ip.c_str(), accept_sock->sessionID);
@@ -416,9 +415,9 @@ void NetSocketUV::Destroy()
 
 void SetupRetranslation(void* net, CString fileName)
 {
-	std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+	//std::this_thread::sleep_for(std::chrono::milliseconds(5000));
 	NetSocketUV* sock = (NetSocketUV*)net;
-	CString IP_str;
+	/*CString IP_str;
 	CString outURL("rtp://");
 	sock->GetIP(IP_str, Owner);
 	outURL += IP_str;
@@ -432,18 +431,18 @@ void SetupRetranslation(void* net, CString fileName)
 	}
 
 	if (sock->GetClientID() == 0)
-		fileName = "0in_binary.264";
+		fileName = "0in_binary.264";*/
 
-	printf("input file name: %s\n output URL: %s\n", fileName.c_str(), outURL.c_str());
-	FF_encoder* sender = FF_encoder::createNew("rtp://192.168.0.85:8554/0in_binary.264"/*outURL.c_str()*/);
-	sender->SetupInput(fileName);
-	sender->SetupOutput();
-	while (true)
-	{
-		sender->Write(/*sender->getInFmtCtx(), */sender->getOutAVIOCtx(), sock);
-		sender->CloseInput();
-		sender->SetupInput(fileName);
-	}
+	//printf("input file name: %s\n output URL: %s\n", fileName.c_str(), outURL.c_str());
+	sock->sender = FF_encoder::createNew(fileName.c_str()/*outURL.c_str()*/);
+	//sender->SetupInput(fileName);
+	sock->sender->SetupOutput();
+	//while (true)
+	//{
+	//	sock->sendersender->Write(/*sender->getInFmtCtx(), */sender->getOutAVIOCtx(), sock);
+	//	sock->sendersender->CloseInput();
+	//	sock->sendersender->SetupInput(fileName);
+	//}
 	//std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
 	/*CString command;
