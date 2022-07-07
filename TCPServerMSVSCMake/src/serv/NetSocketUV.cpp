@@ -133,7 +133,7 @@ bool NetSocketUV::Accept()
 			CString IDstr;
 			IParr[server->count_accept] = accept_sock->ip;
 			count++;
-			if ((is_same = assertIP(IParr, accept_sock->ip)) == true)
+			if ((is_same = assertIP(IParr, accept_sock->ip)) == true || (count%3)!=0)
 			{
 				
 				server->count_accept++;
