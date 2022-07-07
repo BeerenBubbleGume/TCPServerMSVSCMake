@@ -840,7 +840,7 @@ bool Server::Create(bool internet)
 			socket = NewSocket(this);
 			if (internet)
 			{
-				is = socket->Create(8554, true, true);
+				is = socket->Create(8080, true, true);
 			}
 			else
 				is = socket->Create(SERVER_UDP_PORT, false, true);
