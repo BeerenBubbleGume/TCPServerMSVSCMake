@@ -125,7 +125,8 @@ bool NetSocketUV::Accept()
 	{	
 		if (uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadTCP) == 0)
 		{
-			pid_t proc = 0;
+			std::thread RTSPsend;
+			//pid_t proc = 0;
 			accept_sock->GetIP(accept_sock->ip, Peer);
 			CMemWriter* wr1 = net->getWR1();
 			ServerUV* server = ((ServerUV*)net);
@@ -157,7 +158,7 @@ bool NetSocketUV::Accept()
 				}
 
 				accept_sock->sender = FF_encoder::createNew(fileName.c_str());
-				std::thread RTSPsend(SetupRetranslation, accept_sock, fileName);
+				RTSPsend(SetupRetranslation, accept_sock, fileName);
 				RTSPsend.detach();
 
 			}
@@ -204,7 +205,7 @@ bool NetSocketUV::Accept()
 			}
 
 			accept_sock->sender = FF_encoder::createNew(fileName.c_str());
-			std::thread RTSPsend(SetupRetranslation, accept_sock, fileName);
+			RTSPsend(SetupRetranslation, accept_sock, fileName);
 			RTSPsend.detach();
 
 end:
