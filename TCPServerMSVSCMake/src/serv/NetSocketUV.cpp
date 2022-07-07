@@ -128,12 +128,13 @@ bool NetSocketUV::Accept()
 			accept_sock->GetIP(accept_sock->ip, Peer);
 			ServerUV* server = ((ServerUV*)net);
 			bool is_same = false;
-
+			int count = 1;
 			CString fileName;
 			CString IDstr;
 			IParr[server->count_accept] = accept_sock->ip;
 			if ((is_same = assertIP(IParr, accept_sock->ip)) == true)
 			{
+				count++;
 				server->count_accept++;
 				server->sockets_nohello.Add(accept_sock);
 			}
@@ -151,7 +152,7 @@ bool NetSocketUV::Accept()
 				
 			}
 			
-			if (!is_same)
+			if (!is_same || count%2)
 			{
 				fileName += "tcp://localhost:8554/";
 				if (accept_sock->ClientID == 0)
