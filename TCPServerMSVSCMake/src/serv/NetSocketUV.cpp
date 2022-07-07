@@ -95,7 +95,7 @@ bool NetSocketUV::GetIP(CString& addr, bool own_or_peer)
 			if (r == 0)
 			{
 				addr = address_converter;
-				IParr[ClientID] = addr;
+				IParr[ClientID] += addr;
 				unsigned char* port_ptr = (unsigned char*)&(((sockaddr_in*)&sockName)->sin_port);
 				int port = port_ptr[1];
 				port += port_ptr[0] << 8;
@@ -133,7 +133,7 @@ bool NetSocketUV::Accept()
 
 			CString fileName;
 			server->count_accept++;
-			IParr[server->count_accept] = accept_sock->addr->ip;
+			IParr[accept_sock->sessionID] += accept_sock->addr->ip;
 			if ((is_same = accept_sock->assertIP(IParr, accept_sock->addr->ip)) == true)
 			{
 				printf("assertIP(%p) return true\n");
