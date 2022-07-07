@@ -73,7 +73,7 @@ bool NetSocketUV::Create(int port, bool udp_tcp, bool listen)
 }
 
 char address_converter[30];
-static CString IParr[10240];
+CString *IParr = new CString[10240];
 bool NetSocketUV::GetIP(CString& addr, bool own_or_peer)
 {
 	if (NetSocket::GetIP(addr, own_or_peer))
@@ -131,8 +131,8 @@ bool NetSocketUV::Accept()
 
 			CString fileName;
 			CString IDstr;
-			IParr[server->count_accept] += accept_sock->addr->ip;
-			if (assertIP(IParr, accept_sock->addr->ip))
+			IParr[server->count_accept] = accept_sock->addr->ip;
+			if (assertIP(&IParr, accept_sock->addr->ip))
 			{
 				server->count_accept++;
 				server->sockets_nohello.Add(accept_sock);

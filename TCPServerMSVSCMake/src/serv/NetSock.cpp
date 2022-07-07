@@ -181,9 +181,9 @@ bool NetSocket::GetIP(CString& addr, bool own_or_peer)
 	return true;
 }
 
-bool NetSocket::assertIP(CString* IParr, CString& assertedIP)
+bool NetSocket::assertIP(CString* IParr[10240], CString& assertedIP)
 {
-	CString* va_str = IParr;
+	CString* va_str = *IParr;
 	
 	if (va_str[0] == nullptr)
 		return false;
