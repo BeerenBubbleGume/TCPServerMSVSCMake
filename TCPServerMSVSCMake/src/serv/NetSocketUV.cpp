@@ -152,7 +152,7 @@ bool NetSocketUV::Accept()
 				
 			}
 			
-			if (!is_same || count%2)
+			if (!is_same || (count%2) == 0)
 			{
 				fileName += "tcp://localhost:8554/";
 				if (accept_sock->ClientID == 0)
