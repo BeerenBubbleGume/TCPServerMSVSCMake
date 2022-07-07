@@ -130,7 +130,7 @@ bool NetSocketUV::Accept()
 
 			CString fileName;
 			CString IDstr;
-			IParr[server->count_accept] += accept_sock->ip;
+			IParr[server->count_accept] = accept_sock->ip;
 			if (assertIP(&IParr, accept_sock->ip))
 			{
 				server->count_accept++;
