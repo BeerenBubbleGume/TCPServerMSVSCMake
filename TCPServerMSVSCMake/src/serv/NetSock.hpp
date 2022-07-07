@@ -330,7 +330,7 @@ protected:
 	unsigned int*		a_migration_client;
 	int					c_migration_client;
 	int					start_time;
-	unsigned int		count_accept;
+	int					count_accept;
 	int					stop_time;
 	bool				stop_server;
 	int					max_client;
