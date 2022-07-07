@@ -7,6 +7,7 @@ NetSocketUV::NetSocketUV(Net* net) : NetSocket(net)
 {
 	sock = NULL;
 	status = errno;
+	sender = nullptr;
 }
 
 NetSocketUV::~NetSocketUV()
