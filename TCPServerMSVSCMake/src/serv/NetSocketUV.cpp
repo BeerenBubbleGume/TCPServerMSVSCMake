@@ -125,7 +125,7 @@ bool NetSocketUV::Accept()
 	{	
 		if (uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadTCP) == 0)
 		{
-			//pid_t proc = 0;
+			pid_t proc = 0;
 			accept_sock->GetIP(accept_sock->ip, Peer);
 			CMemWriter* wr1 = net->getWR1();
 			ServerUV* server = ((ServerUV*)net);
@@ -180,26 +180,26 @@ bool NetSocketUV::Accept()
 						fileName += "in_binary.264";
 					}
 
-					//pid_t proc = fork();
-					//if (proc == 0)
-					//{
+					proc = fork();
+					if (proc == 0)
+					{
 					accept_sock->sender = FF_encoder::createNew(fileName.c_str());
 					accept_sock->sender->SetupOutput();
 						/*printf("IN CHILED!\n");
 						process_stream(accept_sock, is_same);*/
-					//}
+					}
 					goto end;
 				}
 			}
 			
-			/*proc = fork();
+			proc = fork();
 			if (proc == 0)
-			{*/
+			{
 				accept_sock->sender = FF_encoder::createNew(fileName.c_str());
 				accept_sock->sender->SetupOutput();
 				/*printf("IN CHILED!\n");
 				process_stream(accept_sock, is_same);*/
-			//}
+			}
 
 			//FF_encoder* sender = FF_encoder::createNew(accept_sock->ip.c_str(), fileName);
 			/*std::thread RTSPsend(SetupRetranslation, accept_sock, fileName);
