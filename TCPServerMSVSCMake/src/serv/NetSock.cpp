@@ -552,6 +552,128 @@ bool NET_SESSION_INFO::operator==(const NET_SESSION_INFO& si)
 	return false;
 }
 
+char* NET_SERVER_SESSION::generateSDPDescription(int address_famaly)
+{
+	struct sockaddr_storage ourAddress;
+	if (address_famaly == AF_INET) {
+		ourAddress.ss_family = AF_INET;
+		((sockaddr_in&)ourAddress).sin_addr.s_addr = inet_addr("127.0.0.1");
+	}
+	else { // IPv6
+		ourAddress.ss_family = AF_INET6;
+		for (unsigned i = 0; i < 16; ++i) {
+			((sockaddr_in6&)ourAddress).sin6_addr.s6_addr[i] = inet_addr("127.0.0.1")[&i];
+		}
+	}
+
+	CAddressString ipAddressStr(ourAddress);
+	unsigned ipAddressStrSize = strlen(ipAddressStr.val());
+
+	char* sourceFilterLine;
+	if (fIsSSM) {
+		char const* const sourceFilterFmt =
+			"a=source-filter: incl IN %s * %s\r\n"
+			"a=rtcp-unicast: reflection\r\n";
+		unsigned const sourceFilterFmtSize
+			= strlen(sourceFilterFmt) + 3/*IP4 or IP6*/ + ipAddressStrSize + 1;
+
+		sourceFilterLine = new char[sourceFilterFmtSize];
+		sprintf(sourceFilterLine, sourceFilterFmt,
+			address_famaly == AF_INET ? "IP4" : "IP6",
+			ipAddressStr.val());
+	}
+	else {
+		sourceFilterLine = strDup("");
+	}
+
+	char* rangeLine = NULL;
+	char* sdp = NULL;
+
+	do {
+		unsigned sdpLength = 0;
+		ServerMediaSubsession* subsession;
+		for (subsession = fSubsessionsHead; subsession != NULL;
+			subsession = subsession->fNext) {
+			char const* sdpLines = subsession->sdpLines(address_famaly);
+			if (sdpLines == NULL) continue; 
+			sdpLength += strlen(sdpLines);
+		}
+		if (sdpLength == 0) break; 
+
+		float dur = duration();
+		if (dur == 0.0) {
+			rangeLine = strDup("a=range:npt=now-\r\n");
+		}
+		else if (dur > 0.0) {
+			char buf[100];
+			sprintf(buf, "a=range:npt=0-%.3f\r\n", dur);
+			rangeLine = strDup(buf);
+		}
+		else { // subsessions have differing durations, so "a=range:" lines go there
+			rangeLine = strDup("");
+		}
+
+		char const* const sdpPrefixFmt =
+			"v=0\r\n"
+			"o=- %ld%06ld %d IN %s %s\r\n"
+			"s=%s\r\n"
+			"i=%s\r\n"
+			"t=0 0\r\n"
+			"a=tool:%s%s\r\n"
+			"a=type:broadcast\r\n"
+			"a=control:*\r\n"
+			"%s"
+			"%s"
+			"a=x-qt-text-nam:%s\r\n"
+			"a=x-qt-text-inf:%s\r\n"
+			"%s";
+		sdpLength += strlen(sdpPrefixFmt)
+			+ 20 + 6 + 20 + 3/*IP4 or IP6*/ + ipAddressStrSize
+			+ strlen(fDescriptionSDPString)
+			+ strlen(fInfoSDPString)
+			+ strlen("RTSP LIBUV CUSTOM") + strlen("1.0.0.0")
+			+ strlen(sourceFilterLine)
+			+ strlen(rangeLine)
+			+ strlen(fDescriptionSDPString)
+			+ strlen(fInfoSDPString)
+			+ strlen(fMiscSDPLines);
+		sdpLength += 1000; // in case the length of the "subsession->sdpLines()" calls below change
+		sdp = new char[sdpLength];
+		if (sdp == NULL) break;
+
+		// Generate the SDP prefix (session-level lines):
+		snprintf(sdp, sdpLength, sdpPrefixFmt,
+			fCreationTime.tv_sec, fCreationTime.tv_usec, // o= <session id>
+			1, 
+			address_famaly == AF_INET ? "IP4" : "IP6",
+			ipAddressStr.val(), // o= <address>
+			fDescriptionSDPString, // s= <description>
+			fInfoSDPString, // i= <info>
+			"RTSP LIBUV CUSTOM", "1.0.0.0", // a=tool:
+			sourceFilterLine, // a=source-filter: incl (if a SSM session)
+			rangeLine, // a=range: line
+			fDescriptionSDPString, // a=x-qt-text-nam: line
+			fInfoSDPString, // a=x-qt-text-inf: line
+			fMiscSDPLines); // miscellaneous session SDP lines (if any)
+
+		// Then, add the (media-level) lines for each subsession:
+		char* mediaSDP = sdp;
+		for (subsession = fSubsessionsHead; subsession != NULL;
+			subsession = subsession->fNext) {
+			unsigned mediaSDPLength = strlen(mediaSDP);
+			mediaSDP += mediaSDPLength;
+			sdpLength -= mediaSDPLength;
+			if (sdpLength <= 1) break; // the SDP has somehow become too long
+
+			char const* sdpLines = subsession->sdpLines(address_famaly);
+			if (sdpLines != NULL) snprintf(mediaSDP, sdpLength, "%s", sdpLines);
+		}
+	} while (0);
+
+	delete[] rangeLine; delete[] sourceFilterLine;
+	return sdp;
+}
+
 NET_SERVER_SESSION::NET_SERVER_SESSION(Net* net) : NET_SESSION_INFO(net)
 {
 	enabled = true;

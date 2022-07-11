@@ -3,6 +3,28 @@
 using std::ofstream;
 ofstream fout;
 
+static void decodeURL(char* url) {
+	char* cursor = url;
+	while (*cursor) {
+		if ((cursor[0] == '%') &&
+			cursor[1] && isxdigit(cursor[1]) &&
+			cursor[2] && isxdigit(cursor[2])) {
+
+			char hex[3];
+			hex[0] = cursor[1];
+			hex[1] = cursor[2];
+			hex[2] = '\0';
+			*url++ = (char)strtol(hex, NULL, 16);
+			cursor += 3;
+		}
+		else {
+			*url++ = *cursor++;
+		}
+	}
+
+	*url = '\0';
+}
+
 NetSocketUV::NetSocketUV(Net* net) : NetSocket(net)
 {
 	sock = NULL;
@@ -209,6 +231,87 @@ bool NetSocketUV::Accept()
 		return false;
 	}
 	return false;
+}
+
+bool NetSocketUV::AcceptRTSP()
+{
+	NetSocketUV* accept_sock = (NetSocketUV*)net->NewSocket(net);
+	accept_sock->Create(0, true, false, SOCKET_MODE_DEFAULT);
+	uv_tcp_t* host = GetPtrTCP(sock);
+	uv_tcp_t* client = GetPtrTCP(accept_sock->sock);
+	if (uv_accept((uv_stream_t*)host, (uv_stream_t*)client) == 0)
+	{
+		if (uv_read_start((uv_stream_t*)client, OnAllocBuffer, OnReadRTSPcommands) == 0)
+		{
+			accept_sock->GetIP(accept_sock->ip, Peer);
+			ServerUV* server = ((ServerUV*)net);
+			bool is_same = false;
+
+			CString fileName;
+			CString IDstr;
+			IParr[server->count_accept] = accept_sock->ip;
+			count++;
+			if ((is_same = assertIP(IParr, accept_sock->ip)) == true || (count % 3) != 0)
+			{
+
+				server->count_accept++;
+				server->sockets_nohello.Add(accept_sock);
+			}
+			else
+			{
+				server->count_accept++;
+				server->sockets_nohello.Add(accept_sock);
+				server->ConnectSocket(accept_sock, server->count_accept);
+				if (!accept_sock->sessionID)
+				{
+					NET_SERVER_SESSION* ss = new NET_SERVER_SESSION(server);
+					server->AddSessionInfo(ss, accept_sock);
+				}
+			}
+		}
+	}
+	return false;
+}
+
+void NetSocketUV::ReceiveRTSPcommand()
+{
+	NetBuffer* recv_buf = net->GetRecvBuffer();
+	int received_bytes = recv_buf->GetLength();
+	recvbuffer.Add(received_bytes, recv_buf->GetData());
+	
+	fRequestBytesAlreadySeen++;
+	fRequestBuffer[fRequestBytesAlreadySeen] = '\0';
+	
+	char cmdName[RTSP_PARAM_STRING_MAX];
+	char urlPreSuffix[RTSP_PARAM_STRING_MAX];
+	char urlSuffix[RTSP_PARAM_STRING_MAX];
+	char cseq[RTSP_PARAM_STRING_MAX];
+	char sessionIdStr[RTSP_PARAM_STRING_MAX];
+	unsigned contentLength = 0;
+
+	bool parseSuccess = parseRTSPRequestString((char*)fRequestBuffer, fLastCRLF + 2 - fRequestBuffer,
+		cmdName, sizeof cmdName,
+		urlPreSuffix, sizeof urlPreSuffix,
+		urlSuffix, sizeof urlSuffix,
+		cseq, sizeof cseq,
+		sessionIdStr, sizeof sessionIdStr,
+		contentLength, true);
+
+	if (strcmp((const char*)recvbuffer.GetData(), "DESCRIBE"))
+	{
+	}
+	else if (strcmp((const char*)recvbuffer.GetData(), "SETUP"))
+	{
+
+	}
+	else if (strcmp((const char*)recvbuffer.GetData(), "PLAY"))
+	{
+
+	}
+	else if (strcmp((const char*)recvbuffer.GetData(), "STOP"))
+	{
+
+	}
 }
 
 void NetSocketUV::ReceiveTCP()
@@ -516,6 +619,222 @@ void SetupRetranslation(void* net, CString fileName)
 
 void OnAcceptRTSP(uv_stream_t* stream, int status)
 {
+	std::cout << "___ On Connect ___" << std::endl;
+	if (status < 0)
+	{
+		fprintf(stderr, "New connection error %s\n", uv_strerror(status));
+		return;
+	}
+	NetSocketUV* net_sock = (NetSocketUV*)GetNetSocketPtr(stream);
+	net_sock->AcceptRTSP();
+}
+
+bool ServerUV::parseRTSPRequestString(char const* reqStr, unsigned reqStrSize, char* resultCmdName, unsigned resultCmdNameMaxSize, char* resultURLPreSuffix, unsigned resultURLPreSuffixMaxSize, char* resultURLSuffix, unsigned resultURLSuffixMaxSize, char* resultCSeq, unsigned resultCSeqMaxSize, char* resultSessionIdStr, unsigned resultSessionIdStrMaxSize, unsigned& contentLength, bool urlIsRTSPS)
+{
+	urlIsRTSPS = false;
+
+	unsigned i;
+	for (i = 0; i < reqStrSize; ++i) {
+		char c = reqStr[i];
+		if (!(c == ' ' || c == '\t' || c == '\r' || c == '\n' || c == '\0')) break;
+	}
+	if (i == reqStrSize) return false;
+
+	bool parseSucceeded = false;
+	unsigned i1 = 0;
+	for (; i1 < resultCmdNameMaxSize - 1 && i < reqStrSize; ++i, ++i1) {
+		char c = reqStr[i];
+		if (c == ' ' || c == '\t') {
+			parseSucceeded = true;
+			break;
+		}
+
+		resultCmdName[i1] = c;
+	}
+	resultCmdName[i1] = '\0';
+	if (!parseSucceeded) return false;
+
+	unsigned j = i + 1;
+	while (j < reqStrSize && (reqStr[j] == ' ' || reqStr[j] == '\t')) ++j;
+	for (; (int)j < (int)(reqStrSize - 8); ++j) {
+		if ((reqStr[j] == 'r' || reqStr[j] == 'R')
+			&& (reqStr[j + 1] == 't' || reqStr[j + 1] == 'T')
+			&& (reqStr[j + 2] == 's' || reqStr[j + 2] == 'S')
+			&& (reqStr[j + 3] == 'p' || reqStr[j + 3] == 'P')) {
+			if (reqStr[j + 4] == 's' || reqStr[j + 4] == 'S') {
+				urlIsRTSPS = true;
+				++j;
+			}
+			if (reqStr[j + 4] == ':' && reqStr[j + 5] == '/') {
+				j += 6;
+				if (reqStr[j] == '/') {
+					++j;
+					while (j < reqStrSize && reqStr[j] != '/' && reqStr[j] != ' ') ++j;
+				}
+				else {
+					--j;
+				}
+				i = j;
+				break;
+			}
+		}
+	}
+
+	parseSucceeded = false;
+	for (unsigned k = i + 1; (int)k < (int)(reqStrSize - 5); ++k) {
+		if (reqStr[k] == 'R' && reqStr[k + 1] == 'T' &&
+			reqStr[k + 2] == 'S' && reqStr[k + 3] == 'P' && reqStr[k + 4] == '/') {
+			while (--k >= i && reqStr[k] == ' ') {}
+			unsigned k1 = k;
+			while (k1 > i && reqStr[k1] != '/') --k1;
+
+			unsigned n = 0, k2 = k1 + 1;
+			if (k2 <= k) {
+				if (k - k1 + 1 > resultURLSuffixMaxSize) return false;
+				while (k2 <= k) resultURLSuffix[n++] = reqStr[k2++];
+			}
+			resultURLSuffix[n] = '\0';
+
+			n = 0; k2 = i + 1;
+			if (k2 + 1 <= k1) {
+				if (k1 - i > resultURLPreSuffixMaxSize) return false;
+				while (k2 <= k1 - 1) resultURLPreSuffix[n++] = reqStr[k2++];
+			}
+			resultURLPreSuffix[n] = '\0';
+			decodeURL(resultURLPreSuffix);
+
+			i = k + 7;
+			parseSucceeded = true;
+			break;
+		}
+	}
+	if (!parseSucceeded) return false;
+
+	parseSucceeded = false;
+	for (j = i; (int)j < (int)(reqStrSize - 5); ++j) {
+		if (_strncasecmp("CSeq:", &reqStr[j], 5) == 0) {
+			j += 5;
+			while (j < reqStrSize && (reqStr[j] == ' ' || reqStr[j] == '\t')) ++j;
+			unsigned n;
+			for (n = 0; n < resultCSeqMaxSize - 1 && j < reqStrSize; ++n, ++j) {
+				char c = reqStr[j];
+				if (c == '\r' || c == '\n') {
+					parseSucceeded = true;
+					break;
+				}
+
+				resultCSeq[n] = c;
+			}
+			resultCSeq[n] = '\0';
+			break;
+		}
+	}
+	if (!parseSucceeded) return false;
+
+	for (j = i; (int)j < (int)(reqStrSize - 8); ++j) {
+		if (_strncasecmp("Session:", &reqStr[j], 8) == 0) {
+			j += 8;
+			while (j < reqStrSize && (reqStr[j] == ' ' || reqStr[j] == '\t')) ++j;
+			unsigned n;
+			for (n = 0; n < resultSessionIdStrMaxSize - 1 && j < reqStrSize; ++n, ++j) {
+				char c = reqStr[j];
+				if (c == '\r' || c == '\n') {
+					break;
+				}
+
+				resultSessionIdStr[n] = c;
+			}
+			resultSessionIdStr[n] = '\0';
+			break;
+		}
+	}
+
+	// Also: Look for "Content-Length:" (optional, case insensitive)
+	contentLength = 0; // default value
+	for (j = i; (int)j < (int)(reqStrSize - 15); ++j) {
+		if (_strncasecmp("Content-Length:", &(reqStr[j]), 15) == 0) {
+			j += 15;
+			while (j < reqStrSize && (reqStr[j] == ' ' || reqStr[j] == '\t')) ++j;
+			unsigned num;
+			if (sscanf(&reqStr[j], "%u", &num) == 1) {
+				contentLength = num;
+			}
+		}
+	}
+	return true;
+}
+
+void ServerUV::handleCmd_DESCRIBE(char const* urlPreSuffix, char const* urlSuffix, char const* fullRequestStr)
+{
+	char urlTotalSuffix[2 * RTSP_PARAM_STRING_MAX];
+	
+	urlTotalSuffix[0] = '\0';
+	if (urlPreSuffix[0] != '\0') {
+		strcat(urlTotalSuffix, urlPreSuffix);
+		strcat(urlTotalSuffix, "/");
+	}
+	strcat(urlTotalSuffix, urlSuffix);
+
+}
+
+void ServerUV::handleCmd_DESCRIBE_afterLookup(NET_SESSION_INFO* sess)
+{
+	char* sdpDescription = NULL;
+	char* rtspURL = NULL;
+	do {
+		if (sess == NULL) {
+			handleCmd_notFound();
+			break;
+		}
+
+		session->incrementReferenceCount();
+
+		sdpDescription = session->generateSDPDescription(fAddressFamily);
+		if (sdpDescription == NULL) {
+			setRTSPResponse("404 File Not Found, Or In Incorrect Format");
+			break;
+		}
+		unsigned sdpDescriptionSize = strlen(sdpDescription);
+
+		rtspURL = fOurRTSPServer.rtspURL(session, fClientInputSocket);
+
+		snprintf((char*)fResponseBuffer, sizeof fResponseBuffer,
+			"RTSP/1.0 200 OK\r\nCSeq: %s\r\n"
+			"%s"
+			"Content-Base: %s/\r\n"
+			"Content-Type: application/sdp\r\n"
+			"Content-Length: %d\r\n\r\n"
+			"%s",
+			fCurrentCSeq,
+			dateHeader(),
+			rtspURL,
+			sdpDescriptionSize,
+			sdpDescription);
+	} while (0);
+
+	if (session != NULL) {
+		// Decrement its reference count, now that we're done using it:
+		session->decrementReferenceCount();
+		if (session->referenceCount() == 0 && session->deleteWhenUnreferenced()) {
+			fOurServer.removeServerMediaSession(session);
+		}
+	}
+
+	delete[] sdpDescription;
+	delete[] rtspURL;
+}
+
+void OnReadRTSPcommands(uv_stream_t* handle, ssize_t suggested_size, const uv_buf_t* buf)
+{
+	NetSocketUV* socket = (NetSocketUV*)GetNetSocketPtr(handle);
+	if (suggested_size < 0)
+	{
+		socket->getNet()->OnLostConnection(socket);
+	}
+	NetBuffer* recv_buffer = socket->getNet()->GetRecvBuffer();
+	assert(buf->base == (char*)recv_buffer->GetData());
+	recv_buffer->SetMaxSize(suggested_size);
+	socket->ReceiveRTSPcommand();
 }
 
 void* NetSocketUV::WaitingDelay(void* delay)
@@ -594,7 +913,7 @@ NET_BUFFER_INDEX* ServerUV::NewBuffer(int index)
 
 void ServerUV::StartUVServer(bool internet)
 {
-	StopServer();
+	//StopServer();
 	if (internet)
 	{
 		printf("What a protocol should been used: UDP or TCP?\n");

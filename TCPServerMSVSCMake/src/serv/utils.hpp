@@ -10,6 +10,8 @@ class	CStream;
 
 enum STREAM_MODE{STREAM_READ, STREAM_WRITE, STREAM_ADD, STREAM_MAX, STREAM_ERROR = -2};
 
+static char* strDup(const char* str);
+
 struct MEM_DATA
 {
 	unsigned char* data;
@@ -137,6 +139,33 @@ public:
 
 	void DeleteLastSlash();
 	bool IsVariableName();
+};
+
+class CAddressString : public CString {
+public:
+	// IPv4 input:
+	CAddressString(struct sockaddr_in const& addr);
+	CAddressString(struct in_addr const& addr);
+	//AddressString(ipv4AddressBits const& addr); // "addr" is assumed to be in network byte order
+
+	// IPv6 input:
+	CAddressString(struct sockaddr_in6 const& addr);
+	CAddressString(struct in6_addr const& addr);
+	//AddressString(ipv6AddressBits const& addr);
+
+	// IPv4 or IPv6 input:
+	CAddressString(struct sockaddr_storage const& addr);
+
+	virtual ~CAddressString();
+
+	char const* val() const { return fVal; }
+
+private:
+	//void init(ipv4AddressBits const& addr); // used to implement the IPv4 constructors
+	//void init(ipv6AddressBits const& addr); // used to implement the IPv6 constructors
+
+private:
+	char* fVal; // The result ASCII string: allocated by the constructor; deleted by the destructor
 };
 
 class CStringArray

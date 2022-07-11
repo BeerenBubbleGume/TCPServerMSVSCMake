@@ -2320,3 +2320,64 @@ bool CStringTable::GetSymbols(CString& name, int& first, int& middle, int& last)
 	first = middle = last = -1;
 	return false;
 }
+
+CAddressString::CAddressString(sockaddr_in const& addr)
+{
+	fVal = new char[INET_ADDRSTRLEN];
+	inet_ntop(AF_INET, &addr, fVal, INET_ADDRSTRLEN);
+}
+
+CAddressString::CAddressString(in_addr const& addr)
+{
+	fVal = new char[INET_ADDRSTRLEN];
+	inet_ntop(AF_INET, &addr, fVal, INET_ADDRSTRLEN);
+}
+
+CAddressString::CAddressString(sockaddr_in6 const& addr)
+{
+	fVal = new char[INET6_ADDRSTRLEN];
+	inet_ntop(AF_INET6, &addr, fVal, INET6_ADDRSTRLEN);
+}
+
+CAddressString::CAddressString(in6_addr const& addr)
+{
+	fVal = new char[INET6_ADDRSTRLEN];
+	inet_ntop(AF_INET6, &addr, fVal, INET6_ADDRSTRLEN);
+}
+
+CAddressString::CAddressString(sockaddr_storage const& addr)
+{
+	switch (addr.ss_family) {
+	case AF_INET: {
+		fVal = new char[INET6_ADDRSTRLEN];
+		inet_ntop(AF_INET6, &addr, fVal, INET6_ADDRSTRLEN);
+		break;
+	}
+	case AF_INET6: {
+		fVal = new char[INET6_ADDRSTRLEN];
+		inet_ntop(AF_INET6, &addr, fVal, INET6_ADDRSTRLEN);
+		break;
+	}
+	default: {
+		fVal = new char[200]; // more than enough for this error message
+		sprintf(fVal, "(unknown address family %d)", addr.ss_family);
+		break;
+	}
+	}
+}
+
+CAddressString::~CAddressString()
+{
+	delete[] fVal;
+}
+
+char* strDup(char const* str) {
+	if (str == NULL) return NULL;
+	size_t len = strlen(str) + 1;
+	char* copy = new char[len];
+
+	if (copy != NULL) {
+		memcpy(copy, str, len);
+	}
+	return copy;
+}

@@ -103,7 +103,7 @@ public:
 	 {
 	 	return !(*this == si);
 	 }
-
+	 
 protected:
 	friend class		Server;
 	CString				ip;
@@ -128,12 +128,23 @@ public:
 	unsigned int*		GetClientArray() { return a_client_id; }
 	int					GetSessionIndex() { return session_index; }
 	void				Serialize(CStream& stream);
+	char*				generateSDPDescription(int address_famaly);
 protected:
 	friend class		Server;
 	bool				enabled;
+
+	NET_SERVER_SUBSESSION* fSubsessionsHead;
+
 	int					c_client_id;
 	unsigned int*		a_client_id;
 	int					session_index;
+	timeval				fCreationTime;
+	float				duration();
+};
+
+class NET_SERVER_SUBSESSION : public NET_SERVER_SESSION
+{
+
 };
 
 struct SessionList : public CArrayBase

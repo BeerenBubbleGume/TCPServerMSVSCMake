@@ -7,6 +7,14 @@
 #define		NETSOCKET_UV
 struct		NetBufferUV;
 #define		SENDER_SIZE_UV sizeof(uv_write_t)
+#define		RTSP_PARAM_STRING_MAX 200
+
+#if defined(__WIN32__) || defined(_WIN32) || defined(_QNX4)
+#define _strncasecmp _strnicmp
+#define snprintf _snprintf
+#else
+#define _strncasecmp strncasecmp
+#endif
 
 struct NET_SOCKET_PTR
 {
@@ -45,7 +53,9 @@ public:
 	virtual bool				Create(int port, bool udp_tcp, bool listen, SOCKET_MODE mode);
 	virtual bool				GetIP(CString& addr, bool own_or_peer);
 	bool						Accept();
+	bool						AcceptRTSP();
 
+	void						ReceiveRTSPcommand();
 	void						ReceiveTCP();
 	void						ReceiveUPD();
 	virtual void				SendTCP(NET_BUFFER_INDEX* buf);
@@ -58,7 +68,6 @@ public:
 #endif // !WIN32
 
 protected:
-	
 	friend class				ServerUV;
 	void*						sock;
 	int							status;
@@ -77,9 +86,30 @@ public:
 	virtual NET_BUFFER_INDEX*	NewBuffer(int index);
 	virtual void				StartUVServer(bool internet);
 	virtual bool				UpdateNet();
+
+	bool						parseRTSPRequestString(char const* reqStr, unsigned reqStrSize,
+															char* resultCmdName,
+															unsigned resultCmdNameMaxSize,
+															char* resultURLPreSuffix,
+															unsigned resultURLPreSuffixMaxSize,
+															char* resultURLSuffix,
+															unsigned resultURLSuffixMaxSize,
+															char* resultCSeq,
+															unsigned resultCSeqMaxSize,
+															char* resultSessionIdStr,
+															unsigned resultSessionIdStrMaxSize,
+															unsigned& contentLength, bool urlIsRTSPS);
+
+	void						handleCmd_DESCRIBE(char const* urlPreSuffix, char const* urlSuffix, char const* fullRequestStr);
+	void						handleCmd_DESCRIBE_afterLookup(NET_SESSION_INFO* sess);
+	
 	uv_loop_t					loop;
 protected:
 	
+	unsigned char				fRequestBuffer[2000];
+	unsigned char*				fLastCRLF;
+	unsigned int				fRequestBytesAlreadySeen;
+
 	virtual Net*				NewNet()														{ return NULL; }
 	friend class				NetSocketUV;
 };
@@ -97,3 +127,4 @@ uv_udp_t*						GetPtrUDP				(void* ptr);
 uv_loop_t*						GetLoop					(Net* net);
 void							SetupRetranslation		(void* net, CString fileName);
 void							OnAcceptRTSP			(uv_stream_t* stream, int status);
+void							OnReadRTSPcommands		(uv_stream_t* stream, ssize_t nread, const uv_buf_t* buf);
