@@ -855,7 +855,7 @@ bool Server::Create(bool internet)
 				if (socket)
 				{
 					socket->Create(8554, true, true, true);
-					ConnectSocket(socket, 2);
+					ConnectSocket(socket);
 					assert(socket->ClientID == SERVER_ID + 2);
 				}
 
