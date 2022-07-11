@@ -855,8 +855,8 @@ bool Server::Create(bool internet)
 				if (socket)
 				{
 					socket->Create(8554, true, true, true);
-					ConnectSocket(socket, 1);
-					//assert(socket->ClientID == SERVER_ID + 2);
+					ConnectSocket(socket, 2);
+					assert(socket->ClientID == SERVER_ID + 2);
 				}
 
 				a_migration_client = new unsigned int[c_migration_client];
