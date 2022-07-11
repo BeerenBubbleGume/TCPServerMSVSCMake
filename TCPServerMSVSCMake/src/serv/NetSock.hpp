@@ -37,8 +37,8 @@ enum MESSAGE_TYPE
 
 enum SOCKET_MODE
 {
+	SOCKET_MODE_DEFAULT,
 	SOCKET_MODE_TCP,
-	SOCKET_MODE_UDP,
 	SOCKET_MODE_RTSP
 };
 
@@ -231,7 +231,7 @@ public:
 	virtual				~NetSocket();
 	void				Destroy();
 
-	virtual bool		Create(int port, bool udp_tcp, bool listen, bool RTSP);
+	virtual bool		Create(int port, bool udp_tcp, bool listen, SOCKET_MODE mode);
 	virtual void		ReceiveTCP() = 0;
 	virtual void		ReceiveUPD() = 0;
 	virtual void		SendTCP(NET_BUFFER_INDEX* buf) = 0;

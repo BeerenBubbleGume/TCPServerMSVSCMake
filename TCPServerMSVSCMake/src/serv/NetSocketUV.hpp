@@ -42,7 +42,7 @@ public:
 								NetSocketUV(Net* net);
 	virtual						~NetSocketUV();
 
-	virtual bool				Create(int port, bool udp_tcp, bool listen, bool RTSP);
+	virtual bool				Create(int port, bool udp_tcp, bool listen, SOCKET_MODE mode);
 	virtual bool				GetIP(CString& addr, bool own_or_peer);
 	bool						Accept();
 
@@ -53,9 +53,10 @@ public:
 
 	//virtual void				SetupRetranslation(NetSocketUV* socket, unsigned int clientID);
 	static void*				WaitingDelay(void* delay);
-	FF_encoder*					GetSender()												{ return sender; }
-	void						SetFF_encoder(FF_encoder* encoder)						{ sender = encoder; }
+#ifndef WIN32
 	FF_encoder*					sender;
+#endif // !WIN32
+
 protected:
 	
 	friend class				ServerUV;
@@ -95,6 +96,4 @@ uv_tcp_t*						GetPtrTCP				(void* ptr);
 uv_udp_t*						GetPtrUDP				(void* ptr);
 uv_loop_t*						GetLoop					(Net* net);
 void							SetupRetranslation		(void* net, CString fileName);
-int								process_stream			(NetSocketUV* input_sock, bool is_same);
-void							play					(NetSocket* input_socket);
-void							afterPlaying			(void* clientData);
+void							OnAcceptRTSP			(uv_stream_t* stream, int status);

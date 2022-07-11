@@ -1,3 +1,5 @@
+#ifndef WIN32
+
 #include "FF_encoder.hpp"
 
 void FF_encoder::CloseInput()
@@ -9,7 +11,7 @@ void FF_encoder::CloseInput()
 
 void FF_encoder::SetupInput(CString& fileName)
 {
-    
+
     fFileName = fileName.c_str();
 
     fPacket = av_packet_alloc();
@@ -32,32 +34,32 @@ void FF_encoder::SetupInput(CString& fileName)
     }
 
     av_dump_format(ifmt_ctx, 0, fFileName, 0);
-   
+
     /*ret = avformat_write_header(ofmt_ctx, nullptr);
     if (ret < 0) {
         fprintf(stderr, "Error occurred when opening output file\n");
         goto end;
     }*/
 
-//end:
-//    CloseInput();
-//
-//    /* close output */
-//    if (ofmt_ctx && !(ofmt->flags & AVFMT_NOFILE))
-//        avio_closep(&ofmt_ctx->pb);
-//    avformat_free_context(ofmt_ctx);
-//
-//    av_freep(&stream_mapping);
-//
-//    if (ret < 0 && ret != AVERROR_EOF) {
-//        fprintf(stderr, "Error occurred: %s\n", av_err2str(ret));
-//        exit(1);
-//    }
+    //end:
+    //    CloseInput();
+    //
+    //    /* close output */
+    //    if (ofmt_ctx && !(ofmt->flags & AVFMT_NOFILE))
+    //        avio_closep(&ofmt_ctx->pb);
+    //    avformat_free_context(ofmt_ctx);
+    //
+    //    av_freep(&stream_mapping);
+    //
+    //    if (ret < 0 && ret != AVERROR_EOF) {
+    //        fprintf(stderr, "Error occurred: %s\n", av_err2str(ret));
+    //        exit(1);
+    //    }
 }
 
 void FF_encoder::SetupOutput()
 {
-    
+
     options = NULL;
     AVStream* video_track = nullptr;
     //AVStream* audio_track = nullptr;
@@ -106,7 +108,7 @@ void FF_encoder::SetupOutput()
     assert(ret >= 0);
     ret = av_dict_set(&options, "f", "rtsp://host:port/serverPlay/", 0);
     assert(ret >= 0);*/
-    
+
     avformat_alloc_output_context2(&ofmt_ctx, nullptr, "rtsp", fOutURL);
     if (!ofmt_ctx) {
         fprintf(stderr, "Could not create output context\n");
@@ -118,15 +120,15 @@ void FF_encoder::SetupOutput()
     //audio_track = avformat_new_stream(ofmt_ctx, avcodec_find_encoder(AV_CODEC_ID_OPUS));
     //ofmt_ctx->oformat->video_codec = AV_CODEC_ID_H264;
     //ofmt_ctx->oformat->audio_codec = AV_CODEC_ID_OPUS;
-    
+
     avformat_network_init();
-    
+
     ret = avio_open2(&ofmt_ctx->pb, fOutURL, AVIO_FLAG_WRITE, &ofmt_ctx->interrupt_callback, &options);
     if (ret < 0) {
         fprintf(stderr, "Could not open output file '%s', av_err2str() %s\n", fOutURL, av_err2str(ret));
         goto end;
     }
-    
+
     /*ret = avformat_init_output(ofmt_ctx, &options);
     if (ret < 0)
     {
@@ -139,9 +141,9 @@ void FF_encoder::SetupOutput()
         goto end;
     }*/
     //fout = ofmt_ctx->pb;
-    
+
     av_dump_format(ofmt_ctx, 0, fOutURL, 1);
-    
+
     /*while (!accepted)
     {
         if ((ret = avio_accept(ofmt_ctx->pb, &client)) >= 0)
@@ -166,7 +168,7 @@ end:
 
 FF_encoder* FF_encoder::createNew(const char* outURL)
 {
-	return new FF_encoder(outURL);
+    return new FF_encoder(outURL);
 }
 
 void FF_encoder::Write(/*AVFormatContext* in, */AVIOContext* out, NetSocket* sock)
@@ -210,7 +212,7 @@ void FF_encoder::Write(/*AVFormatContext* in, */AVIOContext* out, NetSocket* soc
     }
     av_dump_format(ofmt_ctx, 0, fOutURL, 1);*/
     //avio_handshake(client);
-    
+
     uint8_t* buff = sock->GetRecvBuffer()->GetData();
     int size = sock->GetRecvBuffer()->GetLength();
     /*ret = avio_read(in->pb, buff, sizeof(buff));
@@ -228,7 +230,7 @@ end:
 
     CloseInput();
     //remove(fFileName);
-   
+
 
     //while (1) {
     //    AVStream* in_stream, * out_stream;
@@ -280,7 +282,7 @@ FF_encoder::FF_encoder(const char* outURL) : fOutURL(outURL)
     fPacket = nullptr;
     stream_index = 0;
     stream_mapping_size = 0;
-    stream_mapping = nullptr;    
+    stream_mapping = nullptr;
 }
 
 FF_encoder::~FF_encoder()
@@ -296,5 +298,8 @@ FF_encoder::~FF_encoder()
     stream_mapping_size = 0;
     stream_mapping = nullptr;
 
-    
+
 }
+
+
+#endif // !WIN32

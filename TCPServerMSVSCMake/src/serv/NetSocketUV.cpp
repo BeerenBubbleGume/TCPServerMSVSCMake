@@ -7,7 +7,9 @@ NetSocketUV::NetSocketUV(Net* net) : NetSocket(net)
 {
 	sock = NULL;
 	status = errno;
+#ifndef WIN32
 	sender = nullptr;
+#endif // !WIN32
 }
 
 NetSocketUV::~NetSocketUV()
@@ -16,9 +18,9 @@ NetSocketUV::~NetSocketUV()
 	status = 0;
 }
 
-bool NetSocketUV::Create(int port, bool udp_tcp, bool listen, bool RTSP)
+bool NetSocketUV::Create(int port, bool udp_tcp, bool listen, SOCKET_MODE mode)
 {	
-	NetSocket::Create(port, udp_tcp, listen, RTSP);
+	NetSocket::Create(port, udp_tcp, listen, mode);
 	uv_loop_t* loop = GetLoop(net);	
 	if (udp_tcp)
 	{
@@ -34,19 +36,37 @@ bool NetSocketUV::Create(int port, bool udp_tcp, bool listen, bool RTSP)
 
 		if (listen)
 		{
-			sockaddr_in* sock_addres = new sockaddr_in;
-			int i = uv_ip4_addr("0.0.0.0", port, sock_addres);
-			assert(i == 0);
-			int b = uv_tcp_bind(tcp, (sockaddr*)sock_addres, 0);
-			assert(b == 0);
-			if (!RTSP)
+			switch (mode)
 			{
+			case SOCKET_MODE_DEFAULT:
+				break;
+			case SOCKET_MODE_TCP:
+			{
+				sockaddr_in* sock_addres = new sockaddr_in;
+				int i = uv_ip4_addr("0.0.0.0", port, sock_addres);
+				assert(i == 0);
+				int b = uv_tcp_bind(tcp, (sockaddr*)sock_addres, 0);
+				assert(b == 0);
 				int l = uv_listen((uv_stream_t*)tcp, 10240, OnAccept);
 				if (l != 0)
 					return false;
 			}
-			else
-				int l = uv_listen((uv_stream_t*)tcp, 10240, nullptr);
+				break;
+			case SOCKET_MODE_RTSP:
+			{
+				sockaddr_in* sock_addres = new sockaddr_in;
+				int i = uv_ip4_addr("0.0.0.0", port, sock_addres);
+				assert(i == 0);
+				int b = uv_tcp_bind(tcp, (sockaddr*)sock_addres, 0);
+				assert(b == 0);
+				int l = uv_listen((uv_stream_t*)tcp, 10240, OnAcceptRTSP);
+				if (l != 0)
+					return false;
+			}
+				break;
+			default:
+				break;
+			}
 		}		
 		return true;
 	}
@@ -123,7 +143,7 @@ int count = 1;
 bool NetSocketUV::Accept()
 {
 	NetSocketUV* accept_sock = (NetSocketUV*)net->NewSocket(net);
-	accept_sock->Create(0, true, false, false);
+	accept_sock->Create(0, true, false, SOCKET_MODE_DEFAULT);
 	uv_tcp_t* host = GetPtrTCP(sock);
 	uv_tcp_t* client = GetPtrTCP(accept_sock->sock);
 	if (uv_accept((uv_stream_t*)host, (uv_stream_t*)client) == 0)
@@ -157,8 +177,9 @@ bool NetSocketUV::Accept()
 
 				
 			}
-			
-			if (!is_same || (count%3) == 0)
+#ifndef WIN32
+
+			if (!is_same || (count % 3) == 0)
 			{
 				fileName += "tcp://localhost:8554/";
 				if (accept_sock->ClientID == 0)
@@ -172,6 +193,8 @@ bool NetSocketUV::Accept()
 				accept_sock->sender = FF_encoder::createNew(fileName.c_str());
 				accept_sock->sender->SetupOutput();
 			}
+
+#endif // !WIN32
 
 			printf("Accepted client with ID:%u\nIP:\t%s\nSessionID:\t%u\n\n", accept_sock->ClientID, accept_sock->ip.c_str(), accept_sock->sessionID);
 			
@@ -222,7 +245,11 @@ void NetSocketUV::ReceiveTCP()
 	}
 	sender->setAVIOCtx(ctx);*/
 	//if (sender->accepted == true)
-		sender->Write(sender->getOutAVIOCtx(), this);
+#ifndef WIN32
+	sender->Write(sender->getOutAVIOCtx(), this);
+#endif // !WIN32
+
+	
 	/*if (recvbuffer.GetPacketCount() > 0 && received_bytes > 5000)
 	{
 		sender->SetupInput(fileName);
@@ -301,7 +328,9 @@ void OnReadTCP(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)
 	if (nread < 0)
 	{
 		printf("Client disconnected!\n");
+#ifndef WIN32
 		uvsocket->sender->CloseOutput();
+#endif // !WIN32
 		uvsocket->getNet()->OnLostConnection(uvsocket);
 		//OnCloseSocket((uv_handle_t*)stream);
 		
@@ -393,9 +422,10 @@ void SetupRetranslation(void* net, CString fileName)
 		fileName = "0in_binary.264";*/
 
 	//printf("input file name: %s\n output URL: %s\n", fileName.c_str(), outURL.c_str());
+#ifndef WIN32
 	sock->sender = FF_encoder::createNew(fileName.c_str()/*outURL.c_str()*/);
-	//sender->SetupInput(fileName);
 	sock->sender->SetupOutput();
+#endif // !WIN32
 	//while (true)
 	//{
 	//	sock->sendersender->Write(/*sender->getInFmtCtx(), */sender->getOutAVIOCtx(), sock);
@@ -484,72 +514,9 @@ void SetupRetranslation(void* net, CString fileName)
 	return;
 }
 
-//MediaSink* sink = nullptr;
-
-//int process_stream(NetSocket* input_sock, bool is_same)
-//{
-//	if (is_same == false)
-//	{
-//		TaskScheduler* scheduler = BasicTaskScheduler::createNew();
-//		UsageEnvironment* env = BasicUsageEnvironment::createNew(*scheduler);
-//		if (!env)
-//		{
-//			printf("cannot create liveMedia::UsageEnvironment!\n");
-//			exit(1);
-//		}
-//		sockaddr_storage rtspAddr;
-//		rtspAddr.ss_family = AF_INET;
-//		Groupsock* rtpGS = new Groupsock(*env, rtspAddr, 8554, 255);
-//
-//		H264VideoRTPSink* outSink = H264VideoRTPSink::createNew(*env, rtpGS, 96);
-//
-//		RTSPServer* sender = RTSPServer::createNew(*env, 8554);
-//		if (!sender)
-//		{
-//			printf("cannot create liveMedia::RTSPServer!\n");
-//			exit(1);
-//		}
-//		ServerMediaSession* sms = ServerMediaSession::createNew(*env, "0in_binary.264");
-//		PassiveServerMediaSubsession* subsess = PassiveServerMediaSubsession::createNew(*outSink);
-//		sms->addSubsession(subsess);
-//
-//		sender->addServerMediaSession(sms);
-//
-//		*env << "Use this URL to PLAY stream: '" << sender->rtspURL(sms) << "'\n";
-//
-//		play(input_sock);
-//
-//		env->taskScheduler().doEventLoop();
-//
-//		return 1;
-//	}
-//	else
-//	{
-//		printf("Same IP detected!\n");
-//		return 0;
-//	}
-//}
-//
-//void play(NetSocket* input_socket)
-//{
-//	NetBuffer* rbuff = input_socket->GetRecvBuffer();
-//	unsigned char* inData = rbuff->GetData();
-//	unsigned inLen = rbuff->GetLength();
-//
-//	ByteStreamMemoryBufferSource* inSource = ByteStreamMemoryBufferSource::createNew(sink->envir(), inData, inLen, False);
-//	if (!inSource)
-//	{
-//		printf("cannot create ByteStreamMemoryBufferSource!\n");
-//		exit(1);
-//	}
-//	sink->startPlaying(*inSource, afterPlaying, input_socket);
-//}
-//
-//void afterPlaying(void* clientData)
-//{
-//	NetSocket* sock = (NetSocket*)clientData;
-//	play(sock);
-//}
+void OnAcceptRTSP(uv_stream_t* stream, int status)
+{
+}
 
 void* NetSocketUV::WaitingDelay(void* delay)
 {

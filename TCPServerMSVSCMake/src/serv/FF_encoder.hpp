@@ -1,4 +1,6 @@
 #pragma once
+#ifndef WIN32
+
 #include "includes.hpp"
 #include "NetSock.hpp"
 #ifdef __cplusplus
@@ -18,34 +20,36 @@ public:
 	void						CloseInput();
 	void						SetupInput(CString& fileName);
 	void						SetupOutput();
-	static FF_encoder*			createNew(const char* outURL);
+	static FF_encoder* createNew(const char* outURL);
 	void						Write(/*AVFormatContext* in, */AVIOContext* out, NetSocket* sock);
-	AVFormatContext*			getInFmtCtx()										{ return ifmt_ctx; }
-	AVFormatContext*			getOutFmtCtx()										{ return ofmt_ctx; }
-	AVIOContext*				getOutAVIOCtx()										{ return ofmt_ctx->pb; }
-	void						setAVIOCtx(AVIOContext* ctx)						{ ofmt_ctx->pb = ctx; }
+	AVFormatContext* getInFmtCtx() { return ifmt_ctx; }
+	AVFormatContext* getOutFmtCtx() { return ofmt_ctx; }
+	AVIOContext* getOutAVIOCtx() { return ofmt_ctx->pb; }
+	void						setAVIOCtx(AVIOContext* ctx) { ofmt_ctx->pb = ctx; }
 	void						CloseOutput();
 	bool						accepted;
 protected:
 	FF_encoder(const char* outURL);
 	~FF_encoder();
-	const AVOutputFormat*		ofmt;
-	AVFormatContext*			ifmt_ctx, *ofmt_ctx;
-	AVPacket*					fPacket;
-	AVDictionary*				options;
+	const AVOutputFormat* ofmt;
+	AVFormatContext* ifmt_ctx, * ofmt_ctx;
+	AVPacket* fPacket;
+	AVDictionary* options;
 	//AVIOContext*				fout;
-	AVIOContext*				client;
-	FILE*						fFile;
-	const AVCodec*				fCodec;
+	AVIOContext* client;
+	FILE* fFile;
+	const AVCodec* fCodec;
 
-	unsigned char*				fData;
+	unsigned char* fData;
 	unsigned					fDataSize;
 
 	int							ret, i;
 	int							stream_index;
-	int*						stream_mapping;
+	int* stream_mapping;
 	int							stream_mapping_size;
 
-	const char*					fCodecName, *fFileName, *fOutURL;
+	const char* fCodecName, * fFileName, * fOutURL;
 
 };
+
+#endif // !WIN32

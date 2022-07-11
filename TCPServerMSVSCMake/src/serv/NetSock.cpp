@@ -111,7 +111,7 @@ void NetSocket::Destroy()
 		udp_tcp = false;
 }
 
-bool NetSocket::Create(int port, bool udp_tcp, bool listen, bool RTSP)
+bool NetSocket::Create(int port, bool udp_tcp, bool listen, SOCKET_MODE mode)
 {
 	this->udp_tcp = udp_tcp;
 	this->port = port;
@@ -831,32 +831,32 @@ bool Server::Create(bool internet)
 	if (Net::Create(internet))
 	{
 		NetSocket* socket = NewSocket(this);
-		bool is = socket->Create(SERVER_TCP_PORT, internet, true, false);
+		bool is = socket->Create(SERVER_TCP_PORT, internet, true, SOCKET_MODE_TCP);
 		if (is)
 		{
 			ConnectSocket(socket);
 			assert(socket->ClientID == SERVER_ID);
 
-			socket = NewSocket(this);
+			/*socket = NewSocket(this);
 			if (internet)
 			{
-				is = socket->Create(8080, true, true, false);
+				is = socket->Create(8080, true, true, SOCKET_MODE_TCP);
 			}
 			else
-				is = socket->Create(SERVER_UDP_PORT, false, true, false);
+				is = socket->Create(SERVER_UDP_PORT, false, true, SOCKET_MODE_DEFAULT);*/
 
 			if (is)
 			{
-				ConnectSocket(socket);
-				assert(socket->ClientID == SERVER_ID + 1);
+				/*ConnectSocket(socket);
+				assert(socket->ClientID == SERVER_ID + 1);*/
 				int i;
 
 				socket = NewSocket(this);
 				if (socket)
 				{
-					socket->Create(8554, true, true, true);
+					socket->Create(8554, true, true, SOCKET_MODE_RTSP);
 					ConnectSocket(socket);
-					assert(socket->ClientID == SERVER_ID + 2);
+					assert(socket->ClientID == SERVER_ID + 1);
 				}
 
 				a_migration_client = new unsigned int[c_migration_client];

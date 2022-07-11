@@ -35,19 +35,10 @@ IF(WIN32)
 	#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} WIN32 _WIN32")
 ELSE()
 	target_include_directories(TCPServerMSVSCMake PUBLIC
-								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/
-								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/liveMedia/
-								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/groupsock/
-								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/BasicUsageEnvironment
-								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/UsageEnvironment
-								
+								${CMAKE_CURRENT_SOURCE_DIR}/libs/includes/								
 								)
 	target_link_libraries(TCPServerMSVSCMake
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libuv.a
-								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libliveMedia.a
-								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libgroupsock.a
-								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libBasicUsageEnvironment.a
-								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libUsageEnvironment.a
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libavformat.a
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libavdevice.a
 								${CMAKE_CURRENT_SOURCE_DIR}/libs/lib/libavcodec.a
