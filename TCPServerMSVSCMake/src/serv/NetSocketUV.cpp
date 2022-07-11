@@ -16,9 +16,9 @@ NetSocketUV::~NetSocketUV()
 	status = 0;
 }
 
-bool NetSocketUV::Create(int port, bool udp_tcp, bool listen)
+bool NetSocketUV::Create(int port, bool udp_tcp, bool listen, bool RTSP)
 {	
-	NetSocket::Create(port, udp_tcp, listen);
+	NetSocket::Create(port, udp_tcp, listen, RTSP);
 	uv_loop_t* loop = GetLoop(net);	
 	if (udp_tcp)
 	{
@@ -39,9 +39,14 @@ bool NetSocketUV::Create(int port, bool udp_tcp, bool listen)
 			assert(i == 0);
 			int b = uv_tcp_bind(tcp, (sockaddr*)sock_addres, 0);
 			assert(b == 0);
-			int l = uv_listen((uv_stream_t*)tcp, 10240, OnAccept);
-			if (l != 0)
-				return false;
+			if (!RTSP)
+			{
+				int l = uv_listen((uv_stream_t*)tcp, 10240, OnAccept);
+				if (l != 0)
+					return false;
+			}
+			else
+				int l = uv_listen((uv_stream_t*)tcp, 10240, nullptr);
 		}		
 		return true;
 	}
@@ -118,7 +123,7 @@ int count = 1;
 bool NetSocketUV::Accept()
 {
 	NetSocketUV* accept_sock = (NetSocketUV*)net->NewSocket(net);
-	accept_sock->Create(0, true, false);
+	accept_sock->Create(0, true, false, false);
 	uv_tcp_t* host = GetPtrTCP(sock);
 	uv_tcp_t* client = GetPtrTCP(accept_sock->sock);
 	if (uv_accept((uv_stream_t*)host, (uv_stream_t*)client) == 0)

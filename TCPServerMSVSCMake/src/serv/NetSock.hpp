@@ -231,7 +231,7 @@ public:
 	virtual				~NetSocket();
 	void				Destroy();
 
-	virtual bool		Create(int port, bool udp_tcp, bool listen);
+	virtual bool		Create(int port, bool udp_tcp, bool listen, bool RTSP);
 	virtual void		ReceiveTCP() = 0;
 	virtual void		ReceiveUPD() = 0;
 	virtual void		SendTCP(NET_BUFFER_INDEX* buf) = 0;

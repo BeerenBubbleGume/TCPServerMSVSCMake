@@ -111,7 +111,7 @@ void NetSocket::Destroy()
 		udp_tcp = false;
 }
 
-bool NetSocket::Create(int port, bool udp_tcp, bool listen)
+bool NetSocket::Create(int port, bool udp_tcp, bool listen, bool RTSP)
 {
 	this->udp_tcp = udp_tcp;
 	this->port = port;
@@ -831,7 +831,7 @@ bool Server::Create(bool internet)
 	if (Net::Create(internet))
 	{
 		NetSocket* socket = NewSocket(this);
-		bool is = socket->Create(SERVER_TCP_PORT, internet, true);
+		bool is = socket->Create(SERVER_TCP_PORT, internet, true, false);
 		if (is)
 		{
 			ConnectSocket(socket);
@@ -840,10 +840,10 @@ bool Server::Create(bool internet)
 			socket = NewSocket(this);
 			if (internet)
 			{
-				is = socket->Create(8080, true, true);
+				is = socket->Create(8080, true, true, false);
 			}
 			else
-				is = socket->Create(SERVER_UDP_PORT, false, true);
+				is = socket->Create(SERVER_UDP_PORT, false, true, false);
 
 			if (is)
 			{
@@ -854,6 +854,7 @@ bool Server::Create(bool internet)
 				socket = NewSocket(this);
 				if (socket)
 				{
+					socket->Create(8554, true, true, true);
 					ConnectSocket(socket, 1);
 					assert(socket->ClientID == SERVER_ID + 2);
 				}
