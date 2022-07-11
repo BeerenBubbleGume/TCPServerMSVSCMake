@@ -398,7 +398,6 @@ void SetupRetranslation(void* net, CString fileName)
 	//	sock->sendersender->SetupInput(fileName);
 	//}
 	//std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-
 	/*CString command;
 	command += "ffmpeg -i ";
 	command += fileName; command += " tcp://";
@@ -411,7 +410,6 @@ void SetupRetranslation(void* net, CString fileName)
 	printf("command: %s\n", command.c_str());
 
 	system(command.c_str());*/
-
 //	std::cout << "thrad id: " << std::this_thread::get_id() << std::endl;
 //	assert(client);
 //	if (client->GetClientID() >= 0)
@@ -624,6 +622,7 @@ NET_BUFFER_INDEX* ServerUV::NewBuffer(int index)
 
 void ServerUV::StartUVServer(bool internet)
 {
+	StopServer();
 	if (internet)
 	{
 		printf("What a protocol should been used: UDP or TCP?\n");

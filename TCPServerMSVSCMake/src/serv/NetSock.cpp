@@ -844,11 +844,20 @@ bool Server::Create(bool internet)
 			}
 			else
 				is = socket->Create(SERVER_UDP_PORT, false, true);
+
 			if (is)
 			{
 				ConnectSocket(socket);
 				assert(socket->ClientID == SERVER_ID + 1);
 				int i;
+
+				socket = NewSocket(this);
+				if (socket)
+				{
+					ConnectSocket(socket, 1);
+					assert(socket->ClientID == SERVER_ID + 2);
+				}
+
 				a_migration_client = new unsigned int[c_migration_client];
 				info = new NET_SESSION_INFO(this);
 				unsigned int max_id = 0;
