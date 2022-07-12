@@ -10,7 +10,8 @@ class	CStream;
 
 enum STREAM_MODE{STREAM_READ, STREAM_WRITE, STREAM_ADD, STREAM_MAX, STREAM_ERROR = -2};
 
-static char* strDup(const char* str);
+char* strDup(const char* str);
+char const* dateHeader();
 
 struct MEM_DATA
 {

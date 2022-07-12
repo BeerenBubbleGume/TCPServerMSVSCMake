@@ -591,7 +591,7 @@ char* NET_SERVER_SESSION::generateSDPDescription(int address_famaly)
 
 	do {
 		unsigned sdpLength = 0;
-		ServerMediaSubsession* subsession;
+		NET_SERVER_SUBSESSION* subsession;
 		for (subsession = fSubsessionsHead; subsession != NULL;
 			subsession = subsession->fNext) {
 			char const* sdpLines = subsession->sdpLines(address_famaly);
@@ -674,12 +674,70 @@ char* NET_SERVER_SESSION::generateSDPDescription(int address_famaly)
 	return sdp;
 }
 
-NET_SERVER_SESSION::NET_SERVER_SESSION(Net* net) : NET_SESSION_INFO(net)
+float NET_SERVER_SESSION::duration() const
+{
+	float minSubsessionDuration = 0.0;
+	float maxSubsessionDuration = 0.0;
+	for (NET_SERVER_SUBSESSION* subsession = fSubsessionsHead; subsession != NULL;
+		subsession = subsession->fNext) {
+		// Hack: If any subsession supports seeking by 'absolute' time, then return a negative value, to indicate that only subsessions
+		// will have a "a=range:" attribute:
+		char* absStartTime = NULL; char* absEndTime = NULL;
+		subsession->getAbsoluteTimeRange(absStartTime, absEndTime);
+		if (absStartTime != NULL) return -1.0f;
+
+		float ssduration = subsession->duration();
+		if (subsession == fSubsessionsHead) { // this is the first subsession
+			minSubsessionDuration = maxSubsessionDuration = ssduration;
+		}
+		else if (ssduration < minSubsessionDuration) {
+			minSubsessionDuration = ssduration;
+		}
+		else if (ssduration > maxSubsessionDuration) {
+			maxSubsessionDuration = ssduration;
+		}
+	}
+
+	if (maxSubsessionDuration != minSubsessionDuration) {
+		return -maxSubsessionDuration; // because subsession durations differ
+	}
+	else {
+		return maxSubsessionDuration; // all subsession durations are the same
+	}
+}
+
+NET_SERVER_SESSION::NET_SERVER_SESSION(Net* net, char const* streamName,
+	char const* info,
+	char const* description,
+	bool isSSM,
+	char const* miscSDPLines) : NET_SESSION_INFO(net)
 {
 	enabled = true;
 	c_client_id = 0;
 	a_client_id = nullptr;
 	session_index = -1;
+
+	fIsSSM = false;
+
+	fStreamName = strDup(streamName == NULL ? "" : streamName);
+
+	char* libNamePlusVersionStr = NULL; // by default
+	if (info == NULL || description == NULL) {
+		libNamePlusVersionStr = new char[strlen("RTSP LIBUV CUSTOM") + strlen("1.0.0.0") + 1];
+		sprintf(libNamePlusVersionStr, "%s%s", "RTSP LIBUV CUSTOM", "1.0.0.0");
+	}
+	fInfoSDPString = strDup(info == NULL ? libNamePlusVersionStr : info);
+	fDescriptionSDPString = strDup(description == NULL ? libNamePlusVersionStr : description);
+	delete[] libNamePlusVersionStr;
+
+	fMiscSDPLines = strDup(miscSDPLines == NULL ? "" : miscSDPLines);
+#ifndef WIN32
+	gettimeofday(&fCreationTime, NULL);
+#else
+	GetLocalTime((LPSYSTEMTIME&)fCreationTime);
+#endif // !WIN32\
+
+	
 }
 
 NET_SERVER_SESSION::~NET_SERVER_SESSION()
@@ -1610,4 +1668,115 @@ bool SessionList::DeleteSession(int index)
 		}
 	}
 	return false;
+}
+
+char* NET_SERVER_SUBSESSION::rtpmapLine()
+{
+	char* encodingParamsPart;
+	encodingParamsPart = strDup("");
+
+	char const* const rtpmapFmt = "a=rtpmap:%d %s/%d%s\r\n";
+	unsigned rtpmapLineSize = strlen(rtpmapFmt)
+		+ 3 /* max char len */ + strlen("video H264")
+		+ 20 /* max int len */ + strlen(encodingParamsPart);
+	char* rtpmapLine = new char[rtpmapLineSize];
+	sprintf(rtpmapLine, rtpmapFmt,
+		96, "video H264",
+		0, encodingParamsPart);
+	delete[] encodingParamsPart;
+	return rtpmapLine;
+}
+
+char* NET_SERVER_SUBSESSION::rangeSDPLine()
+{
+	char* absStart = NULL; char* absEnd = NULL;
+	getAbsoluteTimeRange(absStart, absEnd);
+	if (absStart != NULL) {
+		char buf[100];
+
+		if (absEnd != NULL) {
+			sprintf(buf, "a=range:clock=%s-%s\r\n", absStart, absEnd);
+		}
+		else {
+			sprintf(buf, "a=range:clock=%s-\r\n", absStart);
+		}
+		return strDup(buf);
+	}
+
+	if (fParentSession == NULL) return NULL;
+
+	// If all of our parent's subsessions have the same duration
+	// (as indicated by "fParentSession->duration() >= 0"), there's no "a=range:" line:
+	if (fParentSession->duration() >= 0.0) return strDup("");
+
+	// Use our own duration for a "a=range:" line:
+	float ourDuration = duration();
+	if (ourDuration == 0.0) {
+		return strDup("a=range:npt=now-\r\n");
+	}
+	else {
+		char buf[100];
+		sprintf(buf, "a=range:npt=0-%.3f\r\n", ourDuration);
+		return strDup(buf);
+	}
+}
+
+const char* NET_SERVER_SUBSESSION::sdpLines(int addressFamaly)
+{
+	if (fSDPLines == NULL) {
+		in_addr servAddr;
+		CAddressString groupAddressStr(servAddr);
+		unsigned short portNum = ntohs(8554);
+		unsigned char ttl = 255;
+		unsigned char rtpPayloadType = 96;
+		char const* mediaType = "video H264";
+		unsigned estBitrate = 5000;
+		char* rtpmapLine = this->rtpmapLine();
+		//char* keyMgmtLine = fRTPSink.keyMgmtLine();
+		//char const* rtcpmuxLine = rtcpIsMuxed() ? "a=rtcp-mux\r\n" : "";
+		char const* rangeLine = rangeSDPLine();
+		char const* auxSDPLine = nullptr;
+		if (auxSDPLine == NULL) auxSDPLine = "";
+
+		char const* const sdpFmt =
+			"m=%s %d RTP/%sAVP %d\r\n"
+			"c=IN %s %s/%d\r\n"
+			"b=AS:%u\r\n"
+			"%s"
+			"%s"
+			"%s"
+			"%s"
+			"%s"
+			"a=control:%s\r\n";
+		unsigned sdpFmtSize = strlen(sdpFmt)
+			+ strlen(mediaType) + 5 /* max short len */ + 1 + 3 /* max char len */
+			+ 3/*IP4 or IP6*/ + strlen(groupAddressStr.val()) + 3 /* max char len */
+			+ 20 /* max int len */
+			//+ strlen(rtpmapLine)
+			//+ strlen(keyMgmtLine)
+			//+ strlen(rtcpmuxLine)
+			+ strlen(rangeLine)
+			+ strlen(auxSDPLine);
+		char* sdpLines = new char[sdpFmtSize];
+		sprintf(sdpLines, sdpFmt,
+			mediaType, // m= <media>
+			portNum, // m= <port>
+			//fParentSession->streamingUsesSRTP ? "S" : "",
+			rtpPayloadType, // m= <fmt list>
+			"IP4", // c= address type
+			groupAddressStr.val(), // c= <connection address>
+			ttl, // c= TTL
+			estBitrate, // b=AS:<bandwidth>
+			rtpmapLine, // a=rtpmap:... (if present)
+			//keyMgmtLine, // a=key-mgmt:... (if present)
+			//rtcpmuxLine, // a=rtcp-mux:... (if present)
+			rangeLine, // a=range:... (if present)
+			auxSDPLine); // optional extra SDP line
+		delete[](char*)rangeLine; /*delete[] keyMgmtLine*/ delete[] rtpmapLine;
+
+		fSDPLines = strDup(sdpLines);
+		delete[] sdpLines;
+	}
+
+	return fSDPLines;
 }

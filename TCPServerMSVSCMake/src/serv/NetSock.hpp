@@ -15,6 +15,7 @@ struct	NET_STATISTICS;
 class	NET_SESSION_INFO;
 class	NET_SERVER_SESSION;
 class	Server;
+class	NET_SERVER_SUBSESSION;
 
 
 #define SERVER_ID 0
@@ -118,7 +119,11 @@ protected:
 class NET_SERVER_SESSION : public NET_SESSION_INFO
 {
 public:
-	NET_SERVER_SESSION(Net* net);
+	NET_SERVER_SESSION(Net* net, char const* streamName = NULL,
+		char const* info = NULL,
+		char const* description = NULL,
+		bool isSSM = false,
+		char const* miscSDPLines = NULL);
 	virtual ~NET_SERVER_SESSION();
 
 	virtual void		AddClient(NetSocket* socket);
@@ -129,21 +134,44 @@ public:
 	int					GetSessionIndex() { return session_index; }
 	void				Serialize(CStream& stream);
 	char*				generateSDPDescription(int address_famaly);
+	void				incrementReferenceCount() { ++fReferenceCount; }
+	void				decrementReferenceCount() { if (fReferenceCount > 0) --fReferenceCount; }
+	unsigned			referenceCount() const { return fReferenceCount; }
+
 protected:
 	friend class		Server;
 	bool				enabled;
 
-	NET_SERVER_SUBSESSION* fSubsessionsHead;
+	NET_SERVER_SUBSESSION*	fSubsessionsHead;
+	friend class			NET_SERVER_SUBSESSION;
+	char*					fStreamName;
+	char*					fInfoSDPString;
+	char*					fDescriptionSDPString;
+	char*					fMiscSDPLines;
+	unsigned				fReferenceCount;
+
+	bool					fIsSSM;
 
 	int					c_client_id;
 	unsigned int*		a_client_id;
 	int					session_index;
+
 	timeval				fCreationTime;
-	float				duration();
+	float				duration() const;
 };
 
-class NET_SERVER_SUBSESSION : public NET_SERVER_SESSION
+class NET_SERVER_SUBSESSION : public NET_SESSION_INFO
 {
+	NET_SERVER_SUBSESSION*	fNext;
+	friend class NET_SERVER_SESSION;
+	const char*			fSDPLines;
+	char*				rtpmapLine();
+	char*				rangeSDPLine();
+	NET_SERVER_SESSION* fParentSession;
+public:
+	void				getAbsoluteTimeRange(char*& absStartTime, char*& absEndTime) const { absStartTime = absEndTime = nullptr; }
+	float				duration() const			{ return 0.0; }
+	const char*			sdpLines(int addressFamaly);
 
 };
 

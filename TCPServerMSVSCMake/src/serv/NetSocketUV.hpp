@@ -101,17 +101,21 @@ public:
 															unsigned& contentLength, bool urlIsRTSPS);
 
 	void						handleCmd_DESCRIBE(char const* urlPreSuffix, char const* urlSuffix, char const* fullRequestStr);
-	void						handleCmd_DESCRIBE_afterLookup(NET_SESSION_INFO* sess);
-	
+	void						handleCmd_DESCRIBE_afterLookup(NET_SERVER_SESSION* sess);
+	void						handleCmd_notFound();
+
 	uv_loop_t					loop;
 protected:
-	
-	unsigned char				fRequestBuffer[2000];
+	unsigned char				fRequestBuffer[20000];
+	unsigned char				fResponseBuffer[20000];
 	unsigned char*				fLastCRLF;
 	unsigned int				fRequestBytesAlreadySeen;
-
+	const char*					fCurrentCSeq;
 	virtual Net*				NewNet()														{ return NULL; }
 	friend class				NetSocketUV;
+
+	void						setRTSPResponse(const char* responseStr);
+
 };
 
 #endif

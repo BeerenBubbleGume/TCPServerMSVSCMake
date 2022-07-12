@@ -216,10 +216,7 @@ bool NetSocketUV::Accept()
 				accept_sock->sender->SetupOutput();
 			}
 
-#endif // !WIN32
-
-			printf("Accepted client with ID:%u\nIP:\t%s\nSessionID:\t%u\n\n", accept_sock->ClientID, accept_sock->ip.c_str(), accept_sock->sessionID);
-			
+#endif // !WIN32			
 			return true;
 		}
 		else
@@ -245,29 +242,17 @@ bool NetSocketUV::AcceptRTSP()
 		{
 			accept_sock->GetIP(accept_sock->ip, Peer);
 			ServerUV* server = ((ServerUV*)net);
-			bool is_same = false;
-
-			CString fileName;
-			CString IDstr;
-			IParr[server->count_accept] = accept_sock->ip;
-			count++;
-			if ((is_same = assertIP(IParr, accept_sock->ip)) == true || (count % 3) != 0)
+			
+			server->count_accept++;
+			server->sockets_nohello.Add(accept_sock);
+			server->ConnectSocket(accept_sock, server->count_accept);
+			if (!accept_sock->sessionID)
 			{
-
-				server->count_accept++;
-				server->sockets_nohello.Add(accept_sock);
+				NET_SERVER_SESSION* ss = new NET_SERVER_SESSION(server);
+				server->AddSessionInfo(ss, accept_sock);
 			}
-			else
-			{
-				server->count_accept++;
-				server->sockets_nohello.Add(accept_sock);
-				server->ConnectSocket(accept_sock, server->count_accept);
-				if (!accept_sock->sessionID)
-				{
-					NET_SERVER_SESSION* ss = new NET_SERVER_SESSION(server);
-					server->AddSessionInfo(ss, accept_sock);
-				}
-			}
+			printf("Accepted client with ID:%u\nIP:\t%s\nSessionID:\t%u\n\n", accept_sock->ClientID, accept_sock->ip.c_str(), accept_sock->sessionID);
+			return true;
 		}
 	}
 	return false;
@@ -278,9 +263,10 @@ void NetSocketUV::ReceiveRTSPcommand()
 	NetBuffer* recv_buf = net->GetRecvBuffer();
 	int received_bytes = recv_buf->GetLength();
 	recvbuffer.Add(received_bytes, recv_buf->GetData());
-	
-	fRequestBytesAlreadySeen++;
-	fRequestBuffer[fRequestBytesAlreadySeen] = '\0';
+	ServerUV* server = (ServerUV*)net;
+	assert(server);
+	server->fRequestBytesAlreadySeen++;
+	server->fRequestBuffer[server->fRequestBytesAlreadySeen] = '\0';
 	
 	char cmdName[RTSP_PARAM_STRING_MAX];
 	char urlPreSuffix[RTSP_PARAM_STRING_MAX];
@@ -289,7 +275,7 @@ void NetSocketUV::ReceiveRTSPcommand()
 	char sessionIdStr[RTSP_PARAM_STRING_MAX];
 	unsigned contentLength = 0;
 
-	bool parseSuccess = parseRTSPRequestString((char*)fRequestBuffer, fLastCRLF + 2 - fRequestBuffer,
+	bool parseSuccess = server->parseRTSPRequestString((char*)server->fRequestBuffer, server->fLastCRLF + 2 - server->fRequestBuffer,
 		cmdName, sizeof cmdName,
 		urlPreSuffix, sizeof urlPreSuffix,
 		urlSuffix, sizeof urlSuffix,
@@ -299,6 +285,10 @@ void NetSocketUV::ReceiveRTSPcommand()
 
 	if (strcmp((const char*)recvbuffer.GetData(), "DESCRIBE"))
 	{
+		CString d;
+		d.IntToString(ClientID);
+		d += "in_binary.264";
+		server->handleCmd_DESCRIBE("rtsp://", d.c_str(), "ServerRTSP/Play/");
 	}
 	else if (strcmp((const char*)recvbuffer.GetData(), "SETUP"))
 	{
@@ -310,7 +300,7 @@ void NetSocketUV::ReceiveRTSPcommand()
 	}
 	else if (strcmp((const char*)recvbuffer.GetData(), "STOP"))
 	{
-
+		uv_read_stop((uv_stream_t*)GetPtrTCP(sock));
 	}
 }
 
@@ -777,7 +767,7 @@ void ServerUV::handleCmd_DESCRIBE(char const* urlPreSuffix, char const* urlSuffi
 
 }
 
-void ServerUV::handleCmd_DESCRIBE_afterLookup(NET_SESSION_INFO* sess)
+void ServerUV::handleCmd_DESCRIBE_afterLookup(NET_SERVER_SESSION* sess)
 {
 	char* sdpDescription = NULL;
 	char* rtspURL = NULL;
@@ -787,16 +777,23 @@ void ServerUV::handleCmd_DESCRIBE_afterLookup(NET_SESSION_INFO* sess)
 			break;
 		}
 
-		session->incrementReferenceCount();
+		sess->incrementReferenceCount();
 
-		sdpDescription = session->generateSDPDescription(fAddressFamily);
+		sdpDescription = sess->generateSDPDescription(AF_INET);
 		if (sdpDescription == NULL) {
 			setRTSPResponse("404 File Not Found, Or In Incorrect Format");
 			break;
 		}
 		unsigned sdpDescriptionSize = strlen(sdpDescription);
-
-		rtspURL = fOurRTSPServer.rtspURL(session, fClientInputSocket);
+		CString rtspURL;
+		rtspURL += "rtsp://";
+		NetSocketUV* sock = (NetSocketUV*)sockets.Get(count_accept);
+		sock->GetIP(rtspURL, Peer);
+		rtspURL.Delete(rtspURL.Find(":", 6));
+		CString d;
+		d.IntToString(sock->ClientID);
+		rtspURL += d;
+		rtspURL += "in_binary.264";
 
 		snprintf((char*)fResponseBuffer, sizeof fResponseBuffer,
 			"RTSP/1.0 200 OK\r\nCSeq: %s\r\n"
@@ -807,21 +804,37 @@ void ServerUV::handleCmd_DESCRIBE_afterLookup(NET_SESSION_INFO* sess)
 			"%s",
 			fCurrentCSeq,
 			dateHeader(),
-			rtspURL,
+			rtspURL.c_str(),
 			sdpDescriptionSize,
 			sdpDescription);
 	} while (0);
 
-	if (session != NULL) {
-		// Decrement its reference count, now that we're done using it:
-		session->decrementReferenceCount();
-		if (session->referenceCount() == 0 && session->deleteWhenUnreferenced()) {
-			fOurServer.removeServerMediaSession(session);
-		}
-	}
+	//if (sess != NULL) {
+	//	// Decrement its reference count, now that we're done using it:
+	//	sess->decrementReferenceCount();
+	//	if (sess->referenceCount() == 0 && sess->deleteWhenUnreferenced()) {
+	//		fOurServer.removeServerMediaSession(session);
+	//	}
+	//}
 
 	delete[] sdpDescription;
 	delete[] rtspURL;
+}
+
+void ServerUV::handleCmd_notFound()
+{
+	setRTSPResponse("404 Stream Not Found");
+}
+
+void ServerUV::setRTSPResponse(const char* responseStr)
+{
+	snprintf((char*)fResponseBuffer, sizeof fResponseBuffer,
+		"RTSP/1.0 %s\r\n"
+		"CSeq: %s\r\n"
+		"%s\r\n",
+		responseStr,
+		fCurrentCSeq,
+		dateHeader());
 }
 
 void OnReadRTSPcommands(uv_stream_t* handle, ssize_t suggested_size, const uv_buf_t* buf)
@@ -880,6 +893,7 @@ ServerUV::ServerUV()
 	int r = uv_loop_init(&loop);
 	assert(r == 0);
 	uv_server = this;
+	fRequestBytesAlreadySeen = 0;
 }
 
 ServerUV::~ServerUV()
